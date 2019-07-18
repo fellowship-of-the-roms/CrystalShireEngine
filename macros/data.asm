@@ -81,11 +81,6 @@ MACRO dab ; dwb address, bank
 	endr
 ENDM
 
-MACRO dba_pic ; dbw bank, address
-	db BANK(\1) - PICS_FIX
-	dw \1
-ENDM
-
 MACRO bcd
 	rept _NARG
 		dn ((\1) % 100) / 10, (\1) % 10

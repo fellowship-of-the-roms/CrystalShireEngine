@@ -236,22 +236,17 @@ ROMX $5a
 	"Pics 19"
 ROMX $5b
 	"bank5B"
-	"Pics 20"
 ROMX $5c
 	"mobile5C"
-	"Pics 21"
 ROMX $5d
 	"Crystal Phone Text 2"
-	"Pics 22"
 ROMX $5e
 	"UpdateBattleHUDs"
 	"Songs 5"
 	"Crystal Sound Effects"
 	"mobile5E"
-	"Pics 23"
 ROMX $5f
 	"mobile5F"
-	"Pics 24"
 ROMX $60
 	"Map Scripts 13"
 	"Pokedex Entries 001-064"
