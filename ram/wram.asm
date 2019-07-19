@@ -2611,6 +2611,13 @@ NEXTU
 wBuySellItemPrice::
 wTempMysteryGiftTimer::
 wMagikarpLength:: dw
+
+NEXTU
+; 16-bit wram
+	ds 13
+wOtherTrainerType:: db
+wTrainerGroupBank:: db
+
 ENDU
 
 wTempEnemyMonSpecies::  db
