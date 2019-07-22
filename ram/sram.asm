@@ -1,7 +1,13 @@
 SECTION "Scratch", SRAM
 
+UNION
 sScratch:: ds $60 tiles
 
+NEXTU
+sEnemyFrontPicTileCount:: db
+sPaddedEnemyFrontPic:: ds 7 * 7 tiles
+
+ENDU
 
 SECTION "SRAM Bank 0", SRAM
 

@@ -160,7 +160,7 @@ Function4a098:
 	call WaitBGMap
 	call LoadStandardMenuHeader
 	farcall Function89de0
-	call Call_ExitMenu
+	call ExitMenu
 	call MG_Mobile_Layout_LoadPals
 	call Function4a485
 	pop bc
@@ -402,7 +402,7 @@ Function4a28a:
 .asm_4a2df
 	farcall Function11765d
 	call ClearBGPalettes
-	call Call_ExitMenu
+	call ExitMenu
 	call LoadFontsExtra
 	scf
 	ret
@@ -437,7 +437,7 @@ Function4a28a:
 .dont_delete_password
 	call ExitMenu
 .quit
-	call Call_ExitMenu
+	call ExitMenu
 	farcall Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	xor a
 	ret

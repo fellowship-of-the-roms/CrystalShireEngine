@@ -46,7 +46,7 @@ SelectApricornForKurt:
 	call Kurt_GiveUpSelectedQuantityOfSelectedApricorn
 
 .done
-	call Call_ExitMenu
+	call ExitMenu
 	ret
 
 Kurt_SelectApricorn:

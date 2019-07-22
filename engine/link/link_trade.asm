@@ -30,7 +30,7 @@ TestMobileTradeBorderTilemap: ; unreferenced
 	call SetPalettes
 	call WaitBGMap
 	call JoyWaitAorB
-	call Call_ExitMenu
+	call ExitMenu
 	ret
 
 MobileTradeBorderTilemap:
@@ -160,7 +160,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 	call LoadStandardMenuHeader
 	call .PrintWaitingText
 	farcall WaitLinkTransfer
-	call Call_ExitMenu
+	call ExitMenu
 	call WaitBGMap2
 	ret
 
