@@ -151,7 +151,6 @@ StartMenu::
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatus
 	call UpdateSprites
-	call GSReloadPalettes
 	call FinishExitMenu
 	ret
 

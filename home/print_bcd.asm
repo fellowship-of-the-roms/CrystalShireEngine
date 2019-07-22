@@ -32,7 +32,7 @@ PrintBCDNumber::
 	dec c
 	jr nz, .loop
 	bit PRINTNUM_LEADINGZEROS_F, b
-	jr z, .done ; if so, we are done
+	ret z ; if so, we are done
 ; every digit of the BCD number is zero
 	bit PRINTNUM_LEFTALIGN_F, b
 	jr nz, .skipLeftAlignmentAdjustment
@@ -47,7 +47,6 @@ PrintBCDNumber::
 	ld [hl], "0"
 	call PrintLetterDelay
 	inc hl
-.done
 	ret
 
 PrintBCDDigit::

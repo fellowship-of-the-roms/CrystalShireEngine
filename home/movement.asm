@@ -2,7 +2,6 @@ InitMovementBuffer::
 	ld [wMovementBufferObject], a
 	xor a
 	ld [wMovementBufferCount], a
-	ld a, $0 ; was BANK(wMovementBuffer) in G/S
 	ld [wUnusedMovementBufferBank], a
 	ld a, LOW(wMovementBuffer)
 	ld [wUnusedMovementBufferPointer], a

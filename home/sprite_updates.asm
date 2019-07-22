@@ -4,7 +4,7 @@ DisableSpriteUpdates::
 	ld a, [wVramState]
 	res 0, a
 	ld [wVramState], a
-	ld a, $0
+	xor a
 	ld [wSpriteUpdatesEnabled], a
 	ret
 

@@ -30,6 +30,3 @@ IsInJohto::
 .Kanto:
 	ld a, KANTO_REGION
 	ret
-
-SetXYCompareFlags:: ; dummied out
-	ret

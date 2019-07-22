@@ -22,14 +22,6 @@ PrintLetterDelay::
 	push de
 	push bc
 
-	ld hl, hOAMUpdate
-	ld a, [hl]
-	push af
-
-; orginally turned oam update off...
-;	ld a, 1
-	ld [hl], a
-
 ; force fast scroll?
 	ld a, [wTextboxFlags]
 	bit FAST_TEXT_DELAY_F, a
@@ -73,8 +65,6 @@ PrintLetterDelay::
 	jr nz, .checkjoypad
 
 .end
-	pop af
-	ldh [hOAMUpdate], a
 	pop bc
 	pop de
 	pop hl

@@ -63,8 +63,7 @@ GetClock::
 	ldh [hRTCDayHi], a
 
 ; unlatch clock / disable clock r/w
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 FixDays::
 ; fix day count
@@ -196,18 +195,13 @@ InitTime::
 	ret
 
 ClearClock::
-	call .ClearhRTC
-	call SetClock
-	ret
-
-.ClearhRTC:
 	xor a
 	ldh [hRTCSeconds], a
 	ldh [hRTCMinutes], a
 	ldh [hRTCHours], a
 	ldh [hRTCDayLo], a
 	ldh [hRTCDayHi], a
-	ret
+; fallthrough
 
 SetClock::
 ; set clock data from hram
@@ -222,13 +216,6 @@ SetClock::
 	call LatchClock
 	ld hl, MBC3SRamBank
 	ld de, MBC3RTC
-
-; seems to be a halt check that got partially commented out
-; this block is totally pointless
-	ld [hl], RTC_DH
-	ld a, [de]
-	bit 6, a ; halt
-	ld [de], a
 
 ; seconds
 	ld [hl], RTC_S
@@ -253,8 +240,7 @@ SetClock::
 	ld [de], a
 
 ; cleanup
-	call CloseSRAM ; unlatch clock, disable clock r/w
-	ret
+	jp CloseSRAM ; unlatch clock, disable clock r/w
 
 ClearRTCStatus:: ; unreferenced
 ; clear sRTCStatusFlags
@@ -264,8 +250,7 @@ ClearRTCStatus:: ; unreferenced
 	call OpenSRAM
 	pop af
 	ld [sRTCStatusFlags], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
@@ -276,13 +261,11 @@ RecordRTCStatus::
 	pop af
 	or [hl]
 	ld [hl], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 CheckRTCStatus::
 ; check sRTCStatusFlags
 	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	ld a, [sRTCStatusFlags]
-	call CloseSRAM
-	ret
+	jp CloseSRAM

@@ -18,7 +18,6 @@ SaveMenu:
 
 .refused
 	call ExitMenu
-	call GSReloadPalettes
 	farcall SaveMenu_CopyTilemapAtOnce
 	scf
 	ret
@@ -198,9 +197,6 @@ SaveTheGame_yesorno:
 	ld a, [wMenuCursorY]
 	dec a
 	call CloseWindow
-	push af
-	call GSReloadPalettes
-	pop af
 	and a
 	ret
 

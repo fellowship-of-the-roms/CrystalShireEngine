@@ -6,8 +6,7 @@ WaitBGMap::
 	ldh [hBGMapMode], a
 ; Wait for it to do its magic
 	ld c, 4
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 WaitBGMap2::
 	ldh a, [hCGB]
@@ -23,8 +22,7 @@ WaitBGMap2::
 	ld a, 1
 	ldh [hBGMapMode], a
 	ld c, 4
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 IsCGB::
 	ldh a, [hCGB]
@@ -37,7 +35,7 @@ ApplyTilemap::
 	jr z, .dmg
 
 	ld a, [wSpriteUpdatesEnabled]
-	cp 0
+	and a
 	jr z, .dmg
 
 	ld a, 1
@@ -49,8 +47,7 @@ ApplyTilemap::
 	ld a, 1
 	ldh [hBGMapMode], a
 	ld c, 4
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]
@@ -58,13 +55,6 @@ CGBOnly_CopyTilemapAtOnce::
 	jr z, WaitBGMap
 
 CopyTilemapAtOnce::
-	jr _CopyTilemapAtOnce
-
-CopyAttrmapAndTilemapToWRAMBank3: ; unreferenced
-	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
-	ret
-
-_CopyTilemapAtOnce:
 	ldh a, [hBGMapMode]
 	push af
 	xor a
