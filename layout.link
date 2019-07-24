@@ -326,6 +326,8 @@ WRAM0
 	"Overworld Map"
 	align 4
 	"Video"
+	align 5
+	"16-bit WRAM home data"
 WRAMX 1
 	"WRAM 1"
 	"Miscellaneous WRAM 1"
