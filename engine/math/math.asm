@@ -30,7 +30,7 @@ _Multiply::
 
 	ldh a, [hMathBuffer + 2]
 	ld c, a
-	ldh a, [hMultiplicand + 0]
+	ldh a, [hMultiplicand]
 	adc c
 	ldh [hMathBuffer + 2], a
 
@@ -54,9 +54,9 @@ _Multiply::
 	rla
 	ldh [hMultiplicand + 1], a
 
-	ldh a, [hMultiplicand + 0]
+	ldh a, [hMultiplicand]
 	rla
-	ldh [hMultiplicand + 0], a
+	ldh [hMultiplicand], a
 
 	ldh a, [hMultiplicand - 1]
 	rla
@@ -75,13 +75,13 @@ _Multiply::
 	ldh [hProduct + 1], a
 
 	ldh a, [hMathBuffer + 1]
-	ldh [hProduct + 0], a
+	ldh [hProduct], a
 
 	ret
 
 _Divide::
 	xor a
-	ldh [hMathBuffer + 0], a
+	ldh [hMathBuffer], a
 	ldh [hMathBuffer + 1], a
 	ldh [hMathBuffer + 2], a
 	ldh [hMathBuffer + 3], a
@@ -91,7 +91,7 @@ _Divide::
 	ld e, a
 
 .loop
-	ldh a, [hMathBuffer + 0]
+	ldh a, [hMathBuffer]
 	ld c, a
 	ldh a, [hDividend + 1]
 	sub c
@@ -99,11 +99,11 @@ _Divide::
 
 	ldh a, [hDivisor]
 	ld c, a
-	ldh a, [hDividend + 0]
+	ldh a, [hDividend]
 	sbc c
 	jr c, .next
 
-	ldh [hDividend + 0], a
+	ldh [hDividend], a
 
 	ld a, d
 	ldh [hDividend + 1], a
@@ -139,13 +139,13 @@ _Divide::
 	jr nz, .next2
 
 	ld e, 8
-	ldh a, [hMathBuffer + 0]
+	ldh a, [hMathBuffer]
 	ldh [hDivisor], a
 	xor a
-	ldh [hMathBuffer + 0], a
+	ldh [hMathBuffer], a
 
 	ldh a, [hDividend + 1]
-	ldh [hDividend + 0], a
+	ldh [hDividend], a
 
 	ldh a, [hDividend + 2]
 	ldh [hDividend + 1], a
@@ -164,9 +164,9 @@ _Divide::
 	srl a
 	ldh [hDivisor], a
 
-	ldh a, [hMathBuffer + 0]
-	rr a
-	ldh [hMathBuffer + 0], a
+	ldh a, [hMathBuffer]
+	rra
+	ldh [hMathBuffer], a
 
 	jr .loop
 
@@ -184,6 +184,6 @@ _Divide::
 	ldh [hQuotient + 1], a
 
 	ldh a, [hMathBuffer + 1]
-	ldh [hQuotient + 0], a
+	ldh [hQuotient], a
 
 	ret
