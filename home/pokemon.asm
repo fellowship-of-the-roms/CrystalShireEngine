@@ -249,9 +249,11 @@ GetBaseData::
 	jr z, .egg
 
 ; Get BaseData
-	dec a
-	ld bc, BASE_DATA_SIZE
-	ld hl, BaseData
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld a, BASE_DATA_SIZE
+	ld hl, BaseData - BASE_DATA_SIZE ;go one back so we don't decrement hl
 	call AddNTimes
 	ld de, wCurBaseData
 	ld bc, BASE_DATA_SIZE

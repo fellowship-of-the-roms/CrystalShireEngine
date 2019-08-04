@@ -42,11 +42,9 @@ EvolveAfterBattle_MasterLoop:
 	jp z, EvolveAfterBattle_MasterLoop
 
 	ld a, [wEvolutionOldSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -413,11 +411,9 @@ EvolvingText:
 LearnLevelMoves:
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -480,13 +476,10 @@ FillMoves:
 	push hl
 	push de
 	push bc
-	ld hl, EvosAttacksPointers
-	ld b, 0
+	ld bc, EvosAttacksPointers - 2
 	ld a, [wCurPartySpecies]
-	dec a
-	add a
-	rl b
-	ld c, a
+	call GetPokemonIndexFromID
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -601,50 +594,14 @@ EvoFlagAction:
 	pop de
 	ret
 
-GetPreEvolution:
-; Find the first mon to evolve into wCurPartySpecies.
-
-; Return carry and the new species in wCurPartySpecies
-; if a pre-evolution is found.
-
-	ld c, 0
-.loop ; For each Pokemon...
-	ld hl, EvosAttacksPointers
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.loop2 ; For each evolution...
-	ld a, [hli]
-	and a
-	jr z, .no_evolve ; If we jump, this Pokemon does not evolve into wCurPartySpecies.
-	cp EVOLVE_STAT ; This evolution type has the extra parameter of stat comparison.
-	jr nz, .not_tyrogue
-	inc hl
-
-.not_tyrogue
-	inc hl
+GetLowestEvolutionStage:
+; Return the first mon to evolve into wCurPartySpecies.
+; Instead of looking it up, we just load it from a table. This is a lot more efficient.
 	ld a, [wCurPartySpecies]
-	cp [hl]
-	jr z, .found_preevo
-	inc hl
-	ld a, [hl]
-	and a
-	jr nz, .loop2
-
-.no_evolve
-	inc c
-	ld a, c
-	cp NUM_POKEMON
-	jr c, .loop
-	and a
-	ret
-
-.found_preevo
-	inc c
-	ld a, c
+	call GetPokemonIndexFromID
+	ld bc, FirstEvoStages - 1
+	add hl, bc
+	ld a, BANK(FirstEvoStages)
+	call GetFarByte
 	ld [wCurPartySpecies], a
-	scf
 	ret

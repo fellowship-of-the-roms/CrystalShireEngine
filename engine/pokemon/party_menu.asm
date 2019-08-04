@@ -364,11 +364,9 @@ PlacePartyMonEvoStoneCompatibility:
 	ld hl, wPartyMon1Species
 	call AddNTimes
 	ld a, [hl]
-	dec a
-	ld e, a
-	ld d, 0
-	ld hl, EvosAttacksPointers
-	add hl, de
+	call GetPokemonIndexFromID
+	ld de, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, de
 	call .DetermineCompatibility
 	pop hl

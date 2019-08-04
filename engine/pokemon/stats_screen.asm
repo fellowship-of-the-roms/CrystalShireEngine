@@ -416,17 +416,23 @@ StatsScreen_InitUpperHalf:
 	xor a
 	ldh [hBGMapMode], a
 	ld a, [wBaseDexNo]
-	ld [wTextDecimalByte], a
 	ld [wCurSpecies], a
+	call GetPokemonIndexFromID
+	ld a, h
+	ld h, l
+	ld l, a
+	push hl
+	ld hl, sp + 0
+	ld d, h
+	ld e, l
 	hlcoord 8, 0
-	ld [hl], "№"
-	inc hl
-	ld [hl], "."
-	inc hl
-	hlcoord 10, 0
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	ld de, wTextDecimalByte
+	ld a, "№"
+	ld [hli], a
+	ld a, "."
+	ld [hli], a
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
+	add sp, 2
 	hlcoord 14, 0
 	call PrintLevel
 	ld hl, .NicknamePointers

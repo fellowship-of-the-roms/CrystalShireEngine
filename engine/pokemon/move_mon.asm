@@ -1121,8 +1121,7 @@ ShiftBoxMon:
 GiveEgg::
 	ld a, [wCurPartySpecies]
 	push af
-	callfar GetPreEvolution
-	callfar GetPreEvolution
+	callfar GetLowestEvolutionStage
 	ld a, [wCurPartySpecies]
 	dec a
 

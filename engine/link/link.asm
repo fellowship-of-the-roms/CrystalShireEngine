@@ -800,9 +800,11 @@ Link_PrepPartyData_Gen1:
 
 .skip_steel
 	push bc
-	dec a
-	ld hl, BaseData + BASE_TYPES
-	ld bc, BASE_DATA_SIZE
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, BaseData + BASE_TYPES - BASE_DATA_SIZE ;go one back so we don't decrement hl
+	ld a, BASE_DATA_SIZE
 	call AddNTimes
 	ld bc, BASE_CATCH_RATE - BASE_TYPES
 	ld a, BANK(BaseData)

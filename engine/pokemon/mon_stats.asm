@@ -197,9 +197,11 @@ GetGender:
 ; We need the gender ratio to do anything with this.
 	push bc
 	ld a, [wCurPartySpecies]
-	dec a
-	ld hl, BaseData + BASE_GENDER
-	ld bc, BASE_DATA_SIZE
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, BaseData + BASE_GENDER - BASE_DATA_SIZE ;go one back so we don't decrement hl
+	ld a, BASE_DATA_SIZE
 	call AddNTimes
 	pop bc
 
