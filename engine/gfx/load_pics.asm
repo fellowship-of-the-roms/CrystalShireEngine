@@ -279,24 +279,6 @@ GetMonBackpic:
 	ldh [rSVBK], a
 	ret
 
-GSIntro_GetMonFrontpic: ; unreferenced
-	ld a, c
-	push de
-	ld hl, PokemonPicPointers
-	dec a
-	ld bc, 6
-	call AddNTimes
-	ld a, BANK(PokemonPicPointers)
-	call GetFarByte
-	push af
-	inc hl
-	ld a, BANK(PokemonPicPointers)
-	call GetFarWord
-	pop af
-	pop de
-	call FarDecompress
-	ret
-
 GetTrainerPic:
 	ld a, [wTrainerClass]
 	and a
