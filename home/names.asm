@@ -1,13 +1,10 @@
 NamesPointers::
-; entries correspond to GetName constants (see constants/text_constants.asm)
-	dba PokemonNames        ; MON_NAME (not used; jumps to GetPokemonName)
+; entries correspond to GetName constants (see constants/text_constants.asm); MON_NAME is not handled by this table
 	dba MoveNames           ; MOVE_NAME
-	dba NULL                ; DUMMY_NAME
 	dba ItemNames           ; ITEM_NAME
 	dbw 0, wPartyMonOTs     ; PARTY_OT_NAME
 	dbw 0, wOTPartyMonOTs   ; ENEMY_OT_NAME
 	dba TrainerClassNames   ; TRAINER_NAME
-	dbw 4, MoveDescriptions ; MOVE_DESC_NAME_BROKEN (wrong bank)
 
 GetName::
 ; Return name wCurSpecies from name list wNamedObjectType in wStringBuffer1.
@@ -19,27 +16,24 @@ GetName::
 	push de
 
 	ld a, [wNamedObjectType]
-	cp MON_NAME
-	jr nz, .NotPokeName
+	dec a
+	jr nz, .not_mon_name
 
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	ld hl, MON_NAME_LENGTH
-	add hl, de
-	ld e, l
-	ld d, h
 	jr .done
 
-.NotPokeName:
-	ld a, [wNamedObjectType]
+.not_mon_name
 	dec a
-	ld e, a
-	ld d, 0
-	ld hl, NamesPointers
-	add hl, de
-	add hl, de
-	add hl, de
+	ld l, a
+	add a, a
+	add a, l
+	add a, LOW(NamesPointers)
+	ld l, a
+	ld a, HIGH(NamesPointers)
+	adc 0
+	ld h, a
 	ld a, [hli]
 	rst Bankswitch
 	ld a, [hli]
@@ -55,11 +49,6 @@ GetName::
 	call CopyBytes
 
 .done
-	ld a, e
-	ld [wUnusedNamesPointer], a
-	ld a, d
-	ld [wUnusedNamesPointer + 1], a
-
 	pop de
 	pop bc
 	pop hl
