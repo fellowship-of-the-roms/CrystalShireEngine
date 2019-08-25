@@ -220,13 +220,14 @@ POKeString: ; unreferenced
 GetDexEntryPointer:
 ; return dex entry pointer b:de
 	push hl
-	ld hl, PokedexDataPointerTable
 	ld a, b
-	dec a
-	ld d, 0
-	ld e, a
+	call GetPokemonIndexFromID
+	dec hl
+	ld d, h
+	ld e, l
+	add hl, hl
 	add hl, de
-	add hl, de
+	ld de, PokedexDataPointerTable
 	add hl, de
 	ld a, [hli]
 	ld b, a

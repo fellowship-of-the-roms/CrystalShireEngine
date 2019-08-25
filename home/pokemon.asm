@@ -155,8 +155,6 @@ _PlayMonCry::
 	ret
 
 LoadCry::
-; Load cry bc.
-
 	call GetCryIndex
 	ret c
 
@@ -192,12 +190,15 @@ endr
 GetCryIndex::
 	and a
 	jr z, .no
-	cp NUM_POKEMON + 1
+	cp MON_TABLE_ENTRIES + 1
 	jr nc, .no
 
-	dec a
-	ld c, a
-	ld b, 0
+	push hl
+	call GetPokemonIndexFromID
+	dec hl
+	ld b, h
+	ld c, l
+	pop hl
 	and a
 	ret
 

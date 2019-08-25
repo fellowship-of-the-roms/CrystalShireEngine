@@ -663,12 +663,13 @@ PokedexShow1:
 
 PokedexShow2:
 	ld a, [wCurPartySpecies]
-	dec a
-	ld hl, PokedexDataPointerTable
-	ld c, a
-	ld b, 0
+	call GetPokemonIndexFromID
+	dec hl
+	ld b, h
+	ld c, l
+	add hl, hl
 	add hl, bc
-	add hl, bc
+	ld bc, PokedexDataPointerTable
 	add hl, bc
 	ld a, BANK(PokedexDataPointerTable)
 	call GetFarByte

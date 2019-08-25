@@ -750,12 +750,13 @@ HeavyBallMultiplier:
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate
 	ld a, [wEnemyMonSpecies]
-	ld hl, PokedexDataPointerTable
-	dec a
-	ld e, a
-	ld d, 0
+	call GetPokemonIndexFromID
+	dec hl
+	ld d, h
+	ld e, l
+	add hl, hl
 	add hl, de
-	add hl, de
+	ld de, PokedexDataPointerTable
 	add hl, de
 	ld a, BANK(PokedexDataPointerTable)
 	call GetFarByte

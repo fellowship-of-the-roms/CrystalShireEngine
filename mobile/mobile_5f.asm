@@ -1212,10 +1212,12 @@ Function17d7c2:
 Function17d7d3:
 	call IncCrashCheckPointer
 	ld a, [hli]
-	dec a
-	ld e, a
-	ld d, 0
-	call PlayCry
+	push bc
+	call GetCryIndex
+	ld d, b
+	ld e, c
+	pop bc
+	call nc, PlayCry
 	call WaitSFX
 	call HlToCrashCheckPointer
 	ret

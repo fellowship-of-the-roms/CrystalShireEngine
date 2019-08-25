@@ -2382,21 +2382,13 @@ Pokedex_LoadCurrentFootprint:
 
 Pokedex_LoadAnyFootprint:
 	ld a, [wTempSpecies]
-	dec a
-	and %11111000
-	srl a
-	srl a
-	srl a
-	ld e, 0
-	ld d, a
-	ld a, [wTempSpecies]
-	dec a
-	and %111
-	swap a ; * $10
-	add a, a
-	ld l, a
-	ld h, 0
-	add hl, de
+	call GetPokemonIndexFromID
+	dec hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
 	ld de, Footprints
 	add hl, de
 
