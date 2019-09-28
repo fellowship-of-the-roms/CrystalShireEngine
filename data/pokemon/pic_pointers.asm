@@ -1,11 +1,13 @@
 ; Pics are defined in gfx/pics.asm
-
+:
+	table_width 3 * 2, :-
 	dba EggPic ; EGG is now -3, so it must go *above* the label
 	dbw -1, -1 ; unused
 	dbw -1, -1 ; unused
 	dbw -1, -1 ; unused
 	dbw -1, -1 ; unused
 	dbw -1, -1 ; unused
+	assert_table_length -EGG
 PokemonPicPointers::
 ; entries correspond to Pokémon species, two apiece (first index is 0)
 	table_width 3 * 2, PokemonPicPointers
