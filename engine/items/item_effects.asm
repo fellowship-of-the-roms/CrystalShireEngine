@@ -867,6 +867,8 @@ LureBallMultiplier:
 	ret
 
 MoonBallMultiplier:
+; Multiply catch rate by 4 if mon evolves with moon stone
+	push de
 	push bc
 	ld a, [wTempEnemyMonSpecies]
 	call GetPokemonIndexFromID
@@ -875,26 +877,21 @@ MoonBallMultiplier:
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
-	pop bc
 
-	push bc
-	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte
-	cp EVOLVE_ITEM
+	ld a, [wCurItem]
+	ld c, a
+	ld a, MOON_STONE
+	ld [wCurItem], a
+	ld d, h
+	ld e, l
+	farcall DetermineEvolutionItemResults
+	ld a, c
+	ld [wCurItem], a
+	ld a, d
+	or e
 	pop bc
-	ret nz
-
-	inc hl
-	inc hl
-	inc hl
-
-; BUG: Moon Ball does not boost catch rate (see docs/bugs_and_glitches.md)
-	push bc
-	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte
-	cp MOON_STONE_RED ; BURN_HEAL
-	pop bc
-	ret nz
+	pop de
+	ret z
 
 	sla b
 	jr c, .max

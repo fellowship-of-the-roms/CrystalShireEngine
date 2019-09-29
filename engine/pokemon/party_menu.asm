@@ -368,7 +368,17 @@ PlacePartyMonEvoStoneCompatibility:
 	ld de, EvosAttacksPointers - 2
 	add hl, hl
 	add hl, de
-	call .DetermineCompatibility
+	ld a, BANK(EvosAttacksPointers)
+	call GetFarWord
+	ld d, h
+	ld e, l
+	farcall DetermineEvolutionItemResults
+	ld a, d
+	or e
+	ld de, .string_not_able
+	jr z, .got_string
+	ld de, .string_able
+.got_string
 	pop hl
 	call PlaceString
 
@@ -380,48 +390,6 @@ PlacePartyMonEvoStoneCompatibility:
 	inc b
 	dec c
 	jr nz, .loop
-	ret
-
-.DetermineCompatibility:
-; BUG: Only the first three evolution entries can have Stone compatibility reported correctly (see docs/bugs_and_glitches.md)
-	ld de, wStringBuffer1
-	ld a, BANK(EvosAttacksPointers)
-	ld bc, 2
-	call FarCopyBytes
-	ld hl, wStringBuffer1
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, wStringBuffer1
-	ld a, BANK("Evolutions and Attacks")
-	ld bc, wStringBuffer2 - wStringBuffer1
-	call FarCopyBytes
-	ld hl, wStringBuffer1
-.loop2
-; BUG: EVOLVE_STAT can break Stone compatibility reporting (see docs/bugs_and_glitches.md)
-	ld a, [hli]
-	and a
-	jr z, .nope
-	cp EVOLVE_STAT
-	jr nz, .no_skip_extra_byte
-	inc hl
-.no_skip_extra_byte
-	inc hl
-	inc hl
-	cp EVOLVE_ITEM
-	jr nz, .loop2
-	dec hl
-	dec hl
-	ld a, [wCurItem]
-	cp [hl]
-	inc hl
-	inc hl
-	jr nz, .loop2
-	ld de, .string_able
-	ret
-
-.nope
-	ld de, .string_not_able
 	ret
 
 .string_able

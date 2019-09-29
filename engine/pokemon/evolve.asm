@@ -68,7 +68,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wLinkMode]
 	and a
-	jp nz, .dont_evolve_2
+	jp nz, .dont_evolve_check
 
 	ld a, b
 	cp EVOLVE_ITEM
@@ -76,7 +76,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wForceEvolution]
 	and a
-	jp nz, .dont_evolve_2
+	jp nz, .dont_evolve_check
 
 	ld a, b
 	cp EVOLVE_LEVEL
@@ -194,9 +194,10 @@ EvolveAfterBattle_MasterLoop:
 	ld a, $1
 	ld [wMonTriedToEvolve], a
 
-	push hl
-
-	ld a, [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
 	ld [wEvolutionNewSpecies], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -228,12 +229,9 @@ EvolveAfterBattle_MasterLoop:
 	ld hl, CongratulationsYourPokemonText
 	call PrintText
 
-	pop hl
-
-	ld a, [hl]
+	ld a, [wEvolutionNewSpecies]
 	ld [wCurSpecies], a
 	ld [wTempMonSpecies], a
-	ld [wEvolutionNewSpecies], a
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 
@@ -316,11 +314,16 @@ EvolveAfterBattle_MasterLoop:
 	ld h, d
 	jp EvolveAfterBattle_MasterLoop
 
+.dont_evolve_check
+	ld a, b
+	cp EVOLVE_STAT
+	jr nz, .dont_evolve_2
 .dont_evolve_1
 	inc hl
 .dont_evolve_2
 	inc hl
 .dont_evolve_3
+	inc hl
 	inc hl
 	jp .loop
 
@@ -377,7 +380,6 @@ CancelEvolution:
 	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearTilemap
-	pop hl
 	jp EvolveAfterBattle_MasterLoop
 
 IsMonHoldingEverstone:
@@ -417,11 +419,7 @@ LearnLevelMoves:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-
-.skip_evos
-	ld a, [hli]
-	and a
-	jr nz, .skip_evos
+	call SkipEvolutions
 
 .find_move
 	ld a, [hli]
@@ -483,10 +481,7 @@ FillMoves:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.GoToAttacks:
-	ld a, [hli]
-	and a
-	jr nz, .GoToAttacks
+	call SkipEvolutions
 	jr .GetLevel
 
 .NextMove:
@@ -598,9 +593,57 @@ GetLowestEvolutionStage:
 ; Instead of looking it up, we just load it from a table. This is a lot more efficient.
 	ld a, [wCurPartySpecies]
 	call GetPokemonIndexFromID
-	ld bc, FirstEvoStages - 1
+	ld bc, FirstEvoStages - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(FirstEvoStages)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
+	ret
+
+SkipEvolutions::
+; Receives a pointer to the evos and attacks for a mon in hl, and skips to the attacks.
+	ld a, [hli]
+	and a
+	ret z
+	cp EVOLVE_STAT
+	jr nz, .no_extra_skip
+	inc hl
+.no_extra_skip
+	inc hl
+	inc hl
+	inc hl
+	jr SkipEvolutions
+
+DetermineEvolutionItemResults::
+; in: de: pointer to evos and attacks struct, wCurItem: item
+; out: de: species ID or zero; a, hl: clobbered
+	ld h, d
+	ld l, e
+	ld de, 0
+.loop
+	ld a, [hli]
+	and a
+	ret z
+	cp EVOLVE_STAT
+	jr nz, .no_extra_increase
+	inc hl
+.no_extra_increase
+	cp EVOLVE_ITEM ; will fail if the EVOLVE_STAT check passed
+	jr nz, .no_item_check
+	ld a, [wCurItem]
+	cp [hl]
+	jr z, .get_species
+.no_item_check
+	inc hl
+	inc hl
+	inc hl
+	jr .loop
+
+.get_species
+	inc hl
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
 	ret

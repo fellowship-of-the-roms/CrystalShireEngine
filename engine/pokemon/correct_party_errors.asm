@@ -15,21 +15,22 @@ CorrectPartyErrors: ; unreferenced
 	ld c, 0
 .loop1
 	ld a, [hl]
-	and a
-	jr z, .invalid_species
-	cp NUM_POKEMON + 1
-	jr z, .invalid_species
-	cp EGG + 1
-	jr c, .next_species
+	call IsAPokemon
+	jr nc, .next_species
 
-.invalid_species
-	ld [hl], SMEARGLE
+	push hl
+	ld hl, SMEARGLE
+	call GetPokemonIDFromIndex
+	pop hl
+	ld [hl], a
 	push hl
 	push bc
+	push af
 	ld a, c
 	ld hl, wPartyMon1Species
 	call GetPartyLocation
-	ld [hl], SMEARGLE
+	pop af
+	ld [hl], a
 	pop bc
 	pop hl
 
@@ -50,19 +51,19 @@ CorrectPartyErrors: ; unreferenced
 	ld b, h
 	ld c, l
 	ld a, [hl]
-	and a
-	jr z, .invalid_species_2
-	cp NUM_POKEMON + 1
-	jr c, .check_level
+	call IsAPokemon
+	jr nc, .check_level
 
-.invalid_species_2
-	ld [hl], SMEARGLE
+	push hl
+	ld hl, SMEARGLE
+	call GetPokemonIDFromIndex
+	pop hl
+	ld [hl], a
 	push de
 	ld d, 0
 	ld hl, wPartySpecies
 	add hl, de
 	pop de
-	ld a, SMEARGLE
 	ld [hl], a
 
 .check_level

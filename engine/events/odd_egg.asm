@@ -37,6 +37,7 @@ _GiveOddEgg:
 	jr .loop
 .done
 
+	push bc
 	ld hl, OddEggs
 	ld a, NICKNAMED_MON_STRUCT_LENGTH
 	call AddNTimes
@@ -46,6 +47,17 @@ _GiveOddEgg:
 	ld de, wOddEgg
 	ld bc, NICKNAMED_MON_STRUCT_LENGTH + NAME_LENGTH
 	call CopyBytes
+
+	; Loads the actual species and overwrites the zero in wOddEggSpecies
+	pop bc
+	ld hl, OddEggSpecies
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld [wOddEggSpecies], a
 
 	ld a, EGG_TICKET
 	ld [wCurItem], a
