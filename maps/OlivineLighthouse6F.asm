@@ -7,6 +7,11 @@ OlivineLighthouse6F_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, OlivineLighthouse6FLoadReservedIDCallback
+
+OlivineLighthouse6FLoadReservedIDCallback:
+	loadmonindex 1, AMPHAROS
+	endcallback
 
 OlivineLighthouseJasmine:
 	faceplayer
@@ -106,7 +111,7 @@ OlivineLighthouseAmphy:
 	checkevent EVENT_JASMINE_RETURNED_TO_GYM
 	iftrue .HealthyNow
 	writetext AmphyPalPalooText
-	setval AMPHAROS
+	loadmonindex 0, AMPHAROS
 	special PlaySlowCry
 	promptbutton
 	writetext AmphyBreathingLaboredText

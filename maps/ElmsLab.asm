@@ -106,10 +106,10 @@ ElmCheckEverstone:
 	iftrue ElmGiveEverstoneScript
 	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
 	iffalse ElmCheckTogepiEgg
-	setval TOGEPI
+	loadmonindex 1, TOGEPI
 	special FindPartyMonThatSpeciesYourTrainerID
 	iftrue ShowElmTogepiScript
-	setval TOGETIC
+	loadmonindex 2, TOGETIC
 	special FindPartyMonThatSpeciesYourTrainerID
 	iftrue ShowElmTogepiScript
 	writetext ElmThoughtEggHatchedText
@@ -118,10 +118,10 @@ ElmCheckEverstone:
 	end
 
 ElmEggHatchedScript:
-	setval TOGEPI
+	loadmonindex 1, TOGEPI
 	special FindPartyMonThatSpeciesYourTrainerID
 	iftrue ShowElmTogepiScript
-	setval TOGETIC
+	loadmonindex 2, TOGETIC
 	special FindPartyMonThatSpeciesYourTrainerID
 	iftrue ShowElmTogepiScript
 	sjump ElmCheckGotEggAgain

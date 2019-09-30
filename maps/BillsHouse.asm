@@ -1,10 +1,28 @@
 	object_const_def
 	const BILLSHOUSE_GRAMPS
 
+	const_def 1 ; locked Pokémon ID table entries, used for species checking
+	const BILLSHOUSE_INDEX_LICKITUNG
+	const BILLSHOUSE_INDEX_ODDISH
+	const BILLSHOUSE_INDEX_STARYU
+	const BILLSHOUSE_INDEX_GROWLITHE
+	const BILLSHOUSE_INDEX_VULPIX
+	const BILLSHOUSE_INDEX_PICHU
+
 BillsHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, BillsHouseLoadReservedIDsCallback
+
+BillsHouseLoadReservedIDsCallback:
+	loadmonindex BILLSHOUSE_INDEX_LICKITUNG, LICKITUNG
+	loadmonindex BILLSHOUSE_INDEX_ODDISH, ODDISH
+	loadmonindex BILLSHOUSE_INDEX_STARYU, STARYU
+	loadmonindex BILLSHOUSE_INDEX_GROWLITHE, GROWLITHE
+	loadmonindex BILLSHOUSE_INDEX_VULPIX, VULPIX
+	loadmonindex BILLSHOUSE_INDEX_PICHU, PICHU
+	endcallback
 
 BillsGrandpa:
 	faceplayer
@@ -37,7 +55,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal LICKITUNG, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_LICKITUNG, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_LICKITUNG_TO_BILLS_GRANDPA
 	sjump .ShowedLickitung
@@ -51,7 +70,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal ODDISH, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_ODDISH, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_ODDISH_TO_BILLS_GRANDPA
 	sjump .ShowedOddish
@@ -65,7 +85,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal STARYU, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_STARYU, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_STARYU_TO_BILLS_GRANDPA
 	sjump .ShowedStaryu
@@ -81,7 +102,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal GROWLITHE, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_GROWLITHE, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA
 	sjump .ShowedGrowlitheVulpix
@@ -95,7 +117,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal VULPIX, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_VULPIX, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA
 	sjump .ShowedGrowlitheVulpix
@@ -109,7 +132,8 @@ BillsGrandpa:
 	scall .ExcitedToSee
 	special BillsGrandfather
 	iffalse .SaidNo
-	ifnotequal PICHU, .WrongPokemon
+	checkmaplockedmons
+	ifnotequal BILLSHOUSE_INDEX_PICHU, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_PICHU_TO_BILLS_GRANDPA
 	sjump .ShowedPichu

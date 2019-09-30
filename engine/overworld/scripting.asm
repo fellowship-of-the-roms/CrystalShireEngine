@@ -234,6 +234,8 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
+	dw Script_loadmonindex               ; aa
+	dw Script_checkmaplockedmons         ; ab
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2359,3 +2361,63 @@ Script_checkver_duplicate: ; unreferenced
 
 .gs_version:
 	db GS_VERSION
+
+Script_loadmonindex:
+; script command 0xaa
+	call LoadScriptPokemonID
+	ld [wScriptVar], a
+	ld c, a
+	call GetScriptByte
+	dec a
+	cp NUM_MAP_LOCKED_MON_IDS
+	ret nc
+	if LOCKED_MON_ID_MAP_1 > 1
+		add a, LOCKED_MON_ID_MAP_1
+	elif LOCKED_MON_ID_MAP_1 == 1
+		inc a
+	endc
+	ld l, a
+	ld a, c
+	jp LockPokemonID
+
+Script_checkmaplockedmons:
+; script command 0xab
+; check if the script variable's value is one of the reserved map indexes
+	ld a, [wScriptVar]
+	and a
+	ret z
+	cp MON_TABLE_ENTRIES + 1
+	ld c, 0
+	jr nc, .done
+	ld b, a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokemonIndexTable)
+	ldh [rSVBK], a
+	ld hl, wPokemonIndexTableLockedEntries + LOCKED_MON_ID_MAP_1
+.loop
+	inc c
+	ld a, [hli]
+	cp b
+	jr z, .found
+	ld a, c
+	cp NUM_MAP_LOCKED_MON_IDS
+	jr c, .loop
+	ld c, 0
+.found
+	pop af
+	ldh [rSVBK], a
+.done
+	ld a, c
+	ld [wScriptVar], a
+	ret
+
+LoadScriptPokemonID:
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	or l
+	jp nz, GetPokemonIDFromIndex
+	ld a, [wScriptVar]
+	ret

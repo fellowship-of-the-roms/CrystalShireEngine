@@ -18,6 +18,7 @@ TinTower1F_MapScripts:
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, TinTower1FNPCsCallback
 	callback MAPCALLBACK_TILES, TinTower1FStairsCallback
+	callback MAPCALLBACK_NEWMAP, TinTower1FLoadReservedIDsCallback
 
 TinTower1FSuicuneBattleScene:
 	sdefer TinTower1FSuicuneBattleScript
@@ -25,6 +26,12 @@ TinTower1FSuicuneBattleScene:
 
 TinTower1FNoopScene:
 	end
+
+TinTower1FLoadReservedIDsCallback:
+	loadmonindex 1, RAIKOU
+	loadmonindex 2, ENTEI
+	loadmonindex 3, SUICUNE
+	endcallback
 
 TinTower1FNPCsCallback:
 	checkevent EVENT_GOT_RAINBOW_WING
@@ -46,7 +53,7 @@ TinTower1FNPCsCallback:
 	checkevent EVENT_FOUGHT_SUICUNE
 	iftrue .FoughtSuicune
 	appear TINTOWER1F_SUICUNE
-	setval RAIKOU
+	loadmonindex 0, RAIKOU
 	special MonCheck
 	iftrue .NoRaikou
 	appear TINTOWER1F_RAIKOU
@@ -55,7 +62,7 @@ TinTower1FNPCsCallback:
 .NoRaikou:
 	disappear TINTOWER1F_RAIKOU
 .CheckEntei:
-	setval ENTEI
+	loadmonindex 0, ENTEI
 	special MonCheck
 	iftrue .NoEntei
 	appear TINTOWER1F_ENTEI
@@ -84,7 +91,7 @@ TinTower1FStairsCallback:
 TinTower1FSuicuneBattleScript:
 	applymovement PLAYER, TinTower1FPlayerEntersMovement
 	pause 15
-	setval RAIKOU
+	loadmonindex 0, RAIKOU
 	special MonCheck
 	iftrue .Next1 ; if player caught Raikou, it doesn't appear in Tin Tower
 	applymovement TINTOWER1F_RAIKOU, TinTower1FRaikouApproachesMovement
@@ -97,7 +104,7 @@ TinTower1FSuicuneBattleScript:
 	playsound SFX_EXIT_BUILDING
 	waitsfx
 .Next1:
-	setval ENTEI
+	loadmonindex 0, ENTEI
 	special MonCheck
 	iftrue .Next2 ; if player caught Entei, it doesn't appear in Tin Tower
 	applymovement TINTOWER1F_ENTEI, TinTower1FEnteiApproachesMovement

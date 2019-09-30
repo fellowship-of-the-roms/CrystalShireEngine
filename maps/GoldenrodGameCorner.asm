@@ -187,7 +187,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval ABRA
+	loadmonindex 1, ABRA
 	special GameCornerPrizeMonCheckDex
 	givepoke ABRA, 5
 	takecoins GOLDENRODGAMECORNER_ABRA_COINS
@@ -205,7 +205,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval CUBONE
+	loadmonindex 2, CUBONE
 	special GameCornerPrizeMonCheckDex
 	givepoke CUBONE, 15
 	takecoins GOLDENRODGAMECORNER_CUBONE_COINS
@@ -223,7 +223,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval WOBBUFFET
+	loadmonindex 3, WOBBUFFET
 	special GameCornerPrizeMonCheckDex
 	givepoke WOBBUFFET, 15
 	takecoins GOLDENRODGAMECORNER_WOBBUFFET_COINS
