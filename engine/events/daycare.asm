@@ -564,12 +564,15 @@ DayCare_InitBreeding:
 	ld [wCurPartySpecies], a
 	ld a, TEMPMON
 	ld [wMonType], a
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld c, a
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp c
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp c
 	ld a, $0
 	jr z, .LoadWhichBreedmonIsTheMother
 	farcall GetGender
@@ -589,17 +592,7 @@ DayCare_InitBreeding:
 	callfar GetLowestEvolutionStage
 	ld a, EGG_LEVEL
 	ld [wCurPartyLevel], a
-
-; Nidoran♀ can give birth to either gender of Nidoran
-	ld a, [wCurPartySpecies]
-	cp NIDORAN_F
-	jr nz, .GotEggSpecies
-	call Random
-	cp 50 percent + 1
-	ld a, NIDORAN_F
-	jr c, .GotEggSpecies
-	ld a, NIDORAN_M
-.GotEggSpecies:
+	call Daycare_CheckAlternateOffspring
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld [wEggMonSpecies], a
@@ -641,6 +634,9 @@ DayCare_InitBreeding:
 	ld [hli], a
 	dec b
 	jr nz, .loop2
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld b, a
 	ld hl, wEggMonDVs
 	call Random
 	ld [hli], a
@@ -650,11 +646,11 @@ DayCare_InitBreeding:
 	ld [wTempMonDVs + 1], a
 	ld de, wBreedMon1DVs
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp b
 	jr z, .GotDVs
 	ld de, wBreedMon2DVs
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp b
 	jr z, .GotDVs
 	ld a, TEMPMON
 	ld [wMonType], a
@@ -721,3 +717,37 @@ DayCare_InitBreeding:
 
 .String_EGG:
 	db "EGG@"
+
+Daycare_CheckAlternateOffspring:
+	; returns [wCurPartySpecies] in a, unless that species may give birth to an alternate species (e.g., gender variant)
+	; if an alternate species is possible, it returns it 50% of the time
+	call Random
+	add a, a
+	ld a, [wCurPartySpecies]
+	ret nc
+	push hl
+	push de
+	push bc
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld de, 4
+	ld hl, .alternate_offspring_table
+	call IsInWordArray
+	pop bc
+	pop de
+	ld a, [wCurPartySpecies]
+	jr nc, .done
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+.done
+	pop hl
+	ret
+
+.alternate_offspring_table
+	dw NIDORAN_F, NIDORAN_M
+	dw -1

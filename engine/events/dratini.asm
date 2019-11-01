@@ -12,11 +12,16 @@ GiveDratini:
 	call .GetNthPartyMon
 	ld a, [bc]
 	ld c, a
+	push hl
+	ld hl, DRATINI
+	call GetPokemonIDFromIndex
+	pop hl
+	ld b, a
 	ld de, PARTYMON_STRUCT_LENGTH
 .CheckForDratini:
 ; start at the end of the party and search backwards for a Dratini
 	ld a, [hl]
-	cp DRATINI
+	cp b
 	jr z, .GiveMoveset
 	ld a, l
 	sub e

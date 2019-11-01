@@ -1,14 +1,26 @@
 HoOhChamber:
 	ld hl, wPartySpecies
 	ld a, [hl]
-	cp HO_OH ; is Ho-oh the first Pokémon in the party?
-	jr nz, .done ; if not, we're done
+	; is Ho-oh the first Pokémon in the party? If not, we're done
+	call GetPokemonIndexFromID
+	ld a, l
+	sub LOW(HO_OH)
+	if HIGH(HO_OH) == 0
+		or h
+	else
+		ret nz
+		if HIGH(HO_OH) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(HO_OH)
+		endc
+	endc
+	ret nz
 	call GetMapAttributesPointer ; pointless?
 	ld de, EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
 	ld b, SET_FLAG
-	call EventFlagAction
-.done
-	ret
+	jp EventFlagAction
 
 OmanyteChamber:
 	call GetMapAttributesPointer ; pointless?

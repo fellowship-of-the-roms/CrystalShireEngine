@@ -1138,10 +1138,24 @@ BattleCommand_Critical:
 
 .Item:
 	ld c, 0
+	ld b, [hl]
+	call GetPokemonIndexFromID
 
-	cp CHANSEY
+	ld a, l
+	sub LOW(CHANSEY)
+	if HIGH(CHANSEY) == 0
+		or h
+	else
+		jr nz, .Farfetchd
+		if HIGH(CHANSEY) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(CHANSEY)
+		endc
+	endc
 	jr nz, .Farfetchd
-	ld a, [hl]
+	ld a, b
 	cp LUCKY_PUNCH
 	jr nz, .FocusEnergy
 
@@ -1150,9 +1164,21 @@ BattleCommand_Critical:
 	jr .Tally
 
 .Farfetchd:
-	cp FARFETCH_D
+	ld a, l
+	sub LOW(FARFETCH_D)
+	if HIGH(FARFETCH_D) == 0
+		or h
+	else
+		jr nz, .FocusEnergy
+		if HIGH(FARFETCH_D) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(FARFETCH_D)
+		endc
+	endc
 	jr nz, .FocusEnergy
-	ld a, [hl]
+	ld a, b
 	cp STICK
 	jr nz, .FocusEnergy
 
@@ -2495,7 +2521,23 @@ DittoMetalPowder:
 	ld a, [wTempEnemyMonSpecies]
 
 .got_species
-	cp DITTO
+	push hl
+	call GetPokemonIndexFromID
+	ld a, l
+	sub LOW(DITTO)
+	if HIGH(DITTO) == 0
+		or h
+		pop hl
+	else
+		ld a, h
+		pop hl
+		ret nz
+		if HIGH(DITTO) == 1
+			dec a
+		else
+			cp HIGH(DITTO)
+		endc
+	endc
 	ret nz
 
 	push bc
@@ -2710,10 +2752,15 @@ ThickClubBoost:
 ; it's holding a Thick Club, double it.
 	push bc
 	push de
-	ld b, CUBONE
-	ld c, MAROWAK
+	ld bc, CUBONE
 	ld d, THICK_CLUB
 	call SpeciesItemBoost
+	if MAROWAK == (CUBONE + 1)
+		inc bc
+	else
+		ld bc, MAROWAK
+	endc
+	call DoubleStatIfSpeciesHoldingItem
 	pop de
 	pop bc
 	ret
@@ -2725,8 +2772,7 @@ LightBallBoost:
 ; holding a Light Ball, double it.
 	push bc
 	push de
-	ld b, PIKACHU
-	ld c, PIKACHU
+	ld bc, PIKACHU
 	ld d, LIGHT_BALL
 	call SpeciesItemBoost
 	pop de
@@ -2736,12 +2782,17 @@ LightBallBoost:
 SpeciesItemBoost:
 ; Return in hl the stat value at hl.
 
-; If the attacking monster is species b or c and
+; If the attacking monster is species bc and
 ; it's holding item d, double it.
 
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
+	; fallthrough
+
+DoubleStatIfSpeciesHoldingItem:
+; If the attacking monster is species bc and
+; it's holding item d, double the stat in hl.
 
 	push hl
 	ld a, MON_SPECIES
@@ -2753,14 +2804,16 @@ SpeciesItemBoost:
 	jr z, .CompareSpecies
 	ld a, [wTempEnemyMonSpecies]
 .CompareSpecies:
-	pop hl
 
+	call GetPokemonIndexFromID
+	ld a, h
 	cp b
-	jr z, .GetItemHeldEffect
+	ld a, l
+	pop hl
+	ret nz
 	cp c
 	ret nz
 
-.GetItemHeldEffect:
 	push hl
 	call GetUserItem
 	ld a, [hl]

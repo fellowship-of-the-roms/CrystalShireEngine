@@ -214,8 +214,25 @@ PrintPartyMonPage1:
 	xor a
 	ld [hl], a
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	push hl
+	call GetPokemonIndexFromID
+	ld a, l
+	sub LOW(UNOWN)
+	if HIGH(UNOWN) == 0
+		or h
+		pop hl
+	else
+		ld a, h
+		pop hl
+		jr nz, .not_unown
+		if HIGH(UNOWN) == 1
+			dec a
+		else
+			cp HIGH(UNOWN)
+		endc
+	endc
 	jr z, .got_alignment
+.not_unown
 	inc [hl]
 .got_alignment
 	hlcoord 0, 0

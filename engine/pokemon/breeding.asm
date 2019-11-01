@@ -38,18 +38,21 @@ CheckBreedmonCompatibility:
 	jr nz, .compute
 
 .genderless
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld b, a
 	ld c, $0
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp b
 	jr z, .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp b
 	jr nz, .done
 	jr .compute
 
 .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp b
 	jr z, .done
 
 .compute
@@ -121,8 +124,11 @@ CheckBreedmonCompatibility:
 
 ; Ditto is automatically compatible with everything.
 ; If not Ditto, load the breeding groups into b/c and d/e.
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld d, a
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp d
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	call GetBaseData
@@ -136,7 +142,7 @@ CheckBreedmonCompatibility:
 	ld c, a
 
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp d
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	push bc
@@ -236,7 +242,20 @@ HatchEggs:
 	call SetSeenAndCaughtMon
 
 	ld a, [wCurPartySpecies]
-	cp TOGEPI
+	call GetPokemonIndexFromID
+	ld a, l
+	sub LOW(TOGEPI)
+	if HIGH(TOGEPI) == 0
+		or h
+	else
+		jr nz, .nottogepi
+		if HIGH(TOGEPI) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(TOGEPI)
+		endc
+	endc
 	jr nz, .nottogepi
 	; set the event flag for hatching togepi
 	ld de, EVENT_TOGEPI_HATCHED
@@ -537,12 +556,15 @@ LoadEggMove:
 	ret
 
 GetHeritableMoves:
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld b, a
 	ld hl, wBreedMon2Moves
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp b
 	jr z, .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp b
 	jr z, .ditto2
 	ld a, [wBreedMotherOrNonDitto]
 	and a
@@ -594,12 +616,15 @@ GetHeritableMoves:
 	ret
 
 GetBreedmonMovePointer:
+	ld hl, DITTO
+	call GetPokemonIDFromIndex
+	ld b, a
 	ld hl, wBreedMon1Moves
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp b
 	ret z
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp b
 	jr z, .ditto
 	ld a, [wBreedMotherOrNonDitto]
 	and a

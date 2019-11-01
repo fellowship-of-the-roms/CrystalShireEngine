@@ -440,11 +440,11 @@ GetSurfType:
 	ld a, [wCurPartyMon]
 	ld e, a
 	ld d, 0
+	ld hl, PIKACHU
+	call GetPokemonIDFromIndex
 	ld hl, wPartySpecies
 	add hl, de
-
-	ld a, [hl]
-	cp PIKACHU
+	cp [hl]
 	ld a, PLAYER_SURF_PIKA
 	ret z
 	ld a, PLAYER_SURF

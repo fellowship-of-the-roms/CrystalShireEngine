@@ -859,33 +859,49 @@ StatsScreen_PlaceFrontpic:
 	ld hl, wStatsScreenFlags
 	set 5, [hl]
 	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
+	call GetPokemonIndexFromID
+	ld a, l
+	cp LOW(UNOWN)
+	ld a, h
 	hlcoord 0, 0
-	call PrepMonFrontpic
-	ret
-
-.unown
+	jp nz, PrepMonFrontpic
+	if HIGH(UNOWN) == 0
+		and a
+	elif HIGH(UNOWN) == 1
+		dec a
+	else
+		cp HIGH(UNOWN)
+	endc
+	jp nz, PrepMonFrontpic
 	xor a
 	ld [wBoxAlignment], a
-	hlcoord 0, 0
-	call _PrepMonFrontpic
-	ret
+	jp _PrepMonFrontpic
 
 .AnimateEgg:
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	push hl
+	call GetPokemonIndexFromID
+	ld a, l
+	cp LOW(UNOWN)
+	ld a, h
+	pop hl
+	jr nz, .not_unown_egg
+	if HIGH(UNOWN) == 0
+		and a
+	elif HIGH(UNOWN) == 1
+		dec a
+	else
+		cp HIGH(UNOWN)
+	endc
 	jr z, .unownegg
+.not_unown_egg
 	ld a, TRUE
 	ld [wBoxAlignment], a
-	call .get_animation
-	ret
-
+	jr .get_animation
 .unownegg
 	xor a
 	ld [wBoxAlignment], a
-	call .get_animation
-	ret
+	; fallthrough
 
 .get_animation
 	ld a, [wCurPartySpecies]

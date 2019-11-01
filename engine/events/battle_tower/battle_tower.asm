@@ -385,15 +385,16 @@ ValidateBTParty: ; unreferenced
 	ld b, h
 	ld c, l
 	ld a, [hl]
-	and a
-for x, $ff, NUM_POKEMON, -1
+	cp EGG
 	jr z, .invalid
-	cp x
-endr
-	jr nz, .valid
+	call IsAPokemon
+	jr nc, .valid
 
 .invalid
-	ld a, SMEARGLE
+	push hl
+	ld hl, SMEARGLE
+	call GetPokemonIDFromIndex
+	pop hl
 	ld [hl], a
 
 .valid

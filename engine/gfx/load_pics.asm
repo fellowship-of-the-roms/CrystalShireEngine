@@ -118,11 +118,24 @@ _GetFrontpic:
 
 GetPicIndirectPointer:
 	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
 	call GetPokemonIndexFromID
 	ld b, h
 	ld c, l
+	ld a, l
+	sub LOW(UNOWN)
+	if HIGH(UNOWN) == 0
+		or h
+	else
+		jr nz, .not_unown
+		if HIGH(UNOWN) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(UNOWN)
+		endc
+	endc
+	jr z, .unown
+.not_unown
 	ld hl, PokemonPicPointers
 	ld d, BANK(PokemonPicPointers)
 .done
