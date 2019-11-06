@@ -1,4 +1,4 @@
-	db ZAPDOS ; 145
+	db 0 ; species ID placeholder
 
 	db  90,  90,  85, 100, 125,  90
 	;   hp  atk  def  spd  sat  sdf

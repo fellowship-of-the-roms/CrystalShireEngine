@@ -1,4 +1,4 @@
-	db DODRIO ; 085
+	db 0 ; species ID placeholder
 
 	db  60, 110,  70, 100,  60,  60
 	;   hp  atk  def  spd  sat  sdf

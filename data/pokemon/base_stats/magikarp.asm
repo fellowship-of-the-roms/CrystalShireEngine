@@ -1,4 +1,4 @@
-	db MAGIKARP ; 129
+	db 0 ; species ID placeholder
 
 	db  20,  10,  55,  80,  15,  20
 	;   hp  atk  def  spd  sat  sdf

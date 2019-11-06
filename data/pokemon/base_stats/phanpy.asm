@@ -1,4 +1,4 @@
-	db PHANPY ; 231
+	db 0 ; species ID placeholder
 
 	db  90,  60,  60,  40,  40,  40
 	;   hp  atk  def  spd  sat  sdf

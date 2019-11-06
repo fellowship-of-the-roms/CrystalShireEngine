@@ -1,4 +1,4 @@
-	db KANGASKHAN ; 115
+	db 0 ; species ID placeholder
 
 	db 105,  95,  80,  90,  40,  80
 	;   hp  atk  def  spd  sat  sdf

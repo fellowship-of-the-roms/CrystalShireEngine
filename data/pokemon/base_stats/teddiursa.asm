@@ -1,4 +1,4 @@
-	db TEDDIURSA ; 216
+	db 0 ; species ID placeholder
 
 	db  60,  80,  50,  40,  50,  50
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db WOBBUFFET ; 202
+	db 0 ; species ID placeholder
 
 	db 190,  33,  58,  33,  33,  58
 	;   hp  atk  def  spd  sat  sdf

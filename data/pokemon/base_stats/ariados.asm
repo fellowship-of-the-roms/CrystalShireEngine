@@ -1,4 +1,4 @@
-	db ARIADOS ; 168
+	db 0 ; species ID placeholder
 
 	db  70,  90,  70,  40,  60,  60
 	;   hp  atk  def  spd  sat  sdf

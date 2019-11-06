@@ -1,4 +1,4 @@
-	db AIPOM ; 190
+	db 0 ; species ID placeholder
 
 	db  55,  70,  55,  85,  40,  55
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db GYARADOS ; 130
+	db 0 ; species ID placeholder
 
 	db  95, 125,  79,  81,  60, 100
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db WIGGLYTUFF ; 040
+	db 0 ; species ID placeholder
 
 	db 140,  70,  45,  45,  75,  50
 	;   hp  atk  def  spd  sat  sdf

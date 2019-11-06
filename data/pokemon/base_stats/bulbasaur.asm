@@ -1,4 +1,4 @@
-	db BULBASAUR ; 001
+	db 0 ; species ID placeholder
 
 	db  45,  49,  49,  45,  65,  65
 	;   hp  atk  def  spd  sat  sdf

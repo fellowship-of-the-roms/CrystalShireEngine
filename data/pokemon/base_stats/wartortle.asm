@@ -1,4 +1,4 @@
-	db WARTORTLE ; 008
+	db 0 ; species ID placeholder
 
 	db  59,  63,  80,  58,  65,  80
 	;   hp  atk  def  spd  sat  sdf

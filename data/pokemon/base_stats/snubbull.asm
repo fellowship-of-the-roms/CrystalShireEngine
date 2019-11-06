@@ -1,4 +1,4 @@
-	db SNUBBULL ; 209
+	db 0 ; species ID placeholder
 
 	db  60,  80,  50,  30,  40,  40
 	;   hp  atk  def  spd  sat  sdf

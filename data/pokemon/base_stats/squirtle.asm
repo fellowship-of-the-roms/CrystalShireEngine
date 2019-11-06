@@ -1,4 +1,4 @@
-	db SQUIRTLE ; 007
+	db 0 ; species ID placeholder
 
 	db  44,  48,  65,  43,  50,  64
 	;   hp  atk  def  spd  sat  sdf

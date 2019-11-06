@@ -1,4 +1,4 @@
-	db NOCTOWL ; 164
+	db 0 ; species ID placeholder
 
 	db 100,  50,  50,  70,  76,  96
 	;   hp  atk  def  spd  sat  sdf

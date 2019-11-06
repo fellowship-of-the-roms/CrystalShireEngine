@@ -1,4 +1,4 @@
-	db MAGBY ; 240
+	db 0 ; species ID placeholder
 
 	db  45,  75,  37,  83,  70,  55
 	;   hp  atk  def  spd  sat  sdf

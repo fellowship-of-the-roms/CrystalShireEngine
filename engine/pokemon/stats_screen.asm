@@ -415,7 +415,7 @@ StatsScreen_InitUpperHalf:
 	call .PlaceHPBar
 	xor a
 	ldh [hBGMapMode], a
-	ld a, [wBaseDexNo]
+	ld a, [wBaseSpecies]
 	ld [wCurSpecies], a
 	call GetPokemonIndexFromID
 	ld a, h
@@ -445,7 +445,7 @@ StatsScreen_InitUpperHalf:
 	hlcoord 9, 4
 	ld a, "/"
 	ld [hli], a
-	ld a, [wBaseDexNo]
+	ld a, [wBaseSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	call PlaceString
@@ -528,7 +528,7 @@ StatsScreen_PlaceShinyIcon:
 	ret
 
 StatsScreen_LoadGFX:
-	ld a, [wBaseDexNo]
+	ld a, [wBaseSpecies]
 	ld [wTempSpecies], a
 	ld [wCurSpecies], a
 	xor a

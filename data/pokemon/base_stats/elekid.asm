@@ -1,4 +1,4 @@
-	db ELEKID ; 239
+	db 0 ; species ID placeholder
 
 	db  45,  63,  37,  95,  65,  55
 	;   hp  atk  def  spd  sat  sdf

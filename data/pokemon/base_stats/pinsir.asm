@@ -1,4 +1,4 @@
-	db PINSIR ; 127
+	db 0 ; species ID placeholder
 
 	db  65, 125, 100,  85,  55,  70
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db SMEARGLE ; 235
+	db 0 ; species ID placeholder
 
 	db  55,  20,  35,  75,  20,  45
 	;   hp  atk  def  spd  sat  sdf

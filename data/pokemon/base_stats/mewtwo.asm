@@ -1,4 +1,4 @@
-	db MEWTWO ; 150
+	db 0 ; species ID placeholder
 
 	db 106, 110,  90, 130, 154,  90
 	;   hp  atk  def  spd  sat  sdf

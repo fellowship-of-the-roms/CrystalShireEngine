@@ -1,4 +1,4 @@
-	db POLIWRATH ; 062
+	db 0 ; species ID placeholder
 
 	db  90,  85,  95,  70,  70,  90
 	;   hp  atk  def  spd  sat  sdf

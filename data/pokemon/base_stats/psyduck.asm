@@ -1,4 +1,4 @@
-	db PSYDUCK ; 054
+	db 0 ; species ID placeholder
 
 	db  50,  52,  48,  55,  65,  50
 	;   hp  atk  def  spd  sat  sdf

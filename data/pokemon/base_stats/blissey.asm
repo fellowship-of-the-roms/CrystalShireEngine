@@ -1,4 +1,4 @@
-	db BLISSEY ; 242
+	db 0 ; species ID placeholder
 
 	db 255,  10,  10,  55,  75, 135
 	;   hp  atk  def  spd  sat  sdf

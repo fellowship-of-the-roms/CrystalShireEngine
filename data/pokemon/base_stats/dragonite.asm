@@ -1,4 +1,4 @@
-	db DRAGONITE ; 149
+	db 0 ; species ID placeholder
 
 	db  91, 134,  95,  80, 100, 100
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db BLASTOISE ; 009
+	db 0 ; species ID placeholder
 
 	db  79,  83, 100,  78,  85, 105
 	;   hp  atk  def  spd  sat  sdf

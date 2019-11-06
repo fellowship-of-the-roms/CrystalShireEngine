@@ -1,4 +1,4 @@
-	db WOOPER ; 194
+	db 0 ; species ID placeholder
 
 	db  55,  45,  45,  15,  25,  25
 	;   hp  atk  def  spd  sat  sdf

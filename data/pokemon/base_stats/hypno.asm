@@ -1,4 +1,4 @@
-	db HYPNO ; 097
+	db 0 ; species ID placeholder
 
 	db  85,  73,  70,  67,  73, 115
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-	db GIRAFARIG ; 203
+	db 0 ; species ID placeholder
 
 	db  70,  80,  65,  85,  90,  65
 	;   hp  atk  def  spd  sat  sdf

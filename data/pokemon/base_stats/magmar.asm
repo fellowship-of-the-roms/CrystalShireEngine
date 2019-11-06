@@ -1,4 +1,4 @@
-	db MAGMAR ; 126
+	db 0 ; species ID placeholder
 
 	db  65,  95,  57,  93, 100,  85
 	;   hp  atk  def  spd  sat  sdf

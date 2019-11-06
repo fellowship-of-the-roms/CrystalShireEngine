@@ -1,4 +1,4 @@
-	db RHYDON ; 112
+	db 0 ; species ID placeholder
 
 	db 105, 130, 120,  40,  45,  45
 	;   hp  atk  def  spd  sat  sdf

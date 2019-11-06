@@ -1,4 +1,4 @@
-	db PIDGEOT ; 018
+	db 0 ; species ID placeholder
 
 	db  83,  80,  75,  91,  70,  70
 	;   hp  atk  def  spd  sat  sdf

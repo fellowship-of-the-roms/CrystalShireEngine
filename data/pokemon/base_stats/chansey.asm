@@ -1,4 +1,4 @@
-	db CHANSEY ; 113
+	db 0 ; species ID placeholder
 
 	db 250,  05,  05,  50,  35, 105
 	;   hp  atk  def  spd  sat  sdf

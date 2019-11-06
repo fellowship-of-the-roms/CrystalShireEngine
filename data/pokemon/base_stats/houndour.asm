@@ -1,4 +1,4 @@
-	db HOUNDOUR ; 228
+	db 0 ; species ID placeholder
 
 	db  45,  60,  30,  65,  80,  50
 	;   hp  atk  def  spd  sat  sdf

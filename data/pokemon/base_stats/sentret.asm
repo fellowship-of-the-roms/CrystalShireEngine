@@ -1,4 +1,4 @@
-	db SENTRET ; 161
+	db 0 ; species ID placeholder
 
 	db  35,  46,  34,  20,  35,  45
 	;   hp  atk  def  spd  sat  sdf

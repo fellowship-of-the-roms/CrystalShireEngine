@@ -1,4 +1,4 @@
-	db ENTEI ; 244
+	db 0 ; species ID placeholder
 
 	db 115, 115,  85, 100,  90,  75
 	;   hp  atk  def  spd  sat  sdf

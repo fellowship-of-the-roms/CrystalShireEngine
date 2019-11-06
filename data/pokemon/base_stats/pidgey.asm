@@ -1,4 +1,4 @@
-	db PIDGEY ; 016
+	db 0 ; species ID placeholder
 
 	db  40,  45,  40,  56,  35,  35
 	;   hp  atk  def  spd  sat  sdf

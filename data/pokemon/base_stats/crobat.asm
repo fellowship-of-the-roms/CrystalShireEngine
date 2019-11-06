@@ -1,4 +1,4 @@
-	db CROBAT ; 169
+	db 0 ; species ID placeholder
 
 	db  85,  90,  80, 130,  70,  80
 	;   hp  atk  def  spd  sat  sdf

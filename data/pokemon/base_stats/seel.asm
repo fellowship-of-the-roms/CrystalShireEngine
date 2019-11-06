@@ -1,4 +1,4 @@
-	db SEEL ; 086
+	db 0 ; species ID placeholder
 
 	db  65,  45,  55,  45,  45,  70
 	;   hp  atk  def  spd  sat  sdf

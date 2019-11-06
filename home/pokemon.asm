@@ -284,7 +284,7 @@ GetBaseData::
 .end
 ; Replace Pokedex # with species
 	ld a, [wCurSpecies]
-	ld [wBaseDexNo], a
+	ld [wBaseSpecies], a
 
 	pop af
 	rst Bankswitch

@@ -1,4 +1,4 @@
-	db GRANBULL ; 210
+	db 0 ; species ID placeholder
 
 	db  90, 120,  75,  45,  60,  60
 	;   hp  atk  def  spd  sat  sdf

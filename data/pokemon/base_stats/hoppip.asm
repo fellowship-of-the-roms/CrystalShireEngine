@@ -1,4 +1,4 @@
-	db HOPPIP ; 187
+	db 0 ; species ID placeholder
 
 	db  35,  35,  40,  50,  35,  55
 	;   hp  atk  def  spd  sat  sdf

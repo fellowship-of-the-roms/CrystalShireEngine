@@ -1,4 +1,4 @@
-	db DUNSPARCE ; 206
+	db 0 ; species ID placeholder
 
 	db 100,  70,  70,  45,  65,  65
 	;   hp  atk  def  spd  sat  sdf

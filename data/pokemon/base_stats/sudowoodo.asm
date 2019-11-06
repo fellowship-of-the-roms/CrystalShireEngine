@@ -1,4 +1,4 @@
-	db SUDOWOODO ; 185
+	db 0 ; species ID placeholder
 
 	db  70, 100, 115,  30,  30,  65
 	;   hp  atk  def  spd  sat  sdf

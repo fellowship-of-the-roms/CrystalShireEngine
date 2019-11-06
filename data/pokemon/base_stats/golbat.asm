@@ -1,4 +1,4 @@
-	db GOLBAT ; 042
+	db 0 ; species ID placeholder
 
 	db  75,  80,  70,  90,  65,  75
 	;   hp  atk  def  spd  sat  sdf

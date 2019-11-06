@@ -1,4 +1,4 @@
-	db LUGIA ; 249
+	db 0 ; species ID placeholder
 
 	db 106,  90, 130, 110,  90, 154
 	;   hp  atk  def  spd  sat  sdf

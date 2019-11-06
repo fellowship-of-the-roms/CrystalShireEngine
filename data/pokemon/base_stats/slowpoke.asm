@@ -1,4 +1,4 @@
-	db SLOWPOKE ; 079
+	db 0 ; species ID placeholder
 
 	db  90,  65,  65,  15,  40,  40
 	;   hp  atk  def  spd  sat  sdf

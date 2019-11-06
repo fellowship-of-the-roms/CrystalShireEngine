@@ -1,4 +1,4 @@
-	db GOLDEEN ; 118
+	db 0 ; species ID placeholder
 
 	db  45,  67,  60,  63,  35,  50
 	;   hp  atk  def  spd  sat  sdf

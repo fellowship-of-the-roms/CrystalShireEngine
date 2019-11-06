@@ -1,4 +1,4 @@
-	db MACHAMP ; 068
+	db 0 ; species ID placeholder
 
 	db  90, 130,  80,  55,  65,  85
 	;   hp  atk  def  spd  sat  sdf

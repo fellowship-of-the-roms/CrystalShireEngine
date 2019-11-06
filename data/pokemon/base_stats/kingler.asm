@@ -1,4 +1,4 @@
-	db KINGLER ; 099
+	db 0 ; species ID placeholder
 
 	db  55, 130, 115,  75,  50,  50
 	;   hp  atk  def  spd  sat  sdf

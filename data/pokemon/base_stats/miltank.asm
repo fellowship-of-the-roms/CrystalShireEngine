@@ -1,4 +1,4 @@
-	db MILTANK ; 241
+	db 0 ; species ID placeholder
 
 	db  95,  80, 105, 100,  40,  70
 	;   hp  atk  def  spd  sat  sdf

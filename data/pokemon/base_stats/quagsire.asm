@@ -1,4 +1,4 @@
-	db QUAGSIRE ; 195
+	db 0 ; species ID placeholder
 
 	db  95,  85,  85,  35,  65,  65
 	;   hp  atk  def  spd  sat  sdf

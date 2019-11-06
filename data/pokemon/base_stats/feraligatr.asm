@@ -1,4 +1,4 @@
-	db FERALIGATR ; 160
+	db 0 ; species ID placeholder
 
 	db  85, 105, 100,  78,  79,  83
 	;   hp  atk  def  spd  sat  sdf

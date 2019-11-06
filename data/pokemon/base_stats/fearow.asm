@@ -1,4 +1,4 @@
-	db FEAROW ; 022
+	db 0 ; species ID placeholder
 
 	db  65,  90,  65, 100,  61,  61
 	;   hp  atk  def  spd  sat  sdf

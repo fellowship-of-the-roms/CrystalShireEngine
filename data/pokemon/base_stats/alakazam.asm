@@ -1,4 +1,4 @@
-	db ALAKAZAM ; 065
+	db 0 ; species ID placeholder
 
 	db  55,  50,  45, 120, 135,  85
 	;   hp  atk  def  spd  sat  sdf

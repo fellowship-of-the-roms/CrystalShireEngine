@@ -1,4 +1,4 @@
-	db CHARMANDER ; 004
+	db 0 ; species ID placeholder
 
 	db  39,  52,  43,  65,  60,  50
 	;   hp  atk  def  spd  sat  sdf

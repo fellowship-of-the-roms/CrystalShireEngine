@@ -1,4 +1,4 @@
-	db RATICATE ; 020
+	db 0 ; species ID placeholder
 
 	db  55,  81,  60,  97,  50,  70
 	;   hp  atk  def  spd  sat  sdf

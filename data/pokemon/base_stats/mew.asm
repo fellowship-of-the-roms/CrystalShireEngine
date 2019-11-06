@@ -1,4 +1,4 @@
-	db MEW ; 151
+	db 0 ; species ID placeholder
 
 	db 100, 100, 100, 100, 100, 100
 	;   hp  atk  def  spd  sat  sdf

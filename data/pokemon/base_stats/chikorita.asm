@@ -1,4 +1,4 @@
-	db CHIKORITA ; 152
+	db 0 ; species ID placeholder
 
 	db  45,  49,  65,  45,  49,  65
 	;   hp  atk  def  spd  sat  sdf
