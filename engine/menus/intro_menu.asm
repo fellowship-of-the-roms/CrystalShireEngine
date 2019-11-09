@@ -100,6 +100,16 @@ ResetWRAM:
 	ret
 
 _ResetWRAM:
+	ld a, BANK(wPokemonIndexTable)
+	ldh [rSVBK], a
+	ld hl, wPokemonIndexTable
+	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
+	xor a
+	call ByteFill
+
+	ld a, 1
+	ldh [rSVBK], a
+
 	ld hl, wShadowOAM
 	ld bc, wOptions - wShadowOAM
 	xor a
