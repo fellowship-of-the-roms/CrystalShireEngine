@@ -43,6 +43,7 @@ _BillsPC:
 	ret
 
 .UseBillsPC:
+	call .clear_current_reserved_mon
 	ld hl, .MenuHeader
 	call LoadMenuHeader
 	ld a, $1
@@ -64,7 +65,10 @@ _BillsPC:
 	jr nc, .loop
 .cancel
 	call CloseWindow
-	ret
+.clear_current_reserved_mon
+	ld l, LOCKED_MON_ID_CURRENT_MENU
+	xor a
+	jp LockPokemonID
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags

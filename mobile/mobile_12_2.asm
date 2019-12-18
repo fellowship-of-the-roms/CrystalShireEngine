@@ -67,6 +67,10 @@ MobileCheckOwnMonAnywhere:
 	call CloseSRAM
 
 	ld c, 0
+	ld a, [wScriptVar]
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
 .box
 	; Don't search the current box again.
 	ld a, [wCurBox]
@@ -89,44 +93,17 @@ MobileCheckOwnMonAnywhere:
 
 	; Number of monsters in the box
 
-	ld a, [hl]
-	and a
-	jr z, .loopbox
-
-	push bc
-
-	push hl
-	ld de, sBoxMons - sBoxCount
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	push de
-	ld de, sBoxMonOTs - sBoxCount
-	add hl, de
-	ld b, h
-	ld c, l
-	pop hl
-
-	ld d, a
-
-.boxmon
-	call .CheckMatch
-	jr nc, .loopboxmon
-
-	pop bc
-	call CloseSRAM
-	ret
-
-.loopboxmon
-	push bc
-	ld bc, BOXMON_STRUCT_LENGTH
-	add hl, bc
-	pop bc
-	call .AdvanceOTName
-	dec d
-	jr nz, .boxmon
-	pop bc
+	ld b, MONS_PER_BOX
+.box_search_loop
+	ld a, [hli]
+	cp e
+	ld a, [hli]
+	jr nz, .next_box_mon
+	cp d
+	jr z, .found_in_box
+.next_box_mon
+	dec b
+	jr nz, .box_search_loop
 
 .loopbox
 	inc c
@@ -136,6 +113,11 @@ MobileCheckOwnMonAnywhere:
 
 	call CloseSRAM
 	and a
+	ret
+
+.found_in_box
+	call CloseSRAM
+	scf
 	ret
 
 .CheckMatch:
@@ -175,7 +157,7 @@ MobileCheckOwnMonAnywhere:
 .BoxAddresses:
 	table_width 3, MobileCheckOwnMonAnywhere.BoxAddresses
 for n, 1, NUM_BOXES + 1
-	dba sBox{d:n}
+	dba sBox{d:n}PokemonIndexes
 endr
 	assert_table_length NUM_BOXES
 

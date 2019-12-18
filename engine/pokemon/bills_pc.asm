@@ -1114,11 +1114,12 @@ BillsPC_LoadMonStats:
 	ld hl, wBillsPC_ScrollPosition
 	add [hl]
 	ld e, a
-	ld d, 0
-	ld hl, wBillsPCPokemonList + 1 ; box number
-	add hl, de
-	add hl, de
-	add hl, de
+	add a, a
+	add a, a
+	ld c, a
+	ld b, 0
+	ld hl, wBillsPCPokemonList + 2 ; box number
+	add hl, bc
 	ld a, [hl]
 	and a
 	jr z, .party
@@ -1227,11 +1228,11 @@ BillsPC_RefreshTextboxes:
 	ld [hl], "┘"
 
 	ld a, [wBillsPC_ScrollPosition]
+	add a, a
+	add a, a
 	ld e, a
 	ld d, 0
 	ld hl, wBillsPCPokemonList
-	add hl, de
-	add hl, de
 	add hl, de
 	ld e, l
 	ld d, h
@@ -1249,6 +1250,7 @@ BillsPC_RefreshTextboxes:
 	inc de
 	inc de
 	inc de
+	inc de
 	pop af
 	dec a
 	jr nz, .loop
@@ -1259,6 +1261,12 @@ BillsPC_RefreshTextboxes:
 
 .PlaceNickname:
 	ld a, [de]
+	ld b, a
+	inc de
+	ld a, [de]
+	cp b
+	; both $0000 and $FFFF have two identical bytes, so this check works
+	jr nz, .get_nickname
 	and a
 	ret z
 	cp -1
@@ -1370,86 +1378,133 @@ BillsPC_RefreshTextboxes:
 .Placeholder:
 	db "-----@"
 
-MACRO copy_box_data
-.loop\@
-	ld a, [hl]
-	cp -1
-	jr z, .done\@
-	and a
-	jr z, .done\@
-	ld [de], a ; species
-	inc de
-	ld a, [wBillsPC_LoadedBox]
-	ld [de], a ; box number
-	inc de
-	ld a, [wBillsPCTempListIndex]
-	ld [de], a ; list index
-	inc a
-	ld [wBillsPCTempListIndex], a
-	inc de
-	inc hl
-	ld a, [wBillsPCTempBoxCount]
-	inc a
-	ld [wBillsPCTempBoxCount], a
-	jr .loop\@
-
-.done\@
-	if \1
-		call CloseSRAM
-	endc
-	ld a, -1
-	ld [de], a
-	ld a, [wBillsPCTempBoxCount]
-	inc a
-	ld [wBillsPC_NumMonsInBox], a
-ENDM
-
 CopyBoxmonSpecies:
 	xor a
 	ld hl, wBillsPCPokemonList
-	ld bc, 3 * 30
+	ld bc, 4 * 30
+	push hl
 	call ByteFill
-	ld de, wBillsPCPokemonList
-	xor a
-	ld [wBillsPCTempListIndex], a
-	ld [wBillsPCTempBoxCount], a
+	pop hl
 	ld a, [wBillsPC_LoadedBox]
+	ld b, a
+	ld c, 0
 	and a
 	jr z, .party
 	cp NUM_BOXES + 1
 	jr z, .sBox
-	ld b, a
+
+	push bc
+	push hl
 	call GetBoxPointer
 	ld a, b
 	call OpenSRAM
 	inc hl
-	copy_box_data 1
-	ret
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+.box_loop
+	ld a, [de]
+	inc de
+	cp -1
+	jr z, .box_done
+	push hl
+	ld hl, EGG
+	cp l
+	call nz, BillsPC_GetSpeciesIndexForBoxSlot
+	ld a, h
+	ldh [hTemp], a
+	ld a, l
+	pop hl
+	ld [hli], a
+	ldh a, [hTemp]
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	inc c
+	jr .box_loop
 
-.party
-	ld hl, wPartySpecies
-	copy_box_data 0
+.box_done
+	call CloseSRAM ;preserves af
+.list_done
+	; expects a = $FF
+	ld [hli], a
+	ld [hl], a
+	ld a, c
+	inc a
+	ld [wBillsPC_NumMonsInBox], a
 	ret
 
 .sBox
 	ld a, BANK(sBox)
 	call OpenSRAM
-	ld hl, sBoxSpecies
-	copy_box_data 1
+	ld de, sBoxSpecies
+	call .load_list
+	jp CloseSRAM
+
+.party
+	ld de, wPartySpecies
+.load_list
+	ld a, [de]
+	cp -1
+	jr z, .list_done
+	inc de
+	push hl
+	call GetPokemonIndexFromID
+	ld a, h
+	ldh [hTemp], a
+	ld a, l
+	pop hl
+	ld [hli], a
+	ldh a, [hTemp]
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	inc c
+	jr .load_list
+
+BillsPC_GetSpeciesIndexForBoxSlot:
+	; in: b: box, c: slot
+	; out: hl: species
+	; preserves bc, de
+	push bc
+	push de
+	dec b
+	ld a, c
+	ld c, b
+	ld b, a
+	farcall GetBoxMonPokemonIndexPointer
+	ldh a, [hSRAMBank]
+	ld c, a
+	ld a, b
+	call OpenSRAM
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, c
+	call OpenSRAM
+	pop de
+	pop bc
 	ret
 
 BillsPC_GetSelectedPokemonSpecies:
 	ld a, [wBillsPC_CursorPosition]
 	ld hl, wBillsPC_ScrollPosition
 	add [hl]
+	add a, a
+	add a, a
 	ld e, a
 	ld d, 0
 	ld hl, wBillsPCPokemonList
 	add hl, de
-	add hl, de
-	add hl, de
-	ld a, [hl]
-	ret
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp GetPokemonIDFromIndex
 
 BillsPC_UpdateSelectionCursor:
 	ld a, [wBillsPC_NumMonsInBox]
@@ -1740,13 +1795,16 @@ BillsPC_CopyMon:
 
 .box
 	ld b, a
+	ld a, [wCurPartyMon]
+	ld c, a
+	call BillsPC_GetSpeciesIndexForBoxSlot
+	call GetPokemonIDFromIndex
+	ld [wCurPartySpecies], a
+	ld l, LOCKED_MON_ID_CURRENT_MENU
+	call LockPokemonID
 	call GetBoxPointer
 	ld a, b
 	call OpenSRAM
-	push hl
-	inc hl
-	call CopySpeciesToTemp
-	pop hl
 	push hl
 	ld bc, sBoxMonNicknames - sBox
 	add hl, bc
@@ -1762,6 +1820,9 @@ BillsPC_CopyMon:
 	ld bc, BOXMON_STRUCT_LENGTH
 	call CopyMonToTemp
 	call CloseSRAM
+	ld a, LOCKED_MON_ID_CURRENT_MENU
+	call GetLockedPokemonID
+	ld [wBufferMonSpecies], a
 	farcall CalcBufferMonStats
 	ret
 
@@ -2107,7 +2168,8 @@ CopySpeciesToTemp:
 	add hl, bc
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	ret
+	ld l, LOCKED_MON_ID_CURRENT_MENU
+	jp LockPokemonID
 
 CopyNicknameToTemp:
 	ld bc, MON_NAME_LENGTH

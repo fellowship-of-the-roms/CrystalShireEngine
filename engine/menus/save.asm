@@ -491,8 +491,21 @@ SaveIndexTables:
 
 SaveBox:
 	call GetBoxAddress
+	push de
+	push af
 	call SaveBoxAddress
-	ret
+	pop af
+	call OpenSRAM
+	pop hl
+	call ComputeSavedBoxIndexTable
+	call GetBoxPokemonIndexesAddress
+	call OpenSRAM
+	ld d, h
+	ld e, l
+	ld hl, wBoxPartialData
+	ld bc, 2 * MONS_PER_BOX
+	call CopyBytes
+	jp CloseSRAM
 
 SaveChecksum:
 	ld hl, sSaveData
@@ -771,7 +784,24 @@ LoadIndexTables:
 LoadBox:
 	call GetBoxAddress
 	call LoadBoxAddress
-	ret
+	call GetBoxPokemonIndexesAddress
+	call OpenSRAM
+	ld de, wBoxPartialData
+	ld bc, 2 * MONS_PER_BOX
+	call CopyBytes
+	ld a, BANK(sBox)
+	call OpenSRAM
+	call ClearIndexesForLoadedBox
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokemonIndexTable)
+	ldh [rSVBK], a
+	; GC the table now that lots of entries are free
+	farcall PokemonTableGarbageCollection
+	pop af
+	ldh [rSVBK], a
+	call UpdateIndexesForLoadedBox
+	jp CloseSRAM
 
 VerifyChecksum:
 	ld hl, sSaveData
@@ -917,6 +947,23 @@ endr
 	pop af
 	ret
 
+GetBoxPokemonIndexesAddress:
+	ld a, [wCurBox]
+	ld e, a
+	ld d, 0
+	ld hl, BoxAddresses + 5 * NUM_BOXES
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	push af
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop af
+	ret
+	ret
+
 SaveBoxAddress:
 ; Save box via wBoxPartialData.
 ; We do this in three steps because the size of wBoxPartialData is less than
@@ -992,6 +1039,48 @@ SaveBoxAddress:
 	pop hl
 	ret
 
+ComputeSavedBoxIndexTable:
+	push hl
+	ld a, [hl]
+	ld de, wBoxPartialData
+	and a
+	jr z, .empty_box
+	cp MONS_PER_BOX
+	jr c, .valid_count
+	ld a, MONS_PER_BOX
+.valid_count
+	ld bc, sBoxMons - sBox
+	add hl, bc
+	ld [wTempLoopCounter], a
+	ld c, BOXMON_STRUCT_LENGTH
+.loop
+	ld a, [hl]
+	add hl, bc
+	push hl
+	call GetPokemonIndexFromID
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	inc de
+	ld hl, wTempLoopCounter
+	dec [hl]
+	pop hl
+	jr nz, .loop
+.empty_box
+	pop hl
+	ld a, MONS_PER_BOX
+	sub [hl]
+	ret c
+	add a, a
+	ld h, d
+	ld l, e
+	ld c, a
+	xor a
+	ld b, a
+	jp ByteFill
+
 LoadBoxAddress:
 ; Load box via wBoxPartialData.
 ; We do this in three steps because the size of wBoxPartialData is less than
@@ -1055,6 +1144,59 @@ LoadBoxAddress:
 	pop hl
 	ret
 
+ClearIndexesForLoadedBox:
+	ld hl, sBoxMon1Species
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld a, MONS_PER_BOX
+.loop
+	ld [hl], 0
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
+UpdateIndexesForLoadedBox:
+	ld de, sBox
+	ld a, [de]
+	cp MONS_PER_BOX
+	jr c, .count_OK
+	ld a, MONS_PER_BOX
+	ld [de], a
+.count_OK
+	inc de
+	and a
+	jr z, .done
+	ld [wTempLoopCounter], a
+	ld bc, sBoxMon1Species
+	ld hl, wBoxPartialData - 1
+.loop
+	inc hl
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld [bc], a
+	ld a, [de]
+	cp EGG
+	jr z, .is_egg
+	ld a, [bc]
+	ld [de], a
+.is_egg
+	ld hl, BOXMON_STRUCT_LENGTH
+	add hl, bc
+	ld b, h
+	ld c, l
+	inc de
+	ld hl, wTempLoopCounter
+	dec [hl]
+	pop hl
+	jr nz, .loop
+.done
+	ld a, -1
+	ld [de], a
+	ret
+
 EraseBoxes:
 	ld hl, BoxAddresses
 	ld c, NUM_BOXES
@@ -1094,6 +1236,22 @@ EraseBoxes:
 	pop bc
 	dec c
 	jr nz, .next
+	ld e, NUM_BOXES
+.index_loop
+	ld a, [hli]
+	call OpenSRAM
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	push hl
+	ld h, a
+	ld l, b
+	xor a
+	ld bc, 2 * MONS_PER_BOX
+	call ByteFill
+	pop hl
+	dec e
+	jr nz, .index_loop
 	ret
 
 BoxAddresses:
@@ -1102,6 +1260,25 @@ for n, 1, NUM_BOXES + 1
 	db BANK(sBox{d:n}) ; aka BANK(sBox{d:n}End)
 	dw sBox{d:n}, sBox{d:n}End
 endr
+	assert_table_length NUM_BOXES
+
+	; index addresses
+BoxIndexAddresses:
+	table_width 3, BoxIndexAddresses
+	dba sBox1PokemonIndexes
+	dba sBox2PokemonIndexes
+	dba sBox3PokemonIndexes
+	dba sBox4PokemonIndexes
+	dba sBox5PokemonIndexes
+	dba sBox6PokemonIndexes
+	dba sBox7PokemonIndexes
+	dba sBox8PokemonIndexes
+	dba sBox9PokemonIndexes
+	dba sBox10PokemonIndexes
+	dba sBox11PokemonIndexes
+	dba sBox12PokemonIndexes
+	dba sBox13PokemonIndexes
+	dba sBox14PokemonIndexes
 	assert_table_length NUM_BOXES
 
 Checksum:

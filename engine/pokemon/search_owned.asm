@@ -68,6 +68,7 @@ CheckOwnMonAnywhere:
 	; Run CheckOwnMon on each Pokémon in the party.
 
 .partymon
+	and a
 	call CheckOwnMon
 	ret c
 
@@ -91,6 +92,7 @@ CheckOwnMonAnywhere:
 	ld hl, sBoxMon1Species
 	ld bc, sBoxMonOTs
 .openboxmon
+	and a
 	call CheckOwnMon
 	jr nc, .loop
 
@@ -110,8 +112,15 @@ CheckOwnMonAnywhere:
 
 .boxes
 	call CloseSRAM
+	ld a, [wSavedAtLeastOnce]
+	and a
+	ret z
 
 	ld c, 0
+	ld a, [wScriptVar]
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
 .box
 	; Don't search the current box again.
 	ld a, [wCurBox]
@@ -119,59 +128,47 @@ CheckOwnMonAnywhere:
 	cp c
 	jr z, .loopbox
 
-	; Load the box.
-
-	ld hl, SearchBoxAddressTable
+	; Load the box's indexes.
+	ld hl, BoxPokemonIndexesAddressTable
 	ld b, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
+	ldh [hTemp], a
 	call OpenSRAM
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
-	; Number of monsters in the box
-
-	ld a, [hl]
-	and a
-	jr z, .loopbox
-
-	push bc
+.boxmon
+	ld a, [hli]
+	cp e
+	ld a, [hli]
+	jr nz, .loopboxmon
+	cp d
+	jr nz, .loopboxmon
 
 	push hl
-	ld de, sBoxMons - sBoxCount
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
 	push de
-	ld de, sBoxMonOTs - sBoxCount
-	add hl, de
-	ld b, h
-	ld c, l
-	pop hl
-
-	ld d, a
-
-.boxmon
-	call CheckOwnMon
-	jr nc, .loopboxmon
-
+	push bc
+	call GetBoxMonPointers
+	ld a, [wTempSpecies]
+	call IsAPokemon
+	ccf
+	call c, CheckOwnMon ;calls with carry set (skips species check)
 	pop bc
-	call CloseSRAM
-	ret
+	pop de
+	pop hl
+	jp c, CloseSRAM ;preserves flags
+	ldh a, [hTemp]
+	call OpenSRAM
 
 .loopboxmon
-	push bc
-	ld bc, BOXMON_STRUCT_LENGTH
-	add hl, bc
-	pop bc
-	call UpdateOTPointer
-	dec d
-	jr nz, .boxmon
-	pop bc
+	inc b
+	ld a, b
+	cp MONS_PER_BOX
+	jr c, .boxmon
 
 .loopbox
 	inc c
@@ -192,6 +189,7 @@ CheckOwnMon:
 ; hl, pointer to PartyMonNSpecies
 ; bc, pointer to PartyMonNOT
 ; wScriptVar should contain the species we're looking for
+; carry flag: if set, skip species check
 
 ; outputs:
 ; sets carry if monster matches species, ID, and OT name.
@@ -203,11 +201,12 @@ CheckOwnMon:
 	ld e, c
 
 	; check species
-
+	jr c, .no_species_check
 	ld a, [wScriptVar]
 	ld b, [hl]
 	cp b
 	jr nz, .notfound
+.no_species_check
 
 	; check ID number
 
@@ -254,11 +253,103 @@ endr
 	scf
 	ret
 
+GetBoxMonPointers::
+	; in: b = slot, c = box
+	; out: hl = pointer to mon struct, de = pointer to nickname, bc = pointer to OT
+	; also loads the corresponding box bank in SRAM and sets wTempSpecies to the party ID (or 0 for an empty slot)
+	ld e, b
+	ld b, 0
+	ld hl, SearchBoxAddressTable
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	call OpenSRAM
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, e
+	ld d, h
+	ld e, l
+	cp [hl]
+	ld c, a
+	ld a, b ;b = 0
+	jr nc, .got_ID
+	inc hl
+	add hl, bc
+	ld a, [hl]
+.got_ID
+	ld [wTempSpecies], a
+	ld a, c
+	ld hl, sBoxMonOTs - sBox
+	add hl, de
+	ld c, NAME_LENGTH
+	push af
+	call AddNTimes
+	pop af
+	push hl
+	ld hl, sBoxMonNicknames - sBox
+	add hl, de
+	if MON_NAME_LENGTH != NAME_LENGTH
+		ld c, MON_NAME_LENGTH
+	endc
+	push af
+	call AddNTimes
+	pop af
+	push hl
+	ld hl, sBoxMons - sBox
+	add hl, de
+	pop de
+	ld c, BOXMON_STRUCT_LENGTH
+	call AddNTimes
+	pop bc
+	ret
+
+GetBoxMonPokemonIndexPointer::
+	; in: b = slot, c = box
+	; out: b = bank, hl = pointer
+	; preserves de
+	ld a, b
+	ld b, 0
+	ld hl, BoxPokemonIndexesAddressTable
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld c, a
+	ld a, [hli]
+	push af
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	pop bc
+	ret
+
 SearchBoxAddressTable:
 	table_width 3, SearchBoxAddressTable
 for n, 1, NUM_BOXES + 1
 	dba sBox{d:n}
 endr
+	assert_table_length NUM_BOXES
+
+BoxPokemonIndexesAddressTable:
+	table_width 3, BoxPokemonIndexesAddressTable
+	dba sBox1PokemonIndexes
+	dba sBox2PokemonIndexes
+	dba sBox3PokemonIndexes
+	dba sBox4PokemonIndexes
+	dba sBox5PokemonIndexes
+	dba sBox6PokemonIndexes
+	dba sBox7PokemonIndexes
+	dba sBox8PokemonIndexes
+	dba sBox9PokemonIndexes
+	dba sBox10PokemonIndexes
+	dba sBox11PokemonIndexes
+	dba sBox12PokemonIndexes
+	dba sBox13PokemonIndexes
+	dba sBox14PokemonIndexes
 	assert_table_length NUM_BOXES
 
 UpdateOTPointer:

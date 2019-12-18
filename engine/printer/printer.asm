@@ -735,6 +735,8 @@ Printer_PrintBoxListSegment:
 	ld a, [de]
 	cp $ff
 	jp z, .finish
+	cp EGG
+	call nz, Printer_GetTrueBoxSpeciesIndex
 	ld [wNamedObjectIndex], a
 	ld [wCurPartySpecies], a
 
@@ -867,6 +869,40 @@ Printer_GetBoxMonSpecies:
 	add hl, de
 	ld e, l
 	ld d, h
+	pop hl
+	ret
+
+Printer_GetTrueBoxSpeciesIndex:
+	push hl
+	push af
+	ld a, [wWhichBoxToPrint]
+	ld hl, wCurBox
+	cp [hl]
+	pop hl
+	ld l, a
+	ld a, h
+	jr z, .done
+	push bc
+	ld c, l
+	ld a, [wAddrOfBoxToPrint]
+	cpl
+	add a, e
+	ld b, a
+	farcall GetBoxMonPokemonIndexPointer
+	ldh a, [hSRAMBank]
+	ld c, a
+	ld a, b
+	call OpenSRAM
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld b, a
+	ld a, c
+	call OpenSRAM
+	ld a, b
+	pop bc
+.done
 	pop hl
 	ret
 

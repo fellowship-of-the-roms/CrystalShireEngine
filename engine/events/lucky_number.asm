@@ -66,13 +66,15 @@ CheckForLuckyNumberWinners:
 	ld a, [hl]
 	and a
 	jr z, .SkipBox ; no mons in this box
+	ld [wTempLoopCounter], a
+	ld de, sBoxMon1ID - sBox
+	add hl, de
+	ld d, 0
+	ld e, c
 	push bc
 	ld b, h
 	ld c, l
 	inc bc
-	ld de, sBoxMon1ID - sBox
-	add hl, de
-	ld d, a
 .BoxNLoop:
 	ld a, [bc]
 	inc bc
@@ -81,15 +83,20 @@ CheckForLuckyNumberWinners:
 
 	call .CompareLuckyNumberToMonID ; sets wScriptVar and wCurPartySpecies appropriately
 	jr nc, .SkipBoxMon
-	ld a, TRUE
+	ld a, e
+	add a, 2
 	ld [wTempByteValue], a
+	ld a, d
+	ld [wCurPartySpecies], a
 
 .SkipBoxMon:
 	push bc
 	ld bc, BOXMON_STRUCT_LENGTH
 	add hl, bc
 	pop bc
-	dec d
+	inc d
+	ld a, [wTempLoopCounter]
+	cp d
 	jr nz, .BoxNLoop
 	pop bc
 
@@ -106,17 +113,38 @@ CheckForLuckyNumberWinners:
 
 	farcall StubbedTrainerRankings_LuckyNumberShow
 	ld a, [wTempByteValue]
+	ld hl, .LuckyNumberMatchPartyText
 	and a
-	push af
+	jr z, .print
+	dec a
+	jr z, .print_box
+	ld e, a
+	ld d, 0
+	ld hl, .BoxSpeciesBankAddresses - 3 ;box number is one-based here
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	call OpenSRAM
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wCurPartySpecies]
+	ld e, a
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call CloseSRAM
+	call GetPokemonIDFromIndex
+	ld [wCurPartySpecies], a
+.print_box
+	ld hl, .LuckyNumberMatchPCText
+.print
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	ld hl, .LuckyNumberMatchPartyText
-	pop af
-	jr z, .print
-	ld hl, .LuckyNumberMatchPCText
-
-.print
 	jp PrintText
 
 .CompareLuckyNumberToMonID:
@@ -196,6 +224,24 @@ CheckForLuckyNumberWinners:
 for n, 1, NUM_BOXES + 1
 	dba sBox{d:n}
 endr
+	assert_table_length NUM_BOXES
+
+.BoxSpeciesBankAddresses:
+	table_width 3, CheckForLuckyNumberWinners.BoxSpeciesBankAddresses
+	dba sBox1PokemonIndexes
+	dba sBox2PokemonIndexes
+	dba sBox3PokemonIndexes
+	dba sBox4PokemonIndexes
+	dba sBox5PokemonIndexes
+	dba sBox6PokemonIndexes
+	dba sBox7PokemonIndexes
+	dba sBox8PokemonIndexes
+	dba sBox9PokemonIndexes
+	dba sBox10PokemonIndexes
+	dba sBox11PokemonIndexes
+	dba sBox12PokemonIndexes
+	dba sBox13PokemonIndexes
+	dba sBox14PokemonIndexes
 	assert_table_length NUM_BOXES
 
 .LuckyNumberMatchPartyText:

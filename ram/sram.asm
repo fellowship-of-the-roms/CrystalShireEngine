@@ -199,21 +199,34 @@ MACRO boxes
 	sBox{d:box_n}:: box sBox{d:box_n}
 	endr
 ENDM
+DEF boxindex_n = 0
+MACRO boxesindexes
+	rept \1
+		DEF boxindex_n += 1
+	sBox{d:boxindex_n}PokemonIndexes:: ds 2 * MONS_PER_BOX
+	endr
+ENDM
 
 SECTION "Boxes 1-7", SRAM
 
 ; sBox1 - sBox7
 	boxes 7
 
+	boxesindexes 7
+
 SECTION "Boxes 8-14", SRAM
 
 ; sBox8 - sBox14
 	boxes 7
 
+	boxesindexes 7
+
 ; All 14 boxes fit exactly within 2 SRAM banks
 	assert box_n == NUM_BOXES, \
 		"boxes: Expected {d:NUM_BOXES} total boxes, got {d:box_n}"
 
+	assert boxindex_n == NUM_BOXES, \
+		"boxesindexes: Expected {d:NUM_BOXES} total boxes, got {d:boxindex_n}"
 
 SECTION "SRAM Mobile 1", SRAM
 
