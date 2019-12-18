@@ -182,7 +182,13 @@ BattleTowerBattle:
 	xor a ; FALSE
 	ld [wBattleTowerBattleEnded], a
 	call _BattleTowerBattle
-	ret
+	xor a
+	ld l, LOCKED_MON_ID_BATTLE_TOWER_1
+	call LockPokemonID
+	ld l, LOCKED_MON_ID_BATTLE_TOWER_2
+	call LockPokemonID
+	ld l, LOCKED_MON_ID_BATTLE_TOWER_3
+	jp LockPokemonID
 
 UnusedBattleTowerDummySpecial1:
 	ret
