@@ -350,8 +350,8 @@ WRAMX 5
 	"GBC Video"
 	org $d300
 	"Battle Animations"
-	org $d800
-	"Mobile RAM"
+	org $d500
+	"Mobile RAM and Pokedex Listings"
 WRAMX 6
 	"Scratch RAM"
 WRAMX 7

@@ -65,23 +65,37 @@ _GetVarAction::
 	dwb wBlueCardBalance,               RETVAR_ADDR_DE
 	dwb wBuenasPassword,                RETVAR_ADDR_DE
 	dwb wKenjiBreakTimer,               RETVAR_STRBUF2
-	dwb NULL,                           RETVAR_STRBUF2
+	dwb .CountUncaughtMons,             RETVAR_EXECUTE
 
 .CountCaughtMons:
-; Caught mons.
+; Caught mons. Saturate at 255.
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits
-	ld a, [wNumSetBits]
+.count_caught_or_seen_mons
+	ld bc, wEndPokedexCaught - wPokedexCaught
+	call CountSetBits16
+	ld a, b
+.load_or_saturate
+	add a, -1
+	sbc a
+	or c
 	jp .loadstringbuffer2
 
 .CountSeenMons:
-; Seen mons.
+; Seen mons. Saturate at 255.
 	ld hl, wPokedexSeen
-	ld b, wEndPokedexSeen - wPokedexSeen
-	call CountSetBits
-	ld a, [wNumSetBits]
-	jp .loadstringbuffer2
+	jr .count_caught_or_seen_mons
+
+.CountUncaughtMons:
+; Mons left to catch. Saturate at 255.
+	ld hl, wPokedexCaught
+	ld bc, wEndPokedexCaught - wPokedexCaught
+	call CountSetBits16
+	ld a, LOW(NUM_POKEMON)
+	sub c
+	ld c, a
+	ld a, HIGH(NUM_POKEMON)
+	sbc b
+	jr .load_or_saturate
 
 .CountBadges:
 ; Number of owned badges.

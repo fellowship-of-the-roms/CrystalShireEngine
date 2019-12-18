@@ -9,6 +9,7 @@
 	const LOCKED_MON_ID_MAP_7
 	const LOCKED_MON_ID_MAP_8
 DEF NUM_MAP_LOCKED_MON_IDS EQU const_value + -LOCKED_MON_ID_MAP_1
+	const LOCKED_MON_ID_DEX_SELECTED
 
 if const_value > MON_TABLE_LOCKED_ENTRIES
 	fail "Too many locked Pokémon IDs"

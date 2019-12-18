@@ -135,7 +135,9 @@ wMapTimeOfDay:: db
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db
-wPrevDexEntry:: db
+
+	ds 1
+
 wDisableTextAcceleration:: db
 wPrevLandmark:: db
 wCurLandmark:: db
@@ -716,16 +718,14 @@ ENDU
 UNION
 ; pokedex
 wPokedexDataStart::
-wPokedexOrder:: ds $100 ; >= NUM_POKEMON
-wPokedexOrderEnd::
-wDexListingScrollOffset:: db ; offset of the first displayed entry from the start
+wDexListingScrollOffset:: dw ; offset of the first displayed entry from the start
 wDexListingCursor:: db ; Dex cursor
-wDexListingEnd:: db ; Last mon to display
+wDexListingEnd:: dw ; Last mon to display
 wDexListingHeight:: db ; number of entries displayed at once in the dex listing
 wCurDexMode:: db ; Pokedex Mode
 wDexSearchMonType1:: db ; first type to search
 wDexSearchMonType2:: db ; second type to search
-wDexSearchResultCount:: db
+wDexSearchResultCount:: dw
 wDexArrowCursorPosIndex:: db
 wDexArrowCursorDelayCounter:: db
 wDexArrowCursorBlinkCounter:: db
@@ -734,14 +734,24 @@ wUnlockedUnownMode:: db
 wDexCurUnownIndex:: db
 wDexUnownCount:: db
 wDexConvertedMonType:: db ; mon type converted from dex search mon type
-wDexListingScrollOffsetBackup:: db
+wDexListingScrollOffsetBackup:: dw
 wDexListingCursorBackup:: db
 wBackupDexListingCursor:: db
-wBackupDexListingPage:: db
+wBackupDexListingPage:: dw
 wDexCurLocation:: db
 wPokedexStatus:: db
+wPokedexDisplayNumber:: dw
+wDexLastSeenIndex:: db ; index into wPokedexSeen containing the last non-zero value
+wDexLastSeenValue:: db ; value at index
+wDexTempCounter:: dw
 wPokedexDataEnd::
-	ds 2
+
+wPrevDexEntry:: dw
+wPrevDexEntryBackup:: dw
+wPrevDexEntryJumptableIndex:: db
+
+wPokedexNameBuffer:: ds MON_NAME_LENGTH
+	ds 231
 
 NEXTU
 ; pokegear
@@ -1524,12 +1534,6 @@ NEXTU
 wCreditsBorderFrame:: db
 wCreditsBorderMon:: db
 wCreditsLYOverride:: db
-
-NEXTU
-; pokedex
-wPrevDexEntryJumptableIndex:: db
-wPrevDexEntryBackup:: db
-wUnusedPokedexByte:: db
 
 NEXTU
 ; pokegear
@@ -3626,8 +3630,9 @@ wSurfWaveBGEffectEnd::
 ENDU
 
 
-SECTION "Mobile RAM", WRAMX
+SECTION "Mobile RAM and Pokedex Listings", WRAMX
 
+UNION
 w5_d800:: ds $200
 w5_da00:: ds $200
 w5_dc00:: ds $d
@@ -3638,6 +3643,10 @@ w5_MobileOpponentBattleStartMessage:: ds $c
 w5_MobileOpponentBattleWinMessage:: ds $c
 w5_MobileOpponentBattleLossMessage:: ds $c
 
+NEXTU
+wPokedexOrder:: ds 2 * (NUM_POKEMON + 1) ; enough room to expand to 1,407 entries
+
+ENDU
 
 SECTION "Scratch RAM", WRAMX
 

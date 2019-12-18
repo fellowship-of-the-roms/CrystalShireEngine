@@ -96,12 +96,21 @@ DisplayDexEntry:
 	ld [hli], a
 	ld a, $5d ; .
 	ld [hli], a
-	ld de, wTempSpecies
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	push hl
+	ld a, [wTempSpecies]
+	call GetPokemonIndexFromID
+	ld b, l
+	ld c, h
+	ld hl, sp + 0
+	ld d, h
+	ld e, l
+	pop hl
+	push bc
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
+	pop bc
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wTempSpecies]
-	dec a
 	call CheckCaughtMon
 	pop hl
 	pop bc

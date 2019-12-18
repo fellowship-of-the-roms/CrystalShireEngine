@@ -20,11 +20,14 @@ StageDataForMysteryGift:
 	call CopyBytes
 	push de ; wMysteryGiftStaging+14
 	ld hl, sPokemonData + wPokedexCaught - wPokemonData
-	ld b, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits
+	ld bc, wEndPokedexCaught - wPokedexCaught
+	call CountSetBits16
+	ld a, b
+	add a, -1
+	sbc a
+	or c
 	pop de
 	pop bc
-	ld a, [wNumSetBits]
 	ld [de], a
 	inc de ; wMysteryGiftStaging+15
 	call CloseSRAM
