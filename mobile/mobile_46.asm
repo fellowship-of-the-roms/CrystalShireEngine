@@ -3951,14 +3951,19 @@ BattleTower_UbersCheck:
 	ld a, [wPartyCount]
 .loop
 	push af
+	push bc
+	push de
+	push hl
 	ld a, [de]
-	cp MEWTWO
-	jr z, .uber
-	cp MEW
-	jr z, .uber
-	cp LUGIA
-	jr c, .next
-	cp NUM_POKEMON + 1
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, .ubers
+	ld de, 2
+	call IsInWordArray
+	pop hl
+	pop de
+	pop bc
 	jr nc, .next
 .uber
 	ld a, [hl]
@@ -3975,6 +3980,14 @@ BattleTower_UbersCheck:
 	ldh [rSVBK], a
 	and a
 	ret
+
+.ubers
+	dw MEWTWO
+	dw MEW
+	dw LUGIA
+	dw HO_OH
+	dw CELEBI
+	dw -1
 
 .uber_under_70
 	pop af

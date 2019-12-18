@@ -392,8 +392,20 @@ Function17d1f1:
 	call SetSeenAndCaughtMon
 
 	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .asm_17d223
+	call GetPokemonIndexFromID
+	sub LOW(UNOWN)
+	if HIGH(UNOWN) == 0
+		or h
+	else
+		ret nz
+		if HIGH(UNOWN) == 1
+			dec h
+		else
+			ld a, h
+			cp HIGH(UNOWN)
+		endc
+	endc
+	ret nz
 
 	ld hl, wPartyMon1DVs
 	ld a, [wPartyCount]
@@ -404,12 +416,10 @@ Function17d1f1:
 	callfar UpdateUnownDex
 	ld a, [wFirstUnownSeen]
 	and a
-	jr nz, .asm_17d223
+	ret nz
 
 	ld a, [wUnownLetter]
 	ld [wFirstUnownSeen], a
-
-.asm_17d223
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

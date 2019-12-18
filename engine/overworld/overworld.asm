@@ -217,7 +217,11 @@ GetMonSprite:
 	ld d, 0
 	ld hl, SpriteMons
 	add hl, de
-	ld a, [hl]
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
 	jr .Mon
 
 .BreedMon1

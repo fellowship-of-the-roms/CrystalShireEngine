@@ -437,10 +437,8 @@ HoldSwitchmonIcon:
 ReadMonMenuIcon:
 	cp EGG
 	jr z, .egg
-	dec a
-	ld hl, MonMenuIcons
-	ld e, a
-	ld d, 0
+	call GetPokemonIndexFromID
+	ld de, MonMenuIcons - 1
 	add hl, de
 	ld a, [hl]
 	ret
