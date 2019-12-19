@@ -3438,6 +3438,11 @@ wPokeAnimBitmaskBuffer:: ds 7
 wPokeAnimStructEnd::
 
 
+SECTION "16-bit WRAM tables", WRAMX
+; align this section to $100
+	wram_conversion_table wPokemonIndexTable, MON_TABLE
+
+
 SECTION "Battle Tower RAM", WRAMX
 
 w3_d000:: ds 1

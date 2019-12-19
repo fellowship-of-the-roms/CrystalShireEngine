@@ -12,3 +12,9 @@
 ;                          conversion is also valid without using the table. This guarantees that high values (such
 ;                          as $FF), often handled as negative indexes, retain their special meanings without requiring
 ;                          an allocation
+
+DEF MON_TABLE_ENTRIES                EQU 100
+DEF MON_TABLE_LOCKED_ENTRIES         EQU  30
+DEF MON_TABLE_CACHE_SIZE             EQU  16
+DEF MON_TABLE_SAVED_RECENT_INDEXES   EQU   8
+DEF MON_TABLE_MINIMUM_RESERVED_INDEX EQU $FD ; ensures that the value for the egg will remain reserved
