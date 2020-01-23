@@ -50,3 +50,23 @@ MACRO ___conversion_table_homecall_readlocked
 	pop hl
 	ret
 ENDM
+
+; in: a = 8-bit index
+; out: hl = 16-bit index; a clobbered
+GetPokemonIndexFromID::
+	___conversion_table_homecall read, _GetPokemonIndexFromID
+
+; in: hl = 16-bit index
+; out: a = 8-bit index, hl clobbered
+GetPokemonIDFromIndex::
+	___conversion_table_homecall write, _GetPokemonIDFromIndex
+
+; in: a = 8-bit index or zero (to clear), l = position
+; out: a = unchanged, hl = clobbered
+LockPokemonID::
+	___conversion_table_homecall lock, _LockPokemonID
+
+; in: a = position
+; out: a = 8-bit index; everything else preserved
+GetLockedPokemonID::
+	___conversion_table_homecall_readlocked wPokemonIndexTable
