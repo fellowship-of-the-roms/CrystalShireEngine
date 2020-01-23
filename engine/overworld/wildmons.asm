@@ -902,11 +902,13 @@ RandomPhoneMon:
 .skip
 	ld a, [wTrainerGroupBank]
 	call GetFarByte
-	inc hl
-	cp -1
-	jr nz, .skip
+	add a, l
+	ld l, a
+	jr nc, .skip_trainer
+	inc h
 	jr .skip_trainer
 .skipped
+	inc hl
 
 .skip_name
 	ld a, [wTrainerGroupBank]

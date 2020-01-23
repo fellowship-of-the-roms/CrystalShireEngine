@@ -11,6 +11,7 @@ INCLUDE "macros/coords.asm"
 INCLUDE "macros/vc.asm"
 INCLUDE "macros/wram_16bit.asm"
 INCLUDE "macros/indirection.asm"
+INCLUDE "macros/lists.asm"
 
 INCLUDE "macros/scripts/audio.asm"
 INCLUDE "macros/scripts/maps.asm"
