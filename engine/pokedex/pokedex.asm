@@ -2183,10 +2183,14 @@ Pokedex_SearchForMons:
 	jr z, .next_mon
 	; instead of going through an index conversion and GetBaseData (which would end up GC'ing the
 	; index table several times!), just load the base data pointer directly and do a far read
-	ld a, BASE_DATA_SIZE
-	ld hl, BaseData + BASE_TYPES - BASE_DATA_SIZE ;compensate for the one-based indexing
-	call AddNTimes ;preserves bc!
 	ld a, BANK(BaseData)
+	ld hl, BaseData
+	push bc
+	call LoadIndirectPointer
+	ld bc, BASE_TYPES
+	add hl, bc
+	pop bc
+	jr z, .next_mon
 	call GetFarWord ;load both types in hl
 	ld a, [wDexConvertedMonType]
 	cp h

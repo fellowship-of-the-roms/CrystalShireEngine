@@ -440,21 +440,21 @@ GetEggMove:
 	push bc
 	ld a, [wEggMonSpecies]
 	call GetPokemonIndexFromID
-	ld bc, EggMovePointers - 2
-	add hl, hl
-	add hl, bc
+	ld b, h
+	ld c, l
+	ld hl, EggMovePointers
 	ld a, BANK(EggMovePointers)
-	call GetFarWord
+	call LoadDoubleIndirectPointer
 .loop
-	ld a, BANK("Egg Moves")
 	call GetFarByte
 	cp -1
 	jr z, .reached_end
-	ld b, a
+	ld c, a
 	ld a, [de]
-	cp b
+	cp c
 	jr z, .done_carry
 	inc hl
+	ld a, b
 	jr .loop
 
 .reached_end
@@ -472,23 +472,23 @@ GetEggMove:
 .found_eggmove
 	ld a, [wEggMonSpecies]
 	call GetPokemonIndexFromID
-	ld bc, EvosAttacksPointers - 2
-	add hl, hl
-	add hl, bc
+	ld b, h
+	ld c, l
+	ld hl, EvosAttacksPointers
 	ld a, BANK(EvosAttacksPointers)
-	call GetFarWord
+	call LoadDoubleIndirectPointer
 	call FarSkipEvolutions
 .loop4
-	ld a, BANK("Evolutions and Attacks")
+	ld a, b
 	call GetFarByte
 	and a
 	jr z, .inherit_tmhm
 	inc hl
-	ld a, BANK("Evolutions and Attacks")
+	ld a, b
 	call GetFarByte
-	ld b, a
+	ld c, a
 	ld a, [de]
-	cp b
+	cp c
 	jr z, .done_carry
 	inc hl
 	jr .loop4

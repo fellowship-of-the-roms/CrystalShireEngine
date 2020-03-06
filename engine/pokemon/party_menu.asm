@@ -365,11 +365,11 @@ PlacePartyMonEvoStoneCompatibility:
 	call AddNTimes
 	ld a, [hl]
 	call GetPokemonIndexFromID
-	ld de, EvosAttacksPointers - 2
-	add hl, hl
-	add hl, de
+	ld b, h
+	ld c, l
+	ld hl, EvosAttacksPointers
 	ld a, BANK(EvosAttacksPointers)
-	call GetFarWord
+	call LoadDoubleIndirectPointer
 	ld d, h
 	ld e, l
 	farcall DetermineEvolutionItemResults

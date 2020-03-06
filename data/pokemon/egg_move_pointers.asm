@@ -1,5 +1,10 @@
 EggMovePointers::
-	table_width 2, EggMovePointers
+	indirect_table 2, 1
+	indirect_entries NUM_POKEMON, EggMovePointers1
+	indirect_table_end
+
+EggMovePointers1:
+	table_width 2, EggMovePointers1
 	dw BulbasaurEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
@@ -251,4 +256,4 @@ EggMovePointers::
 	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
-	assert_table_length NUM_POKEMON
+.IndirectEnd::

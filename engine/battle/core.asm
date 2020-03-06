@@ -3318,12 +3318,14 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	call GetPokemonIndexFromID
 	ld b, h
 	ld c, l
-	ld hl, BaseData + BASE_TYPES - BASE_DATA_SIZE ;go one back so we don't decrement hl
-	ld a, BASE_DATA_SIZE
-	call AddNTimes
-	ld de, wEnemyMonType
-	ld bc, BASE_CATCH_RATE - BASE_TYPES
+	ld hl, BaseData
 	ld a, BANK(BaseData)
+	call LoadIndirectPointer
+	jr z, .done
+	ld bc, BASE_TYPES
+	add hl, bc
+	ld de, wEnemyMonType
+	ld c, BASE_CATCH_RATE - BASE_TYPES
 	call FarCopyBytes
 	ld a, [wBattleMonType1]
 	ld [wPlayerMoveStruct + MOVE_TYPE], a
@@ -3338,6 +3340,7 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE + 1
 	jr nc, .super_effective
+.done
 	pop bc
 	ret
 

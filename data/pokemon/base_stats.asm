@@ -22,7 +22,11 @@ MACRO tmhm
 ENDM
 
 BaseData::
-	table_width BASE_DATA_SIZE, BaseData
+	indirect_table BASE_DATA_SIZE, 1
+	indirect_entries NUM_POKEMON, BaseData1
+	indirect_table_end
+
+BaseData1:
 INCLUDE "data/pokemon/base_stats/bulbasaur.asm"
 INCLUDE "data/pokemon/base_stats/ivysaur.asm"
 INCLUDE "data/pokemon/base_stats/venusaur.asm"
@@ -274,4 +278,4 @@ INCLUDE "data/pokemon/base_stats/tyranitar.asm"
 INCLUDE "data/pokemon/base_stats/lugia.asm"
 INCLUDE "data/pokemon/base_stats/ho_oh.asm"
 INCLUDE "data/pokemon/base_stats/celebi.asm"
-	assert_table_length NUM_POKEMON
+.IndirectEnd::
