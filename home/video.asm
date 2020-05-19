@@ -124,52 +124,33 @@ UpdateBGMap::
 
 ; BG Map 0
 	dec a ; 1
-	jr z, .Tiles
+	jr z, .Tiles0
 	dec a ; 2
-	jr z, .Attr
+	jr z, .Attr0
 
 ; BG Map 1
-	dec a ; useless
+	ld hl, vBGMap1
+	dec a ; 3
+	jr z, .Tiles1
+	dec a ; 4
+	jr z, .Attr1
+	ret
 
+.Attr0:
 	ldh a, [hBGMapAddress]
 	ld l, a
 	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	push hl
 
-	xor a ; LOW(vBGMap1)
-	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap1)
-	ldh [hBGMapAddress + 1], a
-
-	ldh a, [hBGMapMode]
-	push af
-	cp 3
-	call z, .Tiles
-	pop af
-	cp 4
-	call z, .Attr
-
-	pop hl
-	ld a, l
-	ldh [hBGMapAddress], a
-	ld a, h
-	ldh [hBGMapAddress + 1], a
-	ret
-
-.Attr:
+.Attr1:
 	ld a, 1
 	ldh [rVBK], a
 
-	hlcoord 0, 0, wAttrmap
 	call .update
 
 	xor a
 	ldh [rVBK], a
 	ret
-
-.Tiles:
-	hlcoord 0, 0
 
 .update
 	ld [hSPBuffer], sp
@@ -177,22 +158,15 @@ UpdateBGMap::
 ; Which third?
 	ldh a, [hBGMapThird]
 	and a ; 0
-	jr z, .top
+	jr z, .attr_top
 	dec a ; 1
-	jr z, .middle
+	jr z, .attr_middle
 	; 2
 
 DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 
-; bottom
-	ld de, 2 * THIRD_HEIGHT * SCREEN_WIDTH
-	add hl, de
-	ld sp, hl
-
-	ldh a, [hBGMapAddress + 1]
-	ld h, a
-	ldh a, [hBGMapAddress]
-	ld l, a
+.attr_bottom
+	coord sp, 0, 2 * THIRD_HEIGHT, wAttrmap
 
 	ld de, 2 * THIRD_HEIGHT * BG_MAP_WIDTH
 	add hl, de
@@ -201,15 +175,8 @@ DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	xor a
 	jr .start
 
-.middle
-	ld de, THIRD_HEIGHT * SCREEN_WIDTH
-	add hl, de
-	ld sp, hl
-
-	ldh a, [hBGMapAddress + 1]
-	ld h, a
-	ldh a, [hBGMapAddress]
-	ld l, a
+.attr_middle
+	coord sp, 0, THIRD_HEIGHT, wAttrmap
 
 	ld de, THIRD_HEIGHT * BG_MAP_WIDTH
 	add hl, de
@@ -218,16 +185,56 @@ DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	ld a, 2
 	jr .start
 
-.top
-	ld sp, hl
-
-	ldh a, [hBGMapAddress + 1]
-	ld h, a
-	ldh a, [hBGMapAddress]
-	ld l, a
+.attr_top
+	coord sp, 0, 0, wAttrmap
 
 ; Next time: middle third
-	ld a, 1
+	jr .continue
+
+.Tiles0:
+	ldh a, [hBGMapAddress]
+	ld l, a
+	ldh a, [hBGMapAddress + 1]
+	ld h, a
+
+.Tiles1:
+	ld [hSPBuffer], sp
+
+; Which third?
+	ldh a, [hBGMapThird]
+	and a ; 0
+	jr z, .tiles_top
+	dec a ; 1
+	jr z, .tiles_middle
+	; 2
+
+.tiles_bottom
+	coord sp, 0, 2 * THIRD_HEIGHT
+
+	ld de, 2 * THIRD_HEIGHT * BG_MAP_WIDTH
+	add hl, de
+
+; Next time: top third
+	xor a
+	jr .start
+
+.tiles_middle
+	coord sp, 0, THIRD_HEIGHT
+
+	ld de, THIRD_HEIGHT * BG_MAP_WIDTH
+	add hl, de
+
+; Next time: bottom third
+	ld a, 2
+	jr .start
+
+.tiles_top
+	coord sp, 0, 0
+
+; Next time: middle third
+
+.continue
+	inc a
 
 .start
 ; Which third to update next time
