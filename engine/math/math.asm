@@ -1,189 +1,123 @@
 _Multiply::
 ; hMultiplier is one byte.
-	ld a, 8
-	ld b, a
+	ldh a, [hMultiplicand]
+	ld e, a
+	ldh a, [hMultiplicand + 1]
+	ld h, a
+	ldh a, [hMultiplicand + 2]
+	ld l, a
 
 	xor a
-	ldh [hMultiplicand - 1], a
-	ldh [hMathBuffer + 1], a
-	ldh [hMathBuffer + 2], a
-	ldh [hMathBuffer + 3], a
-	ldh [hMathBuffer + 4], a
-
-.loop
+	ld d, a
+	ldh [hProduct], a
+	ldh [hProduct + 1], a
+	ldh [hProduct + 2], a
+	ldh [hProduct + 3], a
 	ldh a, [hMultiplier]
-	srl a
-	ldh [hMultiplier], a
+	and a
+	ret z
+.loop
+	rra
 	jr nc, .next
 
-	ldh a, [hMathBuffer + 4]
-	ld c, a
-	ldh a, [hMultiplicand + 2]
-	add c
-	ldh [hMathBuffer + 4], a
+	ld c, a ; store multiplier in c
 
-	ldh a, [hMathBuffer + 3]
-	ld c, a
-	ldh a, [hMultiplicand + 1]
-	adc c
-	ldh [hMathBuffer + 3], a
-
-	ldh a, [hMathBuffer + 2]
-	ld c, a
-	ldh a, [hMultiplicand]
-	adc c
-	ldh [hMathBuffer + 2], a
-
-	ldh a, [hMathBuffer + 1]
-	ld c, a
-	ldh a, [hMultiplicand - 1]
-	adc c
-	ldh [hMathBuffer + 1], a
-
-.next
-	dec b
-	jr z, .done
-
-; hMultiplicand <<= 1
-
-	ldh a, [hMultiplicand + 2]
-	add a
-	ldh [hMultiplicand + 2], a
-
-	ldh a, [hMultiplicand + 1]
-	rla
-	ldh [hMultiplicand + 1], a
-
-	ldh a, [hMultiplicand]
-	rla
-	ldh [hMultiplicand], a
-
-	ldh a, [hMultiplicand - 1]
-	rla
-	ldh [hMultiplicand - 1], a
-
-	jr .loop
-
-.done
-	ldh a, [hMathBuffer + 4]
+	ldh a, [hProduct + 3]
+	add l
 	ldh [hProduct + 3], a
-
-	ldh a, [hMathBuffer + 3]
+	ldh a, [hProduct + 2]
+	adc h
 	ldh [hProduct + 2], a
-
-	ldh a, [hMathBuffer + 2]
+	ldh a, [hProduct + 1]
+	adc e
 	ldh [hProduct + 1], a
-
-	ldh a, [hMathBuffer + 1]
+	ldh a, [hProduct]
+	adc d
 	ldh [hProduct], a
 
+	ld a, c ; retrieve multiplier
+
+.next
+	add hl, hl
+	rl e
+	rl d
+	and a
+	jr nz, .loop
 	ret
 
 _Divide::
-	xor a
-	ldh [hMathBuffer], a
-	ldh [hMathBuffer + 1], a
-	ldh [hMathBuffer + 2], a
-	ldh [hMathBuffer + 3], a
-	ldh [hMathBuffer + 4], a
-
-	ld a, 9
-	ld e, a
-
-.loop
-	ldh a, [hMathBuffer]
-	ld c, a
-	ldh a, [hDividend + 1]
-	sub c
-	ld d, a
+	ldh a, [hDivisor]
+	and a
+	ret z
 
 	ldh a, [hDivisor]
-	ld c, a
-	ldh a, [hDividend]
-	sbc c
-	jr c, .next
-
-	ldh [hDividend], a
-
-	ld a, d
-	ldh [hDividend + 1], a
-
-	ldh a, [hMathBuffer + 4]
-	inc a
-	ldh [hMathBuffer + 4], a
-
-	jr .loop
-
-.next
+	ld d, a
+	ld c, LOW(hDividend)
+	ld e, 0
+	ld l, e
+.loop
+	push bc
+	ld b, 8
+	ldh a, [c]
+	ld h, a
+	ld l, 0
+.loop2
+	sla h
+	rl e
+	ld a, e
+	jr c, .carry
+	cp d
+	jr c, .skip
+.carry
+	sub d
+	ld e, a
+	inc l
+.skip
 	ld a, b
 	cp 1
 	jr z, .done
-
-	ldh a, [hMathBuffer + 4]
-	add a
-	ldh [hMathBuffer + 4], a
-
-	ldh a, [hMathBuffer + 3]
-	rla
-	ldh [hMathBuffer + 3], a
-
-	ldh a, [hMathBuffer + 2]
-	rla
-	ldh [hMathBuffer + 2], a
-
-	ldh a, [hMathBuffer + 1]
-	rla
-	ldh [hMathBuffer + 1], a
-
-	dec e
-	jr nz, .next2
-
-	ld e, 8
-	ldh a, [hMathBuffer]
-	ldh [hDivisor], a
-	xor a
-	ldh [hMathBuffer], a
-
-	ldh a, [hDividend + 1]
-	ldh [hDividend], a
-
-	ldh a, [hDividend + 2]
-	ldh [hDividend + 1], a
-
-	ldh a, [hDividend + 3]
-	ldh [hDividend + 2], a
-
-.next2
-	ld a, e
-	cp 1
-	jr nz, .okay
+	sla l
 	dec b
-
-.okay
-	ldh a, [hDivisor]
-	srl a
-	ldh [hDivisor], a
-
-	ldh a, [hMathBuffer]
-	rra
-	ldh [hMathBuffer], a
-
-	jr .loop
-
+	jr .loop2
 .done
-	ldh a, [hDividend + 1]
-	ldh [hRemainder], a
+	ld a, c
+	add hMathBuffer - hDividend
+	ld c, a
+	ld a, l
+	ldh [c], a
+	pop bc
+	inc c
+	dec b
+	jr nz, .loop
 
-	ldh a, [hMathBuffer + 4]
-	ldh [hQuotient + 3], a
-
-	ldh a, [hMathBuffer + 3]
-	ldh [hQuotient + 2], a
-
-	ldh a, [hMathBuffer + 2]
-	ldh [hQuotient + 1], a
-
-	ldh a, [hMathBuffer + 1]
+	xor a
 	ldh [hQuotient], a
-
+	ldh [hQuotient + 1], a
+	ldh [hQuotient + 2], a
+	ldh [hQuotient + 3], a
+	ld a, e
+	ldh [hRemainder], a
+	ld a, c
+	sub LOW(hDividend)
+	ld b, a
+	ld a, c
+	add hMathBuffer - hDividend - 1
+	ld c, a
+	ldh a, [c]
+	ldh [hQuotient + 3], a
+	dec b
+	ret z
+	dec c
+	ldh a, [c]
+	ldh [hQuotient + 2], a
+	dec b
+	ret z
+	dec c
+	ldh a, [c]
+	ldh [hQuotient + 1], a
+	dec b
+	ret z
+	dec c
+	ldh a, [c]
+	ldh [hQuotient], a
 	ret
