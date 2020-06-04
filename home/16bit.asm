@@ -70,3 +70,23 @@ LockPokemonID::
 ; out: a = 8-bit index; everything else preserved
 GetLockedPokemonID::
 	___conversion_table_homecall_readlocked wPokemonIndexTable
+
+; in: a = 8-bit index
+; out: hl = 16-bit index; a clobbered
+GetMoveIndexFromID::
+	___conversion_table_homecall read, _GetMoveIndexFromID
+
+; in: hl = 16-bit index
+; out: a = 8-bit index, hl clobbered
+GetMoveIDFromIndex::
+	___conversion_table_homecall write, _GetMoveIDFromIndex
+
+; in: a = 8-bit index or zero (to clear), l = position
+; out: a = unchanged, hl = clobbered
+LockMoveID::
+	___conversion_table_homecall lock, _LockMoveID
+
+; in: a = position
+; out: a = 8-bit index; everything else preserved
+GetLockedMoveID::
+	___conversion_table_homecall_readlocked wMoveIndexTable

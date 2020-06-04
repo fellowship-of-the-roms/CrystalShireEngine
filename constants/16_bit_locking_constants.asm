@@ -20,3 +20,10 @@ DEF NUM_MAP_LOCKED_MON_IDS EQU const_value + -LOCKED_MON_ID_MAP_1
 if const_value > MON_TABLE_LOCKED_ENTRIES
 	fail "Too many locked Pokémon IDs"
 endc
+
+; Move locked ID table constants
+	const_def
+
+if const_value > MOVE_TABLE_LOCKED_ENTRIES
+	fail "Too many locked move IDs"
+endc
