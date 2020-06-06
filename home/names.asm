@@ -1,6 +1,5 @@
 NamesPointers::
-; entries correspond to GetName constants (see constants/text_constants.asm); MON_NAME is not handled by this table
-	dba MoveNames           ; MOVE_NAME
+; entries correspond to GetName constants (see constants/text_constants.asm); MON_NAME and MOVE_NAME are not handled by this table
 	dba ItemNames           ; ITEM_NAME
 	dbw 0, wPartyMonOTs     ; PARTY_OT_NAME
 	dbw 0, wOTPartyMonOTs   ; ENEMY_OT_NAME
@@ -15,17 +14,29 @@ GetName::
 	push bc
 	push de
 
-	ld a, [wNamedObjectType]
-	dec a
-	jr nz, .not_mon_name
-
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	jr .done
 
-.not_mon_name
+	ld a, [wNamedObjectType]
+	dec a ; MON_NAME
+	ld hl, GetPokemonName
+	jr z, .go
+	dec a ; MOVE_NAME
+	ld hl, GetMoveName
+	jr z, .go
 	dec a
+	ld hl, .generic_function
+.go
+	call _hl_
+
+	pop de
+	pop bc
+	pop hl
+	pop af
+	rst Bankswitch
+	ret
+
+.generic_function
 	ld l, a
 	add a, a
 	add a, l
@@ -46,15 +57,21 @@ GetName::
 
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
+	jp CopyBytes
 
-.done
-	pop de
-	pop bc
-	pop hl
-	pop af
-	rst Bankswitch
-	ret
+GetNthString16::
+; Like GetNthString, but with a 16-bit index in bc
+	inc b
+	jr .handle_loop
+
+.loop
+	xor a
+	call GetNthString.loop ; will act as a = $100
+.handle_loop
+	dec b
+	jr nz, .loop
+	ld a, c
+	; fallthrough
 
 GetNthString::
 ; Return the address of the
@@ -63,6 +80,7 @@ GetNthString::
 	and a
 	ret z
 
+.loop
 	push bc
 	ld b, a
 	ld c, "@"
@@ -242,15 +260,25 @@ INCLUDE "home/hm_moves.asm"
 
 GetMoveName::
 	push hl
-
-	ld a, MOVE_NAME
-	ld [wNamedObjectType], a
-
-	ld a, [wNamedObjectIndex] ; move id
-	ld [wCurSpecies], a
-
-	call GetName
+	push bc
+	ldh a, [hROMBank]
+	push af
+	ld a, BANK(MoveNames)
+	rst Bankswitch
+	ld a, [wNamedObjectIndex]
+	call GetMoveIndexFromID
+	dec hl
+	ld b, h
+	ld c, l
+	ld hl, MoveNames
+	call GetNthString16
 	ld de, wStringBuffer1
-
+	push de
+	ld bc, MOVE_NAME_LENGTH
+	call CopyBytes
+	pop de
+	pop af
+	rst Bankswitch
+	pop bc
 	pop hl
 	ret

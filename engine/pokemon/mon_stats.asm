@@ -450,10 +450,8 @@ ListMoves:
 	push de
 	push hl
 	push hl
-	ld [wCurSpecies], a
-	ld a, MOVE_NAME
-	ld [wNamedObjectType], a
-	call GetName
+	ld [wNamedObjectIndex], a
+	call GetMoveName
 	ld de, wStringBuffer1
 	pop hl
 	push bc
