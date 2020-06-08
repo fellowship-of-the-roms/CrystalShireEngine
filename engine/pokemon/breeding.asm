@@ -438,6 +438,26 @@ InitEggMoves:
 
 GetEggMove:
 	push bc
+	push de
+	call GetBreedmonMovePointer
+	ld b, NUM_MOVES
+	ld a, [de]
+	ld c, a
+.breedmon_loop
+	ld a, [hli]
+	and a
+	jr z, .not_breedmon
+	cp c
+	jr z, .breedmon_found
+	dec b
+	jr nz, .breedmon_loop
+.not_breedmon
+
+	ld a, c
+	call GetMoveIndexFromID
+	ld d, h
+	ld e, l
+.not_learnset_move
 	ld a, [wEggMonSpecies]
 	call GetPokemonIndexFromID
 	ld b, h
@@ -445,31 +465,56 @@ GetEggMove:
 	ld hl, EggMovePointers
 	ld a, BANK(EggMovePointers)
 	call LoadDoubleIndirectPointer
-.loop
-	call GetFarByte
-	cp -1
-	jr z, .reached_end
+.egg_move_loop
+	push hl
+	call GetFarWord
+	ld a, h
+	and l
 	ld c, a
-	ld a, [de]
-	cp c
-	jr z, .done_carry
+	ld a, h
+	cp d
+	jr nz, .no_egg_match
+	ld a, l
+	cp e
+.no_egg_match
+	pop hl
+	jr z, .is_egg_move
+	inc hl
 	inc hl
 	ld a, b
-	jr .loop
+	inc c
+	jr nz, .egg_move_loop
 
-.reached_end
-	call GetBreedmonMovePointer
-	ld b, NUM_MOVES
-.loop2
+	ld bc, TMHMMoves
+.tmhm_loop
+	ld a, BANK(TMHMMoves)
+	ld h, b
+	ld l, c
+	call GetFarWord
+	ld a, h
+	and l
+	jr z, .done
+	inc bc
+	inc bc
+	ld a, h
+	cp d
+	jr nz, .tmhm_loop
+	ld a, l
+	cp e
+	jr nz, .tmhm_loop
+	pop de
 	ld a, [de]
-	cp [hl]
-	jr z, .found_eggmove
-	inc hl
-	dec b
-	jr z, .inherit_tmhm
-	jr .loop2
+	push de
+	ld [wPutativeTMHMMove], a
+	predef CanLearnTMHMMove
+	xor a
+	cp c ;will carry if non-zero
+	jr .done
 
-.found_eggmove
+.breedmon_found
+	call GetMoveIndexFromID
+	ld d, h
+	ld e, l
 	ld a, [wEggMonSpecies]
 	call GetPokemonIndexFromID
 	ld b, h
@@ -478,47 +523,28 @@ GetEggMove:
 	ld a, BANK(EvosAttacksPointers)
 	call LoadDoubleIndirectPointer
 	call FarSkipEvolutions
-.loop4
+.learnset_loop
 	ld a, b
 	call GetFarByte
-	and a
-	jr z, .inherit_tmhm
-	inc hl
-	ld a, b
-	call GetFarByte
-	ld c, a
-	ld a, [de]
-	cp c
-	jr z, .done_carry
-	inc hl
-	jr .loop4
-
-.inherit_tmhm
-	ld hl, TMHMMoves
-.loop5
-	ld a, BANK(TMHMMoves)
-	call GetFarByte
 	inc hl
 	and a
-	jr z, .done
-	ld b, a
-	ld a, [de]
-	cp b
-	jr nz, .loop5
-	ld [wPutativeTMHMMove], a
-	predef CanLearnTMHMMove
-	ld a, c
-	and a
-	jr z, .done
-
-.done_carry
-	pop bc
+	jr z, .not_learnset_move
+	push hl
+	call GetFarWord
+	ld a, l
+	cp e
+	ld a, h
+	pop hl
+	inc hl
+	inc hl
+	jr nz, .learnset_loop
+	cp d
+	jr nz, .learnset_loop
+.is_egg_move
 	scf
-	ret
-
 .done
+	pop de
 	pop bc
-	and a
 	ret
 
 LoadEggMove:

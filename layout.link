@@ -48,7 +48,8 @@ ROMX $07
 ROMX $08
 	"Clock Reset"
 	"Tileset Data 3"
-	"Egg Moves"
+	"Egg Move Pointers"
+	"Egg Moves 1"
 ROMX $09
 	"bank9"
 ROMX $0a
@@ -67,11 +68,14 @@ ROMX $0f
 	"Battle Core"
 ROMX $10
 	"bank10"
-	"Evolutions and Attacks"
+	"Evolutions and Attacks Pointers"
+	"Evolutions and Attacks 1"
 ROMX $11
 	"bank11"
 ROMX $12
 	"Crystal Features 1"
+	"Egg Moves 2"
+	"Evolutions and Attacks 2"
 ROMX $13
 	"bank13"
 	"Shrink Pics"
