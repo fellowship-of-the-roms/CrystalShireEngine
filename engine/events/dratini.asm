@@ -55,12 +55,9 @@ GiveDratini:
 	ld [de], a ; give the Pokémon the new move
 
 	; get the PP of the new move
-	dec a
-	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
+	ld l, a
+	ld a, MOVE_PP
+	call GetMoveAttribute
 
 	; get the address of the move's PP and update the PP
 	ld hl, MON_PP - MON_MOVES

@@ -23,7 +23,6 @@ BattleCommand_MirrorCoat:
 
 	ld a, BATTLE_VARS_LAST_COUNTER_MOVE_OPP
 	call GetBattleVar
-	dec a
 	ld de, wStringBuffer1
 	call GetMoveData
 

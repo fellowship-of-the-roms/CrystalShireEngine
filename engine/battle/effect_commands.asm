@@ -3616,7 +3616,6 @@ UpdateMoveData:
 	ld [wCurSpecies], a
 	ld [wNamedObjectIndex], a
 
-	dec a
 	call GetMoveData
 	call GetMoveName
 	jp CopyName1
@@ -6786,27 +6785,6 @@ SkipToBattleCommand:
 	ld a, l
 	ld [wBattleScriptBufferAddress], a
 	ret
-
-GetMoveAttr:
-; Assuming hl = Moves + x, return attribute x of move a.
-	push bc
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	call GetMoveByte
-	pop bc
-	ret
-
-GetMoveData:
-; Copy move struct a to de.
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	jp FarCopyBytes
-
-GetMoveByte:
-	ld a, BANK(Moves)
-	jp GetFarByte
 
 DisappearUser:
 	farcall _DisappearUser

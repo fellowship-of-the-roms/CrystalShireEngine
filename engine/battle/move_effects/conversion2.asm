@@ -13,9 +13,9 @@ BattleCommand_Conversion2:
 	and a
 	jr z, .failed
 	push hl
-	dec a
-	ld hl, Moves + MOVE_TYPE
-	call GetMoveAttr
+	ld l, a
+	ld a, MOVE_TYPE
+	call GetMoveAttribute
 	ld d, a
 	pop hl
 	cp CURSE_TYPE
