@@ -188,7 +188,15 @@ BattleTowerBattle:
 	ld l, LOCKED_MON_ID_BATTLE_TOWER_2
 	call LockPokemonID
 	ld l, LOCKED_MON_ID_BATTLE_TOWER_3
-	jp LockPokemonID
+	call LockPokemonID
+	lb bc, NUM_MOVES * 3, LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1
+.loop
+	ld l, c
+	call LockMoveID
+	inc c
+	dec b
+	jr nz, .loop
+	ret
 
 UnusedBattleTowerDummySpecial1:
 	ret

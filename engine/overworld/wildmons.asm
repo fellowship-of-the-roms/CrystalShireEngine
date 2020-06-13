@@ -955,7 +955,7 @@ RandomPhoneMon:
 .no_item
 	bit TRAINERTYPE_MOVES_F, c
 	jr z, .no_moves
-	add a, NUM_MOVES
+	add a, NUM_MOVES * 2
 .no_moves
 	ld c, a
 	ld b, 0

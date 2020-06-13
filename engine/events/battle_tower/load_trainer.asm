@@ -96,7 +96,7 @@ LoadRandomBattleTowerMon:
 	ld a, [wBTChoiceOfLvlGroup]
 	dec a
 	ld hl, BattleTowerMons
-	ld bc, BATTLETOWER_NUM_UNIQUE_MON * (NICKNAMED_MON_STRUCT_LENGTH + 1)
+	ld bc, BATTLETOWER_NUM_UNIQUE_MON * (NICKNAMED_MON_STRUCT_LENGTH + 5)
 	call AddNTimes
 
 	ldh a, [hRandomAdd]
@@ -109,10 +109,10 @@ LoadRandomBattleTowerMon:
 	maskbits BATTLETOWER_NUM_UNIQUE_MON
 	cp BATTLETOWER_NUM_UNIQUE_MON
 	jr nc, .resample
-	ld bc, NICKNAMED_MON_STRUCT_LENGTH + 1
+	ld bc, NICKNAMED_MON_STRUCT_LENGTH + 5
 	call AddNTimes
 
-	; hl = pointer to the mon that will be loaded (1 byte species, NICKNAMED_MON_STRUCT_LENGTH - 1 bytes data)
+	; hl = pointer to the mon that will be loaded (1 byte species, 1 byte item, 2 -> 1 byte each move, NICKNAMED_MON_STRUCT_LENGTH - 6 bytes data)
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -155,24 +155,51 @@ LoadRandomBattleTowerMon:
 	cp [hl]
 	jr z, .FindARandomBattleTowerMon
 
-	; reserve and load the converted species from wTempSpecies and copy everything else
+	; reserve and load the converted species from wTempSpecies, manually load item and moves, and copy everything else
 	push hl
 	ld l, LOCKED_MON_ID_BATTLE_TOWER_1
+	; LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1 rotated right 2
+	ld c, (LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1 >> 2) | ((LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1 & 3) << 6)
 	ld a, e
 	; assume that NICKNAMED_MON_STRUCT_LENGTH is not a multiple of $80 (it's actually far less than $80)
 	cp LOW(wBT_OTMon1)
 	jr z, .got_index
 	inc l
+	inc c
 	cp LOW(wBT_OTMon2)
 	jr z, .got_index
 	inc l
+	inc c
 .got_index
 	ld a, [wTempSpecies]
 	ld [de], a
 	inc de
 	call LockPokemonID
 	pop hl
-	ld bc, NICKNAMED_MON_STRUCT_LENGTH - 1
+	; item
+	ld a, [hli]
+	ld [de], a
+	inc de
+	; moves
+	ld b, NUM_MOVES
+	rlc c
+	rlc c
+.move_loop
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetMoveIDFromIndex
+	ld [de], a
+	inc de
+	ld l, c
+	call LockMoveID
+	inc c
+	pop hl
+	inc hl
+	dec b
+	jr nz, .move_loop
+	ld c, NICKNAMED_MON_STRUCT_LENGTH - 6
 	call CopyBytes
 
 	; rename the Pokémon to its default name (overriding the transliterated Japanese nicknames)

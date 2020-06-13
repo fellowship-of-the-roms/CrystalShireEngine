@@ -136,6 +136,15 @@ ReadTrainerPartyPieces:
 	ld b, NUM_MOVES
 .copy_moves
 	call GetNextTrainerDataByte
+	push hl
+	push af
+	call GetNextTrainerDataByte
+	ld h, a
+	pop af
+	ld l, a
+	call GetMoveIDFromIndex
+	pop hl
+	inc hl
 	ld [de], a
 	inc de
 	dec b
