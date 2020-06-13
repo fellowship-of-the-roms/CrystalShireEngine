@@ -250,38 +250,41 @@ InitBattleAnimBuffer:
 	ld d, a
 	ld a, [wBattleAnimTempFixY]
 	cp $ff
-	jr nz, .check_kinesis_softboiled_milkdrink
+	jr nz, .vertical_flip
 	ld a, 5 * TILE_WIDTH
-	add d
 	jr .done
 
-.check_kinesis_softboiled_milkdrink
+.vertical_flip
 	sub d
 	push af
-	ld a, [wFXAnimID + 1]
-	or a
-	jr nz, .no_sub
-	ld a, [wFXAnimID]
-	cp KINESIS
-	jr z, .do_sub
-	cp SOFTBOILED
-	jr z, .do_sub
-	cp MILK_DRINK
-	jr nz, .no_sub
-.do_sub
-	pop af
-	sub 1 * TILE_WIDTH
-	jr .done
-
-.no_sub
-	pop af
+	push hl
+	push bc
+	ld hl, wFXAnimID
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	ld de, 2
+	ld hl, .extra_offset_moves
+	call IsInWordArray
+	pop bc
+	pop hl
+	pop de
+	sbc a
+	and -(1 * TILE_WIDTH)
 .done
+	add a, d
 	ld [wBattleAnimTempYCoord], a
 	ld a, [hli]
 	xor $ff
 	inc a
 	ld [wBattleAnimTempXOffset], a
 	ret
+
+.extra_offset_moves
+	dw KINESIS
+	dw SOFTBOILED
+	dw MILK_DRINK
+	dw -1
 
 GetBattleAnimTileOffset:
 	push hl

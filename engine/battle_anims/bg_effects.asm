@@ -1526,10 +1526,14 @@ Tackle_ReturnMove:
 Rollout_FillLYOverridesBackup:
 	push af
 	ld a, [wFXAnimID + 1]
-	or a
+	if HIGH(ROLLOUT)
+		cp HIGH(ROLLOUT)
+	else
+		or a
+	endc
 	jr nz, .not_rollout
 	ld a, [wFXAnimID]
-	cp ROLLOUT
+	cp LOW(ROLLOUT)
 	jr z, .rollout
 .not_rollout
 	pop af

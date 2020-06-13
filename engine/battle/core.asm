@@ -615,7 +615,7 @@ ParsePlayerAction:
 .not_encored
 	ld a, [wBattlePlayerAction]
 	cp BATTLEPLAYERACTION_SWITCH
-	jr z, .reset_rage
+	jp z, .reset_rage
 	and a
 	jr nz, .reset_bide
 	ld a, [wPlayerSubStatus3]
@@ -623,7 +623,15 @@ ParsePlayerAction:
 	jr nz, .locked_in
 	xor a
 	ld [wMoveSelectionMenuType], a
-	inc a ; POUND
+	if HIGH(POUND)
+		ld a, HIGH(POUND)
+	endc
+	ld [wFXAnimID + 1], a
+	if LOW(POUND) == (HIGH(POUND) + 1)
+		inc a
+	else
+		ld a, LOW(POUND)
+	endc
 	ld [wFXAnimID], a
 	call MoveSelectionScreen
 	push af
@@ -1235,7 +1243,13 @@ HandleWrap:
 
 	ld a, [de]
 	ld [wNamedObjectIndex], a
+	push hl
+	call GetMoveIndexFromID
+	ld a, l
 	ld [wFXAnimID], a
+	ld a, h
+	ld [wFXAnimID + 1], a
+	pop hl
 	call GetMoveName
 	dec [hl]
 	jr z, .release_from_bounds
@@ -1248,7 +1262,6 @@ HandleWrap:
 	call SwitchTurnCore
 	xor a
 	ld [wNumHits], a
-	ld [wFXAnimID + 1], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
 
@@ -4370,12 +4383,15 @@ ItemRecoveryAnim:
 	push de
 	push bc
 	call EmptyBattleTextbox
-	ld a, RECOVER
-	ld [wFXAnimID], a
 	call SwitchTurnCore
 	xor a
 	ld [wNumHits], a
+	if HIGH(RECOVER)
+		ld a, HIGH(RECOVER)
+	endc
 	ld [wFXAnimID + 1], a
+	ld a, LOW(RECOVER)
+	ld [wFXAnimID], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
 	pop bc

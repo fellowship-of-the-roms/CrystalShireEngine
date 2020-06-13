@@ -259,33 +259,34 @@
 	const BEAT_UP      ; fb
 DEF NUM_ATTACKS EQU const_value - 1
 
-; Battle animations use the same constants as the moves up to this point
-	const_next $ff
-	const ANIM_SWEET_SCENT_2     ; ff
-	const ANIM_THROW_POKE_BALL   ; 100
-	const ANIM_SEND_OUT_MON      ; 101
-	const ANIM_RETURN_MON        ; 102
-	const ANIM_CONFUSED          ; 103
-	const ANIM_SLP               ; 104
-	const ANIM_BRN               ; 105
-	const ANIM_PSN               ; 106
-	const ANIM_SAP               ; 107
-	const ANIM_FRZ               ; 108
-	const ANIM_PAR               ; 109
-	const ANIM_IN_LOVE           ; 10a
-	const ANIM_IN_SANDSTORM      ; 10b
-	const ANIM_IN_NIGHTMARE      ; 10c
-	const ANIM_IN_WHIRLPOOL      ; 10d
+; Battle animations use the same constants as the moves
+	const ANIM_SWEET_SCENT_2     ; fc
+; Animations with negative IDs will play even when animations are disabled
+	const_def -1, -1
+	const ANIM_HIT_CONFUSION     ;  -1 (ffff)
+	const ANIM_SHAKE             ;  -2 (fffe)
+	const ANIM_WOBBLE            ;  -3 (fffd)
+	const ANIM_PLAYER_DAMAGE     ;  -4 (fffc)
+	const ANIM_PLAYER_STAT_DOWN  ;  -5 (fffb)
+	const ANIM_ENEMY_STAT_DOWN   ;  -6 (fffa)
+	const ANIM_ENEMY_DAMAGE      ;  -7 (fff9)
+	const ANIM_MISS              ;  -8 (fff8)
 ; battle anims
-	const ANIM_MISS              ; 10e
-	const ANIM_ENEMY_DAMAGE      ; 10f
-	const ANIM_ENEMY_STAT_DOWN   ; 110
-	const ANIM_PLAYER_STAT_DOWN  ; 111
-	const ANIM_PLAYER_DAMAGE     ; 112
-	const ANIM_WOBBLE            ; 113
-	const ANIM_SHAKE             ; 114
-	const ANIM_HIT_CONFUSION     ; 115
-DEF NUM_BATTLE_ANIMS EQU const_value - 1
+	const ANIM_IN_WHIRLPOOL      ;  -9 (fff7)
+	const ANIM_IN_NIGHTMARE      ;  -a (fff6)
+	const ANIM_IN_SANDSTORM      ;  -b (fff5)
+	const ANIM_IN_LOVE           ;  -c (fff4)
+	const ANIM_PAR               ;  -d (fff3)
+	const ANIM_FRZ               ;  -e (fff2)
+	const ANIM_SAP               ;  -f (fff1)
+	const ANIM_PSN               ; -10 (fff0)
+	const ANIM_BRN               ; -11 (ffef)
+	const ANIM_SLP               ; -12 (ffee)
+	const ANIM_CONFUSED          ; -13 (ffed)
+	const ANIM_RETURN_MON        ; -14 (ffec)
+	const ANIM_SEND_OUT_MON      ; -15 (ffeb)
+	const ANIM_THROW_POKE_BALL   ; -16 (ffea)
+DEF NUM_BATTLE_ANIMS EQU -const_value - 1
 
 ; wNumHits uses offsets from ANIM_MISS
 	const_def
