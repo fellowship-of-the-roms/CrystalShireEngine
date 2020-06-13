@@ -51,12 +51,28 @@ OddEggSpecies:
 	dw TYROGUE
 	assert_table_length NUM_ODD_EGGS
 
+OddEggMoves:
+	dw THUNDERSHOCK, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw THUNDERSHOCK, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw POUND, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw POUND, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw SING, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw SING, CHARM, DIZZY_PUNCH, NO_MOVE
+	dw POUND, LICK, DIZZY_PUNCH, NO_MOVE
+	dw POUND, LICK, DIZZY_PUNCH, NO_MOVE
+	dw EMBER, DIZZY_PUNCH, NO_MOVE, NO_MOVE
+	dw EMBER, DIZZY_PUNCH, NO_MOVE, NO_MOVE
+	dw QUICK_ATTACK, LEER, DIZZY_PUNCH, NO_MOVE
+	dw QUICK_ATTACK, LEER, DIZZY_PUNCH, NO_MOVE
+	dw TACKLE, DIZZY_PUNCH, NO_MOVE, NO_MOVE
+	dw TACKLE, DIZZY_PUNCH, NO_MOVE, NO_MOVE
+
 OddEggs:
 	table_width NICKNAMED_MON_STRUCT_LENGTH, OddEggs
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db THUNDERSHOCK, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 02048 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -82,7 +98,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db THUNDERSHOCK, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00256 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -108,7 +124,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db POUND, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 04096 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -134,7 +150,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db POUND, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00768 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -160,7 +176,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db SING, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 04096 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -186,7 +202,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db SING, CHARM, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00768 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -212,7 +228,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db POUND, LICK, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 03584 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -238,7 +254,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db POUND, LICK, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -264,7 +280,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db EMBER, DIZZY_PUNCH, 0, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 02560 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -290,7 +306,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db EMBER, DIZZY_PUNCH, 0, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -316,7 +332,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db QUICK_ATTACK, LEER, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 03072 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -342,7 +358,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db QUICK_ATTACK, LEER, DIZZY_PUNCH, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -368,7 +384,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db TACKLE, DIZZY_PUNCH, 0, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 02560 ; OT ID
 	dt 125 ; Exp
 	; Stat exp
@@ -394,7 +410,7 @@ OddEggs:
 
 	db 0 ; Species, will be filled on load
 	db NO_ITEM
-	db TACKLE, DIZZY_PUNCH, 0, 0
+	db 0, 0, 0, 0 ; Moves, will be filled on load
 	dw 00256 ; OT ID
 	dt 125 ; Exp
 	; Stat exp

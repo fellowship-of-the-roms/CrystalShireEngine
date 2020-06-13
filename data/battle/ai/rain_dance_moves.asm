@@ -1,15 +1,15 @@
 ; AI_SMART prefers these moves during rain.
 
 RainDanceMoves:
-	db WATER_GUN
-	db HYDRO_PUMP
-	db SURF
-	db BUBBLEBEAM
-	db THUNDER
-	db WATERFALL
-	db CLAMP
-	db BUBBLE
-	db CRABHAMMER
-	db OCTAZOOKA
-	db WHIRLPOOL
-	db -1 ; end
+	dw WATER_GUN
+	dw HYDRO_PUMP
+	dw SURF
+	dw BUBBLEBEAM
+	dw THUNDER
+	dw WATERFALL
+	dw CLAMP
+	dw BUBBLE
+	dw CRABHAMMER
+	dw OCTAZOOKA
+	dw WHIRLPOOL
+	dw -1 ; end

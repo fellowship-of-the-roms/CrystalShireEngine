@@ -1,9 +1,9 @@
 CriticalHitMoves:
-	db KARATE_CHOP
-	db RAZOR_WIND
-	db RAZOR_LEAF
-	db CRABHAMMER
-	db SLASH
-	db AEROBLAST
-	db CROSS_CHOP
-	db -1
+	dw KARATE_CHOP
+	dw RAZOR_WIND
+	dw RAZOR_LEAF
+	dw CRABHAMMER
+	dw SLASH
+	dw AEROBLAST
+	dw CROSS_CHOP
+	dw -1
