@@ -2319,8 +2319,20 @@ RestorePPEffect:
 	jp nz, Not_PP_Up
 
 	ld a, [hl]
-	cp SKETCH
+	push hl
+	call GetMoveIndexFromID
+	ld a, h
+	if HIGH(SKETCH)
+		cp HIGH(SKETCH)
+	else
+		and a
+	endc
+	ld a, l
+	pop hl
+	jr nz, .not_sketch
+	cp LOW(SKETCH)
 	jr z, .CantUsePPUpOnSketch
+.not_sketch
 
 	ld bc, MON_PP - MON_MOVES
 	add hl, bc

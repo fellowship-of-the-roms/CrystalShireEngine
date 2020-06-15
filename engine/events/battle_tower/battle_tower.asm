@@ -441,13 +441,15 @@ ValidateBTParty: ; unreferenced
 	ld a, [hli]
 	and a
 	jr z, .not_move
-	cp NUM_ATTACKS + 1
-	jr nc, .not_move
-	jr .valid_move
+	cp MOVE_TABLE_ENTRIES + 1
+	jr c, .valid_move
 
 .not_move
 	dec hl
-	ld a, POUND
+	push hl
+	ld hl, POUND
+	call GetMoveIDFromIndex
+	pop hl
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -457,7 +459,7 @@ ValidateBTParty: ; unreferenced
 
 .valid_move
 	ld a, [hl]
-	cp NUM_ATTACKS + 1
+	cp MOVE_TABLE_ENTRIES + 1
 	jr c, .next
 	ld [hl], $0
 

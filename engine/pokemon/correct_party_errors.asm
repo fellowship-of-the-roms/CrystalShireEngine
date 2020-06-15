@@ -169,16 +169,20 @@ CorrectPartyErrors: ; unreferenced
 	ld a, [hl]
 	and a
 	jr z, .invalid_move
-	cp NUM_ATTACKS + 1
+	cp MOVE_TABLE_ENTRIES + 1
 	jr c, .moves_loop
 .invalid_move
-	ld [hl], POUND
+	push hl
+	ld hl, POUND
+	call GetMoveIDFromIndex
+	pop hl
+	ld [hl], a
 
 .moves_loop
 	ld a, [hl]
 	and a
 	jr z, .fill_invalid_moves
-	cp NUM_ATTACKS + 1
+	cp MOVE_TABLE_ENTRIES + 1
 	jr c, .next_move
 
 .fill_invalid_moves

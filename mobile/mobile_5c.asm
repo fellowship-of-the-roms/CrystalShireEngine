@@ -212,9 +212,12 @@ CheckBTMonMovesForErrors:
 .loop
 	push hl
 	ld a, [hl]
-	cp NUM_ATTACKS + 1
+	cp MOVE_TABLE_ENTRIES + 1
 	jr c, .okay
-	ld a, POUND
+	push hl
+	ld hl, POUND
+	call GetMoveIDFromIndex
+	pop hl
 	ld [hl], a
 
 .okay
@@ -224,7 +227,7 @@ CheckBTMonMovesForErrors:
 	ld a, [hl]
 	and a
 	jr z, .loop3
-	cp NUM_ATTACKS + 1
+	cp MOVE_TABLE_ENTRIES + 1
 	jr c, .next
 
 .loop3

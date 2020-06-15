@@ -1194,7 +1194,18 @@ AI_Smart_SpeedDownHit:
 ; Player is faster than enemy.
 
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
-	cp ICY_WIND
+	push hl
+	call GetMoveIDFromIndex
+	ld a, h
+	if HIGH(ICY_WIND)
+		cp HIGH(ICY_WIND)
+	else
+		and a
+	endc
+	ld a, l
+	pop hl
+	ret nz
+	cp LOW(ICY_WIND)
 	ret nz
 	call AICheckEnemyQuarterHP
 	ret nc
@@ -2217,7 +2228,18 @@ AI_Smart_Magnitude:
 AI_Smart_Earthquake:
 ; Greatly encourage this move if the player is underground and the enemy is faster.
 	ld a, [wLastPlayerCounterMove]
-	cp DIG
+	push hl
+	call GetMoveIndexFromID
+	ld a, h
+	if HIGH(DIG)
+		cp HIGH(DIG)
+	else
+		and a
+	endc
+	ld a, l
+	pop hl
+	ret nz
+	cp LOW(DIG)
 	ret nz
 
 	ld a, [wPlayerSubStatus3]
@@ -2573,7 +2595,18 @@ AI_Smart_Twister:
 AI_Smart_Gust:
 ; Greatly encourage this move if the player is flying and the enemy is faster.
 	ld a, [wLastPlayerCounterMove]
-	cp FLY
+	push hl
+	call GetMoveIndexFromID
+	ld a, h
+	if HIGH(FLY)
+		cp HIGH(FLY)
+	else
+		and a
+	endc
+	ld a, l
+	pop hl
+	ret nz
+	cp LOW(FLY)
 	ret nz
 
 	ld a, [wPlayerSubStatus3]
@@ -2978,7 +3011,7 @@ AI_Aggressive:
 ; Nothing we can do if no attacks did damage.
 	ld a, c
 	and a
-	jr z, .done
+	ret z
 
 ; Discourage moves that do less damage unless they're reckless too.
 	ld hl, wEnemyAIMoveScores - 1
@@ -2988,7 +3021,7 @@ AI_Aggressive:
 	inc b
 	ld a, b
 	cp NUM_MOVES + 1
-	jr z, .done
+	ret z
 
 ; Ignore this move if it is the highest damaging one.
 	cp c
@@ -3022,9 +3055,6 @@ AI_Aggressive:
 ; If we made it this far, discourage this move.
 	inc [hl]
 	jr .checkmove2
-
-.done
-	ret
 
 INCLUDE "data/battle/ai/reckless_moves.asm"
 

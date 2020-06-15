@@ -38,7 +38,10 @@ BattleCommand_Sketch:
 ; Fail if move is invalid or is Struggle.
 	and a
 	jr z, .fail
-	cp STRUGGLE
+	push bc
+	ld bc, STRUGGLE
+	call CompareMove
+	pop bc
 	jr z, .fail
 ; Fail if user already knows that move
 	ld c, NUM_MOVES
@@ -50,14 +53,16 @@ BattleCommand_Sketch:
 	jr nz, .does_user_already_know_move
 ; Find Sketch in the user's moveset.
 ; Pointer in hl, and index in c.
-	dec hl
+	push hl
+	ld hl, SKETCH
+	call GetMoveIDFromIndex
+	pop hl
 	ld c, NUM_MOVES
 .find_sketch
 	dec c
-	ld a, [hld]
-	cp SKETCH
+	dec hl
+	cp [hl]
 	jr nz, .find_sketch
-	inc hl
 ; The Sketched move is loaded to that slot.
 	ld a, b
 	ld [hl], a

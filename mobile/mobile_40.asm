@@ -1552,9 +1552,19 @@ _LinkBattleSendReceiveAction:
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr nz, .switch
 	ld a, [wCurPlayerMove]
+	call GetMoveIndexFromID
 	ld b, BATTLEACTION_STRUGGLE
-	cp STRUGGLE
+	ld a, h
+	if HIGH(STRUGGLE)
+		cp HIGH(STRUGGLE)
+	else
+		and a
+	endc
+	jr nz, .not_struggle
+	ld a, l
+	cp LOW(STRUGGLE)
 	jr z, .struggle
+.not_struggle
 	ld b, BATTLEACTION_SKIPTURN
 	cp $ff
 	jr z, .struggle
