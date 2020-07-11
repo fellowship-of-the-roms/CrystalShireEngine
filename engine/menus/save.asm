@@ -462,12 +462,12 @@ SavePokemonData:
 	ret
 
 SaveIndexTables:
+	; saving is already a long operation, so take the chance to GC the table
+	farcall ForceGarbageCollection
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wPokemonIndexTable)
 	ldh [rSVBK], a
-	; saving is already a long operation, so take the chance to GC the table
-	farcall PokemonTableGarbageCollection
 	ld a, BANK(sPokemonIndexTable)
 	call OpenSRAM
 	ld hl, wPokemonIndexTable
@@ -781,14 +781,8 @@ LoadBox:
 	ld a, BANK(sBox)
 	call OpenSRAM
 	call ClearIndexesForLoadedBox
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokemonIndexTable)
-	ldh [rSVBK], a
 	; GC the table now that lots of entries are free
-	farcall PokemonTableGarbageCollection
-	pop af
-	ldh [rSVBK], a
+	farcall ForceGarbageCollection
 	call UpdateIndexesForLoadedBox
 	jp CloseSRAM
 
