@@ -1823,6 +1823,8 @@ BillsPC_CopyMon:
 	ld a, LOCKED_MON_ID_CURRENT_MENU
 	call GetLockedPokemonID
 	ld [wBufferMonSpecies], a
+	ld hl, wBufferMon
+	call BillsPC_ConvertBoxMonToPartyMon
 	farcall CalcBufferMonStats
 	ret
 
@@ -2563,4 +2565,130 @@ BillsPC_PlaceChangeBoxString:
 	call PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
+	ret
+
+BillsPC_ConvertBoxData::
+	; converts data in an entire box of mons from party to box or vice-versa
+	; in: b:de: box address (SRAM), c: conversion direction (0: party to box, 1: box to party)
+	; out: all clobbered
+	ld a, b
+	call OpenSRAM
+	ld a, [de]
+	and a
+	jr z, .done
+	cp MONS_PER_BOX + 1
+	jr nc, .done ;don't corrupt the data any further
+	ld b, a
+	ld hl, MONS_PER_BOX + 2
+	add hl, de
+	ld de, BOXMON_STRUCT_LENGTH
+.loop
+	bit 0, c
+	call .convert
+	add hl, de
+	dec b
+	jr nz, .loop
+.done
+	jp CloseSRAM
+
+.convert
+	jr nz, BillsPC_ConvertBoxMonToPartyMon
+	; fallthrough
+
+BillsPC_ConvertPartyMonToBoxMon:
+	; converts 8-bit IDs in the party mon struct's moves into 14-bit indexes, storing the overflow bits in the PP count
+	; in: hl: struct pointer
+	; out: hl, bc, de: preserved
+	push hl
+	push de
+	push bc
+	call BillsPC_SetUpMoveAndPPPointers
+.loop
+	ld a, [bc]
+	call GetMoveIndexFromID
+	ld a, l
+	ld [bc], a
+	inc bc
+	ld a, [de]
+	and $c0
+	or h
+	ld [de], a
+	inc de
+	ld hl, hTemp
+	dec [hl]
+	jr nz, .loop
+	pop bc
+	pop de
+	pop hl
+	ret
+
+BillsPC_ConvertBoxMonToPartyMon:
+	; undoes the conversion from the previous function and fully restores the PP of the mon
+	push hl
+	push de
+	push bc
+	call BillsPC_SetUpMoveAndPPPointers
+.loop
+	ld a, [bc]
+	ld l, a
+	ld a, [de]
+	and $3f
+	ld h, a
+	cp $3f
+	jr nz, .ok
+	ld h, $ff
+.ok
+	call GetMoveIDFromIndex
+	ld [bc], a
+	inc bc
+	and a
+	jr z, .got_PP
+	ld l, a
+	ld a, MOVE_PP
+	call GetMoveAttribute
+	; max PP = base PP + min(7, base PP / 5) * PP Ups
+	ld h, a
+	ld l, -1
+.pp_up_size_loop
+	inc l
+	sub 5
+	jr nc, .pp_up_size_loop
+	ld a, l
+	cp 8
+	jr c, .pp_up_size_OK
+	ld l, 7
+.pp_up_size_OK
+	ld a, [de]
+	and $c0
+	or h
+	ld h, a
+	bit 6, h
+	jr z, .skip_add_one
+	add a, l
+.skip_add_one
+	add hl, hl ; if the top bit is set, it sets carry; it will also double l
+	jr nc, .got_PP
+	add a, l
+.got_PP
+	ld [de], a
+	inc de
+	ld hl, hTemp
+	dec [hl]
+	jr nz, .loop
+	pop bc
+	pop de
+	pop hl
+	ret
+
+BillsPC_SetUpMoveAndPPPointers:
+	ld de, MON_MOVES
+	add hl, de
+	ld b, h
+	ld c, l
+	ld e, MON_PP - MON_MOVES
+	add hl, de
+	ld d, h
+	ld e, l
+	ld a, NUM_MOVES
+	ldh [hTemp], a
 	ret
