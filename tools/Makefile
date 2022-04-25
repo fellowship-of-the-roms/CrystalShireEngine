@@ -4,6 +4,7 @@ CC := gcc
 CFLAGS := -O3 -flto -std=c17 -Wall -Wextra -pedantic
 
 tools := \
+	bankends \
 	bpp2png \
 	lzcomp \
 	gfx \
@@ -33,6 +34,12 @@ bpp2png: bpp2png.c lodepng/lodepng.c common.h lodepng/lodepng.h
 lzcomp: CFLAGS += -Wno-strict-overflow -Wno-sign-compare
 lzcomp: $(wildcard lz/*.c) $(wildcard lz/*.h)
 	$(CC) $(CFLAGS) -o $@ lz/*.c
+
+bankends: bankends.c parsemap.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+parsemap.o: parsemap.c parsemap.h
+	$(CC) $(CFLAGS) -c $^
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $<

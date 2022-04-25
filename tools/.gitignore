@@ -1,3 +1,4 @@
+bankends
 bpp2png
 gfx
 lzcomp
@@ -8,3 +9,6 @@ pokemon_animation
 pokemon_animation_graphics
 scan_includes
 stadium
+
+# compiled objects
+*.h.gch
