@@ -960,28 +960,28 @@ GetMonFramesPointer:
 	jr z, .egg
 
 	call PokeAnim_IsUnown
-	ld b, BANK(UnownFramesPointers)
-	ld c, BANK(UnownsFrames)
-	ld hl, UnownFramesPointers
-	jr z, .got_frames
-	ld a, [wPokeAnimSpecies]
-	cp JOHTO_POKEMON
-	ld b, BANK(FramesPointers)
-	ld c, BANK(KantoFrames)
-	ld hl, FramesPointers
-	jr c, .got_frames
-	ld c, BANK(JohtoFrames)
-.got_frames
-	ld a, c
+	ld hl, FramesPointers - 3
+	ld a, BANK(FramesPointers)
+	ld bc, 3
+	jr nz, .got_frames
+	ld a, BANK(UnownsFrames)
 	ld [wPokeAnimFramesBank], a
+	ld hl, UnownFramesPointers - 2
+	ld a, BANK(UnownFramesPointers)
+	ld c, 2
+.got_frames
 
+	push af
 	ld a, [wPokeAnimSpeciesOrUnown]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, b
+	call AddNTimes
+	pop af
+	jr z, .no_bank
+	ld c, a
+	call GetFarByte
+	ld [wPokeAnimFramesBank], a
+	inc hl
+	ld a, c
+.no_bank
 	call GetFarWord
 	ld a, l
 	ld [wPokeAnimFramesAddr], a
@@ -990,13 +990,11 @@ GetMonFramesPointer:
 	ret
 
 .egg
-	ld hl, EggFrames
-	ld c, BANK(EggFrames)
-	ld a, c
+	ld a, BANK(EggFrames)
 	ld [wPokeAnimFramesBank], a
-	ld a, l
+	ld a, LOW(EggFrames)
 	ld [wPokeAnimFramesAddr], a
-	ld a, h
+	ld a, HIGH(EggFrames)
 	ld [wPokeAnimFramesAddr + 1], a
 	ret
 
