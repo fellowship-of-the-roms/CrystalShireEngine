@@ -20,8 +20,6 @@ GoldenrodNameRaterBookshelf:
 GoldenrodNameRaterRadio:
 	jumpstd Radio2Script
 
-INCLUDE "data/text/unused_sweet_honey.asm"
-
 GoldenrodNameRater_MapEvents:
 	db 0, 0 ; filler
 
