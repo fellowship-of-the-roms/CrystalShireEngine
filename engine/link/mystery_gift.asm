@@ -38,7 +38,7 @@ DoMysteryGift:
 	farcall StageDataForMysteryGift
 	call ClearMysteryGiftTrainer
 	vc_patch Infrared_stage_party_data
-if DEF(_CRYSTAL11_VC)
+if DEF(_CRYSTAL_VC)
 	farcall StagePartyDataForMysteryGift
 	call ClearMysteryGiftTrainer
 	nop
@@ -271,7 +271,7 @@ endc
 ExchangeMysteryGiftData:
 	vc_hook Infrared_ExchangeMysteryGiftData_start
 	vc_patch Infrared_ExchangeMysteryGiftData_function
-if DEF(_CRYSTAL11_VC)
+if DEF(_CRYSTAL_VC)
 	ld d, $ef
 .loop
 	dec d

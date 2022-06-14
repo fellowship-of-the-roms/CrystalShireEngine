@@ -21,8 +21,8 @@ rom_obj := \
 	lib/mobile/main.o \
 	lib/mobile/mail.o
 
-pokecrystal_obj         := $(rom_obj:.o=.o)
-pokecrystal11_vc_obj    := $(rom_obj:.o=_vc.o)
+pokecrystal_obj    := $(rom_obj:.o=.o)
+pokecrystal_vc_obj := $(rom_obj:.o=_vc.o)
 
 
 ### Build tools
