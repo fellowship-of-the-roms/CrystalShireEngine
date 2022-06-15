@@ -63,3 +63,9 @@ PokedexFlagAction::
 	ld a, c
 	and a
 	ret
+
+CheckSeenMonIndex::
+	ld hl, wPokedexSeen
+	ld b, CHECK_FLAG
+	dec de
+	jp FlagAction

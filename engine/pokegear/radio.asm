@@ -204,46 +204,25 @@ OaksPKMNTalk4:
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	; bc now contains the chosen map's group and number indices.
-	push bc
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	; de now contains the chosen map's group and number indices.
+	push de
+	farcall LookUpGrassJohtoWildmons
 
-	; Search the JohtoGrassWildMons array for the chosen map.
-	ld hl, JohtoGrassWildMons
-.loop
-	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte
-	cp -1
-	jr z, .overflow
-	inc hl
-	cp b
-	jr nz, .next
-	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte
-	cp c
-	jr z, .done
-.next
-	dec hl
-	ld de, GRASS_WILDDATA_LENGTH
-	add hl, de
-	jr .loop
-
-.done
-	; Point hl to the list of morning Pokémon., skipping percentages
-rept 4
-	inc hl
-endr
 	; Generate a number, either 0, 1, or 2, to choose a time of day.
 .loop2
 	call Random
 	maskbits NUM_DAYTIMES
 	cp DARKNESS_F
 	jr z, .loop2
-
-	ld bc, 2 * NUM_GRASSMON
+	; Point hl to the list of Pokémon for that time of day, skipping the map ID and the percentages
+	ld bc, 5
+	add hl, bc
+	ld c, 3 * NUM_GRASSMON
 	call AddNTimes
+
 .loop3
 	; Choose one of the middle three Pokemon.
 	call Random
@@ -256,9 +235,11 @@ endr
 	ld d, 0
 	add hl, de
 	add hl, de
+	add hl, de
 	inc hl ; skip level
 	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
 	ld [wCurPartySpecies], a
 	call GetPokemonName
