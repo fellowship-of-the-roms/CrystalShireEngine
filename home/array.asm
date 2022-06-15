@@ -22,6 +22,23 @@ IsInArray::
 	scf
 	ret
 
+IsInWordArray_NextItem:
+	add hl, de
+IsInWordArray::
+; Same as IsInArray, but for word values. The value is input in bc; index not returned.
+	ld a, [hli]
+	and [hl]
+	inc a
+	ret z
+	ld a, [hld]
+	cp b
+	jr nz, IsInWordArray_NextItem
+	ld a, [hl]
+	cp c
+	jr nz, IsInWordArray_NextItem
+	scf
+	ret
+
 SkipNames::
 ; Skip a names.
 	ld bc, NAME_LENGTH

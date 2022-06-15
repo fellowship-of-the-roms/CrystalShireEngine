@@ -19,113 +19,113 @@ TreeMons:
 TreeMonSet_City:
 TreeMonSet_Canyon:
 ; common
-	db 50, SPEAROW,    10
-	db 15, SPEAROW,    10
-	db 15, SPEAROW,    10
-	db 10, AIPOM,      10
-	db  5, AIPOM,      10
-	db  5, AIPOM,      10
+	dbbw 50, 10, SPEAROW
+	dbbw 15, 10, SPEAROW
+	dbbw 15, 10, SPEAROW
+	dbbw 10, 10, AIPOM
+	dbbw  5, 10, AIPOM
+	dbbw  5, 10, AIPOM
 	db -1
 ; rare
-	db 50, SPEAROW,    10
-	db 15, HERACROSS,  10
-	db 15, HERACROSS,  10
-	db 10, AIPOM,      10
-	db  5, AIPOM,      10
-	db  5, AIPOM,      10
+	dbbw 50, 10, SPEAROW
+	dbbw 15, 10, HERACROSS
+	dbbw 15, 10, HERACROSS
+	dbbw 10, 10, AIPOM
+	dbbw  5, 10, AIPOM
+	dbbw  5, 10, AIPOM
 	db -1
 
 TreeMonSet_Town:
 ; common
-	db 50, SPEAROW,    10
-	db 15, EKANS,      10
-	db 15, SPEAROW,    10
-	db 10, AIPOM,      10
-	db  5, AIPOM,      10
-	db  5, AIPOM,      10
+	dbbw 50, 10, SPEAROW
+	dbbw 15, 10, EKANS
+	dbbw 15, 10, SPEAROW
+	dbbw 10, 10, AIPOM
+	dbbw  5, 10, AIPOM
+	dbbw  5, 10, AIPOM
 	db -1
 ; rare
-	db 50, SPEAROW,    10
-	db 15, HERACROSS,  10
-	db 15, HERACROSS,  10
-	db 10, AIPOM,      10
-	db  5, AIPOM,      10
-	db  5, AIPOM,      10
+	dbbw 50, 10, SPEAROW
+	dbbw 15, 10, HERACROSS
+	dbbw 15, 10, HERACROSS
+	dbbw 10, 10, AIPOM
+	dbbw  5, 10, AIPOM
+	dbbw  5, 10, AIPOM
 	db -1
 
 TreeMonSet_Route:
 ; common
-	db 50, HOOTHOOT,   10
-	db 15, SPINARAK,   10
-	db 15, LEDYBA,     10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, SPINARAK
+	dbbw 15, 10, LEDYBA
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 ; rare
-	db 50, HOOTHOOT,   10
-	db 15, PINECO,     10
-	db 15, PINECO,     10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, PINECO
+	dbbw 15, 10, PINECO
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 
 TreeMonSet_Kanto:
 ; common
-	db 50, HOOTHOOT,   10
-	db 15, EKANS,      10
-	db 15, HOOTHOOT,   10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, EKANS
+	dbbw 15, 10, HOOTHOOT
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 ; rare
-	db 50, HOOTHOOT,   10
-	db 15, PINECO,     10
-	db 15, PINECO,     10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, PINECO
+	dbbw 15, 10, PINECO
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 
 TreeMonSet_Lake:
 ; common
-	db 50, HOOTHOOT,   10
-	db 15, VENONAT,    10
-	db 15, HOOTHOOT,   10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, VENONAT
+	dbbw 15, 10, HOOTHOOT
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 ; rare
-	db 50, HOOTHOOT,   10
-	db 15, PINECO,     10
-	db 15, PINECO,     10
-	db 10, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
-	db  5, EXEGGCUTE,  10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, PINECO
+	dbbw 15, 10, PINECO
+	dbbw 10, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
+	dbbw  5, 10, EXEGGCUTE
 	db -1
 
 TreeMonSet_Forest:
 ; common
-	db 50, HOOTHOOT,   10
-	db 15, PINECO,     10
-	db 15, PINECO,     10
-	db 10, NOCTOWL,    10
-	db  5, BUTTERFREE, 10
-	db  5, BEEDRILL,   10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, PINECO
+	dbbw 15, 10, PINECO
+	dbbw 10, 10, NOCTOWL
+	dbbw  5, 10, BUTTERFREE
+	dbbw  5, 10, BEEDRILL
 	db -1
 ; rare
-	db 50, HOOTHOOT,   10
-	db 15, CATERPIE,   10
-	db 15, WEEDLE,     10
-	db 10, HOOTHOOT,   10
-	db  5, METAPOD,    10
-	db  5, KAKUNA,     10
+	dbbw 50, 10, HOOTHOOT
+	dbbw 15, 10, CATERPIE
+	dbbw 15, 10, WEEDLE
+	dbbw 10, 10, HOOTHOOT
+	dbbw  5, 10, METAPOD
+	dbbw  5, 10, KAKUNA
 	db -1
 
 TreeMonSet_Rock:
-	db 90, KRABBY,     15
-	db 10, SHUCKLE,    15
+	dbbw 90, 15, KRABBY
+	dbbw 10, 15, SHUCKLE
 	db -1

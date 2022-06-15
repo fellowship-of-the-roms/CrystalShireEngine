@@ -971,35 +971,49 @@ LoveBallMultiplier:
 	ret
 
 FastBallMultiplier:
+; multiply catch rate by 4 if the enemy mon is in the FleeMons tables
 	ld a, [wTempEnemyMonSpecies]
-	ld c, a
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
 	ld hl, FleeMons
-	ld d, 3
+	ld c, 3
+	push bc
 
 .loop
 ; BUG: Fast Ball only boosts catch rate for three Pokémon (see docs/bugs_and_glitches.md)
 	ld a, BANK(FleeMons)
 	call GetFarByte
-
+	ld c, a
 	inc hl
-	cp -1
-	jr z, .next
-	cp c
-	jr nz, .next
+	ld a, BANK(FleeMons)
+	call GetFarByte
+	ld b, a
+	and c
+	inc a
+	jr z, .next_list
+	ld a, b
+	cp d
+	jr nz, .loop
+	ld a, c
+	cp e
+	jr nz, .loop
+
+	pop bc
 	sla b
 	jr c, .max
-
 	sla b
 	ret nc
-
 .max
 	ld b, $ff
 	ret
 
-.next
-	dec d
-	jr nz, .loop
-	ret
+.next_list
+	pop bc
+	dec c
+	ret z
+	push bc
+	jr .loop
 
 LevelBallMultiplier:
 ; multiply catch rate by 8 if player mon level / 4 > enemy mon level
