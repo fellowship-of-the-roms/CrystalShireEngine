@@ -175,8 +175,11 @@ endc
 	push de
 	callfar ConvertMon_1to2
 	pop de
-	pop hl
 	ld a, [wTempSpecies]
+	ld l, a
+	ld h, 0
+	call GetPokemonIDFromIndex
+	pop hl
 	ld [de], a
 	inc de
 	jr .party_loop
@@ -253,7 +256,10 @@ endc
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-
+	ld hl, wOTPartyMons
+	ld de, wStringBuffer1
+	ld bc, 2 * PARTY_LENGTH + 15 ;6 preamble bytes, 2 replacement bytes, 1 stop byte, and 6 extra just in case
+	call Serial_ExchangeBytes
 	ld hl, wLinkData
 	ld de, wOTPartyData
 	ld bc, SERIAL_PREAMBLE_LENGTH + NAME_LENGTH + (1 + PARTY_LENGTH + 1) + 2 + (PARTYMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH + 3
@@ -455,7 +461,8 @@ endc
 	ld de, wOTPartyMons
 	ld bc, wOTPartyDataEnd - wOTPartyMons
 	call CopyBytes
-
+	call Link_FixOTParty_Gen2
+	jp c, LinkTimeout ;we got garbage, so just pretend we're disconnected
 	ld a, LOW(wOTPartyMonOTs)
 	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOTs)
@@ -718,9 +725,14 @@ Link_PrepPartyData_Gen1:
 	ld a, [hli]
 	cp -1
 	jr z, .done_party
-	ld [wTempSpecies], a
 	push hl
 	push de
+	call GetPokemonIndexFromID
+	xor a
+	cp h
+	sbc a
+	or l
+	ld [wTempSpecies], a
 	callfar ConvertMon_2to1
 	pop de
 	pop hl
@@ -761,6 +773,11 @@ Link_PrepPartyData_Gen1:
 	push de
 	push bc
 	ld a, [hl]
+	call GetPokemonIndexFromID
+	xor a
+	cp h
+	sbc a
+	or l
 	ld [wTempSpecies], a
 	callfar ConvertMon_2to1
 	pop bc
@@ -785,12 +802,17 @@ Link_PrepPartyData_Gen1:
 	ld [de], a
 	inc de
 	ld a, [bc]
-	cp MAGNEMITE
-	jr z, .steel_type
-	cp MAGNETON
+	call GetPokemonIndexFromID
+	push bc
+	ld bc, MAGNEMITE
+	call .compare
+	if MAGNETON == (MAGNEMITE + 1)
+		inc bc
+	else
+		ld bc, MAGNETON
+	endc
+	call nz, .compare
 	jr nz, .skip_steel
-
-.steel_type
 	ld a, ELECTRIC
 	ld [de], a
 	inc de
@@ -799,8 +821,6 @@ Link_PrepPartyData_Gen1:
 	jr .done_steel
 
 .skip_steel
-	push bc
-	call GetPokemonIndexFromID
 	ld b, h
 	ld c, l
 	ld hl, BaseData + BASE_TYPES - BASE_DATA_SIZE ;go one back so we don't decrement hl
@@ -809,9 +829,9 @@ Link_PrepPartyData_Gen1:
 	ld bc, BASE_CATCH_RATE - BASE_TYPES
 	ld a, BANK(BaseData)
 	call FarCopyBytes
-	pop bc
 
 .done_steel
+	pop bc
 	push bc
 	ld hl, MON_ITEM
 	add hl, bc
@@ -837,11 +857,9 @@ Link_PrepPartyData_Gen1:
 	push bc
 
 	ld a, [bc]
-	dec a
 	push bc
-	ld b, 0
-	ld c, a
-	ld hl, KantoMonSpecials
+	call GetPokemonIndexFromID
+	ld bc, KantoMonSpecials - 1
 	add hl, bc
 	ld a, BANK(KantoMonSpecials)
 	call GetFarByte
@@ -865,6 +883,14 @@ Link_PrepPartyData_Gen1:
 	inc de
 	ld h, b
 	ld l, c
+	ret
+
+.compare
+	ld a, h
+	cp b
+	ret nz
+	ld a, l
+	cp c
 	ret
 
 Link_PrepPartyData_Gen2:
@@ -900,6 +926,16 @@ Link_PrepPartyData_Gen2:
 	ld hl, wPartyMonNicknames
 	ld bc, PARTY_LENGTH * MON_NAME_LENGTH
 	call CopyBytes
+	; just use the wOTPartyMons area as staging for this
+	ld de, wOTPartyMons
+	ld a, SERIAL_PREAMBLE_BYTE
+	ld b, 6
+.index_list_preamble_fill
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .index_list_preamble_fill
+	call Link_BuildIndexList
 
 ; Okay, we did all that.  Now, are we in the trade center?
 	ld a, [wLinkMode]
@@ -1012,6 +1048,242 @@ Link_PrepPartyData_Gen2:
 	ld [de], a
 	ret
 
+Link_FixOTParty_Gen2:
+	; returns carry on a transmission error
+	ld hl, wStringBuffer1
+.skip_preamble_loop
+	ld a, [hli]
+	cp SERIAL_PREAMBLE_BYTE
+	jr z, .skip_preamble_loop
+	dec hl
+	push hl
+	ld c, 2 * PARTY_LENGTH + 2
+	call Link_ComputeBufferChecksum
+	cp [hl]
+	pop hl
+	scf
+	ret nz
+	ld a, 2 * PARTY_LENGTH
+	call Link_FixIndexListAfterTransfer
+	ld d, h
+	ld e, l
+	ld c, 0
+.party_loop
+	ld a, [de]
+	inc de
+	ld l, a
+	ld a, [de]
+	inc de
+	ld h, a
+	call GetPokemonIDFromIndex
+	ld b, a
+	push bc
+	ld b, 0
+	ld a, PARTYMON_STRUCT_LENGTH
+	ld hl, wOTPartyMon1Species
+	call AddNTimes
+	pop bc
+	ld [hl], b
+	ld a, LOW(wOTPartySpecies)
+	add a, c
+	ld l, a
+	adc HIGH(wOTPartySpecies)
+	sub l
+	ld h, a
+	ld a, [hl]
+	cp EGG
+	jr z, .no_species_update
+	call IsAPokemon
+	jr c, .no_species_update
+	ld [hl], b
+.no_species_update
+	inc c
+	ld a, c
+	cp PARTY_LENGTH
+	jr c, .party_loop
+	; carry already cleared
+	ret
+
+Link_BuildIndexList:
+	; in: de: address
+	push de
+	lb bc, 0, PARTY_LENGTH
+	ld hl, wPartyMon1Species
+.loop
+	push hl
+	ld a, [hl]
+	ld hl, 0
+	call IsAPokemon
+	call nc, GetPokemonIndexFromID
+	call .write
+	pop hl
+	ld a, c
+	ld c, PARTYMON_STRUCT_LENGTH
+	add hl, bc
+	ld c, a
+	dec c
+	jr nz, .loop
+	pop hl
+	ld a, e
+	sub l
+	ld c, a
+	call Link_StageIndexListForTransfer
+	inc c
+	inc c
+	call Link_ComputeBufferChecksum
+	inc de
+	; pad with some safe value - the checksum is always safe
+	ld c, 7
+.checksum_loop
+	inc de
+	ld [de], a
+	dec c
+	jr nz, .checksum_loop
+	ret
+
+.write
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	inc de
+	ret
+
+Link_ComputeBufferChecksum:
+	; in: hl: buffer, c: length
+	; out: a: checksum, hl: end of buffer, c: destroyed
+	ld a, 4 ;-$fc, but that gives a warning...
+.loop
+	add a, [hl]
+	jr nc, .no_carry
+	sub $fc
+.no_carry
+	inc hl
+	dec c
+	jr nz, .loop
+	cpl
+	inc a
+	ret
+
+Link_StageIndexListForTransfer:
+	; will remove all $FD and $FE bytes from the data, replacing them with any two other unused bytes
+	; the two chosen bytes will be appended to the end of the data stream
+	; in: hl: data, a: size (maximum $EF); will preserve bc, de, hl
+	push bc
+	push de
+	; wStringBuffer4 and wStringBuffer5 are used as a bitmap
+	ld e, a
+	push hl
+	ld hl, wStringBuffer4
+	ld bc, $20
+	xor a
+	call ByteFill
+	pop hl
+	ld d, e
+.read_loop
+	ld a, [hli]
+	push hl
+	ld c, a
+	and $1f
+	add a, LOW(wStringBuffer4)
+	ld l, a
+	adc HIGH(wStringBuffer4)
+	sub l
+	ld h, a
+	sla c
+	sbc a
+	and $f
+	inc a
+	sla c
+	jr nc, .not_two
+	add a, a
+	add a, a
+.not_two
+	sla c
+	jr nc, .not_one
+	add a, a
+.not_one
+	or [hl]
+	ld [hl], a
+	pop hl
+	dec d
+	jr nz, .read_loop
+	push hl
+	ld hl, wStringBuffer4 + 1
+	call .find_substitute
+	ld c, a
+	call .find_substitute
+	pop hl
+	ld b, a
+	inc hl
+	ld [hld], a
+	ld a, c
+	ld [hld], a
+.replace_loop
+	ld a, [hl]
+	cp $ff
+	jr z, .ok
+	cp $fd
+	jr c, .ok
+	ld a, c
+	jr z, .ok
+	ld a, b
+.ok
+	ld [hld], a
+	dec e
+	jr nz, .replace_loop
+	inc hl
+	pop de
+	pop bc
+	ret
+
+.find_substitute
+	ld a, [hli]
+	inc a
+	jr z, .find_substitute
+	dec a
+	ld b, a
+	xor a
+.bit_loop
+	inc a
+	srl b
+	jr c, .bit_loop
+	add a, a
+	swap a
+	add a, l
+	sub LOW(wStringBuffer4 + $21) ;+1 for the extra increment in [hli] and +$20 for the extra increment in the bit loop
+	ret
+
+Link_FixIndexListAfterTransfer:
+	; undoes the previous function's transform
+	push bc
+	push de
+	ld c, a
+	ld b, 0
+	add hl, bc
+	inc hl
+	ld a, [hld]
+	ld d, a
+	ld e, [hl]
+.loop
+	dec hl
+	ld a, [hl]
+	ld b, SERIAL_PREAMBLE_BYTE
+	cp e
+	jr z, .ok
+	inc b
+	cp d
+	jr z, .ok
+	ld b, a
+.ok
+	ld [hl], b
+	dec c
+	jr nz, .loop
+	pop de
+	pop bc
+	ret
+
 Link_CopyMailPreamble:
 ; fill 5 bytes with the value of a, starting at de
 	ld c, SERIAL_MAIL_PREAMBLE_LENGTH
@@ -1054,6 +1326,8 @@ Link_ConvertPartyStruct1to2:
 	ld c, l
 	ld a, [de]
 	inc de
+	ld l, a
+	ld h, 0
 	push bc
 	push de
 	ld [wTempSpecies], a
@@ -1061,6 +1335,9 @@ Link_ConvertPartyStruct1to2:
 	pop de
 	pop bc
 	ld a, [wTempSpecies]
+	ld l, a
+	ld h, 0
+	call GetPokemonIDFromIndex
 	ld [bc], a
 	ld [wCurSpecies], a
 	ld hl, MON_HP
@@ -1999,20 +2276,28 @@ LinkTrade:
 ; illicit trade machines, but it doesn't seem like a very effective one.
 ; Removing this code breaks link compatibility with the vanilla gen2 games, but
 ; has otherwise no consequence.
+	ld hl, MEW
+	call GetPokemonIDFromIndex
+	push af
+	ld hl, CELEBI
+	call GetPokemonIDFromIndex
+	pop hl
+	ld l, a
+	; h = MEW, l = CELEBI
 	ld b, 1
 	pop af
 	ld c, a
-	cp MEW
+	cp h
 	jr z, .send_checkbyte
 	ld a, [wCurPartySpecies]
-	cp MEW
+	cp h
 	jr z, .send_checkbyte
 	ld b, 2
 	ld a, c
-	cp CELEBI
+	cp l
 	jr z, .send_checkbyte
 	ld a, [wCurPartySpecies]
-	cp CELEBI
+	cp l
 	jr z, .send_checkbyte
 
 ; Send the byte in a loop until the desired byte has been received.
@@ -2119,6 +2404,13 @@ CheckTimeCapsuleCompatibility:
 	ld a, [hli]
 	cp -1
 	jr z, .checkitem
+	push hl
+	call GetPokemonIndexFromID
+	ld a, h
+	and a
+	ld a, l
+	pop hl
+	jr nz, .mon_too_new
 	cp JOHTO_POKEMON
 	jr nc, .mon_too_new
 	dec b
@@ -2162,6 +2454,8 @@ CheckTimeCapsuleCompatibility:
 	jr .done
 
 .mon_too_new
+	dec hl
+	ld a, [hl]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld a, $1

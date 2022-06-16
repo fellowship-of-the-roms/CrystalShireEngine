@@ -35,15 +35,23 @@ ValidateOTTrademon:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
+	ld [wCurSpecies], a
 
 	; Magnemite and Magneton's types changed
 	; from Electric to Electric/Steel.
-	cp MAGNEMITE
-	jr z, .normal
-	cp MAGNETON
+	call GetPokemonIndexFromID
+	push bc
+	ld bc, MAGNEMITE
+	call .compare
+	if MAGNETON == (MAGNEMITE + 1)
+		inc bc
+	else
+		ld bc, MAGNETON
+	endc
+	call nz, .compare
+	pop bc
 	jr z, .normal
 
-	ld [wCurSpecies], a
 	call GetBaseData
 	ld hl, wLinkOTPartyMonTypes
 	add hl, bc
@@ -62,6 +70,14 @@ ValidateOTTrademon:
 
 .abnormal
 	scf
+	ret
+
+.compare
+	ld a, h
+	cp b
+	ret nz
+	ld a, l
+	cp c
 	ret
 
 CheckAnyOtherAliveMonsForTrade:
