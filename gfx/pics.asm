@@ -773,3 +773,8 @@ INCBIN "gfx/pokemon/unown_y/back.2bpp.lz"
 INCBIN "gfx/pokemon/unown_p/back.2bpp.lz"
 INCBIN "gfx/pokemon/unown_i/back.2bpp.lz"
 INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
+
+
+SECTION "Pics 20", ROMX
+
+KrisPic: INCBIN "gfx/trainers/kris.2bpp.lz"

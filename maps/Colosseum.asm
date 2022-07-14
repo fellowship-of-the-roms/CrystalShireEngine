@@ -1,6 +1,6 @@
 	object_const_def
-	const COLOSSEUM_CHRIS1
-	const COLOSSEUM_CHRIS2
+	const COLOSSEUM_LINK_TRAINER1
+	const COLOSSEUM_LINK_TRAINER2
 
 Colosseum_MapScripts:
 	def_scene_scripts
@@ -25,13 +25,13 @@ ColosseumNoop2Scene:
 ColosseumSetWhichChrisCallback:
 	special CableClubCheckWhichChris
 	iffalse .Chris2
-	disappear COLOSSEUM_CHRIS2
-	appear COLOSSEUM_CHRIS1
+	disappear COLOSSEUM_LINK_TRAINER2
+	appear COLOSSEUM_LINK_TRAINER1
 	endcallback
 
 .Chris2:
-	disappear COLOSSEUM_CHRIS1
-	appear COLOSSEUM_CHRIS2
+	disappear COLOSSEUM_LINK_TRAINER1
+	appear COLOSSEUM_LINK_TRAINER2
 	endcallback
 
 ColosseumPreparePokecenter2FCallback:
@@ -74,5 +74,5 @@ Colosseum_MapEvents:
 	bg_event  5,  4, BGEVENT_LEFT, ColosseumConsoleScript
 
 	def_object_events
-	object_event  3,  4, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CableClubFriendScript, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	object_event  6,  4, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CableClubFriendScript, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
+	object_event  3,  4, SPRITE_LINK_TRAINER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CableClubFriendScript, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	object_event  6,  4, SPRITE_LINK_TRAINER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CableClubFriendScript, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2

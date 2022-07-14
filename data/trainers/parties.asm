@@ -5274,3 +5274,16 @@ MysticalmanGroup:
 	db -1 ; end
 
 	end_list_items
+
+KrisGroup:
+	next_list_item; KRIS (1)
+	db "KRIS@", TRAINERTYPE_NORMAL
+	db 10
+	dw CHIKORITA
+	db 10
+	dw CYNDAQUIL
+	db 10
+	dw TOTODILE
+	db -1 ; end
+
+	end_list_items
