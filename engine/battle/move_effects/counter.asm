@@ -33,11 +33,10 @@ BattleCommand_Counter:
 	cp SPECIAL
 	ret nc
 
-; BUG: Counter and Mirror Coat still work if the opponent uses an item (see docs/bugs_and_glitches.md)
 	ld hl, wCurDamage
 	ld a, [hli]
 	or [hl]
-	ret z
+	jr z, .failed
 
 	ld a, [hl]
 	add a
@@ -53,4 +52,10 @@ BattleCommand_Counter:
 
 	xor a
 	ld [wAttackMissed], a
+	ret
+
+.failed
+	ld a, TRUE
+	ld [wEffectFailed], a
+	and a
 	ret
