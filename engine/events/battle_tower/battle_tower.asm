@@ -476,7 +476,7 @@ ValidateBTParty: ; unreferenced
 	ld e, l
 	push hl
 	push de
-	ld hl, MON_STAT_EXP - 1
+	ld hl, MON_EVS - 1
 	add hl, bc
 	ld b, TRUE
 	predef CalcMonStats

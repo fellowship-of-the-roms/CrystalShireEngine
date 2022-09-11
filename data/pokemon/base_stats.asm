@@ -1,4 +1,12 @@
 ; used in data/pokemon/base_stats/*.asm
+
+MACRO evs
+	db (\1 << 6) | (\2 << 4) | (\3 << 2) | \4
+	db (\5 << 6) | (\6 << 4)
+	assert (\1 + \2 + \3 + \4 + \5 + \6) > 0, "This Mon has no EV yields."
+	assert (\1 + \2 + \3 + \4 + \5 + \6) < 4, "This Mon's EV Yield is greater than 4!"
+ENDM
+
 MACRO tmhm
 	; initialize bytes to 0
 	for n, (NUM_TM_HM_TUTOR + 7) / 8

@@ -141,7 +141,7 @@ ItemEffects1:
 	dw NoEffect            ; STAR_PIECE
 	dw NoEffect            ; ITEM_87
 	dw NoEffect            ; ITEM_88
-	dw NoEffect            ; ITEM_89
+	dw VitaminEffect       ; ZINC
 	dw NoEffect            ; CHARCOAL
 	dw RestoreHPEffect     ; BERRY_JUICE
 	dw NoEffect            ; SCOPE_LENS
@@ -1206,23 +1206,59 @@ VitaminEffect:
 
 	call RareCandy_StatBooster_GetParameters
 
-	call GetStatExpRelativePointer
+	call GetEVRelativePointer
 
-	ld a, MON_STAT_EXP
+	ld a, MON_EVS
 	call GetPartyParamLocation
+
+	ld d, 10
+	push bc
+	push hl
+	ld e, NUM_STATS
+	ld bc, 0
+.count_evs
+	ld a, [hli]
+	add c
+	ld c, a
+	jr nc, .cont
+	inc b
+.cont
+	dec e
+	jr nz, .count_evs
+	ld a, d
+	add c
+	ld c, a
+	adc b
+	sub c 
+	ld b, a
+	ld e, d
+.decrease_evs_gained
+	farcall IsEvsGreaterThan510
+	jr nc, .check_ev_overflow
+	dec e
+	dec bc
+	jr .decrease_evs_gained
+.check_ev_overflow
+	pop hl 
+	pop bc 
+
+	ld a, e
+	and a
+	jr z, NoEffectMessage
 
 	add hl, bc
 	ld a, [hl]
 	cp 100
 	jr nc, NoEffectMessage
 
-	add 10
+	add e
 	ld [hl], a
 	call UpdateStatsAfterItem
 
-	call GetStatExpRelativePointer
+	call GetEVRelativePointer
 
 	ld hl, StatStrings
+	add hl, bc
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -1251,7 +1287,7 @@ UpdateStatsAfterItem:
 	call GetPartyParamLocation
 	ld d, h
 	ld e, l
-	ld a, MON_STAT_EXP - 1
+	ld a, MON_EVS - 1
 	call GetPartyParamLocation
 	ld b, TRUE
 	predef_jump CalcMonStats
@@ -1270,18 +1306,20 @@ StatStrings:
 	dw .attack
 	dw .defense
 	dw .speed
-	dw .special
+	dw .sp_atk
+	dw .sp_def
 
 .health  db "HEALTH@"
 .attack  db "ATTACK@"
 .defense db "DEFENSE@"
 .speed   db "SPEED@"
-.special db "SPECIAL@"
+.sp_atk  db "SPCL.ATK@"
+.sp_def  db "SPCL.DEF@"
 
-GetStatExpRelativePointer:
+GetEVRelativePointer:
 	ld a, [wCurItem]
 	call GetItemIndexFromID
-	ld de, StatExpItemPointerOffsets
+	ld de, EVItemPointerOffsets
 .next
 	ld a, [de]
 	inc de
@@ -1304,12 +1342,13 @@ GetStatExpRelativePointer:
 	ld b, 0
 	ret
 
-StatExpItemPointerOffsets:
-	dwb HP_UP,    MON_HP_EXP - MON_STAT_EXP
-	dwb PROTEIN, MON_ATK_EXP - MON_STAT_EXP
-	dwb IRON,    MON_DEF_EXP - MON_STAT_EXP
-	dwb CARBOS,  MON_SPD_EXP - MON_STAT_EXP
-	dwb CALCIUM, MON_SPC_EXP - MON_STAT_EXP
+EVItemPointerOffsets:
+	dwb HP_UP,   MON_HP_EV  - MON_EVS
+	dwb PROTEIN, MON_ATK_EV - MON_EVS
+	dwb IRON,    MON_DEF_EV - MON_EVS
+	dwb CARBOS,  MON_SPD_EV - MON_EVS
+	dwb CALCIUM, MON_SAT_EV - MON_EVS
+	dwb ZINC,    MON_SDF_EV - MON_EVS
 
 RareCandy_StatBooster_GetParameters:
 	ld a, [wCurPartySpecies]

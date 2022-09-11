@@ -110,7 +110,7 @@ ItemNames::
 	li "LUCKY EGG"    ; 006C
 	li "STARDUST"     ; 006D
 	li "STAR PIECE"   ; 006E
-	li "TERU-SAMA"    ; 0071
+	li "ZINC"         ; 0071
 	li "TERU-SAMA"    ; 006F
 	li "TERU-SAMA"    ; 0070
 	li "CHARCOAL"     ; 0072

@@ -118,7 +118,7 @@
 	const STAR_PIECE   ; 006E
 	const ITEM_87      ; 006F
 	const ITEM_88      ; 0070
-	const ITEM_89      ; 0071
+	const ZINC         ; 0071
 	const CHARCOAL     ; 0072
 	const BERRY_JUICE  ; 0073
 	const SCOPE_LENS   ; 0074
