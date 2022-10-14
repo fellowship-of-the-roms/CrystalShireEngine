@@ -945,7 +945,7 @@ LoadMailGFX_Color3:
 
 INCLUDE "gfx/mail.asm"
 
-ItemIsMail:
+ItemIsMail::
 	push bc
 	ld a, d
 	call GetItemIndexFromID

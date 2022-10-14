@@ -51,50 +51,61 @@ Textbox::
 	pop bc
 	jr TextboxPalette
 
+TextBoxCharacters:
+	db "┌─┐" ; top
+	db "│ │" ; middle
+	db "└─┘" ; bottom
+
 TextboxBorder::
+	ld de, TextBoxCharacters
+	; fallthrough
+CreateBoxBorders::
+	ld a, SCREEN_WIDTH
+
 	; Top
+	call .PlaceRow
+	jr .row
+
+.row_loop
+	dec de
+	dec de
+	dec de
+.row
+	call .PlaceRow
+	dec b
+	jr nz, .row_loop
+
+	; Bottom row (fallthrough)
+
+.PlaceRow:
+	push af
 	push hl
-	ld a, "┌"
+	ld a, [de]
+	inc de
 	ld [hli], a
-	inc a ; "─"
+	ld a, [de]
+	inc de
 	call .PlaceChars
-	inc a ; "┐"
+	ld a, [de]
+	inc de
 	ld [hl], a
 	pop hl
-
-	; Middle
-	ld de, SCREEN_WIDTH
-	add hl, de
-.row
-	push hl
-	ld a, "│"
-	ld [hli], a
-	ld a, " "
-	call .PlaceChars
-	ld [hl], "│"
-	pop hl
-
-	ld de, SCREEN_WIDTH
-	add hl, de
-	dec b
-	jr nz, .row
-
-	; Bottom
-	ld a, "└"
-	ld [hli], a
-	ld a, "─"
-	call .PlaceChars
-	ld [hl], "┘"
-
+	pop af
+	push bc
+	ld b, 0
+	ld c, a
+	add hl, bc
+	pop bc
 	ret
 
 .PlaceChars:
 ; Place char a c times.
-	ld d, c
+	push bc
 .loop
 	ld [hli], a
-	dec d
+	dec c
 	jr nz, .loop
+	pop bc
 	ret
 
 TextboxPalette::
@@ -149,8 +160,7 @@ BuenaPrintText::
 
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PlaceHLTextAtBC
-	ret
+	jp PlaceHLTextAtBC
 
 SetUpTextbox::
 	push hl
@@ -174,6 +184,33 @@ FarPlaceString::
 	rst Bankswitch
 	ret
 
+PlaceVWFString::
+; Place string de at hl with flags in b and offset in c.
+; Read while in ROM0 so [de] can be from any ROMX bank.
+	newfarcall _BuildAppendVFWTextFunction
+.loop
+	ld a, [de]
+	newfarcall _PlaceNextVWFChar
+	ret z
+	bit VWF_SINGLE_F, b
+	jr z, .loop
+	ret
+
+GetVWFLength::
+; Returns length of string de in a.
+; Read while in ROM0 so [de] can be from any ROMX bank.
+	push de
+	push bc
+	ld c, 0
+.loop
+	ld a, [de]
+	newfarcall _GetNextVWFLength
+	jr nz, .loop
+	ld a, c
+	pop bc
+	pop de
+	ret
+
 PlaceString::
 	push hl
 	; fallthrough
@@ -186,10 +223,6 @@ PlaceNextChar::
 	ld c, l
 	pop hl
 	ret
-
-DummyChar:: ; unreferenced
-	pop de
-	; fallthrough
 
 NextChar::
 	inc de
@@ -609,8 +642,7 @@ TextScroll::
 	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 Text_WaitBGMap::
 	push bc

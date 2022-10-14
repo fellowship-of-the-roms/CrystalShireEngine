@@ -42,13 +42,6 @@ PokemonTableGarbageCollection:
 	                                            wBattleMonSpecies, wEnemyMonSpecies, wOddEggSpecies, wBaseSpecies
 	pop af
 	ldh [rSVBK], a
-	ldh a, [hSRAMBank]
-	push af
-	ld a, BANK(sBox)
-	call OpenSRAM
-	___conversion_bitmap_check_structs sBoxMons, BOXMON_STRUCT_LENGTH, MONS_PER_BOX, .set_bit
-	pop af
-	call OpenSRAM ;will close SRAM if hSRAMBank was -1
 	___conversion_bitmap_free_unused wPokemonIndexTable, MON_TABLE
 	pop de
 	ret
@@ -92,15 +85,6 @@ MoveTableGarbageCollection:
 	                                            wPutativeTMHMMove
 	pop af
 	ldh [rSVBK], a
-	ldh a, [hSRAMBank]
-	push af
-	ld a, BANK(sBox)
-	call OpenSRAM
-	FOR ___move, NUM_MOVES
-		___conversion_bitmap_check_structs sBoxMon1Moves + ___move, BOXMON_STRUCT_LENGTH, MONS_PER_BOX, .set_bit
-	endr
-	pop af
-	call OpenSRAM
 	___conversion_bitmap_free_unused wMoveIndexTable, MOVE_TABLE
 	pop de
 	ret

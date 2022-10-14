@@ -31,7 +31,7 @@ ItemNames::
 	li "LEAF STONE"   ; 001D
 	li "METAL POWDER" ; 001E
 	li "NUGGET"       ; 001F
-	li "# DOLL"       ; 0020
+	li "POKé DOLL"    ; 0020 VWF can't print "# DOLL"
 	li "FULL HEAL"    ; 0021
 	li "REVIVE"       ; 0022
 	li "MAX REVIVE"   ; 0023
@@ -192,7 +192,7 @@ BallNames::
 	li "MASTER BALL" ; 0200
 	li "ULTRA BALL"  ; 0201
 	li "GREAT BALL"  ; 0202
-	li "# BALL"      ; 0203
+	li "POKé BALL"   ; 0203 VWF can't print "# BALL"
 	li "HEAVY BALL"  ; 0204
 	li "LEVEL BALL"  ; 0205
 	li "LURE BALL"   ; 0206

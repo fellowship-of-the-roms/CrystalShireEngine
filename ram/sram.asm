@@ -127,11 +127,21 @@ sChecksum:: dw
 sCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption
 
 
-SECTION "Active Box", SRAM
+SECTION "Box Metadata", SRAM
 
-sBox:: box sBox
+for n, 1, NUM_BOXES + 1
+sNewBox{d:n}:: newbox sNewBox{d:n}
+endr
+sNewBoxEnd::
 
-	ds $100
+for n, 1, NUM_BOXES + 1
+sBackupNewBox{d:n}:: newbox sBackupNewBox{d:n}
+endr
+sBackupNewBoxEnd::
+
+sWritingBackup:: db ; 1 if we're saving, anything else if not.
+
+	ds $ff
 
 
 SECTION "Link Battle Data", SRAM
@@ -196,43 +206,15 @@ sBTMonPrevPrevTrainer{d:n}:: dw
 endr
 
 
-; The PC boxes will not fit into one SRAM bank,
-; so they use multiple SECTIONs
-DEF box_n = 0
-MACRO boxes
-	rept \1
-		DEF box_n += 1
-	sBox{d:box_n}:: box sBox{d:box_n}
-	endr
-ENDM
-DEF boxindex_n = 0
-MACRO boxesindexes
-	rept \1
-		DEF boxindex_n += 1
-	sBox{d:boxindex_n}PokemonIndexes:: ds 2 * MONS_PER_BOX
-	endr
-ENDM
+SECTION "PokeDB Bank 1", SRAM
 
-SECTION "Boxes 1-7", SRAM
+sNewBoxMons1:: pokedb sNewBoxMons1, MONDB_ENTRIES
 
-; sBox1 - sBox7
-	boxes 7
 
-	boxesindexes 7
+SECTION "PokeDB Bank 2", SRAM
 
-SECTION "Boxes 8-14", SRAM
+sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
-; sBox8 - sBox14
-	boxes 7
-
-	boxesindexes 7
-
-; All 14 boxes fit exactly within 2 SRAM banks
-	assert box_n == NUM_BOXES, \
-		"boxes: Expected {d:NUM_BOXES} total boxes, got {d:box_n}"
-
-	assert boxindex_n == NUM_BOXES, \
-		"boxesindexes: Expected {d:NUM_BOXES} total boxes, got {d:boxindex_n}"
 
 SECTION "SRAM Mobile 1", SRAM
 

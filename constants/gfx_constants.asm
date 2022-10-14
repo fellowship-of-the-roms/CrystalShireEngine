@@ -33,6 +33,16 @@ DEF HP_GREEN  EQU 0
 DEF HP_YELLOW EQU 1
 DEF HP_RED    EQU 2
 
+; VWF flags (see engine/gfx/vwf.asm)
+	const_def
+	const VWF_SINGLE_F
+	const VWF_INVERT_F
+	const VWF_OPAQUE_F
+
+DEF VWF_SINGLE EQU 1 << VWF_SINGLE_F
+DEF VWF_INVERT EQU 1 << VWF_INVERT_F
+DEF VWF_OPAQUE EQU 1 << VWF_OPAQUE_F
+
 ; sprite_oam_struct members (see macros/ram.asm)
 rsreset
 DEF SPRITEOAMSTRUCT_YCOORD     rb ; 0

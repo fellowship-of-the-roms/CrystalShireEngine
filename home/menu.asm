@@ -396,13 +396,11 @@ CopyNameFromMenu::
 	pop hl
 	ret
 
-PlaceGenericTwoOptionBox:: ; unreferenced
-	call LoadMenuHeader
-	jr InterpretTwoOptionMenu
-
 YesNoBox::
 	lb bc, SCREEN_WIDTH - 6, 7
 ; fallthrough
+NoYesBox::
+	newfarjp _NoYesBox
 
 PlaceYesNoBox::
 ; Return nc (yes) or c (no).
@@ -802,12 +800,5 @@ InterpretBattleMenu::
 	ldh a, [hROMBank]
 	ld [wMenuData_2DMenuItemStringsBank], a
 	farcall _InterpretBattleMenu
-	ld a, [wMenuCursorPosition]
-	ret
-
-InterpretMobileMenu:: ; unreferenced
-	ldh a, [hROMBank]
-	ld [wMenuData_2DMenuItemStringsBank], a
-	farcall _InterpretMobileMenu
 	ld a, [wMenuCursorPosition]
 	ret
