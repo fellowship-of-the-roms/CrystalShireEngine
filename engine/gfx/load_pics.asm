@@ -121,6 +121,8 @@ _PrepareFrontpic:
 	ret
 
 _GetFrontpic:
+	ld a, BANK(sEnemyFrontPicTileCount)
+	call OpenSRAM
 	call _PrepareFrontpic
 	push hl
 	call Get2bpp

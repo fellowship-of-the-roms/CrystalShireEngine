@@ -108,13 +108,18 @@ _FinishMenuMonIconColor:
 GetMonPalInBCDE:
 ; Sets BCDE to mon icon palette.
 ; Input: c = species, b = shininess (1=true, 0=false)
+	ld a, c
+	call GetPokemonIndexFromID
+	dec hl
+	ld d, h
+	ld e, l
+
 	ld hl, MonMenuIconPals
-	dec c
 
 	; This sets z if mon is shiny.
 	dec b
 	ld b, 0
-	add hl, bc
+	add hl, de
 	ld a, [hl]
 	jr z, .shiny
 	swap a
