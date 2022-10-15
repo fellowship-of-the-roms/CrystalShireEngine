@@ -396,12 +396,12 @@ CopyNameFromMenu::
 	pop hl
 	ret
 
-YesNoBox::
-	lb bc, SCREEN_WIDTH - 6, 7
-; fallthrough
 NoYesBox::
 	newfarjp _NoYesBox
 
+YesNoBox::
+	lb bc, SCREEN_WIDTH - 6, 7
+; fallthrough
 PlaceYesNoBox::
 ; Return nc (yes) or c (no).
 	push bc
