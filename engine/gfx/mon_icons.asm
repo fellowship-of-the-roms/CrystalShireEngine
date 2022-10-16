@@ -490,11 +490,15 @@ endr
 	push hl
 
 	ld a, [wCurIcon]
+	cp EGG
 	push hl
+	ld hl, IconPointers - (3 * 2)
+	jr z, .is_egg
 	call GetPokemonIndexFromID
 	add hl, hl
 	ld de, IconPointers
 	add hl, de
+.is_egg
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
