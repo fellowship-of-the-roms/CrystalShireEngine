@@ -748,76 +748,64 @@ EncodeBufferMon:
 ; Encodes party_struct wBufferMon in-place to savemon_struct wEncodedBufferMon.
 ; Bytes identical to both structs do not need encoding.
 
-	; Shift everything forwards 1
-	ld hl, wBufferMonLevel
-	ld de, wBufferMonStatus
-	ld c, MON_STATUS - MON_SPECIES
-.species_loop
-	ld a, [hld]
-	ld [de], a
-	dec de
-	dec c
-	jr nz, .species_loop
+	; Handle EGGs, store as high bit in EXP.
+	xor a
+	ld b, a
+	ld a, [wBufferMonAltSpecies]
+	cp EGG
+	jr nz, .not_egg
+	inc b
+.not_egg
+	xor a
+	or b
+	ld hl, wEncodedBufferMonIsEgg
+	rrc a
+	or [hl]
+	ld [hl], a
 
-	ld a, [wBufferMonSpecies + 1]
+	; Convert species to 16 bit.
+	ld a, [wBufferMonSpecies]
 	call GetPokemonIndexFromID
-	ld a, h
-	ld [wBufferMonSpecies], a
 	ld a, l
-	ld [wBufferMonSpecies + 1], a
-
-	; Shift moves and everything after forwards by 4
-	ld hl, wBufferMonStatus
-	ld de, wBufferMonStatus + 4
-	ld c, MON_STATUS - MON_MOVES
-.moves_shift_loop
-	ld a, [hld]
-	ld [de], a
-	dec de
-	dec c
-	jr nz, .moves_shift_loop
-
-	ld hl, wEncodedBufferMonMoves + 4
-	ld de, wEncodedBufferMonMoves
-	ld c, NUM_MOVES
-.moves_loop
-	ld a, [hli]
-	push hl
-	call GetMoveIndexFromID
+	ld [wEncodedBufferMonSpeciesLow], a
 	ld a, h
-	ld [de], a
-	inc de
-	ld a, l
-	ld [de], a
-	inc de
-	pop hl
-	dec c
-	jr nz, .moves_loop
+	ld [wEncodedBufferMonSpeciesHigh], a
 
 	; Convert 4 PP bytes to 1 PP Up byte.
 	ld hl, wEncodedBufferMonPPUps
 	ld b, NUM_MOVES
-	ld d, h
-	ld e, l
-.loop
+.pp_up_loop
+	ld a, PP_UP_MASK
+	and a, [hl]
+	ld [hli], a
+	dec b
+	jr nz, .pp_up_loop
+
+	; Convert moves to 16 bit.
+	ld hl, wBufferMonMoves
+	ld de, wEncodedBufferMonMovesLow
+	lb bc, NUM_MOVES, SAVEMON_MOVES_HIGH - SAVEMON_MOVES_LOW
+.moves_loop
+	ld a, [hli]
+	push hl
+	call GetMoveIndexFromID
+	ld a, l
+	push de
+	ld [de], a
+	ld a, c
+	add e
+	ld e, a
+	adc d
+	sub e
+	ld d, a
 	ld a, [de]
-	srl [hl]
-	srl [hl]
-	and %11000000
-	or [hl]
-	ld [hl], a
+	or h
+	ld [de], a
+	pop de
+	pop hl
 	inc de
 	dec b
-	jr nz, .loop
-
-	; Shift everything after PP Ups backwards.
-	ld hl, wEncodedBufferMonPPUps + 4 ; 4 original PP bytes.
-	ld de, wEncodedBufferMonHappiness
-	ld bc, wEncodedBufferMonAltSpecies - wEncodedBufferMonHappiness
-	call CopyBytes
-
-	ld a, [wBufferMonAltSpecies]
-	ld [wEncodedBufferMonAltSpecies], a
+	jr nz, .moves_loop
 
 	; Move name-related bytes.
 	ld hl, wBufferMonNickname
@@ -973,78 +961,53 @@ DecodeBufferMon:
 	ld c, MON_NAME_LENGTH - 1
 	jr nz, .outer_loop
 
-	ld a, [wEncodedBufferMonSpecies]
-	ld h, a
-	ld a, [wEncodedBufferMonSpecies + 1]
+	ld a, [wEncodedBufferMonSpeciesLow]
 	ld l, a
+	ld a, [wEncodedBufferMonSpeciesHigh]
+	ld h, a
 	call GetPokemonIDFromIndex
 	ld [wBufferMonSpecies], a
 
-	ld a, [wEncodedBufferMonAltSpecies]
-	cp EGG
-	jr z, .is_egg
+	ld hl, wEncodedBufferMonIsEgg
+	ld a, [hl]
+	bit IS_EGG_F, a
 	ld a, [wBufferMonSpecies]
-.is_egg
+	jr z, .is_not_egg
+	ld a, EGG
+	res IS_EGG_F, [hl]
+.is_not_egg
 	ld [wBufferMonAltSpecies], a
 
-	; Shift everything up 1
-	ld hl, wEncodedBufferMonItem
-	ld de, wBufferMonItem
-	ld bc, SAVEMON_ALTSPECIES - SAVEMON_ITEM
-	call CopyBytes
-
-	ld hl, wBufferMonMoves
-	ld de, wBufferMonMoves
-	ld c, NUM_MOVES
+	ld hl, wEncodedBufferMonMovesLow
+	;ld de, wBufferMonMoves
+	lb bc, NUM_MOVES, SAVEMON_MOVES_HIGH - SAVEMON_MOVES_LOW
 .moves_loop
-	ld a, [hli]
-	ld b, a
-	ld a, [hl]
 	push hl
+	ld a, [hl]
+	ld e, a
+	ld a, c
+	add l
 	ld l, a
-	ld a, b
+	adc h
+	sub l
 	ld h, a
+	ld a, [hl]
+	and PP_MASK
+	ld h, a
+	ld l, e
 	call GetMoveIDFromIndex
-	ld [de], a
-	inc de
 	pop hl
-	inc hl
-	dec c
+	ld [hli], a
+	dec b
 	jr nz, .moves_loop
 
-	; Shift everything up by 4
-	ld hl, wEncodedBufferMonID - 1 ; Shifted by 1 already.
-	ld de, wBufferMonID
-	ld bc, SAVEMON_ALTSPECIES - SAVEMON_ID
-	call CopyBytes
-
-	; Shift everything back by 3
-	ld hl, wBufferMonLevel - 3
-	ld de, wBufferMonLevel
-	ld c, BOXMON_STRUCT_LENGTH - MON_HAPPINESS
-.pp_shift_loop
-	ld a, [hld]
-	ld [de], a
-	dec de
-	dec c
-	jr nz, .pp_shift_loop
-
-	ld hl, wBufferMonPP
-	ld de, wBufferMonPP + 3
+	ld hl, wEncodedBufferMonPPUps
 	ld b, NUM_MOVES
-
-	; Write PP Up data.
-	ld a, [hl]
-.pp_loop
-	push af
-	and %11000000
-	ld [de], a
-	pop af
-	add a
-	add a
-	dec de
-	dec b
-	jr nz, .pp_loop
+.pp_up_loop
+	ld a, PP_UP_MASK
+	and [hl]
+	ld [hli], a
+	jr nz, .pp_up_loop
 
 	pop af
 	jr z, SetTempPartyMonData

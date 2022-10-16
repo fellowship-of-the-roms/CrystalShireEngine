@@ -30,10 +30,11 @@ MACRO box_struct
 ENDM
 
 MACRO savemon_struct
-\1Species::        dw
+\1SpeciesLow::     db
 \1Item::           db
-\1Moves::          ds NUM_MOVES * 2
+\1MovesLow::       ds NUM_MOVES
 \1ID::             dw
+\1IsEgg::
 \1Exp::            ds 3
 \1StatExp::
 \1HPExp::          dw
@@ -42,7 +43,8 @@ MACRO savemon_struct
 \1SpdExp::         dw
 \1SpcExp::         dw
 \1DVs::            dw
-\1PPUps::          db
+\1MovesHigh::
+\1PPUps::          ds NUM_MOVES
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
@@ -51,7 +53,7 @@ MACRO savemon_struct
 \1CaughtGender::
 \1CaughtLocation:: db
 \1Level::          db
-\1AltSpecies::     db ; holds the alternative species byte (to handle eggs)
+\1SpeciesHigh::    db
 \1Nickname::       ds MON_NAME_LENGTH - 1 ; terminator is implicit
 \1OT::             ds PLAYER_NAME_LENGTH - 1 ; terminator is implicit
 \1End::
