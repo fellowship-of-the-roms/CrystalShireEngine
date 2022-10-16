@@ -3713,6 +3713,11 @@ NEXTU
 wDecompressScratch:: ds $100 tiles
 
 NEXTU
+
+	ds $80 tiles
+wDecompressEnemyFrontpic:: ds $80 tiles
+
+NEXTU
 ; unidentified uses
 w6_d000:: ds $1000
 ENDU
