@@ -748,8 +748,54 @@ EncodeBufferMon:
 ; Encodes party_struct wBufferMon in-place to savemon_struct wEncodedBufferMon.
 ; Bytes identical to both structs do not need encoding.
 
+	; Shift everything forwards 1
+	ld hl, wBufferMonLevel
+	ld de, wBufferMonStatus
+	ld c, MON_STATUS - MON_SPECIES
+.species_loop
+	ld a, [hld]
+	ld [de], a
+	dec de
+	dec c
+	jr nz, .species_loop
+
+	ld a, [wBufferMonSpecies + 1]
+	call GetPokemonIndexFromID
+	ld a, h
+	ld [wBufferMonSpecies], a
+	ld a, l
+	ld [wBufferMonSpecies + 1], a
+
+	; Shift moves and everything after forwards by 4
+	ld hl, wBufferMonStatus
+	ld de, wBufferMonStatus + 4
+	ld c, MON_STATUS - MON_MOVES
+.moves_shift_loop
+	ld a, [hld]
+	ld [de], a
+	dec de
+	dec c
+	jr nz, .moves_shift_loop
+
+	ld hl, wEncodedBufferMonMoves + 4
+	ld de, wEncodedBufferMonMoves
+	ld c, NUM_MOVES
+.moves_loop
+	ld a, [hli]
+	push hl
+	call GetMoveIndexFromID
+	ld a, h
+	ld [de], a
+	inc de
+	ld a, l
+	ld [de], a
+	inc de
+	pop hl
+	dec c
+	jr nz, .moves_loop
+
 	; Convert 4 PP bytes to 1 PP Up byte.
-	ld hl, wBufferMonPP
+	ld hl, wEncodedBufferMonPPUps
 	ld b, NUM_MOVES
 	ld d, h
 	ld e, l
@@ -765,7 +811,7 @@ EncodeBufferMon:
 	jr nz, .loop
 
 	; Shift everything after PP Ups backwards.
-	ld hl, wBufferMonHappiness
+	ld hl, wEncodedBufferMonPPUps + 4 ; 4 original PP bytes.
 	ld de, wEncodedBufferMonHappiness
 	ld bc, wEncodedBufferMonAltSpecies - wEncodedBufferMonHappiness
 	call CopyBytes
@@ -927,20 +973,65 @@ DecodeBufferMon:
 	ld c, MON_NAME_LENGTH - 1
 	jr nz, .outer_loop
 
-	; Shift data past PP to leave room for PP data.
-	; AltSpecies is after stats when decoded, so handle that first separately.
-	ld hl, wEncodedBufferMonAltSpecies
-	ld de, wBufferMonAltSpecies
-	ld a, [hld]
+	ld a, [wEncodedBufferMonSpecies]
+	ld h, a
+	ld a, [wEncodedBufferMonSpecies + 1]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld [wBufferMonSpecies], a
+
+	ld a, [wEncodedBufferMonAltSpecies]
+	cp EGG
+	jr z, .is_egg
+	ld a, [wBufferMonSpecies]
+.is_egg
+	ld [wBufferMonAltSpecies], a
+
+	; Shift everything up 1
+	ld hl, wEncodedBufferMonItem
+	ld de, wBufferMonItem
+	ld bc, SAVEMON_ALTSPECIES - SAVEMON_ITEM
+	call CopyBytes
+
+	ld hl, wBufferMonMoves
+	ld de, wBufferMonMoves
+	ld c, NUM_MOVES
+.moves_loop
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	push hl
+	ld l, a
+	ld a, b
+	ld h, a
+	call GetMoveIDFromIndex
 	ld [de], a
+	inc de
+	pop hl
+	inc hl
+	dec c
+	jr nz, .moves_loop
+
+	; Shift everything up by 4
+	ld hl, wEncodedBufferMonID - 1 ; Shifted by 1 already.
+	ld de, wBufferMonID
+	ld bc, SAVEMON_ALTSPECIES - SAVEMON_ID
+	call CopyBytes
+
+	; Shift everything back by 3
+	ld hl, wBufferMonLevel - 3
 	ld de, wBufferMonLevel
-	lb bc, NUM_MOVES, wEncodedBufferMonLevel - wEncodedBufferMonPPUps
-.reverse_copybytes_loop
+	ld c, BOXMON_STRUCT_LENGTH - MON_HAPPINESS
+.pp_shift_loop
 	ld a, [hld]
 	ld [de], a
 	dec de
 	dec c
-	jr nz, .reverse_copybytes_loop
+	jr nz, .pp_shift_loop
+
+	ld hl, wBufferMonPP
+	ld de, wBufferMonPP + 3
+	ld b, NUM_MOVES
 
 	; Write PP Up data.
 	ld a, [hl]

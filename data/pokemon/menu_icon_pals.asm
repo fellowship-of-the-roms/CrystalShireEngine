@@ -6,6 +6,7 @@ ENDM
 	icon_pals RED,    BLUE   ; EGG is -3
 	icon_pals RED,    RED    ; unused
 	icon_pals RED,    RED    ; unused
+	icon_pals RED,    RED    ; unused
 MonMenuIconPals:
 	table_width 1, MonMenuIconPals
 	;         normal, shiny

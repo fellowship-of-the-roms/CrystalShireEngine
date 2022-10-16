@@ -30,9 +30,9 @@ MACRO box_struct
 ENDM
 
 MACRO savemon_struct
-\1Species::        db
+\1Species::        dw
 \1Item::           db
-\1Moves::          ds NUM_MOVES
+\1Moves::          ds NUM_MOVES * 2
 \1ID::             dw
 \1Exp::            ds 3
 \1StatExp::
