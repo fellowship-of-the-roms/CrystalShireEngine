@@ -749,19 +749,12 @@ EncodeBufferMon:
 ; Bytes identical to both structs do not need encoding.
 
 	; Handle EGGs, store as high bit in EXP.
-	xor a
-	ld b, a
 	ld a, [wBufferMonAltSpecies]
+	ld hl, wEncodedBufferMonIsEgg
 	cp EGG
 	jr nz, .not_egg
-	inc b
-.not_egg
-	xor a
-	or b
-	ld hl, wEncodedBufferMonIsEgg
-	rrca
-	or [hl]
-	ld [hl], a
+	set IS_EGG_F, [hl]
+	.not_egg
 
 	; Convert species to 16 bit.
 	ld a, [wBufferMonSpecies]
