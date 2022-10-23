@@ -759,7 +759,7 @@ EncodeBufferMon:
 	xor a
 	or b
 	ld hl, wEncodedBufferMonIsEgg
-	rrc a
+	rrca
 	or [hl]
 	ld [hl], a
 
@@ -792,15 +792,20 @@ EncodeBufferMon:
 	ld a, l
 	push de
 	ld [de], a
+
+	; Add c to de to get Moves High
 	ld a, c
 	add e
 	ld e, a
 	adc d
 	sub e
 	ld d, a
+
 	ld a, [de]
-	or h
+	or h ; OR with already stored 2 PP-UP bits.
 	ld [de], a
+
+	; Pop back low
 	pop de
 	pop hl
 	inc de
@@ -961,6 +966,7 @@ DecodeBufferMon:
 	ld c, MON_NAME_LENGTH - 1
 	jr nz, .outer_loop
 
+	; Convert 16-bit species index back to 8-bit ID.
 	ld a, [wEncodedBufferMonSpeciesLow]
 	ld l, a
 	ld a, [wEncodedBufferMonSpeciesHigh]
@@ -968,8 +974,12 @@ DecodeBufferMon:
 	call GetPokemonIDFromIndex
 	ld [wBufferMonSpecies], a
 
+	; Get Egg bit and store in AltSpecies
 	ld hl, wEncodedBufferMonIsEgg
 	ld a, [hl]
+
+	; If EGG, load EGG into AltSpecies, otherwise
+	; load Species into AltSpecies.
 	bit IS_EGG_F, a
 	ld a, [wBufferMonSpecies]
 	jr z, .is_not_egg
@@ -978,29 +988,35 @@ DecodeBufferMon:
 .is_not_egg
 	ld [wBufferMonAltSpecies], a
 
+	; Convert 16-bit Moves Index to 8-bit Move IDs
 	ld hl, wEncodedBufferMonMovesLow
-	;ld de, wBufferMonMoves
 	lb bc, NUM_MOVES, SAVEMON_MOVES_HIGH - SAVEMON_MOVES_LOW
 .moves_loop
 	push hl
 	ld a, [hl]
 	ld e, a
+
+	; Go high by adding c to hl
 	ld a, c
 	add l
 	ld l, a
 	adc h
 	sub l
 	ld h, a
+
 	ld a, [hl]
 	and PP_MASK
 	ld h, a
 	ld l, e
 	call GetMoveIDFromIndex
+
+	; Go back low
 	pop hl
 	ld [hli], a
 	dec b
 	jr nz, .moves_loop
 
+	; Convert PPUp bits back to PP
 	ld hl, wEncodedBufferMonPPUps
 	ld b, NUM_MOVES
 .pp_up_loop
