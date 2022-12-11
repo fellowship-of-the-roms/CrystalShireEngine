@@ -55,14 +55,48 @@ SetFacingStepAction:
 	inc a
 	and %00001111
 	ld [hl], a
-
+	ld e, a
+	ld hl, OBJECT_FACING
+	add hl, bc
+	ld d, [hl]
+	ld hl, OBJECT_WALKING
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	jr z, .bitTwoAndThree
+	cp (STEP_SLOW << 2 | RIGHT) + 1
+	jr c, .slowStep
+	cp (3 << 2 | DOWN)
+	jr nc, .runningStep
+; walking speed
+	ld a, e
+	and %111
+	jr nz, .continue
+	inc d
+	jr .continue
+.slowStep
+	ld a, e
+	and %1111
+	jr nz, .continue
+	inc d
+	jr .continue
+.runningStep
+	ld a, e
+	and %11
+	jr nz, .continue
+	inc d
+	jr .continue
+.bitTwoAndThree
+	ld a, e
 	rrca
 	rrca
-	maskbits NUM_DIRECTIONS
 	ld d, a
 
+.continue
+	ld a, d
+	and %11
+	ld d, a
 	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
 	or d
 	ld hl, OBJECT_FACING
 	add hl, bc
@@ -99,7 +133,7 @@ SetFacingBumpAction:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	bit SLIDING_F, [hl]
-	jr nz, SetFacingCurrent
+	jmp nz, SetFacingCurrent
 
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc

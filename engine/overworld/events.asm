@@ -142,7 +142,9 @@ HandleMap:
 	ld a, [wMapStatus]
 	cp MAPSTATUS_HANDLE
 	ret nz
+	call DoBackgroundEvents
 
+DoBackgroundEvents:
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
@@ -150,37 +152,28 @@ HandleMap:
 
 MapEvents:
 	ld a, [wMapEventStatus]
-	ld hl, .Jumptable
-	rst JumpTable
-	ret
-
-.Jumptable:
-; entries correspond to MAPEVENTS_* constants
-	dw .events
-	dw .no_events
-
-.events:
+	and a
+	ret nz
 	call PlayerEvents
 	call DisableEvents
 	farjp ScriptEvents
 
-.no_events:
-	ret
-
-MaxOverworldDelay:
-	db 2
-
 ResetOverworldDelay:
-	ld a, [MaxOverworldDelay]
-	ld [wOverworldDelay], a
+	ld hl, wOverworldDelay
+	bit 7, [hl]
+	res 7, [hl]
+	ret nz
+	ld [hl], 2
 	ret
 
 NextOverworldFrame:
 	ld a, [wOverworldDelay]
 	and a
-	ret z
-	ld c, a
-	jmp DelayFrames
+	jp nz, DelayFrame
+; reset overworld delay to leak into the next frame
+	ld a, $82
+	ld [wOverworldDelay], a
+	ret
 
 HandleMapTimeAndJoypad:
 	ld a, [wMapEventStatus]
@@ -1033,7 +1026,7 @@ EdgeWarpScript:
 	reloadend MAPSETUP_CONNECTION
 
 ChangeDirectionScript:
-	deactivatefacing 3
+	callasm UnfreezeAllObjects
 	callasm EnableWildEncounters
 	end
 
