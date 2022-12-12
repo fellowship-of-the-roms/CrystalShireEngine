@@ -1,35 +1,7 @@
-_BuildAppendVFWTextFunction::
-; Build a function to write pixels in hAppendVWFText.
-; - nothing:        or [hl] / ld [hld], a / ld [hl], a / ret
-; - invert:        xor [hl] / ld [hld], a / ld [hl], a / ret
-; - opaque:         or [hl] / ld [hld], a /              ret
-; - invert+opaque: xor [hl] / ld [hld], a /              ret
-	push af
-	push hl
-	ld hl, hAppendVWFText
-	bit VWF_INVERT_F, b
-	ld a, $ae ; xor [hl]
-	jr nz, .invert
-	ld a, $b6 ; or [hl]
-.invert
-	ld [hli], a
-	ld a, $32 ; ld [hld], a
-	ld [hli], a
-	bit VWF_OPAQUE_F, b
-	jr nz, .opaque
-	ld a, $77 ; ld [hl], a
-	ld [hli], a
-.opaque
-	ld [hl], $c9 ; ret
-	pop hl
-	pop af
-	ret
-
-_PlaceNextVWFChar::
-; Place character a (just read from [de]) at hl with flags in b and offset in c.
+PlaceNextVWFChar::
+; Place character a (just read from [de]) at hl with offset in c.
 ; Advances de to the next character.
 ; Returns z if the character is the string terminator.
-; Preserves the value of b.
 	inc de
 	cp "@"
 	ret z
@@ -98,11 +70,15 @@ _PlaceNextVWFChar::
 	inc hl
 	push hl
 	ld a, d
-	call hAppendVWFText
+	or [hl]
+	ld [hld], a
+	ld [hl], a
 	ld a, e
 	ld de, 1 tiles + 1
 	add hl, de
-	call hAppendVWFText
+	or [hl]
+	ld [hld], a
+	ld [hl], a
 	pop hl
 	pop de
 	pop af

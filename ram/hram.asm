@@ -187,6 +187,4 @@ hFunctionTarget::
 hFunctionTargetLo:: db
 hFunctionTargetHi:: db
 
-hAppendVWFText:: ds 4
-
-	ds 9
+	ds 13

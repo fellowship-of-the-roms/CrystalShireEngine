@@ -185,15 +185,12 @@ FarPlaceString::
 	ret
 
 PlaceVWFString::
-; Place string de at hl with flags in b and offset in c.
+; Place string de at hl with offset in c.
 ; Read while in ROM0 so [de] can be from any ROMX bank.
-	newfarcall _BuildAppendVFWTextFunction
 .loop
 	ld a, [de]
-	newfarcall _PlaceNextVWFChar
-	ret z
-	bit VWF_SINGLE_F, b
-	jr z, .loop
+	newfarcall PlaceNextVWFChar
+	jr nz, .loop
 	ret
 
 GetVWFLength::
