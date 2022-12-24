@@ -417,44 +417,10 @@ BattleAnimFunc_PokeBallBlocked:
 	jmp DeinitBattleAnimation
 
 GetBallAnimPal:
-	ld hl, BallColors
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wCurItem)
-	ldh [rSVBK], a
-	ld a, [wCurItem]
-	push hl
-	call GetItemIndexFromID
-	ld d, h
-	ld e, l
-	pop hl
-	pop af
-	ldh [rSVBK], a
-.IsInArray:
-	ld a, [hli]
-	cp -1
-	jr z, .load
-	cp e
-	jr nz, .skip
-	ld a, [hli]
-	cp d
-	jr z, .load
-	inc hl
-	jr .IsInArray
-
-.load
-	ld a, [hl]
 	ld hl, BATTLEANIMSTRUCT_PALETTE
 	add hl, bc
-	ld [hl], a
+	ld [hl], PAL_BATTLE_OB_RED
 	ret
-
-.skip
-	inc hl
-	inc hl
-	jr .IsInArray
-
-INCLUDE "data/battle_anims/ball_colors.asm"
 
 BattleAnimFunc_Ember:
 	call BattleAnim_AnonJumptable
