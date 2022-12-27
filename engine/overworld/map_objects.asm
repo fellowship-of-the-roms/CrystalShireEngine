@@ -24,6 +24,7 @@ DeleteMapObject::
 	ld [hl], -1
 .ok
 	pop bc
+	farcall CheckForUsedObjPals
 	ret
 
 HandleObjectStep:
@@ -2057,7 +2058,7 @@ SpawnShadow:
 
 .ShadowObject:
 	; vtile, palette, movement
-	db $00, PAL_OW_EMOTE, SPRITEMOVEDATA_SHADOW
+	db $00, PAL_OW_EMOTE_GRAY, SPRITEMOVEDATA_SHADOW
 
 SpawnStrengthBoulderDust:
 	push bc
@@ -2069,7 +2070,7 @@ SpawnStrengthBoulderDust:
 
 .BoulderDustObject:
 	; vtile, palette, movement
-	db $00, PAL_OW_EMOTE, SPRITEMOVEDATA_BOULDERDUST
+	db $00, PAL_OW_EMOTE_GRAY, SPRITEMOVEDATA_BOULDERDUST
 
 SpawnEmote:
 	push bc
@@ -2081,7 +2082,7 @@ SpawnEmote:
 
 .EmoteObject:
 	; vtile, palette, movement
-	db $00, PAL_OW_EMOTE, SPRITEMOVEDATA_EMOTE
+	db $00, PAL_OW_EMOTE_BLACK, SPRITEMOVEDATA_EMOTE
 
 ShakeGrass:
 	push bc
@@ -2093,7 +2094,7 @@ ShakeGrass:
 
 .GrassObject:
 	; vtile, palette, movement
-	db $00, PAL_OW_TREE, SPRITEMOVEDATA_GRASS
+	db $00, PAL_OW_COPY_BG_GREEN, SPRITEMOVEDATA_GRASS
 
 ShakeScreen:
 	push bc
@@ -2108,7 +2109,7 @@ ShakeScreen:
 
 .ScreenShakeObject:
 	; vtile, palette, movement
-	db $00, PAL_OW_EMOTE, SPRITEMOVEDATA_SCREENSHAKE
+	db $00, PAL_OW_EMOTE_GRAY, SPRITEMOVEDATA_SCREENSHAKE
 
 DespawnEmote:
 	push bc
@@ -2522,23 +2523,6 @@ SpawnInFacingDown:
 _ContinueSpawnFacing:
 	ld bc, wPlayerStruct
 	jmp SetSpriteDirection
-
-_SetPlayerPalette:
-	ld a, d
-	and 1 << 7
-	ret z
-	ld a, d
-	swap a
-	and PALETTE_MASK
-	ld d, a
-	ld bc, wPlayerStruct
-	ld hl, OBJECT_PALETTE
-	add hl, bc
-	ld a, [hl]
-	and ~PALETTE_MASK
-	or d
-	ld [hl], a
-	ret
 
 StartFollow::
 	push bc

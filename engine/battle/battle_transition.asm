@@ -692,6 +692,8 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
+	farcall ClearSavedObjPals
+	farcall CheckForUsedObjPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
@@ -700,6 +702,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 .nextscene
 	jmp StartTrainerBattle_NextScene
 
+; todo: verify the following (dyn pal)
 .copypals
 	ld de, wBGPals1 palette PAL_BG_TEXT
 	call .copy

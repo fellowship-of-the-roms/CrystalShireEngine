@@ -51,3 +51,5 @@ MapSetupCommands:
 	add_mapsetup EnableTextAcceleration ; 2c
 	add_mapsetup InitMapNameSign ; 2d
 	add_mapsetup DecompressMetatiles ; 2e
+	add_mapsetup DisableDynPalUpdates ; 2f
+	add_mapsetup EnableDynPalUpdates ; 30

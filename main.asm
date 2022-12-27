@@ -697,6 +697,12 @@ SECTION "Battle Weather Images", ROMX
 INCLUDE "gfx/weather_images.asm"
 
 
+SECTION "Dynamic Pals System", ROMX
+
+INCLUDE "engine/gfx/sprite_palettes.asm"
+INCLUDE "engine/gfx/dynamic_pals.asm"
+
+
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
 
 ; The end of the ROM is taken up by checksums of the content, apparently used

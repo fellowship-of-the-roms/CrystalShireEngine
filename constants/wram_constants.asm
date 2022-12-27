@@ -324,3 +324,10 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const_def
 	const IN_BAG_F
 	const IN_PC_F
+
+; wPalFlags
+	const_def
+	const NO_DYN_PAL_APPLY_F   ; 0
+	const SCAN_OBJECTS_FIRST_F ; 1
+	const USE_DAYTIME_PAL_F    ; 2
+	const DISABLE_DYN_PAL_F    ; 3

@@ -38,6 +38,8 @@ DEF NUM_ENVIRONMENTS EQU const_value - 1
 	const PALETTE_DARK
 DEF NUM_MAP_PALETTES EQU const_value
 
+DEF IN_DARKNESS EQU %100
+
 ; FishGroups indexes (see data/wild/fish.asm)
 	const_def
 	const FISHGROUP_NONE

@@ -17,11 +17,6 @@ INCLUDE "data/events/special_pointers.asm"
 UnusedDummySpecial:
 	ret
 
-SetPlayerPalette:
-	ld a, [wScriptVar]
-	ld d, a
-	farjp _SetPlayerPalette
-
 GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
 	call CheckCaughtMon

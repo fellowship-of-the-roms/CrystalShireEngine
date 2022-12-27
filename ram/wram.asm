@@ -128,7 +128,9 @@ wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
 
-	ds 3
+wPalFlags:: db
+
+	ds 2
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db
@@ -2300,8 +2302,6 @@ wStringBuffer5:: ds STRING_BUFFER_LENGTH
 
 wBattleMenuCursorPosition:: db
 
-	ds 1
-
 wCurBattleMon::
 ; index of the player's mon currently in battle (0-5)
 	db
@@ -2951,8 +2951,6 @@ wStartSecond:: db
 
 wRTC:: ds 4
 
-	ds 4
-
 wDST::
 ; bit 7: dst
 	db
@@ -2963,8 +2961,6 @@ wGameTimeHours::   dw
 wGameTimeMinutes:: db
 wGameTimeSeconds:: db
 wGameTimeFrames::  db
-
-	ds 2
 
 wCurDay:: db
 
@@ -2985,7 +2981,11 @@ endr
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
-	ds 4
+wUsedObjectPals:: db
+for n, 8
+wLoadedObjPal{d:n}:: db 
+endr
+wNeededPalIndex:: db
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
@@ -3076,7 +3076,7 @@ wPlayerState:: db
 wHallOfFameCount:: db
 
 wTradeFlags:: flag_array NUM_NPC_TRADES
-
+wEmotePal:: db
 wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
 wFarfetchdPosition:: db

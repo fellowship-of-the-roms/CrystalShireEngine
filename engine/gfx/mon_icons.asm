@@ -417,7 +417,9 @@ FlyFunction_GetMonIcon:
 	pop de
 	ld a, e
 	call GetIcon_a
-
+; todo: made up this label location... fix this!
+; fallthrough
+SetOWFlyMonColor:
 	; Edit the OBJ 0 palette so that the cursor Pokémon has the right colors.
 	ld a, MON_DVS
 	call GetPartyParamLocation

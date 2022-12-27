@@ -58,6 +58,7 @@ NewGame:
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
+	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
 	call OakSpeech
@@ -333,6 +334,7 @@ Continue:
 	call Continue_MobileAdapterMenu
 	call CloseWindow
 	call ClearTilemap
+	farcall ClearSavedObjPals
 	ld c, 20
 	call DelayFrames
 	farcall JumpRoamMons
