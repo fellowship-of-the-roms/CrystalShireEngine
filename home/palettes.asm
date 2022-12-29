@@ -316,11 +316,3 @@ ReloadSpritesNoPalettes::
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	jmp DelayFrame
-
-SwapTextboxPalettes::
-	homecall _SwapTextboxPalettes
-	ret
-
-ScrollBGMapPalettes::
-	homecall _ScrollBGMapPalettes
-	ret
