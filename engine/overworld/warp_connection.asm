@@ -1,5 +1,4 @@
 HandleNewMap:
-	call ClearUnusedMapBuffer
 	call ResetMapBufferEventFlags
 	call ResetFlashIfOutOfCave
 	call GetCurrentMapSceneID

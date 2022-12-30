@@ -865,14 +865,6 @@ wc7d3:: ds 2
 ENDU
 
 
-SECTION "Unused Map Buffer", WRAM0
-
-; This was a buffer for map-related pointers in the 1997 G/S prototype.
-; See wMapBuffer in pokegold-spaceworld's wram.asm.
-wUnusedMapBuffer:: ds 24
-wUnusedMapBufferEnd::
-
-
 SECTION UNION "Overworld Map", WRAM0
 
 ; overworld map blocks
