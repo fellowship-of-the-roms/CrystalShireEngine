@@ -91,10 +91,10 @@ MovementPointers:
 	dw Movement_rock_smash            ; 57
 	dw Movement_return_dig            ; 58
 	dw Movement_skyfall_top           ; 59
-	dw Movement_run_step_down         ; 5a
-	dw Movement_run_step_up           ; 5b
-	dw Movement_run_step_left         ; 5c
-	dw Movement_run_step_right        ; 5d
+	dw Movement_bike_step_down        ; 5a
+	dw Movement_bike_step_up          ; 5b
+	dw Movement_bike_step_left        ; 5c
+	dw Movement_bike_step_right       ; 5d
 	assert_table_length NUM_MOVEMENT_CMDS
 
 Movement_teleport_from:
@@ -459,6 +459,22 @@ Movement_slow_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
 	jr Movement_do_step
 
+Movement_bike_step_down:
+	ld a, STEP_BIKE << 2 | DOWN
+	jr Movement_do_step
+
+Movement_bike_step_up:
+	ld a, STEP_BIKE << 2 | UP
+	jr Movement_do_step
+
+Movement_bike_step_left:
+	ld a, STEP_BIKE << 2 | LEFT
+	jr Movement_do_step
+
+Movement_bike_step_right:
+	ld a, STEP_BIKE << 2 | RIGHT
+	jr Movement_do_step
+
 Movement_step_down:
 	ld a, STEP_WALK << 2 | DOWN
 	jr Movement_do_step
@@ -473,41 +489,25 @@ Movement_step_left:
 
 Movement_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jr Movement_do_step
-
-Movement_big_step_down:
-	ld a, STEP_BIKE << 2 | DOWN
-	jr Movement_do_step
-
-Movement_big_step_up:
-	ld a, STEP_BIKE << 2 | UP
-	jr Movement_do_step
-
-Movement_big_step_left:
-	ld a, STEP_BIKE << 2 | LEFT
-	jr Movement_do_step
-
-Movement_big_step_right:
-	ld a, STEP_BIKE << 2 | RIGHT
 Movement_do_step:
 	ld d, OBJECT_ACTION_STEP
 Movement_normal_step:
 	jmp NormalStep
 
-Movement_run_step_down:
-	ld a, $3 << 2 | DOWN  ; STEP_RUN
+Movement_big_step_down:
+	ld a, STEP_RUN << 2 | DOWN
 	jp Movement_do_run
 
-Movement_run_step_up:
-	ld a, $3 << 2 | UP    ; STEP_RUN
+Movement_big_step_up:
+	ld a, STEP_RUN << 2 | UP
 	jp Movement_do_run
 
-Movement_run_step_left:
-	ld a, $3 << 2 | LEFT  ; STEP_RUN
+Movement_big_step_left:
+	ld a, STEP_RUN << 2 | LEFT
 	jp Movement_do_run
 
-Movement_run_step_right:
-	ld a, $3 << 2 | RIGHT ; STEP_RUN
+Movement_big_step_right:
+	ld a, STEP_RUN << 2 | RIGHT
 Movement_do_run:
 	ld d, OBJECT_ACTION_RUN
 	jr Movement_normal_step
@@ -545,19 +545,19 @@ Movement_turn_in_right:
 	jmp TurningStep
 
 Movement_turn_waterfall_down:
-	ld a, STEP_BIKE << 2 | DOWN
+	ld a, STEP_RUN << 2 | DOWN
 	jmp TurningStep
 
 Movement_turn_waterfall_up:
-	ld a, STEP_BIKE << 2 | UP
+	ld a, STEP_RUN << 2 | UP
 	jmp TurningStep
 
 Movement_turn_waterfall_left:
-	ld a, STEP_BIKE << 2 | LEFT
+	ld a, STEP_RUN << 2 | LEFT
 	jmp TurningStep
 
 Movement_turn_waterfall_right:
-	ld a, STEP_BIKE << 2 | RIGHT
+	ld a, STEP_RUN << 2 | RIGHT
 	jmp TurningStep
 
 Movement_slow_slide_step_down:
@@ -593,19 +593,19 @@ Movement_slide_step_right:
 	jmp SlideStep
 
 Movement_fast_slide_step_down:
-	ld a, STEP_BIKE << 2 | DOWN
+	ld a, STEP_RUN << 2 | DOWN
 	jmp SlideStep
 
 Movement_fast_slide_step_up:
-	ld a, STEP_BIKE << 2 | UP
+	ld a, STEP_RUN << 2 | UP
 	jmp SlideStep
 
 Movement_fast_slide_step_left:
-	ld a, STEP_BIKE << 2 | LEFT
+	ld a, STEP_RUN << 2 | LEFT
 	jmp SlideStep
 
 Movement_fast_slide_step_right:
-	ld a, STEP_BIKE << 2 | RIGHT
+	ld a, STEP_RUN << 2 | RIGHT
 	jmp SlideStep
 
 Movement_slow_jump_step_down:
@@ -641,19 +641,19 @@ Movement_jump_step_right:
 	jmp JumpStep
 
 Movement_fast_jump_step_down:
-	ld a, STEP_BIKE << 2 | DOWN
+	ld a, STEP_RUN << 2 | DOWN
 	jmp JumpStep
 
 Movement_fast_jump_step_up:
-	ld a, STEP_BIKE << 2 | UP
+	ld a, STEP_RUN << 2 | UP
 	jmp JumpStep
 
 Movement_fast_jump_step_left:
-	ld a, STEP_BIKE << 2 | LEFT
+	ld a, STEP_RUN << 2 | LEFT
 	jmp JumpStep
 
 Movement_fast_jump_step_right:
-	ld a, STEP_BIKE << 2 | RIGHT
+	ld a, STEP_RUN << 2 | RIGHT
 	jmp JumpStep
 
 Movement_turn_step_down:
