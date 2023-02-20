@@ -82,34 +82,9 @@ GetAnimatedFrontpic:
 PrepareFrontpic:
 	ldh a, [rSVBK]
 	push af
-	call _OldPrepareFrontPic
+	call _PrepareFrontpic
 	pop af
 	ldh [rSVBK], a
-	ret
-
-_OldPrepareFrontPic::
-	push de
-	call GetBaseData
-	ld a, [wBasePicSize]
-	and $f
-	ld b, a
-	push bc
-	call GetFrontpicPointer
-	ld a, BANK(wDecompressEnemyFrontpic)
-	ldh [rSVBK], a
-	ld a, b
-	ld de, wDecompressEnemyFrontpic
-	call FarDecompress
-	pop bc
-	ld hl, wDecompressScratch
-	ld de, wDecompressEnemyFrontpic
-	call PadFrontpic
-	pop hl
-	push hl
-	ld de, wDecompressScratch
-	ld c, 7 * 7
-	ldh a, [hROMBank]
-	pop hl
 	ret
 
 _PrepareFrontpic:

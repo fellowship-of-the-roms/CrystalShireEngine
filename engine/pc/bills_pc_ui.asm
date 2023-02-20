@@ -1040,8 +1040,11 @@ _GetCursorMon:
 	ld a, BANK(wDecompressScratch)
 	ldh [rSVBK], a
 	lb bc, BANK(_GetCursorMon), 7 * 7
-	ld de, wDecompressScratch
+	ld a, BANK(sPaddedEnemyFrontPic)
+	call OpenSRAM
+	ld de, sPaddedEnemyFrontPic
 	call BillsPC_Get2bpp
+	call CloseSRAM
 	pop af
 	ldh [rSVBK], a
 	xor a
