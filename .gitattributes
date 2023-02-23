@@ -24,6 +24,7 @@
 *.lz.* binary diff=hex
 *.bin binary diff=hex
 *.blk binary diff=hex
+*.ablk binary diff=hex
 *.rle binary diff=hex
 *.attrmap binary diff=hex
 *.tilemap binary diff=hex
