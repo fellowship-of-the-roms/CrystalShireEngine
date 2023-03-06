@@ -12,7 +12,7 @@ hRTCHours::   db
 hRTCMinutes:: db
 hRTCSeconds:: db
 
-hLZAddress:: dw
+	ds 2
 
 hHours:: db
 	ds 1

@@ -19,42 +19,43 @@ Decompress::
 
 ; This function decompresses lz-compressed data from hl to de.
 
-LZ_END EQU $ff ; Compressed data is terminated with $ff.
+DEF LZ_END EQU $ff ; Compressed data is terminated with $ff.
 
 ; A typical control command consists of:
 
-LZ_CMD EQU %11100000 ; command id (bits 5-7)
-LZ_LEN EQU %00011111 ; length n   (bits 0-4)
+DEF LZ_CMD EQU %11100000 ; command id (bits 5-7)
+DEF LZ_LEN EQU %00011111 ; length n   (bits 0-4)
 
 ; Additional parameters are read during command execution.
 
 ; Commands:
 
-LZ_LITERAL   EQU 0 << 5 ; Read literal data for n bytes.
-LZ_ITERATE   EQU 1 << 5 ; Write the same byte for n bytes.
-LZ_ALTERNATE EQU 2 << 5 ; Alternate two bytes for n bytes.
-LZ_ZERO      EQU 3 << 5 ; Write 0 for n bytes.
+DEF LZ_DATA          EQU 0 << 5 ; Read literal data for n bytes.
+DEF LZ_REPEAT        EQU 1 << 5 ; Write the same byte for n bytes.
+DEF LZ_ALTERNATE     EQU 2 << 5 ; Alternate two bytes for n bytes.
+DEF LZ_ZERO          EQU 3 << 5 ; Write 0 for n bytes.
 
 ; Another class of commands reuses data from the decompressed output.
-LZ_RW        EQU 2 + 5 ; bit
+DEF LZ_COPY          EQU 7 ; bit
 
 ; These commands take a signed offset to start copying from.
 ; Wraparound is simulated.
 ; Positive offsets (15-bit) are added to the start address.
 ; Negative offsets (7-bit) are subtracted from the current position.
 
-LZ_REPEAT    EQU 4 << 5 ; Repeat n bytes from the offset.
-LZ_FLIP      EQU 5 << 5 ; Repeat n bitflipped bytes.
-LZ_REVERSE   EQU 6 << 5 ; Repeat n bytes in reverse.
+DEF LZ_COPY_NORMAL   EQU 4 << 5 ; Repeat n bytes from the offset.
+DEF LZ_COPY_FLIPPED  EQU 5 << 5 ; Repeat n bitflipped bytes.
+DEF LZ_COPY_REVERSED EQU 6 << 5 ; Repeat n bytes in reverse.
 
 ; If the value in the count needs to be larger than 5 bits,
 ; LZ_LONG can be used to expand the count to 10 bits.
-LZ_LONG      EQU 7 << 5
+DEF LZ_LONG          EQU 7 << 5
 
 ; A new control command is read in bits 2-4.
 ; The top two bits of the length are bits 0-1.
 ; Another byte is read containing the bottom 8 bits.
-LZ_LONG_HI   EQU %00000011
+DEF LZ_LONG_CMD      EQU %00011100
+DEF LZ_LONG_HI       EQU %00000011
 
 ; In other words, the structure of the command becomes
 ; 111xxxyy yyyyyyyy
@@ -63,250 +64,284 @@ LZ_LONG_HI   EQU %00000011
 
 ; For more information, refer to the code below and in extras/gfx.py.
 
-	; Swap de and hl for speed.
+	; Swap de and hl for speed
 	call SwapHLDE
 
-	; Save the output address
-	; for rewrite commands.
-	ld a, l
-	ldh [hLZAddress], a
-	ld a, h
-	ldh [hLZAddress + 1], a
+	; Save the output address for rewrite commands
+	push hl
+	call .Main
+	; Clean the stack (no need to restore the output address)
+	add sp, 2
 
-.Main:
-	ld a, [de]
-	cp LZ_LONG
-	jr c, .short
-	cp LZ_END
-	jmp z, SwapHLDE
+	jmp SwapHLDE
 
-.long
-; The count is now 10 bits.
-
-	; Read the next 3 bits.
-	; %00011100 -> %11100000
-	add a
-	add a ; << 3
-	add a
-
-	; This is our new control code.
-	and LZ_CMD
-	ldh [hBuffer], a
-
-	ld a, [de]
-	inc de
-	and LZ_LONG_HI
-	ld b, a
-	ld a, [de]
-	inc de
-	ld c, a
-
-	; read at least 1 byte
-	inc bc
-	jr .command
-
-.short
-	and LZ_CMD
-	ldh [hBuffer], a
-
-	ld a, [de]
-	inc de
-	and LZ_LEN
-	ld c, a
-	ld b, 0
-
-	; read at least 1 byte
-	inc c
-
-.command
-	; Increment loop counts.
-	; We bail the moment they hit 0.
-	ld a, c
-	and a
-	jr z, .even
+.lz_copy_flip
 	inc b
-.even
+	ld a, b
 
-	ldh a, [hBuffer]
+.lz_copy_flip_outer_loop
+	push af
 
-	bit LZ_RW, a
-	jr nz, .rewrite
-
-	cp LZ_ITERATE
-	jr z, .Iter
-	cp LZ_ALTERNATE
-	jr z, .Alt
-	cp LZ_ZERO
-	jr z, .Zero
-
-.Literal:
-; Read literal data for bc bytes.
-.lloop
-	ld a, [de]
-	ld [hli], a
-	inc de
-	dec c
-	jr nz, .lloop
-	dec b
-	jr nz, .lloop
-	jr .Main
-
-.Iter:
-; Write the same byte for bc bytes.
+.lz_copy_flip_inner_loop
 	ld a, [de]
 	inc de
-.iloop
-	ld [hli], a
-	dec c
-	jr nz, .iloop
-	dec b
-	jr nz, .iloop
-	jr .Main
 
-.Alt:
-; Alternate two bytes for bc bytes.
-	; Store alternating bytes in d and e.
-	ld a, [de]
-	inc de
-	push de
-	ldh [hBuffer], a
-	ld a, [de]
-	ld e, a
-	ldh a, [hBuffer]
-	ld d, a
-.aloop
-	ld a, d
+; https://github.com/pret/pokecrystal/wiki/Optimizing-assembly-code#reverse-the-bits-of-a
+	ld b, a
+	rlca
+	rlca
+	xor b
+	and $aa
+	xor b
+	ld b, a
+	swap b
+	xor b
+	and $33
+	xor b
+	rrca
+
 	ld [hli], a
 	dec c
-	jr nz, .anext
-	dec b
-	jr z, .adone
-.anext
-	ld a, e
-	ld [hli], a
-	dec c
-	jr nz, .aloop
-	dec b
-	jr nz, .aloop
-.adone
-	; Skip past the bytes we were alternating.
+	jr nz, .lz_copy_flip_inner_loop
+
+	pop af
+	dec a
+	jr nz, .lz_copy_flip_outer_loop
+
 	pop de
 	inc de
 	jr .Main
 
-.Zero:
-; Write 0 for bc bytes.
-	xor a
-	jr .iloop
+.lz_copy_reverse
+	inc b
+	srl c
+	jr nc, .lz_copy_reverse_skip
+	ld a, [de]
+	ld [hli], a
+	dec de
 
-.rewrite
-; Repeat decompressed data from output.
+.lz_copy_reverse_skip
+	jr z, .lz_copy_reverse_loop2
+.lz_copy_reverse_loop1
+	ld a, [de]
+	ld [hli], a
+	dec de
+	ld a, [de]
+	ld [hli], a
+	dec de
+
+	dec c
+	jr nz, .lz_copy_reverse_loop1
+
+.lz_copy_reverse_loop2
+	dec b
+	ld c, $80
+	jr nz, .lz_copy_reverse_loop1
+
+	pop de
+	inc de
+	jr .Main
+
+; alternate is implemented as a repeat
+; writes the pattern out, then chases its own tail
+.lz_alternate
+	ld a, [de]
+	inc de
 	push de
 	push hl
+	ld [hli], a
+	ld a, [de]
+	ld [hli], a
+	pop de
+
+	; assume count >= 3, because < 3 is nonsense
+	dec bc
+	dec bc
+	jr .lz_copy_repeat
+
+.lz_copy
+	; stash command
+	ld [hl], a
 
 	ld a, [de]
-	bit 7, a ; sign
-	jr z, .positive
+	bit 7, a
+	jr nz, .relative
 
-	; Relative offsets count backwards from hl and contain an excess of $7f.
-	; In other words, $80 = hl - 1, $81 = hl - 2, ..., $ff = hl - 128.
+	; 15 bit absolute
+	inc de
+	push de
+	push hl
+	ld h, d
+	ld l, e
+	ld d, a
+	ld e, [hl]
+
+	; lzaddr from the stack
+	ld hl, sp+$6
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	jr .got_offset
+
+.relative
+	push de
+	push hl
 	cpl
 	sub $80
 	ld e, a
 	ld d, $ff
-	jr .ok
 
-.positive
-; Positive offsets are two bytes.
-	ld h, a
-	inc de
-	ld a, [de]
-	ld l, a
-	ldh a, [hLZAddress]
-	ld e, a
-	ldh a, [hLZAddress + 1]
-	ld d, a
-
-.ok
-	; add to starting output address
+.got_offset
 	add hl, de
 	ld d, h
 	ld e, l
 	pop hl
 
-	ldh a, [hBuffer]
+	; unstash command
+	ld a, [hl]
+	cp (LZ_COPY_FLIPPED << 1) & $ff
+	jr z, .lz_copy_flip
+	jr nc, .lz_copy_reverse
 
-	cp LZ_FLIP
-	jr z, .Flip
-	cp LZ_REVERSE
-	jr z, .Reverse
-
-; Since LZ_LONG is command 7,
-; only commands 0-6 are passed in.
-; This leaves room for an extra command 7.
-; However, lengths longer than 768
-; would be interpreted as LZ_END.
-
-; More practically, LZ_LONG is not recursive.
-; For now, it defaults to LZ_REPEAT.
-
-.Repeat:
-; Copy decompressed data for bc bytes.
-.rloop
-	ld a, [de]
-	inc de
-
-	ld [hli], a
-
-	dec c
-	jr nz, .rloop
-	dec b
-	jr nz, .rloop
-	jr .donerw
-
-.Flip:
-; Copy bitflipped decompressed data for bc bytes.
-.floop
-	ld a, [de]
-	inc de
-
-	ld [hl], b
-	ld b, 0
-rept 8
-	rra
-	rl b
-endr
-	ld a, b
-	ld b, [hl]
-
-	ld [hli], a
-
-	dec c
-	jr nz, .floop
-	dec b
-	jr nz, .floop
-	jr .donerw
-
-.Reverse:
-; Copy byte-reversed data for bc bytes.
-.rvloop
-	ld a, [de]
-	dec de
-
-	ld [hli], a
-
-	dec c
-	jr nz, .rvloop
-	dec b
-	jr nz, .rvloop
-
-.donerw
+.lz_copy_repeat
+	call CopyBytes_hl_de
 	pop de
-
-	ld a, [de]
-	add a
-	jr c, .next
-	inc de ; positive offset is two bytes
-.next
 	inc de
-	jmp .Main
+	jr .Main
+
+.lz_data_short
+	ld c, a
+	inc c
+.lz_data_short_no_inc
+	srl c
+	jr nc, .lz_data_short_skip
+	ld a, [de]
+	ld [hli], a
+	inc de
+
+.lz_data_short_skip
+	jr z, .Main
+.lz_data_short_loop
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+
+	dec c
+	jr nz, .lz_data_short_loop
+; fallthrough
+
+; Where the magic starts
+.Main
+	ld a, [de]
+	inc de
+	cp LZ_LEN + 1
+	; For lzdata no more work is needed
+	jr c, .lz_data_short
+	ld b, a
+	cp LZ_LONG
+	jr nc, .long
+
+	and LZ_LEN
+	ld c, a
+	inc c
+	xor b
+	ld b, 0
+
+.cont
+	; command in a
+	; length in bc
+	rla
+	jr c, .lz_copy
+
+	cp (LZ_ALTERNATE << 1) & $ff
+	jr z, .lz_alternate
+	jr nc, .lz_zero
+
+.lz_iterate
+	ld a, [de]
+	inc de
+	jr .fill
+
+.lz_zero
+	xor a
+.fill
+	inc b
+	srl c
+	jr nc, .fill_skip
+	ld [hli], a
+
+.fill_skip
+	jr z, .fill_next
+.fill_loop
+	ld [hli], a
+	ld [hli], a
+	dec c
+	jr nz, .fill_loop
+
+.fill_next
+	dec b
+	jr z, .Main
+	ld c, $80
+	jr .fill_loop
+
+.long
+	inc a
+	ret z ; LZ_END
+	ld a, b
+
+	and LZ_LONG_HI
+	ld [hl], a
+	ld a, [de]
+	inc de
+	ld c, a
+	ld a, b
+	and LZ_LONG_CMD
+	ld b, [hl]
+	inc bc
+	add a
+	add a
+	add a
+	jr nz, .cont
+
+.lz_data
+	; for short runs (<256) we can avoid a call
+	; given that most graphics are <1k this will be practically
+	; all of them
+	or b
+	jr z, .lz_data_short_no_inc
+	call CopyBytes_hl_de
+	jr .Main
+
+; CopyBytes copies from hl to de
+; For performance reasons, we need de to hl
+CopyBytes_hl_de:
+	inc b
+
+	srl c
+	jr nc, .skip
+	ld a, [de]
+	ld [hli], a
+	inc de
+
+.skip
+	jr z, .next
+.loop
+rept 2
+	ld a, [de]
+	ld [hli], a
+	inc de
+endr
+
+	dec c
+	jr nz, .loop
+
+.next
+	dec b
+	ret z
+
+	ld c, $80
+	jr .loop

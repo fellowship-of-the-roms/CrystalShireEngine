@@ -1,18 +1,40 @@
 CopyBytes::
 ; copy bc bytes from hl to de
 	inc b ; we bail the moment b hits 0, so include the last run
-	inc c ; same thing; include last byte
-	jr .HandleLoop
-.CopyByte:
+
+	srl c
+	jr nc, .skip1
 	ld a, [hli]
 	ld [de], a
 	inc de
-.HandleLoop:
+
+.skip1
+	srl c
+	jr nc, .skip2
+rept 2
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
+
+.skip2
+	jr z, .next
+.loop
+rept 4
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
+
 	dec c
-	jr nz, .CopyByte
+	jr nz, .loop
+
+.next
 	dec b
-	jr nz, .CopyByte
-	ret
+	ret z
+
+	ld c, $40
+	jr .loop
 
 SwapBytes::
 ; swap bc bytes between hl and de
@@ -40,16 +62,31 @@ SwapBytes::
 ByteFill::
 ; fill bc bytes with the value of a, starting at hl
 	inc b ; we bail the moment b hits 0, so include the last run
-	inc c ; same thing; include last byte
-	jr .HandleLoop
-.PutByte:
+	srl c
+	jr nc, .skip1
 	ld [hli], a
-.HandleLoop:
+
+.skip1
+	srl c
+	jr nc, .skip2
+	ld [hli], a
+	ld [hli], a
+
+.skip2
+	jr z, .next
+.loop
+rept 4
+	ld [hli], a
+endr
 	dec c
-	jr nz, .PutByte
+	jr nz, .loop
+
+.next
 	dec b
-	jr nz, .PutByte
-	ret
+	ret z
+
+	ld c, $40
+	jr .loop
 
 GetFarByte::
 ; retrieve a single byte from a:hl, and return it in a.

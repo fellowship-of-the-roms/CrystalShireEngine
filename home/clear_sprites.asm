@@ -1,13 +1,9 @@
 ClearSprites::
 ; Erase OAM data
 	ld hl, wShadowOAM
-	ld b, wShadowOAMEnd - wShadowOAM
+	ld bc, wShadowOAMEnd - wShadowOAM
 	xor a
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
+	jp ByteFill
 
 HideSprites::
 ; Set all OAM y-positions to 160 to hide them offscreen

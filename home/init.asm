@@ -63,17 +63,21 @@ Init::
 	xor a
 	ldh [rLCDC], a
 
+; Place stack at its default location in in hram
+	ld sp, $FFFE
+
+; Enable double speed now to speed up the rest of initialization
+	ldh a, [hCGB]
+	and a
+	call nz, DoubleSpeed
+
 ; Clear WRAM bank 0
 	ld hl, WRAM0_Begin
 	ld bc, WRAM0_End - WRAM0_Begin
-.ByteFill:
-	ld [hl], 0
-	inc hl
-	dec bc
-	ld a, b
-	or c
-	jr nz, .ByteFill
+	xor a
+	call ByteFill
 
+; Move stack to wram
 	ld sp, wStackTop
 
 ; Clear HRAM
@@ -155,10 +159,6 @@ Init::
 	xor a ; SRAM_DISABLE
 	ld [MBC3LatchClock], a
 	ld [MBC3SRamEnable], a
-
-	ldh a, [hCGB]
-	and a
-	call nz, DoubleSpeed
 
 	xor a
 	ldh [rIF], a

@@ -3588,6 +3588,10 @@ endr
 	ld de, wBillsPC_CurPals
 	ld c, 24
 	call CopyBytes
+	ld c, 17
+.busyloop
+	dec c
+	jr nz, .busyloop
 	ld a, LOW(wLCDBillsPC3)
 	ldh [hFunctionTargetLo], a
 	ld a, HIGH(wLCDBillsPC3)
