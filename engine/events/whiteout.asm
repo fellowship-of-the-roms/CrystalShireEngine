@@ -29,11 +29,12 @@ Script_Whiteout:
 	text_end
 
 OverworldBGMap:
-	call ClearPalettes
-	call ClearScreen
-	call WaitBGMap2
-	call HideSprites
-	jmp RotateThreePalettesLeft
+	farcall FadeOutPalettes
+	call ClearTilemap
+	call ClearSprites
+	ld a, CGB_PLAIN
+	call GetSGBLayout
+	jmp SetPalettes
 
 BattleBGMap:
 	ld b, SCGB_BATTLE_GRAYSCALE

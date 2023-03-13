@@ -179,7 +179,7 @@ FadeMapMusicAndPalettes:
 	ld a, [wMusicFadeID + 1]
 	ld a, $4
 	ld [wMusicFade], a
-	jmp RotateThreePalettesRight
+	farjp FadeOutPalettes
 
 ForceMapMusic:
 	ld a, [wPlayerState]

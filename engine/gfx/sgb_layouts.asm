@@ -55,6 +55,7 @@ SGBLayoutJumptable:
 	dw .SGB_TrainerOrMonFrontpicPals
 	dw .SGB_MysteryGift
 	dw .SGB_Unused1E
+	dw .SGB_Unused1E ; SCGB_PLAIN (not used)
 	assert_table_length NUM_SCGB_LAYOUTS
 
 .SGB_BattleGrayscale:

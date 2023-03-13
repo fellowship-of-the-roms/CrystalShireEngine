@@ -1874,7 +1874,7 @@ MenuData_17dc96: ; unreferenced
 Function17dc9f:
 	call IncCrashCheckPointer
 	call HlToCrashCheckPointer
-	jmp RotateFourPalettesLeft
+;	jmp RotateFourPalettesLeft
 
 Function17dca9:
 	call IncCrashCheckPointer
@@ -1896,7 +1896,7 @@ Function17dcaf:
 	add hl, de
 	dec c
 	jr nz, .asm_17dcbb
-	call RotateThreePalettesRight
+;	call RotateThreePalettesRight
 	ld a, $4
 	ldh [rSVBK], a
 	ret

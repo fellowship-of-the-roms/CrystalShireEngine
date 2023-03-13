@@ -738,7 +738,7 @@ Function117c4a:
 	add hl, de
 	dec c
 	jr nz, .loop
-	call RotateThreePalettesRight
+;	call RotateThreePalettesRight
 	pop af
 	ldh [rSVBK], a
 	ld a, $80

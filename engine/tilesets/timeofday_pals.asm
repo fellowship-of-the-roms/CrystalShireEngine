@@ -112,17 +112,12 @@ _UpdateTimePals::
 	jmp DmgToCgbTimePals
 
 FadeInPalettes::
-	ld c, $12
-	call GetTimePalFade
-	ld b, $4
-	jmp ConvertTimePalsDecHL
+	ld c, 10
+	jmp FadePalettes
 
 FadeOutPalettes::
-	call FillWhiteBGColor
-	ld c, $9
-	call GetTimePalFade
-	ld b, $4
-	jmp ConvertTimePalsIncHL
+	ld c, 10
+	jmp FadeToWhite
 
 BattleTowerFade:
 	call FillWhiteBGColor
