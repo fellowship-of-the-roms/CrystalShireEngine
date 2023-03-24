@@ -430,7 +430,8 @@ FlushStorageSystem:
 	ld c, 1
 .inner_loop
 	call GetStorageBoxPointer
-	call _AllocateStorageFlag
+	; If e==0 (null entry), this will not set any flag.
+	call SetStorageAllocationFlag
 	ld a, c
 	inc c
 	cp MONS_PER_BOX
@@ -1432,7 +1433,7 @@ AllocateStorageFlag:
 ; Allocates the given storage flag. Returns nz if storage is already in use.
 	call IsStorageUsed
 	ret nz
-	call _AllocateStorageFlag
+	call SetStorageAllocationFlag
 	xor a
 	ret
 
@@ -1440,7 +1441,7 @@ IsStorageUsed:
 ; Returns z if the given storage slot is unused. Preserves wBufferMon.
 	ld a, CHECK_FLAG
 	jr StorageFlagAction
-_AllocateStorageFlag:
+SetStorageAllocationFlag:
 	ld a, SET_FLAG
 	; fallthrough
 StorageFlagAction:
