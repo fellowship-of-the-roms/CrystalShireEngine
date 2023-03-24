@@ -250,7 +250,7 @@ SwapPartyMons:
 
 	; Swap partymon struct
 	ld hl, wPartyMon1
-	ld c, PARTYMON_STRUCT_LENGTH
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call DoPartySwap
 
 	; Swap nickname
