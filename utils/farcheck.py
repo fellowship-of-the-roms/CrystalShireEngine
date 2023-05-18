@@ -23,7 +23,7 @@ exclude = {
 }
 
 if len(sys.argv) != 2:
-	print(f'Usage: {sys.argv[0]} polishedcrystal.sym', file=sys.stderr)
+	print(f'Usage: {sys.argv[0]} pokecrystal.sym', file=sys.stderr)
 	exit(1)
 
 sym_banks = {}
@@ -73,15 +73,24 @@ for filename in iglob('**/*.asm', recursive=True):
 					code = code.strip()
 					comment = comment[0].strip() if comment else ''
 					if suppress not in comment and not suppressing:
-						print(f"{filename}:{i}: '{code}' in bank {cur_bank:02X} references '{label}' in bank {bank:02X}")
+						try:
+							print(f"{filename}:{i}: '{code}' in bank {cur_bank:02X} references '{label}' in bank {bank:02X}")
+						except TypeError:
+							print(f"Warning: unable to print bank information for {filename}:{i}. Continuing...")
 				if label in rst_funcs and m.group(1) == 'call' and not m.group(2):
 					code, *comment = line.split(';', 1)
 					code = code.strip()
 					comment = comment[0].strip() if comment else ''
 					if suppress not in comment and not suppressing:
-						print(f"{filename}:{i}: '{code}' can use 'rst ${rst_funcs[label]:02x}'")
+						try:
+							print(f"{filename}:{i}: '{code}' can use 'rst ${rst_funcs[label]:02x}'")
+						except TypeError:
+							print(f"Warning: unable to print 'rst' information for {filename}:{i}. Continuing...")
 			elif (m := re.match(far_rx, line)):
 				label, bank = get_label_bank(m)
 				if bank is not None and bank == cur_bank:
 					code = line.split(';', 1)[0].strip()
-					print(f"{filename}:{i}: '{code}' in bank {cur_bank:02X} references '{label}' already in bank {bank:02X}")
+					try:
+						print(f"{filename}:{i}: '{code}' in bank {cur_bank:02X} references '{label}' already in bank {bank:02X}")
+					except TypeError:
+						print(f"Warning: unable to print bank information for {filename}:{i}. Continuing...")
