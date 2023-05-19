@@ -345,9 +345,11 @@ WRAMX 2
 	align 8
 	"16-bit WRAM tables"
 WRAMX 3
-	"Battle Tower RAM"
+	org $d000
+	"Metatiles"
 WRAMX 4
-	"Surrounding Data"
+	org $d000
+	"Attributes"
 WRAMX 5
 	align 8
 	"GBC Video"

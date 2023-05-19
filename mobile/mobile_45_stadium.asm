@@ -668,13 +668,13 @@ Function117bb6:
 	ld a, [wcd89]
 	and $1
 	jr nz, .asm_117c16
-	ld a, [w3_d000]
+;	ld a, [w3_d000]
 	cp $fe
 	jr nz, .asm_117c16
-	ld a, [w3_d001]
+;	ld a, [w3_d001]
 	cp $f
 	jr nz, .asm_117c16
-	ld hl, w3_dfec
+;	ld hl, w3_dfec
 	ld de, wcd69
 	ld c, $10
 .asm_117c0b
@@ -704,7 +704,7 @@ Function117bb6:
 	ldh [rSVBK], a
 	ld a, $7
 	call OpenSRAM
-	ld hl, w3_d002
+;	ld hl, w3_d002
 	ld de, $b000
 	ld bc, $1000
 	rst CopyBytes

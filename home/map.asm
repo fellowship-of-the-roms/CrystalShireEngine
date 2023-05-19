@@ -48,32 +48,27 @@ GetMapSceneID::
 	rst Bankswitch
 
 	ld hl, MapScenes
+	ld de, 4
+	jr .handleLoop
 .loop
+	pop hl
+	add hl, de
+.handleLoop
 	push hl
 	ld a, [hli] ; map group, or terminator
 	cp -1
 	jr z, .end ; the current map is not in the scene_var table
 	cp b
-	jr nz, .next ; map group did not match
+	jr nz, .loop ; map group did not match
 	ld a, [hli] ; map number
 	cp c
-	jr z, .found ; we found our map
-
-.next
-	pop hl
-	ld de, 4 ; scene_var size
-	add hl, de
-	jr .loop
-
+	jr nz, .loop ; map number did not match
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	jr .done
 .end
 	scf
-	jr .done
-
-.found
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-
 .done
 	pop hl
 	pop bc
@@ -86,137 +81,7 @@ GetMapSceneID::
 OverworldTextModeSwitch::
 	; fallthrough
 LoadMapPart::
-	ldh a, [hROMBank]
-	push af
-
-	ld a, [wTilesetBlocksBank]
-	rst Bankswitch
-	call LoadMetatiles
-
-	ld a, "■"
-	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	rst ByteFill
-
-	ld a, [wTilesetAttributesBank]
-	rst Bankswitch
-	call LoadMetatileAttributes
-
-	ld a, BANK(_LoadMapPart)
-	rst Bankswitch
-	call _LoadMapPart
-
-	pop af
-	rst Bankswitch
-	ret
-
-LoadMetatiles::
-	ld hl, wSurroundingTiles
-	ld de, wTilesetBlocksAddress
-	jr _LoadMetatilesOrAttributes
-
-LoadMetatileAttributes::
-	ld hl, wSurroundingAttributes
-	ld de, wTilesetAttributesAddress
-	; fallthrough
-_LoadMetatilesOrAttributes:
-	ld a, [de]
-	ld [wTilesetDataAddress], a
-	inc de
-	ld a, [de]
-	ld [wTilesetDataAddress + 1], a
-
-	; de <- wOverworldMapAnchor
-	ld a, [wOverworldMapAnchor]
-	ld e, a
-	ld a, [wOverworldMapAnchor + 1]
-	ld d, a
-	ld b, SCREEN_META_HEIGHT
-
-.row
-	push de
-	push hl
-	ld c, SCREEN_META_WIDTH
-
-.col
-	push de
-	push hl
-	; Load the current map block.
-	; If the current map block is a border block, load the border block.
-	ld a, [de]
-	and a
-	jr nz, .ok
-	ld a, [wMapBorderBlock]
-
-.ok
-	; Load the current wSurroundingTiles address into de.
-	ld e, l
-	ld d, h
-	; Set hl to the address of the current metatile data ([wTilesetBlocksAddress] + (a) tiles).
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld a, [wTilesetDataAddress]
-	add l
-	ld l, a
-	ld a, [wTilesetDataAddress + 1]
-	adc h
-	ld h, a
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Surrounding Data")
-	ldh [rSVBK], a
-
-	; copy the 4x4 metatile
-rept METATILE_WIDTH - 1
-rept METATILE_WIDTH
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	ld a, e
-	add SURROUNDING_WIDTH - METATILE_WIDTH
-	ld e, a
-	jr nc, .next\@
-	inc d
-.next\@
-endr
-rept METATILE_WIDTH
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-
-	pop af
-	ldh [rSVBK], a
-
-	; Next metatile
-	pop hl
-	ld de, METATILE_WIDTH
-	add hl, de
-	pop de
-	inc de
-	dec c
-	jr nz, .col
-	; Next metarow
-	pop hl
-	ld de, SURROUNDING_WIDTH * METATILE_WIDTH
-	add hl, de
-	pop de
-	ld a, [wMapWidth]
-	add MAP_CONNECTION_PADDING_WIDTH * 2
-	add e
-	ld e, a
-	jr nc, .ok2
-	inc d
-.ok2
-	dec b
-	jmp nz, .row
-	ret
+	farjp _LoadMapPart
 
 ReturnToMapFromSubmenu::
 	ld a, MAPSETUP_SUBMENU
@@ -301,19 +166,13 @@ GetDestinationWarpNumber::
 
 .found_warp
 	pop hl
-	call .IncreaseHLTwice
-	ret nc ; never encountered
+	inc hl
+	inc hl
 
 	ld a, [wCurMapWarpCount]
 	inc a
 	sub c
 	ld c, a
-	scf
-	ret
-
-.IncreaseHLTwice:
-	inc hl
-	inc hl
 	scf
 	ret
 

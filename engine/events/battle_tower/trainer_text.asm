@@ -1,13 +1,13 @@
 BattleTowerText::
-; Print text c for trainer [wBT_OTTrainerClass]
+;; Print text c for trainer [wBT_OTTrainerClass]
 ; 1: Intro text
 ; 2: Player lost
 ; 3: Player won
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wBT_OTTrainerClass)
+;	ld a, BANK(wBT_OTTrainerClass)
 	ldh [rSVBK], a
-	ld hl, wBT_OTTrainerClass
+;	ld hl, wBT_OTTrainerClass
 	ld a, [hl]
 	dec a
 	ld e, a
@@ -43,11 +43,11 @@ BattleTowerText::
 	ld b, 0
 	dec c
 	jr nz, .restore
-	ld [wBT_TrainerTextIndex], a
+;	ld [wBT_TrainerTextIndex], a
 	jr .okay2
 
 .restore
-	ld a, [wBT_TrainerTextIndex]
+;	ld a, [wBT_TrainerTextIndex]
 
 .okay2
 	push af

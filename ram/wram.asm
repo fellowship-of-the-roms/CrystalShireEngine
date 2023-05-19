@@ -3480,80 +3480,14 @@ SECTION "16-bit WRAM tables", WRAMX
 	wram_conversion_table wItemIndexTable, ITEM_TABLE
 
 
-SECTION "Battle Tower RAM", WRAMX
+SECTION "Metatiles", WRAMX
 
-w3_d000:: ds 1
-w3_d001:: ds 1
-w3_d002:: ds 16
-w3_d012:: ds $6e
-w3_d080:: ds 1
-w3_d081:: ds $f
-w3_d090:: ds $70
-
-w3_d100::
-wBT_OTTrainer:: battle_tower_struct wBT_OT
-	ds $20
-wBT_TrainerTextIndex:: db
-	ds 1
-w3_d202:: battle_tower_struct w3_d202
-w3_d2e2:: battle_tower_struct w3_d2e2
-w3_d3c2:: battle_tower_struct w3_d3c2
-w3_d4a2:: battle_tower_struct w3_d4a2
-w3_d582:: battle_tower_struct w3_d582
-w3_d662:: battle_tower_struct w3_d662
-
-UNION
-w3_d742:: battle_tower_struct w3_d742
-
-NEXTU
-	ds $be
-w3_d800:: ds BG_MAP_WIDTH * SCREEN_HEIGHT
-
-NEXTU
-	ds $be
-wBTChoiceOfLvlGroup:: db
-	ds $1
-w3_d802:: ds 12
-w3_d80e:: db
-	ds $1
-w3_d810::
-	ds $59
-w3_d869:: ds $17
-w3_d880:: ds 1
-w3_d881:: ds 8
-w3_d889:: ds 1
-w3_d88a:: ds 4
-w3_d88e:: ds 1
-w3_d88f:: ds 4
-w3_d893:: ds 1
-w3_d894:: ds 1
-w3_d895:: ds 11
-w3_d8a0:: ds 1
-w3_d8a1:: ds 1
-w3_d8a2:: ds 1
-w3_d8a3:: ds 1
-ENDU
-
-	ds $1c0
-
-w3_dc00:: ds SCREEN_WIDTH * SCREEN_HEIGHT
-UNION
-w3_dd68:: ds SCREEN_WIDTH * SCREEN_HEIGHT
-
-	ds $11c
-
-w3_dfec:: ds $10
-w3_dffc:: ds 4
-NEXTU
-	ds $98
-w3_de00:: ds $200
-ENDU
+wDecompressedMetatiles:: ds 256 * 16
 
 
-SECTION "Surrounding Data", WRAMX
+SECTION "Attributes", WRAMX
 
-wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
-wSurroundingAttributes:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
+wDecompressedAttributes:: ds 256 * 16
 
 
 SECTION "GBC Video", WRAMX, ALIGN[8]

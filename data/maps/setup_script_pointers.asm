@@ -50,3 +50,4 @@ MapSetupCommands:
 	add_mapsetup ApplyMapPalettes ; 2b
 	add_mapsetup EnableTextAcceleration ; 2c
 	add_mapsetup InitMapNameSign ; 2d
+	add_mapsetup DecompressMetatiles ; 2e

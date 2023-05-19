@@ -31,7 +31,6 @@ INCLUDE "engine/math/print_num.asm"
 INCLUDE "engine/pokemon/health.asm"
 INCLUDE "engine/events/overworld.asm"
 INCLUDE "engine/items/items.asm"
-INCLUDE "engine/overworld/player_step.asm"
 INCLUDE "engine/battle/anim_hp_bar.asm"
 INCLUDE "engine/pokemon/move_mon.asm"
 INCLUDE "engine/pokemon/breedmon_level_growth.asm"
@@ -40,6 +39,10 @@ INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/battle_anims/pokeball_wobble.asm"
 INCLUDE "engine/pokemon/knows_move.asm"
 
+SECTION "Load Map Part", ROMX
+
+INCLUDE "engine/overworld/player_step.asm"
+INCLUDE "engine/overworld/load_map_part.asm"
 
 SECTION "bank4", ROMX
 
@@ -194,7 +197,6 @@ INCLUDE "engine/menus/empty_sram.asm"
 INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
 INCLUDE "engine/events/checksave.asm"
 INCLUDE "data/maps/scenes.asm"
-INCLUDE "engine/overworld/load_map_part.asm"
 INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
 
 

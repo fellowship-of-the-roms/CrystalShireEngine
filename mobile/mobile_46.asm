@@ -166,7 +166,7 @@ Function118125:
 	cp [hl]
 	jr nz, .loop
 	xor a
-	ld [w3_d000], a
+;;	ld [w3_d000], a
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
@@ -189,20 +189,20 @@ Function118180:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(w3_d202)
+;	ld a, BANK(w3_d202)
 	ldh [rSVBK], a
 
-	ld de, w3_d202
+;	ld de, w3_d202
 	ld c, $96
 	farcall CheckStringForErrors_IgnoreTerminator
 	jr c, .return_d3
 
-	ld de, w3_d202
+;	ld de, w3_d202
 	lb bc, 1, $96
 	farcall CheckStringContainsLessThanBNextCharacters
 	jr c, .return_d3
 
-	ld hl, w3_d202
+;	ld hl, w3_d202
 	ld de, s5_a8b2
 	ld bc, 150
 	rst CopyBytes
@@ -1269,7 +1269,7 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 
 .asm_118a30
 	ld a, [wcd4f]
-	ld [w3_d800], a
+;;	ld [w3_d800], a
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 .b_button
@@ -1298,21 +1298,12 @@ Function118a54: ; unreferenced
 	ld bc, $0004
 	jr Function118ae4
 
-Function118a65: ; unreferenced
-	ld hl, BattleDownloadURL
-	ld de, wcc60
-	ld bc, $80
-	rst CopyBytes
-	ld de, w3_d000
-	ld bc, $1000
-	jmp Function118b10
-
 SetBattleDownloadURL:
 	ld hl, BattleDownloadURL
 	ld de, wcc60
 	ld bc, $80
 	rst CopyBytes
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
 
@@ -1321,7 +1312,7 @@ SetExchangeDownloadURL:
 	ld de, wcc60
 	ld bc, $80
 	rst CopyBytes
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
 
@@ -1332,7 +1323,7 @@ SetNewsDownloadURL:
 	rst CopyBytes
 	ld a, $5
 	ldh [rSVBK], a
-	ld de, w3_d100
+;;	ld de, w3_d100
 	ld bc, $e00
 	jr Function118b10
 
@@ -1341,7 +1332,7 @@ SetStadiumDownloadURL:
 	ld de, wcc60
 	ld bc, $80
 	rst CopyBytes
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
 
@@ -1350,7 +1341,7 @@ SetOddEggDownloadURL:
 	ld de, wcc60
 	ld bc, $80
 	rst CopyBytes
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
 
@@ -1565,7 +1556,7 @@ asm_118d9f:
 	ld [wcd3b], a
 
 .asm_118db7
-	ld hl, w3_d800
+;;	ld hl, w3_d800
 	ld a, LOW(wc608)
 	ld [hli], a
 	ld a, HIGH(wc608)
@@ -1586,8 +1577,8 @@ asm_118d9f:
 	call Function119ec2
 	ld a, $40
 	ld [wcd89], a
-	ld hl, w3_d800
-	ld de, w3_de00
+;;	ld hl, w3_d800
+;;	ld de, w3_de00
 	ld bc, $200
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
@@ -1716,13 +1707,13 @@ Function118e92:
 	ld de, wcc60
 	call Function1191ad
 	ret c
-	ld de, w3_d800
+;;	ld de, w3_d800
 	ld bc, $0800
 	jmp Function118b10
 
 Function118eb0:
 	call Function118440
-	ld hl, w3_d802
+;	ld hl, w3_d802
 	ld de, wBGMapBuffer
 	ld bc, $000c
 	rst CopyBytes
@@ -1733,7 +1724,7 @@ Function118eb0:
 Function118ec6:
 	call Function118440
 	call SpeechTextbox
-	ld hl, w3_d80e
+;	ld hl, w3_d80e
 	ld de, wc320
 	ld bc, $0026
 	rst CopyBytes
@@ -1842,7 +1833,7 @@ Function118f68:
 	ld a, $40
 	ld [wcd89], a
 	ld hl, wc346
-	ld de, w3_de00
+;;	ld de, w3_de00
 	ld bc, $200
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
@@ -1922,7 +1913,7 @@ Function119009:
 	ld a, $40
 	ld [wcd89], a
 	ld hl, wc346
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
@@ -1935,9 +1926,9 @@ Function119054:
 	ld e, a
 	ld a, [wcd50]
 	ld d, a
-	ld a, [w3_d000]
+;;	ld a, [w3_d000]
 	ld c, a
-	ld a, [w3_d000 + 1]
+;;	ld a, [w3_d000 + 1]
 	ld b, a
 	call Function119192
 	ret c
@@ -1947,9 +1938,9 @@ Function119054:
 	ld a, $6
 	ldh [rSVBK], a
 	ld hl, wd002
-	ld a, [w3_d000]
+;;	ld a, [w3_d000]
 	ld c, a
-	ld a, [w3_d000 + 1]
+;;	ld a, [w3_d000 + 1]
 	ld b, a
 	call Function119192
 	ret c
@@ -1984,7 +1975,7 @@ Function119054:
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 Function1190d0:
-	ld a, BANK(w3_d000)
+;;	ld a, BANK(w3_d000)
 	ldh [rSVBK], a
 	ld a, [wcd57]
 	ld l, a
@@ -1993,7 +1984,7 @@ Function1190d0:
 	ld de, wcc60
 	call Function1191ad
 	ret c
-	ld de, w3_d000
+;;	ld de, w3_d000
 	ld bc, $1000
 	jmp Function118b10
 
@@ -2012,9 +2003,9 @@ Function1190ec:
 	call CloseSRAM
 	ld a, BANK(s6_a000)
 	call OpenSRAM
-	ld a, [w3_d000]
+;;	ld a, [w3_d000]
 	ld c, a
-	ld a, [w3_d000 + 1]
+;;	ld a, [w3_d000 + 1]
 	ld b, a
 	ld hl, wd002
 	ld de, s6_a000
@@ -2034,7 +2025,7 @@ Function1190ec:
 	ret c
 
 .asm_11913e
-	ld a, BANK("Battle Tower RAM")
+;;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	call CloseSRAM
 	ld hl, Text_ReceivedNews
@@ -2051,7 +2042,7 @@ Function11914e:
 	ret
 
 Function11915d:
-	ld hl, w3_d802
+;	ld hl, w3_d802
 	ld de, wcd20
 	ld bc, 12
 	rst CopyBytes
@@ -2124,21 +2115,21 @@ Function1191ad:
 	jr c, .asm_1191b4
 	ld a, $da
 	call SetMobileErrorCode
-	ld a, BANK("Battle Tower RAM")
+;;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	pop bc
 	scf
 	ret
 
 .asm_1191cc
-	ld a, BANK("Battle Tower RAM")
+;;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	pop bc
 	and a
 	ret
 
 Function1191d3:
-	ld hl, w3_d100 + 2
+;;	ld hl, w3_d100 + 2
 	ld a, l
 	ld [wcd53], a
 	ld a, h
@@ -2194,7 +2185,7 @@ Function119223:
 	dec de
 	xor a
 	ld [de], a
-	ld hl, w3_d810
+;	ld hl, w3_d810
 .asm_119241
 	ld a, [hli]
 	cp $50
@@ -2433,9 +2424,9 @@ Function1193a0:
 	ld [wBattleTowerRoomMenu2JumptableIndex], a
 	call BattleTowerRoomMenu2
 	ld hl, wc346
-	ld a, LOW(w3_d000)
+;;	ld a, LOW(w3_d000)
 	ld [hli], a
-	ld a, HIGH(w3_d000)
+;	ld a, HIGH(w3_d000)
 	ld [hli], a
 	ld a, [wcd3b]
 	ld [hli], a
@@ -2454,7 +2445,7 @@ Function1193a0:
 	ld a, $40
 	ld [wcd89], a
 	ld hl, wc346
-	ld de, w3_de00
+;	ld de, w3_de00
 	ld bc, $200
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
@@ -2478,16 +2469,16 @@ Function1193fb:
 	ld a, $8
 	ld [wBattleTowerRoomMenu2JumptableIndex], a
 	call BattleTowerRoomMenu2
-	ld de, w3_d000
+;	ld de, w3_d000
 	ld bc, $1000
 	jmp Function118b10
 
 Function119413:
 	ld a, $6 ; ???
 	call OpenSRAM
-	ld a, [w3_d000]
+;	ld a, [w3_d000]
 	ld c, a
-	ld a, [w3_d000 + 1]
+;	ld a, [w3_d000 + 1]
 	ld b, a
 	dec bc
 	dec bc
@@ -2512,7 +2503,7 @@ Function119413:
 	ret c
 
 .asm_119447
-	ld a, BANK("Battle Tower RAM")
+;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	call CloseSRAM
 	jmp BattleTowerRoomMenu_IncrementJumptable
@@ -2837,7 +2828,7 @@ Function119648:
 	ld [wBattleTowerRoomMenu2JumptableIndex], a
 	call BattleTowerRoomMenu2
 	call Function118b24
-	ld de, w3_d000
+;	ld de, w3_d000
 	ld bc, $1000
 	ld a, MOBILEAPI_15
 	jmp Function119e2b
@@ -3128,7 +3119,7 @@ Function1197dc:
 	xor a
 	ld [de], a
 	call Function118b24
-	ld de, w3_d000
+;	ld de, w3_d000
 	ld bc, $1000
 	ld a, MOBILEAPI_15
 	jmp Function119e2b
@@ -3153,7 +3144,7 @@ Function119800:
 	farcall Function10803d
 	call Function11a9ce
 	call RestartMapMusic
-	ld a, BANK("Battle Tower RAM")
+;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	pop af
 	ld [wBattleTowerRoomMenuJumptableIndex], a
@@ -3188,7 +3179,7 @@ Function11984e:
 	farcall MobileTradeAnimation_SendGivemonToGTS
 	call Function11a9ce
 	call RestartMapMusic
-	ld a, BANK("Battle Tower RAM")
+;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	pop af
 	ld [wBattleTowerRoomMenuJumptableIndex], a
@@ -3222,7 +3213,7 @@ Function11984e:
 	farcall MobileTradeAnimation_RetrieveGivemonFromGTS
 	call Function11a9ce
 	call RestartMapMusic
-	ld a, BANK("Battle Tower RAM")
+;	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	pop af
 	ld [wBattleTowerRoomMenuJumptableIndex], a
@@ -3246,7 +3237,7 @@ Function1198f7:
 	ret nz
 	ld hl, wc608 + 2
 	call Function119940
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	ld a, LOW(wc608)
 	ld [hli], a
 	ld a, HIGH(wc608)
@@ -3267,8 +3258,8 @@ Function1198f7:
 	call Function119ec2
 	ld a, $40
 	ld [wcd89], a
-	ld hl, w3_d800
-	ld de, w3_de00
+;	ld hl, w3_d800
+;	ld de, w3_de00
 	ld bc, $200
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
@@ -3319,14 +3310,14 @@ Function119973:
 	ld [wcf64], a
 	xor a
 	ld [wcf65], a
-	ld [w3_d090], a
-	ld de, w3_d000
+;	ld [w3_d090], a
+;	ld de, w3_d000
 	ld a, MOBILEAPI_10
 	jmp Function119e2b
 
 Function119987:
-	ld hl, w3_d000 + 1
-	ld a, [w3_d000]
+;	ld hl, w3_d000 + 1
+;	ld a, [w3_d000]
 	or [hl]
 	jr z, .asm_1199a0
 	ld a, [wcf64]
@@ -3338,7 +3329,7 @@ Function119987:
 	jmp Function119e2b
 
 .asm_1199a0
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	and a
 	jr z, .asm_1199ae
 	ld a, $16
@@ -3351,10 +3342,10 @@ Function119987:
 	ret
 
 Function1199b4:
-	ld a, [w3_d081 + 1]
+;	ld a, [w3_d081 + 1]
 	and a
 	jr nz, .asm_1199c7
-	ld a, [w3_d081]
+;	ld a, [w3_d081]
 	cp $7
 	jr nc, .asm_1199c7
 	call BattleTowerRoomMenu_IncrementJumptable
@@ -3370,7 +3361,7 @@ Function1199ca:
 	ld l, a
 	ld a, [wcf65]
 	ld h, a
-	ld de, w3_d100
+;	ld de, w3_d100
 	ld bc, $0700
 	ld a, MOBILEAPI_14
 	jmp Function119e2b
@@ -3383,14 +3374,14 @@ Function1199e2:
 	ld a, c
 	cp $1
 	jmp nz, Function119ac9
-	ld hl, w3_d880
+;	ld hl, w3_d880
 	ld bc, XGameCode
 .loop
 	ld a, [bc]
 	and a
 	jr z, .game_result_prefix
 	cp [hl]
-	jmp nz, Function119ac9
+	jr nz, Function119ac9
 	inc bc
 	inc hl
 	jr .loop
@@ -3399,32 +3390,32 @@ Function1199e2:
 	ld c, $17
 	ld de, XGameResultPrefix
 	call Function119e4f
-	jmp c, .asm_119aa7
+	jr c, .asm_119aa7
 	ld a, c
 	cp $1
-	jmp nz, .asm_119aa7
-	ld a, [w3_d880]
+	jr nz, .asm_119aa7
+;	ld a, [w3_d880]
 	cp $31
-	jmp nz, .asm_119aa7
-	ld a, [w3_d881]
+	jr nz, .asm_119aa7
+;	ld a, [w3_d881]
 	cp $20
 	jr nz, .asm_119aa7
-	ld a, [w3_d88a]
+;	ld a, [w3_d88a]
 	cp $20
 	jr nz, .asm_119aa7
-	ld a, [w3_d894]
+;	ld a, [w3_d894]
 	cp $20
 	jr nz, .asm_119aa7
 	xor a
-	ld [w3_d8a0], a
-	ld [w3_d8a1], a
-	ld [w3_d8a2], a
-	ld [w3_d8a3], a
-	ld hl, w3_d8a0
-	ld bc, w3_d889
+;	ld [w3_d8a0], a
+;	ld [w3_d8a1], a
+;	ld [w3_d8a2], a
+;	ld [w3_d8a3], a
+;	ld hl, w3_d8a0
+;	ld bc, w3_d889
 	call Function119e98
 	call Function119e98
-	ld hl, w3_d8a0
+;	ld hl, w3_d8a0
 	ld a, [wcd2d]
 	cp [hl]
 	jr nz, Function119ac9
@@ -3441,16 +3432,16 @@ Function1199e2:
 	cp [hl]
 	jr nz, Function119ac9
 	xor a
-	ld [w3_d8a0], a
-	ld [w3_d8a1], a
-	ld [w3_d8a2], a
-	ld [w3_d8a3], a
-	ld hl, w3_d8a0
-	ld bc, w3_d88e
+;	ld [w3_d8a0], a
+;	ld [w3_d8a1], a
+;	ld [w3_d8a2], a
+;	ld [w3_d8a3], a
+;	ld hl, w3_d8a0
+;;	ld bc, w3_d88e
 	call Function119e98
-	ld bc, w3_d893
+;	ld bc, w3_d893
 	call Function119e98
-	ld hl, w3_d8a0
+;	ld hl, w3_d8a0
 	ld a, [wcd2f]
 	cp [hl]
 	jr nz, .asm_119aa7
@@ -3470,30 +3461,30 @@ Function1199e2:
 .asm_119aa7
 	ld a, $25
 	ld [wBattleTowerRoomMenuJumptableIndex], a
-	jmp Function119b45
+	jr Function119b45
 
 .asm_119aaf
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	and a
 	jr nz, .asm_119aa7
-	ld a, [w3_d895]
+;	ld a, [w3_d895]
 	sub $30
-	ld [w3_d090], a
+;	ld [w3_d090], a
 	ld a, [wcf64]
-	ld [w3_d090 + 1], a
+;	ld [w3_d090 + 1], a
 	ld a, [wcf65]
-	ld [w3_d090 + 2], a
+;	ld [w3_d090 + 2], a
 
 Function119ac9:
-	ld a, [w3_d000]
+;	ld a, [w3_d000]
 	ld l, a
-	ld a, [w3_d000 + 1]
+;	ld a, [w3_d000 + 1]
 	ld h, a
 	dec hl
 	ld a, l
-	ld [w3_d000], a
+;	ld [w3_d000], a
 	ld a, h
-	ld [w3_d000 + 1], a
+;	ld [w3_d000 + 1], a
 	ld a, [wcf64]
 	ld l, a
 	ld a, [wcf65]
@@ -3522,7 +3513,7 @@ Function119b0d:
 	ld a, $8
 	ld [wBattleTowerRoomMenu2JumptableIndex], a
 	call BattleTowerRoomMenu2
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	cp $1
 	jr z, .asm_119b23
 	ld a, $19
@@ -3532,19 +3523,19 @@ Function119b0d:
 .asm_119b23
 	ld a, $10
 	ld [wcd89], a
-	ld a, [w3_d090 + 1]
+;	ld a, [w3_d090 + 1]
 	ld l, a
-	ld a, [w3_d090 + 2]
+;	ld a, [w3_d090 + 2]
 	ld h, a
-	ld de, w3_d100
+;	ld de, w3_d100
 	ld bc, $0700
 	ld a, MOBILEAPI_12
 	jmp Function119e2b
 
 Function119b3b:
-	ld a, [w3_d090 + 1]
+;	ld a, [w3_d090 + 1]
 	ld l, a
-	ld a, [w3_d090 + 2]
+;	ld a, [w3_d090 + 2]
 	ld h, a
 	jr asm_119b4d
 
@@ -3559,7 +3550,7 @@ asm_119b4d:
 	jmp Function119e2b
 
 Function119b52:
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	cp $1
 	jr nz, .asm_119b66
 	ld a, BANK(s5_a800)
@@ -3573,19 +3564,19 @@ Function119b52:
 	jmp Function119e2b
 
 Function119b6b:
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	cp $1
 	jr z, .asm_119b75
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 .asm_119b75
-	ld a, [w3_d100]
+;	ld a, [w3_d100]
 	ld b, a
-	ld a, [w3_d100 + 1]
+;	ld a, [w3_d100 + 1]
 	or b
 	jr z, .asm_119be3
-	ld hl, w3_d800
-	ld de, w3_d100 + 2
+;	ld hl, w3_d800
+;	ld de, w3_d100 + 2
 .asm_119b85
 	ld a, [de]
 	inc de
@@ -3668,7 +3659,7 @@ Function119b6b:
 	ld [s5_a800], a
 	call CloseSRAM
 	xor a
-	ld [w3_d090], a
+;	ld [w3_d090], a
 	ret
 
 .asm_119bfa
@@ -3677,10 +3668,10 @@ Function119b6b:
 	cp $d
 	jr nz, .asm_119b93
 	ld a, l
-	cp LOW(w3_d869)
+;	cp LOW(w3_d869)
 	jr nz, .asm_119be3
 	ld a, h
-	cp HIGH(w3_d869)
+;	cp HIGH(w3_d869)
 	jr nz, .asm_119be3
 	ld a, BANK(s5_b090) ; aka BANK(s5_b091) and BANK(s5_b023)
 	call OpenSRAM
@@ -3688,14 +3679,14 @@ Function119b6b:
 	ld [s5_b090], a
 	ld a, [wcf65]
 	ld [s5_b091], a
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	ld de, s5_b023
 	ld bc, 105
 	rst CopyBytes
 	ld a, $3
 	ld [s5_a800], a
 	call CloseSRAM
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	ld de, wc608
 	ld bc, 105
 	rst CopyBytes
@@ -3738,7 +3729,7 @@ popc
 	ld [s5_a800], a
 	call CloseSRAM
 	xor a
-	ld [w3_d090], a
+;	ld [w3_d090], a
 	scf
 	ret
 
@@ -4009,7 +4000,7 @@ popc
 
 Function119e4f:
 	push bc
-	ld hl, w3_d100
+;	ld hl, w3_d100
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -4057,7 +4048,7 @@ popc
 	pop de
 	pop bc
 	inc hl
-	ld de, w3_d880
+;	ld de, w3_d880
 .loop3
 	ld a, [hli]
 	ld [de], a
@@ -4312,10 +4303,10 @@ Function11a00e:
 	jr Function11a0ca
 
 .asm_11a039
-	ld a, BANK(w3_d800)
+;	ld a, BANK(w3_d800)
 	ldh [rSVBK], a
 	ld hl, wc608
-	ld de, w3_d800
+;	ld de, w3_d800
 	ld bc, 246
 	rst CopyBytes
 	ld a, $1
@@ -4323,9 +4314,9 @@ Function11a00e:
 	call FadeToMenu
 	farcall Function11765d
 	call Function11a9ce
-	ld a, BANK(w3_d800)
+;	ld a, BANK(w3_d800)
 	ldh [rSVBK], a
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	ld de, wc608
 	ld bc, 246
 	rst CopyBytes
@@ -6997,9 +6988,9 @@ Function11b570:
 	ld a, $3
 	ldh [rSVBK], a
 
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	ld de, wc608
-	ld bc, w3_d88f - w3_d800
+;	ld bc, w3_d88f - w3_d800
 	rst CopyBytes
 
 	ld a, $1
@@ -7012,7 +7003,7 @@ Function11b570:
 	ld [de], a
 	inc de
 	ld hl, wc608
-	ld bc, w3_d88f - w3_d800
+;	ld bc, w3_d88f - w3_d800
 	rst CopyBytes
 
 	push de
@@ -7108,7 +7099,7 @@ Function11b66d:
 	push af
 	ld a, $3
 	ldh [rSVBK], a
-	ld a, [w3_d090]
+;	ld a, [w3_d090]
 	ld b, a
 	pop af
 	ldh [rSVBK], a
@@ -7132,7 +7123,7 @@ Function11b66d:
 	ld a, $3
 	ldh [rSVBK], a
 	ld a, $2
-	ld [w3_d090], a
+;	ld [w3_d090], a
 	pop af
 	ldh [rSVBK], a
 
