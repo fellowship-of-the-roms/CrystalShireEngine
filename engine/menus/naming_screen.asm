@@ -102,7 +102,7 @@ NamingScreen:
 	ld hl, LoadMenuMonIcon
 	ld a, BANK(LoadMenuMonIcon)
 	ld e, MONICON_NAMINGSCREEN
-	rst FarCall
+	call FarCall_hl
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
@@ -339,7 +339,7 @@ NamingScreenJoypadLoop:
 	ret
 
 .quit
-	callfar ClearSpriteAnims
+	farcall ClearSpriteAnims
 	call ClearSprites
 	xor a
 	ldh [hSCX], a
@@ -821,7 +821,7 @@ NamingScreen_GetLastCharacter:
 
 LoadNamingScreenGFX:
 	call ClearSprites
-	callfar ClearSpriteAnims
+	farcall ClearSpriteAnims
 	call LoadStandardFont
 	call LoadFontsExtra
 
@@ -1006,7 +1006,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ret
 
 .exit_mail
-	callfar ClearSpriteAnims
+	farcall ClearSpriteAnims
 	call ClearSprites
 	xor a
 	ldh [hSCX], a

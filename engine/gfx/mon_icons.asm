@@ -215,7 +215,7 @@ Unused_GetPartyMenuMonIcon:
 	push hl
 	push bc
 	ld d, a
-	callfar ItemIsMail
+	farcall ItemIsMail
 	pop bc
 	pop hl
 	jr c, .not_mail
@@ -288,7 +288,7 @@ PartyMenu_InitAnimatedMonIcon:
 	push hl
 	push bc
 	ld d, a
-	callfar ItemIsMail
+	farcall ItemIsMail
 	pop bc
 	pop hl
 	jr c, .mail
@@ -544,7 +544,7 @@ GetStorageIcon:
 	call _LoadOverworldMonIcon
 	ld c, 4
 	pop hl
-	newfarjp BillsPC_SafeGet2bpp
+	farjp BillsPC_SafeGet2bpp
 
 FreezeMonIcons:
 	ld hl, wSpriteAnimationStructs

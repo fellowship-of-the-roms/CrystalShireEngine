@@ -428,7 +428,7 @@ Function11837a:
 	jr nz, .asm_118393
 	pop af
 	ldh [rSVBK], a
-	jmp BattleTowerRoomMenu_Cleanup
+	jr BattleTowerRoomMenu_Cleanup
 
 BattleTowerRoomMenu_InitRAM:
 	di
@@ -4310,7 +4310,7 @@ Function11a00e:
 	jr z, .asm_11a039
 	dec a
 	jr z, .asm_11a081
-	jmp Function11a0ca
+	jr Function11a0ca
 
 .asm_11a039
 	ld a, BANK(w3_d800)
@@ -5515,7 +5515,7 @@ Text_ThisBattleRoomPleaseWait: ; unreferenced
 Function11ac3e:
 	call SpeechTextbox
 	call FadeToMenu
-	callfar ClearSpriteAnims2
+	farcall ClearSpriteAnims2
 	call Function11ac51
 	jmp CloseSubmenu
 
@@ -5633,11 +5633,11 @@ Function11ad1b:
 	ld hl, LoadMenuMonIcon
 	ld a, BANK(LoadMenuMonIcon)
 	ld e, MONICON_MOBILE1
-	rst FarCall
+	call FarCall_hl
 	ld hl, LoadMenuMonIcon
 	ld a, BANK(LoadMenuMonIcon)
 	ld e, MONICON_MOBILE2
-	rst FarCall
+	call FarCall_hl
 	ld hl, wPokedexOrder
 	ld bc, $0115
 	xor a

@@ -41,7 +41,9 @@ DoMysteryGift:
 if DEF(_CRYSTAL_VC)
 	farcall StagePartyDataForMysteryGift
 	call ClearMysteryGiftTrainer
-	nop ; no-optimize nops
+	nop ; no-optimize nop
+	nop ; no-optimize nop
+	nop ; no-optimize nop
 else
 	ld a, 2
 	ld [wMysteryGiftMessageCount], a
@@ -88,10 +90,10 @@ endc
 .skip_checks
 	ld a, [wMysteryGiftPlayerBackupItem]
 	and a
-	jmp nz, .GiftWaiting
+	jr nz, .GiftWaiting
 	ld a, [wMysteryGiftPartnerBackupItem]
 	and a
-	jmp nz, .FriendNotReady
+	jr nz, .FriendNotReady
 	ld a, [wMysteryGiftPartnerGameVersion]
 	cp POKEMON_PIKACHU_2_VERSION
 	jr z, .skip_append_save
@@ -116,7 +118,7 @@ endc
 	pop bc
 	jr nz, .SentItem
 ; keep the decoration if it wasn't already received
-	callfar GetDecorationName_c
+	farcall GetDecorationName_c
 	ld h, d
 	ld l, e
 	ld de, wStringBuffer1
@@ -291,6 +293,8 @@ if DEF(_CRYSTAL_VC)
 else
 	di
 	farcall ClearChannels
+	nop
+	nop
 	call InitializeIRCommunicationInterrupts
 
 .restart
@@ -1335,7 +1339,7 @@ CopyMysteryGiftReceivedDecorationsToPC:
 	pop bc
 	jr z, .skip
 	push bc
-	callfar SetSpecificDecorationFlag
+	farcall SetSpecificDecorationFlag
 	pop bc
 .skip
 	inc c

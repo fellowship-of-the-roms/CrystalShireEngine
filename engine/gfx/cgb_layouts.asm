@@ -291,7 +291,7 @@ PokedexCursorPalette:
 INCLUDE "gfx/pokedex/cursor.pal"
 
 _CGB_BillsPC:
-	newfarcall GetBoxTheme
+	farcall GetBoxTheme
 BillsPC_PreviewTheme:
 	; hl = BillsPC_ThemePals + a * 4 * 2
 	ld h, 0
@@ -338,7 +338,7 @@ BillsPC_PreviewTheme:
 	ld de, wOBPals1 palette 6
 	jmp LoadHLPaletteIntoDE
 .apply_pals
-	newfarjp BillsPC_SetPals
+	farjp BillsPC_SetPals
 
 .GetMonPalette:
 	ld bc, wTempMonDVs

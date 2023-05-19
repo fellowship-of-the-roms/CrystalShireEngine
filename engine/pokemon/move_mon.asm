@@ -153,7 +153,7 @@ endr
 	push de
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callfar CalcExpAtLevel
+	farcall CalcExpAtLevel
 	pop de
 	ldh a, [hProduct + 1]
 	ld [de], a
@@ -368,7 +368,7 @@ endr
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
-	callfar UpdateUnownDex
+	farcall UpdateUnownDex
 
 .done
 	scf ; When this function returns, the carry flag indicates success vs failure.
@@ -484,7 +484,7 @@ AddTempmonToParty:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
-	callfar UpdateUnownDex
+	farcall UpdateUnownDex
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .done
@@ -609,7 +609,7 @@ RetrieveBreedmon:
 	farcall HealPartyMon
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callfar CalcExpAtLevel
+	farcall CalcExpAtLevel
 	pop bc
 	ld hl, MON_EXP
 	add hl, bc
@@ -665,7 +665,7 @@ DepositBreedmon:
 SendMonIntoBox:
 ; Sends the mon into one of Bills Boxes
 ; the data comes mainly from 'wEnemyMon:'
-	newfarcall NewStorageBoxPointer
+	farcall NewStorageBoxPointer
 	jr nc, .not_full
 
 	and a
@@ -707,7 +707,7 @@ SendMonIntoBox:
 	push de
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callfar CalcExpAtLevel
+	farcall CalcExpAtLevel
 	pop de
 	ldh a, [hProduct + 1]
 	ld [de], a
@@ -767,7 +767,7 @@ SendMonIntoBox:
 	jr nz, .not_unown
 	ld hl, wBufferMonDVs
 	predef GetUnownLetter
-	callfar UpdateUnownDex
+	farcall UpdateUnownDex
 
 .not_unown
 	ld a, [wCurPartySpecies]
@@ -778,14 +778,14 @@ SendMonIntoBox:
 	ld [wBufferMonBox], a
 	ld a, c
 	ld [wBufferMonSlot], a
-	newfarcall UpdateStorageBoxMonFromTemp
+	farcall UpdateStorageBoxMonFromTemp
 	scf
 	ret
 
 GiveEgg::
 	ld a, [wCurPartySpecies]
 	push af
-	callfar GetLowestEvolutionStage
+	farcall GetLowestEvolutionStage
 	ld a, [wCurPartySpecies]
 
 ; TryAddMonToParty sets Seen and Caught flags
@@ -1263,7 +1263,7 @@ GivePoke::
 .failed
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
-	callfar LoadEnemyMon
+	farcall LoadEnemyMon
 	call SendMonIntoBox
 	jmp nc, .FailedToGiveMon
 	ld a, BOXMON
@@ -1282,7 +1282,7 @@ GivePoke::
 	jr z, .done
 	ld a, [wCurItem]
 	ld [wBufferMonItem], a
-	newfarcall UpdateStorageBoxMonFromTemp
+	farcall UpdateStorageBoxMonFromTemp
 
 .done
 	ld a, [wCurPartySpecies]
@@ -1366,7 +1366,7 @@ GivePoke::
 	ld [hli], a
 	call Random
 	ld [hl], a
-	newfarcall UpdateStorageBoxMonFromTemp
+	farcall UpdateStorageBoxMonFromTemp
 	farcall SetGiftBoxMonCaughtData
 	jr .skip_nickname
 
@@ -1401,7 +1401,7 @@ GivePoke::
 	ld de, wBufferMonNickname
 	ld bc, MON_NAME_LENGTH
 	call CopyBytes
-	newfarcall UpdateStorageBoxMonFromTemp
+	farcall UpdateStorageBoxMonFromTemp
 	ld b, $1
 	ret
 
@@ -1428,5 +1428,4 @@ InitNickname:
 	call InitName
 	ld a, $4 ; ExitAllMenus is in bank 0; maybe it used to be in bank 4
 	ld hl, ExitAllMenus
-	rst FarCall
-	ret
+	jmp FarCall_hl

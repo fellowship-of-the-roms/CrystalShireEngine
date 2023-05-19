@@ -191,9 +191,9 @@ BillsPC_RefreshTheme:
 UseBillsPC:
 	call ClearTilemap
 	call ClearPalettes
-	newfarcall WipeAttrmap
+	farcall WipeAttrmap
 	call ClearSprites
-	newfarcall ClearSpriteAnims
+	farcall ClearSpriteAnims
 	ld a, [wVramState]
 	res 0, a
 	ld [wVramState], a
@@ -440,7 +440,7 @@ SafeCopyTilemapAtOnce::
 ;    3 = use whatever was in hCGBPalUpdate
 ; bit 2: if set, clear hOAMUpdate
 ; bit 3: if set, only update tilemap
-	newfarjp _SafeCopyTilemapAtOnce
+	farjp _SafeCopyTilemapAtOnce
 
 BillsPC_BlankTiles:
 ; Used as input to blank a*4 tiles (mon icons typically use 4 tiles).
@@ -641,7 +641,7 @@ PCIconLoop:
 	push hl
 	push de
 	push bc
-	newfarcall GetStorageIcon_a
+	farcall GetStorageIcon_a
 	pop bc
 	pop de
 	pop hl
@@ -732,14 +732,14 @@ WriteIconPaletteData:
 	push de
 	push bc
 	ld bc, wBufferMonDVs
-	newfarcall CheckShininess
+	farcall CheckShininess
 	ld a, [wBufferMonAltSpecies]
 	ld c, a
 	ld b, 1
 	jr c, .got_shininess
 	dec b
 .got_shininess
-	newfarcall GetMonPalInBCDE
+	farcall GetMonPalInBCDE
 	ld h, b
 	ld l, c
 	pop bc
@@ -784,7 +784,7 @@ BillsPC_UpdateCursorLocation:
 	ld de, wStringBuffer3
 	ld bc, 8
 	call CopyBytes
-	newfarcall PlaySpriteAnimations
+	farcall PlaySpriteAnimations
 	ld hl, wStringBuffer3
 	ld de, wShadowOAMSprite30
 	ld bc, 8
@@ -1010,7 +1010,7 @@ _GetCursorMon:
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld de, vTiles2
-	newfarcall PrepareFrontpic
+	farcall PrepareFrontpic
 
 	push hl
 	ld a, "@"
@@ -1098,7 +1098,7 @@ _GetCursorMon:
 	; Colors
 	ld bc, wBufferMonDVs
 	ld a, [wBufferMonAltSpecies]
-	newfarcall GetMonNormalOrShinyPalettePointer
+	farcall GetMonNormalOrShinyPalettePointer
 	ld de, wBillsPC_PokepicPal
 	push de
 	ld b, 4
@@ -1135,7 +1135,7 @@ _GetCursorMon:
 
 	; Poképic tilemap
 	hlcoord 0, 0
-	newfarcall PlaceFrontpicAtHL
+	farcall PlaceFrontpicAtHL
 
 	; Nickname
 	hlcoord 8, 0
@@ -1168,7 +1168,7 @@ _GetCursorMon:
 	; Gender
 	ld a, BUFFERMON
 	ld [wMonType], a
-	newfarcall GetGender
+	farcall GetGender
 	hlcoord 4, 8
 	jr c, .genderless
 	ld a, "♂"
@@ -1183,7 +1183,7 @@ _GetCursorMon:
 	push hl
 	push bc
 	ld bc, wBufferMonDVs
-	newfarcall CheckShininess
+	farcall CheckShininess
 	pop bc
 	pop hl
 	inc hl
@@ -1566,7 +1566,7 @@ BillsPC_Stats:
 	call BillsPC_PrepareTransistion
 	ld a, BUFFERMON
 	ld [wMonType], a
-	newfarcall _OpenPartyStats
+	farcall _OpenPartyStats
 	jmp BillsPC_ReturnFromTransistion
 
 BillsPC_CursorPick1:
@@ -1612,7 +1612,7 @@ BillsPC_SetIcon:
 	call BillsPC_SetPals
 	call DelayFrame
 	pop hl
-	newfarjp GetStorageIcon
+	farjp GetStorageIcon
 
 BillsPC_MoveIconData:
 ; Copies icon data from slot bc to slot de, then blanks slot bc.
@@ -2125,7 +2125,7 @@ BillsPC_Moves:
 	ld hl, .CantCheckEggMoves
 	jmp z, BillsPC_PrintText
 	call BillsPC_PrepareTransistion
-	newfarcall _ManagePokemonMoves
+	farcall _ManagePokemonMoves
 	jr BillsPC_ReturnFromTransistion
 
 .CantCheckEggMoves:
@@ -2150,7 +2150,7 @@ BillsPC_GetStorageSpace:
 	call YesNoBox
 	push af
 	jr c, .menutext_abort
-	newfarcall ForceGameSave
+	farcall ForceGameSave
 	ld hl, BillsPC_GameSaved
 	call PrintText
 	; fallthrough
@@ -2177,7 +2177,7 @@ BillsPC_GiveItem:
 
 .entries_not_full
 	call BillsPC_PrepareTransistion
-	newfarcall PCGiveItem
+	farcall PCGiveItem
 	; fallthrough
 
 BillsPC_ReturnFromTransistion:
@@ -2235,7 +2235,7 @@ BillsPC_TakeMail:
 	dec a
 	ld [wCurPartyMon], a
 	call BillsPC_HideCursorAndMode
-	newfarcall TakeMail
+	farcall TakeMail
 
 	; Preserve return flags.
 	push af
@@ -2250,7 +2250,7 @@ BillsPC_ReadMail:
 	dec a
 	ld [wCurPartyMon], a
 	call BillsPC_PrepareTransistion
-	newfarcall ReadPartyMonMail
+	farcall ReadPartyMonMail
 	jr BillsPC_ReturnFromTransistion
 
 BillsPC_MoveItem:
@@ -2263,7 +2263,7 @@ BillsPC_MoveItem:
 	jr nz, .not_on_pack
 
 	call BillsPC_PrepareTransistion
-	newfarcall GetItemToGive
+	farcall GetItemToGive
 	push af
 	call BillsPC_ReturnFromTransistion
 	pop af
@@ -2621,7 +2621,7 @@ BillsPC_CanReleaseMon:
 	push hl
 	push de
 	push bc
-	newfarcall CheckCurPartyMonFainted
+	farcall CheckCurPartyMonFainted
 	pop bc
 	pop de
 	pop hl
@@ -2847,7 +2847,7 @@ BillsPC_Rename:
 	call BillsPC_PrepareTransistion
 	ld b, $4 ; box
 	ld de, wStringBuffer2
-	newfarcall NamingScreen
+	farcall NamingScreen
 	ld hl, wStringBuffer2
 
 	; Abort if no name was entered.
@@ -2940,9 +2940,9 @@ endr
 	cp -1
 	jr z, .current_theme
 	dec a
-	newfarjp BillsPC_PreviewTheme
+	farjp BillsPC_PreviewTheme
 .current_theme
-	newfarjp _CGB_BillsPC
+	farjp _CGB_BillsPC
 
 INCLUDE "data/pc/theme_names.asm"
 
@@ -3066,7 +3066,7 @@ BillsPC_SwapStorage:
 	ld a, [wBufferMonSpecies]
 	ld [wCurPartySpecies], a
 	call BillsPC_PrepareTransistion
-	newfarcall ComposeMailMessage
+	farcall ComposeMailMessage
 	call BillsPC_ReturnFromTransistion
 
 	; reload cursor item icon
@@ -3207,7 +3207,7 @@ BillsPC_SwapStorage:
 	jr c, .menutext_abort
 
 	; Just re-run this function.
-	newfarcall ForceGameSave
+	farcall ForceGameSave
 	ld hl, BillsPC_GameSaved
 	call PrintText
 	call BillsPC_UpdateCursorLocation
@@ -3400,7 +3400,7 @@ BillsPC_ApplyPals:
 BillsPC_RestoreUI:
 	call ClearPalettes
 	call ClearSprites
-	newfarcall ClearSpriteAnims
+	farcall ClearSpriteAnims
 
 	; This needs to be done in case a frontpic anim overwrote data here.
 	ld a, 1

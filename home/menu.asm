@@ -23,11 +23,11 @@ Load2DMenuData::
 	ret
 
 StaticMenuJoypad::
-	callfar _StaticMenuJoypad
+	farcall _StaticMenuJoypad
 	jr GetMenuJoypad
 
 ScrollingMenuJoypad::
-	callfar _ScrollingMenuJoypad
+	farcall _ScrollingMenuJoypad
 ; fallthrough
 
 GetMenuJoypad::
@@ -62,17 +62,17 @@ HideCursor::
 	ret
 
 PushWindow::
-	callfar _PushWindow
+	farcall _PushWindow
 	ret
 
 ExitMenu::
 	push af
-	callfar _ExitMenu
+	farcall _ExitMenu
 	pop af
 	ret
 
 InitVerticalMenuCursor::
-	callfar _InitVerticalMenuCursor
+	farcall _InitVerticalMenuCursor
 	ret
 
 CloseWindow::
@@ -393,7 +393,7 @@ CopyNameFromMenu::
 	ret
 
 NoYesBox::
-	newfarjp _NoYesBox
+	farjp _NoYesBox
 
 YesNoBox::
 	lb bc, SCREEN_WIDTH - 6, 7

@@ -217,15 +217,15 @@ SpriteAnimFunc_GSIntroHoOhLugia:
 	ret
 
 SpriteAnimFunc_NamingScreenCursor:
-	callfar NamingScreen_AnimateCursor
+	farcall NamingScreen_AnimateCursor
 	ret
 
 SpriteAnimFunc_MailCursor:
-	callfar ComposeMail_AnimateCursor
+	farcall ComposeMail_AnimateCursor
 	ret
 
 SpriteAnimFunc_GameFreakLogo:
-	callfar GameFreakLogoSpriteAnim
+	farcall GameFreakLogoSpriteAnim
 	ret
 
 SpriteAnimFunc_GSGameFreakLogoStar:
@@ -355,11 +355,11 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_SlotsGolem:
-	callfar Slots_AnimateGolem
+	farcall Slots_AnimateGolem
 	ret
 
 SpriteAnimFunc_SlotsChansey:
-	callfar Slots_AnimateChansey
+	farcall Slots_AnimateChansey
 	ld hl, wSlotsDelay
 	ld a, [hl]
 	cp $2
@@ -401,15 +401,15 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	ret
 
 SpriteAnimFunc_UnusedCursor:
-	callfar UnusedCursor_InterpretJoypad_AnimateCursor
+	farcall UnusedCursor_InterpretJoypad_AnimateCursor
 	ret
 
 SpriteAnimFunc_PokegearArrow:
-	callfar AnimatePokegearModeIndicatorArrow
+	farcall AnimatePokegearModeIndicatorArrow
 	ret
 
 SpriteAnimFunc_MemoryGameCursor:
-	callfar MemoryGame_InterpretJoypad_AnimateCursor
+	farcall MemoryGame_InterpretJoypad_AnimateCursor
 	ret
 
 SpriteAnimFunc_TradePokeBall:
@@ -550,7 +550,7 @@ SpriteAnimFunc_TradeTubeBulge:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_TrademonInTube:
-	callfar TradeAnim_AnimateTrademonInTube
+	farcall TradeAnim_AnimateTrademonInTube
 	ret
 
 SpriteAnimFunc_RevealNewMon:
@@ -590,7 +590,7 @@ SpriteAnimFunc_RevealNewMon:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_RadioTuningKnob:
-	callfar AnimateTuningKnob
+	farcall AnimateTuningKnob
 	ret
 
 SpriteAnimFunc_CutLeaves:
@@ -866,7 +866,7 @@ AnimSeqs_Cosine:
 
 SpriteAnimFunc_PcCursor:
 	; Switch frameset ID depending on item mode setting.
-	newfarcall BillsPC_CheckBagDisplay
+	farcall BillsPC_CheckBagDisplay
 	ld a, SPRITE_ANIM_FRAMESET_PC_CURSOR_ITEM
 	jr z, .got_frameset
 	assert SPRITE_ANIM_FRAMESET_PC_CURSOR == SPRITE_ANIM_FRAMESET_PC_CURSOR_ITEM - 1
@@ -877,8 +877,8 @@ SpriteAnimFunc_PcCursor:
 	ld [hl], a
 	push de
 	push bc
-	newfarcall BillsPC_GetCursorSlot
-	newfarcall BillsPC_GetXYFromStorageBox
+	farcall BillsPC_GetCursorSlot
+	farcall BillsPC_GetXYFromStorageBox
 	pop bc
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -940,7 +940,7 @@ SpriteAnimFunc_PcQuick:
 	jr .done
 
 .finish_anim
-	newfarcall BillsPC_FinishQuickAnim
+	farcall BillsPC_FinishQuickAnim
 	; fallthrough
 .done
 	pop de
@@ -1011,7 +1011,7 @@ SpriteAnimFunc_PcPack:
 	ld [hl], a
 
 	; Hide pack outside Item mode
-	newfarcall BillsPC_CheckBagDisplay
+	farcall BillsPC_CheckBagDisplay
 	ld a, $80 ; move it out of view
 	jr nz, .got_pack_y
 	xor a

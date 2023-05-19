@@ -408,7 +408,7 @@ Function17d1f1:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
-	callfar UpdateUnownDex
+	farcall UpdateUnownDex
 	ld a, [wFirstUnownSeen]
 	and a
 	ret nz

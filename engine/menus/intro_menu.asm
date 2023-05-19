@@ -153,7 +153,7 @@ _ResetWRAM:
 	ld [wCurBox], a
 	ld [wSavedAtLeastOnce], a
 
-	newfarcall InitializeBoxes
+	farcall InitializeBoxes
 
 	ld hl, wNumItems
 	call .InitList
@@ -349,7 +349,7 @@ Continue:
 	jr z, .SpawnAfterE4
 	ld a, MAPSETUP_CONTINUE
 	ldh [hMapEntryMethod], a
-	jmp FinishContinueFunction
+	jr FinishContinueFunction
 
 .FailToLoad:
 	ret
@@ -933,7 +933,7 @@ Intro_PlacePlayerSprite:
 DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
-	callfar SplashScreen
+	farcall SplashScreen
 	jr c, StartTitleScreen
 	farcall CrystalIntro
 

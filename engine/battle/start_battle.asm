@@ -60,9 +60,9 @@ PlayBattleMusic:
 	ld a, [wBattleType]
 	cp BATTLETYPE_SUICUNE
 	ld de, MUSIC_SUICUNE_BATTLE
-	jmp z, .done
+	jr z, .done
 	cp BATTLETYPE_ROAMING
-	jmp z, .done
+	jr z, .done
 
 	; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
@@ -187,7 +187,7 @@ ClearBattleRAM:
 	xor a
 	call ByteFill
 
-	callfar ResetEnemyStatLevels
+	farcall ResetEnemyStatLevels
 
 	call ClearWindowData
 

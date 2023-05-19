@@ -173,7 +173,7 @@ endc
 	ld [wTempSpecies], a
 	push hl
 	push de
-	callfar ConvertMon_1to2
+	farcall ConvertMon_1to2
 	pop de
 	ld a, [wTempSpecies]
 	ld l, a
@@ -734,7 +734,7 @@ Link_PrepPartyData_Gen1:
 	sbc a
 	or l
 	ld [wTempSpecies], a
-	callfar ConvertMon_2to1
+	farcall ConvertMon_2to1
 	pop de
 	pop hl
 	ld a, [wTempSpecies]
@@ -780,7 +780,7 @@ Link_PrepPartyData_Gen1:
 	sbc a
 	or l
 	ld [wTempSpecies], a
-	callfar ConvertMon_2to1
+	farcall ConvertMon_2to1
 	pop bc
 	pop de
 	ld a, [wTempSpecies]
@@ -1391,7 +1391,7 @@ Link_ConvertPartyStruct1to2:
 	push bc
 	push de
 	ld [wTempSpecies], a
-	callfar ConvertMon_1to2
+	farcall ConvertMon_1to2
 	pop de
 	pop bc
 	ld a, [wTempSpecies]
@@ -1659,7 +1659,7 @@ LinkTradeOTPartymonMenuLoop:
 	jr z, .not_a_button
 	ld a, INIT_ENEMYOT_LIST
 	ld [wInitListType], a
-	callfar InitList
+	farcall InitList
 	ld hl, wOTPartyMon1Species
 	farcall LinkMonStatsScreen
 	jmp LinkTradePartiesMenuMasterLoop
@@ -1849,7 +1849,7 @@ LinkTrade_TradeStatsMenu:
 	ld [wMenuCursorY], a
 	ld a, INIT_PLAYEROT_LIST
 	ld [wInitListType], a
-	callfar InitList
+	farcall InitList
 	farcall LinkMonStatsScreen
 	call SafeLoadTempTilemapToTilemap
 	hlcoord 6, 1
@@ -2301,7 +2301,7 @@ LinkTrade:
 
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
-	callfar RemoveMonFromParty
+	farcall RemoveMonFromParty
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
@@ -2351,7 +2351,7 @@ LinkTrade:
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
-	callfar EvolvePokemon
+	farcall EvolvePokemon
 	call ClearScreen
 	call LoadTradeScreenBorderGFX
 	call SetTradeRoomBGPals
@@ -2958,7 +2958,7 @@ TimeCapsule:
 	ld a, LINK_TIMECAPSULE
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	callfar LinkCommunications
+	farcall LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a
@@ -2969,7 +2969,7 @@ TradeCenter:
 	ld a, LINK_TRADECENTER
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	callfar LinkCommunications
+	farcall LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a
@@ -2980,7 +2980,7 @@ Colosseum:
 	ld a, LINK_COLOSSEUM
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	callfar LinkCommunications
+	farcall LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a

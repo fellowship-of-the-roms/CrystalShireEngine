@@ -280,7 +280,7 @@ Serial_ExchangeSyncBytes::
 
 Serial_PrintWaitingTextAndSyncAndExchangeNybble::
 	call LoadTilemapToTempTilemap
-	callfar PlaceWaitingText
+	farcall PlaceWaitingText
 	call WaitLinkTransfer
 	jmp SafeLoadTempTilemapToTilemap
 

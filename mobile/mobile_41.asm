@@ -1049,7 +1049,7 @@ Function1064c3:
 	push hl
 	ld hl, Function3f88
 	ld a, b
-	rst FarCall
+	call FarCall_hl
 	pop hl
 	pop bc
 	pop af
@@ -1065,7 +1065,7 @@ Function1064d8: ; unreferenced
 	push hl
 	ld hl, Function3f9f
 	ld a, b
-	rst FarCall
+	call FarCall_hl
 	pop hl
 	pop bc
 	pop af

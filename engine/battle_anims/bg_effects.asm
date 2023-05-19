@@ -526,7 +526,7 @@ BattleBGEffect_BattlerObj_2Row:
 	jmp EndBattleBGEffect
 
 _QueueBattleAnimation:
-	callfar QueueBattleAnimation
+	farcall QueueBattleAnimation
 	ret
 
 BattleBGEffect_RemoveMon:
@@ -2850,12 +2850,12 @@ BattleBGEffects_CheckSGB:
 
 BattleBGEffects_Sine:
 	ld e, a
-	callfar BattleAnim_Sine_e
+	farcall BattleAnim_Sine_e
 	ld a, e
 	ret
 
 BattleBGEffects_Cosine:
 	ld e, a
-	callfar BattleAnim_Cosine_e
+	farcall BattleAnim_Cosine_e
 	ld a, e
 	ret
