@@ -654,6 +654,10 @@ _OpenPartyStats:
 	call ClearSprites
 	call LowVolume
 	predef StatsScreenInit
+	; This ensures that MaxVolume works as it should if we're in the middle of
+	; playing a cry.
+	ld a, $77
+	ld [wLastVolume], a
 	call MaxVolume
 	call ExitMenu
 	ld a, 0
