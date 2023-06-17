@@ -342,7 +342,7 @@ ParseCredits:
 	call DelayFrame
 	pop de
 	call PlayMusic
-	jmp .loop
+	jr .loop
 
 .wait2
 ; Wait for some amount of ticks.

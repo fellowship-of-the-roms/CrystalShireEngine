@@ -3,7 +3,7 @@ ClearSprites::
 	ld hl, wShadowOAM
 	ld bc, wShadowOAMEnd - wShadowOAM
 	xor a
-	jp ByteFill
+	jmp ByteFill
 
 HideSprites::
 ; Set all OAM y-positions to 160 to hide them offscreen

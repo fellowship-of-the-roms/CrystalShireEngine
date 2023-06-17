@@ -236,7 +236,7 @@ SetClock::
 ;	call OpenSRAM
 ;	pop af
 ;	ld [sRTCStatusFlags], a
-;	jp CloseSRAM
+;	jmp CloseSRAM
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
