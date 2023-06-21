@@ -1251,7 +1251,7 @@ StepFunction_TeleportFrom:
 	inc [hl]
 	ld a, [hl]
 	ld d, $60
-	call Sine
+	farcall Sine
 	ld a, h
 	sub $60
 	ld hl, OBJECT_SPRITE_Y_OFFSET
@@ -1316,7 +1316,7 @@ StepFunction_TeleportTo:
 	inc [hl]
 	ld a, [hl]
 	ld d, $60
-	call Sine
+	farcall Sine
 	ld a, h
 	sub $60
 	ld hl, OBJECT_SPRITE_Y_OFFSET
@@ -1393,7 +1393,7 @@ StepFunction_Skyfall:
 	inc [hl]
 	ld a, [hl]
 	ld d, $60
-	call Sine
+	farcall Sine
 	ld a, h
 	sub $60
 	ld hl, OBJECT_SPRITE_Y_OFFSET

@@ -192,7 +192,7 @@ SpriteAnimFunc_GSTitleTrail:
 	ld a, [hl]
 	add 3
 	ld [hl], a
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -209,7 +209,7 @@ SpriteAnimFunc_GSIntroHoOhLugia:
 	inc a
 	ld [hl], a
 	ld d, 2
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -247,14 +247,14 @@ SpriteAnimFunc_GSGameFreakLogoStar:
 	ld a, [hl]
 	push af
 	push de
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -291,14 +291,14 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	ld a, [hl]
 	push af
 	push de
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -389,7 +389,7 @@ SpriteAnimFunc_SlotsChanseyEgg:
 .move_vertical
 	ld a, e
 	ld d, 32
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -453,7 +453,7 @@ SpriteAnimFunc_TradePokeBall:
 	jr c, .done
 	dec [hl]
 	ld d, 40
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -490,7 +490,7 @@ SpriteAnimFunc_TradePokeBall:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	call Sprites_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -563,7 +563,7 @@ SpriteAnimFunc_RevealNewMon:
 
 	push af
 	push de
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -571,7 +571,7 @@ SpriteAnimFunc_RevealNewMon:
 
 	pop de
 	pop af
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -609,14 +609,14 @@ SpriteAnimFunc_CutLeaves:
 	inc [hl]
 	push af
 	push de
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -655,7 +655,7 @@ SpriteAnimFunc_FlyFrom:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -680,7 +680,7 @@ SpriteAnimFunc_FlyLeaf:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -715,7 +715,7 @@ SpriteAnimFunc_FlyTo:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -747,7 +747,7 @@ SpriteAnimFunc_IntroSuicune:
 	xor $ff
 	inc a
 	ld d, 32
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -766,7 +766,7 @@ SpriteAnimFunc_IntroPichuWooper:
 	xor $ff
 	inc a
 	ld d, 32
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -786,14 +786,14 @@ SpriteAnimFunc_IntroUnown:
 	ld a, [hl]
 	push af
 	push de
-	call AnimSeqs_Sine
+	farcall Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call AnimSeqs_Cosine
+	farcall Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -844,12 +844,6 @@ AnimSeqs_IncAnonJumptableIndex:
 	add hl, bc
 	inc [hl]
 	ret
-
-AnimSeqs_Sine:
-	jmp Sprites_Sine
-
-AnimSeqs_Cosine:
-	jmp Sprites_Cosine
 
 SpriteAnimFunc_PcCursor:
 	; Switch frameset ID depending on item mode setting.
