@@ -242,9 +242,9 @@ MACRO anim_keepsprites
 	db anim_keepsprites_command
 ENDM
 
-	const anim_0xf5_command ; $f5
-MACRO anim_0xf5
-	db anim_0xf5_command
+	const anim_keepspritesandoam_command ; $f5
+MACRO anim_keepspritesandoam
+	db anim_keepspritesandoam_command
 ENDM
 
 	const anim_0xf6_command ; $f6
