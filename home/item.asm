@@ -51,6 +51,7 @@ ReceiveItem::
 	ret
 
 CheckItem::
+; [wCurItem] = item *ID* to check.
 	push hl
 	push de
 	push bc

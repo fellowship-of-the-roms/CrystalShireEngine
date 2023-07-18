@@ -2,7 +2,8 @@ MACRO npctrade
 ; dialog set, requested mon, offered mon, nickname, dvs, item, OT ID, OT name, gender requested
 	db \1
 	dw \2, \3
-	db \4, \5, \6, \7
+	db \4, \5, \6
+	dw \7
 	shift
 	dw \7
 	db \8, \9

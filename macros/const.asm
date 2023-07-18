@@ -39,6 +39,12 @@ MACRO const_next
 	endc
 ENDM
 
+MACRO const_align
+	DEF align_mask = (1 << (\1)) - 1
+	DEF const_value += (align_mask + 1 - (const_value & align_mask)) & align_mask
+	assert !(const_value & align_mask)
+ENDM
+
 MACRO rb_skip
 	if _NARG == 1
 		rsset _RS + \1

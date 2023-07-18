@@ -230,7 +230,8 @@ CheckCoinsAndCoinCase:
 	ld a, [hli]
 	or [hl]
 	jr z, .no_coins
-	ld a, COIN_CASE
+	ld hl, COIN_CASE
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

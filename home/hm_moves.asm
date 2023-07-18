@@ -1,7 +1,10 @@
 ; HM moves can't be forgotten
 
 IsHM::
-	cp HM01
+	push hl
+	call GetItemIndexFromID
+	cphl16 HM01
+	pop hl
 	jr c, .NotHM
 	scf
 	ret

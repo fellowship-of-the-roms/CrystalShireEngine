@@ -117,8 +117,18 @@ ReadTrainerPartyPieces:
 	ld d, h
 	ld e, l
 	pop hl
+	push hl
 	call GetNextTrainerDataByte
+	push af
+	call GetNextTrainerDataByte
+	ld h, a
+	pop af
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
 	ld [de], a
+	inc hl
+	inc hl
 .no_item
 
 	ld a, [wOtherTrainerType]

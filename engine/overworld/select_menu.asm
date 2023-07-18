@@ -49,6 +49,8 @@ CheckRegisteredItem:
 
 .CheckKeyItem:
 	ld a, [wRegisteredItem]
+	call GetItemIndexFromID
+	ld a, l
 	ld hl, wKeyItems
 	ld de, 1
 	call IsInArray

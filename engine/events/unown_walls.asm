@@ -31,7 +31,8 @@ OmanyteChamber:
 	and a
 	jr nz, .nope
 
-	ld a, WATER_STONE
+	ld hl, WATER_STONE
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
@@ -51,7 +52,10 @@ OmanyteChamber:
 	call GetPartyParamLocation
 	pop bc
 	ld a, [hl]
-	cp WATER_STONE
+	push hl
+	call GetItemIndexFromID
+	cphl16 WATER_STONE
+	pop hl
 	jr nz, .loop
 
 .open

@@ -1,6 +1,5 @@
 NamesPointers::
 ; entries correspond to GetName constants (see constants/text_constants.asm); MON_NAME and MOVE_NAME are not handled by this table
-	dba ItemNames           ; ITEM_NAME
 	dbw 0, wPartyMonOTs     ; PARTY_OT_NAME
 	dbw 0, wOTPartyMonOTs   ; ENEMY_OT_NAME
 	dba TrainerClassNames   ; TRAINER_NAME
@@ -24,7 +23,10 @@ GetName::
 	dec a ; MOVE_NAME
 	ld hl, GetMoveName
 	jr z, .go
-	dec a
+	dec a ; ITEM_NAME
+	ld hl, GetItemName
+	jr z, .go
+	dec a ; ?
 	ld hl, .generic_function
 .go
 	call _hl_
@@ -153,23 +155,65 @@ GetPokemonName::
 
 GetItemName::
 ; Get item name for wNamedObjectIndex.
-
 	push hl
 	push bc
+
+	ldh a, [hROMBank]
+	push af
+
+	ld a, BANK(ItemNames)
+	rst Bankswitch
+
 	ld a, [wNamedObjectIndex]
 
-	cp TM01
+	call GetItemIndexFromID
+
+	cphl16 FIRST_TMHM_ITEM
 	jr nc, .TM
 
-	ld [wCurSpecies], a
-	ld a, ITEM_NAME
-	ld [wNamedObjectType], a
-	call GetName
+	push hl
+	ld b, h
+	ld c, l
+	pop hl
+
+	cphl16 FIRST_BALL_ITEM
+	jr nc, .Balls
+	cphl16 FIRST_KEY_ITEM
+	jr nc, .Key_Items
+	dec bc
+	ld hl, ItemNames
+	jr .get_nth_string_16
+.Key_Items
+	ld hl, -(FIRST_KEY_ITEM)
+	add hl, bc
+	ld b, h
+	ld c, l
+	ld hl, KeyItemNames
+	jr .get_nth_string_16
+.Balls
+	ld hl, -(FIRST_BALL_ITEM)
+	add hl, bc
+	ld b, h
+	ld c, l
+	ld hl, BallNames
+.get_nth_string_16
+	call GetNthString16
 	jr .Copied
 .TM:
+	ld de, wStringBuffer1
 	call GetTMHMName
+	jr .done
 .Copied:
 	ld de, wStringBuffer1
+	push de
+	ld bc, ITEM_NAME_LENGTH
+	call CopyBytes
+	pop de
+
+.done
+	pop af
+	rst Bankswitch
+
 	pop bc
 	pop hl
 	ret
@@ -183,8 +227,10 @@ GetTMHMName::
 	ld a, [wNamedObjectIndex]
 	push af
 
+	call GetItemIndexFromID
+
 ; TM/HM prefix
-	cp HM01
+	cphl16 HM01
 	push af
 	jr c, .TM
 

@@ -215,20 +215,64 @@ StandardMart:
 	ld a, STANDARDMART_TOPMENU
 	ret
 
-FarReadMart:
+FarCopyMart: ; copy the mart directly
 	ld hl, wMartPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld de, wCurMartCount
-.CopyMart:
 	ld a, [wMartPointerBank]
 	call GetFarByte
 	ld [de], a
 	inc hl
 	inc de
-	cp -1
+	ld c, a
+	ld b, 0
+	ld a, [wMartPointerBank]
+	call FarCopyBytes
+; end list
+	ld a, -1
+	ld [de], a
+	jr FarReadMart.ReadPrices
+
+FarReadMart: ; read mart items (index -> ID conversion)
+	ld hl, wMartPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, wCurMartCount
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	inc hl
+	; store item count
+	ld [de], a
+	ld  c, a
+	inc de
+.CopyMart:
+	push hl
+	push bc
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld c, a
+	inc hl
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld b, a
+	push bc
+	pop hl
+	call GetItemIDFromIndex
+	pop bc
+	pop hl
+	inc hl
+	inc hl
+	ld [de], a
+	inc de
+	dec c
 	jr nz, .CopyMart
+	; end of list
+	ld a, -1
+	ld [de], a
+.ReadPrices:
 	ld hl, wMartItem1BCD
 	ld de, wCurMartItems
 .ReadMartItem:
@@ -301,13 +345,23 @@ ReadMart:
 	ld de, wCurMartItems
 .loop
 ; copy the items to wCurMartItems
+	push hl
 	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	call GetItemIDFromIndex
+	pop hl
 	ld [de], a
 	inc de
 ; -1 is the terminator
-	cp -1
+	cphl16 -1
+	pop hl
 	jr z, .done
 
+; set hl to the price
+	inc hl
+	inc hl
 	push de
 ; copy the price to de
 	ld a, [hli]
@@ -534,6 +588,8 @@ BargainShopAskPurchaseQuantity:
 	ld h, [hl]
 	ld l, a
 	inc hl
+	inc hl
+	add hl, de
 	add hl, de
 	add hl, de
 	add hl, de
@@ -573,6 +629,8 @@ RooftopSaleAskPurchaseQuantity:
 	ld h, [hl]
 	ld l, a
 	inc hl
+	inc hl
+	add hl, de
 	add hl, de
 	add hl, de
 	add hl, de
@@ -708,6 +766,8 @@ PharmacyComeAgainText:
 	text_end
 
 SellMenu:
+	ld hl, wItemFlags
+	set IN_BAG_F, [hl]
 	call DisableSpriteUpdates
 	farcall DepositSellInitPackBuffers
 .loop
@@ -719,6 +779,8 @@ SellMenu:
 	jr .loop
 
 .quit
+	ld hl, wItemFlags
+	res IN_BAG_F, [hl]
 	call ReturnToMapWithSpeechTextbox
 	and a
 	ret

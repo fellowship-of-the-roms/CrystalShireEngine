@@ -86,10 +86,13 @@ GetFruitTreeItem:
 	push hl
 	push de
 	ld e, a
-	ld d, 0
+	ld a, 0
+	sla e
+	adc 0
+	ld d, a
 	ld hl, FruitTreeItems
 	add hl, de
-	ld a, [hl]
+	call GetItemIDFromHL
 	pop de
 	pop hl
 	ret

@@ -126,12 +126,17 @@ StageDataForMysteryGift:
 
 MysteryGiftGetItem:
 	ld a, c
-	cp MysteryGiftItems.End - MysteryGiftItems
+	cp (MysteryGiftItems.End - MysteryGiftItems) / 2
 	jr nc, MysteryGiftFallbackItem
 	ld hl, MysteryGiftItems
 	ld b, 0
 	add hl, bc
-	ld c, [hl]
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	ld c, a
 	ret
 
 MysteryGiftGetDecoration:

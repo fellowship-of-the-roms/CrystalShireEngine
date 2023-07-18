@@ -123,20 +123,20 @@ EvolveAfterBattle_MasterLoop:
 
 	call GetNextEvoAttackByte
 	cp TR_ANYTIME
-	jr z, .proceed
+	jp z, .proceed
 	cp TR_MORNDAY
 	jr z, .happiness_daylight
 
 ; TR_NITE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp nz, .skip_evolution_species
+	jp nz, .skip_half_species_parameter
 	jr .proceed
 
 .happiness_daylight
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp z, .skip_evolution_species
+	jp z, .skip_half_species_parameter
 	jr .proceed
 
 .trade
@@ -149,16 +149,24 @@ EvolveAfterBattle_MasterLoop:
 
 	call GetNextEvoAttackByte
 	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
 	inc a
 	jr z, .proceed
+	dec a
 
 	ld a, [wLinkMode]
 	cp LINK_TIMECAPSULE
-	jp z, .skip_evolution_species
+	jp z, .skip_half_species_parameter
 
 	ld a, [wTempMonItem]
 	cp b
-	jp nz, .skip_evolution_species
+	jp nz, .skip_half_species_parameter
 
 	xor a
 	ld [wTempMonItem], a
@@ -167,6 +175,13 @@ EvolveAfterBattle_MasterLoop:
 .item
 	call GetNextEvoAttackByte
 	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
 	ld a, [wCurItem]
 	cp b
 	jp nz, .skip_evolution_species
@@ -184,9 +199,9 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wTempMonLevel]
 	cp b
-	jp c, .skip_evolution_species
+	jp c, .skip_half_species_parameter
 	call IsMonHoldingEverstone
-	jp z, .skip_evolution_species
+	jp z, .skip_half_species_parameter
 
 .proceed
 	ld a, [wTempMonLevel]
@@ -332,6 +347,8 @@ EvolveAfterBattle_MasterLoop:
 	inc hl
 .skip_evolution_species_parameter
 	inc hl
+.skip_half_species_parameter
+	inc hl
 .skip_evolution_species
 	inc hl
 	inc hl
@@ -399,7 +416,8 @@ IsMonHoldingEverstone:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hl]
-	cp EVERSTONE
+	call GetItemIndexFromID
+	cphl16 EVERSTONE
 	pop hl
 	ret
 
@@ -641,6 +659,7 @@ SkipEvolutions::
 	inc hl
 	inc hl
 	inc hl
+	inc hl
 	jr SkipEvolutions
 
 DetermineEvolutionItemResults::
@@ -661,6 +680,13 @@ DetermineEvolutionItemResults::
 	jr nz, .skip_species_parameter
 	call GetNextEvoAttackByte
 	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
 	ld a, [wCurItem]
 	cp b
 	jr nz, .skip_species
@@ -673,6 +699,8 @@ DetermineEvolutionItemResults::
 .skip_species_two_parameters
 	inc hl
 .skip_species_parameter
+	inc hl
+.skip_half_species_parameter
 	inc hl
 .skip_species
 	inc hl

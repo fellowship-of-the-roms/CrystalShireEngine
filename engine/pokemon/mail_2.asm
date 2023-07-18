@@ -105,8 +105,14 @@ endc
 	ld c, 0
 .loop2
 	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
 	cp b
 	jr z, .got_pointer
+	ld a, [hli]
 	cp -1
 	jr z, .invalid
 	inc c
@@ -119,6 +125,7 @@ endc
 	inc hl
 
 .got_pointer
+	inc hl
 	ld a, c
 	ld [wCurMailIndex], a
 	ld a, [hli]
@@ -133,19 +140,19 @@ endc
 
 MailGFXPointers:
 ; entries correspond to *MAIL_INDEX constants
-	table_width 3, MailGFXPointers
-	dbw FLOWER_MAIL,  LoadFlowerMailGFX
-	dbw SURF_MAIL,    LoadSurfMailGFX
-	dbw LITEBLUEMAIL, LoadLiteBlueMailGFX
-	dbw PORTRAITMAIL, LoadPortraitMailGFX
-	dbw LOVELY_MAIL,  LoadLovelyMailGFX
-	dbw EON_MAIL,     LoadEonMailGFX
-	dbw MORPH_MAIL,   LoadMorphMailGFX
-	dbw BLUESKY_MAIL, LoadBlueSkyMailGFX
-	dbw MUSIC_MAIL,   LoadMusicMailGFX
-	dbw MIRAGE_MAIL,  LoadMirageMailGFX
+	table_width 4, MailGFXPointers
+	dw FLOWER_MAIL,  LoadFlowerMailGFX
+	dw SURF_MAIL,    LoadSurfMailGFX
+	dw LITEBLUEMAIL, LoadLiteBlueMailGFX
+	dw PORTRAITMAIL, LoadPortraitMailGFX
+	dw LOVELY_MAIL,  LoadLovelyMailGFX
+	dw EON_MAIL,     LoadEonMailGFX
+	dw MORPH_MAIL,   LoadMorphMailGFX
+	dw BLUESKY_MAIL, LoadBlueSkyMailGFX
+	dw MUSIC_MAIL,   LoadMusicMailGFX
+	dw MIRAGE_MAIL,  LoadMirageMailGFX
 	assert_table_length NUM_MAIL
-	db -1 ; end
+	dw -1 ; end
 
 LoadSurfMailGFX:
 	push bc
@@ -939,9 +946,15 @@ LoadMailGFX_Color3:
 INCLUDE "gfx/mail.asm"
 
 ItemIsMail:
+	push bc
 	ld a, d
+	call GetItemIndexFromID
+	ld b, h
+	ld c, l
 	ld hl, MailItems
-	ld de, 1
-	jp IsInArray
+	ld de, 2
+	call IsInWordArray
+	pop bc
+	ret
 
 INCLUDE "data/items/mail_items.asm"

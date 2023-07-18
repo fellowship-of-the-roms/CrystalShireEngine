@@ -178,26 +178,45 @@ AI_TryItem:
 ; BUG: AI might use its base reward value as an item (see docs/bugs_and_glitches.md)
 	ld de, wEnemyTrainerItem1
 .loop
-	ld a, [hl]
-	and a
-	inc a
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	cphl16 -1
+	pop hl
 	ret z
 
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	ld h, a
 	ld a, [de]
-	cp [hl]
+	cp h
+	pop hl
 	jr z, .has_item
 	inc de
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	ld h, a
 	ld a, [de]
-	cp [hl]
+	cp h
+	pop hl
 	jr z, .has_item
 
 	dec de
 	inc hl
 	inc hl
 	inc hl
+	inc hl
 	jr .loop
 
 .has_item
+	inc hl
 	inc hl
 
 	push hl
@@ -271,20 +290,20 @@ AI_TryItem:
 	ret
 
 AI_Items:
-	dbw FULL_RESTORE, .FullRestore
-	dbw MAX_POTION,   .MaxPotion
-	dbw HYPER_POTION, .HyperPotion
-	dbw SUPER_POTION, .SuperPotion
-	dbw POTION,       .Potion
-	dbw X_ACCURACY,   .XAccuracy
-	dbw FULL_HEAL,    .FullHeal
-	dbw GUARD_SPEC,   .GuardSpec
-	dbw DIRE_HIT,     .DireHit
-	dbw X_ATTACK,     .XAttack
-	dbw X_DEFEND,     .XDefend
-	dbw X_SPEED,      .XSpeed
-	dbw X_SPECIAL,    .XSpecial
-	db -1 ; end
+	dw FULL_RESTORE, .FullRestore
+	dw MAX_POTION,   .MaxPotion
+	dw HYPER_POTION, .HyperPotion
+	dw SUPER_POTION, .SuperPotion
+	dw POTION,       .Potion
+	dw X_ACCURACY,   .XAccuracy
+	dw FULL_HEAL,    .FullHeal
+	dw GUARD_SPEC,   .GuardSpec
+	dw DIRE_HIT,     .DireHit
+	dw X_ATTACK,     .XAttack
+	dw X_DEFEND,     .XDefend
+	dw X_SPEED,      .XSpeed
+	dw X_SPECIAL,    .XSpecial
+	dw -1 ; end
 
 .FullHeal:
 	call .Status
@@ -544,18 +563,27 @@ AIUsedItemSound:
 EnemyUsedFullHeal:
 	call AIUsedItemSound
 	call AI_HealStatus
-	ld a, FULL_HEAL
+	push hl
+	ld hl, FULL_HEAL
+	call GetItemIDFromIndex
+	pop hl
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedMaxPotion:
-	ld a, MAX_POTION
+	push hl
+	ld hl, MAX_POTION
+	call GetItemIDFromIndex
+	pop hl
 	ld [wCurEnemyItem], a
 	jr FullRestoreContinue
 
 EnemyUsedFullRestore:
 ; BUG: AI use of Full Heal does not cure confusion status (see docs/bugs_and_glitches.md)
 	call AI_HealStatus
-	ld a, FULL_RESTORE
+	push hl
+	ld hl, FULL_RESTORE
+	call GetItemIDFromIndex
+	pop hl
 	ld [wCurEnemyItem], a
 	ld hl, wEnemySubStatus3
 	res SUBSTATUS_CONFUSED, [hl]
@@ -585,17 +613,26 @@ FullRestoreContinue:
 	jr EnemyPotionFinish
 
 EnemyUsedPotion:
-	ld a, POTION
+	push hl
+	ld hl, POTION
+	call GetItemIDFromIndex
+	pop hl
 	ld b, 20
 	jr EnemyPotionContinue
 
 EnemyUsedSuperPotion:
-	ld a, SUPER_POTION
+	push hl
+	ld hl, SUPER_POTION
+	call GetItemIDFromIndex
+	pop hl
 	ld b, 50
 	jr EnemyPotionContinue
 
 EnemyUsedHyperPotion:
-	ld a, HYPER_POTION
+	push hl
+	ld hl, HYPER_POTION
+	call GetItemIDFromIndex
+	pop hl
 	ld b, 200
 
 EnemyPotionContinue:
@@ -744,21 +781,30 @@ EnemyUsedXAccuracy:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_X_ACCURACY, [hl]
-	ld a, X_ACCURACY
+	push hl
+	ld hl, X_ACCURACY
+	call GetItemIDFromIndex
+	pop hl
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedGuardSpec:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_MIST, [hl]
-	ld a, GUARD_SPEC
+	push hl
+	ld hl, GUARD_SPEC
+	call GetItemIDFromIndex
+	pop hl
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedDireHit:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
-	ld a, DIRE_HIT
+	push hl
+	ld hl, DIRE_HIT
+	call GetItemIDFromIndex
+	pop hl
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 AICheckEnemyFractionMaxHP: ; unreferenced
@@ -795,22 +841,34 @@ AICheckEnemyFractionMaxHP: ; unreferenced
 
 EnemyUsedXAttack:
 	ld b, ATTACK
-	ld a, X_ATTACK
+	push hl
+	ld hl, X_ATTACK
+	call GetItemIDFromIndex
+	pop hl
 	jr EnemyUsedXItem
 
 EnemyUsedXDefend:
 	ld b, DEFENSE
-	ld a, X_DEFEND
+	push hl
+	ld hl, X_DEFEND
+	call GetItemIDFromIndex
+	pop hl
 	jr EnemyUsedXItem
 
 EnemyUsedXSpeed:
 	ld b, SPEED
-	ld a, X_SPEED
+	push hl
+	ld hl, X_SPEED
+	call GetItemIDFromIndex
+	pop hl
 	jr EnemyUsedXItem
 
 EnemyUsedXSpecial:
 	ld b, SP_ATTACK
-	ld a, X_SPECIAL
+	push hl
+	ld hl, X_SPECIAL
+	call GetItemIDFromIndex
+	pop hl
 
 ; Parameter
 ; a = ITEM_CONSTANT

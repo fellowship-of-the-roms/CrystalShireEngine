@@ -437,7 +437,11 @@ GetBallAnimPal:
 	ld a, BANK(wCurItem)
 	ldh [rSVBK], a
 	ld a, [wCurItem]
-	ld e, a
+	push hl
+	call GetItemIndexFromID
+	ld d, h
+	ld e, l
+	pop hl
 	pop af
 	ldh [rSVBK], a
 .IsInArray:
@@ -445,6 +449,9 @@ GetBallAnimPal:
 	cp -1
 	jr z, .load
 	cp e
+	jr nz, .skip
+	ld a, [hli]
+	cp d
 	jr z, .load
 	inc hl
 	jr .IsInArray
@@ -455,6 +462,11 @@ GetBallAnimPal:
 	add hl, bc
 	ld [hl], a
 	ret
+
+.skip
+	inc hl
+	inc hl
+	jr .IsInArray
 
 INCLUDE "data/battle_anims/ball_colors.asm"
 

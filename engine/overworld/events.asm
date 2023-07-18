@@ -132,11 +132,6 @@ EnterMap:
 	ld [wMapStatus], a
 	ret
 
-UnusedWait30Frames: ; unreferenced
-	ld c, 30
-	call DelayFrames
-	ret
-
 HandleMap:
 	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
@@ -475,11 +470,6 @@ CheckTimeEvents:
 	scf
 	ret
 
-.unused ; unreferenced
-	ld a, $8 ; ???
-	scf
-	ret
-
 OWPlayerInput:
 	call PlayerMovement
 	ret c
@@ -597,8 +587,28 @@ ObjectEventTypeArray:
 	ld l, a
 	call GetMapScriptsBank
 	ld de, wItemBallData
-	ld bc, wItemBallDataEnd - wItemBallData
-	call FarCopyBytes
+	call GetFarByte
+	push hl
+	push bc
+	ld c, a
+	inc hl
+	call GetMapScriptsBank
+	call GetFarByte
+	ld b, a
+	; bc = item index
+	push bc
+	pop hl
+	; bc -> hl
+	call GetItemIDFromIndex
+	ld [de], a
+	inc de
+	pop bc
+	pop hl
+	inc hl
+	inc hl
+	call GetMapScriptsBank
+	call GetFarByte
+	ld [de], a
 	ld a, PLAYEREVENT_ITEMBALL
 	scf
 	ret
@@ -690,6 +700,14 @@ BGEventJumptable:
 	ld de, wHiddenItemData
 	ld bc, wHiddenItemDataEnd - wHiddenItemData
 	call FarCopyBytes
+	ld hl, wHiddenItemID
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ld [hl], a
 	ld a, BANK(HiddenItemScript)
 	ld hl, HiddenItemScript
 	call CallScript
@@ -703,6 +721,14 @@ BGEventJumptable:
 	ld de, wHiddenItemData
 	ld bc, wHiddenItemDataEnd - wHiddenItemData
 	call FarCopyBytes
+	ld hl, wHiddenItemID
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ld [hl], a
 	jr .dontread
 
 .ifset:
@@ -988,9 +1014,6 @@ PlayerEventScriptPointers:
 	assert_table_length NUM_PLAYER_EVENTS + 1
 
 InvalidEventScript:
-	end
-
-UnusedPlayerEventScript: ; unreferenced
 	end
 
 HatchEggScript:

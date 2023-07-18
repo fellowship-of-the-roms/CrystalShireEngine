@@ -1,6 +1,6 @@
 XItemStats:
-	;  item,      stat
-	db X_ATTACK,  ATTACK
-	db X_DEFEND,  DEFENSE
-	db X_SPEED,   SPEED
-	db X_SPECIAL, SP_ATTACK
+	;   item,      stat
+	dwb X_ATTACK,  ATTACK
+	dwb X_DEFEND,  DEFENSE
+	dwb X_SPEED,   SPEED
+	dwb X_SPECIAL, SP_ATTACK

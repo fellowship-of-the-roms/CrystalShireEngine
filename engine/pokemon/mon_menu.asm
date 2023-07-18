@@ -238,6 +238,8 @@ GiveTakePartyMonItem:
 	ret
 
 .GiveItem:
+	ld hl, wItemFlags
+	set IN_BAG_F, [hl]
 	farcall DepositSellInitPackBuffers
 
 .loop
@@ -265,6 +267,8 @@ GiveTakePartyMonItem:
 	jr .loop
 
 .quit
+	ld hl, wItemFlags
+	res IN_BAG_F, [hl]
 	ret
 
 TryGiveItemToPartymon:

@@ -90,6 +90,7 @@ ScrollingMenuJoyAction:
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
 	ld a, [wMenuSelection]
 	ld [wCurItem], a
+	call CheckItemPocketConversion
 	ld a, [wMenuSelectionQuantity]
 	ld [wItemQuantity], a
 	call ScrollingMenu_GetCursorPosition
@@ -497,6 +498,16 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	ld h, [hl]
 	ld l, a
 	inc hl ; items
+	ld a, [wItemFlags]
+	and (1 << IN_PC_F)
+	jr nz, ScrollingMenu_GetListItemCoordAndFunctionArgs16bit
+	ld a, [wItemFlags]
+	and (1 << IN_BAG_F)
+	jr z, .skip
+	ld a, [wCurPocket]
+	and a ; ITEM_POCKET
+	jr z, ScrollingMenu_GetListItemCoordAndFunctionArgs16bit
+.skip
 	ld a, [wMenuData_ScrollingMenuItemFormat]
 	cp SCROLLINGMENU_ITEMS_NORMAL
 	jr z, .got_spacing
@@ -516,4 +527,67 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	ld [wMenuSelectionQuantity], a
 	pop hl
 	pop de
+	ret
+
+ScrollingMenu_GetListItemCoordAndFunctionArgs16bit:
+	ld a, [wMenuData_ScrollingMenuItemFormat]
+	cp SCROLLINGMENU_ITEMS_NORMAL
+	jr z, .got_spacing
+	cp SCROLLINGMENU_ITEMS_QUANTITY
+	jr z, .pointless_jump
+.pointless_jump
+	add hl, de
+.got_spacing
+	add hl, de
+	add hl, de
+	ld a, [wMenuData_ItemsPointerBank]
+	push hl
+	call GetFarWord
+	ld a, l
+	cp -1
+	jr z, .end_of_list
+	ld d, l
+	ld l, h
+	ld h, d
+	call GetItemIDFromIndex
+.end_of_list
+	pop hl
+	ld [wMenuSelection], a
+	ld [wCurItem], a
+	call CheckItemPocketConversion
+	inc hl
+	inc hl
+	ld a, [wMenuData_ItemsPointerBank]
+	call GetFarByte
+	ld [wMenuSelectionQuantity], a
+	pop hl
+	pop de
+	ret
+
+CheckItemPocketConversion:
+	ld a, [wItemFlags]
+	and a
+	ret z
+	ld a, [wCurPocket]
+	cp BALL_POCKET
+	jr nz, .not_ball_pocket
+	ld a, [wCurItem]
+	push hl
+	ld h, HIGH(FIRST_BALL_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ld [wCurItem], a
+	ret
+
+.not_ball_pocket
+	cp KEY_ITEM_POCKET
+	ret nz
+	ld a, [wCurItem]
+	push hl
+	ld h, HIGH(FIRST_KEY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ld [wCurItem], a
 	ret

@@ -196,7 +196,12 @@ BattleTowerBattle:
 	inc c
 	dec b
 	jr nz, .loop
-	ret
+	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_1
+	call LockItemID
+	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_2
+	call LockItemID
+	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_3
+	jp LockItemID
 
 UnusedBattleTowerDummySpecial1:
 	ret
@@ -945,7 +950,10 @@ BattleTower_GiveReward:
 	inc hl
 	dec b
 	jr nz, .loop
-	ld a, POTION
+	push hl
+	ld hl, POTION
+	call GetItemIDFromIndex
+	pop hl
 	ld [wScriptVar], a
 	ret
 
@@ -971,17 +979,15 @@ BattleTower_SaveOptions:
 
 BattleTower_RandomlyChooseReward:
 ; Generate a random stat boosting item.
-.loop
-	call Random
-	ldh a, [hRandomAdd]
-	and $7
-	cp 6
-	jr c, .okay
-	sub 6
-.okay
-	add HP_UP
-	cp LUCKY_PUNCH
-	jr z, .loop
+	ld a, 4
+	call RandomRange
+	push bc
+	ld hl, HP_UP
+	ld b, 0
+	ld c, a
+	add hl, bc
+	pop bc
+	call GetItemIDFromIndex
 	push af
 	ld a, BANK(sBattleTowerReward)
 	call OpenSRAM
@@ -1259,7 +1265,8 @@ Function170923:
 BattleTowerAction_EggTicket:
 	xor a ; FALSE
 	ld [wScriptVar], a
-	ld a, EGG_TICKET
+	ld hl, EGG_TICKET
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
@@ -1301,8 +1308,9 @@ endr
 	ld a, "@"
 	ld [hli], a
 	ld [hli], a
+	ld hl, EGG_TICKET
+	call GetItemIDFromIndex
 	pop hl
-	ld a, EGG_TICKET
 	ld [wCurItem], a
 	ld a, 1
 	ld [wItemQuantityChange], a

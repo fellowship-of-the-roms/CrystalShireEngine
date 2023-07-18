@@ -55,9 +55,21 @@ GetTrainerAttributes:
 	call AddNTimes
 	ld de, wEnemyTrainerItem1
 	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	inc hl
 	ld [de], a
 	inc de
 	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	inc hl
 	ld [de], a
 	ld a, [hl]
 	ld [wEnemyTrainerBaseReward], a

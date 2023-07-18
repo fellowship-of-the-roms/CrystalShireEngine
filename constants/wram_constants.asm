@@ -318,3 +318,8 @@ DEF DAYCARELADY_ACTIVE_F         EQU 7
 	const UNLOCKED_UNOWNS_S_TO_W_F
 	const UNLOCKED_UNOWNS_X_TO_Z_F
 DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
+
+; wItemFlags::
+	const_def
+	const IN_BAG_F
+	const IN_PC_F

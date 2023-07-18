@@ -63,7 +63,7 @@ RandyScript:
 	end
 
 GiftSpearowMail:
-	db FLOWER_MAIL
+	dw FLOWER_MAIL
 	db   "DARK CAVE leads"
 	next "to another road@"
 

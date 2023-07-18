@@ -27,6 +27,76 @@ PlaceMenuItemQuantity:
 .done
 	ret
 
+PlaceMenuItemBallName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BALL_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	pop hl
+	call PlaceString
+	ret
+
+PlaceMenuItemBallQuantity:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BALL_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	farcall _CheckTossableItem
+	ld a, [wItemAttributeValue]
+	pop hl
+	and a
+	jr nz, .done
+	ld de, $15
+	add hl, de
+	ld [hl], "×"
+	inc hl
+	ld de, wMenuSelectionQuantity
+	lb bc, 1, 2
+	call PrintNum
+
+.done
+	ret
+
+PlaceMenuKeyItemName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_KEY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	pop hl
+	call PlaceString
+	ret
+
+PlaceMenuKeyItemQuantity:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_KEY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	farcall _CheckTossableItem
+	ld a, [wItemAttributeValue]
+	pop hl
+	and a
+	jr nz, .done
+	ld de, $15
+	add hl, de
+	ld [hl], "×"
+	inc hl
+	ld de, wMenuSelectionQuantity
+	lb bc, 1, 2
+	call PrintNum
+
+.done
+	ret
+
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader
 	call CopyMenuHeader
@@ -216,23 +286,25 @@ FindApricornsInBag:
 
 	ld hl, ApricornBalls
 .loop
-	ld a, [hl]
-	cp -1
-	jr z, .done
 	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	cphl16 $ffff
+	jr z, .done
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
 	pop hl
-	jr nc, .nope
-	ld a, [hl]
+	inc hl
+	inc hl
+	jr nc, .loop
 	call .addtobuffer
-.nope
-	inc hl
-	inc hl
 	jr .loop
-
 .done
+	pop hl
+	farcall ItemTableGarbageCollection
 	ld a, [wKurtApricornCount]
 	and a
 	ret nz
@@ -246,6 +318,7 @@ FindApricornsInBag:
 	ld e, [hl]
 	ld d, 0
 	add hl, de
+	ld a, [wCurItem]
 	ld [hl], a
 	pop hl
 	ret

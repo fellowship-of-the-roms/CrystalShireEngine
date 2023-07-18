@@ -5,11 +5,29 @@
 	const KURTSHOUSE_KURT2
 	const KURTSHOUSE_TWIN2
 
+	const_def 1 ; locked Pokémon ID table entries, used for species checking
+	const KURTSHOUSE_INDEX_BLU_APRICORN
+	const KURTSHOUSE_INDEX_YLW_APRICORN
+	const KURTSHOUSE_INDEX_GRN_APRICORN
+	const KURTSHOUSE_INDEX_WHT_APRICORN
+	const KURTSHOUSE_INDEX_BLK_APRICORN
+	const KURTSHOUSE_INDEX_PNK_APRICORN
+
 KurtsHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, KurtsHouseLoadReservedIDsCallback
 	callback MAPCALLBACK_OBJECTS, KurtsHouseKurtCallback
+
+KurtsHouseLoadReservedIDsCallback:
+	loaditemindex KURTSHOUSE_INDEX_BLU_APRICORN, BLU_APRICORN
+	loaditemindex KURTSHOUSE_INDEX_YLW_APRICORN, YLW_APRICORN
+	loaditemindex KURTSHOUSE_INDEX_GRN_APRICORN, GRN_APRICORN
+	loaditemindex KURTSHOUSE_INDEX_WHT_APRICORN, WHT_APRICORN
+	loaditemindex KURTSHOUSE_INDEX_BLK_APRICORN, BLK_APRICORN
+	loaditemindex KURTSHOUSE_INDEX_PNK_APRICORN, PNK_APRICORN
+	endcallback
 
 KurtsHouseKurtCallback:
 	checkevent EVENT_CLEARED_SLOWPOKE_WELL
@@ -130,13 +148,14 @@ Kurt1:
 	promptbutton
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
 	special SelectApricornForKurt
+	checkmaplockeditems
 	ifequal FALSE, .Cancel
-	ifequal BLU_APRICORN, .Blu
-	ifequal YLW_APRICORN, .Ylw
-	ifequal GRN_APRICORN, .Grn
-	ifequal WHT_APRICORN, .Wht
-	ifequal BLK_APRICORN, .Blk
-	ifequal PNK_APRICORN, .Pnk
+	ifequal KURTSHOUSE_INDEX_BLU_APRICORN, .Blu
+	ifequal KURTSHOUSE_INDEX_YLW_APRICORN, .Ylw
+	ifequal KURTSHOUSE_INDEX_GRN_APRICORN, .Grn
+	ifequal KURTSHOUSE_INDEX_WHT_APRICORN, .Wht
+	ifequal KURTSHOUSE_INDEX_BLK_APRICORN, .Blk
+	ifequal KURTSHOUSE_INDEX_PNK_APRICORN, .Pnk
 ; .Red
 	setevent EVENT_GAVE_KURT_RED_APRICORN
 	sjump .GaveKurtApricorns

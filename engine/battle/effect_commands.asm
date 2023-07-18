@@ -1179,7 +1179,10 @@ BattleCommand_Critical:
 	endc
 	jr nz, .Farfetchd
 	ld a, b
-	cp LUCKY_PUNCH
+	push hl
+	call GetItemIndexFromID
+	cphl16 LUCKY_PUNCH
+	pop hl
 	jr nz, .FocusEnergy
 
 ; +2 critical level
@@ -1202,7 +1205,10 @@ BattleCommand_Critical:
 	endc
 	jr nz, .FocusEnergy
 	ld a, b
-	cp STICK
+	push hl
+	call GetItemIndexFromID
+	cphl16 STICK
+	pop hl
 	jr nz, .FocusEnergy
 
 ; +2 critical level
@@ -2566,7 +2572,10 @@ DittoMetalPowder:
 	push bc
 	call GetOpponentItem
 	ld a, [hl]
-	cp METAL_POWDER
+	push hl
+	call GetItemIndexFromID
+	cphl16 METAL_POWDER
+	pop hl
 	pop bc
 	ret nz
 
@@ -2776,7 +2785,11 @@ ThickClubBoost:
 	push bc
 	push de
 	ld bc, CUBONE
-	ld d, THICK_CLUB
+	push hl
+	ld hl, THICK_CLUB
+	call GetItemIDFromIndex
+	ld d, a
+	pop hl
 	call SpeciesItemBoost
 	if MAROWAK == (CUBONE + 1)
 		inc bc
@@ -2796,7 +2809,11 @@ LightBallBoost:
 	push bc
 	push de
 	ld bc, PIKACHU
-	ld d, LIGHT_BALL
+	push hl
+	ld hl, LIGHT_BALL
+	call GetItemIDFromIndex
+	ld d, a
+	pop hl
 	call SpeciesItemBoost
 	pop de
 	pop bc
@@ -6667,16 +6684,26 @@ GetItemHeldEffect:
 	ret z
 
 	push hl
-	ld hl, ItemAttributes + ITEMATTR_EFFECT
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, ITEMATTR_STRUCT_LENGTH
-	call AddNTimes
+	call GetItemIndexFromID
+	ld b, h
+	ld c, l
 	ld a, BANK(ItemAttributes)
-	call GetFarWord
-	ld b, l
-	ld c, h
+	ld hl, ItemAttributes
+	call LoadIndirectPointer
+
+	ld bc, ITEMATTR_EFFECT
+	add hl, bc
+
+	ld a, BANK(ItemAttributes)
+	call GetFarByte
+
+	ld b, a
+
+	inc hl
+	ld a, BANK(ItemAttributes)
+	call GetFarByte
+
+	ld c, a
 	pop hl
 	ret
 

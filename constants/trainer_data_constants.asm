@@ -1,7 +1,7 @@
 ; TrainerClassAttributes struct members (see data/trainers/attributes.asm)
 rsreset
-DEF TRNATTR_ITEM1           rb ; 0
-DEF TRNATTR_ITEM2           rb ; 1
+DEF TRNATTR_ITEM1           rw ; 0
+DEF TRNATTR_ITEM2           rw ; 1
 DEF TRNATTR_BASEMONEY       rb ; 2
 DEF TRNATTR_AI_MOVE_WEIGHTS rw ; 3
 DEF TRNATTR_AI_ITEM_SWITCH  rw ; 5

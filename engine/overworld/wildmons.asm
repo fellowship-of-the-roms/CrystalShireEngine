@@ -254,7 +254,10 @@ ApplyCleanseTagEffectOnEncounterRate::
 	ld c, a
 .loop
 	ld a, [hl]
-	cp CLEANSE_TAG
+	push hl
+	call GetItemIndexFromID
+	cphl16 CLEANSE_TAG
+	pop hl
 	jr z, .cleansetag
 	add hl, de
 	dec c
@@ -951,6 +954,7 @@ RandomPhoneMon:
 	ld a, 3
 	bit TRAINERTYPE_ITEM_F, c
 	jr z, .no_item
+	inc a
 	inc a
 .no_item
 	bit TRAINERTYPE_MOVES_F, c

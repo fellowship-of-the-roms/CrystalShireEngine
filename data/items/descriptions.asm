@@ -1,263 +1,214 @@
 ItemDescriptions:
+	indirect_table 2, 1
+	indirect_entries NUM_ITEM_POCKET, ItemDescriptions1
+	indirect_entries FIRST_KEY_ITEM - 1; sparse Table
+	indirect_entries (FIRST_KEY_ITEM - 1) + NUM_KEY_ITEM_POCKET, ItemDescriptionsKeyItems
+	indirect_entries FIRST_BALL_ITEM - 1 ; sparse Table
+	indirect_entries (FIRST_BALL_ITEM - 1) + NUM_BALL_ITEM_POCKET, ItemDescriptionsBalls
+	indirect_table_end
+
+ItemDescriptions1:
 ; entries correspond to item ids (see constants/item_constants.asm)
-	table_width 2, ItemDescriptions
-	dw MasterBallDesc
-	dw UltraBallDesc
-	dw BrightpowderDesc
-	dw GreatBallDesc
-	dw PokeBallDesc
-	dw QuestionMarkDesc
-	dw BicycleDesc
-	dw MoonStoneDesc
-	dw AntidoteDesc
-	dw BurnHealDesc
-	dw IceHealDesc
-	dw AwakeningDesc
-	dw ParlyzHealDesc
-	dw FullRestoreDesc
-	dw MaxPotionDesc
-	dw HyperPotionDesc
-	dw SuperPotionDesc
-	dw PotionDesc
-	dw EscapeRopeDesc
-	dw RepelDesc
-	dw MaxElixerDesc
-	dw FireStoneDesc
-	dw ThunderStoneDesc
-	dw WaterStoneDesc
-	dw QuestionMarkDesc
-	dw HPUpDesc
-	dw ProteinDesc
-	dw IronDesc
-	dw CarbosDesc
-	dw LuckyPunchDesc
-	dw CalciumDesc
-	dw RareCandyDesc
-	dw XAccuracyDesc
-	dw LeafStoneDesc
-	dw MetalPowderDesc
-	dw NuggetDesc
-	dw PokeDollDesc
-	dw FullHealDesc
-	dw ReviveDesc
-	dw MaxReviveDesc
-	dw GuardSpecDesc
-	dw SuperRepelDesc
-	dw MaxRepelDesc
-	dw DireHitDesc
-	dw QuestionMarkDesc
-	dw FreshWaterDesc
-	dw SodaPopDesc
-	dw LemonadeDesc
-	dw XAttackDesc
-	dw QuestionMarkDesc
-	dw XDefendDesc
-	dw XSpeedDesc
-	dw XSpecialDesc
-	dw CoinCaseDesc
-	dw ItemfinderDesc
-	dw QuestionMarkDesc
-	dw ExpShareDesc
-	dw OldRodDesc
-	dw GoodRodDesc
-	dw SilverLeafDesc
-	dw SuperRodDesc
-	dw PPUpDesc
-	dw EtherDesc
-	dw MaxEtherDesc
-	dw ElixerDesc
-	dw RedScaleDesc
-	dw SecretPotionDesc
-	dw SSTicketDesc
-	dw MysteryEggDesc
-	dw ClearBellDesc
-	dw SilverWingDesc
-	dw MoomooMilkDesc
-	dw QuickClawDesc
-	dw PsnCureBerryDesc
-	dw GoldLeafDesc
-	dw SoftSandDesc
-	dw SharpBeakDesc
-	dw PrzCureBerryDesc
-	dw BurntBerryDesc
-	dw IceBerryDesc
-	dw PoisonBarbDesc
-	dw KingsRockDesc
-	dw BitterBerryDesc
-	dw MintBerryDesc
-	dw RedApricornDesc
-	dw TinyMushroomDesc
-	dw BigMushroomDesc
-	dw SilverPowderDesc
-	dw BluApricornDesc
-	dw QuestionMarkDesc
-	dw AmuletCoinDesc
-	dw YlwApricornDesc
-	dw GrnApricornDesc
-	dw CleanseTagDesc
-	dw MysticWaterDesc
-	dw TwistedSpoonDesc
-	dw WhtApricornDesc
-	dw BlackbeltDesc
-	dw BlkApricornDesc
-	dw QuestionMarkDesc
-	dw PnkApricornDesc
-	dw BlackGlassesDesc
-	dw SlowpokeTailDesc
-	dw PinkBowDesc
-	dw StickDesc
-	dw SmokeBallDesc
-	dw NeverMeltIceDesc
-	dw MagnetDesc
-	dw MiracleBerryDesc
-	dw PearlDesc
-	dw BigPearlDesc
-	dw EverStoneDesc
-	dw SpellTagDesc
-	dw RageCandyBarDesc
-	dw GSBallDesc
-	dw BlueCardDesc
-	dw MiracleSeedDesc
-	dw ThickClubDesc
-	dw FocusBandDesc
-	dw QuestionMarkDesc
-	dw EnergyPowderDesc
-	dw EnergyRootDesc
-	dw HealPowderDesc
-	dw RevivalHerbDesc
-	dw HardStoneDesc
-	dw LuckyEggDesc
-	dw CardKeyDesc
-	dw MachinePartDesc
-	dw EggTicketDesc
-	dw LostItemDesc
-	dw StardustDesc
-	dw StarPieceDesc
-	dw BasementKeyDesc
-	dw PassDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw CharcoalDesc
-	dw BerryJuiceDesc
-	dw ScopeLensDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw MetalCoatDesc
-	dw DragonFangDesc
-	dw QuestionMarkDesc
-	dw LeftoversDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw MysteryBerryDesc
-	dw DragonScaleDesc
-	dw BerserkGeneDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw SacredAshDesc
-	dw HeavyBallDesc
-	dw FlowerMailDesc
-	dw LevelBallDesc
-	dw LureBallDesc
-	dw FastBallDesc
-	dw QuestionMarkDesc
-	dw LightBallDesc
-	dw FriendBallDesc
-	dw MoonBallDesc
-	dw LoveBallDesc
-	dw NormalBoxDesc
-	dw GorgeousBoxDesc
-	dw SunStoneDesc
-	dw PolkadotBowDesc
-	dw QuestionMarkDesc
-	dw UpGradeDesc
-	dw BerryDesc
-	dw GoldBerryDesc
-	dw SquirtBottleDesc
-	dw QuestionMarkDesc
-	dw ParkBallDesc
-	dw RainbowWingDesc
-	dw QuestionMarkDesc
-	dw BrickPieceDesc
-	dw SurfMailDesc
-	dw LiteBlueMailDesc
-	dw PortraitMailDesc
-	dw LovelyMailDesc
-	dw EonMailDesc
-	dw MorphMailDesc
-	dw BlueSkyMailDesc
-	dw MusicMailDesc
-	dw MirageMailDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	assert_table_length NUM_ITEMS
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	assert_table_length $ff
+	dw BrightpowderDesc ; 0001
+	dw QuestionMarkDesc ; 0002
+	dw MoonStoneDesc    ; 0003
+	dw AntidoteDesc     ; 0004
+	dw BurnHealDesc     ; 0005
+	dw IceHealDesc      ; 0006
+	dw AwakeningDesc    ; 0007
+	dw ParlyzHealDesc   ; 0008
+	dw FullRestoreDesc  ; 0009
+	dw MaxPotionDesc    ; 000A
+	dw HyperPotionDesc  ; 000B
+	dw SuperPotionDesc  ; 000C
+	dw PotionDesc       ; 000D
+	dw EscapeRopeDesc   ; 000E
+	dw RepelDesc        ; 000F
+	dw MaxElixerDesc    ; 0010
+	dw FireStoneDesc    ; 0011
+	dw ThunderStoneDesc ; 0012
+	dw WaterStoneDesc   ; 0013
+	dw QuestionMarkDesc ; 0014
+	dw HPUpDesc         ; 0015
+	dw ProteinDesc      ; 0016
+	dw IronDesc         ; 0017
+	dw CarbosDesc       ; 0018
+	dw LuckyPunchDesc   ; 0019
+	dw CalciumDesc      ; 001A
+	dw RareCandyDesc    ; 001B
+	dw XAccuracyDesc    ; 001C
+	dw LeafStoneDesc    ; 001D
+	dw MetalPowderDesc  ; 001E
+	dw NuggetDesc       ; 001F
+	dw PokeDollDesc     ; 0020
+	dw FullHealDesc     ; 0021
+	dw ReviveDesc       ; 0022
+	dw MaxReviveDesc    ; 0023
+	dw GuardSpecDesc    ; 0024
+	dw SuperRepelDesc   ; 0025
+	dw MaxRepelDesc     ; 0026
+	dw DireHitDesc      ; 0027
+	dw QuestionMarkDesc ; 0028
+	dw FreshWaterDesc   ; 0029
+	dw SodaPopDesc      ; 002A
+	dw LemonadeDesc     ; 002B
+	dw XAttackDesc      ; 002C
+	dw QuestionMarkDesc ; 002D
+	dw XDefendDesc      ; 002E
+	dw XSpeedDesc       ; 002F
+	dw XSpecialDesc     ; 0030
+	dw QuestionMarkDesc ; 0031
+	dw ExpShareDesc     ; 0032
+	dw SilverLeafDesc   ; 0033
+	dw PPUpDesc         ; 0034
+	dw EtherDesc        ; 0035
+	dw MaxEtherDesc     ; 0036
+	dw ElixerDesc       ; 0037
+	dw MoomooMilkDesc   ; 0038
+	dw QuickClawDesc    ; 0039
+	dw PsnCureBerryDesc ; 003A
+	dw GoldLeafDesc     ; 003B
+	dw SoftSandDesc     ; 003C
+	dw SharpBeakDesc    ; 003D
+	dw PrzCureBerryDesc ; 003E
+	dw BurntBerryDesc   ; 003F
+	dw IceBerryDesc     ; 0040
+	dw PoisonBarbDesc   ; 0041
+	dw KingsRockDesc    ; 0042
+	dw BitterBerryDesc  ; 0043
+	dw MintBerryDesc    ; 0044
+	dw RedApricornDesc  ; 0045
+	dw TinyMushroomDesc ; 0046
+	dw BigMushroomDesc  ; 0047
+	dw SilverPowderDesc ; 0048
+	dw BluApricornDesc  ; 0049
+	dw QuestionMarkDesc ; 004A
+	dw AmuletCoinDesc   ; 004B
+	dw YlwApricornDesc  ; 004C
+	dw GrnApricornDesc  ; 004D
+	dw CleanseTagDesc   ; 004E
+	dw MysticWaterDesc  ; 004F
+	dw TwistedSpoonDesc ; 0050
+	dw WhtApricornDesc  ; 0051
+	dw BlackbeltDesc    ; 0052
+	dw BlkApricornDesc  ; 0053
+	dw QuestionMarkDesc ; 0054
+	dw PnkApricornDesc  ; 0055
+	dw BlackGlassesDesc ; 0056
+	dw SlowpokeTailDesc ; 0057
+	dw PinkBowDesc      ; 0058
+	dw StickDesc        ; 0059
+	dw SmokeBallDesc    ; 005A
+	dw NeverMeltIceDesc ; 005B
+	dw MagnetDesc       ; 005C
+	dw MiracleBerryDesc ; 005D
+	dw PearlDesc        ; 005E
+	dw BigPearlDesc     ; 005F
+	dw EverStoneDesc    ; 0060
+	dw SpellTagDesc     ; 0061
+	dw RageCandyBarDesc ; 0062
+	dw MiracleSeedDesc  ; 0063
+	dw ThickClubDesc    ; 0064
+	dw FocusBandDesc    ; 0065
+	dw QuestionMarkDesc ; 0066
+	dw EnergyPowderDesc ; 0067
+	dw EnergyRootDesc   ; 0068
+	dw HealPowderDesc   ; 0069
+	dw RevivalHerbDesc  ; 006A
+	dw HardStoneDesc    ; 006B
+	dw LuckyEggDesc     ; 006C
+	dw StardustDesc     ; 006D
+	dw StarPieceDesc    ; 006E
+	dw QuestionMarkDesc ; 006F
+	dw QuestionMarkDesc ; 0070
+	dw QuestionMarkDesc ; 0071
+	dw CharcoalDesc     ; 0072
+	dw BerryJuiceDesc   ; 0073
+	dw ScopeLensDesc    ; 0074
+	dw QuestionMarkDesc ; 0075
+	dw QuestionMarkDesc ; 0076
+	dw MetalCoatDesc    ; 0077
+	dw DragonFangDesc   ; 0078
+	dw QuestionMarkDesc ; 0079
+	dw LeftoversDesc    ; 007A
+	dw QuestionMarkDesc ; 007B
+	dw QuestionMarkDesc ; 007C
+	dw QuestionMarkDesc ; 007D
+	dw MysteryBerryDesc ; 007E
+	dw DragonScaleDesc  ; 007F
+	dw BerserkGeneDesc  ; 0080
+	dw QuestionMarkDesc ; 0081
+	dw QuestionMarkDesc ; 0082
+	dw QuestionMarkDesc ; 0083
+	dw SacredAshDesc    ; 0084
+	dw FlowerMailDesc   ; 0085
+	dw QuestionMarkDesc ; 0086
+	dw LightBallDesc    ; 0087
+	dw NormalBoxDesc    ; 0088
+	dw GorgeousBoxDesc  ; 0089
+	dw SunStoneDesc     ; 008A
+	dw PolkadotBowDesc  ; 008B
+	dw QuestionMarkDesc ; 008C
+	dw UpGradeDesc      ; 008D
+	dw BerryDesc        ; 008E
+	dw GoldBerryDesc    ; 008F
+	dw QuestionMarkDesc ; 0090
+	dw QuestionMarkDesc ; 0091
+	dw BrickPieceDesc   ; 0092
+	dw SurfMailDesc     ; 0093
+	dw LiteBlueMailDesc ; 0094
+	dw PortraitMailDesc ; 0095
+	dw LovelyMailDesc   ; 0096
+	dw EonMailDesc      ; 0097
+	dw MorphMailDesc    ; 0098
+	dw BlueSkyMailDesc  ; 0099
+	dw MusicMailDesc    ; 009A
+	dw MirageMailDesc   ; 009B
+	dw QuestionMarkDesc ; 009C
+	dw QuestionMarkDesc ; 009D
+	dw QuestionMarkDesc ; 009E
+	dw QuestionMarkDesc ; 009F
+.IndirectEnd:
+
+ItemDescriptionsKeyItems:
+	dw BicycleDesc      ; 0100
+	dw CoinCaseDesc     ; 0101
+	dw ItemfinderDesc   ; 0102
+	dw OldRodDesc       ; 0103
+	dw GoodRodDesc      ; 0104
+	dw SuperRodDesc     ; 0105
+	dw RedScaleDesc     ; 0106
+	dw SecretPotionDesc ; 0107
+	dw SSTicketDesc     ; 0108
+	dw MysteryEggDesc   ; 0109
+	dw ClearBellDesc    ; 010A
+	dw SilverWingDesc   ; 010B
+	dw GSBallDesc       ; 010C
+	dw BlueCardDesc     ; 010D
+	dw CardKeyDesc      ; 010E
+	dw MachinePartDesc  ; 010F
+	dw EggTicketDesc    ; 0110
+	dw LostItemDesc     ; 0111
+	dw BasementKeyDesc  ; 0112
+	dw PassDesc         ; 0113
+	dw SquirtBottleDesc ; 0114
+	dw RainbowWingDesc  ; 0115
+.IndirectEnd:
+
+ItemDescriptionsBalls:
+	dw MasterBallDesc ; 0200
+	dw UltraBallDesc  ; 0201
+	dw GreatBallDesc  ; 0202
+	dw PokeBallDesc   ; 0203
+	dw HeavyBallDesc  ; 0204
+	dw LevelBallDesc  ; 0205
+	dw LureBallDesc   ; 0206
+	dw FastBallDesc   ; 0207
+	dw FriendBallDesc ; 0208
+	dw MoonBallDesc   ; 0209
+	dw LoveBallDesc   ; 020A
+	dw ParkBallDesc   ; 020B
+.IndirectEnd:
 
 MasterBallDesc:
 	db   "The best BALL. It"

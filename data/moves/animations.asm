@@ -300,10 +300,10 @@ BattleAnim_SweetScent2:
 	anim_ret
 
 BattleAnim_ThrowPokeBall:
-	anim_if_param_equal NO_ITEM, .TheTrainerBlockedTheBall
-	anim_if_param_equal MASTER_BALL, .MasterBall
-	anim_if_param_equal ULTRA_BALL, .UltraBall
-	anim_if_param_equal GREAT_BALL, .GreatBall
+	anim_if_param_item_equal NO_ITEM, .TheTrainerBlockedTheBall
+	anim_if_param_item_equal MASTER_BALL, .MasterBall
+	anim_if_param_item_equal ULTRA_BALL, .UltraBall
+	anim_if_param_item_equal GREAT_BALL, .GreatBall
 	; any other ball
 	anim_2gfx BATTLE_ANIM_GFX_POKE_BALL, BATTLE_ANIM_GFX_SMOKE
 	anim_sound 6, 2, SFX_THROW_BALL

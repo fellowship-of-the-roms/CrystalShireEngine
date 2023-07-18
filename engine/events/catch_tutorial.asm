@@ -56,8 +56,11 @@ CatchTutorial::
 	ld hl, wDudeNumItems
 	ld [hl], 1
 	inc hl
-	ld [hl], POTION
-	inc hl
+	push hl
+	ld hl, POTION
+	call GetItemIDFromIndex
+	pop hl
+	ld [hli], a
 	ld [hl], 1
 	inc hl
 	ld [hl], -1
@@ -68,8 +71,12 @@ CatchTutorial::
 	ld hl, wDudeNumBalls
 	ld a, 1
 	ld [hli], a
-	ld a, POKE_BALL
+	push hl
+	ld hl, POKE_BALL
+	call GetItemIDFromIndex
+	pop hl
 	ld [hli], a
+	ld a, 5
 	ld [hli], a
 	ld [hl], -1
 	ret

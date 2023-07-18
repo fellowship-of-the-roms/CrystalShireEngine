@@ -5,22 +5,32 @@ _DoItemEffect::
 	call CopyName1
 	ld a, 1
 	ld [wItemEffectSucceeded], a
+	push bc
+	push de
 	ld a, [wCurItem]
-	dec a
+	call GetItemIndexFromID
+	ld b, h
+	ld c, l
+	ld a, BANK(ItemEffects)
 	ld hl, ItemEffects
-	rst JumpTable
-	ret
+	call LoadDoubleIndirectPointer
+	pop de
+	pop bc
+	jp hl
 
 ItemEffects:
 ; entries correspond to item ids (see constants/item_constants.asm)
-	table_width 2, ItemEffects
-	dw PokeBallEffect      ; MASTER_BALL
-	dw PokeBallEffect      ; ULTRA_BALL
+	indirect_table 2, 1
+	indirect_entries NUM_ITEM_POCKET, ItemEffects1
+	indirect_entries FIRST_KEY_ITEM - 1 ; sparse table
+	indirect_entries (FIRST_KEY_ITEM - 1) + NUM_KEY_ITEM_POCKET, ItemEffectsKeyItems
+	indirect_entries FIRST_BALL_ITEM - 1 ; sparse table
+	indirect_entries (FIRST_BALL_ITEM - 1) + NUM_BALL_ITEM_POCKET, ItemEffectsBalls
+	indirect_table_end
+
+ItemEffects1:
 	dw NoEffect            ; BRIGHTPOWDER
-	dw PokeBallEffect      ; GREAT_BALL
-	dw PokeBallEffect      ; POKE_BALL
 	dw TownMapEffect       ; TOWN_MAP
-	dw BicycleEffect       ; BICYCLE
 	dw EvoStoneEffect      ; MOON_STONE
 	dw StatusHealingEffect ; ANTIDOTE
 	dw StatusHealingEffect ; BURN_HEAL
@@ -67,24 +77,13 @@ ItemEffects:
 	dw XItemEffect         ; X_DEFEND
 	dw XItemEffect         ; X_SPEED
 	dw XItemEffect         ; X_SPECIAL
-	dw CoinCaseEffect      ; COIN_CASE
-	dw ItemfinderEffect    ; ITEMFINDER
 	dw PokeFluteEffect     ; POKE_FLUTE
 	dw NoEffect            ; EXP_SHARE
-	dw OldRodEffect        ; OLD_ROD
-	dw GoodRodEffect       ; GOOD_ROD
 	dw NoEffect            ; SILVER_LEAF
-	dw SuperRodEffect      ; SUPER_ROD
 	dw RestorePPEffect     ; PP_UP
 	dw RestorePPEffect     ; ETHER
 	dw RestorePPEffect     ; MAX_ETHER
 	dw RestorePPEffect     ; ELIXER
-	dw NoEffect            ; RED_SCALE
-	dw NoEffect            ; SECRETPOTION
-	dw NoEffect            ; S_S_TICKET
-	dw NoEffect            ; MYSTERY_EGG
-	dw NoEffect            ; CLEAR_BELL
-	dw NoEffect            ; SILVER_WING
 	dw RestoreHPEffect     ; MOOMOO_MILK
 	dw NoEffect            ; QUICK_CLAW
 	dw StatusHealingEffect ; PSNCUREBERRY
@@ -128,8 +127,6 @@ ItemEffects:
 	dw NoEffect            ; EVERSTONE
 	dw NoEffect            ; SPELL_TAG
 	dw RestoreHPEffect     ; RAGECANDYBAR
-	dw NoEffect            ; GS_BALL
-	dw BlueCardEffect      ; BLUE_CARD
 	dw NoEffect            ; MIRACLE_SEED
 	dw NoEffect            ; THICK_CLUB
 	dw NoEffect            ; FOCUS_BAND
@@ -140,14 +137,8 @@ ItemEffects:
 	dw RevivalHerbEffect   ; REVIVAL_HERB
 	dw NoEffect            ; HARD_STONE
 	dw NoEffect            ; LUCKY_EGG
-	dw CardKeyEffect       ; CARD_KEY
-	dw NoEffect            ; MACHINE_PART
-	dw NoEffect            ; EGG_TICKET
-	dw NoEffect            ; LOST_ITEM
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
-	dw BasementKeyEffect   ; BASEMENT_KEY
-	dw NoEffect            ; PASS
 	dw NoEffect            ; ITEM_87
 	dw NoEffect            ; ITEM_88
 	dw NoEffect            ; ITEM_89
@@ -170,16 +161,9 @@ ItemEffects:
 	dw NoEffect            ; ITEM_9A
 	dw NoEffect            ; ITEM_9B
 	dw SacredAshEffect     ; SACRED_ASH
-	dw PokeBallEffect      ; HEAVY_BALL
 	dw NoEffect            ; FLOWER_MAIL
-	dw PokeBallEffect      ; LEVEL_BALL
-	dw PokeBallEffect      ; LURE_BALL
-	dw PokeBallEffect      ; FAST_BALL
 	dw NoEffect            ; ITEM_A2
 	dw NoEffect            ; LIGHT_BALL
-	dw PokeBallEffect      ; FRIEND_BALL
-	dw PokeBallEffect      ; MOON_BALL
-	dw PokeBallEffect      ; LOVE_BALL
 	dw NormalBoxEffect     ; NORMAL_BOX
 	dw GorgeousBoxEffect   ; GORGEOUS_BOX
 	dw EvoStoneEffect      ; SUN_STONE
@@ -188,26 +172,63 @@ ItemEffects:
 	dw NoEffect            ; UP_GRADE
 	dw RestoreHPEffect     ; BERRY
 	dw RestoreHPEffect     ; GOLD_BERRY
-	dw SquirtbottleEffect  ; SQUIRTBOTTLE
 	dw NoEffect            ; ITEM_B0
-	dw PokeBallEffect      ; PARK_BALL
-	dw NoEffect            ; RAINBOW_WING
 	dw NoEffect            ; ITEM_B3
-	assert_table_length ITEM_B3
-; The items past ITEM_B3 do not have effect entries:
-;	BRICK_PIECE
-;	SURF_MAIL
-;	LITEBLUEMAIL
-;	PORTRAITMAIL
-;	LOVELY_MAIL
-;	EON_MAIL
-;	MORPH_MAIL
-;	BLUESKY_MAIL
-;	MUSIC_MAIL
-;	MIRAGE_MAIL
-;	ITEM_BE
-; They all have the ITEMMENU_NOUSE attribute so they can't be used anyway.
-; NoEffect would be appropriate, with the table then being NUM_ITEMS long.
+	dw NoEffect            ; BRICK_PIECE
+	dw NoEffect            ; SURF_MAIL
+	dw NoEffect            ; LITEBLUEMAIL
+	dw NoEffect            ; PORTRAITMAIL
+	dw NoEffect            ; LOVELY_MAIL
+	dw NoEffect            ; EON_MAIL
+	dw NoEffect            ; MORPH_MAIL
+	dw NoEffect            ; BLUESKY_MAIL
+	dw NoEffect            ; MUSIC_MAIL
+	dw NoEffect            ; MIRAGE_MAIL
+	dw NoEffect            ; ITEM_BE
+	dw NoEffect            ; ITEM_DC
+	dw NoEffect            ; ITEM_C3
+	dw NoEffect            ; ITEM_FA
+.IndirectEnd:
+
+ItemEffectsKeyItems:
+	dw BicycleEffect      ; BICYCLE
+	dw CoinCaseEffect     ; COIN_CASE
+	dw ItemfinderEffect   ; ITEMFINDER
+	dw OldRodEffect       ; OLD_ROD
+	dw GoodRodEffect      ; GOOD_ROD
+	dw SuperRodEffect     ; SUPER_ROD
+	dw NoEffect           ; RED_SCALE
+	dw NoEffect           ; SECRETPOTION
+	dw NoEffect           ; S_S_TICKET
+	dw NoEffect           ; MYSTERY_EGG
+	dw NoEffect           ; CLEAR_BELL
+	dw NoEffect           ; SILVER_WING
+	dw NoEffect           ; GS_BALL
+	dw BlueCardEffect     ; BLUE_CARD
+	dw CardKeyEffect      ; CARD_KEY
+	dw NoEffect           ; MACHINE_PART
+	dw NoEffect           ; EGG_TICKET
+	dw NoEffect           ; LOST_ITEM
+	dw BasementKeyEffect  ; BASEMENT_KEY
+	dw NoEffect           ; PASS
+	dw SquirtbottleEffect ; SQUIRTBOTTLE
+	dw NoEffect           ; RAINBOW_WING
+.IndirectEnd:
+
+ItemEffectsBalls:
+	dw PokeBallEffect ; MASTER_BALL
+	dw PokeBallEffect ; ULTRA_BALL
+	dw PokeBallEffect ; GREAT_BALL
+	dw PokeBallEffect ; POKE_BALL
+	dw PokeBallEffect ; HEAVY_BALL
+	dw PokeBallEffect ; LEVEL_BALL
+	dw PokeBallEffect ; LURE_BALL
+	dw PokeBallEffect ; FAST_BALL
+	dw PokeBallEffect ; FRIEND_BALL
+	dw PokeBallEffect ; MOON_BALL
+	dw PokeBallEffect ; LOVE_BALL
+	dw PokeBallEffect ; PARK_BALL
+.IndirectEnd:
 
 PokeBallEffect:
 ; BUG: The Dude's catching tutorial may crash if his Poké Ball can't be used (see docs/bugs_and_glitches.md)
@@ -231,7 +252,8 @@ PokeBallEffect:
 	xor a
 	ld [wWildMon], a
 	ld a, [wCurItem]
-	cp PARK_BALL
+	call GetItemIndexFromID
+	cphl16 PARK_BALL
 	call nz, ReturnToBattle_UseBall
 
 	ld hl, wOptions
@@ -245,33 +267,51 @@ PokeBallEffect:
 	cp BATTLETYPE_TUTORIAL
 	jp z, .catch_without_fail
 	ld a, [wCurItem]
-	cp MASTER_BALL
+	call GetItemIndexFromID
+	cphl16 MASTER_BALL
 	jp z, .catch_without_fail
-	ld a, [wCurItem]
 	ld c, a
-	ld hl, BallMultiplierFunctionTable
 
+	ld de, BallMultiplierFunctionTable
 .get_multiplier_loop
-	ld a, [hli]
+	ld a, [de]
+	inc de
 	cp $ff
+	jr z, .next_num
+	cp l
+	jr nz, .skip_entry
+.next_num
+	ld a, [de]
+	cp -1 ; no balls above $ff00
+	inc de
 	jr z, .skip_or_return_from_ball_fn
-	cp c
+	cp h
+.got_mult_index
 	jr z, .call_ball_function
-	inc hl
-	inc hl
+	inc de
+	inc de
+	jr .get_multiplier_loop
+
+.skip_entry
+	inc de
+	inc de
+	inc de
 	jr .get_multiplier_loop
 
 .call_ball_function
-	ld a, [hli]
-	ld h, [hl]
+	ld a, [de]
 	ld l, a
+	inc de
+	ld a, [de]
+	ld h, a
 	ld de, .skip_or_return_from_ball_fn
 	push de
 	jp hl
 
 .skip_or_return_from_ball_fn
 	ld a, [wCurItem]
-	cp LEVEL_BALL
+	call GetItemIndexFromID
+	cphl16 LEVEL_BALL
 	ld a, b
 	jp z, .skip_hp_calc
 
@@ -387,11 +427,14 @@ PokeBallEffect:
 	call DelayFrames
 
 	ld a, [wCurItem]
-	cp POKE_BALL + 1 ; Assumes Master/Ultra/Great come before
-	jr c, .not_kurt_ball
-	ld a, POKE_BALL
-.not_kurt_ball
 	ld [wBattleAnimParam], a
+	call GetItemIndexFromID
+	cphl16 POKE_BALL + 1 ; Assumes Master/Ultra/Great come before
+	jr c, .not_kurt_ball
+	ld hl, POKE_BALL
+	call GetItemIDFromIndex
+	ld [wBattleAnimParam], a
+.not_kurt_ball
 
 	ld de, ANIM_THROW_POKE_BALL
 	ld a, e
@@ -546,7 +589,8 @@ PokeBallEffect:
 	farcall SetCaughtData
 
 	ld a, [wCurItem]
-	cp FRIEND_BALL
+	call GetItemIndexFromID
+	cphl16 FRIEND_BALL
 	jr nz, .SkipPartyMonFriendBall
 
 	ld a, [wPartyCount]
@@ -611,7 +655,8 @@ PokeBallEffect:
 	set BATTLERESULT_BOX_FULL, [hl]
 .BoxNotFullYet:
 	ld a, [wCurItem]
-	cp FRIEND_BALL
+	call GetItemIndexFromID
+	cphl16 FRIEND_BALL
 	jr nz, .SkipBoxMonFriendBall
 	; The captured mon is now first in the box
 	ld a, FRIEND_BALL_HAPPINESS
@@ -710,17 +755,17 @@ PokeBallEffect:
 BallMultiplierFunctionTable:
 ; table of routines that increase or decrease the catch rate based on
 ; which ball is used in a certain situation.
-	dbw ULTRA_BALL,  UltraBallMultiplier
-	dbw GREAT_BALL,  GreatBallMultiplier
-	dbw SAFARI_BALL, SafariBallMultiplier ; Safari Ball, leftover from RBY
-	dbw HEAVY_BALL,  HeavyBallMultiplier
-	dbw LEVEL_BALL,  LevelBallMultiplier
-	dbw LURE_BALL,   LureBallMultiplier
-	dbw FAST_BALL,   FastBallMultiplier
-	dbw MOON_BALL,   MoonBallMultiplier
-	dbw LOVE_BALL,   LoveBallMultiplier
-	dbw PARK_BALL,   ParkBallMultiplier
-	db -1 ; end
+	dw ULTRA_BALL,  UltraBallMultiplier
+	dw GREAT_BALL,  GreatBallMultiplier
+	dw SAFARI_BALL, SafariBallMultiplier ; Safari Ball, leftover from RBY
+	dw HEAVY_BALL,  HeavyBallMultiplier
+	dw LEVEL_BALL,  LevelBallMultiplier
+	dw LURE_BALL,   LureBallMultiplier
+	dw FAST_BALL,   FastBallMultiplier
+	dw MOON_BALL,   MoonBallMultiplier
+	dw LOVE_BALL,   LoveBallMultiplier
+	dw PARK_BALL,   ParkBallMultiplier
+	dw -1 ; end
 
 UltraBallMultiplier:
 ; multiply catch rate by 2
@@ -880,7 +925,10 @@ MoonBallMultiplier:
 
 	ld a, [wCurItem]
 	ld c, a
-	ld a, MOON_STONE
+	push hl
+	ld hl, MOON_STONE
+	call GetItemIDFromIndex
+	pop hl
 	ld [wCurItem], a
 	ld d, h
 	ld e, l
@@ -1117,7 +1165,10 @@ EvoStoneEffect:
 	call GetPartyParamLocation
 
 	ld a, [hl]
-	cp EVERSTONE
+	push hl
+	call GetItemIndexFromID
+	cphl16 EVERSTONE
+	pop hl
 	jr z, .NoEffect
 
 	ld a, TRUE
@@ -1220,26 +1271,36 @@ StatStrings:
 
 GetStatExpRelativePointer:
 	ld a, [wCurItem]
-	ld hl, StatExpItemPointerOffsets
+	call GetItemIndexFromID
+	ld de, StatExpItemPointerOffsets
 .next
-	cp [hl]
-	inc hl
+	ld a, [de]
+	inc de
+	cp l
+	jr nz, .skip_entry
+	ld a, [de]
+	inc de
+	cp h
 	jr z, .got_it
-	inc hl
+	inc de
+	jr .next ; possible infinite loop here
+.skip_entry
+	inc de
+	inc de
 	jr .next
 
 .got_it
-	ld a, [hl]
+	ld a, [de]
 	ld c, a
 	ld b, 0
 	ret
 
 StatExpItemPointerOffsets:
-	db HP_UP,    MON_HP_EXP - MON_STAT_EXP
-	db PROTEIN, MON_ATK_EXP - MON_STAT_EXP
-	db IRON,    MON_DEF_EXP - MON_STAT_EXP
-	db CARBOS,  MON_SPD_EXP - MON_STAT_EXP
-	db CALCIUM, MON_SPC_EXP - MON_STAT_EXP
+	dwb HP_UP,    MON_HP_EXP - MON_STAT_EXP
+	dwb PROTEIN, MON_ATK_EXP - MON_STAT_EXP
+	dwb IRON,    MON_DEF_EXP - MON_STAT_EXP
+	dwb CARBOS,  MON_SPD_EXP - MON_STAT_EXP
+	dwb CALCIUM, MON_SPC_EXP - MON_STAT_EXP
 
 RareCandy_StatBooster_GetParameters:
 	ld a, [wCurPartySpecies]
@@ -1449,22 +1510,29 @@ HealStatus:
 
 GetItemHealingAction:
 	push hl
-	ld a, [wCurItem]
+	push de
 	ld hl, StatusHealingActions
-	ld bc, 3
+	ld de, 4
 .next
-	cp [hl]
+	call GetItemIDFromHL
+	and a
+	jr z, .found_it ; NO_ITEM Bound check.
+	ld b, a
+	ld a, [wCurItem]
+	cp b
 	jr z, .found_it
-	add hl, bc
+	add hl, de
 	jr .next
 
 .found_it
+	inc hl
 	inc hl
 	ld b, [hl]
 	inc hl
 	ld a, [hl]
 	ld c, a
 	cp %11111111
+	pop de
 	pop hl
 	ret
 
@@ -1534,7 +1602,10 @@ RevivePokemon:
 	xor a
 	ld [wLowHealthAlarm], a
 	ld a, [wCurItem]
-	cp REVIVE
+	push hl
+	call GetItemIDFromIndex
+	cphl16 REVIVE
+	pop hl
 	jr z, .revive_half_hp
 
 	call ReviveFullHP
@@ -1940,20 +2011,36 @@ GetOneFifthMaxHP:
 
 GetHealingItemAmount:
 	push hl
-	ld a, [wCurItem]
 	ld hl, HealingHPAmounts
-	ld d, a
-.next
+	; [hl] == $ffff?
+.check
+	push hl
 	ld a, [hli]
-	cp -1
-	jr z, .NotFound
-	cp d
-	jr z, .done
-	inc hl
-	inc hl
-	jr .next
+	ld h, [hl]
+	ld l, a
+	cphl16 $ffff
+	pop hl
+	jr z, .not_found ; branch if $ffff
+	call GetItemIDFromHL
+	ld b, a
+	ld a, [wCurItem]
 
-.NotFound:
+	inc hl
+	inc hl ; hl at price
+
+	cp b
+	jr nz, .next_item
+
+	jr .done
+
+.next_item
+	inc hl
+	inc hl
+	jr .check
+
+.not_found:
+	inc hl
+	inc hl
 	scf
 .done
 	ld e, [hl]
@@ -2107,18 +2194,21 @@ DireHitEffect:
 
 XItemEffect:
 	call UseItemText
-
-	ld a, [wCurItem]
 	ld hl, XItemStats
-
 .loop
-	cp [hl]
+	call GetItemIDFromHL
+	ld b, a
+	ld a, [wCurItem]
+	cp b
 	jr z, .got_it
+; move to next item
+	inc hl
 	inc hl
 	inc hl
 	jr .loop
 
 .got_it
+	inc hl
 	inc hl
 	ld b, [hl]
 	xor a
@@ -2277,14 +2367,16 @@ RestorePPEffect:
 
 .loop2
 	ld a, [wTempRestorePPItem]
-	cp MAX_ELIXER
+	call GetItemIndexFromID
+	cphl16 MAX_ELIXER
 	jp z, Elixer_RestorePPofAllMoves
-	cp ELIXER
+	cphl16 ELIXER
 	jp z, Elixer_RestorePPofAllMoves
 
 	ld hl, RaiseThePPOfWhichMoveText
 	ld a, [wTempRestorePPItem]
-	cp PP_UP
+	call GetItemIndexFromID
+	cphl16 PP_UP
 	jr z, .ppup
 	ld hl, RestoreThePPOfWhichMoveText
 
@@ -2315,7 +2407,8 @@ RestorePPEffect:
 	pop hl
 
 	ld a, [wTempRestorePPItem]
-	cp PP_UP
+	call GetItemIndexFromID
+	cphl16 PP_UP
 	jp nz, Not_PP_Up
 
 	ld a, [hl]
@@ -2343,7 +2436,7 @@ RestorePPEffect:
 .CantUsePPUpOnSketch:
 	ld hl, PPIsMaxedOutText
 	call PrintText
-	jr .loop2
+	jp .loop2
 
 .do_ppup
 	ld a, [hl]
@@ -2476,13 +2569,14 @@ RestorePP:
 	jr nc, .dont_restore
 
 	ld a, [wTempRestorePPItem]
-	cp MAX_ELIXER
+	call GetItemIndexFromID
+	cphl16 MAX_ELIXER
 	jr z, .restore_all
-	cp MAX_ETHER
+	cphl16 MAX_ETHER
 	jr z, .restore_all
 
 	ld c, 5
-	cp MYSTERYBERRY
+	cphl16 MYSTERYBERRY
 	jr z, .restore_some
 
 	ld c, 10

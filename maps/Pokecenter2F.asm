@@ -296,10 +296,12 @@ Script_TimeCapsuleClosed:
 	end
 
 LinkReceptionistScript_TimeCapsule:
+IF !DEF(_DEBUG)
 	checkevent EVENT_MET_BILL
 	iftrue Script_TimeCapsuleClosed
 	checkflag ENGINE_TIME_CAPSULE
 	iftrue Script_TimeCapsuleClosed
+ENDC
 	special SetBitsForTimeCapsuleRequest
 	faceplayer
 	opentext

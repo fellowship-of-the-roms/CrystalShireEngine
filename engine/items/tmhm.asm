@@ -47,7 +47,8 @@ AskTeachTMHM:
 	push af
 	res NO_TEXT_SCROLL, [hl]
 	ld a, [wCurItem]
-	cp TM01
+	call GetItemIndexFromID
+	cphl16 FIRST_TMHM_ITEM
 	jr c, .NotTMHM
 	call GetTMHMItemMove
 	ld a, [wTempTMHM]
@@ -56,7 +57,10 @@ AskTeachTMHM:
 	call CopyName1
 	ld hl, BootedTMText ; Booted up a TM
 	ld a, [wCurItem]
-	cp HM01
+	push hl
+	call GetItemIndexFromID
+	cphl16 HM01
+	pop hl
 	jr c, .TM
 	ld hl, BootedHMText ; Booted up an HM
 .TM:

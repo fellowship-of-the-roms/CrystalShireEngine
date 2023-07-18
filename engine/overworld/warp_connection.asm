@@ -25,6 +25,15 @@ ResetMapLockedIDs:
 	call LockPokemonID
 	dec e
 	jr nz, .mon_loop
+	ld e, NUM_MAP_LOCKED_ITEM_IDS
+.item_loop
+	ld a, LOCKED_ITEM_ID_MAP_1 - 1
+	add a, e
+	ld l, a
+	xor a
+	call LockItemID
+	dec e
+	jr nz, .item_loop
 	ret
 
 EnterMapConnection:

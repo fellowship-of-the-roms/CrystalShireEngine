@@ -90,3 +90,37 @@ LockMoveID::
 ; out: a = 8-bit index; everything else preserved
 GetLockedMoveID::
 	___conversion_table_homecall_readlocked wMoveIndexTable
+
+; in: a = 8-bit index
+; out: hl = 16-bit index; a clobbered
+GetItemIndexFromID::
+	___conversion_table_homecall read, _GetItemIndexFromID
+
+; in: hl = 16-bit index
+; out: a = 8-bit index, hl clobbered
+GetItemIDFromIndex::
+	___conversion_table_homecall write, _GetItemIDFromIndex
+
+; in: a = 8-bit index or zero (to clear), l = position
+; out: a = unchanged, hl = clobbered
+LockItemID::
+	___conversion_table_homecall lock, _LockItemID
+
+; in: a = position
+; out: a = 8-bit index; everything else preserved
+GetLockedItemID::
+	___conversion_table_homecall_readlocked wItemIndexTable
+
+GetItemIDFromHL::
+; in:
+; 	[hl] = address of 16-bit item index
+; out:
+;	a  = found item ID
+; preserves all registers except output
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ret

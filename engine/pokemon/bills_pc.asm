@@ -1139,12 +1139,15 @@ BillsPC_LoadMonStats:
 	ld [wTempMonLevel], a
 	pop hl
 	push hl
-	ld bc, sBoxMon1Item - sBox
+	ld bc, sBoxMon1Species - sBox
 	add hl, bc
 	ld bc, BOXMON_STRUCT_LENGTH
 	ld a, e
 	call AddNTimes
-	ld a, [hl]
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	call GetItemIDFromIndex
 	ld [wTempMonItem], a
 	pop hl
 	ld bc, sBoxMon1DVs - sBox
@@ -1820,6 +1823,12 @@ BillsPC_CopyMon:
 	ld bc, BOXMON_STRUCT_LENGTH
 	call CopyMonToTemp
 	call CloseSRAM
+	ld a, [wBufferMonSpecies]
+	ld h, a
+	ld a, [wBufferMonItem]
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wBufferMonItem], a
 	ld a, LOCKED_MON_ID_CURRENT_MENU
 	call GetLockedPokemonID
 	ld [wBufferMonSpecies], a

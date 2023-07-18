@@ -2,8 +2,10 @@ PrintItemDescription:
 ; Print the description for item [wCurSpecies] at de.
 
 	ld a, [wCurSpecies]
-	cp TM01
+	call GetItemIndexFromID
+	cphl16 FIRST_TMHM_ITEM
 	jr c, .not_a_tm
+	call GetItemIDFromIndex
 
 	ld [wCurItem], a
 	push de
@@ -16,17 +18,21 @@ PrintItemDescription:
 
 .not_a_tm
 	push de
-	ld hl, ItemDescriptions
 	ld a, [wCurSpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	call GetItemIndexFromID
+	ld b, h
+	ld c, l
+	ld a, BANK(ItemDescriptions)
+	ld hl, ItemDescriptions
+	call LoadDoubleIndirectPointer
+	jr nz, .ok
+; wrong item
+	ld a, BANK(QuestionMarkDesc)
+	ld hl, QuestionMarkDesc
+.ok
+	ld d, h
+	ld e, l
 	pop hl
-	jp PlaceString
+	jp FarPlaceString
 
 INCLUDE "data/items/descriptions.asm"

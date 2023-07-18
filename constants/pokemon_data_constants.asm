@@ -17,8 +17,8 @@ DEF BASE_CATCH_RATE  rb
 DEF BASE_EXP         rb
 DEF BASE_ITEMS       rw
 rsset BASE_ITEMS
-DEF BASE_ITEM_1      rb
-DEF BASE_ITEM_2      rb
+DEF BASE_ITEM_1      rw
+DEF BASE_ITEM_2      rw
 DEF BASE_GENDER      rb
                      rb_skip
 DEF BASE_EGG_STEPS   rb

@@ -474,6 +474,10 @@ SaveIndexTables:
 	ld de, sPokemonIndexTable
 	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
 	call CopyBytes
+	ld hl, wItemIndexTable
+	ld de, sItemIndexTable
+	ld bc, wItemIndexTableEnd - wItemIndexTable
+	call CopyBytes
 	ld a, BANK(sMoveIndexTable)
 	call OpenSRAM
 	ld hl, wMoveIndexTable
@@ -582,6 +586,10 @@ SaveBackupIndexTables:
 	ld hl, wPokemonIndexTable
 	ld de, sBackupPokemonIndexTable
 	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
+	call CopyBytes
+	ld hl, wItemIndexTable
+	ld de, sBackupItemIndexTable
+	ld bc, wItemIndexTableEnd - wItemIndexTable
 	call CopyBytes
 	ld a, BANK(sBackupMoveIndexTable)
 	call OpenSRAM
@@ -800,6 +808,10 @@ LoadIndexTables:
 	ld de, wPokemonIndexTable
 	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
 	call CopyBytes
+	ld hl, sItemIndexTable
+	ld de, wItemIndexTable
+	ld bc, wItemIndexTableEnd - wItemIndexTable
+	call CopyBytes
 	ld a, BANK(sMoveIndexTable)
 	call OpenSRAM
 	ld hl, sMoveIndexTable
@@ -823,6 +835,11 @@ LoadBox:
 	call CopyBytes
 	ld a, BANK(sBox)
 	call OpenSRAM
+	push hl
+	push de
+	call UpdateItemIndexesForLoadedBox
+	pop de
+	pop hl
 	call ClearIndexesForLoadedBox
 	; GC the table now that lots of entries are free
 	farcall ForceGarbageCollection
@@ -897,6 +914,10 @@ LoadBackupIndexTables:
 	ld hl, sBackupPokemonIndexTable
 	ld de, wPokemonIndexTable
 	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
+	call CopyBytes
+	ld hl, sBackupItemIndexTable
+	ld de, wItemIndexTable
+	ld bc, wItemIndexTableEnd - wItemIndexTable
 	call CopyBytes
 	ld a, BANK(sBackupMoveIndexTable)
 	call OpenSRAM
@@ -1120,7 +1141,20 @@ ComputeSavedBoxIndexTable:
 	ld [wTempLoopCounter], a
 	ld c, BOXMON_STRUCT_LENGTH
 .loop
+	ld a, [hli]
+	push af
 	ld a, [hl]
+	push de
+	push hl
+	call GetItemIndexFromID
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, e
+	ld [hld], a
+	ld [hl], d
+	pop de
+	pop af
 	add hl, bc
 	push hl
 	call GetPokemonIndexFromID
@@ -1218,6 +1252,38 @@ ClearIndexesForLoadedBox:
 	ld [hl], 0
 	add hl, bc
 	dec a
+	jr nz, .loop
+	ret
+
+UpdateItemIndexesForLoadedBox:
+	ld de, sBox
+	ld a, [de]
+	cp MONS_PER_BOX
+	jr c, .count_OK
+	ld a, MONS_PER_BOX
+	ld [de], a
+.count_OK
+	inc de
+	and a
+	ret z
+	ld [wTempLoopCounter], a
+	ld hl, sBoxMon1Species
+.loop
+	push hl
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	call GetItemIDFromIndex
+	pop hl
+	inc hl
+	ld [hl], a
+	dec hl
+	ld de, BOXMON_STRUCT_LENGTH
+	add hl, de
+	push hl
+	ld hl, wTempLoopCounter
+	dec [hl]
+	pop hl
 	jr nz, .loop
 	ret
 

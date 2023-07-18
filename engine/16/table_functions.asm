@@ -8,6 +8,7 @@ ForceGarbageCollection::
 	ldh [rSVBK], a
 	call PokemonTableGarbageCollection
 	call MoveTableGarbageCollection
+	call ItemTableGarbageCollection
 	pop af
 	ldh [rSVBK], a
 	pop bc
@@ -109,3 +110,76 @@ MoveTableGarbageCollection:
 
 _LockMoveID::
 	___conversion_table_lock_ID wMoveIndexTable, MOVE_TABLE
+
+
+_GetItemIndexFromID::
+	___conversion_table_load wItemIndexTable, ITEM_TABLE
+
+_GetItemIDFromIndex::
+	___conversion_table_store wItemIndexTable, ITEM_TABLE
+	; fallthrough
+
+ItemTableGarbageCollection:
+; must preserve de and rSVBK
+	push de
+	ldh a, [rSVBK]
+	push af
+
+; init used items bitmap
+	___conversion_bitmap_initialize wItemIndexTable, ITEM_TABLE, .set_bit
+
+; goto where items are used
+	ld a, 1
+	ldh [rSVBK], a
+
+; check structs
+	; held items
+	___conversion_bitmap_check_structs wPartyMons + (wPartyMon1Item - wPartyMon1), PARTYMON_STRUCT_LENGTH, PARTY_LENGTH, .set_bit
+	___conversion_bitmap_check_structs wOTPartyMons + (wOTPartyMon1Item - wOTPartyMon1), PARTYMON_STRUCT_LENGTH, PARTY_LENGTH, .set_bit
+
+	; kurt temp items
+	___conversion_bitmap_check_structs wKurtApricornItems, 1, 10, .set_bit
+
+; check individual variables
+	___conversion_bitmap_check_values .set_bit, \
+		wSwitchItem, wPackUsedItem, wTempMonItem, wMartItemID, \
+		wCurItem, wEnemyMonItem, wBattleMonItem, wWhichMomItem, \
+		wItemBallItemID, wContestMonItem, wBattleAnimParam, \
+		wScriptVar, wCurEnemyItem, wEnemyTrainerItem1, \
+		wEnemyTrainerItem2, wNamedObjectIndex, wBaseItem1, \
+		wBaseItem2
+
+; battle tower stuff should be here but this ROM hack doesn't care
+
+	ld a, BANK(wItemIndexTable)
+	ldh [rSVBK], a
+	___conversion_bitmap_free_unused wItemIndexTable, ITEM_TABLE
+
+	pop af
+	ldh [rSVBK], a
+
+	ldh a, [hSRAMBank]
+	push af
+	ld a, BANK(sBattleTowerReward)
+	call OpenSRAM
+	___conversion_bitmap_check_values .set_bit, \
+		sBattleTowerReward, sBackupMysteryGiftItem
+	pop af
+	call OpenSRAM
+
+	ldh a, [hSRAMBank]
+	push af
+	ld a, BANK(sBox)
+	call OpenSRAM
+	___conversion_bitmap_check_structs sBoxMon1Item, BOXMON_STRUCT_LENGTH, MONS_PER_BOX, .set_bit
+	pop af
+	call OpenSRAM ;will close SRAM if hSRAMBank was -1
+
+	pop de
+	ret
+
+.set_bit
+	___conversion_bitmap_set ITEM_TABLE
+
+_LockItemID::
+	___conversion_table_lock_ID wItemIndexTable, ITEM_TABLE

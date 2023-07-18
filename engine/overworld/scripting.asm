@@ -236,6 +236,8 @@ ScriptCommandTable:
 	dw Script_checksave                  ; a9
 	dw Script_loadmonindex               ; aa
 	dw Script_checkmaplockedmons         ; ab
+	dw Script_loaditemindex              ; ac
+	dw Script_checkmaplockeditems        ; ad
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -483,10 +485,19 @@ GiveItemScript:
 
 Script_verbosegiveitemvar:
 	call GetScriptByte
-	cp ITEM_FROM_MEM
-	jr nz, .ok
+	ld l, a
+	call GetScriptByte
+	ld h, a
+
+	cphl16 ITEM_FROM_MEM ; for fruit trees and what not
+	jr z, .from_mem
+
+	call GetItemIDFromIndex
+	jr .got_item
+
+.from_mem
 	ld a, [wScriptVar]
-.ok
+.got_item
 	ld [wCurItem], a
 	call GetScriptByte
 	call GetVarAction
@@ -1584,14 +1595,20 @@ CopyConvertedText:
 
 Script_getitemname:
 	call GetScriptByte
-	and a ; USE_SCRIPT_VAR
-	jr nz, .ok
-	ld a, [wScriptVar]
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	or l
+	jr z, .use_script_var
+	call GetItemIDFromIndex
 .ok
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld de, wStringBuffer1
 	jr GetStringBuffer
+.use_script_var
+	ld a, [wScriptVar]
+	jr .ok
 
 Script_getcurlandmarkname:
 	ld a, [wMapGroup]
@@ -1685,9 +1702,13 @@ Script_givepokemail:
 	call GetScriptByte
 	ld h, a
 	ld a, [wScriptBank]
-	call GetFarByte
+	push hl
+	call GetFarWord
+	call GetItemIDFromIndex
 	ld b, a
+	pop hl
 	push bc
+	inc hl
 	inc hl
 	ld bc, MAIL_MSG_LENGTH
 	ld de, wMonMailMessageBuffer
@@ -1709,10 +1730,19 @@ Script_checkpokemail:
 
 Script_giveitem:
 	call GetScriptByte
-	cp ITEM_FROM_MEM
-	jr nz, .ok
+	ld l, a
+	call GetScriptByte
+	ld h, a
+
+	cphl16 ITEM_FROM_MEM ; for fruit trees and what not
+	jr z, .from_mem
+
+	call GetItemIDFromIndex
+	jr .got_item
+
+.from_mem
 	ld a, [wScriptVar]
-.ok
+.got_item
 	ld [wCurItem], a
 	call GetScriptByte
 	ld [wItemQuantityChange], a
@@ -1731,6 +1761,10 @@ Script_takeitem:
 	xor a
 	ld [wScriptVar], a
 	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call GetScriptByte
 	ld [wItemQuantityChange], a
@@ -1747,6 +1781,10 @@ Script_checkitem:
 	xor a
 	ld [wScriptVar], a
 	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
@@ -1913,6 +1951,10 @@ Script_givepoke:
 	call GetScriptByte
 	ld [wCurPartyLevel], a
 	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call GetScriptByte
 	and a
@@ -2349,7 +2391,6 @@ Script_checkver_duplicate: ; unreferenced
 	db GS_VERSION
 
 Script_loadmonindex:
-; script command 0xaa
 	call LoadScriptPokemonID
 	ld [wScriptVar], a
 	ld c, a
@@ -2367,7 +2408,6 @@ Script_loadmonindex:
 	jp LockPokemonID
 
 Script_checkmaplockedmons:
-; script command 0xab
 ; check if the script variable's value is one of the reserved map indexes
 	ld a, [wScriptVar]
 	and a
@@ -2405,5 +2445,63 @@ LoadScriptPokemonID:
 	ld h, a
 	or l
 	jp nz, GetPokemonIDFromIndex
+	ld a, [wScriptVar]
+	ret
+
+Script_loaditemindex:
+	call LoadScriptItemID
+	ld [wScriptVar], a
+	ld c, a
+	call GetScriptByte
+	dec a
+	cp NUM_MAP_LOCKED_ITEM_IDS
+	ret nc
+	if LOCKED_ITEM_ID_MAP_1 > 1
+		add a, LOCKED_ITEM_TD_MAP_1
+	elif LOCKED_ITEM_ID_MAP_1 == 1
+		inc a
+	endc
+	ld l, a
+	ld a, c
+	jp LockItemID
+
+Script_checkmaplockeditems:
+; check if the script variable's value is one of the reserved map indexes
+	ld a, [wScriptVar]
+	and a
+	ret z
+	cp ITEM_TABLE_ENTRIES + 1
+	ld c, 0
+	jr nc, .done
+	ld b, a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wItemIndexTable)
+	ldh [rSVBK], a
+	ld hl, wItemIndexTableLockedEntries + LOCKED_ITEM_ID_MAP_1
+.loop
+	inc c
+	ld a, [hli]
+	cp b
+	jr z, .found
+	ld a, c
+	cp NUM_MAP_LOCKED_ITEM_IDS
+	jr c, .loop
+	ld c, 0
+.found
+	pop af
+	ldh [rSVBK], a
+.done
+	ld a, c
+	ld [wScriptVar], a
+	ret
+
+LoadScriptItemID:
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	or l
+	jp nz, GetItemIDFromIndex
 	ld a, [wScriptVar]
 	ret

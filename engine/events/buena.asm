@@ -84,7 +84,10 @@ BuenaPrize:
 	jr z, .done
 	ld [wMenuSelectionQuantity], a
 	call Buena_GetPrize
-	ld a, [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, .BuenaIsThatRightText
@@ -95,14 +98,21 @@ BuenaPrize:
 	ld a, [wMenuSelectionQuantity]
 	call Buena_GetPrize
 	inc hl
+	inc hl
 	ld a, [hld]
+	dec hl
 	ld c, a
 	ld a, [wBlueCardBalance]
 	cp c
 	jr c, .InsufficientBalance
 
 	ld a, [hli]
+	inc hl
 	push hl
+	dec hl
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld a, $1
 	ld [wItemQuantityChange], a
@@ -133,7 +143,7 @@ BuenaPrize:
 
 .print
 	call BuenaPrintText
-	jr .loop
+	jp .loop
 
 .done
 	call CloseWindow
@@ -270,7 +280,10 @@ endr
 .PrintPrizeItem:
 	ld a, [wMenuSelection]
 	call Buena_GetPrize
-	ld a, [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
 	push de
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -281,6 +294,7 @@ endr
 .PrintPrizePoints:
 	ld a, [wMenuSelection]
 	call Buena_GetPrize
+	inc hl
 	inc hl
 	ld a, [hl]
 	ld c, "0"
@@ -293,6 +307,7 @@ Buena_GetPrize:
 	ld hl, BuenaPrizeItems
 	ld b, 0
 	ld c, a
+	add hl, bc
 	add hl, bc
 	add hl, bc
 	ret

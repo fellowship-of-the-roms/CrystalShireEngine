@@ -282,7 +282,10 @@ DoNPCTrade:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call Trade_GetAttributeOfLastPartymon
 	pop hl
-	ld a, [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
 	ld [de], a
 
 	push af
