@@ -124,8 +124,7 @@ _GiveOddEgg:
 	ld [wMobileMonNicknamePointer], a
 	ld a, HIGH(wOddEggName)
 	ld [wMobileMonNicknamePointer + 1], a
-	farcall AddMobileMonToParty
-	ret
+	farjp AddMobileMonToParty
 
 .Odd:
 	db "ODD@@@@@@@@@"

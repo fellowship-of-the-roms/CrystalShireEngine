@@ -699,8 +699,7 @@ Function11c4be:
 	hlcoord 0, 14, wAttrmap
 	ld bc, $28
 	call ByteFill
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 String_11c4db:
 	db   "６つのことば¯くみあわせます"
@@ -891,8 +890,7 @@ Function11c618:
 	hlcoord 0, 6, wAttrmap
 	ld bc, $c8
 	call ByteFill
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 EZChatString_Stop_Mode_Cancel:
 	db "けす　　　　モード　　　やめる@"
@@ -1489,8 +1487,7 @@ Function11c9ab:
 	hlcoord 0, 6, wAttrmap
 	ld bc, $c8
 	call ByteFill
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 Function11c9bd:
 	ld de, String_11ca38
@@ -1578,8 +1575,7 @@ Function11ca19:
 	add hl, de
 	dec c
 	jr nz, .asm_11ca22
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 String_11ca38:
 	db   "とうろくちゅう<NO>あいさつ¯ぜんぶ"
@@ -1986,8 +1982,7 @@ Function11cdaa:
 	hlcoord 0, 12, wAttrmap
 	ld bc, 4 * SCREEN_WIDTH
 	call ByteFill
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 String_11cdc7:
 ; Words will be displayed by category

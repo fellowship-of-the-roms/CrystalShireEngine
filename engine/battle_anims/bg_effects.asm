@@ -526,8 +526,7 @@ BattleBGEffect_BattlerObj_2Row:
 	jmp EndBattleBGEffect
 
 _QueueBattleAnimation:
-	farcall QueueBattleAnimation
-	ret
+	farjp QueueBattleAnimation
 
 BattleBGEffect_RemoveMon:
 ; Slides mon out of screen

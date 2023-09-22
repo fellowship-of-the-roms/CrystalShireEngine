@@ -325,8 +325,7 @@ Function1719ed:
 	call ClearSprites
 	farcall Function171d2b
 	farcall ReloadMapPart
-	farcall ClearSpriteAnims
-	ret
+	farjp ClearSpriteAnims
 
 Function171a11:
 .loop

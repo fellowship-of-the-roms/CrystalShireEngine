@@ -1814,8 +1814,7 @@ Slots_GetPayout:
 	ld a, [hl]
 	ld [wPayout], a
 	ld d, a
-	farcall StubbedTrainerRankings_AddToSlotsPayouts
-	ret
+	farjp StubbedTrainerRankings_AddToSlotsPayouts
 
 .PayoutTable:
 	table_width 2, Slots_GetPayout.PayoutTable
@@ -1840,8 +1839,7 @@ Slots_PayoutText:
 	jr nz, .MatchedSomething
 	ld hl, .SlotsDarnText
 	call PrintText
-	farcall StubbedTrainerRankings_EndSlotsWinStreak
-	ret
+	farjp StubbedTrainerRankings_EndSlotsWinStreak
 
 .MatchedSomething:
 	srl a
@@ -1864,8 +1862,7 @@ Slots_PayoutText:
 .return
 	ld hl, .Text_PrintPayout
 	call PrintText
-	farcall StubbedTrainerRankings_AddToSlotsWinStreak
-	ret
+	farjp StubbedTrainerRankings_AddToSlotsWinStreak
 
 .PayoutStrings:
 	table_width 6, Slots_PayoutText.PayoutStrings

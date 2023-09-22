@@ -217,16 +217,13 @@ SpriteAnimFunc_GSIntroHoOhLugia:
 	ret
 
 SpriteAnimFunc_NamingScreenCursor:
-	farcall NamingScreen_AnimateCursor
-	ret
+	farjp NamingScreen_AnimateCursor
 
 SpriteAnimFunc_MailCursor:
-	farcall ComposeMail_AnimateCursor
-	ret
+	farjp ComposeMail_AnimateCursor
 
 SpriteAnimFunc_GameFreakLogo:
-	farcall GameFreakLogoSpriteAnim
-	ret
+	farjp GameFreakLogoSpriteAnim
 
 SpriteAnimFunc_GSGameFreakLogoStar:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -355,8 +352,7 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_SlotsGolem:
-	farcall Slots_AnimateGolem
-	ret
+	farjp Slots_AnimateGolem
 
 SpriteAnimFunc_SlotsChansey:
 	farcall Slots_AnimateChansey
@@ -401,16 +397,13 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	ret
 
 SpriteAnimFunc_UnusedCursor:
-	farcall UnusedCursor_InterpretJoypad_AnimateCursor
-	ret
+	farjp UnusedCursor_InterpretJoypad_AnimateCursor
 
 SpriteAnimFunc_PokegearArrow:
-	farcall AnimatePokegearModeIndicatorArrow
-	ret
+	farjp AnimatePokegearModeIndicatorArrow
 
 SpriteAnimFunc_MemoryGameCursor:
-	farcall MemoryGame_InterpretJoypad_AnimateCursor
-	ret
+	farjp MemoryGame_InterpretJoypad_AnimateCursor
 
 SpriteAnimFunc_TradePokeBall:
 	call AnimSeqs_AnonJumptable
@@ -550,8 +543,7 @@ SpriteAnimFunc_TradeTubeBulge:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_TrademonInTube:
-	farcall TradeAnim_AnimateTrademonInTube
-	ret
+	farjp TradeAnim_AnimateTrademonInTube
 
 SpriteAnimFunc_RevealNewMon:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -590,8 +582,7 @@ SpriteAnimFunc_RevealNewMon:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_RadioTuningKnob:
-	farcall AnimateTuningKnob
-	ret
+	farjp AnimateTuningKnob
 
 SpriteAnimFunc_CutLeaves:
 	ld hl, SPRITEANIMSTRUCT_VAR2
@@ -732,12 +723,10 @@ SpriteAnimFunc_FlyTo:
 	ret
 
 SpriteAnimFunc_MobileTradeSentPulse:
-	farcall MobileTradeAnim_AnimateSentPulse
-	ret
+	farjp MobileTradeAnim_AnimateSentPulse
 
 SpriteAnimFunc_MobileTradeOTPulse:
-	farcall MobileTradeAnim_AnimateOTPulse
-	ret
+	farjp MobileTradeAnim_AnimateOTPulse
 
 SpriteAnimFunc_IntroSuicune:
 	ld a, [wIntroSceneTimer]
@@ -827,12 +816,10 @@ SpriteAnimFunc_IntroSuicuneAway:
 	ret
 
 SpriteAnimFunc_EZChatCursor:
-	farcall AnimateEZChatCursor
-	ret
+	farjp AnimateEZChatCursor
 
 SpriteAnimFunc_Celebi:
-	farcall UpdateCelebiPosition
-	ret
+	farjp UpdateCelebiPosition
 
 AnimSeqs_AnonJumptable:
 	ld hl, sp+0

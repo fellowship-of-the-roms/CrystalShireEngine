@@ -433,8 +433,7 @@ FlyFunction_GetMonIcon:
 	add a
 	add a
 	ld e, a
-	farcall SetFirstOBJPalette
-	ret
+	farjp SetFirstOBJPalette
 
 GetMonIconDE: ; unreferenced
 	push de

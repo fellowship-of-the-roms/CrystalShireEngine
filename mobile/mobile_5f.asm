@@ -77,8 +77,7 @@ Function17c000:
 	ldh [rVBK], a
 
 	call EnableLCD
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 HaveWantGFX:
 INCBIN "gfx/mobile/havewant.2bpp"
@@ -499,8 +498,7 @@ MenuData_ChallengeExplanationCancel:
 
 Function17d2b6:
 	call Function17d2c0
-	farcall Function1181da
-	ret
+	farjp Function1181da
 
 Function17d2c0:
 	xor a

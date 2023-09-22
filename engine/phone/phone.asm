@@ -130,8 +130,7 @@ CheckPhoneCall::
 	ret
 
 .timecheck
-	farcall CheckReceiveCallTimer
-	ret
+	farjp CheckReceiveCallTimer
 
 CheckPhoneContactTimeOfDay:
 	push hl
@@ -431,8 +430,7 @@ Script_SpecialElmCall: ; unreferenced
 RingTwice_StartCall:
 	call .Ring
 	call .Ring
-	farcall StubbedTrainerRankings_PhoneCalls
-	ret
+	farjp StubbedTrainerRankings_PhoneCalls
 
 .Ring:
 	call Phone_StartRinging
@@ -457,8 +455,7 @@ PhoneCall::
 	ld [wPhoneCaller + 1], a
 	call .Ring
 	call .Ring
-	farcall StubbedTrainerRankings_PhoneCalls
-	ret
+	farjp StubbedTrainerRankings_PhoneCalls
 
 .Ring:
 	call Phone_StartRinging
@@ -535,8 +532,7 @@ Phone_StartRinging:
 	call PlaySFX
 	call Phone_CallerTextbox
 	call UpdateSprites
-	farcall PhoneRing_CopyTilemapAtOnce
-	ret
+	farjp PhoneRing_CopyTilemapAtOnce
 
 HangUp_Wait20Frames:
 	jr Phone_Wait20Frames
@@ -544,8 +540,7 @@ HangUp_Wait20Frames:
 Phone_Wait20Frames:
 	ld c, 20
 	call DelayFrames
-	farcall PhoneRing_CopyTilemapAtOnce
-	ret
+	farjp PhoneRing_CopyTilemapAtOnce
 
 Phone_TextboxWithName:
 	push bc

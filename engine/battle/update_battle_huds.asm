@@ -5,5 +5,4 @@ _UpdateBattleHUDs:
 	farcall DrawEnemyHUD
 	ld hl, wEnemyHPPal
 	call SetHPPal
-	farcall FinishBattleAnim
-	ret
+	farjp FinishBattleAnim

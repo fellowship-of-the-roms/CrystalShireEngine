@@ -1,6 +1,5 @@
 DoItemEffect::
-	farcall _DoItemEffect
-	ret
+	farjp _DoItemEffect
 
 CheckTossableItem::
 	push hl

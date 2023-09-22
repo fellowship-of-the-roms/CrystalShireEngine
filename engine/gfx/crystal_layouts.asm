@@ -67,8 +67,7 @@ _CrystalCGB_MobileLayout0:
 	call Crystal_WipeAttrmap
 	call MG_Mobile_Layout_CreatePalBoxes
 	farcall ApplyAttrmap
-	farcall ApplyPals
-	ret
+	farjp ApplyPals
 
 MG_Mobile_Layout_CreatePalBoxes:
 	hlcoord 0, 0, wAttrmap
@@ -213,8 +212,7 @@ Function49742:
 	ld bc, 8 palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
-	farcall ApplyPals
-	ret
+	farjp ApplyPals
 
 .MobileBorderPalettes:
 INCLUDE "gfx/trade/mobile_border.pal"
@@ -275,8 +273,7 @@ _LoadTradeRoomBGPals:
 	ld bc, 6 palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
-	farcall ApplyPals
-	ret
+	farjp ApplyPals
 
 TradeRoomPalette:
 INCLUDE "gfx/trade/border.pal"

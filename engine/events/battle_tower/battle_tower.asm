@@ -1,14 +1,12 @@
 BattleTowerRoomMenu:
 ; special
 	call InitBattleTowerChallengeRAM
-	farcall _BattleTowerRoomMenu
-	ret
+	farjp _BattleTowerRoomMenu
 
 Function1700ba:
 ; special
 	call InitBattleTowerChallengeRAM
-	farcall Function11811a
-	ret
+	farjp Function11811a
 
 Function1700c4:
 	ldh a, [rSVBK]
@@ -54,8 +52,7 @@ Function1700c4:
 Function170114:
 	call InitBattleTowerChallengeRAM
 	call .Function170121
-	farcall Function11805f
-	ret
+	farjp Function11805f
 
 .Function170121:
 	ld a, BANK(s5_a948)
@@ -967,8 +964,7 @@ BattleTowerAction_1D:
 	jmp CloseSRAM
 
 BattleTower_SaveOptions:
-	farcall SaveOptions
-	ret
+	farjp SaveOptions
 
 BattleTower_RandomlyChooseReward:
 ; Generate a random stat boosting item.
@@ -1569,8 +1565,7 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	ldh [hUsedSpriteIndex], a
 	ld a, [hl]
 	ldh [hUsedSpriteTile], a
-	farcall GetUsedSprite
-	ret
+	farjp GetUsedSprite
 
 INCLUDE "data/trainers/sprites.asm"
 

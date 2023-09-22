@@ -101,21 +101,17 @@ SafeHDMATransfer::
 	ret
 
 UpdatePlayerSprite::
-	farcall _UpdatePlayerSprite
-	ret
+	farjp _UpdatePlayerSprite
 
 LoadStandardFont::
-	farcall _LoadStandardFont
-	ret
+	farjp _LoadStandardFont
 
 LoadFontsBattleExtra::
-	farcall _LoadFontsBattleExtra
-	ret
+	farjp _LoadFontsBattleExtra
 
 LoadFontsExtra::
 	farcall _LoadFontsExtra1
-	farcall _LoadFontsExtra2
-	ret
+	farjp _LoadFontsExtra2
 
 DecompressRequest2bpp::
 	push de

@@ -31,8 +31,7 @@ HallOfFame::
 	call AnimateHallOfFame
 	pop af
 	ld b, a
-	farcall Credits
-	ret
+	farjp Credits
 
 RedCredits::
 	ld a, LOW(MUSIC_NONE)
@@ -53,8 +52,7 @@ RedCredits::
 	ld [wSpawnAfterChampion], a
 	ld a, [wStatusFlags]
 	ld b, a
-	farcall Credits
-	ret
+	farjp Credits
 
 HallOfFame_FadeOutMusic:
 	ld a, LOW(MUSIC_NONE)
@@ -67,8 +65,7 @@ HallOfFame_FadeOutMusic:
 	xor a
 	ld [wVramState], a
 	ldh [hMapAnims], a
-	farcall InitDisplayForHallOfFame
-	ret
+	farjp InitDisplayForHallOfFame
 
 HallOfFame_PlayMusicDE:
 	push de
@@ -624,8 +621,7 @@ HOF_AnimatePlayerPic:
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
 	call WaitBGMap
-	farcall ProfOaksPCRating
-	ret
+	farjp ProfOaksPCRating
 
 .PlayTime:
 	db "PLAY TIME@"

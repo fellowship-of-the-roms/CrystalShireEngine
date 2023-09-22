@@ -2449,12 +2449,10 @@ String_TooBadTheTradeWasCanceled:
 LinkTextboxAtHL:
 	ld d, h
 	ld e, l
-	farcall LinkTextbox
-	ret
+	farjp LinkTextbox
 
 LoadTradeScreenBorderGFX:
-	farcall _LoadTradeScreenBorderGFX
-	ret
+	farjp _LoadTradeScreenBorderGFX
 
 SetTradeRoomBGPals:
 	farcall LoadTradeRoomBGPals ; just a nested farcall; so wasteful
@@ -2469,8 +2467,7 @@ PlaceTradeScreenTextbox: ; unreferenced
 	ld b, 6
 	ld c, 18
 	call LinkTextboxAtHL
-	farcall PlaceTradePartnerNamesAndParty
-	ret
+	farjp PlaceTradePartnerNamesAndParty
 
 INCLUDE "engine/movie/trade_animation.asm"
 

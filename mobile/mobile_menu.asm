@@ -836,6 +836,5 @@ Function4a6d8:
 
 if DEF(_DEBUG)
 MainMenu_DebugRoom:
-	farcall _DebugRoom
-	ret
+	farjp _DebugRoom
 endc

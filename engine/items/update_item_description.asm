@@ -43,5 +43,4 @@ UpdateKeyItemDescription:
 	cp -1
 	ret z
 	decoord 1, 14
-	farcall PrintItemDescription
-	ret
+	farjp PrintItemDescription

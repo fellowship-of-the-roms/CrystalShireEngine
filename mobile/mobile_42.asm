@@ -1487,8 +1487,7 @@ MobileTradeAnim_AnimateSentPulse:
 	ret
 
 .delete
-	farcall DeinitializeSprite
-	ret
+	farjp DeinitializeSprite
 
 MobileTradeAnim_AnimateOTPulse:
 	ld hl, SPRITEANIMSTRUCT_YCOORD

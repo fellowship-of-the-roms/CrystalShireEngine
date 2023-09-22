@@ -155,8 +155,7 @@ endc
 	lb bc, 7, 7
 	predef PlaceGraphic
 	ld de, vTiles2 tile $31
-	farcall RotateUnownFrontpic
-	ret
+	farjp RotateUnownFrontpic
 
 .Load2bppToSRAM:
 	ldh a, [rSVBK]

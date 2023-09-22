@@ -1,6 +1,5 @@
 GiveOddEgg:
-	farcall _GiveOddEgg
-	ret
+	farjp _GiveOddEgg
 
 Function11765d:
 	ldh a, [hInMenu]
@@ -59,8 +58,7 @@ Function117699:
 	call ClearSprites
 	farcall Function171c87
 	farcall ReloadMapPart
-	farcall ClearSpriteAnims
-	ret
+	farjp ClearSpriteAnims
 
 Function1176ee:
 .loop
@@ -152,8 +150,7 @@ Function117764:
 	ret
 
 Function117764_select:
-	farcall Function171cf0
-	ret
+	farjp Function171cf0
 
 Function117764_start:
 	ld a, $2
@@ -516,16 +513,14 @@ Function117a94:
 	call ClearBGPalettes
 	call ClearSprites
 	farcall Function172e78
-	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
-	ret
+	farjp HDMATransferAttrmapAndTilemapToWRAMBank3
 
 Function117ab4:
 	call ClearBGPalettes
 	call ClearSprites
 	farcall Function172e78
 	farcall Function172eb9
-	farcall ReloadMapPart
-	ret
+	farjp ReloadMapPart
 
 Function117acd:
 	call JoyTextDelay

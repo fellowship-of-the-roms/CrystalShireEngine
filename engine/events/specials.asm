@@ -20,8 +20,7 @@ UnusedDummySpecial:
 SetPlayerPalette:
 	ld a, [wScriptVar]
 	ld d, a
-	farcall _SetPlayerPalette
-	ret
+	farjp _SetPlayerPalette
 
 GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
@@ -89,8 +88,7 @@ NameRival:
 	db "SILVER@"
 
 NameRater:
-	farcall _NameRater
-	ret
+	farjp _NameRater
 
 OverworldTownMap:
 	call FadeToMenu
@@ -168,8 +166,7 @@ BugContestJudging:
 MapRadio:
 	ld a, [wScriptVar]
 	ld e, a
-	farcall PlayRadio
-	ret
+	farjp PlayRadio
 
 UnownPuzzle:
 	call FadeToMenu
@@ -298,8 +295,7 @@ ResetLuckyNumberShowFlag:
 	farcall RestartLuckyNumberCountdown
 	ld hl, wLuckyNumberShowFlag
 	res LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
-	farcall LoadOrRegenerateLuckyIDNumber
-	ret
+	farjp LoadOrRegenerateLuckyIDNumber
 
 CheckLuckyNumberShowFlag:
 	farcall _CheckLuckyNumberShowFlag

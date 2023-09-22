@@ -1207,8 +1207,7 @@ DrawPackGFX:
 	jmp Request2bpp
 
 .female
-	farcall DrawKrisPackGFX
-	ret
+	farjp DrawKrisPackGFX
 
 PackGFXPointers:
 	dw PackGFX + (15 tiles) * 1 ; ITEM_POCKET
