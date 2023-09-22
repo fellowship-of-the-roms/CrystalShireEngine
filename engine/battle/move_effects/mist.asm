@@ -6,8 +6,8 @@ BattleCommand_Mist:
 	set SUBSTATUS_MIST, [hl]
 	call AnimateCurrentMove
 	ld hl, MistText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .already_mist
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed

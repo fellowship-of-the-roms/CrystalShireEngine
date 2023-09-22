@@ -206,4 +206,4 @@ TakeCoins::
 CheckCoins::
 	ld a, 2
 	ld de, wCoins
-	jp CompareFunds
+	jmp CompareFunds

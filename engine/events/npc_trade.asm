@@ -74,7 +74,7 @@ NPCTrade::
 	ld l, LOCKED_MON_ID_TRADE_SEND
 	call LockPokemonID
 	ld l, LOCKED_MON_ID_TRADE_RECEIVE
-	jp LockPokemonID
+	jmp LockPokemonID
 
 .TradeAnimation:
 	call DisableSpriteUpdates

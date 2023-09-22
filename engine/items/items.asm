@@ -1,6 +1,6 @@
 _ReceiveItem::
 	call DoesHLEqualNumItems
-	jp nz, PutItemInPocket
+	jmp nz, PutItemInPocket
 	push hl
 	call CheckItemPocket
 	pop de
@@ -20,16 +20,16 @@ _ReceiveItem::
 .Item:
 	ld h, d
 	ld l, e
-	jp PutItemInPocket
+	jmp PutItemInPocket
 
 .KeyItem:
 	ld h, d
 	ld l, e
-	jp ReceiveKeyItem
+	jmp ReceiveKeyItem
 
 .Ball:
 	ld hl, wNumBalls
-	jp PutItemInPocketLow
+	jmp PutItemInPocketLow
 
 .TMHM:
 	ld h, d
@@ -37,7 +37,7 @@ _ReceiveItem::
 	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
-	jp ReceiveTMHM
+	jmp ReceiveTMHM
 
 _TossItem::
 	call DoesHLEqualNumItems
@@ -60,7 +60,7 @@ _TossItem::
 
 .Ball:
 	ld hl, wNumBalls
-	jp RemoveItemFromPocketLow
+	jmp RemoveItemFromPocketLow
 
 .TMHM:
 	ld h, d
@@ -68,19 +68,19 @@ _TossItem::
 	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
-	jp TossTMHM
+	jmp TossTMHM
 
 .KeyItem:
 	ld h, d
 	ld l, e
-	jp TossKeyItem
+	jmp TossKeyItem
 
 .Item:
 	ld h, d
 	ld l, e
 
 .remove
-	jp RemoveItemFromPocket
+	jmp RemoveItemFromPocket
 
 _CheckItem::
 	call DoesHLEqualNumItems
@@ -103,7 +103,7 @@ _CheckItem::
 
 .Ball:
 	ld hl, wNumBalls
-	jp CheckTheItemLow
+	jmp CheckTheItemLow
 
 .TMHM:
 	ld h, d
@@ -111,19 +111,19 @@ _CheckItem::
 	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
-	jp CheckTMHM
+	jmp CheckTMHM
 
 .KeyItem:
 	ld h, d
 	ld l, e
-	jp CheckKeyItems
+	jmp CheckKeyItems
 
 .Item:
 	ld h, d
 	ld l, e
 
 .nope
-	jp CheckTheItem
+	jmp CheckTheItem
 
 DoesHLEqualNumItems:
 	ld a, l

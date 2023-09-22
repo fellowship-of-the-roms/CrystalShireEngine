@@ -689,7 +689,7 @@ Function16cc25:
 .CopyPal:
 	ld bc, 1 palettes
 	ld a, $5
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 
 Function16cc49:
 	hlcoord 4, 15

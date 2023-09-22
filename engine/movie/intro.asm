@@ -19,7 +19,7 @@ CrystalIntro:
 	call IntroSceneJumper
 	farcall PlaySpriteAnimations
 	call DelayFrame
-	jp .loop
+	jr .loop
 
 .ShutOffMusic
 	ld de, MUSIC_NONE

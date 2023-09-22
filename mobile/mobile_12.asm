@@ -127,7 +127,7 @@ Function48157:
 	push bc
 asm_4815f:
 	bit A_BUTTON_F, a
-	jp nz, Function4820d
+	jmp nz, Function4820d
 	ld b, a
 	ld a, [wd002]
 	bit 6, a
@@ -138,7 +138,7 @@ asm_4815f:
 	bit B_BUTTON_F, b
 	jr nz, .b_button
 .dont_check_b_button
-	jp Function48272
+	jmp Function48272
 
 .b_button
 	call ClearBGPalettes
@@ -227,11 +227,11 @@ Function4820d:
 	cp $1
 	jr z, asm_4828d
 	cp $2
-	jp z, Function4876f
+	jmp z, Function4876f
 	cp $3
-	jp z, Function48304
+	jmp z, Function48304
 	cp $4
-	jp z, Function488d3
+	jmp z, Function488d3
 	ld a, $2
 	call MenuClickSound
 	ld a, [wd002]
@@ -263,7 +263,7 @@ Function4820d:
 	ret
 
 Function48272:
-	jp Function4840c
+	jmp Function4840c
 
 MobileString_PersonalInfo:
 	db "Personal Info@"
@@ -300,7 +300,7 @@ asm_4828d:
 	call PlayClickSFX
 	call ExitMenu
 	bit 0, a
-	jp z, Function4840c
+	jmp z, Function4840c
 	ld hl, wMenuCursorY
 	ld a, [hl]
 	ld hl, Strings_484fb
@@ -324,7 +324,7 @@ asm_4828d:
 	ld a, [wd003]
 	set 0, a
 	ld [wd003], a
-	jp Function4840c
+	jmp Function4840c
 
 Function48304:
 	call Function48283
@@ -381,7 +381,7 @@ Function48304:
 .asm_48377
 	call Function48187
 	farcall Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
-	jp Function4840c
+	jmp Function4840c
 
 Function48383:
 	push bc
@@ -495,14 +495,14 @@ Function4840c:
 	ld c, 1
 	hlcoord 1, 4
 	call ClearBox
-	jp Function48157
+	jmp Function48157
 
 .narrower_box
 	ld b, 7
 	ld c, 1
 	hlcoord 1, 6
 	call ClearBox
-	jp Function48157
+	jmp Function48157
 
 Mobile12_Bin2Dec:
 	push bc
@@ -868,7 +868,7 @@ Function4876f:
 	call Function487ec
 	pop af
 	ldh [hInMenu], a
-	jp Function4840c
+	jmp Function4840c
 
 Function487ec:
 	push hl
@@ -899,10 +899,10 @@ String_4880d:
 Function4880e:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
-	jp nz, Function488b9
+	jmp nz, Function488b9
 	ldh a, [hJoyPressed]
 	and B_BUTTON
-	jp nz, Function488b4
+	jmp nz, Function488b4
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_UP
@@ -1015,7 +1015,7 @@ Function488d3:
 	ld de, MobileDesc_ZipCode
 	call PlaceString
 	call Function48a3a
-	jp c, Function4840c
+	jmp c, Function4840c
 	ld hl, MenuHeader_0x4850e
 	call LoadMenuHeader
 	ldh a, [hInMenu]
@@ -1050,11 +1050,11 @@ asm_48922:
 	call JoyTextDelay
 	ldh a, [hJoyDown]
 	and a
-	jp z, Function4896e
+	jr z, Function4896e
 	bit 0, a
-	jp nz, Function4896e
+	jr nz, Function4896e
 	bit 1, a
-	jp nz, Function4896e
+	jr nz, Function4896e
 	ld a, [wd002]
 	and %11001111
 	res 7, a
@@ -1166,7 +1166,7 @@ asm_48972:
 	call ClearBox
 	pop af
 	ldh [hInMenu], a
-	jp Function4840c
+	jmp Function4840c
 
 Function489ea:
 	push de
@@ -1232,7 +1232,7 @@ Function48a3a:
 	call ExitMenu
 	pop af
 	bit 1, a
-	jp nz, Function48a9a
+	jr nz, Function48a9a
 	ld a, [wMenuCursorY]
 	cp $1
 	jr z, .asm_48a98
@@ -1266,10 +1266,10 @@ String_48aa1:
 Function48ab5:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
-	jp nz, Function48c0f
+	jmp nz, Function48c0f
 	ldh a, [hJoyPressed]
 	and B_BUTTON
-	jp nz, Function48c0d
+	jmp nz, Function48c0d
 	ld a, d
 	and a
 	jr z, .asm_48adf
@@ -1345,7 +1345,7 @@ Function48ab5:
 	jr nz, .asm_48b55
 	ld a, [hl]
 	and D_LEFT
-	jp nz, Function48bd7
+	jmp nz, Function48bd7
 	ld a, [hl]
 	and D_RIGHT
 	jr nz, .asm_48b9d
@@ -1396,7 +1396,7 @@ Function48ab5:
 	call Function48c5a
 .asm_48b88
 	ld a, $f0
-	jp Function48c00
+	jr Function48c00
 .asm_48b8d
 	pop af
 	ld b, a

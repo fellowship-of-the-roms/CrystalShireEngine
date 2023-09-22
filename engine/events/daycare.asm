@@ -543,7 +543,7 @@ DayCare_InitBreeding:
 	cp 150
 	jr c, .loop
 	ld [wStepsToEgg], a
-	jp .UselessJump
+	jr .UselessJump
 
 .UselessJump:
 	xor a

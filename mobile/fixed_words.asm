@@ -461,7 +461,7 @@ EZChat_MasterLoop:
 	ld hl, wcd23
 	set 1, [hl]
 	set 2, [hl]
-	jp Function11cfb5
+	jmp Function11cfb5
 
 .InitRAM:
 	ld a, $9
@@ -472,7 +472,7 @@ EZChat_MasterLoop:
 	ld [wcd30], a
 	ld de, wcd2d
 	call Function11cfce
-	jp Function11cfb5
+	jmp Function11cfb5
 
 Function11c35f:
 	ld hl, wcd2f
@@ -486,7 +486,7 @@ Function11c35f:
 	call Function11cfce
 	pop af
 	ret nz
-	jp Function11cfb5
+	jmp Function11cfb5
 
 Function11c373:
 	ld hl, wcd30
@@ -501,7 +501,7 @@ Function11c373:
 	pop af
 	ret nz
 	call Function11c38a
-	jp Function11cfb5
+	jmp Function11cfb5
 
 Function11c38a:
 	ld hl, Unknown_11c986
@@ -3120,7 +3120,7 @@ EZChat_GetSeenPokemonByKana:
 	pop af
 	dec a
 	jr z, .ExitMasterLoop
-	jp .MasterLoop
+	jmp .MasterLoop
 
 .ExitMasterLoop:
 	pop af

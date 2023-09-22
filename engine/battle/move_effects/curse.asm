@@ -49,7 +49,7 @@ BattleCommand_Curse:
 	call BattleCommand_StatUpMessage
 	call ResetMiss
 	call BattleCommand_DefenseUp
-	jp BattleCommand_StatUpMessage
+	jmp BattleCommand_StatUpMessage
 
 .ghost
 
@@ -74,11 +74,11 @@ BattleCommand_Curse:
 	call CallBattleCore
 	call UpdateUserInParty
 	ld hl, PutACurseText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed
 
 .cantraise
 
@@ -88,4 +88,4 @@ BattleCommand_Curse:
 	call GetStatName
 	call AnimateFailedMove
 	ld hl, WontRiseAnymoreText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

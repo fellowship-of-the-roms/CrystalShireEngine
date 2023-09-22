@@ -111,7 +111,7 @@ Function117738:
 	ld [hl], a
 	ld a, $3
 	ld [wcd23], a
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 Function117764:
 	ld a, [wcd4a]
@@ -133,7 +133,7 @@ Function117764:
 	jr nz, Function117764_start
 	ld a, [hl]
 	and A_BUTTON
-	jp nz, Function117764_a_button
+	jmp nz, Function117764_a_button
 	ld a, [hl]
 	and B_BUTTON
 	jr nz, Function117764_b_button
@@ -146,10 +146,10 @@ Function117764:
 	jr nz, Function117764_d_down
 	ld a, [hl]
 	and D_LEFT
-	jp nz, Function117764_d_left
+	jmp nz, Function117764_d_left
 	ld a, [hl]
 	and D_RIGHT
-	jp nz, Function117764_d_right
+	jmp nz, Function117764_d_right
 	ret
 
 Function117764_select:
@@ -169,7 +169,7 @@ Function1177b7:
 	ld a, [wcd4a]
 	and a
 	jr z, .asm_1177c5
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 .asm_1177c5
 	ld a, $6
@@ -180,7 +180,7 @@ Function1177cb:
 	ld a, $80
 	ld [wcd49], a
 	ld [wScriptVar], a
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 Function117764_b_button:
 	call PlayClickSFX
@@ -270,16 +270,16 @@ Function117764_a_button:
 	jr nz, .not_4
 	ld a, [wcd4c]
 	cp $2
-	jp z, Function1177b7
+	jmp z, Function1177b7
 	cp $1
-	jp z, Function1177cb
-	jp Function117764_select
+	jmp z, Function1177cb
+	jmp Function117764_select
 
 .not_4
 	ld a, [wcd4a]
 	ld e, a
 	cp $10
-	jp z, Function117764_start
+	jmp z, Function117764_start
 	inc a
 	ld [wcd4a], a
 	ld d, $0
@@ -314,7 +314,7 @@ Function117764_a_button:
 	ld a, e
 	cp $f
 	ret nz
-	jp Function117764_start
+	jmp Function117764_start
 
 Function1178aa:
 	ld hl, MenuHeader_1179b5
@@ -337,7 +337,7 @@ Function1178aa:
 	call PlaceString
 	ld a, $1
 	ld [wcd4e], a
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 Function1178e8:
 	ldh a, [hJoyPressed]
@@ -384,12 +384,12 @@ Function1178e8:
 	call ExitMenu
 	ld a, $1
 	ld [wcd4f], a
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 .b_button
 	call ExitMenu
 	call ExitMenu
-	jp MobilePassword_IncrementJumptable
+	jmp MobilePassword_IncrementJumptable
 
 Function117942:
 	call SpeechTextbox
@@ -559,7 +559,7 @@ Function117b06:
 	farcall Function172eb9
 	ld a, $10
 	ld [wcf64], a
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 Function117b14:
 	ld hl, wcf64
@@ -569,12 +569,12 @@ Function117b14:
 	call LoadMenuHeader
 	call MenuBox
 	call MenuBoxCoord2Tile
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 Function117b28:
 	ld hl, MobileStadiumEntryText
 	call PrintText
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 Function117b31:
 	ld hl, MenuHeader_117cc4
@@ -587,7 +587,7 @@ Function117b31:
 	hlcoord 15, 8
 	ld a, "▶"
 	ld [hl], a
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 Function117b4f:
 	ldh a, [hJoyPressed]
@@ -634,7 +634,7 @@ Function117b4f:
 	call ExitMenu
 	call ExitMenu
 	farcall ReloadMapPart
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 .b_button
 	call ExitMenu
@@ -719,7 +719,7 @@ Function117bb6:
 	call CloseSRAM
 	pop af
 	ldh [rSVBK], a
-	jp MobileStudium_JumptableIncrement
+	jmp MobileStudium_JumptableIncrement
 
 Function117c4a:
 	ld hl, MenuHeader_117cbc

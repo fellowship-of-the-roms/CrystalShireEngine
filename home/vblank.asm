@@ -232,7 +232,7 @@ UpdatePals::
 
 	ldh a, [hCGB]
 	and a
-	jp nz, UpdateCGBPals
+	jmp nz, UpdateCGBPals
 
 	; update gb pals
 	ld a, [wBGP]

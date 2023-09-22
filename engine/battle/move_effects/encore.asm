@@ -14,7 +14,7 @@ BattleCommand_Encore:
 	ld hl, .invalid_moves
 	call CheckMoveInList
 	pop hl
-	jp c, .failed
+	jmp c, .failed
 
 .got_move
 	ld a, [hli]
@@ -25,14 +25,14 @@ BattleCommand_Encore:
 	add hl, bc
 	ld a, [hl]
 	and PP_MASK
-	jp z, .failed
+	jmp z, .failed
 	ld a, [wAttackMissed]
 	and a
-	jp nz, .failed
+	jr nz, .failed
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_ENCORED, [hl]
-	jp nz, .failed
+	jr nz, .failed
 	set SUBSTATUS_ENCORED, [hl]
 	call BattleRandom
 	and $3
@@ -107,10 +107,10 @@ BattleCommand_Encore:
 .finish_move
 	call AnimateCurrentMove
 	ld hl, GotAnEncoreText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
-	jp PrintDidntAffect2
+	jmp PrintDidntAffect2
 
 .invalid_moves
 	dw NO_MOVE

@@ -269,7 +269,7 @@ InitializeVisibleSprites:
 	push bc
 	call CopyObjectStruct
 	pop bc
-	jp c, .ret
+	jr c, .ret
 
 .next
 	ld hl, MAPOBJECT_LENGTH

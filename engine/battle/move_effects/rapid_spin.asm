@@ -31,4 +31,4 @@ BattleCommand_ClearHazards:
 	xor a
 	ld [de], a
 	ld hl, ReleasedByText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

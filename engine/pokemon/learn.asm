@@ -32,7 +32,7 @@ LearnMove:
 	push de
 	call ForgetMove
 	pop de
-	jp c, .cancel
+	jr c, .cancel
 
 	push hl
 	push de
@@ -72,17 +72,17 @@ LearnMove:
 
 	ld a, [wBattleMode]
 	and a
-	jp z, .learned
+	jr z, .learned
 
 	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wCurBattleMon]
 	cp b
-	jp nz, .learned
+	jr nz, .learned
 
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jp nz, .learned
+	jr nz, .learned
 
 	ld h, d
 	ld l, e
@@ -94,13 +94,13 @@ LearnMove:
 	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
 	call CopyBytes
-	jp .learned
+	jr .learned
 
 .cancel
 	ld hl, StopLearningMoveText
 	call PrintText
 	call YesNoBox
-	jp c, .loop
+	jmp c, .loop
 
 	ld hl, DidNotLearnMoveText
 	call PrintText

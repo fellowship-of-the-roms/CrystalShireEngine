@@ -8,7 +8,7 @@ BattleCommand_FuryCutter:
 .go
 	ld a, [wAttackMissed]
 	and a
-	jp nz, ResetFuryCutterCount
+	jr nz, ResetFuryCutterCount
 
 	inc [hl]
 

@@ -306,7 +306,7 @@ StoreSwarmMapIndices::
 CheckPokerus:
 ; Check if a monster in your party has Pokerus
 	farcall _CheckPokerus
-	jp ScriptReturnCarry
+	jr ScriptReturnCarry
 
 ResetLuckyNumberShowFlag:
 	farcall RestartLuckyNumberCountdown
@@ -317,7 +317,7 @@ ResetLuckyNumberShowFlag:
 
 CheckLuckyNumberShowFlag:
 	farcall _CheckLuckyNumberShowFlag
-	jp ScriptReturnCarry
+	jr ScriptReturnCarry
 
 SnorlaxAwake:
 ; Check if the Poké Flute channel is playing, and if the player is standing
@@ -371,7 +371,7 @@ SnorlaxAwake:
 
 PlayCurMonCry:
 	ld a, [wCurPartySpecies]
-	jp PlayMonCry
+	jmp PlayMonCry
 
 GameboyCheck:
 	ldh a, [hCGB]
@@ -420,4 +420,4 @@ TrainerHouse:
 	call OpenSRAM
 	ld a, [sMysteryGiftTrainerHouseFlag]
 	ld [wScriptVar], a
-	jp CloseSRAM
+	jmp CloseSRAM

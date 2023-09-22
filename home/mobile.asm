@@ -26,7 +26,7 @@ MobileAPI::
 	ld [wc981], a
 	rst Bankswitch
 
-	jp _MobileAPI
+	jmp _MobileAPI
 
 ReturnMobileAPI::
 ; Return from _MobileAPI
@@ -134,7 +134,7 @@ Function3eea::
 	call Function3f35
 	pop bc
 	pop hl
-	jp MobileHome_PlaceBox
+	jr MobileHome_PlaceBox
 
 Function3f20::
 Function3f35::

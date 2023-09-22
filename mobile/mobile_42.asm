@@ -11,7 +11,7 @@ MobileTradeAnimation_SendGivemonToGTS:
 	ld a, $80
 	ld [wcf65], a
 	ld de, .TradeAnimScript
-	jp RunMobileTradeAnim_NoFrontpics
+	jr RunMobileTradeAnim_NoFrontpics
 
 .TradeAnimScript:
 	mobiletradeanim MobileTradeAnim_ShowPlayerMonForGTS
@@ -31,7 +31,7 @@ MobileTradeAnimation_ReceiveGetmonFromGTS:
 asm_108018:
 	ld [wcf65], a
 	ld de, .TradeAnimScript
-	jp RunMobileTradeAnim_NoFrontpics
+	jr RunMobileTradeAnim_NoFrontpics
 
 .TradeAnimScript:
 	mobiletradeanim MobileTradeAnim_11
@@ -50,7 +50,7 @@ Function10802a:
 asm_10802c:
 	ld [wcf65], a
 	ld de, .TradeAnimScript
-	jp RunMobileTradeAnim_Frontpics
+	jr RunMobileTradeAnim_Frontpics
 
 .TradeAnimScript: ; trade
 	mobiletradeanim MobileTradeAnim_ShowPlayerMonToBeSent
@@ -66,7 +66,7 @@ Function10803d:
 	ld a, $0
 	ld [wcf65], a
 	ld de, .TradeAnimScript
-	jp RunMobileTradeAnim_NoFrontpics
+	jr RunMobileTradeAnim_NoFrontpics
 
 .TradeAnimScript:
 	mobiletradeanim MobileTradeAnim_11
@@ -79,7 +79,7 @@ Function10804d:
 	ld a, $0
 	ld [wcf65], a
 	ld de, .TradeAnimScript
-	jp RunMobileTradeAnim_NoFrontpics
+	jr RunMobileTradeAnim_NoFrontpics
 
 .TradeAnimScript:
 	mobiletradeanim MobileTradeAnim_11

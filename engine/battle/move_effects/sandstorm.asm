@@ -9,8 +9,8 @@ BattleCommand_StartSandstorm:
 	ld [wWeatherCount], a
 	call AnimateCurrentMove
 	ld hl, SandstormBrewedText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed

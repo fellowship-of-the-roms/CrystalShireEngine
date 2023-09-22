@@ -44,7 +44,7 @@ MoveTutor:
 	; MOVETUTOR_ICE_BEAM
 	ld hl, ICE_BEAM
 .ok
-	jp GetMoveIDFromIndex
+	jmp GetMoveIDFromIndex
 
 CheckCanLearnMoveTutorMove:
 	ld hl, .MenuHeader

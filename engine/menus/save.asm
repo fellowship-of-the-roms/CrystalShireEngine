@@ -138,7 +138,7 @@ SavedTheGame:
 	call PrintText
 	ld de, SFX_SAVE
 	call WaitPlaySFX
-	jp WaitSFX
+	jmp WaitSFX
 
 .saving_text
 	text "Saving…"
@@ -174,7 +174,7 @@ SaveGameData:
 	call SaveChecksum
 	call WriteBackupSave
 	farcall SaveRTC
-	jp CloseSRAM ; just in case
+	jmp CloseSRAM ; just in case
 
 WriteBackupSave:
 ; Runs after saving the main copy. Writes the "pseudo-WRAM" copies of storage
@@ -196,7 +196,7 @@ WriteBackupSave:
 	; Finished saving.
 	xor a
 	call SetSavePhase
-	jp CloseSRAM
+	jmp CloseSRAM
 
 LoadStorageSystem:
 ; Copy backup storage system to active.
@@ -217,7 +217,7 @@ CopyStorageSystem:
 	call OpenSRAM
 	ld bc, sNewBoxEnd - sNewBox1
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 UpdateStackTop:
 ; sStackTop appears to be unused.
@@ -281,7 +281,7 @@ EraseLinkBattleStats:
 	ld bc, sLinkBattleStatsEnd - sLinkBattleStats
 	xor a
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM
 
 EraseMysteryGift:
 	ld a, BANK(sBackupMysteryGiftItem)
@@ -290,7 +290,7 @@ EraseMysteryGift:
 	ld bc, sBackupMysteryGiftItemEnd - sBackupMysteryGiftItem
 	xor a
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM
 
 EraseHallOfFame:
 	ld a, BANK(sHallOfFame)
@@ -299,7 +299,7 @@ EraseHallOfFame:
 	ld bc, sHallOfFameEnd - sHallOfFame
 	xor a
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM
 
 InitDefaultEZChatMsgs: ; unreferenced
 	ld a, BANK(sEZChatMessages) ; MBC30 bank used by JP Crystal; inaccessible by MBC3
@@ -308,7 +308,7 @@ InitDefaultEZChatMsgs: ; unreferenced
 	ld de, sEZChatMessages
 	ld bc, EASY_CHAT_MESSAGE_LENGTH * 4
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 .Data:
 ; introduction
@@ -329,7 +329,7 @@ EraseBattleTowerStatus:
 	call OpenSRAM
 	xor a
 	ld [sBattleTowerChallengeState], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveData:
 	call _SaveData
@@ -381,7 +381,7 @@ ValidateSave:
 	ld [sCheckValue1], a
 	ld a, SAVE_CHECK_VALUE_2
 	ld [sCheckValue2], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveOptions:
 	ld a, BANK(sOptions)
@@ -393,7 +393,7 @@ SaveOptions:
 	ld a, [wOptions]
 	and ~(1 << NO_TEXT_SCROLL)
 	ld [sOptions], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SavePlayerData:
 	ld a, BANK(sPlayerData)
@@ -406,7 +406,7 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SavePokemonData:
 	ld a, BANK(sPokemonData)
@@ -443,7 +443,7 @@ SaveIndexTables:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveChecksum:
 	ld a, BANK(sMoveIndexTable)
@@ -534,7 +534,7 @@ SaveBackupIndexTables:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveBackupChecksum:
 	ld a, BANK(sBackupMoveIndexTable)
@@ -564,7 +564,7 @@ WasMidSaveAborted:
 	call OpenSRAM
 	ld a, [sWritingBackup]
 	dec a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SetSavePhase:
 ; set current save phase: 1 (saving), 0 (not saving).
@@ -573,7 +573,7 @@ SetSavePhase:
 	call OpenSRAM
 	pop af
 	ld [sWritingBackup], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 TryLoadSaveFile:
 	call VerifyChecksum
@@ -768,7 +768,7 @@ LoadIndexTables:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 VerifyChecksum:
 	ld hl, sSaveData
@@ -851,7 +851,7 @@ LoadBackupIndexTables:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 VerifyBackupChecksum:
 	ld hl, sBackupSaveData
@@ -911,7 +911,7 @@ _SaveData:
 	ld a, [hli]
 	ld [s4_a60e + 1], a
 
-	jp CloseSRAM
+	jmp CloseSRAM
 
 _LoadData:
 	ld a, BANK(sCrystalData)
@@ -930,7 +930,7 @@ _LoadData:
 	ld a, [s4_a60e + 1]
 	ld [hli], a
 
-	jp CloseSRAM
+	jmp CloseSRAM
 
 Checksum:
 	ld de, 0

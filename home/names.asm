@@ -59,7 +59,7 @@ GetName::
 
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 GetNthString16::
 ; Like GetNthString, but with a 16-bit index in bc
@@ -287,7 +287,7 @@ GetTMHMName::
 
 	pop af
 	ld [wNamedObjectIndex], a
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .TMText:
 	db "TM"

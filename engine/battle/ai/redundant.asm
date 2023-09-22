@@ -6,7 +6,7 @@ AI_Redundant:
 	ld de, 3
 	ld hl, .Moves
 	call IsInArray
-	jp nc, .NotRedundant
+	jmp nc, .NotRedundant
 	inc hl
 	ld a, [hli]
 	ld h, [hl]

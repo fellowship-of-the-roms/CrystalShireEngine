@@ -370,13 +370,13 @@ Menu_WasButtonPressed:
 _2DMenuInterpretJoypad:
 	call GetMenuJoypad
 	bit A_BUTTON_F, a
-	jp nz, .a_b_start_select
+	jmp nz, .a_b_start_select
 	bit B_BUTTON_F, a
-	jp nz, .a_b_start_select
+	jmp nz, .a_b_start_select
 	bit SELECT_F, a
-	jp nz, .a_b_start_select
+	jmp nz, .a_b_start_select
 	bit START_F, a
-	jp nz, .a_b_start_select
+	jmp nz, .a_b_start_select
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit D_LEFT_F, a
@@ -408,7 +408,7 @@ _2DMenuInterpretJoypad:
 	bit 5, a
 	jr nz, .wrap_around_down
 	bit 3, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -431,7 +431,7 @@ _2DMenuInterpretJoypad:
 	bit 5, a
 	jr nz, .wrap_around_up
 	bit 2, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -455,7 +455,7 @@ _2DMenuInterpretJoypad:
 	bit 4, a
 	jr nz, .wrap_around_left
 	bit 1, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -479,7 +479,7 @@ _2DMenuInterpretJoypad:
 	bit 4, a
 	jr nz, .wrap_around_right
 	bit 0, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -665,7 +665,7 @@ _ExitMenu::
 	call GetWindowStackTop
 	ld a, l
 	or h
-	jp z, Error_Cant_ExitMenu
+	jr z, Error_Cant_ExitMenu
 	ld a, l
 	ld [wWindowStackPointer], a
 	ld a, h

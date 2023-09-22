@@ -30,7 +30,7 @@ BugContest_SetCaughtContestMon:
 	xor a
 	ld [wMonType], a
 	ld hl, wContestMon
-	jp GeneratePartyMonStats
+	jmp GeneratePartyMonStats
 
 .ContestCaughtMonText:
 	text_far _ContestCaughtMonText

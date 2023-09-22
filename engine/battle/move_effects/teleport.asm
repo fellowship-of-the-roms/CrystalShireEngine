@@ -46,7 +46,7 @@ BattleCommand_Teleport:
 
 .failed
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed
 
 .enemy_turn
 	; Can't teleport from a trainer battle
@@ -91,4 +91,4 @@ BattleCommand_Teleport:
 	call SetBattleDraw
 
 	ld hl, FledFromBattleText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

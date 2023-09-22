@@ -1,7 +1,7 @@
 BattleCommand_Spite:
 	ld a, [wAttackMissed]
 	and a
-	jp nz, .failed
+	jmp nz, .failed
 	ld bc, PARTYMON_STRUCT_LENGTH ; unused
 	ld hl, wEnemyMonMoves
 	ldh a, [hBattleTurn]
@@ -81,7 +81,7 @@ BattleCommand_Spite:
 	ld a, d
 	ld [wTextDecimalByte], a
 	ld hl, SpiteEffectText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
-	jp PrintDidntAffect2
+	jmp PrintDidntAffect2

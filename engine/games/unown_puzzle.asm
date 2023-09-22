@@ -177,10 +177,10 @@ UnownPuzzleJumptable:
 .Function:
 	ldh a, [hJoyPressed]
 	and START
-	jp nz, UnownPuzzle_Quit
+	jmp nz, UnownPuzzle_Quit
 	ldh a, [hJoyPressed]
 	and A_BUTTON
-	jp nz, UnownPuzzle_A
+	jmp nz, UnownPuzzle_A
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_UP

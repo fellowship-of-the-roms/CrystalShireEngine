@@ -171,7 +171,7 @@ BattleBGEffects_IncAnonJumptableIndex:
 
 BattleBGEffect_FlashInverted:
 	ld de, .inverted
-	jp BattleBGEffect_FlashContinue
+	jr BattleBGEffect_FlashContinue
 
 .inverted
 	dc 3, 2, 1, 0
@@ -179,7 +179,7 @@ BattleBGEffect_FlashInverted:
 
 BattleBGEffect_FlashWhite:
 	ld de, .white
-	jp BattleBGEffect_FlashContinue
+	jr BattleBGEffect_FlashContinue
 
 .white
 	dc 3, 2, 1, 0
@@ -1537,7 +1537,7 @@ Rollout_FillLYOverridesBackup:
 	jr z, .rollout
 .not_rollout
 	pop af
-	jp BGEffect_FillLYOverridesBackup
+	jmp BGEffect_FillLYOverridesBackup
 
 .rollout
 	ldh a, [hLYOverrideStart]

@@ -89,7 +89,7 @@ Function1165e3:
 	ld a, $1
 	call Function116780
 	ret c
-	jp Function116797
+	jmp Function116797
 
 Function1165f5:
 	ld a, $1
@@ -130,7 +130,7 @@ Function116623:
 	ld a, $6
 	call Function116780
 	ret c
-	jp Function116797
+	jmp Function116797
 
 Function116635:
 	ld a, $2

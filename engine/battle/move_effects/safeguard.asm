@@ -14,8 +14,8 @@ BattleCommand_Safeguard:
 	ld [de], a
 	call AnimateCurrentMove
 	ld hl, CoveredByVeilText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed

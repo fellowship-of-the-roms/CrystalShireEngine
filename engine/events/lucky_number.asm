@@ -94,7 +94,7 @@ CheckForLuckyNumberWinners:
 	call CopyBytes
 	ld hl, .MatchInStorage
 .got_text
-	jp PrintText
+	jmp PrintText
 
 .MatchInParty:
 	; Congratulations! We have a match with the ID number of @  in your party.

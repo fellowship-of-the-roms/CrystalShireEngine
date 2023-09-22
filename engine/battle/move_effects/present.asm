@@ -18,10 +18,10 @@ BattleCommand_Present:
 
 	ld a, [wTypeMatchup]
 	and a
-	jp z, AnimateFailedMove
+	jmp z, AnimateFailedMove
 	ld a, [wAttackMissed]
 	and a
-	jp nz, AnimateFailedMove
+	jmp nz, AnimateFailedMove
 
 	push bc
 	call BattleRandom
@@ -82,6 +82,6 @@ BattleCommand_Present:
 	ld hl, PresentFailedText
 	call StdBattleTextbox
 .do_animation
-	jp EndMoveEffect
+	jmp EndMoveEffect
 
 INCLUDE "data/moves/present_power.asm"

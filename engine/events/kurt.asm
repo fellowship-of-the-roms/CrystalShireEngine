@@ -169,7 +169,7 @@ PlaceApricornQuantity:
 	inc hl
 	ld de, wItemQuantityChange
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	jmp PrintNum
 
 Kurt_GetQuantityOfApricorn:
 	push bc

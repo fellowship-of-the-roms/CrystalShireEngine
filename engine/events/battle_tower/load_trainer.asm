@@ -226,7 +226,7 @@ LoadRandomBattleTowerMon:
 
 	pop bc
 	dec c
-	jp nz, .loop
+	jmp nz, .loop
 
 	push de
 	ld hl, sBTMonPrevTrainer1
@@ -242,7 +242,7 @@ LoadRandomBattleTowerMon:
 	ld a, [wBT_OTMon3]
 	call .store_index
 	pop de
-	jp CloseSRAM
+	jmp CloseSRAM
 
 .store_index
 	call GetPokemonIndexFromID

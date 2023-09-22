@@ -136,7 +136,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .lnext
 	dec b
-	jp z, .Main
+	jr z, .Main
 
 .lnext
 	ld a, [hli]
@@ -152,7 +152,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .inext
 	dec b
-	jp z, .Main
+	jr z, .Main
 
 .inext
 	ld [de], a
@@ -164,7 +164,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .anext1
 	dec b
-	jp z, .adone1
+	jr z, .adone1
 .anext1
 	ld a, [hli]
 	ld [de], a
@@ -173,7 +173,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .anext2
 	dec b
-	jp z, .adone2
+	jr z, .adone2
 .anext2
 	ld a, [hld]
 	ld [de], a
@@ -196,7 +196,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .znext
 	dec b
-	jp z, .Main
+	jr z, .Main
 
 .znext
 	ld [de], a
@@ -272,7 +272,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	dec c
 	jr nz, .fnext
 	dec b
-	jp z, .donerw
+	jr z, .donerw
 
 .fnext
 	ld a, [hli]
@@ -298,7 +298,7 @@ DEF LZ_LONG_HI   EQU %00000011
 	jr nz, .rvnext
 
 	dec b
-	jp z, .donerw
+	jr z, .donerw
 
 .rvnext
 	ld a, [hld]
@@ -314,4 +314,4 @@ DEF LZ_LONG_HI   EQU %00000011
 	inc hl ; positive offset is two bytes
 .next
 	inc hl
-	jp .Main
+	jmp .Main

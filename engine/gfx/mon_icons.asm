@@ -10,7 +10,7 @@ _LoadOverworldMonIcon:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	jp GetIconBank
+	jmp GetIconBank
 
 SetMenuMonIconColor:
 	push hl
@@ -529,8 +529,8 @@ GetIconBank:
 GetGFXUnlessMobile:
 	ld a, [wLinkMode]
 	cp LINK_MOBILE
-	jp nz, Request2bpp
-	jp Get2bppViaHDMA
+	jmp nz, Request2bpp
+	jmp Get2bppViaHDMA
 
 
 GetStorageIcon_a:

@@ -678,7 +678,7 @@ BGEventJumptable:
 	ld a, [wPlayerDirection]
 	and %1100
 	cp b
-	jp nz, .dontread
+	jr nz, .dontread
 .read:
 	call PlayTalkObject
 	ld hl, wCurBGEventScriptAddr
@@ -692,7 +692,7 @@ BGEventJumptable:
 
 .itemifset:
 	call CheckBGEventFlag
-	jp nz, .dontread
+	jr nz, .dontread
 	call PlayTalkObject
 	call GetMapScriptsBank
 	ld de, wHiddenItemData

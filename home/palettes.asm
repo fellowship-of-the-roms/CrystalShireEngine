@@ -153,7 +153,7 @@ DmgToCgbObjPals::
 	pop af
 	ldh [rSVBK], a
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 DmgToCgbObjPal0::
 	ldh [rOBP0], a
@@ -315,7 +315,7 @@ ReloadSpritesNoPalettes::
 	ldh [rSVBK], a
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	jp DelayFrame
+	jmp DelayFrame
 
 SwapTextboxPalettes::
 	homecall _SwapTextboxPalettes

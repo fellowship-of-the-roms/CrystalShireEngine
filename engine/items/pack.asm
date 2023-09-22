@@ -563,7 +563,7 @@ RegisterItem:
 GiveItem:
 	ld a, [wPartyCount]
 	and a
-	jp z, .NoPokemon
+	jmp z, .NoPokemon
 	ld a, [wOptions]
 	push af
 	res NO_TEXT_SCROLL, a

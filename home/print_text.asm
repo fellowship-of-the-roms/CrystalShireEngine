@@ -65,7 +65,7 @@ PrintLetterDelay::
 	jr nz, .checkjoypad
 
 .end
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 CopyDataUntil::
 ; Copy [hl .. bc) to de.

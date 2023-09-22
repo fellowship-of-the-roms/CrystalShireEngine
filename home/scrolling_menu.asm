@@ -19,8 +19,8 @@ ScrollingMenu::
 .UpdatePalettes:
 	ld hl, wVramState
 	bit 0, [hl]
-	jp nz, UpdateTimePals
-	jp SetPalettes
+	jmp nz, UpdateTimePals
+	jmp SetPalettes
 
 InitScrollingMenu::
 	ld a, [wMenuBorderTopCoord]
@@ -38,7 +38,7 @@ InitScrollingMenu::
 	push de
 	call Coord2Tile
 	pop bc
-	jp Textbox
+	jmp Textbox
 
 JoyTextDelay_ForcehJoyDown::
 	call DelayFrame

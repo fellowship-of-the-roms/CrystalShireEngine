@@ -28,5 +28,5 @@ BattleCommand_HealBell:
 
 	ldh a, [hBattleTurn]
 	and a
-	jp z, CalcPlayerStats
-	jp CalcEnemyStats
+	jmp z, CalcPlayerStats
+	jmp CalcEnemyStats

@@ -67,7 +67,7 @@ BattleCommand_Disable:
 	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, WasDisabledText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
-	jp FailMove
+	jmp FailMove

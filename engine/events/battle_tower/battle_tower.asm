@@ -201,7 +201,7 @@ BattleTowerBattle:
 	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_2
 	call LockItemID
 	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_3
-	jp LockItemID
+	jmp LockItemID
 
 UnusedBattleTowerDummySpecial1:
 	ret
@@ -498,7 +498,7 @@ ValidateBTParty: ; unreferenced
 	add hl, bc
 	pop de
 	dec d
-	jp nz, .pkmn_loop
+	jmp nz, .pkmn_loop
 	ret
 
 BT_ChrisName:

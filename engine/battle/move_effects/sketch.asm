@@ -5,18 +5,18 @@ BattleCommand_Sketch:
 	and a
 	jr z, .not_linked
 	call AnimateFailedMove
-	jp PrintNothingHappened
+	jmp PrintNothingHappened
 
 .not_linked
 ; If the opponent has a substitute up, fail.
 	call CheckSubstituteOpp
-	jp nz, .fail
+	jmp nz, .fail
 ; If the opponent is transformed, fail.
 ; BUG: A Transformed Pokémon can use Sketch and learn otherwise unobtainable moves (see docs/bugs_and_glitches.md)
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jp nz, .fail
+	jmp nz, .fail
 ; Get the user's moveset in its party struct.
 ; This move replacement shall be permanent.
 ; Pointer will be in de.
@@ -114,8 +114,8 @@ BattleCommand_Sketch:
 	call AnimateCurrentMove
 
 	ld hl, SketchedText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .fail
 	call AnimateFailedMove
-	jp PrintDidntAffect
+	jmp PrintDidntAffect

@@ -93,7 +93,7 @@ ComputePathToWalkToPlayer::
 	ld a, l
 	call .GetMovementData
 	ld c, e
-	jp AppendToMovementBufferNTimes
+	jr AppendToMovementBufferNTimes
 
 .GetMovementData:
 	push de

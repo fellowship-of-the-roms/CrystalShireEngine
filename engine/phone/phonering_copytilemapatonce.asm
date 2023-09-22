@@ -1,10 +1,10 @@
 PhoneRing_CopyTilemapAtOnce:
 	ldh a, [hCGB]
 	and a
-	jp z, WaitBGMap
+	jmp z, WaitBGMap
 	ld a, [wSpriteUpdatesEnabled]
 	cp $0
-	jp z, WaitBGMap
+	jmp z, WaitBGMap
 
 ; The following is a modified version of _CopyTilemapAtOnce
 ; that waits for [rLY] to be LY_VBLANK - 1 instead of $80 - 1.

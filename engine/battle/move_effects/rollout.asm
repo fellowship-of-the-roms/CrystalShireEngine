@@ -13,7 +13,7 @@ BattleCommand_CheckCurl:
 	jr z, .reset
 
 	ld b, doturn_command
-	jp SkipToBattleCommand
+	jmp SkipToBattleCommand
 
 .reset
 	xor a

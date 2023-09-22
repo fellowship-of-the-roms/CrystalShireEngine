@@ -36,7 +36,7 @@ PrintMonTypes:
 	inc bc
 	add hl, bc
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	jp ByteFill
+	jmp ByteFill
 
 PrintMoveType:
 ; Print the type of move b at hl.
@@ -66,7 +66,7 @@ PrintType:
 	ld d, [hl]
 	pop hl
 
-	jp PlaceString
+	jmp PlaceString
 
 GetTypeName:
 ; Copy the name of type [wNamedObjectIndex] to wStringBuffer1.
@@ -82,6 +82,6 @@ GetTypeName:
 	ld l, a
 	ld de, wStringBuffer1
 	ld bc, MOVE_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 INCLUDE "data/types/names.asm"

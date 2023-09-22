@@ -619,13 +619,13 @@ DebugRoom_EditPagedValues:
 	rra ; START_F?
 	jr c, DebugRoom_PagedValuePressedStart
 	rra ; D_RIGHT_F?
-	jp c, DebugRoom_IncrementPagedValue
+	jmp c, DebugRoom_IncrementPagedValue
 	rra ; D_LEFT_F?
-	jp c, DebugRoom_DecrementPagedValue
+	jmp c, DebugRoom_DecrementPagedValue
 	rra ; D_UP_F?
-	jp c, DebugRoom_PrevPagedValue
+	jmp c, DebugRoom_PrevPagedValue
 	rra ; D_DOWN_F?
-	jp c, DebugRoom_NextPagedValue
+	jmp c, DebugRoom_NextPagedValue
 	pop hl
 .continue
 ; call wDebugRoomAutoFunction if it's not null, then jump to .resume

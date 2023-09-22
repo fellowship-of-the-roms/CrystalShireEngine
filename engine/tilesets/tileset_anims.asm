@@ -427,7 +427,7 @@ AnimateFountainTile:
 	ld sp, hl
 	ld l, e
 	ld h, d
-	jp WriteTile
+	jmp WriteTile
 
 .FountainTileFramePointers:
 	dw .FountainTile1
@@ -470,7 +470,7 @@ AnimateWaterTile:
 	ld sp, hl
 	ld l, e
 	ld h, d
-	jp WriteTile
+	jmp WriteTile
 
 .WaterTileFrames:
 	INCBIN "gfx/tilesets/water/water.2bpp"
@@ -508,7 +508,7 @@ ForestTreeLeftAnimation:
 ; Write the tile graphic from hl (now sp) to tile $0c (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $0c
-	jp WriteTile
+	jmp WriteTile
 
 ForestTreeLeftFrames:
 	INCBIN "gfx/tilesets/forest-tree/1.2bpp"
@@ -555,7 +555,7 @@ ForestTreeRightAnimation:
 ; Write the tile graphic from hl (now sp) to tile $0f (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $0f
-	jp WriteTile
+	jmp WriteTile
 
 ForestTreeLeftAnimation2:
 ; Save the stack pointer in bc for WriteTile to restore
@@ -593,7 +593,7 @@ ForestTreeLeftAnimation2:
 ; Write the tile graphic from hl (now sp) to tile $0c (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $0c
-	jp WriteTile
+	jmp WriteTile
 
 ForestTreeRightAnimation2:
 ; Save the stack pointer in bc for WriteTile to restore
@@ -635,7 +635,7 @@ ForestTreeRightAnimation2:
 ; Write the tile graphic from hl (now sp) to tile $0f (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $0f
-	jp WriteTile
+	jmp WriteTile
 
 GetForestTreeFrame:
 ; Return 0 if a is even, or 2 if odd.
@@ -687,7 +687,7 @@ AnimateFlowerTile:
 ; Write the tile graphic from hl (now sp) to tile $03 (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $03
-	jp WriteTile
+	jmp WriteTile
 
 .FlowerTileFrames:
 	INCBIN "gfx/tilesets/flower/dmg_1.2bpp"
@@ -721,7 +721,7 @@ AnimateLavaBubbleTile1:
 ; Write the tile graphic from hl (now sp) to tile $5b (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $5b
-	jp WriteTile
+	jmp WriteTile
 
 AnimateLavaBubbleTile2:
 ; Save the stack pointer in bc for WriteTile to restore
@@ -746,7 +746,7 @@ AnimateLavaBubbleTile2:
 ; Write the tile graphic from hl (now sp) to tile $38 (now hl)
 	ld sp, hl
 	ld hl, vTiles2 tile $38
-	jp WriteTile
+	jmp WriteTile
 
 LavaBubbleTileFrames:
 	INCBIN "gfx/tilesets/lava/1.2bpp"

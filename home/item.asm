@@ -7,7 +7,7 @@ CheckTossableItem::
 	push de
 	push bc
 	farcall _CheckTossableItem
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 TossItem::
 	push hl
@@ -23,7 +23,7 @@ TossItem::
 	pop bc
 	ld a, b
 	rst Bankswitch
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 ReceiveItem::
 	push bc
@@ -50,7 +50,7 @@ ItemIsMail_a::
 	push bc
 	ld d, a
 	newfarcall ItemIsMail
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 CheckItem::
 ; [wCurItem] = item *ID* to check.
@@ -67,4 +67,4 @@ CheckItem::
 	pop bc
 	ld a, b
 	rst Bankswitch
-	jp PopBCDEHL
+	jmp PopBCDEHL

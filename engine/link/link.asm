@@ -34,7 +34,7 @@ LinkCommunications:
 	ld [hl], HIGH(SERIAL_LINK_BYTE_TIMEOUT)
 	ld a, [wLinkMode]
 	cp LINK_TIMECAPSULE
-	jp nz, Gen2ToGen2LinkComms
+	jmp nz, Gen2ToGen2LinkComms
 
 Gen2ToGen1LinkComms:
 	call ClearLinkData
@@ -117,9 +117,9 @@ endc
 	ld a, [hl]
 	pop hl
 	and a
-	jp z, ExitLinkCommunications
+	jmp z, ExitLinkCommunications
 	cp $7
-	jp nc, ExitLinkCommunications
+	jmp nc, ExitLinkCommunications
 
 	ld de, wLinkData
 	ld bc, NAME_LENGTH + (1 + PARTY_LENGTH + 1) + (REDMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH + 3
@@ -202,7 +202,7 @@ endc
 	call z, DelayFrames
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
-	jp InitTradeMenuDisplay
+	jmp InitTradeMenuDisplay
 
 Gen2ToGen2LinkComms:
 	call ClearLinkData
@@ -211,7 +211,7 @@ Gen2ToGen2LinkComms:
 	call CheckLinkTimeout_Gen2
 	ld a, [wScriptVar]
 	and a
-	jp z, LinkTimeout
+	jmp z, LinkTimeout
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr nz, .player_1
@@ -334,7 +334,7 @@ endc
 
 	ld a, [wLinkMode]
 	cp LINK_TRADECENTER
-	jp nz, .skip_mail
+	jmp nz, .skip_mail
 	ld hl, wLinkOTMail
 .loop2
 	ld a, [hli]
@@ -464,7 +464,7 @@ endc
 	ld bc, wOTPartyDataEnd - wOTPartyMons
 	call CopyBytes
 	call Link_FixOTParty_Gen2
-	jp c, LinkTimeout ;we got garbage, so just pretend we're disconnected
+	jmp c, LinkTimeout ;we got garbage, so just pretend we're disconnected
 	ld a, LOW(wOTPartyMonOTs)
 	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOTs)
@@ -528,12 +528,12 @@ endc
 	ld [wOptions], a
 
 	farcall LoadPokemonData
-	jp ExitLinkCommunications
+	jmp ExitLinkCommunications
 
 .ready_to_trade
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
-	jp InitTradeMenuDisplay
+	jmp InitTradeMenuDisplay
 
 LinkTimeout:
 	ld de, .LinkTimeoutText
@@ -767,7 +767,7 @@ Link_PrepPartyData_Gen1:
 	ld hl, wPartyMonNicknames
 .copy_ot_nicks
 	ld bc, PARTY_LENGTH * NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 .ConvertPartyStruct2to1:
 	ld b, h
@@ -1380,7 +1380,7 @@ Link_ConvertPartyStruct1to2:
 	call CopyBytes
 	ld de, wOTPartyMonNicknames
 	ld bc, PARTY_LENGTH * MON_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 .ConvertToGen2:
 	ld b, h
@@ -1627,7 +1627,7 @@ InitTradeMenuDisplay:
 	ld [wMenuCursorY], a
 	inc a
 	ld [wPlayerLinkAction], a
-	jp LinkTrade_PlayerPartyMenu
+	jmp LinkTrade_PlayerPartyMenu
 
 LinkTrade_OTPartyMenu:
 	ld a, OTPARTYMON
@@ -1655,7 +1655,7 @@ LinkTradeOTPartymonMenuLoop:
 	farcall LinkTradeMenu
 	ld a, d
 	and a
-	jp z, LinkTradePartiesMenuMasterLoop
+	jmp z, LinkTradePartiesMenuMasterLoop
 	bit A_BUTTON_F, a
 	jr z, .not_a_button
 	ld a, INIT_ENEMYOT_LIST
@@ -1663,7 +1663,7 @@ LinkTradeOTPartymonMenuLoop:
 	callfar InitList
 	ld hl, wOTPartyMon1Species
 	farcall LinkMonStatsScreen
-	jp LinkTradePartiesMenuMasterLoop
+	jmp LinkTradePartiesMenuMasterLoop
 
 .not_a_button
 	bit D_UP_F, a
@@ -1672,7 +1672,7 @@ LinkTradeOTPartymonMenuLoop:
 	ld b, a
 	ld a, [wOTPartyCount]
 	cp b
-	jp nz, LinkTradePartiesMenuMasterLoop
+	jmp nz, LinkTradePartiesMenuMasterLoop
 	xor a
 	ld [wMonType], a
 	call HideCursor
@@ -1689,8 +1689,8 @@ LinkTradeOTPartymonMenuLoop:
 
 .not_d_up
 	bit D_DOWN_F, a
-	jp z, LinkTradePartiesMenuMasterLoop
-	jp LinkTradeOTPartymonMenuCheckCancel
+	jmp z, LinkTradePartiesMenuMasterLoop
+	jmp LinkTradeOTPartymonMenuCheckCancel
 
 LinkTrade_PlayerPartyMenu:
 	farcall InitMG_Mobile_LinkTradePalMap
@@ -1721,19 +1721,19 @@ LinkTradePartymonMenuLoop:
 	ld a, d
 	and a
 	jr nz, .check_joypad
-	jp LinkTradePartiesMenuMasterLoop
+	jr LinkTradePartiesMenuMasterLoop
 
 .check_joypad
 	bit A_BUTTON_F, a
 	jr z, .not_a_button
-	jp LinkTrade_TradeStatsMenu
+	jr LinkTrade_TradeStatsMenu
 
 .not_a_button
 	bit D_DOWN_F, a
 	jr z, .not_d_down
 	ld a, [wMenuCursorY]
 	dec a
-	jp nz, LinkTradePartiesMenuMasterLoop
+	jr nz, LinkTradePartiesMenuMasterLoop
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	call HideCursor
@@ -1746,7 +1746,7 @@ LinkTradePartymonMenuLoop:
 	pop hl
 	ld a, 1
 	ld [wMenuCursorY], a
-	jp LinkTrade_OTPartyMenu
+	jmp LinkTrade_OTPartyMenu
 
 .not_d_down
 	bit D_UP_F, a
@@ -1764,13 +1764,13 @@ LinkTradePartymonMenuLoop:
 	ld [hl], " "
 	pop bc
 	pop hl
-	jp LinkTradePartymonMenuCheckCancel
+	jmp LinkTradePartymonMenuCheckCancel
 
 LinkTradePartiesMenuMasterLoop:
 	ld a, [wMonType]
 	and a
-	jp z, LinkTradePartymonMenuLoop ; PARTYMON
-	jp LinkTradeOTPartymonMenuLoop  ; OTPARTYMON
+	jr z, LinkTradePartymonMenuLoop ; PARTYMON
+	jmp LinkTradeOTPartymonMenuLoop  ; OTPARTYMON
 
 LinkTrade_TradeStatsMenu:
 	call LoadTilemapToTempTilemap
@@ -1815,7 +1815,7 @@ LinkTrade_TradeStatsMenu:
 	pop af
 	ld [wMenuCursorY], a
 	call SafeLoadTempTilemapToTilemap
-	jp LinkTrade_PlayerPartyMenu
+	jmp LinkTrade_PlayerPartyMenu
 
 .d_right
 	ld a, " "
@@ -1840,7 +1840,7 @@ LinkTrade_TradeStatsMenu:
 	ld [w2DMenuFlags2], a
 	call ScrollingMenuJoypad
 	bit D_LEFT_F, a
-	jp nz, .joy_loop
+	jr nz, .joy_loop
 	bit B_BUTTON_F, a
 	jr nz, .b_button
 	jr .try_trade
@@ -1861,7 +1861,7 @@ LinkTrade_TradeStatsMenu:
 	lb bc, 6, 1
 	ld a, " "
 	call LinkEngine_FillBox
-	jp LinkTrade_PlayerPartyMenu
+	jmp LinkTrade_PlayerPartyMenu
 
 .try_trade
 	call PlaceHollowCursor
@@ -1873,7 +1873,7 @@ LinkTrade_TradeStatsMenu:
 	farcall PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
-	jp z, InitTradeMenuDisplay
+	jmp z, InitTradeMenuDisplay
 	ld [wCurOTTradePartyMon], a
 	call LinkTradePlaceArrow
 	ld c, 100
@@ -1881,7 +1881,7 @@ LinkTrade_TradeStatsMenu:
 	farcall ValidateOTTrademon
 	jr c, .abnormal
 	farcall CheckAnyOtherAliveMonsForTrade
-	jp nc, LinkTrade
+	jmp nc, LinkTrade
 	xor a
 	ld [wUnusedLinkAction], a
 	ld [wOtherPlayerLinkAction], a
@@ -1929,7 +1929,7 @@ LinkTrade_TradeStatsMenu:
 	farcall PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 100
 	call DelayFrames
-	jp InitTradeMenuDisplay
+	jmp InitTradeMenuDisplay
 
 .LinkTradeCantBattleText:
 	text_far _LinkTradeCantBattleText
@@ -1945,7 +1945,7 @@ LinkTrade_TradeStatsMenu:
 LinkTradeOTPartymonMenuCheckCancel:
 	ld a, [wMenuCursorY]
 	cp 1
-	jp nz, LinkTradePartiesMenuMasterLoop
+	jmp nz, LinkTradePartiesMenuMasterLoop
 	call HideCursor
 
 	push hl
@@ -1976,12 +1976,12 @@ LinkTradePartymonMenuCheckCancel:
 	jr z, .d_up
 	ld a, [wOTPartyCount]
 	ld [wMenuCursorY], a
-	jp LinkTrade_OTPartyMenu
+	jmp LinkTrade_OTPartyMenu
 
 .d_up
 	ld a, $1
 	ld [wMenuCursorY], a
-	jp LinkTrade_PlayerPartyMenu
+	jmp LinkTrade_PlayerPartyMenu
 
 .a_button
 	ld a, "▷"
@@ -2026,7 +2026,7 @@ GSPlaceTradeScreenFooter: ; unreferenced
 ; Place the string
 	hlcoord 2, 16
 	ld de, .CancelString
-	jp PlaceString
+	jmp PlaceString
 
 .CancelString:
 	db "CANCEL@"
@@ -2137,7 +2137,7 @@ LinkTrade:
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
 	farcall PrintWaitingTextAndSyncAndExchangeNybble
-	jp InitTradeMenuDisplay_Delay
+	jmp InitTradeMenuDisplay_Delay
 
 .try_trade
 	ld a, $2
@@ -2154,7 +2154,7 @@ LinkTrade:
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
-	jp InitTradeMenuDisplay_Delay
+	jmp InitTradeMenuDisplay_Delay
 
 .do_trade
 	ld hl, sPartyMail
@@ -2424,13 +2424,13 @@ LinkTrade:
 	call DelayFrames
 	ld a, [wLinkMode]
 	cp LINK_TIMECAPSULE
-	jp z, Gen2ToGen1LinkComms
-	jp Gen2ToGen2LinkComms
+	jmp z, Gen2ToGen1LinkComms
+	jmp Gen2ToGen2LinkComms
 
 InitTradeMenuDisplay_Delay:
 	ld c, 100
 	call DelayFrames
-	jp InitTradeMenuDisplay
+	jmp InitTradeMenuDisplay
 
 String_TradeCancel:
 	db   "TRADE"
@@ -2781,7 +2781,7 @@ CheckLinkTimeout_Receptionist:
 	ld a, [wScriptVar]
 	and a
 	ret nz
-	jp Link_ResetSerialRegistersAfterLinkClosure
+	jmp Link_ResetSerialRegistersAfterLinkClosure
 
 CheckLinkTimeout_Gen2:
 ; if wScriptVar = 0 on exit, link connection is closed
@@ -2995,13 +2995,13 @@ CloseLink:
 	ld c, 3
 	call DelayFrames
 	vc_hook Wireless_room_check
-	jp Link_ResetSerialRegistersAfterLinkClosure
+	jr Link_ResetSerialRegistersAfterLinkClosure
 
 FailedLinkToPast:
 	ld c, 40
 	call DelayFrames
 	ld a, $e
-	jp Link_EnsureSync
+	jr Link_EnsureSync
 
 Link_ResetSerialRegistersAfterLinkClosure:
 	ld c, 3

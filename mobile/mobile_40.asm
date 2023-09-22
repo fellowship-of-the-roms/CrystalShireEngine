@@ -213,7 +213,7 @@ Function10016f:
 	cp $02
 	ret z
 	cp $ff
-	jp z, .asm_1001f5
+	jr z, .asm_1001f5
 	cp $fe
 	jr z, .asm_1001c4
 	cp $f5
@@ -221,9 +221,9 @@ Function10016f:
 	cp $f6
 	jr z, .asm_1001b6
 	cp $fa
-	jp z, .asm_1001bd
+	jr z, .asm_1001bd
 	cp $f7
-	jp z, .asm_1001ee
+	jr z, .asm_1001ee
 	cp $f4
 	jr z, .asm_1001d2
 	cp $f3
@@ -1779,7 +1779,7 @@ Mobile_MoveSelectionScreen:
 	farcall CheckPlayerHasUsableMoves
 	ret z
 	call Function100dd8
-	jp c, xor_a_dec_a
+	jmp c, xor_a_dec_a
 	call Function100e72
 	call .GetMoveSelection
 	push af
@@ -1806,9 +1806,9 @@ Mobile_MoveSelectionScreen:
 	ld a, [wMenuJoypadFilter]
 	and c
 	bit D_UP_F, a
-	jp nz, .d_up
+	jr nz, .d_up
 	bit D_DOWN_F, a
-	jp nz, .d_down
+	jr nz, .d_down
 	bit A_BUTTON_F, a
 	jr nz, .a_button
 	bit B_BUTTON_F, a
@@ -1818,11 +1818,11 @@ Mobile_MoveSelectionScreen:
 .d_up
 	ld a, [wMenuCursorY]
 	and a
-	jp nz, .master_loop
+	jr nz, .master_loop
 	ld a, [wNumMoves]
 	inc a
 	ld [wMenuCursorY], a
-	jp .master_loop
+	jr .master_loop
 
 .d_down
 	ld a, [wMenuCursorY]
@@ -1831,10 +1831,10 @@ Mobile_MoveSelectionScreen:
 	inc a
 	inc a
 	cp b
-	jp nz, .master_loop
+	jr nz, .master_loop
 	ld a, $01
 	ld [wMenuCursorY], a
-	jp .master_loop
+	jr .master_loop
 
 .b_button
 	ld a, [wMenuCursorY]
@@ -1884,7 +1884,7 @@ Mobile_MoveSelectionScreen:
 .print_text
 	call StdBattleTextbox
 	call SafeLoadTempTilemapToTilemap
-	jp .GetMoveSelection
+	jmp .GetMoveSelection
 
 .ListMoves:
 	hlcoord 0, 8
@@ -4400,7 +4400,7 @@ Function101e09:
 Function101e31:
 	ld a, $3a
 	ld [wMobileCommsJumptableIndex], a
-	jp Function101c2b
+	jmp Function101c2b
 
 Function101e39:
 	call Function1020bf

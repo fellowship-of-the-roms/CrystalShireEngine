@@ -243,7 +243,7 @@ StubbedTrainerRankings_AddToBattlePayouts:
 StubbedTrainerRankings_StepCount:
 	ret
 	ld hl, sTrainerRankingStepCount
-	jp StubbedTrainerRankings_Increment4Byte
+	jmp StubbedTrainerRankings_Increment4Byte
 
 StubbedTrainerRankings_BattleTowerWins: ; unreferenced
 	ret
@@ -254,12 +254,12 @@ StubbedTrainerRankings_BattleTowerWins: ; unreferenced
 	call CloseSRAM
 	ret nz
 	ld hl, sTrainerRankingBattleTowerWins
-	jp StubbedTrainerRankings_Increment2Byte
+	jmp StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_TMsHMsTaught:
 	ret
 	ld hl, sTrainerRankingTMsHMsTaught
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Battles:
 	ret
@@ -267,7 +267,7 @@ StubbedTrainerRankings_Battles:
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
 	ld hl, sTrainerRankingBattles
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildBattles:
 	ret
@@ -275,52 +275,52 @@ StubbedTrainerRankings_WildBattles:
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
 	ld hl, sTrainerRankingWildBattles
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_TrainerBattles:
 	ret
 	ld hl, sTrainerRankingTrainerBattles
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Unused1: ; unreferenced
 	ret
 	ld hl, sTrainerRankingUnused1
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_HallOfFame::
 	ret
 	ld hl, sTrainerRankingHOFEntries
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildMonsCaught:
 	ret
 	ld hl, sTrainerRankingWildMonsCaught
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_HookedEncounters:
 	ret
 	ld hl, sTrainerRankingHookedEncounters
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_EggsHatched:
 	ret
 	ld hl, sTrainerRankingEggsHatched
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MonsEvolved:
 	ret
 	ld hl, sTrainerRankingMonsEvolved
-	jp StubbedTrainerRankings_Increment3Byte
+	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_FruitPicked:
 	ret
 	ld hl, sTrainerRankingFruitPicked
-	jp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Healings:
 	ret
 	ld hl, sTrainerRankingHealings
-	jp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MysteryGift:
 	ret

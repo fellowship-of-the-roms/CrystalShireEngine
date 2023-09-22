@@ -1,6 +1,6 @@
 LoadSGBLayout:
 	call CheckCGB
-	jp nz, LoadSGBLayoutCGB
+	jmp nz, LoadSGBLayoutCGB
 
 	ld a, b
 	cp SCGB_DEFAULT
@@ -8,7 +8,7 @@ LoadSGBLayout:
 	ld a, [wDefaultSGBLayout]
 .not_default
 	cp SCGB_PARTY_MENU_HP_BARS
-	jp z, SGB_ApplyPartyMenuHPPals
+	jmp z, SGB_ApplyPartyMenuHPPals
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -569,4 +569,4 @@ _LoadSGBLayout_ReturnFromJumptable:
 	push de
 	call PushSGBPals
 	pop hl
-	jp PushSGBPals
+	jmp PushSGBPals

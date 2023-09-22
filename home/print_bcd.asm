@@ -67,7 +67,7 @@ PrintBCDDigit::
 .outputDigit
 	add "0"
 	ld [hli], a
-	jp PrintLetterDelay
+	jmp PrintLetterDelay
 
 .zeroDigit
 	bit PRINTNUM_LEADINGZEROS_F, b ; either printing leading zeroes or already reached a nonzero digit?

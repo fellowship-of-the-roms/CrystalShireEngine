@@ -1,6 +1,6 @@
 HDMATransferAttrmapAndTilemapToWRAMBank3::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -21,7 +21,7 @@ HDMATransferAttrmapAndTilemapToWRAMBank3::
 
 HDMATransferTilemapToWRAMBank3::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0
@@ -35,7 +35,7 @@ HDMATransferTilemapToWRAMBank3::
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -49,7 +49,7 @@ HDMATransferAttrmapToWRAMBank3:
 
 ReloadMapPart::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -80,7 +80,7 @@ ReloadMapPart::
 Mobile_ReloadMapPart:
 	ld hl, ReloadMapPart ; useless
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -110,7 +110,7 @@ Mobile_ReloadMapPart:
 
 Function1040d4: ; unreferenced
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function
 	ld a, $1
@@ -133,7 +133,7 @@ Function1040d4: ; unreferenced
 
 Function1040fb: ; unreferenced
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function
 	ld a, $1
@@ -147,7 +147,7 @@ Function1040fb: ; unreferenced
 OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 ; OpenText
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	; Transfer wAttrmap and Tilemap to BGMap
@@ -179,7 +179,7 @@ OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 
 Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap:
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	; Transfer wAttrmap and Tilemap to BGMap
@@ -499,8 +499,8 @@ HDMATransfer1bpp::
 .loop
 	ld a, c
 	cp $10
-	jp c, .bankswitch
-	jp z, .bankswitch
+	jr c, .bankswitch
+	jr z, .bankswitch
 	push bc
 	push hl
 	push de
@@ -560,7 +560,7 @@ HDMATransfer1bpp::
 
 HDMATransfer_OnlyTopFourRows:
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	ld hl, wScratchTilemap

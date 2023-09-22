@@ -70,7 +70,7 @@ DrawBattleHPBar::
 	ld [hl], a
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 PrepMonFrontpic::
 	ld a, $1
@@ -106,7 +106,7 @@ PlayStereoCry::
 	ld [wStereoPanningMask], a
 	pop af
 	call _PlayMonCry
-	jp WaitSFX
+	jmp WaitSFX
 
 PlayStereoCry2::
 ; Don't wait for the cry to end.
@@ -115,11 +115,11 @@ PlayStereoCry2::
 	ld a, 1
 	ld [wStereoPanningMask], a
 	pop af
-	jp _PlayMonCry
+	jr _PlayMonCry
 
 PlayMonCry::
 	call PlayMonCry2
-	jp WaitSFX
+	jmp WaitSFX
 
 PlayMonCry2::
 ; Don't wait for the cry to end.
@@ -142,7 +142,7 @@ _PlayMonCry::
 	call PlayCry
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 LoadCry::
 	call GetCryIndex
@@ -224,7 +224,7 @@ Print8BitNumLeftAlign::
 	ld [wTextDecimalByte], a
 	ld de, wTextDecimalByte
 	ld b, PRINTNUM_LEFTALIGN | 1
-	jp PrintNum
+	jmp PrintNum
 
 GetBaseData::
 	push hl
@@ -278,7 +278,7 @@ GetBaseData::
 
 	pop af
 	rst Bankswitch
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetCurNickname::
 	ld a, [wCurPartyMon]

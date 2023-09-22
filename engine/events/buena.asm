@@ -143,7 +143,7 @@ BuenaPrize:
 
 .print
 	call BuenaPrintText
-	jp .loop
+	jmp .loop
 
 .done
 	call CloseWindow

@@ -217,4 +217,4 @@ PrintWinLossText::
 	call GetMapScriptsBank
 	call FarPrintText
 	call WaitBGMap
-	jp WaitPressAorB_BlinkCursor
+	jmp WaitPressAorB_BlinkCursor

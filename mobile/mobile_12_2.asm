@@ -587,9 +587,9 @@ Function4acaa:
 	cp $1
 	jr z, Function4ad17
 	cp $2
-	jp z, Function4ad56
+	jr z, Function4ad56
 	cp $3
-	jp z, Function4ad60
+	jr z, Function4ad60
 	jr .asm_4acf3
 
 .asm_4ad0e

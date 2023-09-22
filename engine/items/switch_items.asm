@@ -16,7 +16,7 @@ SwitchItemsInBag:
 	dec a
 	ld [wSwitchItem], a
 	call .try_combining_stacks
-	jp c, .combine_stacks
+	jmp c, .combine_stacks
 	ld a, [wScrollingMenuCursorPosition]
 	ld c, a
 	ld a, [wSwitchItem]

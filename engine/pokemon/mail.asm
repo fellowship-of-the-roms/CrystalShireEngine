@@ -69,7 +69,7 @@ DeleteMailFromPC:
 	call ByteFill
 	ld hl, sMailboxCount
 	dec [hl]
-	jp CloseSRAM
+	jmp CloseSRAM
 
 ReadMailMessage:
 	ld a, b
@@ -111,14 +111,14 @@ MoveMailFromPCToParty:
 	ld [hl], d
 	call CloseSRAM
 	pop bc
-	jp DeleteMailFromPC
+	jmp DeleteMailFromPC
 
 GetMailboxCount:
 	ld a, BANK(sMailboxCount)
 	call OpenSRAM
 	ld a, [sMailboxCount]
 	ld c, a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 CheckPokeMail::
 	push bc
@@ -234,7 +234,7 @@ GivePokeMail::
 	pop bc
 	ld a, b
 	ld [de], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 BackupPartyMonMail:
 	ld a, BANK(sPartyMail)
@@ -247,7 +247,7 @@ BackupPartyMonMail:
 	ld de, sMailboxCountBackup
 	ld bc, 1 + MAILBOX_CAPACITY * MAIL_STRUCT_LENGTH
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 RestorePartyMonMail:
 	ld a, BANK(sPartyMail)
@@ -260,7 +260,7 @@ RestorePartyMonMail:
 	ld de, sMailboxCount
 	ld bc, 1 + MAILBOX_CAPACITY * MAIL_STRUCT_LENGTH
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 DeletePartyMonMail:
 	ld a, BANK(sPartyMail)
@@ -273,7 +273,7 @@ DeletePartyMonMail:
 	ld hl, sMailboxCount
 	ld bc, 1 + MAILBOX_CAPACITY * MAIL_STRUCT_LENGTH
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM
 
 IsAnyMonHoldingMail:
 	ld a, [wPartyCount]
@@ -303,11 +303,11 @@ _PlayerMailBoxMenu:
 	jr z, .nomail
 	call LoadStandardMenuHeader
 	call MailboxPC
-	jp CloseWindow
+	jmp CloseWindow
 
 .nomail
 	ld hl, .EmptyMailboxText
-	jp MenuTextboxBackup
+	jmp MenuTextboxBackup
 
 .EmptyMailboxText:
 	text_far _EmptyMailboxText
@@ -365,7 +365,7 @@ MailboxPC_PrintMailAuthor:
 	ld a, [wMenuSelection]
 	call MailboxPC_GetMailAuthor
 	pop hl
-	jp PlaceString
+	jmp PlaceString
 
 MailboxPC:
 	xor a
@@ -427,7 +427,7 @@ MailboxPC:
 	dec a
 	ld b, a
 	call ReadMailMessage
-	jp CloseSubmenu
+	jmp CloseSubmenu
 
 .PutInPack:
 	ld hl, .MailMessageLostText
@@ -444,7 +444,7 @@ MailboxPC:
 	call ReceiveItem
 	jr c, .put_in_bag
 	ld hl, .MailPackFullText
-	jp MenuTextboxBackup
+	jmp MenuTextboxBackup
 
 .put_in_bag
 	ld a, [wMenuSelection]
@@ -452,7 +452,7 @@ MailboxPC:
 	ld b, a
 	call DeleteMailFromPC
 	ld hl, .MailClearedPutAwayText
-	jp MenuTextboxBackup
+	jmp MenuTextboxBackup
 
 .MailClearedPutAwayText:
 	text_far _MailClearedPutAwayText
@@ -476,7 +476,7 @@ MailboxPC:
 	call AddNTimes
 	ld a, [hl]
 	ld [wCurItem], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 .AttachMail:
 	call FadeToMenu
@@ -520,7 +520,7 @@ MailboxPC:
 	call PrintText
 
 .exit2
-	jp CloseSubmenu
+	jmp CloseSubmenu
 
 .MailAlreadyHoldingItemText:
 	text_far _MailAlreadyHoldingItemText

@@ -1,11 +1,11 @@
 BattleCommand_BatonPass:
 	ldh a, [hBattleTurn]
 	and a
-	jp nz, .Enemy
+	jr nz, .Enemy
 
 ; Need something to switch to
 	call CheckAnyOtherAlivePartyMons
-	jp z, FailedBatonPass
+	jmp z, FailedBatonPass
 
 	call UpdateBattleMonInParty
 	call AnimateCurrentMove
@@ -34,7 +34,7 @@ BattleCommand_BatonPass:
 
 ; Mobile link battles handle entrances differently
 	farcall CheckMobileBattleError
-	jp c, EndMoveEffect
+	jmp c, EndMoveEffect
 
 	ld hl, PassedBattleMonEntrance
 	call CallBattleCore
@@ -46,10 +46,10 @@ BattleCommand_BatonPass:
 ; Wildmons don't have anything to switch to
 	ld a, [wBattleMode]
 	dec a ; WILDMON
-	jp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call CheckAnyOtherAliveEnemyMons
-	jp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call UpdateEnemyMonInParty
 	call AnimateCurrentMove
@@ -57,7 +57,7 @@ BattleCommand_BatonPass:
 
 ; Mobile link battles handle entrances differently
 	farcall CheckMobileBattleError
-	jp c, EndMoveEffect
+	jmp c, EndMoveEffect
 
 ; Passed enemy PartyMon entrance
 	xor a
@@ -116,11 +116,11 @@ BatonPass_LinkEnemySwitch:
 	add BATTLEACTION_SWITCH1
 	ld [wBattleAction], a
 .switch
-	jp CloseWindow
+	jmp CloseWindow
 
 FailedBatonPass:
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed
 
 ResetBatonPassStatus:
 ; Reset status changes that aren't passed by Baton Pass.

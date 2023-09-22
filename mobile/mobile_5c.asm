@@ -371,7 +371,7 @@ Function171a5d:
 	jr nz, .asm_171a6a
 	bit 0, a
 	ret nz
-	jp Function171c66
+	jmp Function171c66
 
 .asm_171a6a
 	ld a, MOBILEAPI_00
@@ -399,7 +399,7 @@ Function171a95:
 	hlcoord 2, 8
 	ld de, String_171aa7
 	call PlaceString
-	jp Function171c66
+	jmp Function171c66
 
 String_171aa7:
 	db   "モバイルアダプタに"
@@ -412,7 +412,7 @@ Function171ac9:
 	ld hl, $5c
 	ld a, MOBILEAPI_01
 	call MobileAPI
-	jp Function171c66
+	jmp Function171c66
 
 Function171ad7:
 	xor a
@@ -422,7 +422,7 @@ Function171ad7:
 	ld de, wc608
 	ld a, MOBILEAPI_06
 	call MobileAPI
-	jp Function171c66
+	jmp Function171c66
 
 Function171aec:
 	ldh a, [rSVBK]
@@ -473,7 +473,7 @@ Function171aec:
 	pop af
 	dec a
 	jr nz, .asm_171b1b
-	jp Function171c66
+	jmp Function171c66
 
 Function171b42:
 	ld a, [de]
@@ -513,16 +513,16 @@ Function171b4b:
 	ld [wcd23], a
 	ld a, $8
 	ld [wcd24], a
-	jp Function171c66
+	jmp Function171c66
 
 Function171b85:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jp nz, Function171b9f
+	jr nz, Function171b9f
 	ld a, [hl]
 	and A_BUTTON
-	jp nz, Function171bbd
+	jr nz, Function171bbd
 	ld a, [hl]
 	and D_UP
 	jr nz, asm_171ba5
@@ -560,16 +560,16 @@ Function171bbd:
 	ld [wcd23], a
 	xor a
 	ld [wcd24], a
-	jp Function171c66
+	jmp Function171c66
 
 Function171bcc:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jp nz, Function171bdc
+	jr nz, Function171bdc
 	ld a, [hl]
 	and A_BUTTON
-	jp nz, Function171beb
+	jr nz, Function171beb
 	ret
 
 Function171bdc:
@@ -712,7 +712,7 @@ Function171cf0:
 	call CopyBytes
 	hlcoord 3, 16
 	ld de, String_172e3f
-	jp PlaceString
+	jmp PlaceString
 
 .shifted
 	ld hl, PasswordShiftTilemap
@@ -721,7 +721,7 @@ Function171cf0:
 	call CopyBytes
 	hlcoord 3, 16
 	ld de, String_172e4e
-	jp PlaceString
+	jmp PlaceString
 
 Function171d2b:
 	call DisableLCD

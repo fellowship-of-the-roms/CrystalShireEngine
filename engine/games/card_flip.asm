@@ -843,127 +843,127 @@ CardFlip_CheckWinCondition:
 	dw .OddSix
 
 .Impossible:
-	jp .Lose
+	jmp .Lose
 
 .PikaJiggly:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
-	jp nz, .Lose
+	jmp nz, .Lose
 	jr .WinSix
 
 .PoliOddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
 	jr nz, .WinSix
-	jp .Lose
+	jmp .Lose
 
 .WinSix:
 	ld c, $6
 	ld de, SFX_2ND_PLACE
-	jp .Payout
+	jmp .Payout
 
 .OneTwo:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	jr z, .WinNine
-	jp .Lose
+	jmp .Lose
 
 .ThreeFour:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $8
 	jr z, .WinNine
-	jp .Lose
+	jmp .Lose
 
 .FiveSix:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $10
 	jr z, .WinNine
-	jp .Lose
+	jmp .Lose
 
 .WinNine:
 	ld c, $9
 	ld de, SFX_2ND_PLACE
-	jp .Payout
+	jmp .Payout
 
 .Pikachu:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	jr z, .WinTwelve
-	jp .Lose
+	jmp .Lose
 
 .Jigglypuff:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $1
 	jr z, .WinTwelve
-	jp .Lose
+	jmp .Lose
 
 .Poliwag:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $2
 	jr z, .WinTwelve
-	jp .Lose
+	jmp .Lose
 
 .Oddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $3
 	jr z, .WinTwelve
-	jp .Lose
+	jmp .Lose
 
 .WinTwelve:
 	ld c, $c
 	ld de, SFX_2ND_PLACE
-	jp .Payout
+	jmp .Payout
 
 .One:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	jr z, .WinEighteen
-	jp .Lose
+	jmp .Lose
 
 .Two:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $4
 	jr z, .WinEighteen
-	jp .Lose
+	jmp .Lose
 
 .Three:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $8
 	jr z, .WinEighteen
-	jp .Lose
+	jmp .Lose
 
 .Four:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $c
 	jr z, .WinEighteen
-	jp .Lose
+	jmp .Lose
 
 .Five:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $10
 	jr z, .WinEighteen
-	jp .Lose
+	jr .Lose
 
 .Six:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $14
 	jr z, .WinEighteen
-	jp .Lose
+	jr .Lose
 
 .WinEighteen:
 	ld c, $12
 	ld de, SFX_2ND_PLACE
-	jp .Payout
+	jr .Payout
 
 .PikaOne:
 	ld e, $0
@@ -1178,16 +1178,16 @@ ChooseCard_HandleJoypad:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_LEFT
-	jp nz, .d_left
+	jr nz, .d_left
 	ld a, [hl]
 	and D_RIGHT
-	jp nz, .d_right
+	jr nz, .d_right
 	ld a, [hl]
 	and D_UP
-	jp nz, .d_up
+	jr nz, .d_up
 	ld a, [hl]
 	and D_DOWN
-	jp nz, .d_down
+	jmp nz, .d_down
 	ret
 
 .d_left
@@ -1201,14 +1201,14 @@ ChooseCard_HandleJoypad:
 	and a
 	ret z
 	dec [hl]
-	jp .play_sound
+	jmp .play_sound
 
 .mon_group_left
 	ld a, [hl]
 	cp $3
 	jr c, .left_to_number_gp
 	dec [hl]
-	jp .play_sound
+	jmp .play_sound
 
 .mon_pair_left
 	ld a, [hl]
@@ -1218,14 +1218,14 @@ ChooseCard_HandleJoypad:
 	jr c, .left_to_number_gp
 	dec [hl]
 	dec [hl]
-	jp .play_sound
+	jr .play_sound
 
 .left_to_number_gp
 	ld a, $2
 	ld [wCardFlipCursorY], a
 	ld a, $1
 	ld [wCardFlipCursorX], a
-	jp .play_sound
+	jr .play_sound
 
 .d_right
 	ld hl, wCardFlipCursorX

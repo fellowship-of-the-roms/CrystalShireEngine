@@ -13,7 +13,7 @@ GetPartyParamLocation::
 GetPartyLocation::
 ; Add the length of a PartyMon struct to hl a times.
 	ld bc, PARTYMON_STRUCT_LENGTH
-	jp AddNTimes
+	jmp AddNTimes
 
 FarSkipEvolutions::
 ; Calls SkipEvolutions from another bank. It can't be a farcall because it uses hl.
@@ -113,7 +113,7 @@ UpdateBattleMon::
 	ld e, l
 	ld hl, wBattleMonLevel
 	ld bc, wBattleMonMaxHP - wBattleMonLevel
-	jp CopyBytes
+	jmp CopyBytes
 
 UpdateEnemyMonInParty::
 ; Update level, status, current HP
@@ -131,13 +131,13 @@ UpdateEnemyMonInParty::
 	ld e, l
 	ld hl, wEnemyMonLevel
 	ld bc, wEnemyMonMaxHP - wEnemyMonLevel
-	jp CopyBytes
+	jmp CopyBytes
 
 RefreshBattleHuds::
 	call UpdateBattleHuds
 	ld c, 3
 	call DelayFrames
-	jp WaitBGMap
+	jmp WaitBGMap
 
 UpdateBattleHuds::
 	farcall UpdatePlayerHUD
@@ -191,7 +191,7 @@ BattleTextbox::
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
-	jp PrintTextboxText
+	jmp PrintTextboxText
 
 StdBattleTextbox::
 ; Open a textbox and print battle text at 20:hl.

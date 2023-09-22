@@ -2264,7 +2264,7 @@ Function89e6f:
 	call Function8a5a3
 	call Function891ab
 	call SetPalettes
-	jp Function89e36
+	jr Function89e36
 
 Function89e9a:
 	ldh a, [rSVBK]
@@ -2299,7 +2299,7 @@ Function89eb9:
 	call Function8a5a3
 	call Function891ab
 	call SetPalettes
-	jp Function89e36
+	jmp Function89e36
 
 Function89ee1:
 	call ClearBGPalettes
@@ -2383,7 +2383,7 @@ endr
 	jr z, .asm_89f09
 	dec c
 	jr nz, .asm_89f60
-	jp Function89e36
+	jmp Function89e36
 
 Function89f6a:
 	push af
@@ -2480,12 +2480,12 @@ Function89fce:
 	call Function89448
 	call SetPalettes
 	call Function891ab
-	jp Function89e36
+	jmp Function89e36
 
 Function89fed:
 	ld hl, MobileCardFolderIntro1Text
 	call PrintText
-	jp Function89e36
+	jmp Function89e36
 
 Function89ff6:
 	call Function891fe
@@ -2511,19 +2511,19 @@ Function89ff6:
 	call CloseSRAM
 	call Function891ab
 	call Mobile22_PromptButton
-	jp Function89e36
+	jmp Function89e36
 
 Function8a03d:
 	ld hl, MobileCardFolderIntro2Text
 	call Mobile_EnableSpriteUpdates
 	call PrintText
 	call Mobile_DisableSpriteUpdates
-	jp Function89e36
+	jmp Function89e36
 
 Function8a04c:
 	ld hl, MobileCardFolderIntro3Text
 	call PrintText
-	jp Function89e36
+	jmp Function89e36
 
 Function8a055:
 	ld c, $7
@@ -2562,7 +2562,7 @@ Function8a055:
 	hlcoord 15, 4, wAttrmap
 	call Function8a5a3
 	call CGBOnly_CopyTilemapAtOnce
-	jp Function89e36
+	jmp Function89e36
 
 Function8a0a1:
 	call Mobile22_SetBGMapMode0
@@ -2619,21 +2619,21 @@ Function8a0de:
 
 Function8a0e6:
 	call Function8b539
-	jp Function89e36
+	jmp Function89e36
 
 Function8a0ec:
 	ld hl, MobileCardFolderIntro4Text
 	call PrintText
-	jp Function89e36
+	jmp Function89e36
 
 Function8a0f5:
 	call Function8b555
-	jp nc, Function8a0ff
+	jr nc, Function8a0ff
 	ld hl, wd02d
 	inc [hl]
 
 Function8a0ff:
-	jp Function89e36
+	jmp Function89e36
 
 MobileCardFolderIntro1Text:
 	text_far _MobileCardFolderIntro1Text
@@ -4033,7 +4033,7 @@ Function8aba9:
 	call PlaceString
 	ld a, $1
 	call Function8925e
-	jp c, .asm_8abb3
+	jmp c, .asm_8abb3
 	ld a, [wMenuSelection]
 	ld c, a
 	ret
@@ -4136,7 +4136,7 @@ Function8ac7c:
 	call PrintText
 	ld a, $2
 	call Function89259
-	jp c, Function8ac7c
+	jmp c, Function8ac7c
 	call LoadStandardFont
 	pop de
 	ld c, $0

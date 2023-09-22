@@ -184,7 +184,7 @@ if DEF(_DEBUG)
 	jr z, .hatch
 endc
 	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction
 
 .quit
 	ld h, 7
@@ -218,7 +218,7 @@ if DEF(_DEBUG)
 	pop bc
 .skip
 	xor a
-	jp StatsScreen_JoypadAction
+	jmp StatsScreen_JoypadAction
 
 .HatchSoonString:
 	db "▶HATCH SOON!@"
@@ -242,7 +242,7 @@ MonStatsJoypad:
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction
 
 StatsScreenWaitCry:
 	call IsSFXPlaying
@@ -291,7 +291,7 @@ StatsScreen_JoypadAction:
 	ld c, a
 	pop af
 	bit B_BUTTON_F, a
-	jp nz, .b_button
+	jmp nz, .b_button
 	bit D_LEFT_F, a
 	jr nz, .d_left
 	bit D_RIGHT_F, a
@@ -852,7 +852,7 @@ StatsScreen_PlaceFrontpic:
 	cp LOW(UNOWN)
 	ld a, h
 	hlcoord 0, 0
-	jp nz, PrepMonFrontpic
+	jmp nz, PrepMonFrontpic
 	if HIGH(UNOWN) == 0
 		and a
 	elif HIGH(UNOWN) == 1
@@ -860,10 +860,10 @@ StatsScreen_PlaceFrontpic:
 	else
 		cp HIGH(UNOWN)
 	endc
-	jp nz, PrepMonFrontpic
+	jmp nz, PrepMonFrontpic
 	xor a
 	ld [wBoxAlignment], a
-	jp _PrepMonFrontpic
+	jmp _PrepMonFrontpic
 
 .AnimateEgg:
 	ld a, [wCurPartySpecies]
@@ -1155,7 +1155,7 @@ GetNicknamePointer:
 	cp BUFFERMON
 	ret z
 	ld a, [wCurPartyMon]
-	jp SkipNames
+	jmp SkipNames
 
 CheckFaintedFrzSlp:
 	ld hl, MON_HP

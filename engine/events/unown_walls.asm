@@ -20,7 +20,7 @@ HoOhChamber:
 	call GetMapAttributesPointer ; pointless?
 	ld de, EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
 	ld b, SET_FLAG
-	jp EventFlagAction
+	jmp EventFlagAction
 
 OmanyteChamber:
 	call GetMapAttributesPointer ; pointless?

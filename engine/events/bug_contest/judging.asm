@@ -23,7 +23,7 @@ _BugContestJudging:
 	call GetPokemonName
 	ld hl, ContestJudging_FirstPlaceText
 	call PrintText
-	jp BugContest_GetPlayersResult
+	jmp BugContest_GetPlayersResult
 
 ContestJudging_FirstPlaceText:
 	text_far _ContestJudging_FirstPlaceText
@@ -115,13 +115,13 @@ LoadContestantName:
 	ld hl, wStringBuffer1
 	pop de
 	ld bc, NAME_LENGTH - 1
-	jp CopyBytes
+	jmp CopyBytes
 
 .player
 	ld hl, wPlayerName
 	ld de, wBugContestWinnerName
 	ld bc, NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 INCLUDE "data/events/bug_contest_winners.asm"
 

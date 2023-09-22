@@ -96,7 +96,7 @@ _UpdateSound::
 	ld hl, CHANNEL_FLAGS1
 	add hl, bc
 	bit SOUND_CHANNEL_ON, [hl]
-	jp z, .nextchannel
+	jmp z, .nextchannel
 	; check time left in the current note
 	ld hl, CHANNEL_NOTE_DURATION
 	add hl, bc
@@ -196,7 +196,7 @@ _UpdateSound::
 	inc a
 	ld [wCurChannel], a
 	cp NUM_CHANNELS ; are we done?
-	jp nz, .loop ; do it all again
+	jmp nz, .loop ; do it all again
 
 	call PlayDanger
 	; fade music in/out
@@ -996,13 +996,13 @@ ApplyPitchSlide:
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jp c, .finished_pitch_slide
+	jr c, .finished_pitch_slide
 	jr nz, .continue_pitch_slide
 	ld hl, CHANNEL_PITCH_SLIDE_TARGET
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jp c, .finished_pitch_slide
+	jr c, .finished_pitch_slide
 	jr .continue_pitch_slide
 
 .decreasing
@@ -1158,11 +1158,11 @@ ParseMusic:
 	ld hl, CHANNEL_FLAGS1
 	add hl, bc
 	bit SOUND_SFX, [hl]
-	jp nz, ParseSFXOrCry
+	jmp nz, ParseSFXOrCry
 	bit SOUND_CRY, [hl]
-	jp nz, ParseSFXOrCry
+	jmp nz, ParseSFXOrCry
 	bit SOUND_NOISE, [hl]
-	jp nz, GetNoiseSample
+	jmp nz, GetNoiseSample
 ; normal note
 	; set note duration (bottom nybble)
 	ld a, [wCurMusicByte]
@@ -1194,7 +1194,7 @@ ParseMusic:
 	ld hl, CHANNEL_NOTE_FLAGS
 	add hl, bc
 	set NOTE_NOISE_SAMPLING, [hl]
-	jp LoadNote
+	jmp LoadNote
 
 .rest
 ; note = rest
@@ -2577,7 +2577,7 @@ PlayStereoSFX::
 ; standard procedure if stereo's off
 	ld a, [wOptions]
 	bit STEREO, a
-	jp z, _PlaySFX
+	jmp z, _PlaySFX
 
 ; else, let's go ahead with this
 	ld hl, wMusicID

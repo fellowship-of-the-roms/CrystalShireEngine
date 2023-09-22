@@ -175,7 +175,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 	call WaitBGMap
 	call WaitBGMap2
 	ld c, 50
-	jp DelayFrames
+	jmp DelayFrames
 
 .Waiting:
 	db "WAITING..!@"

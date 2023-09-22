@@ -27,7 +27,7 @@ EvolveAfterBattle_MasterLoop:
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jp z, .ReturnToMap
+	jmp z, .ReturnToMap
 
 	ld [wEvolutionOldSpecies], a
 
@@ -39,7 +39,7 @@ EvolveAfterBattle_MasterLoop:
 	call EvoFlagAction
 	ld a, c
 	and a
-	jp z, EvolveAfterBattle_MasterLoop
+	jr z, EvolveAfterBattle_MasterLoop
 
 	ld a, [wEvolutionOldSpecies]
 	call GetPokemonIndexFromID
@@ -68,19 +68,19 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wLinkMode]
 	and a
-	jp nz, .dont_evolve_check
+	jmp nz, .dont_evolve_check
 
 	ld a, b
 	cp EVOLVE_ITEM
-	jp z, .item
+	jmp z, .item
 
 	ld a, [wForceEvolution]
 	and a
-	jp nz, .dont_evolve_check
+	jmp nz, .dont_evolve_check
 
 	ld a, b
 	cp EVOLVE_LEVEL
-	jp z, .level
+	jmp z, .level
 
 	cp EVOLVE_HAPPINESS
 	jr z, .happiness
@@ -90,10 +90,10 @@ EvolveAfterBattle_MasterLoop:
 	ld c, a
 	ld a, [wTempMonLevel]
 	cp c
-	jp c, .skip_evolution_species_parameter
+	jmp c, .skip_evolution_species_parameter
 
 	call IsMonHoldingEverstone
-	jp z, .skip_evolution_species_parameter
+	jmp z, .skip_evolution_species_parameter
 
 	push hl
 	ld de, wTempMonAttack
@@ -110,42 +110,42 @@ EvolveAfterBattle_MasterLoop:
 
 	call GetNextEvoAttackByte
 	cp c
-	jp nz, .skip_evolution_species
-	jp .proceed
+	jmp nz, .skip_evolution_species
+	jmp .proceed
 
 .happiness
 	ld a, [wTempMonHappiness]
 	cp HAPPINESS_TO_EVOLVE
-	jp c, .skip_evolution_species_parameter
+	jmp c, .skip_evolution_species_parameter
 
 	call IsMonHoldingEverstone
-	jp z, .skip_evolution_species_parameter
+	jmp z, .skip_evolution_species_parameter
 
 	call GetNextEvoAttackByte
 	cp TR_ANYTIME
-	jp z, .proceed
+	jmp z, .proceed
 	cp TR_MORNDAY
 	jr z, .happiness_daylight
 
 ; TR_NITE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp nz, .skip_half_species_parameter
+	jmp nz, .skip_half_species_parameter
 	jr .proceed
 
 .happiness_daylight
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp z, .skip_half_species_parameter
+	jmp z, .skip_half_species_parameter
 	jr .proceed
 
 .trade
 	ld a, [wLinkMode]
 	and a
-	jp z, .skip_evolution_species_parameter
+	jmp z, .skip_evolution_species_parameter
 
 	call IsMonHoldingEverstone
-	jp z, .skip_evolution_species_parameter
+	jmp z, .skip_evolution_species_parameter
 
 	call GetNextEvoAttackByte
 	ld b, a
@@ -162,11 +162,11 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wLinkMode]
 	cp LINK_TIMECAPSULE
-	jp z, .skip_half_species_parameter
+	jmp z, .skip_half_species_parameter
 
 	ld a, [wTempMonItem]
 	cp b
-	jp nz, .skip_half_species_parameter
+	jmp nz, .skip_half_species_parameter
 
 	xor a
 	ld [wTempMonItem], a
@@ -184,14 +184,14 @@ EvolveAfterBattle_MasterLoop:
 	pop hl
 	ld a, [wCurItem]
 	cp b
-	jp nz, .skip_evolution_species
+	jmp nz, .skip_evolution_species
 
 	ld a, [wForceEvolution]
 	and a
-	jp z, .skip_evolution_species
+	jmp z, .skip_evolution_species
 	ld a, [wLinkMode]
 	and a
-	jp nz, .skip_evolution_species
+	jmp nz, .skip_evolution_species
 	jr .proceed
 
 .level
@@ -199,9 +199,9 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wTempMonLevel]
 	cp b
-	jp c, .skip_half_species_parameter
+	jmp c, .skip_half_species_parameter
 	call IsMonHoldingEverstone
-	jp z, .skip_half_species_parameter
+	jmp z, .skip_half_species_parameter
 
 .proceed
 	ld a, [wTempMonLevel]
@@ -238,7 +238,7 @@ EvolveAfterBattle_MasterLoop:
 	push af
 	call ClearSprites
 	pop af
-	jp c, CancelEvolution
+	jmp c, CancelEvolution
 
 	ld hl, CongratulationsYourPokemonText
 	call PrintText
@@ -338,7 +338,7 @@ EvolveAfterBattle_MasterLoop:
 	push hl
 	ld l, e
 	ld h, d
-	jp EvolveAfterBattle_MasterLoop
+	jmp EvolveAfterBattle_MasterLoop
 
 .dont_evolve_check
 	ld a, b
@@ -352,7 +352,7 @@ EvolveAfterBattle_MasterLoop:
 .skip_evolution_species
 	inc hl
 	inc hl
-	jp .loop
+	jmp .loop
 
 .UnusedReturnToMap: ; unreferenced
 	pop hl
@@ -401,13 +401,13 @@ UpdateSpeciesNameIfNotNicknamed:
 	ld hl, wStringBuffer1
 	pop de
 	ld bc, MON_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 CancelEvolution:
 	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearTilemap
-	jp EvolveAfterBattle_MasterLoop
+	jmp EvolveAfterBattle_MasterLoop
 
 IsMonHoldingEverstone:
 	push hl
@@ -526,11 +526,11 @@ FillMoves:
 .GetLevel:
 	call GetNextEvoAttackByte
 	and a
-	jp z, .done
+	jr z, .done
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
-	jp c, .done
+	jr c, .done
 	ld a, [wSkipMovesBeforeLevelUp]
 	and a
 	jr z, .CheckMove
@@ -606,7 +606,7 @@ FillMoves:
 	pop hl
 	ld [hl], a
 	pop hl
-	jp .NextMove
+	jr .NextMove
 
 .done
 	pop bc

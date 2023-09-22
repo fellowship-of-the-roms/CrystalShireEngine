@@ -584,7 +584,7 @@ StartTrainerBattle_SpeckleToBlack:
 StartTrainerBattle_LoadPokeBallGraphics:
 	ld a, [wOtherTrainerClass]
 	and a
-	jp z, .nextscene ; don't need to be here if wild
+	jmp z, .nextscene ; don't need to be here if wild
 
 	xor a
 	ldh [hBGMapMode], a

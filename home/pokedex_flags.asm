@@ -101,7 +101,7 @@ CheckPokedexStatusMonIndex:
 	ld b, CHECK_FLAG
 FlagActionBaseOne:
 	dec de
-	jp FlagAction
+	jmp FlagAction
 
 GetPokemonFlagIndex:
 	call GetPokemonIndexFromID

@@ -33,7 +33,7 @@ BattleCommand_Metronome:
 	call GetBattleVarAddr
 	ld [hl], b
 	call UpdateMoveData
-	jp ResetTurn
+	jr ResetTurn
 
 ChooseRandomMove:
 	; chooses a random valid move and returns it in bc

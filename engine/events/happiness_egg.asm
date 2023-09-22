@@ -15,7 +15,7 @@ GetFirstPokemonHappiness:
 	ld a, [hl]
 	ld [wScriptVar], a
 	call GetPokemonName
-	jp CopyPokemonName_Buffer1_Buffer3
+	jmp CopyPokemonName_Buffer1_Buffer3
 
 CheckFirstMonIsEgg:
 	ld a, [wPartySpecies]
@@ -28,7 +28,7 @@ CheckFirstMonIsEgg:
 .egg
 	ld [wScriptVar], a
 	call GetPokemonName
-	jp CopyPokemonName_Buffer1_Buffer3
+	jmp CopyPokemonName_Buffer1_Buffer3
 
 ChangeHappiness:
 ; Perform happiness action c on wCurPartyMon

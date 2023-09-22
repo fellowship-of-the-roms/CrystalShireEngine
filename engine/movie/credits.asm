@@ -179,7 +179,7 @@ Credits_LoopBack:
 Credits_PrepBGMapUpdate:
 	xor a
 	ldh [hBGMapMode], a
-	jp Credits_Next
+	jr Credits_Next
 
 Credits_UpdateGFXRequestPath:
 	call Credits_LoadBorderGFX
@@ -198,7 +198,7 @@ Credits_RequestGFX:
 	ldh [hBGMapMode], a
 	ld a, 8
 	ld [wRequested2bppSize], a
-	jp Credits_Next
+	jr Credits_Next
 
 Credits_LYOverride:
 	ldh a, [rLY]
@@ -212,7 +212,7 @@ Credits_LYOverride:
 	call .Fill
 	ld hl, wLYOverrides + $87
 	call .Fill
-	jp Credits_Next
+	jr Credits_Next
 
 .Fill:
 	ld c, $8
@@ -225,7 +225,7 @@ Credits_LYOverride:
 ParseCredits:
 	ld hl, wJumptableIndex
 	bit 7, [hl]
-	jp nz, .done
+	jmp nz, .done
 
 ; Wait until the timer has run out to parse the next command.
 	ld hl, wCreditsTimer
@@ -235,7 +235,7 @@ ParseCredits:
 
 ; One tick has passed.
 	dec [hl]
-	jp .done
+	jmp .done
 
 .parse
 ; First, let's clear the current text display,
@@ -254,7 +254,7 @@ ParseCredits:
 
 ; Commands:
 	cp CREDITS_END
-	jp z, .end
+	jmp z, .end
 	cp CREDITS_WAIT
 	jr z, .wait
 	cp CREDITS_SCENE
@@ -339,7 +339,7 @@ ParseCredits:
 	call DelayFrame
 	pop de
 	call PlayMusic
-	jp .loop
+	jmp .loop
 
 .wait2
 ; Wait for some amount of ticks.
@@ -358,7 +358,7 @@ ParseCredits:
 	ldh [hBGMapMode], a
 
 .done
-	jp Credits_Next
+	jmp Credits_Next
 
 .end
 ; Stop execution.

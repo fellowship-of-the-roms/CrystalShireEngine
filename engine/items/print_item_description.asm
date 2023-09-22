@@ -33,6 +33,6 @@ PrintItemDescription:
 	ld d, h
 	ld e, l
 	pop hl
-	jp FarPlaceString
+	jmp FarPlaceString
 
 INCLUDE "data/items/descriptions.asm"

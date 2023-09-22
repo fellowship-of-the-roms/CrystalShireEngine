@@ -56,7 +56,7 @@ BattleCommand_Conversion2:
 	ld [wNamedObjectIndex], a
 	predef GetTypeName
 	ld hl, TransformedTypeText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
-	jp FailMove
+	jmp FailMove

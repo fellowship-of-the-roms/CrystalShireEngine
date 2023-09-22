@@ -104,7 +104,7 @@ GetMonMenuString:
 	ld l, a
 	call GetMoveIDFromIndex
 	ld [wNamedObjectIndex], a
-	jp GetMoveName
+	jmp GetMoveName
 
 .NotMove:
 	ld a, [hli]

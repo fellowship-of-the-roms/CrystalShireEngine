@@ -43,4 +43,4 @@ Divide::
 	push de
 	push bc
 	homecall _Divide
-	jp PopBCDEHL
+	jmp PopBCDEHL

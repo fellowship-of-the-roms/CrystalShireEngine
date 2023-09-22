@@ -33,4 +33,4 @@ GetMoveData::
 	inc de
 	call GetMoveAddress
 	ld bc, MOVE_LENGTH - 1
-	jp FarCopyBytes
+	jmp FarCopyBytes

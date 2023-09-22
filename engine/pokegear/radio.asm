@@ -172,7 +172,7 @@ RadioScroll:
 	ld a, [wNumRadioLinesPrinted]
 	cp 1
 	call nz, CopyBottomLineToTopLine
-	jp ClearBottomLine
+	jmp ClearBottomLine
 
 OaksPKMNTalk1:
 	ld a, 5
@@ -180,17 +180,17 @@ OaksPKMNTalk1:
 	call StartRadioStation
 	ld hl, OPT_IntroText1
 	ld a, OAKS_POKEMON_TALK_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OaksPKMNTalk2:
 	ld hl, OPT_IntroText2
 	ld a, OAKS_POKEMON_TALK_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OaksPKMNTalk3:
 	ld hl, OPT_IntroText3
 	ld a, OAKS_POKEMON_TALK_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OaksPKMNTalk4:
 ; Choose a random route, and a random Pokemon from that route.
@@ -257,24 +257,24 @@ OaksPKMNTalk4:
 	ld hl, OPT_OakText1
 	call CopyRadioTextToRAM
 	ld a, OAKS_POKEMON_TALK_5
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 .overflow
 	pop bc
 	ld a, OAKS_POKEMON_TALK
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 INCLUDE "data/radio/oaks_pkmn_talk_routes.asm"
 
 OaksPKMNTalk5:
 	ld hl, OPT_OakText2
 	ld a, OAKS_POKEMON_TALK_6
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OaksPKMNTalk6:
 	ld hl, OPT_OakText3
 	ld a, OAKS_POKEMON_TALK_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OPT_IntroText1:
 	text_far _OPT_IntroText1
@@ -306,7 +306,7 @@ OaksPKMNTalk7:
 	call GetPokemonName
 	ld hl, OPT_MaryText1
 	ld a, OAKS_POKEMON_TALK_8
-	jp NextRadioLine
+	jmp NextRadioLine
 
 OPT_MaryText1:
 	text_far _OPT_MaryText1
@@ -327,7 +327,7 @@ OaksPKMNTalk8:
 	ld h, [hl]
 	ld l, a
 	ld a, OAKS_POKEMON_TALK_9
-	jp NextRadioLine
+	jmp NextRadioLine
 
 .Adverbs:
 	table_width 2, OaksPKMNTalk8.Adverbs
@@ -436,7 +436,7 @@ OaksPKMNTalk9:
 	ld [wOaksPKMNTalkSegmentCounter], a
 	ld a, OAKS_POKEMON_TALK_10
 .ok
-	jp NextRadioLine
+	jmp NextRadioLine
 
 .Adjectives:
 	table_width 2, OaksPKMNTalk9.Adjectives
@@ -549,7 +549,7 @@ OaksPKMNTalk11:
 	hlcoord 9, 14
 	ld de, .pokemon_string
 	ld a, OAKS_POKEMON_TALK_12
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .pokemon_string
 	db "#MON@"
@@ -561,7 +561,7 @@ OaksPKMNTalk12:
 	hlcoord 1, 16
 	ld de, .pokemon_channel_string
 	ld a, OAKS_POKEMON_TALK_13
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .pokemon_channel_string
 	db "#MON Channel@"
@@ -573,7 +573,7 @@ OaksPKMNTalk13:
 	hlcoord 12, 16
 	ld de, .terminator
 	ld a, OAKS_POKEMON_TALK_14
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .terminator
 	db "@"
@@ -603,13 +603,13 @@ PlaceRadioString:
 	ld [wCurRadioLine], a
 	ld a, 100
 	ld [wRadioTextDelay], a
-	jp PlaceString
+	jmp PlaceString
 
 CopyBottomLineToTopLine:
 	hlcoord 0, 15
 	decoord 0, 13
 	ld bc, SCREEN_WIDTH * 2
-	jp CopyBytes
+	jmp CopyBytes
 
 ClearBottomLine:
 	hlcoord 1, 15
@@ -619,7 +619,7 @@ ClearBottomLine:
 	hlcoord 1, 16
 	ld bc, SCREEN_WIDTH - 2
 	ld a, " "
-	jp ByteFill
+	jmp ByteFill
 
 PokedexShow1:
 	call StartRadioStation
@@ -647,7 +647,7 @@ PokedexShow1:
 	call GetPokemonName
 	ld hl, PokedexShowText
 	ld a, POKEDEX_SHOW_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 PokedexShow2:
 	ld a, [wCurPartySpecies]
@@ -684,37 +684,37 @@ endr
 	ld a, h
 	ld [wPokedexShowPointerAddr + 1], a
 	ld a, POKEDEX_SHOW_3
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow3:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW_4
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow4:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW_5
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow5:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW_6
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow6:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW_7
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow7:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW_8
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 PokedexShow8:
 	call CopyDexEntry
 	ld a, POKEDEX_SHOW
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 CopyDexEntry:
 	ld a, [wPokedexShowPointerAddr]
@@ -782,33 +782,33 @@ BenMonMusic1:
 	call StartPokemonMusicChannel
 	ld hl, BenIntroText1
 	ld a, POKEMON_MUSIC_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenMonMusic2:
 	ld hl, BenIntroText2
 	ld a, POKEMON_MUSIC_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenMonMusic3:
 	ld hl, BenIntroText3
 	ld a, POKEMON_MUSIC_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 FernMonMusic1:
 	call StartPokemonMusicChannel
 	ld hl, FernIntroText1
 	ld a, LETS_ALL_SING_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 FernMonMusic2:
 	ld hl, FernIntroText2
 	ld a, POKEMON_MUSIC_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenFernMusic4:
 	ld hl, BenFernText1
 	ld a, POKEMON_MUSIC_5
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenFernMusic5:
 	call GetWeekday
@@ -818,7 +818,7 @@ BenFernMusic5:
 	ld hl, BenFernText2B
 .SunTueThurSun:
 	ld a, POKEMON_MUSIC_6
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenFernMusic6:
 	call GetWeekday
@@ -828,7 +828,7 @@ BenFernMusic6:
 	ld hl, BenFernText3B
 .SunTueThurSun:
 	ld a, POKEMON_MUSIC_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BenFernMusic7:
 	ret
@@ -893,37 +893,37 @@ LuckyNumberShow1:
 .dontreset
 	ld hl, LC_Text1
 	ld a, LUCKY_NUMBER_SHOW_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow2:
 	ld hl, LC_Text2
 	ld a, LUCKY_NUMBER_SHOW_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow3:
 	ld hl, LC_Text3
 	ld a, LUCKY_NUMBER_SHOW_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow4:
 	ld hl, LC_Text4
 	ld a, LUCKY_NUMBER_SHOW_5
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow5:
 	ld hl, LC_Text5
 	ld a, LUCKY_NUMBER_SHOW_6
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow6:
 	ld hl, LC_Text6
 	ld a, LUCKY_NUMBER_SHOW_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow7:
 	ld hl, LC_Text7
 	ld a, LUCKY_NUMBER_SHOW_8
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow8:
 	ld hl, wStringBuffer1
@@ -934,27 +934,27 @@ LuckyNumberShow8:
 	ld [wStringBuffer1 + 5], a
 	ld hl, LC_Text8
 	ld a, LUCKY_NUMBER_SHOW_9
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow9:
 	ld hl, LC_Text9
 	ld a, LUCKY_NUMBER_SHOW_10
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow10:
 	ld hl, LC_Text7
 	ld a, LUCKY_NUMBER_SHOW_11
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow11:
 	ld hl, LC_Text8
 	ld a, LUCKY_NUMBER_SHOW_12
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow12:
 	ld hl, LC_Text10
 	ld a, LUCKY_NUMBER_SHOW_13
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow13:
 	ld hl, LC_Text11
@@ -964,17 +964,17 @@ LuckyNumberShow13:
 	jr nz, .okay
 	ld a, LUCKY_NUMBER_SHOW_14
 .okay
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow14:
 	ld hl, LC_DragText1
 	ld a, LUCKY_NUMBER_SHOW_15
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LuckyNumberShow15:
 	ld hl, LC_DragText2
 	ld a, LUCKY_CHANNEL
-	jp NextRadioLine
+	jmp NextRadioLine
 
 LC_Text1:
 	text_far _LC_Text1
@@ -1032,12 +1032,12 @@ PeoplePlaces1:
 	call StartRadioStation
 	ld hl, PnP_Text1
 	ld a, PLACES_AND_PEOPLE_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 PeoplePlaces2:
 	ld hl, PnP_Text2
 	ld a, PLACES_AND_PEOPLE_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 PeoplePlaces3:
 	ld hl, PnP_Text3
@@ -1047,7 +1047,7 @@ PeoplePlaces3:
 	jr c, .ok
 	ld a, PLACES_AND_PEOPLE_6 ; Places
 .ok
-	jp NextRadioLine
+	jmp NextRadioLine
 
 PnP_Text1:
 	text_far _PnP_Text1
@@ -1094,7 +1094,7 @@ PeoplePlaces4: ; People
 	callfar GetTrainerName
 	ld hl, PnP_Text4
 	ld a, PLACES_AND_PEOPLE_5
-	jp NextRadioLine
+	jmp NextRadioLine
 
 INCLUDE "data/radio/pnp_hidden_people.asm"
 
@@ -1126,7 +1126,7 @@ PeoplePlaces5:
 	jr c, .ok
 	ld a, PLACES_AND_PEOPLE_6 ; Places
 .ok
-	jp NextRadioLine
+	jmp NextRadioLine
 
 .Adjectives:
 	table_width 2, PeoplePlaces5.Adjectives
@@ -1229,7 +1229,7 @@ PeoplePlaces6: ; Places
 	farcall GetLandmarkName
 	ld hl, PnP_Text5
 	ld a, PLACES_AND_PEOPLE_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 INCLUDE "data/radio/pnp_places.asm"
 
@@ -1262,7 +1262,7 @@ PeoplePlaces7:
 	jr c, .ok
 	ld a, PLACES_AND_PEOPLE_6 ; Places
 .ok
-	jp PrintRadioLine
+	jmp PrintRadioLine
 
 .Adjectives:
 	table_width 2, PeoplePlaces7.Adjectives
@@ -1288,52 +1288,52 @@ RocketRadio1:
 	call StartRadioStation
 	ld hl, RocketRadioText1
 	ld a, ROCKET_RADIO_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio2:
 	ld hl, RocketRadioText2
 	ld a, ROCKET_RADIO_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio3:
 	ld hl, RocketRadioText3
 	ld a, ROCKET_RADIO_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio4:
 	ld hl, RocketRadioText4
 	ld a, ROCKET_RADIO_5
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio5:
 	ld hl, RocketRadioText5
 	ld a, ROCKET_RADIO_6
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio6:
 	ld hl, RocketRadioText6
 	ld a, ROCKET_RADIO_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio7:
 	ld hl, RocketRadioText7
 	ld a, ROCKET_RADIO_8
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio8:
 	ld hl, RocketRadioText8
 	ld a, ROCKET_RADIO_9
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio9:
 	ld hl, RocketRadioText9
 	ld a, ROCKET_RADIO_10
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadio10:
 	ld hl, RocketRadioText10
 	ld a, ROCKET_RADIO
-	jp NextRadioLine
+	jmp NextRadioLine
 
 RocketRadioText1:
 	text_far _RocketRadioText1
@@ -1396,11 +1396,11 @@ EvolutionRadio:
 BuenasPassword1:
 ; Determine if we need to be here
 	call BuenasPasswordCheckTime
-	jp nc, .PlayPassword
+	jr nc, .PlayPassword
 	ld a, [wNumRadioLinesPrinted]
 	and a
-	jp z, BuenasPassword20
-	jp BuenasPassword8
+	jmp z, BuenasPassword20
+	jmp BuenasPassword8
 
 .PlayPassword:
 	call StartRadioStation
@@ -1415,23 +1415,23 @@ BuenasPassword1:
 	ldh [hBGMapMode], a
 	ld hl, BuenaRadioText1
 	ld a, BUENAS_PASSWORD_2
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword2:
 	ld hl, BuenaRadioText2
 	ld a, BUENAS_PASSWORD_3
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword3:
 	call BuenasPasswordCheckTime
 	ld hl, BuenaRadioText3
-	jp c, BuenasPasswordAfterMidnight
+	jmp c, BuenasPasswordAfterMidnight
 	ld a, BUENAS_PASSWORD_4
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword4:
 	call BuenasPasswordCheckTime
-	jp c, BuenasPassword8
+	jmp c, BuenasPassword8
 	ld a, [wBuenasPassword]
 ; If we already generated the password today, we don't need to generate a new one.
 	ld hl, wDailyFlags2
@@ -1463,7 +1463,7 @@ BuenasPassword4:
 	call GetBuenasPassword
 	ld hl, BuenaRadioText4
 	ld a, BUENAS_PASSWORD_5
-	jp NextRadioLine
+	jmp NextRadioLine
 
 GetBuenasPassword:
 ; The password indices are held in c.  High nybble contains the group index, low nybble contains the word index.
@@ -1579,19 +1579,19 @@ INCLUDE "data/radio/buenas_passwords.asm"
 BuenasPassword5:
 	ld hl, BuenaRadioText5
 	ld a, BUENAS_PASSWORD_6
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword6:
 	ld hl, BuenaRadioText6
 	ld a, BUENAS_PASSWORD_7
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword7:
 	call BuenasPasswordCheckTime
 	ld hl, BuenaRadioText7
 	jr c, BuenasPasswordAfterMidnight
 	ld a, BUENAS_PASSWORD
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPasswordAfterMidnight:
 	push hl
@@ -1599,69 +1599,69 @@ BuenasPasswordAfterMidnight:
 	res DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
 	pop hl
 	ld a, BUENAS_PASSWORD_8
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword8:
 	ld hl, wDailyFlags2
 	res DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
 	ld hl, BuenaRadioMidnightText10
 	ld a, BUENAS_PASSWORD_9
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword9:
 	ld hl, BuenaRadioMidnightText1
 	ld a, BUENAS_PASSWORD_10
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword10:
 	ld hl, BuenaRadioMidnightText2
 	ld a, BUENAS_PASSWORD_11
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword11:
 	ld hl, BuenaRadioMidnightText3
 	ld a, BUENAS_PASSWORD_12
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword12:
 	ld hl, BuenaRadioMidnightText4
 	ld a, BUENAS_PASSWORD_13
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword13:
 	ld hl, BuenaRadioMidnightText5
 	ld a, BUENAS_PASSWORD_14
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword14:
 	ld hl, BuenaRadioMidnightText6
 	ld a, BUENAS_PASSWORD_15
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword15:
 	ld hl, BuenaRadioMidnightText7
 	ld a, BUENAS_PASSWORD_16
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword16:
 	ld hl, BuenaRadioMidnightText8
 	ld a, BUENAS_PASSWORD_17
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword17:
 	ld hl, BuenaRadioMidnightText9
 	ld a, BUENAS_PASSWORD_18
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword18:
 	ld hl, BuenaRadioMidnightText10
 	ld a, BUENAS_PASSWORD_19
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword19:
 	ld hl, BuenaRadioMidnightText10
 	ld a, BUENAS_PASSWORD_20
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword20:
 	ldh a, [hBGMapMode]
@@ -1678,7 +1678,7 @@ BuenasPassword20:
 	ld [wNumRadioLinesPrinted], a
 	ld hl, BuenaOffTheAirText
 	ld a, BUENAS_PASSWORD_21
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPassword21:
 	ld a, BUENAS_PASSWORD
@@ -1686,10 +1686,10 @@ BuenasPassword21:
 	xor a
 	ld [wNumRadioLinesPrinted], a
 	call BuenasPasswordCheckTime
-	jp nc, BuenasPassword1
+	jmp nc, BuenasPassword1
 	ld hl, BuenaOffTheAirText
 	ld a, BUENAS_PASSWORD_21
-	jp NextRadioLine
+	jmp NextRadioLine
 
 BuenasPasswordCheckTime:
 	call UpdateTime
@@ -1775,10 +1775,10 @@ BuenaOffTheAirText:
 CopyRadioTextToRAM:
 	ld a, [hl]
 	cp TX_FAR
-	jp z, FarCopyRadioText
+	jmp z, FarCopyRadioText
 	ld de, wRadioText
 	ld bc, 2 * SCREEN_WIDTH
-	jp CopyBytes
+	jmp CopyBytes
 
 StartRadioStation:
 	ld a, [wNumRadioLinesPrinted]
@@ -1804,4 +1804,4 @@ NextRadioLine:
 	push af
 	call CopyRadioTextToRAM
 	pop af
-	jp PrintRadioLine
+	jmp PrintRadioLine

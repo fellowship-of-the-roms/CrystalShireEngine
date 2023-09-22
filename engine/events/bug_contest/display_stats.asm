@@ -93,7 +93,7 @@ ContestAskSwitchText:
 DisplayAlreadyCaughtText:
 	call GetPokemonName
 	ld hl, .ContestAlreadyCaughtText
-	jp PrintText
+	jmp PrintText
 
 .ContestAlreadyCaughtText:
 	text_far _ContestAlreadyCaughtText

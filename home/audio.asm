@@ -18,7 +18,7 @@ InitSound::
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 UpdateSound::
 	push hl
@@ -38,7 +38,7 @@ UpdateSound::
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 _LoadMusicByte::
 ; [wCurMusicByte] = [a:de]
@@ -81,7 +81,7 @@ PlayMusic::
 	pop af
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 PlayMusic2::
 ; Stop playing music, then play music de.
@@ -108,7 +108,7 @@ PlayMusic2::
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 PlayCry::
 ; Play cry de.
@@ -155,7 +155,7 @@ endr
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 PlaySFX::
 ; Play sound effect de.
@@ -191,11 +191,11 @@ PlaySFX::
 	ld [MBC3RomBank], a
 
 .done
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 WaitPlaySFX::
 	call WaitSFX
-	jp PlaySFX
+	jr PlaySFX
 
 WaitSFX::
 ; infinite loop until sfx is done playing
@@ -296,7 +296,7 @@ FadeToMapMusic::
 	ld [wMapMusic], a
 
 .done
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 PlayMapMusic::
 	push hl
@@ -319,7 +319,7 @@ PlayMapMusic::
 	call PlayMusic
 
 .done
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 PlayMapMusicBike::
 ; If the player's on a bike, play the bike music instead of the map music
@@ -346,7 +346,7 @@ PlayMapMusicBike::
 	ld [wMapMusic], a
 	call PlayMusic
 
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 TryRestartMapMusic::
 	ld a, [wDontPlayMapMusicOnReload]
@@ -373,7 +373,7 @@ RestartMapMusic::
 	ld e, a
 	ld d, 0
 	call PlayMusic
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 SpecialMapMusic::
 	ld a, [wPlayerState]
@@ -413,7 +413,7 @@ SpecialMapMusic::
 GetMapMusic_MaybeSpecial::
 	call SpecialMapMusic
 	ret c
-	jp GetMapMusic
+	jmp GetMapMusic
 
 CheckSFX::
 ; Return carry if any SFX channels are active.

@@ -160,7 +160,7 @@ Serial_ExchangeByte::
 	pop hl
 	call CheckLinkTimeoutFramesNonzero
 	jr nz, .loop
-	jp SerialDisconnected
+	jr SerialDisconnected
 
 .not_player_1_or_timed_out
 	ldh a, [rIE]
@@ -227,7 +227,7 @@ Serial_ExchangeByte::
 	ld a, [hl]
 	ldh [hSerialSend], a
 	call DelayFrame
-	jp .timeout_loop
+	jmp .timeout_loop
 
 .ShortDelay:
 	ld a, 15
@@ -282,7 +282,7 @@ Serial_PrintWaitingTextAndSyncAndExchangeNybble::
 	call LoadTilemapToTempTilemap
 	callfar PlaceWaitingText
 	call WaitLinkTransfer
-	jp SafeLoadTempTilemapToTilemap
+	jmp SafeLoadTempTilemapToTilemap
 
 WaitLinkTransfer::
 	vc_hook Wireless_WaitLinkTransfer
@@ -303,7 +303,7 @@ WaitLinkTransfer::
 	; We might be disconnected
 	pop hl
 	xor a
-	jp SerialDisconnected
+	jr SerialDisconnected
 
 .skip
 	pop hl

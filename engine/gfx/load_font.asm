@@ -6,14 +6,14 @@ EnableHDMAForGraphics:
 Get1bppOptionalHDMA: ; unreferenced
 	ld a, [EnableHDMAForGraphics]
 	and a
-	jp nz, Get1bppViaHDMA
-	jp Get1bpp
+	jmp nz, Get1bppViaHDMA
+	jmp Get1bpp
 
 Get2bppOptionalHDMA: ; unreferenced
 	ld a, [EnableHDMAForGraphics]
 	and a
-	jp nz, Get2bppViaHDMA
-	jp Get2bpp
+	jmp nz, Get2bppViaHDMA
+	jmp Get2bpp
 
 _LoadStandardFont::
 	ld de, Font
@@ -21,7 +21,7 @@ _LoadStandardFont::
 	lb bc, BANK(Font), 128 ; "A" to "9"
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
-	jp z, Copy1bpp
+	jmp z, Copy1bpp
 
 	ld de, Font
 	ld hl, vTiles1

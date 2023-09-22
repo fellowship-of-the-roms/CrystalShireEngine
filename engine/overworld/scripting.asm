@@ -297,7 +297,7 @@ Script_jumptextfaceplayer:
 	ld [wScriptTextAddr + 1], a
 	ld b, BANK(JumpTextFacePlayerScript)
 	ld hl, JumpTextFacePlayerScript
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_jumptext:
 	ld a, [wScriptBank]
@@ -308,7 +308,7 @@ Script_jumptext:
 	ld [wScriptTextAddr + 1], a
 	ld b, BANK(JumpTextScript)
 	ld hl, JumpTextScript
-	jp ScriptJump
+	jmp ScriptJump
 
 JumpTextFacePlayerScript:
 	faceplayer
@@ -328,7 +328,7 @@ Script_farjumptext:
 	ld [wScriptTextAddr + 1], a
 	ld b, BANK(JumpTextScript)
 	ld hl, JumpTextScript
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_writetext:
 	call GetScriptByte
@@ -373,7 +373,7 @@ Script_repeattext:
 	ret
 
 Script_waitbutton:
-	jp WaitButton
+	jmp WaitButton
 
 Script_promptbutton:
 	ldh a, [hOAMUpdate]
@@ -459,7 +459,7 @@ Script_verbosegiveitem:
 	call CopyConvertedText
 	ld b, BANK(GiveItemScript)
 	ld de, GiveItemScript
-	jp ScriptCall
+	jmp ScriptCall
 
 GiveItemScript_DummyFunction:
 	ret
@@ -516,7 +516,7 @@ Script_verbosegiveitemvar:
 	call CopyConvertedText
 	ld b, BANK(GiveItemScript)
 	ld de, GiveItemScript
-	jp ScriptCall
+	jmp ScriptCall
 
 Script_itemnotify:
 	call GetPocketName
@@ -651,14 +651,14 @@ Script_describedecoration:
 	farcall DescribeDecoration
 	ld h, d
 	ld l, e
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_fruittree:
 	call GetScriptByte
 	ld [wCurFruitTree], a
 	ld b, BANK(FruitTreeScript)
 	ld hl, FruitTreeScript
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_swarm:
 	call GetScriptByte
@@ -692,7 +692,7 @@ Script_scripttalkafter:
 	ld l, a
 	ld a, [wSeenTrainerBank]
 	ld b, a
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_trainerflagaction:
 	xor a
@@ -728,7 +728,7 @@ Script_endifjustbattled:
 	ld a, [wRunningTrainerBattleScript]
 	and a
 	ret z
-	jp Script_end
+	jmp Script_end
 
 Script_checkjustbattled:
 	ld a, TRUE
@@ -847,7 +847,7 @@ Script_applymovementlasttalked:
 
 	ldh a, [hLastTalked]
 	ld c, a
-	jp ApplyMovement
+	jr ApplyMovement
 
 Script_faceplayer:
 	ldh a, [hLastTalked]
@@ -1077,7 +1077,7 @@ Script_showemote:
 	ld [wScriptDelay], a
 	ld b, BANK(ShowEmoteScript)
 	ld de, ShowEmoteScript
-	jp ScriptCall
+	jmp ScriptCall
 
 ShowEmoteScript:
 	loademote EMOTE_FROM_MEM
@@ -1107,7 +1107,7 @@ Script_earthquake:
 	ld [wEarthquakeMovementDataBuffer + 3], a
 	ld b, BANK(.script)
 	ld de, .script
-	jp ScriptCall
+	jmp ScriptCall
 
 .script
 	applymovement PLAYER, wEarthquakeMovementDataBuffer
@@ -1172,7 +1172,7 @@ Script_catchtutorial:
 	ld [wBattleType], a
 	call BufferScreen
 	farcall CatchTutorial
-	jp Script_reloadmap
+	jr Script_reloadmap
 
 Script_reloadmapafterbattle:
 	ld hl, wBattleScriptFlags
@@ -1184,7 +1184,7 @@ Script_reloadmapafterbattle:
 	jr nz, .notblackedout
 	ld b, BANK(Script_BattleWhiteout)
 	ld hl, Script_BattleWhiteout
-	jp ScriptJump
+	jmp ScriptJump
 
 .notblackedout
 	bit 0, d
@@ -1200,7 +1200,7 @@ Script_reloadmapafterbattle:
 	ld de, Script_SpecialBillCall
 	farcall LoadScriptBDE
 .done
-	jp Script_reloadmap
+	jr Script_reloadmap
 
 Script_reloadmap:
 	xor a
@@ -1273,7 +1273,7 @@ CallCallback::
 	ld a, [wScriptBank]
 	or $80
 	ld [wScriptBank], a
-	jp ScriptCall
+	jr ScriptCall
 
 Script_sjump:
 	call GetScriptByte
@@ -1282,7 +1282,7 @@ Script_sjump:
 	ld h, a
 	ld a, [wScriptBank]
 	ld b, a
-	jp ScriptJump
+	jmp ScriptJump
 
 Script_farsjump:
 	call GetScriptByte
@@ -1291,7 +1291,7 @@ Script_farsjump:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	jp ScriptJump
+	jr ScriptJump
 
 Script_memjump:
 	call GetScriptByte
@@ -1303,19 +1303,19 @@ Script_memjump:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp ScriptJump
+	jr ScriptJump
 
 Script_iffalse:
 	ld a, [wScriptVar]
 	and a
-	jp nz, SkipTwoScriptBytes
-	jp Script_sjump
+	jr nz, SkipTwoScriptBytes
+	jr Script_sjump
 
 Script_iftrue:
 	ld a, [wScriptVar]
 	and a
-	jp nz, Script_sjump
-	jp SkipTwoScriptBytes
+	jr nz, Script_sjump
+	jr SkipTwoScriptBytes
 
 Script_ifequal:
 	call GetScriptByte
@@ -1355,7 +1355,7 @@ Script_callstd:
 	call StdScript
 	ld d, h
 	ld e, l
-	jp ScriptCall
+	jmp ScriptCall
 
 StdScript:
 	call GetScriptByte
@@ -1621,7 +1621,7 @@ ConvertLandmarkToText:
 	ld e, a
 	farcall GetLandmarkName
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jr GetStringBuffer
 
 Script_getlandmarkname:
 	call GetScriptByte
@@ -1644,7 +1644,7 @@ ContinueToGetName:
 	ld [wCurSpecies], a
 	call GetName
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jr GetStringBuffer
 
 Script_gettrainerclassname:
 	ld a, TRAINER_NAME
@@ -1658,7 +1658,7 @@ Script_getmoney:
 	lb bc, PRINTNUM_LEFTALIGN | 3, 6
 	call PrintNum
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jmp GetStringBuffer
 
 Script_getcoins:
 	call ResetStringBuffer1
@@ -1667,7 +1667,7 @@ Script_getcoins:
 	lb bc, PRINTNUM_LEFTALIGN | 2, 6
 	call PrintNum
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jmp GetStringBuffer
 
 Script_getnum:
 	call ResetStringBuffer1
@@ -1676,7 +1676,7 @@ Script_getnum:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 	call PrintNum
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jmp GetStringBuffer
 
 ResetStringBuffer1:
 	ld hl, wStringBuffer1
@@ -1694,7 +1694,7 @@ Script_getstring:
 	ld hl, CopyName1
 	rst FarCall
 	ld de, wStringBuffer2
-	jp GetStringBuffer
+	jmp GetStringBuffer
 
 Script_givepokemail:
 	call GetScriptByte
@@ -2216,7 +2216,7 @@ Script_newloadmap:
 
 Script_reloadend:
 	call Script_newloadmap
-	jp Script_end
+	jr Script_end
 
 Script_opentext:
 	call OpenText
@@ -2277,7 +2277,7 @@ Script_deactivatefacing:
 
 Script_stopandsjump:
 	call StopScript
-	jp Script_sjump
+	jmp Script_sjump
 
 Script_end:
 	call ExitScriptSubroutine
@@ -2405,7 +2405,7 @@ Script_loadmonindex:
 	endc
 	ld l, a
 	ld a, c
-	jp LockPokemonID
+	jmp LockPokemonID
 
 Script_checkmaplockedmons:
 ; check if the script variable's value is one of the reserved map indexes
@@ -2444,7 +2444,7 @@ LoadScriptPokemonID:
 	call GetScriptByte
 	ld h, a
 	or l
-	jp nz, GetPokemonIDFromIndex
+	jmp nz, GetPokemonIDFromIndex
 	ld a, [wScriptVar]
 	ret
 
@@ -2463,7 +2463,7 @@ Script_loaditemindex:
 	endc
 	ld l, a
 	ld a, c
-	jp LockItemID
+	jmp LockItemID
 
 Script_checkmaplockeditems:
 ; check if the script variable's value is one of the reserved map indexes
@@ -2502,6 +2502,6 @@ LoadScriptItemID:
 	call GetScriptByte
 	ld h, a
 	or l
-	jp nz, GetItemIDFromIndex
+	jmp nz, GetItemIDFromIndex
 	ld a, [wScriptVar]
 	ret
