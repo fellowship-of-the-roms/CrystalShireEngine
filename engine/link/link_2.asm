@@ -14,13 +14,11 @@ LinkMonStatsScreen:
 	farcall Link_WaitBGMap
 	farcall InitTradeSpeciesList
 	farcall SetTradeRoomBGPals
-	call WaitBGMap2
-	ret
+	jmp WaitBGMap2
 
 Link_WaitBGMap:
 	call WaitBGMap
-	call WaitBGMap2
-	ret
+	jmp WaitBGMap2
 
 LinkTextbox2:
 	ld h, d

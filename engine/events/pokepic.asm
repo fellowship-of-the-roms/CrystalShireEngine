@@ -24,8 +24,7 @@ Pokepic::
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
 	predef PlaceGraphic
-	call WaitBGMap
-	ret
+	jmp WaitBGMap
 
 ClosePokepic::
 	ld hl, PokepicMenuHeader
@@ -38,8 +37,7 @@ ClosePokepic::
 	call OverworldTextModeSwitch
 	call ApplyTilemap
 	call UpdateSprites
-	call LoadStandardFont
-	ret
+	jmp LoadStandardFont
 
 PokepicMenuHeader:
 	db MENU_BACKUP_TILES ; flags

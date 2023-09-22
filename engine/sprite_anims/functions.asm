@@ -200,8 +200,7 @@ SpriteAnimFunc_GSTitleTrail:
 	ret
 
 .delete
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_GSIntroHoOhLugia:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -277,8 +276,7 @@ SpriteAnimFunc_GSGameFreakLogoStar:
 .delete
 	ld a, 1
 	ld [wIntroSceneFrameCounter], a
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_GSGameFreakLogoSparkle:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -354,8 +352,7 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	ret
 
 .delete
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_SlotsGolem:
 	callfar Slots_AnimateGolem
@@ -369,8 +366,7 @@ SpriteAnimFunc_SlotsChansey:
 	ret nz
 	ld [hl], $3
 	ld a, SPRITE_ANIM_FRAMESET_SLOTS_CHANSEY_2
-	call _ReinitSpriteAnimFrame
-	ret
+	jmp _ReinitSpriteAnimFrame
 
 SpriteAnimFunc_SlotsChanseyEgg:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
@@ -390,8 +386,7 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	ld a, $4
 	ld [wSlotsDelay], a
 	ld de, SFX_PLACE_PUZZLE_PIECE_DOWN
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 .move_right
 	inc [hl]
@@ -525,8 +520,7 @@ SpriteAnimFunc_TradePokeBall:
 	sub $c
 	ld [hl], a
 	ld de, SFX_SWITCH_POKEMON
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 .done2
 	xor a
@@ -534,12 +528,10 @@ SpriteAnimFunc_TradePokeBall:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	call AnimSeqs_IncAnonJumptableIndex
-	ret
+	jmp AnimSeqs_IncAnonJumptableIndex
 
 .delete
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_TradeTubeBulge:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -552,12 +544,10 @@ SpriteAnimFunc_TradeTubeBulge:
 	and $3
 	ret nz
 	ld de, SFX_POKEBALLS_PLACED_ON_TABLE
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 .delete
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_TrademonInTube:
 	callfar TradeAnim_AnimateTrademonInTube
@@ -597,8 +587,7 @@ SpriteAnimFunc_RevealNewMon:
 	ret
 
 .finish_EggShell
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_RadioTuningKnob:
 	callfar AnimateTuningKnob
@@ -708,8 +697,7 @@ SpriteAnimFunc_FlyLeaf:
 	ret
 
 .delete_leaf
-	call DeinitializeSprite
-	ret
+	jmp DeinitializeSprite
 
 SpriteAnimFunc_FlyTo:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
@@ -776,8 +764,7 @@ SpriteAnimFunc_IntroSuicune:
 	add hl, bc
 	ld [hl], a
 	ld a, SPRITE_ANIM_FRAMESET_INTRO_SUICUNE_2
-	call _ReinitSpriteAnimFrame
-	ret
+	jmp _ReinitSpriteAnimFrame
 
 SpriteAnimFunc_IntroPichuWooper:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -829,8 +816,7 @@ SpriteAnimFunc_IntroUnownF:
 	cp $40
 	ret nz
 	ld a, SPRITE_ANIM_FRAMESET_INTRO_UNOWN_F_2
-	call _ReinitSpriteAnimFrame
-	ret
+	jmp _ReinitSpriteAnimFrame
 
 SpriteAnimFunc_IntroSuicuneAway:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
@@ -873,12 +859,10 @@ AnimSeqs_IncAnonJumptableIndex:
 	ret
 
 AnimSeqs_Sine:
-	call Sprites_Sine
-	ret
+	jmp Sprites_Sine
 
 AnimSeqs_Cosine:
-	call Sprites_Cosine
-	ret
+	jmp Sprites_Cosine
 
 SpriteAnimFunc_PcCursor:
 	; Switch frameset ID depending on item mode setting.

@@ -25,8 +25,7 @@ _GetVarAction::
 	jr .loadstringbuffer2
 
 .call
-	call _de_
-	ret
+	jmp _de_
 
 .loadstringbuffer2
 	ld de, wStringBuffer2

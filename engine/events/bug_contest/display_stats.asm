@@ -76,8 +76,7 @@ DisplayCaughtContestMonStats:
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 .Health:
 	db "HEALTH@"

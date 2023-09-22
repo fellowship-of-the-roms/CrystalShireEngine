@@ -109,23 +109,20 @@ _TimeOfDayPals::
 _UpdateTimePals::
 	ld c, $9 ; normal
 	call GetTimePalFade
-	call DmgToCgbTimePals
-	ret
+	jmp DmgToCgbTimePals
 
 FadeInPalettes::
 	ld c, $12
 	call GetTimePalFade
 	ld b, $4
-	call ConvertTimePalsDecHL
-	ret
+	jmp ConvertTimePalsDecHL
 
 FadeOutPalettes::
 	call FillWhiteBGColor
 	ld c, $9
 	call GetTimePalFade
 	ld b, $4
-	call ConvertTimePalsIncHL
-	ret
+	jmp ConvertTimePalsIncHL
 
 BattleTowerFade:
 	call FillWhiteBGColor
@@ -147,15 +144,13 @@ FadeInQuickly:
 	ld c, $0
 	call GetTimePalFade
 	ld b, $4
-	call ConvertTimePalsIncHL
-	ret
+	jmp ConvertTimePalsIncHL
 
 FadeBlackQuickly:
 	ld c, $9
 	call GetTimePalFade
 	ld b, $4
-	call ConvertTimePalsDecHL
-	ret
+	jmp ConvertTimePalsDecHL
 
 FillWhiteBGColor:
 	ldh a, [rSVBK]

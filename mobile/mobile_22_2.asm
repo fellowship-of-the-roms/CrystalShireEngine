@@ -289,8 +289,7 @@ Function8b4a4:
 	pop bc
 	call Function8b4cc
 	call Function8b518
-	call Function8b3cd
-	ret
+	jmp Function8b3cd
 
 Function8b4b8:
 	push bc
@@ -301,8 +300,7 @@ Function8b4b8:
 	pop bc
 	call Function8b4cc
 	call Function8b518
-	call Function8b3cd
-	ret
+	jmp Function8b3cd
 
 Function8b4cc:
 	push bc
@@ -401,8 +399,7 @@ Function8b539:
 	call Function8b4fd
 	ld e, $0
 	call Function89c44
-	call CGBOnly_CopyTilemapAtOnce
-	ret
+	jmp CGBOnly_CopyTilemapAtOnce
 
 Function8b555:
 .loop
@@ -565,8 +562,7 @@ Function8b677:
 	call Function8b6ed
 	call EnableLCD
 	call Function891ab
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 Function8b690:
 	ld hl, MobileCardListGFX
@@ -583,8 +579,7 @@ Function8b690:
 	ld de, vTiles0 tile $ee
 	ld bc, 1 tiles
 	ld a, BANK(MobileCardListGFX)
-	call FarCopyBytes
-	ret
+	jmp FarCopyBytes
 
 Function8b6bb:
 	ldh a, [rSVBK]
@@ -597,8 +592,7 @@ Function8b6bb:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-	call Function8949c
-	ret
+	jmp Function8949c
 
 Palette_8b6d5:
 	RGB 31, 31, 31
@@ -622,8 +616,7 @@ Function8b6ed:
 	hlcoord 0, 14, wAttrmap
 	ld bc, $0050
 	ld a, $7
-	call ByteFill
-	ret
+	jmp ByteFill
 
 Function8b703:
 	call Mobile22_SetBGMapMode0
@@ -888,8 +881,7 @@ Function8b880:
 	ld l, e
 	ld de, wMenuSelection
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 Function8b88c:
 	call OpenSRAMBank4
@@ -926,8 +918,7 @@ Function8b88c:
 .asm_8b8c0
 	pop hl
 	call PlaceString
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function8b8c8:
 	hlcoord 0, 14
@@ -958,8 +949,7 @@ Function8b8c8:
 	ret c
 	hlcoord 0, 13
 	ld c, $12
-	call Function8b732
-	ret
+	jmp Function8b732
 
 Unknown_8b903:
 	dw String_8b90b

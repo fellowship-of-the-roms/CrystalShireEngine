@@ -7,8 +7,7 @@ DrawKrisPackGFX:
 	ld d, [hl]
 	ld hl, vTiles2 tile $50
 	lb bc, BANK(PackFGFX), 15
-	call Request2bpp
-	ret
+	jmp Request2bpp
 
 PackFGFXPointers:
 	dw PackFGFX + (15 tiles) * 1 ; ITEM_POCKET

@@ -84,7 +84,7 @@ PrintPage2:
 	pop af
 	hlcoord 1, 1, wPrinterTilemapBuffer
 	ld a, b
-	call nz, PlaceFarString
+	jmp nz, PlaceFarString
 	ret
 
 .FillColumn:
@@ -240,8 +240,7 @@ PrintPartyMonPage1:
 	call WaitBGMap
 	ld b, SCGB_STATS_SCREEN_HP_PALS
 	call GetSGBLayout
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 PrintPartyMonPage2:
 	call ClearBGPalettes
@@ -291,13 +290,11 @@ PrintPartyMonPage2:
 	call WaitBGMap
 	ld b, SCGB_STATS_SCREEN_HP_PALS
 	call GetSGBLayout
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 .PrintTempMonStats:
 	lb bc, 2, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 GetCurPartyMonName:
 	ld bc, NAME_LENGTH
@@ -319,8 +316,7 @@ PlaceMoveNameString:
 	ld de, PrintParty_NoMoveString
 
 .got_string
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceGenderAndShininess:
 	farcall GetGender

@@ -128,8 +128,7 @@ Function1000ba:
 	ld a, [wcd2b]
 	and a
 	jr z, .loop
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 Function1000e8:
 	ld hl, wcd29
@@ -187,8 +186,7 @@ Function100144:
 	res 5, [hl]
 	res 2, [hl]
 	res 6, [hl]
-	call Function100320
-	ret
+	jmp Function100320
 
 .asm_100155
 	bit 2, [hl]
@@ -203,8 +201,7 @@ Function100163:
 	bit 6, [hl]
 	ret z
 	res 6, [hl]
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 Function10016f:
 	ld a, [wcd2b]
@@ -275,21 +272,18 @@ Function10016f:
 	ld [wMobileErrorCodeBuffer + 2], a
 	ld a, e
 	ld [wMobileErrorCodeBuffer + 1], a
-	call Function10020b
-	ret
+	jr Function10020b
 
 .asm_1001e6
 	ret
 
 .asm_1001e7
 	ld de, String10025e
-	call Function100232
-	ret
+	jr Function100232
 
 .asm_1001ee
 	ld de, String10024d
-	call Function100232
-	ret
+	jr Function100232
 
 .asm_1001f5
 	ld a, [wcd2c]
@@ -298,8 +292,7 @@ Function10016f:
 	ld [wMobileErrorCodeBuffer + 2], a
 	ld a, [wcd2d]
 	ld [wMobileErrorCodeBuffer + 1], a
-	call Function10020b
-	ret
+	jr Function10020b
 
 Function10020b:
 	xor a
@@ -329,8 +322,7 @@ Function100232:
 	pop de
 	call PlaceString
 	call Function100320
-	call JoyWaitAorB
-	ret
+	jmp JoyWaitAorB
 
 String10024d:
 	db   "つうしんを　キャンセル　しました@"
@@ -403,16 +395,14 @@ Function1002dc:
 	farcall RunMapSetupScript
 	xor a
 	ldh [hMapEntryMethod], a
-	call LoadStandardFont
-	ret
+	jmp LoadStandardFont
 
 Function1002ed:
 	farcall LoadOW_BGPal7
 	farcall ApplyPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 Function100301:
 	ld hl, wcd2a
@@ -422,8 +412,7 @@ Function100301:
 	farcall Function10202c
 	farcall Function115dd3
 	call Function100320
-	call JoyWaitAorB
-	ret
+	jmp JoyWaitAorB
 
 Function100320:
 	farcall Mobile_ReloadMapPart
@@ -506,46 +495,40 @@ Function100382:
 Function10038a:
 	ld hl, wccb4
 	ld a, MOBILEAPI_17
-	call MobileAPI
-	ret
+	jmp MobileAPI
 
 Function100393:
 	ld hl, wcc60
 	ld a, MOBILEAPI_1D
-	call MobileAPI
-	ret
+	jmp MobileAPI
 
 Function10039c:
 	ld hl, wcc60
 	ld de, w3_d000
 	ld bc, $54
 	ld a, $03
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function1003ab: ; unreferenced
 	ld hl, w3_d000
 	ld de, wcc60
 	ld bc, $54
 	ld a, $03
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function1003ba:
 	ld hl, wccb4
 	ld de, w3_d080
 	ld bc, $54
 	ld a, $03
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function1003c9:
 	ld hl, w3_d080
 	ld de, wccb4
 	ld bc, $54
 	ld a, $03
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function1003d8:
 	ld hl, wccb4
@@ -753,8 +736,7 @@ Function1004f4:
 	ld a, [wcd27]
 	inc a
 	ld [wcd27], a
-	call Function10039c
-	ret
+	jmp Function10039c
 
 Function100504:
 	push de
@@ -762,8 +744,7 @@ Function100504:
 	call UpdateSprites
 	pop de
 	hlcoord 4, 2
-	call PlaceString
-	ret
+	jmp PlaceString
 
 Function100513:
 	call Function3f7c
@@ -930,8 +911,7 @@ Mobile_CommunicationStandby:
 	call Function3eea
 	ld de, .String
 	hlcoord 4, 11
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .String:
 	db "つうしんたいきちゅう！@"
@@ -1000,8 +980,7 @@ Function100675:
 	bit 2, [hl]
 	set 2, [hl]
 	ret nz
-	call Function1006d3
-	ret
+	jr Function1006d3
 
 Function100681:
 	push hl
@@ -1032,18 +1011,15 @@ Function100697:
 	inc de
 	call .asm_1006b4
 	ld de, String1006c6
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .asm_1006b4
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .asm_1006bb
 	ld de, String1006ca
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String1006c2:
 	db "ふん　@"
@@ -1097,8 +1073,7 @@ MobileBattleResetTimer:
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 MobileBattleFixTimer:
 	ld a, BANK(sMobileBattleTimer)
@@ -1110,8 +1085,7 @@ MobileBattleFixTimer:
 	ld [hli], a
 	xor a
 	ld [hli], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function100720:
 	xor a
@@ -1313,8 +1287,7 @@ Function100846:
 	call PlaceString
 	ld de, wStringBuffer2
 	hlcoord 4, 16
-	call Function100697
-	ret
+	jmp Function100697
 
 .asm_10087c
 	ld de, String_10088e
@@ -1323,8 +1296,7 @@ Function100846:
 	ld h, b
 	ld l, c
 	ld de, String_10089f
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_10088e:
 	db   "モバイルたいせん　できる"
@@ -1413,8 +1385,7 @@ Function100902:
 	call PlaySFX
 	farcall ReloadMapPart
 	ld c, $3c
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 .asm_10093f
 	ld de, .string_10095a
@@ -1424,8 +1395,7 @@ Function100902:
 	call PlaySFX
 	farcall ReloadMapPart
 	ld c, 120
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 .string_10095a
 	db "たいせん　しゅうりょう@"
@@ -1440,8 +1410,7 @@ Function100970:
 	ld de, w3_dd68
 	call Function1009a5
 	call Function1009d2
-	call Function1009ae
-	ret
+	jr Function1009ae
 
 Function100989:
 	ld hl, w3_dc00
@@ -1451,14 +1420,12 @@ Function100989:
 	farcall ReloadMapPart
 	ld hl, w3_dd68
 	decoord 0, 0, wAttrmap
-	call Function1009a5
-	ret
+	jr Function1009a5
 
 Function1009a5:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, $03
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function1009ae:
 	ldh a, [rSVBK]
@@ -1732,8 +1699,7 @@ Mobile_LoadBattleMenu:
 	call Function100ed4
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 Function100b45:
 	call Function100b7a
@@ -2161,8 +2127,7 @@ Function100e63:
 	call Function100db0
 	ret nc
 	ld de, SFX_ELEVATOR_END
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 Function100e72:
 	xor a
@@ -2231,8 +2196,7 @@ Function100ec5:
 
 Function100eca:
 	farcall Mobile_InitPartyMenuBGPal7
-	call Function100ed4
-	ret
+	jr Function100ed4
 
 Function100ed4:
 	farcall ApplyPals
@@ -2391,19 +2355,16 @@ Function100f8d:
 	jr z, .sram
 	and a
 	jr nz, .far_wram
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 .far_wram
 	and $7f
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 .sram
 	call OpenSRAM
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 MACRO macro_100fc0
 	; first byte:
@@ -2469,8 +2430,7 @@ endr
 	ld de, s7_a001
 	ld bc, wc7bd - wc608
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function10107d:
 	xor a
@@ -2512,8 +2472,7 @@ Function10107d:
 	ld b, h
 	ld c, l
 	pop hl
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function1010de:
 	push hl
@@ -2562,8 +2521,7 @@ LoadSelectedPartiesForColosseum:
 	call .CopyName
 	ld hl, wOTMonSelection
 	ld de, wOTPartyMonNicknames
-	call .CopyName
-	ret
+	jr .CopyName
 
 .CopyThreeSpecies:
 ; Load the 3 choices to the buffer
@@ -2671,8 +2629,7 @@ LoadSelectedPartiesForColosseum:
 	ld d, h
 	ld e, l
 	ld hl, wc608
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 .GetDestinationAddress:
 	ld a, [wStringBuffer2 + 4]
@@ -2752,20 +2709,17 @@ Function101251:
 	call Function1021e0
 	call Function1020ea
 	ret c
-	call Function102142
-	ret
+	jmp Function102142
 
 Function101265:
 	ld hl, LinkTerminatedText
-	call Function1021e0
-	ret
+	jmp Function1021e0
 
 Function10126c:
 	call UpdateSprites
 	farcall Script_reloadmappart
 	ld hl, ClosingLinkText
-	call Function1021e0
-	ret
+	jmp Function1021e0
 
 Function10127c:
 	ret
@@ -2943,23 +2897,20 @@ Function1013aa:
 	call ReloadTilesetAndPalettes
 	farcall Function106464
 	call UpdateSprites
-	call FinishExitMenu
-	ret
+	jmp FinishExitMenu
 
 Function1013c0:
 	farcall BlankScreen
 	farcall Stubbed_Function106462
 	farcall Function106464
-	call FinishExitMenu
-	ret
+	jmp FinishExitMenu
 
 Function1013d6:
 	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
 	ret
 
 Function1013dd:
-	call CGBOnly_CopyTilemapAtOnce
-	ret
+	jmp CGBOnly_CopyTilemapAtOnce
 
 Function1013e1: ; unreferenced
 	push de
@@ -3315,14 +3266,12 @@ Function10162a:
 MobileCopyTransferData:
 	ld de, wMobileTransferData
 	ld bc, $1e0
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 MobileCopyTransferData2:
 	ld hl, wMobileTransferData
 	ld bc, $1e0
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function101649:
 	ld a, BANK(w5_d800)
@@ -3330,14 +3279,12 @@ Function101649:
 	call MobileCopyTransferData
 	ld a, BANK(w5_da00)
 	ld de, w5_da00
-	call MobileCopyTransferData2
-	ret
+	jr MobileCopyTransferData2
 
 Function10165a:
 	ld a, BANK(w5_da00)
 	ld hl, w5_da00
-	call MobileCopyTransferData
-	ret
+	jr MobileCopyTransferData
 
 Function101663:
 	ld a, BANK(w5_dc00)
@@ -3345,14 +3292,12 @@ Function101663:
 	call MobileCopyTransferData
 	ld a, BANK(w5_dc00)
 	ld de, w5_dc00
-	call MobileCopyTransferData2
-	ret
+	jr MobileCopyTransferData2
 
 Function101674: ; unreferenced
 	ld a, BANK(w5_dc00)
 	ld hl, w5_dc00
-	call MobileCopyTransferData
-	ret
+	jr MobileCopyTransferData
 
 Function10167d:
 	ld a, 0
@@ -3502,8 +3447,7 @@ Function10176f:
 	ld hl, wccb4
 	ld bc, $54
 	ld a, $11
-	call ByteFill
-	ret
+	jmp ByteFill
 
 Function10177b:
 	ld a, [Unknown_10173a]
@@ -3553,8 +3497,7 @@ Function1017b0:
 	call Function10173b
 	pop bc
 	ld de, wccb5
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function1017c7:
 	ld a, [wcc60]
@@ -3736,8 +3679,7 @@ Function1018fb:
 .asm_101909
 	ld de, wLinkBattleRNs
 	ld bc, 10
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function101913:
 	ld hl, wcd2a
@@ -4494,8 +4436,7 @@ Function101ead:
 
 Function101ecc:
 	call Function101ee2
-	call FadeToMenu
-	ret
+	jmp FadeToMenu
 
 Function101ed3:
 	call Function1013aa
@@ -4598,12 +4539,10 @@ Function10202c:
 	ld e, $0d
 	call Function101ee4
 	hlcoord 4, 4
-	call Function100681
-	ret
+	jmp Function100681
 
 Function102048:
-	call Function10204c
-	ret
+	jr Function10204c
 
 Function10204c:
 	hlcoord 3, 2
@@ -4671,8 +4610,7 @@ Function10209c:
 	ld a, $ff
 	ld hl, wdc42
 	ld bc, 8
-	call ByteFill
-	ret
+	jmp ByteFill
 
 Function1020a8:
 	call Function10209c
@@ -4792,15 +4730,13 @@ Function102142:
 	call PrintText
 
 .asm_10217c
-	call Function1013d6
-	ret
+	jmp Function1013d6
 
 Function102180:
 	ld hl, wc608 + 1
 	ld de, wStringBuffer2
 	ld bc, 11
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function10218d:
 	ld hl, w5_dc00
@@ -4818,8 +4754,7 @@ Function10219f:
 	farcall Function8ac4e
 	call JoyWaitAorB
 	call PlayClickSFX
-	call Function1013aa
-	ret
+	jmp Function1013aa
 
 Function1021b8:
 	call FadeToMenu
@@ -4848,8 +4783,7 @@ CardWasListedText:
 Function1021e0:
 	call MenuTextbox
 	call JoyWaitAorB
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 StartingLinkText: ; unreferenced
 	text_far _StartingLinkText
@@ -4901,14 +4835,12 @@ Function102233:
 	ld bc, 10
 	xor a
 	call ByteFill
-	call Function10304f
-	ret
+	jmp Function10304f
 
 Function102241:
 	call Function10226a
 	call Function102274
-	call Function10224b
-	ret
+	jr Function10224b
 
 Function10224b:
 	ld hl, wcd4b
@@ -4932,8 +4864,7 @@ Function10226a:
 	ld hl, wcd4b
 	bit 0, [hl]
 	ret z
-	call Function10305d
-	ret
+	jmp Function10305d
 
 Function102274:
 	ld hl, wcd4b
@@ -4941,8 +4872,7 @@ Function102274:
 	ret z
 	res 3, [hl]
 	ld de, 8
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 Function102283:
 	ld a, $01
@@ -5704,8 +5634,7 @@ Function1027eb:
 	farcall _LinkTextbox
 	ld de, .Stats_Trade
 	hlcoord 2, 16
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .Stats_Trade:
 	db "STATS     TRADE@"
@@ -6141,8 +6070,7 @@ Function102b32:
 	farcall EvolvePokemon
 	call Function102d9a
 	call Function102dd3
-	call Function102dec
-	ret
+	jmp Function102dec
 
 Function102b4e:
 	ld a, OTPARTYMON
@@ -6161,8 +6089,7 @@ Function102b68: ; unreferenced
 	xor a
 	ld hl, wWindowStackPointer
 	ld bc, $10
-	call ByteFill
-	ret
+	jmp ByteFill
 
 MenuData_102b73:
 	db 9, 6 ; cursor start y, x
@@ -6216,8 +6143,7 @@ Function102bac:
 	call MaxVolume
 	call Function102dd3
 	call Function102dec
-	call Function102db7
-	ret
+	jmp Function102db7
 
 Function102bdc:
 	ld a, [wcd4d]
@@ -6254,36 +6180,31 @@ Function102c07:
 	call Function102c14
 	call Function102c3b
 	call Function102c21
-	call Function102c2e
-	ret
+	jr Function102c2e
 
 Function102c14:
 	ld hl, wPartySpecies
 	ld de, wOTPartySpecies
 	ld bc, 1
-	call Function102c71
-	ret
+	jr Function102c71
 
 Function102c21:
 	ld hl, wPartyMonNicknames
 	ld de, wOTPartyMonNicknames
 	ld bc, 11
-	call Function102c71
-	ret
+	jr Function102c71
 
 Function102c2e:
 	ld hl, wPartyMonOTs
 	ld de, wOTPartyMonOTs
 	ld bc, 11
-	call Function102c71
-	ret
+	jr Function102c71
 
 Function102c3b:
 	ld hl, wPartyMon1
 	ld de, wOTPartyMon1
 	ld bc, $30
-	call Function102c71
-	ret
+	jr Function102c71
 
 Function102c48:
 	farcall Function10165a
@@ -6298,8 +6219,7 @@ Function102c48:
 	ld de, w5_da00
 	ld bc, $1e0
 	ld a, $05
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Function102c71:
 	ld a, [wcd4c]
@@ -6312,8 +6232,7 @@ Function102c71:
 	dec a
 	call AddNTimes
 	pop de
-	call SwapBytes
-	ret
+	jmp SwapBytes
 
 Function102c87:
 	ld a, [wJumptableIndex]
@@ -6388,20 +6307,17 @@ Function102cee:
 	ld e, l
 	ld hl, wd002
 	ld bc, $2f
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function102d34:
 	ld hl, wc608
 	ld bc, $2f
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 Function102d3e:
 	call OpenSRAM
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function102d48:
 	ld a, [wcd4c]
@@ -6490,8 +6406,7 @@ Function102dd3:
 	lb bc, BANK(MobileTradeLightsGFX), 4
 	call Get2bpp
 	farcall __LoadTradeScreenBorderGFX
-	call EnableLCD
-	ret
+	jmp EnableLCD
 
 Function102dec:
 	ld hl, MobileTradeLightsPalettes
@@ -6501,8 +6416,7 @@ Function102dec:
 	call FarCopyWRAM
 	farcall Function49742
 	call SetPalettes
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 Function102e07:
 	hlcoord 3, 10
@@ -6526,8 +6440,7 @@ Function102e07:
 .okay
 	ld de, .waiting
 	hlcoord 4, 11
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .waiting
 	db "Waiting...!@"
@@ -6535,8 +6448,7 @@ Function102e07:
 Function102e3e:
 	ld de, .CancelString
 	hlcoord 10, 17
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .CancelString:
 	db "CANCEL@"
@@ -6559,8 +6471,7 @@ Function102e4f:
 	call .PlaceSpeciesNames
 	hlcoord 7, 9
 	ld de, wOTPartySpecies
-	call .PlaceSpeciesNames
-	ret
+	jr .PlaceSpeciesNames
 
 .PlaceSpeciesNames:
 	ld c, 0
@@ -6612,8 +6523,7 @@ Function102ea8:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, TradingMonForOTMonText
-	call PrintTextboxText
-	ret
+	jmp PrintTextboxText
 
 TradingMonForOTMonText:
 	text_far _TradingMonForOTMonText
@@ -6623,8 +6533,7 @@ Function102ee7:
 	call Function102dc3
 	ld de, String_102ef4
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_102ef4:
 	db   "Too bad! The trade"
@@ -6635,8 +6544,7 @@ Function102f15:
 	call Function102dc3
 	ld de, .TooBadTheTradeWasCanceled
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .TooBadTheTradeWasCanceled:
 	db "こうかんを　キャンセルしました@"
@@ -6645,8 +6553,7 @@ Function102f32:
 	call Function102dc3
 	ld de, .TradeCompleted
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .TradeCompleted:
 	db "Trade completed!@"
@@ -6655,8 +6562,7 @@ Function102f50:
 	call Function102dc3
 	ld de, .PleaseWait
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .PleaseWait:
 	db "しょうしょう　おまち　ください@"
@@ -6665,8 +6571,7 @@ Function102f6d:
 	call Function102dc3
 	ld de, .Finished
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .Finished:
 	db "しゅうりょう　します@"
@@ -6688,8 +6593,7 @@ Function102f85:
 	hlcoord 13, 14
 	call PlaceString
 	ld de, String_102fcc
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_102fb2:
 	db   "あいてがわ<PKMN>えらんだ　"
@@ -6703,8 +6607,7 @@ Function102fce:
 	call Function102dc3
 	ld de, String_102fdb
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_102fdb:
 	db   "あいてがわ<NO>せんたくに"
@@ -6715,8 +6618,7 @@ Function102ff5:
 	call Function102dc3
 	ld de, String_103002
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_103002:
 	db   "その#を　こうかんすると"
@@ -6727,8 +6629,7 @@ Function103021:
 	call Function102dc3
 	ld de, String_10302e
 	hlcoord 1, 14
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_10302e:
 	db   "あいてが　ちゅうしを　えらんだので"
@@ -6750,8 +6651,7 @@ Function10305d:
 	call Function10307f
 	ret c
 	call Function103094
-	call Function10306e
-	ret
+	jr Function10306e
 
 Function10306e:
 	ld a, $01
@@ -6943,8 +6843,7 @@ INCLUDE "gfx/mobile/mobile_trade_lights.pal"
 
 Function103302:
 	call Function103309
-	call Function103362
-	ret
+	jr Function103362
 
 Function103309:
 	xor a
@@ -6988,8 +6887,7 @@ Function103309:
 	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
 	ld a, $01
 	ld [wd1f0], a
-	call Function10339a
-	ret
+	jr Function10339a
 
 Function103362:
 .asm_103362
@@ -7109,8 +7007,7 @@ Function10342c:
 	ld [wd1f2], a
 	call Function103490
 	call Function10343c
-	call Function1034a7
-	ret
+	jr Function1034a7
 
 Function10343c:
 	ld a, [wd1f3]
@@ -7146,15 +7043,13 @@ Function10343c:
 .asm_10347d
 	call Function10350f
 	ld bc, 11
-	call Function103487
-	ret
+	jr Function103487
 
 Function103487:
 	push de
 	call Function1034f7
 	pop de
-	call PlaceString
-	ret
+	jmp PlaceString
 
 Function103490:
 	hlcoord 0, 15
@@ -7164,8 +7059,7 @@ Function103490:
 	ld bc, 6
 	call Function10350f
 	hlcoord 1, 16
-	call PlaceString
-	ret
+	jmp PlaceString
 
 Function1034a7:
 	ld a, [wd1f1]
@@ -7198,8 +7092,7 @@ Function1034be:
 	pop af
 	dec a
 	jr nz, .asm_1034ca
-	call Function103490
-	ret
+	jr Function103490
 
 Function1034e0:
 	push bc
@@ -7210,8 +7103,7 @@ Function1034e0:
 	add hl, bc
 	pop bc
 	ld a, $06
-	call FillBoxWithByte
-	ret
+	jmp FillBoxWithByte
 
 Function1034f1:
 	ld a, [wd1f0]
@@ -7226,8 +7118,7 @@ Function1034f7:
 	ld a, [wd1f2]
 	dec a
 	ld bc, 40
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 Function10350f:
 	ld a, [wd1f3]
@@ -7455,8 +7346,7 @@ Mobile_SelectThreeMons:
 
 Function1036f9:
 	ld hl, MobileBattleRulesText
-	call PrintText
-	ret
+	jmp PrintText
 
 Function103700:
 	ld c, 10
@@ -7697,8 +7587,7 @@ Function10387b:
 	ld [wStringBuffer2], a
 	ld hl, MobileBattleRemainingTimeText
 	call PrintText
-	call JoyWaitAorB
-	ret
+	jmp JoyWaitAorB
 
 MobileBattleRemainingTimeText:
 	text_far _MobileBattleRemainingTimeText

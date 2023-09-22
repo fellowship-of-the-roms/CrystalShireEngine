@@ -283,12 +283,10 @@ MainMenu_PrintCurrentTimeAndDay:
 	hlcoord 0, 14
 	ld b, 2
 	ld c, 18
-	call Textbox
-	ret
+	jmp Textbox
 
 .TimeFail:
-	call SpeechTextbox
-	ret
+	jmp SpeechTextbox
 
 .PlaceTime:
 	ld a, [wSaveFileExists]
@@ -310,8 +308,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	inc hl
 	ld de, hMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .minString: ; unreferenced
 	db "min.@"
@@ -319,8 +316,7 @@ MainMenu_PrintCurrentTimeAndDay:
 .PrintTimeNotSet:
 	hlcoord 1, 14
 	ld de, .TimeNotSetString
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .TimeNotSetString:
 	db "TIME NOT SET@"
@@ -341,8 +337,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	ld h, b
 	ld l, c
 	ld de, .Day
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .Days:
 	db "SUN@"
@@ -361,8 +356,7 @@ ClearTilemapEtc:
 	call ClearTilemap
 	call LoadFontsExtra
 	call LoadStandardFont
-	call ClearWindowData
-	ret
+	jmp ClearWindowData
 
 MainMenu_NewGame:
 	farcall NewGame

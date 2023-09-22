@@ -5,15 +5,13 @@ __LoadTradeScreenBorderGFX:
 	ld de, LinkCommsBorderGFX
 	ld hl, vTiles2
 	lb bc, BANK(LinkCommsBorderGFX), 70
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 LoadMobileTradeBorderTilemap:
 	ld hl, MobileTradeBorderTilemap
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 TestMobileTradeBorderTilemap: ; unreferenced
 ; Loads the mobile trade border graphics and tilemap,
@@ -30,8 +28,7 @@ TestMobileTradeBorderTilemap: ; unreferenced
 	call SetPalettes
 	call WaitBGMap
 	call JoyWaitAorB
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 MobileTradeBorderTilemap:
 INCBIN "gfx/trade/border_mobile.tilemap"
@@ -119,22 +116,19 @@ InitTradeSpeciesList:
 	farcall PlaceTradePartnerNamesAndParty
 	hlcoord 10, 17
 	ld de, .CancelString
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .CancelString:
 	db "CANCEL@"
 
 _LoadTradeScreenBorderGFX:
-	call __LoadTradeScreenBorderGFX
-	ret
+	jmp __LoadTradeScreenBorderGFX
 
 LinkComms_LoadPleaseWaitTextboxBorderGFX:
 	ld de, LinkCommsBorderGFX + $30 tiles
 	ld hl, vTiles2 tile $76
 	lb bc, BANK(LinkCommsBorderGFX), 8
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 LoadTradeRoomBGPals:
 	farcall _LoadTradeRoomBGPals
@@ -149,20 +143,17 @@ LoadCableTradeBorderTilemap:
 	ld hl, CableTradeBorderBottomTilemap
 	decoord 0, 16
 	ld bc, 2 * SCREEN_WIDTH
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 LinkTextbox:
-	call _LinkTextbox
-	ret
+	jmp _LinkTextbox
 
 PrintWaitingTextAndSyncAndExchangeNybble:
 	call LoadStandardMenuHeader
 	call .PrintWaitingText
 	farcall WaitLinkTransfer
 	call ExitMenu
-	call WaitBGMap2
-	ret
+	jmp WaitBGMap2
 
 .PrintWaitingText:
 	hlcoord 4, 10
@@ -182,8 +173,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 
 LinkTradeMenu:
 	call .MenuAction
-	call .GetJoypad
-	ret
+	jr .GetJoypad
 
 .GetJoypad:
 	push bc

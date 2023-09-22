@@ -102,8 +102,7 @@ endc
 	ld [wOptions], a
 	pop af
 	ldh [hInMenu], a
-	call ReturnToMapFromSubmenu
-	ret
+	jmp ReturnToMapFromSubmenu
 
 .LeftRight:
 	ldh a, [hJoyLast]
@@ -134,8 +133,7 @@ endc
 	inc [hl]
 
 .return
-	call .UpdateUnownFrontpic
-	ret
+	jr .UpdateUnownFrontpic
 
 .UpdateUnownFrontpic:
 	ld a, [wJumptableIndex]
@@ -201,8 +199,7 @@ endc
 	call Get2bpp
 	call CloseSRAM
 	ld c, 20
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 AlphRuinsStampString:
 	db " ALPH RUINS STAMP@"

@@ -5788,8 +5788,7 @@ Function11269b:
 	ld a, [wc994]
 	or a
 	call nz, Function1126ac
-	call MobileSDK_CopyString
-	ret
+	jmp MobileSDK_CopyString
 
 Function1126ac:
 	ld hl, Unknown_112137
@@ -8779,8 +8778,7 @@ Function11392f:
 	call Function113a0b
 	ld hl, wMobileSDK_PacketBuffer + 184
 	ld de, wMobileSDK_PacketBuffer + 188
-	call Function113a15
-	ret
+	jmp Function113a15
 
 Function113973:
 	ld hl, wMobileSDK_PacketBuffer + 178
@@ -8813,8 +8811,7 @@ Function113973:
 	call Function113a0b
 	ld hl, wMobileSDK_PacketBuffer + 184
 	ld de, wMobileSDK_PacketBuffer + 188
-	call Function113a15
-	ret
+	jr Function113a15
 
 Function1139b7:
 	ld hl, wMobileSDK_PacketBuffer + 178
@@ -8835,8 +8832,7 @@ Function1139b7:
 	ld d, [hl]
 	ld e, a
 	ld hl, wMobileSDK_PacketBuffer + 184
-	call Function113a28
-	ret
+	jr Function113a28
 
 Function1139de:
 	ld hl, wMobileSDK_PacketBuffer + 182
@@ -8859,8 +8855,7 @@ Function1139de:
 	ld d, [hl]
 	ld e, a
 	ld hl, wMobileSDK_PacketBuffer + 184
-	call Function113a28
-	ret
+	jr Function113a28
 
 Function113a0b:
 	ld b, $4
@@ -9388,7 +9383,7 @@ Function113e42:
 	ld [hl], a
 	ld hl, wc822
 	bit 0, [hl]
-	call z, Function111f97
+	jmp z, Function111f97
 	ret
 
 .asm_113ea8

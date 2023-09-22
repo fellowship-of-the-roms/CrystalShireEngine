@@ -9,8 +9,7 @@ Function1f4003: ; unreferenced
 	ld de, s6_a000
 	ld bc, $1000
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 .news_data
 INCBIN "mobile/news/news_1.bin"
@@ -22,8 +21,7 @@ Function1f4dbe: ; unreferenced
 	ld de, s6_a000
 	ld bc, $1000
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 .news_data
 INCBIN "mobile/news/news_2.bin"
@@ -35,8 +33,7 @@ Function1f5d9f: ; unreferenced
 	ld de, s6_a000
 	ld bc, $1000
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 .news_data
 INCBIN "mobile/news/news_3.bin"

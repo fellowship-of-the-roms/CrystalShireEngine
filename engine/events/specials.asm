@@ -34,13 +34,11 @@ GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
 	ld [wNamedObjectIndex], a
 	farcall NewPokedexEntry
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 UnusedSetSeenMon:
 	ld a, [wScriptVar]
-	call SetSeenMon
-	ret
+	jmp SetSeenMon
 
 FindPartyMonAboveLevel:
 	ld a, [wScriptVar]
@@ -86,8 +84,7 @@ NameRival:
 	farcall _NamingScreen
 	ld hl, wRivalName
 	ld de, .DefaultName
-	call InitName
-	ret
+	jmp InitName
 
 .DefaultName:
 	db "SILVER@"
@@ -99,20 +96,17 @@ NameRater:
 OverworldTownMap:
 	call FadeToMenu
 	farcall _TownMap
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 UnownPrinter:
 	call FadeToMenu
 	farcall _UnownPrinter
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 DisplayLinkRecord:
 	call FadeToMenu
 	farcall _DisplayLinkRecord
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 PlayersHousePC:
 	xor a
@@ -132,8 +126,7 @@ CheckMysteryGift:
 
 .no
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 GetMysteryGiftItem:
 	ld a, BANK(sMysteryGiftItem)
@@ -184,32 +177,28 @@ UnownPuzzle:
 	farcall _UnownPuzzle
 	ld a, [wSolvedUnownPuzzle]
 	ld [wScriptVar], a
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 SlotMachine:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_SlotMachine)
 	ld hl, _SlotMachine
-	call StartGameCornerGame
-	ret
+	jr StartGameCornerGame
 
 CardFlip:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_CardFlip)
 	ld hl, _CardFlip
-	call StartGameCornerGame
-	ret
+	jr StartGameCornerGame
 
 UnusedMemoryGame:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_MemoryGame)
 	ld hl, _MemoryGame
-	call StartGameCornerGame
-	ret
+	jr StartGameCornerGame
 
 StartGameCornerGame:
 	call FarQueueScript
@@ -222,8 +211,7 @@ StartGameCornerGame:
 	ld l, a
 	pop af
 	rst FarCall
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 CheckCoinsAndCoinCase:
 	ld hl, wCoins
@@ -261,8 +249,7 @@ CheckCoinsAndCoinCase:
 
 ClearBGPalettesBufferScreen:
 	call ClearBGPalettes
-	call BufferScreen
-	ret
+	jmp BufferScreen
 
 ScriptReturnCarry:
 	jr c, .carry
@@ -406,14 +393,12 @@ FadeOutMusic:
 Diploma:
 	call FadeToMenu
 	farcall _Diploma
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 PrintDiploma:
 	call FadeToMenu
 	farcall _PrintDiploma
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 TrainerHouse:
 	ld a, BANK(sMysteryGiftTrainerHouseFlag)

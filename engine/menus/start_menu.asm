@@ -89,8 +89,7 @@ StartMenu::
 	call ExitMenu
 .ReturnEnd2:
 	call CloseText
-	call UpdateTimePals
-	ret
+	jmp UpdateTimePals
 
 .GetInput:
 ; Return carry on exit, and no-carry on selection.
@@ -151,8 +150,7 @@ StartMenu::
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatus
 	call UpdateSprites
-	call FinishExitMenu
-	ret
+	jmp FinishExitMenu
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -249,8 +247,7 @@ StartMenu::
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .MenuDesc:
 	push de
@@ -265,8 +262,7 @@ endr
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 .none
 	pop de
 	ret

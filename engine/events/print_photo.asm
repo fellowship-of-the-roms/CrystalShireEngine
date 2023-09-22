@@ -26,8 +26,7 @@ PhotoStudio:
 	ld hl, .EggPhotoText
 
 .print_text
-	call PrintText
-	ret
+	jmp PrintText
 
 .WhichMonPhotoText:
 	text_far _WhichMonPhotoText

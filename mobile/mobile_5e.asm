@@ -62,8 +62,7 @@ Function17a6a8:
 	farcall LoadOW_BGPal7
 	farcall Function49420
 	call SetPalettes
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 Function17a6f5:
 	ld hl, wd1ea
@@ -217,8 +216,7 @@ Function17a7cd:
 	call Function17a83c
 	call Function17a8ae
 	ret c
-	call Function17a848
-	ret
+	jr Function17a848
 
 Function17a7d8:
 	call Function17a83c
@@ -405,28 +403,24 @@ Function17a8de:
 	call Function17a964
 	ld a, $2
 	ld [$d087], a
-	call Function17aa88
-	ret
+	jmp Function17aa88
 
 .asm_17a8fd
 	call Function17a943
-	call Function17aa88
-	ret
+	jmp Function17aa88
 
 .asm_17a904
 	call Function17aad7
 	call Function17aa98
 	call Function17a91e
-	call Function17aa88
-	ret
+	jmp Function17aa88
 
 .asm_17a911
 	call Function17aa98
 	ld a, $5
 	ld [$d087], a
 	xor a
-	call Function17aa88
-	ret
+	jmp Function17aa88
 
 Function17a91e:
 	ld a, [$d08c]
@@ -520,8 +514,7 @@ Function17a99e:
 	call Function17ac46
 	hlcoord 2, 14
 	ld de, String_17a9b2
-	call PlaceString
-	ret
+	jmp PlaceString
 
 String_17a9b2:
 	db   "でんわばんごうが　ただしく"
@@ -535,12 +528,10 @@ Function17a9cb:
 	jr nz, .bit_6_set
 	call Function17a9e3
 	call Function17aa22
-	call Function17a9f5
-	ret
+	jr Function17a9f5
 
 .bit_6_set
-	call Function17a9e3
-	ret
+	jr Function17a9e3
 
 Function17a9e3:
 	ld a, $3
@@ -549,8 +540,7 @@ Function17a9e3:
 	ld b, $8
 	ld c, $8
 	ld a, $5
-	call Function17aa4a
-	ret
+	jr Function17aa4a
 
 Function17a9f5:
 	ld a, [$d08c]
@@ -573,8 +563,7 @@ Function17a9f5:
 	ld c, $11
 	ld hl, Unknown_17aa72
 	ld a, $4
-	call Function17aa4a
-	ret
+	jr Function17aa4a
 
 Function17aa22:
 	ld a, $0
@@ -599,8 +588,7 @@ Function17aa22:
 	pop de
 	ld a, $0
 	ld hl, Unknown_17aa77
-	call Function17aa4a
-	ret
+	jr Function17aa4a
 
 Function17aa4a:
 	ld [$d08d], a
@@ -650,13 +638,11 @@ Unknown_17aa77:
 Function17aa88:
 	jr c, asm_17aa91
 	ld de, SFX_SWITCH_POKEMON
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 asm_17aa91:
 	ld de, SFX_WRONG
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 Function17aa98:
 	ld a, $5
@@ -679,8 +665,7 @@ Function17aaa9:
 	call Function17aae3
 	ld bc, $14
 	pop hl
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 Function17aac3:
 	ld a, $b
@@ -761,8 +746,7 @@ Function17aba0:
 	ld hl, vTiles0 tile $05
 	ld de, MobileDialingGFX
 	lb bc, BANK(MobileDialingGFX), 4
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 Function17abcf:
 	ldh a, [rSVBK]
@@ -801,15 +785,13 @@ Function17ac0c:
 	hlcoord 0, 0
 	ld b, 2
 	ld c, SCREEN_WIDTH - 2
-	call Function17ac46
-	ret
+	jr Function17ac46
 
 Function17ac1d:
 	ld hl, DialpadTilemap
 	decoord 0, 4
 	ld bc, (SCREEN_HEIGHT - 4) * SCREEN_WIDTH
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Function17ac2a:
 	ld hl, DialpadAttrmap
@@ -832,12 +814,10 @@ Function17ac46:
 	ld a, [$d088]
 	bit 4, a
 	jr nz, .bit_4_set
-	call Textbox
-	ret
+	jmp Textbox
 
 .bit_4_set
-	call Function3eea
-	ret
+	jmp Function3eea
 
 Palette_17ac55:
 	RGB  0,  0,  0

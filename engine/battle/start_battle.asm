@@ -9,8 +9,7 @@ ShowLinkBattleParticipants:
 	ld c, 150
 	call DelayFrames
 	call ClearTilemap
-	call ClearSprites
-	ret
+	jmp ClearSprites
 
 FindFirstAliveMonAndStartBattle:
 	xor a

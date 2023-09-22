@@ -30,8 +30,7 @@ StubbedTrainerRankings_HallOfFame2::
 	call CopyBytes
 
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_MagikarpLength:
 	ret
@@ -98,8 +97,7 @@ StubbedTrainerRankings_MagikarpLength:
 
 .done
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_BugContestScore:
 	ret
@@ -127,8 +125,7 @@ StubbedTrainerRankings_BugContestScore:
 
 .done
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsWinStreak:
 	ret
@@ -167,8 +164,7 @@ StubbedTrainerRankings_AddToSlotsWinStreak:
 
 .done
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_EndSlotsWinStreak:
 	ret
@@ -179,8 +175,7 @@ StubbedTrainerRankings_EndSlotsWinStreak:
 	ld [hli], a
 	ld [hl], a
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsPayouts:
 	ret
@@ -207,8 +202,7 @@ StubbedTrainerRankings_AddToSlotsPayouts:
 
 .done
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToBattlePayouts:
 	ret
@@ -237,8 +231,7 @@ StubbedTrainerRankings_AddToBattlePayouts:
 
 .done
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 StubbedTrainerRankings_StepCount:
 	ret
@@ -477,8 +470,7 @@ UpdateTrainerRankingsChecksum2:
 	ld a, BANK(sTrainerRankings)
 	call OpenSRAM
 	call UpdateTrainerRankingsChecksum
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 UpdateTrainerRankingsChecksum:
 	push de
@@ -521,8 +513,7 @@ BackupGSBallFlag:
 	call OpenSRAM
 	pop af
 	ld [sGSBallFlagBackup], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 RestoreGSBallFlag:
 	ld a, BANK(sGSBallFlagBackup)
@@ -533,8 +524,7 @@ RestoreGSBallFlag:
 	call OpenSRAM
 	pop af
 	ld [sGSBallFlag], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 VerifyTrainerRankingsChecksum: ; unreferenced
 	call CalculateTrainerRankingsChecksum
@@ -552,8 +542,7 @@ ClearGSBallFlag:
 	call OpenSRAM
 	xor a
 	ld [sGSBallFlag], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 InitializeTrainerRankings: ; unreferenced
 ; Initializes Trainer Rankings data for a new save file in JP Crystal.
@@ -572,8 +561,7 @@ InitializeTrainerRankings: ; unreferenced
 	ld hl, sTrainerRankings
 	ld de, sTrainerRankingsBackup
 	ld bc, sTrainerRankingsEnd - sTrainerRankings
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 _MobilePrintNum::
 ; Supports signed 31-bit integers (up to 10 digits)
@@ -810,8 +798,7 @@ SetMobileAdapterStatus: ; unused
 	call OpenSRAM
 	ld a, c
 	ld [sMobileAdapterStatus2], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 CheckMobileAdapterStatus: ; unused
 	or a
@@ -1051,8 +1038,7 @@ Function10649b: ; unreferenced
 	ld de, TextboxSpaceGFX
 	ld c, 1
 	ld b, BANK(TextboxSpaceGFX)
-	call Function1064c3
-	ret
+	jr Function1064c3
 
 Function1064c3:
 	ldh a, [rSVBK]
@@ -1107,8 +1093,7 @@ asm_1064ed:
 Function10650a: ; unreferenced
 	ld de, MobilePhoneTilesGFX
 	lb bc, BANK(MobilePhoneTilesGFX), 17
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 MobileDialingFrameGFX:
 INCBIN "gfx/mobile/dialing_frame.2bpp"

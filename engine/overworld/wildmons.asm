@@ -46,8 +46,7 @@ FindNest:
 	ld hl, JohtoWaterWildMons
 	call .FindWater
 	call .RoamMon1
-	call .RoamMon2
-	ret
+	jmp .RoamMon2
 
 .kanto
 	decoord 0, 0

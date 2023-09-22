@@ -128,16 +128,14 @@ LoadMapNameSignGFX:
 	ld de, MapEntryFrameGFX
 	ld hl, vTiles2 tile MAP_NAME_SIGN_START
 	lb bc, BANK(MapEntryFrameGFX), 14
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 InitMapNameFrame:
 	hlcoord 0, 0
 	ld b, 2
 	ld c, 18
 	call InitMapSignAttrmap
-	call PlaceMapNameFrame
-	ret
+	jr PlaceMapNameFrame
 
 PlaceMapNameCenterAlign:
 	ld a, [wCurLandmark]
@@ -152,8 +150,7 @@ PlaceMapNameCenterAlign:
 	hlcoord 0, 2
 	add hl, bc
 	ld de, wStringBuffer1
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .GetNameLength:
 	ld c, 0

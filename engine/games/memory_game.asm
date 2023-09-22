@@ -39,8 +39,7 @@ _MemoryGame:
 	ld a, $e4
 	call DmgToCgbBGPals
 	ld a, $e0
-	call DmgToCgbObjPal0
-	ret
+	jmp DmgToCgbObjPal0
 
 .JumptableLoop:
 	ld a, [wJumptableIndex]
@@ -104,8 +103,7 @@ endr
 	call MemoryGame_Card2Coord
 	xor a
 	ld [wMemoryGameLastCardPicked], a
-	call MemoryGame_PlaceCard
-	ret
+	jmp MemoryGame_PlaceCard
 
 .spawn_object
 	depixel 6, 3, 4, 4
@@ -289,8 +287,7 @@ MemoryGame_CheckMatch:
 	add hl, de
 	call MemoryGame_PlaceCard
 	ld hl, .VictoryText
-	call PrintText
-	ret
+	jmp PrintText
 
 .no_match
 	xor a
@@ -305,8 +302,7 @@ MemoryGame_CheckMatch:
 	call MemoryGame_PlaceCard
 
 	ld hl, MemoryGameDarnText
-	call PrintText
-	ret
+	jmp PrintText
 
 .VictoryText:
 	text_asm
@@ -430,8 +426,7 @@ MemoryGame_PlaceCard:
 	inc a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 MemoryGame_DeleteCard:
 	ld a, $1
@@ -442,8 +437,7 @@ MemoryGame_DeleteCard:
 	ld [hli], a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 MemoryGame_InitStrings:
 	hlcoord 0, 0
@@ -457,8 +451,7 @@ MemoryGame_InitStrings:
 	ld de, .japstr2
 	call PlaceString
 	ld hl, .dummy_text
-	call PrintText
-	ret
+	jmp PrintText
 
 .dummy_text
 	db "@"

@@ -23,8 +23,7 @@ Elevator::
 	ld [wElevatorPointer], a
 	ld a, d
 	ld [wElevatorPointer + 1], a
-	call .LoadFloors
-	ret
+	jr .LoadFloors
 
 .LoadFloors:
 	ld de, wCurElevatorCount
@@ -111,8 +110,7 @@ Elevator_GoToFloor:
 	ld de, wBackupWarpNumber
 	ld a, [wElevatorPointerBank]
 	ld bc, wElevatorDataEnd - wElevatorData - 1
-	call FarCopyBytes
-	ret
+	jmp FarCopyBytes
 
 Elevator_AskWhichFloor:
 	call LoadStandardMenuHeader
@@ -172,8 +170,7 @@ Elevator_GetCurrentFloorString:
 	add hl, de
 	ld a, [hl]
 	pop de
-	call GetFloorString
-	ret
+	jr GetFloorString
 
 Elevator_MenuHeader:
 	db MENU_BACKUP_TILES ; flags

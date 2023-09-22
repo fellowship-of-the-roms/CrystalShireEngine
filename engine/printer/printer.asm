@@ -31,13 +31,11 @@ Printer_PrepareTilemapForPrint:
 	call Printer_StartTransmission
 	pop af
 	ld [wPrinterMargins], a
-	call Printer_CopyTilemapToBuffer
-	ret
+	jmp Printer_CopyTilemapToBuffer
 
 Printer_ExitPrinter:
 	call ReturnToMapFromSubmenu
-	call Printer_RestartMapMusic
-	ret
+	jmp Printer_RestartMapMusic
 
 PrintDexEntry:
 	ld a, [wPrinterQueueLength]
@@ -118,8 +116,7 @@ PrintDexEntry:
 
 Printer_ResetRegistersAndStartDataSend:
 	call Printer_ResetJoypadRegisters
-	call SendScreenToPrinter
-	ret
+	jmp SendScreenToPrinter
 
 PrintUnownStamp:
 	ld a, [wPrinterQueueLength]
@@ -189,8 +186,7 @@ PrintUnownStamp:
 
 PrintMailAndExit:
 	call PrintMail
-	call Printer_ExitPrinter
-	ret
+	jmp Printer_ExitPrinter
 
 PrintMail:
 	ld a, [wPrinterQueueLength]
@@ -398,15 +394,13 @@ Printer_CopyTilemapToBuffer:
 	hlcoord 0, 0
 	ld de, wPrinterTilemapBuffer
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Printer_CopyBufferToTilemap:
 	ld hl, wPrinterTilemapBuffer
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 Printer_ResetJoypadRegisters:
 	xor a
@@ -418,12 +412,10 @@ Printer_ResetJoypadRegisters:
 
 Printer_PlayMusic:
 	ld de, MUSIC_PRINTER
-	call PlayMusic2
-	ret
+	jmp PlayMusic2
 
 Printer_RestartMapMusic:
-	call RestartMapMusic
-	ret
+	jmp RestartMapMusic
 
 CheckPrinterStatus:
 ; Check for printer errors

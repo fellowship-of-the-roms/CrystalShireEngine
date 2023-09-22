@@ -161,8 +161,7 @@ DisplayUnownWords:
 	call WaitBGMap2
 	call JoyWaitAorB
 	call PlayClickSFX
-	call CloseWindow
-	ret
+	jmp CloseWindow
 
 INCLUDE "data/events/unown_walls.asm"
 

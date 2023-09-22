@@ -69,8 +69,7 @@ Function49f16:
 	ld a, MUSIC_MAIN_MENU
 	ld [wMapMusic], a
 	ld de, MUSIC_MAIN_MENU
-	call Function4a6c5
-	ret
+	jmp Function4a6c5
 
 .next
 	ld hl, wMenuCursorY
@@ -502,8 +501,7 @@ Function4a39a: ; unreferenced
 	call Function4a485
 	call Function4a492
 	call Function4a3aa
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 Function4a3a7:
 	call Function4a485
@@ -567,8 +565,7 @@ Function4a3aa:
 	call Function4a6d8
 	lb bc, 1, 1
 	ld a, " "
-	call Function4a6d8
-	ret
+	jmp Function4a6d8
 
 Function4a449: ; unreferenced
 	ld bc, 3 * SCREEN_WIDTH
@@ -592,19 +589,16 @@ Function4a449: ; unreferenced
 	call ByteFill
 	ld bc, SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
-	ret
+	jmp ByteFill
 
 Function4a485:
 	ld de, MobileMenuGFX
 	ld hl, vTiles2 tile $00
 	lb bc, BANK(MobileMenuGFX), 13
-	call Get2bpp
-	ret
+	jmp Get2bpp
 
 Function4a492:
-	call _CrystalCGB_MobileLayout0
-	ret
+	jmp _CrystalCGB_MobileLayout0
 
 MainMenu_MobileStudium:
 	ld a, [wStartDay]
@@ -823,8 +817,7 @@ Function4a6c5:
 	ld a, d
 	ld [wMusicFadeID + 1], a
 	ld c, 22
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 Function4a6d8:
 	push bc

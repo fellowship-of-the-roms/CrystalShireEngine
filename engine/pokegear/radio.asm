@@ -731,8 +731,7 @@ CopyDexEntry:
 	call CopyRadioTextToRAM
 	pop hl
 	pop af
-	call CopyDexEntryPart2
-	ret
+	jr CopyDexEntryPart2
 
 CopyDexEntryPart1:
 	ld de, wPokedexShowPointerBank
@@ -1521,8 +1520,7 @@ GetBuenasPassword:
 	ld l, a
 	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ret
+	jmp GetPokemonName
 
 .Item:
 	ld h, 0
@@ -1534,8 +1532,7 @@ GetBuenasPassword:
 	ld l, a
 	call GetItemIDFromIndex
 	ld [wNamedObjectIndex], a
-	call GetItemName
-	ret
+	jmp GetItemName
 
 .Move:
 	ld h, 0
@@ -1547,8 +1544,7 @@ GetBuenasPassword:
 	ld l, a
 	call GetMoveIDFromIndex
 	ld [wNamedObjectIndex], a
-	call GetMoveName
-	ret
+	jmp GetMoveName
 
 .RawString:
 ; Get the string from the table...

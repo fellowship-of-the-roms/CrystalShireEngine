@@ -368,7 +368,7 @@ EvolveAfterBattle_MasterLoop:
 	ret nz
 	ld a, [wMonTriedToEvolve]
 	and a
-	call nz, RestartMapMusic
+	jmp nz, RestartMapMusic
 	ret
 
 UpdateSpeciesNameIfNotNicknamed:

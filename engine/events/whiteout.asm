@@ -33,14 +33,12 @@ OverworldBGMap:
 	call ClearScreen
 	call WaitBGMap2
 	call HideSprites
-	call RotateThreePalettesLeft
-	ret
+	jmp RotateThreePalettesLeft
 
 BattleBGMap:
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
-	call SetPalettes
-	ret
+	jmp SetPalettes
 
 HalveMoney:
 	farcall StubbedTrainerRankings_WhiteOuts

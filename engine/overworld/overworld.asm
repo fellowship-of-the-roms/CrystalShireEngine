@@ -12,8 +12,7 @@ _UpdatePlayerSprite::
 	ldh [hUsedSpriteIndex], a
 	ld a, [wUsedSprites + 1]
 	ldh [hUsedSpriteTile], a
-	call GetUsedSprite
-	ret
+	jmp GetUsedSprite
 
 _RefreshSprites: ; mobile
 	ld hl, wSpriteFlags
@@ -39,8 +38,7 @@ _ClearSprites: ; mobile
 
 RefreshSprites::
 	call .Refresh
-	call LoadUsedSpritesGFX
-	ret
+	jmp LoadUsedSpritesGFX
 
 .Refresh:
 	xor a
@@ -49,8 +47,7 @@ RefreshSprites::
 	call ByteFill
 	call GetPlayerSprite
 	call AddMapSprites
-	call LoadAndSortSprites
-	ret
+	jmp LoadAndSortSprites
 
 GetPlayerSprite:
 ; Get Chris or Kris's sprite.
@@ -95,12 +92,10 @@ AddMapSprites:
 	call GetMapEnvironment
 	call CheckOutdoorMap
 	jr z, .outdoor
-	call AddIndoorSprites
-	ret
+	jr AddIndoorSprites
 
 .outdoor
-	call AddOutdoorSprites
-	ret
+	jr AddOutdoorSprites
 
 AddIndoorSprites:
 	ld hl, wMap1ObjectSprite
@@ -142,8 +137,7 @@ LoadUsedSpritesGFX:
 	ld a, MAPCALLBACK_SPRITES
 	call RunMapCallback
 	call GetUsedSprites
-	call LoadMiscTiles
-	ret
+	jr LoadMiscTiles
 
 LoadMiscTiles:
 	ld a, [wSpriteFlags]
@@ -308,8 +302,7 @@ _GetSpritePalette::
 LoadAndSortSprites:
 	call LoadSpriteGFX
 	call SortUsedSprites
-	call ArrangeUsedSprites
-	ret
+	jr ArrangeUsedSprites
 
 AddSpriteGFX:
 ; Add any new sprite ids to a list of graphics to be loaded.
@@ -660,8 +653,7 @@ LoadEmote::
 	ld a, c
 	and a
 	ret z
-	call GetEmote2bpp
-	ret
+	jmp GetEmote2bpp
 
 INCLUDE "data/sprites/emotes.asm"
 
