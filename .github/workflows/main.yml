@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout rgbds
+        uses: actions/checkout@v2
+        with:
+          path: rgbds
+          ref: v0.6.1
+          repository: gbdev/rgbds
+
+      - name: Install rgbds
+        working-directory: rgbds
+        run: |
+          sudo make install
+      - name: Remove rgbds
+        run: |
+          rm -rf rgbds
+      - name: Make
+        run: |
+          make -j$(nproc)
+          if ! git diff-index --quiet HEAD --; then
+            echo 'Uncommitted changes detected:'
+            git diff-index HEAD --
+            return 1
+          fi
