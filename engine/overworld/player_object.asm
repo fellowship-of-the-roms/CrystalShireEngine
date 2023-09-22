@@ -123,7 +123,6 @@ RefreshPlayerCoords:
 ; the next three lines are useless
 	ld a, [wObjectFollow_Leader]
 	cp PLAYER
-	ret nz
 	ret
 
 CopyObjectStruct::

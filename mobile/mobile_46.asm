@@ -896,7 +896,6 @@ Function11878d:
 	jmp BattleTowerRoomMenu_IncrementJumptable
 .asm_1187aa
 	call Function118821
-	ret c
 	ret
 .asm_1187af
 	ld a, MOBILEAPI_00
