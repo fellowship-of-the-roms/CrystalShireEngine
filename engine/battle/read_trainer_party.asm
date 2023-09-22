@@ -48,7 +48,7 @@ ReadTrainerParty:
 .loop
 	ld a, [wTrainerGroupBank]
 	call GetFarByte
-	add a, l
+	add l
 	ld l, a
 	jr nc, .skip_trainer
 	inc h
@@ -272,7 +272,7 @@ GetTrainerName::
 
 	ld a, [wTrainerGroupBank]
 	call GetFarByte
-	add a, l
+	add l
 	ld l, a
 	jr nc, .loop
 	inc h

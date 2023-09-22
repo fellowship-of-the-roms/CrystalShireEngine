@@ -249,8 +249,8 @@ ComputeAIContestantScores:
 	and 3
 	cp 3
 	jr z, .loop2
-	add a, a
-	add a, a
+	add a
+	add a
 	ld c, a
 	ld b, 0
 	add hl, bc

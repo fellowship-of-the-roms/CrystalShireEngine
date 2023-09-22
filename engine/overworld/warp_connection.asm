@@ -19,7 +19,7 @@ ResetMapLockedIDs:
 	ld e, NUM_MAP_LOCKED_MON_IDS
 .mon_loop
 	ld a, LOCKED_MON_ID_MAP_1 - 1
-	add a, e
+	add e
 	ld l, a
 	xor a
 	call LockPokemonID

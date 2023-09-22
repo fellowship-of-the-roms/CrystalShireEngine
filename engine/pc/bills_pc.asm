@@ -776,7 +776,7 @@ EncodeBufferMon:
 	ld b, NUM_MOVES
 .pp_up_loop
 	ld a, PP_UP_MASK
-	and a, [hl]
+	and [hl]
 	ld [hli], a
 	dec b
 	jr nz, .pp_up_loop

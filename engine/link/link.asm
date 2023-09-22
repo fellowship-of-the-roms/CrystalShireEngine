@@ -1130,7 +1130,7 @@ Link_FixOTParty_Gen2:
 	dec b
 	jr nz, .move_loop
 	ld a, LOW(wOTPartySpecies)
-	add a, c
+	add c
 	ld l, a
 	adc HIGH(wOTPartySpecies)
 	sub l
@@ -1215,7 +1215,7 @@ Link_ComputeBufferChecksum:
 	; out: a: checksum, hl: end of buffer, c: destroyed
 	ld a, 4 ;-$fc, but that gives a warning...
 .loop
-	add a, [hl]
+	add [hl]
 	jr nc, .no_carry
 	sub $fc
 .no_carry
@@ -1246,7 +1246,7 @@ Link_StageIndexListForTransfer:
 	push hl
 	ld c, a
 	and $1f
-	add a, LOW(wStringBuffer4)
+	add LOW(wStringBuffer4)
 	ld l, a
 	adc HIGH(wStringBuffer4)
 	sub l
@@ -1257,12 +1257,12 @@ Link_StageIndexListForTransfer:
 	inc a
 	sla c
 	jr nc, .not_two
-	add a, a
-	add a, a
+	add a
+	add a
 .not_two
 	sla c
 	jr nc, .not_one
-	add a, a
+	add a
 .not_one
 	or [hl]
 	ld [hl], a
@@ -1309,9 +1309,9 @@ Link_StageIndexListForTransfer:
 	inc a
 	srl b
 	jr c, .bit_loop
-	add a, a
+	add a
 	swap a
-	add a, l
+	add l
 	sub LOW(wStringBuffer4 + $21) ;+1 for the extra increment in [hli] and +$20 for the extra increment in the bit loop
 	ret
 

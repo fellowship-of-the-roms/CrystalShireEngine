@@ -51,7 +51,7 @@ _PlayBattleAnim:
 
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
-	add a, a
+	add a
 	jr c, .play_anyway
 
 	farcall CheckBattleScene

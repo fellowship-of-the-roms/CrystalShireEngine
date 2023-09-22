@@ -74,7 +74,7 @@ _GetVarAction::
 	call CountSetBits16
 	ld a, b
 .load_or_saturate
-	add a, -1
+	add -1
 	sbc a
 	or c
 	jr .loadstringbuffer2

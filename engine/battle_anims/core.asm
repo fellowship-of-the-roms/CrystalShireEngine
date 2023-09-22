@@ -271,7 +271,7 @@ InitBattleAnimBuffer:
 	sbc a
 	and -(1 * TILE_WIDTH)
 .done
-	add a, d
+	add d
 	ld [wBattleAnimTempYCoord], a
 	ld a, [hli]
 	xor $ff

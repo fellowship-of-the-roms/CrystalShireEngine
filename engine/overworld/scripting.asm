@@ -2317,7 +2317,7 @@ Script_loadmonindex:
 	cp NUM_MAP_LOCKED_MON_IDS
 	ret nc
 	if LOCKED_MON_ID_MAP_1 > 1
-		add a, LOCKED_MON_ID_MAP_1
+		add LOCKED_MON_ID_MAP_1
 	elif LOCKED_MON_ID_MAP_1 == 1
 		inc a
 	endc

@@ -11,7 +11,7 @@ LoadIndirectPointer::
 	ld e, a
 	ld a, [hli]
 	ld d, a
-	add a, a
+	add a
 	jr nc, .loop
 	res 7, d
 	dec bc
@@ -37,7 +37,7 @@ LoadIndirectPointer::
 	inc hl
 	cpl
 	inc a
-	add a, c
+	add c
 	ld c, a
 	jr c, .loop ;subtracting by addition has the carry flipped
 	dec b

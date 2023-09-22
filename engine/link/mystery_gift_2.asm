@@ -23,7 +23,7 @@ StageDataForMysteryGift:
 	ld bc, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits16
 	ld a, b
-	add a, -1
+	add -1
 	sbc a
 	or c
 	pop de

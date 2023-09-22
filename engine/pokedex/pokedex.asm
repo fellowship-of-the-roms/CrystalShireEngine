@@ -1147,7 +1147,7 @@ Pokedex_ListingMoveDownOnePage:
 	ld a, d
 .got_scroll
 	ld hl, wDexListingScrollOffset
-	add a, [hl]
+	add [hl]
 	ld [hli], a
 	jr nc, .done
 	inc [hl]
@@ -1812,7 +1812,7 @@ Pokedex_OrderMonsByMode:
 	ld c, 9 ;bits are numbered 1-8 (instead of 0-7) because the first dex entry is #001, not #000
 .highest_bit_index_loop
 	dec c
-	add a, a
+	add a
 	jr nc, .highest_bit_index_loop
 	ld a, [wDexLastSeenIndex]
 	ld l, a

@@ -42,7 +42,7 @@ CanLearnTMHMMove:
 GetTMHMMove:
 	ld a, [wTempTMHM]
 	dec a
-	add a, a
+	add a
 	ld hl, TMHMMoves
 	ld b, 0
 	ld c, a

@@ -47,7 +47,7 @@ CountSetBits16::
 	call CountSetBits
 	pop de
 	pop bc
-	add a, c
+	add c
 	ld c, a
 	jr nc, .handle_loop
 	inc b

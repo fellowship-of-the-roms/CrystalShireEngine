@@ -36,7 +36,7 @@ MACRO ___conversion_table_homecall_readlocked
 	; in: a = position
 	; out: a = 8-bit index; everything else preserved
 	push hl
-	add a, LOW(\1LockedEntries)
+	add LOW(\1LockedEntries)
 	ld l, a
 	ldh a, [rSVBK]
 	ld h, a
