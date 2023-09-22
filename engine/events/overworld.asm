@@ -1726,7 +1726,6 @@ Script_GetOnBike_Register:
 	end
 
 Overworld_DummyFunction: ; unreferenced
-	nop
 	ret
 
 Script_GetOffBike:

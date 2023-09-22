@@ -284,8 +284,6 @@ PlayerEvents:
 	ret
 
 CheckTrainerBattle_GetPlayerEvent:
-	nop
-	nop
 	call CheckTrainerBattle
 	jr nc, .nope
 
@@ -1305,8 +1303,6 @@ TryWildEncounter_BugContest:
 INCLUDE "data/wild/bug_contest_mons.asm"
 
 DoBikeStep::
-	nop
-	nop
 	; If the bike shop owner doesn't have our number, or
 	; if we've already gotten the call, we don't have to
 	; be here.

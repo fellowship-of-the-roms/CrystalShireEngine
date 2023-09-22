@@ -5412,7 +5412,6 @@ Function1025dc:
 	ret
 
 Function1025e9:
-	nop
 	ld hl, wcd4b
 	set 6, [hl]
 	call Function102b4e
@@ -5469,15 +5468,11 @@ Function1025ff:
 	ret
 
 Function102652:
-	nop
 	ld hl, wcd4b
 	set 6, [hl]
-	nop
 	call Function102b7b
-	nop
 	ld hl, wcd4b
 	set 1, [hl]
-	nop
 	ld a, [wcd49]
 	inc a
 	ld [wcd49], a
@@ -6749,7 +6744,6 @@ Function10304f:
 	ret
 
 Function10305d:
-	nop
 	ld a, [wAttrmapEnd]
 	and a
 	ret z
