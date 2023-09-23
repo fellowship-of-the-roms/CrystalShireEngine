@@ -1035,7 +1035,6 @@ FastBallMultiplier:
 	push bc
 
 .loop
-; BUG: Fast Ball only boosts catch rate for three Pokémon (see docs/bugs_and_glitches.md)
 	ld a, BANK(FleeMons)
 	call GetFarByte
 	ld c, a
