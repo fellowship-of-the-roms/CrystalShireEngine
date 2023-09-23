@@ -180,7 +180,11 @@ if DEF(_DEBUG)
 	jr z, .hatch
 endc
 	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
+if DEF(_DEBUG)
+	jmp StatsScreen_JoypadAction
+else
 	jr StatsScreen_JoypadAction
+endc
 
 .quit
 	ld h, 7
@@ -213,7 +217,11 @@ if DEF(_DEBUG)
 	pop bc
 .skip
 	xor a
+if DEF(_DEBUG)
+	jr StatsScreen_JoypadAction
+else
 	jmp StatsScreen_JoypadAction
+endc
 
 .HatchSoonString:
 	db "▶HATCH SOON!@"
@@ -232,7 +240,11 @@ MonStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .next
 	ld h, 0
+if DEF(_DEBUG)
+	jmp StatsScreen_SetJumptableIndex
+else
 	jr StatsScreen_SetJumptableIndex
+endc
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON

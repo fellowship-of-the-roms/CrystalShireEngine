@@ -213,7 +213,7 @@ DebugRoomMenu_SpClear:
 	ld [hli], a
 	ld [hl], a
 	call CloseSRAM
-	jmp DebugRoom_PrintStackBottomTop
+	jr DebugRoom_PrintStackBottomTop
 
 DebugRoom_PrintStackBottomTop:
 	ld a, BANK(sStackTop)
@@ -603,9 +603,9 @@ DebugRoom_EditPagedValues:
 	rra ; START_F?
 	jr c, DebugRoom_PagedValuePressedStart
 	rra ; D_RIGHT_F?
-	jmp c, DebugRoom_IncrementPagedValue
+	jr c, DebugRoom_IncrementPagedValue
 	rra ; D_LEFT_F?
-	jmp c, DebugRoom_DecrementPagedValue
+	jr c, DebugRoom_DecrementPagedValue
 	rra ; D_UP_F?
 	jmp c, DebugRoom_PrevPagedValue
 	rra ; D_DOWN_F?
@@ -721,7 +721,7 @@ DebugRoom_PrevPage:
 	ld [wDebugRoomCurValue], a
 .skip
 	ld a, "▶"
-	jmp DebugRoom_ShowHideCursor
+	jr DebugRoom_ShowHideCursor
 
 DebugRoom_NextPagedValue:
 	ld a, " "
@@ -739,7 +739,7 @@ DebugRoom_NextPagedValue:
 DebugRoom_UpdateValueCursor:
 	ld [wDebugRoomCurValue], a
 	ld a, "▶"
-	jmp DebugRoom_ShowHideCursor
+	jr DebugRoom_ShowHideCursor
 
 DebugRoom_PrevPagedValue:
 	ld a, " "
@@ -1355,7 +1355,7 @@ DebugRoom_SaveRTC:
 	call YesNoBox
 	ret c
 	ld hl, wDebugRoomRTCSec
-	jmp DebugRoom_SetClock
+	jr DebugRoom_SetClock
 
 DebugRoomMenu_RTCEdit_UpdateClock:
 	ld hl, wDebugRoomRTCCurSec
@@ -1451,7 +1451,7 @@ DebugRoomMenu_HaltChkClr:
 	ld [hli], a
 	ld [hl], a
 	call CloseSRAM
-	jmp DebugRoom_PrintRTCHaltChk
+	jr DebugRoom_PrintRTCHaltChk
 
 DebugRoom_PrintRTCHaltChk:
 	hlcoord 16, 9

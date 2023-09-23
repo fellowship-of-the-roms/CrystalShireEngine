@@ -235,6 +235,7 @@ ScriptCommandTable:
 	dw Script_checkmaplockedmons         ; ab
 	dw Script_loaditemindex              ; ac
 	dw Script_checkmaplockeditems        ; ad
+	dw Script_givepokemove               ; ae
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2423,4 +2424,31 @@ LoadScriptItemID:
 	or l
 	jmp nz, GetItemIDFromIndex
 	ld a, [wScriptVar]
+	ret
+
+Script_givepokemove:
+	; Get Move
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	call GetMoveIDFromIndex
+	ld d, a
+
+	; Get Pokemon
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	lb bc, 0, wPartyMon1Moves - wPartyMon1
+	add hl, bc
+
+	; Get Move number
+	call GetScriptByte
+	ld c, a
+	add hl, bc
+
+	; Set move
+	ld a, d
+	ld [hl], a
 	ret
