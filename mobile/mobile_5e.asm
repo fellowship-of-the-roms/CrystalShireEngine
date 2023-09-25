@@ -40,11 +40,11 @@ Function17a6a8:
 	ld hl, wStringBuffer2
 	ld bc, $a
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, wd1ea
 	ld bc, $10
 	ld a, $ff
-	call ByteFill
+	rst ByteFill
 	pop bc
 	ld a, c
 	and a
@@ -104,7 +104,7 @@ Function17a721:
 	ld l, e
 	ld bc, $8
 	ld a, $ff
-	call ByteFill
+	rst ByteFill
 	pop de
 	ld hl, wd1ea
 	ld b, $8
@@ -192,7 +192,7 @@ Function17a7a6: ; unreferenced
 Function17a7ae:
 	ld a, [$d087]
 	ld hl, Jumptable_17a7b6
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_17a7b6:
@@ -699,7 +699,7 @@ Function17aae3:
 	ld a, [$d08a]
 	ld bc, $d
 	ld hl, Unknown_17aaf7
-	call AddNTimes
+	rst AddNTimes
 	pop af
 	ld c, a
 	ld b, 0
@@ -755,17 +755,17 @@ Function17abcf:
 	ld hl, Palette_17ac55
 	ld de, wBGPals1
 	ld bc, 6 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, Palette_17ac95
 	ld de, wOBPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, Palette_17b4b5
 	ld de, wOBPals1 palette 1
 	ld bc, 2 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, MapObjectPals palette 1
 	ld de, wOBPals1 palette 3
@@ -795,7 +795,7 @@ Function17ac2a:
 	ld hl, DialpadAttrmap
 	decoord 0, 4, wAttrmap
 	ld bc, (SCREEN_HEIGHT - 4) * SCREEN_WIDTH
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 0, 4, wAttrmap
 	ld bc, (SCREEN_HEIGHT - 4) * SCREEN_WIDTH
 .loop

@@ -130,7 +130,7 @@ CorrectPartyErrors: ; unreferenced
 .got_nickname
 	pop de
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 
 .valid_nickname
@@ -153,7 +153,7 @@ CorrectPartyErrors: ; unreferenced
 	ld e, l
 	ld hl, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 .valid_ot_name
 	pop bc
 	inc c

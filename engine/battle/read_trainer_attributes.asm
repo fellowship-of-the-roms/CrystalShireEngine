@@ -15,7 +15,7 @@ GetTrainerClassName:
 	ld de, wStringBuffer1
 	push de
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ret
 
@@ -40,7 +40,7 @@ GetOTName:
 	ld bc, TRAINER_CLASS_NAME_LENGTH
 	ld de, wOTClassName
 	push de
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ret
 
@@ -52,7 +52,7 @@ GetTrainerAttributes:
 	dec a
 	ld hl, TrainerClassAttributes + TRNATTR_ITEM1
 	ld bc, NUM_TRAINER_ATTRIBUTES
-	call AddNTimes
+	rst AddNTimes
 	ld de, wEnemyTrainerItem1
 	ld a, [hli]
 	push hl

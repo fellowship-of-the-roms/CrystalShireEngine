@@ -236,7 +236,7 @@ HatchEggs:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Species
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hl]
 	ld [wCurPartySpecies], a
 	call SetSeenAndCaughtMon
@@ -277,7 +277,7 @@ HatchEggs:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld bc, MON_MAXHP
 	add hl, bc
@@ -323,17 +323,17 @@ HatchEggs:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	call CopyBytes
+	rst CopyBytes
 	ld hl, .Text_HatchEgg
 	call PrintText
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	push de
@@ -358,7 +358,7 @@ HatchEggs:
 .nonickname
 	ld hl, wStringBuffer1
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .next
 	ld hl, wCurPartyMon
@@ -690,7 +690,7 @@ Hatch_UpdateFrontpicBGMapCenter:
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	pop bc
 	pop hl
 	ld a, b
@@ -941,7 +941,7 @@ DayCareMonCompatibilityText:
 	push bc
 	ld de, wStringBuffer1
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call CheckBreedmonCompatibility
 	pop bc
 	ld a, [wBreedingCompatibility]

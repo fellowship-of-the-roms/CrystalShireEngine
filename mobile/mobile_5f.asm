@@ -4,7 +4,7 @@ Function17c000:
 	ld hl, vTiles2
 	ld bc, $31 tiles
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	call LoadStandardFont
 	call LoadFontsExtra
@@ -50,7 +50,7 @@ Function17c000:
 	ld hl, HaveWantPals
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -58,7 +58,7 @@ Function17c000:
 	ld hl, MobileSelectGFX
 	ld de, vTiles0 tile $30
 	ld bc, $20 tiles
-	call CopyBytes
+	rst CopyBytes
 
 	ld a, 1
 	ldh [rVBK], a
@@ -66,12 +66,12 @@ Function17c000:
 	ld hl, HaveWantGFX
 	ld de, vTiles2
 	ld bc, $80 tiles
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, HaveWantGFX + $80 tiles
 	ld de, vTiles1
 	ld bc, $10 tiles
-	call CopyBytes
+	rst CopyBytes
 
 	xor a
 	ldh [rVBK], a
@@ -272,7 +272,7 @@ Function17d0f3:
 	ld hl, wMobileMonOT
 	ld de, wOTTrademonOTName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld a, [wMobileMonID]
@@ -342,7 +342,7 @@ Mobile_CopyDefaultMail:
 	ld a, "@"
 	ld hl, wMobileMonMail
 	ld bc, MAIL_MSG_LENGTH + 1
-	call ByteFill
+	rst ByteFill
 	ld hl, .DefaultMessage
 	ld de, wMobileMonMail
 	ld bc, .DefaultMessageEnd - .DefaultMessage
@@ -356,7 +356,7 @@ Mobile_CopyDefaultMailAuthor:
 	ld a, "@"
 	ld de, wMobileMonMailAuthor
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call ByteFill
+	rst ByteFill
 	ld hl, Mobile5F_PlayersName
 	ld de, wMobileMonMailAuthor
 	ld bc, NAME_LENGTH_JAPANESE - 1
@@ -405,7 +405,7 @@ Function17d1f1:
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	predef GetUnownLetter
 	farcall UpdateUnownDex
 	ld a, [wFirstUnownSeen]
@@ -587,7 +587,7 @@ Function17d314:
 	xor a
 	ld hl, $aa73
 	ld bc, $c
-	call ByteFill
+	rst ByteFill
 	call CloseSRAM
 	ld a, $2
 	ld [wScriptVar], a
@@ -609,27 +609,27 @@ Function17d370:
 	ld hl, vTiles0 tile $ee
 	ld de, wc608
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, PokemonNewsGFX
 	ld de, vTiles1
 	ld bc, $48 tiles
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld hl, vTiles2 tile $7f
 	ld bc, 1 tiles
-	call ByteFill
+	rst ByteFill
 	ld hl, wc608
 	ld de, vTiles0 tile $ee
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ldh [rVBK], a
 	ld hl, PostalMarkGFX
 	ld de, vTiles2 tile $60
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	call EnableLCD
 	call Function17d60b
 	ld a, $0
@@ -641,7 +641,7 @@ Function17d370:
 	ld hl, s6_a006
 ;	ld de, w4_d000
 	ld bc, $1000
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 Function17d3f6:
@@ -655,21 +655,21 @@ Function17d405:
 	ld hl, vTiles0 tile $ee
 	ld de, wc608
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, PokemonNewsGFX
 	ld de, vTiles1
 	ld bc, $48 tiles
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld hl, vTiles2 tile $7f
 	ld bc, 1 tiles
-	call ByteFill
+	rst ByteFill
 	ld hl, wc608
 	ld de, vTiles0 tile $ee
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ldh [rVBK], a
 	call EnableLCD
@@ -680,7 +680,7 @@ Function17d405:
 	ld hl, PokemonNewsPalettes
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	call SetPalettes
 	pop af
 	ldh [rSVBK], a
@@ -715,7 +715,7 @@ Function17d48d:
 	ld hl, PokemonNewsPalettes
 	ld de, wc608
 	ld bc, $40
-	call CopyBytes
+	rst CopyBytes
 	ld hl, PokemonNewsTileAttrmap
 	decoord 0, 0
 	bccoord 0, 0, wAttrmap
@@ -835,7 +835,7 @@ Function17d48d:
 	pop de
 	hlcoord 0, 0
 	add hl, bc
-	call PlaceString
+	rst PlaceString
 	push de
 	pop hl
 	inc hl
@@ -844,7 +844,7 @@ Function17d48d:
 	jr nz, .asm_17d53a
 	ld de, wCreditsTimer
 	ld bc, $c
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld [wcd2e], a
 	ld [wcd2f], a
@@ -853,7 +853,7 @@ Function17d48d:
 	ld [wcd31], a
 	ld de, wcd32
 	ld bc, $10
-	call CopyBytes
+	rst CopyBytes
 	ld a, [hli]
 	ld [wcd42], a
 	ld a, [hli]
@@ -941,7 +941,7 @@ Function17d5f6:
 	ld hl, wc608
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld a, $4
 	ldh [rSVBK], a
 	ret
@@ -952,7 +952,7 @@ Function17d60b:
 	ld hl, $b1d3
 	ld de, wc608
 	ld bc, $20
-	call CopyBytes
+	rst CopyBytes
 	ld a, [$b1b1]
 	ld c, a
 	ld a, [$b1b2]
@@ -1030,7 +1030,7 @@ Function17d60b:
 	ld c, a
 	ld a, [$b1b2]
 	ld b, a
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 Function17d6a1:
@@ -1064,12 +1064,12 @@ Function17d6a1:
 	ld [wcd5f], a
 	ld de, wcd60
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	inc hl
 	inc hl
 	ld de, wcd64
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	ld a, [hli]
 	ld [wcd69], a
 	ld a, [hli]
@@ -1181,7 +1181,7 @@ Function17d78d:
 	add hl, bc
 ;	ld de, w4_d000
 	ld bc, $1000
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	xor a
 	ld [wcd77], a
@@ -1362,7 +1362,7 @@ Function17d85d:
 	ld hl, wc608
 	ld de, wBGPals1
 	ld b, $0
-	call CopyBytes
+	rst CopyBytes
 	ld a, $4
 	ldh [rSVBK], a
 	call Function17e32b
@@ -1418,7 +1418,7 @@ Function17d93a:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $5
-	call CopyBytes
+	rst CopyBytes
 	call HlToCrashCheckPointer
 	call Function17e32b
 	ldh a, [rSVBK]
@@ -1452,7 +1452,7 @@ Function17d98b:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	call HlToCrashCheckPointer
 	call Function17e32b
 	ldh a, [rSVBK]
@@ -1487,7 +1487,7 @@ Function17d9e3:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $7
-	call CopyBytes
+	rst CopyBytes
 	call HlToCrashCheckPointer
 	ld a, [wc70b]
 	push af
@@ -1514,7 +1514,7 @@ Function17d9e3:
 	ld c, a
 	ld a, [wc70e]
 	ld b, a
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	cp $c0
 	jr c, .asm_17da2d
@@ -1532,7 +1532,7 @@ Function17da31:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	call HlToCrashCheckPointer
 	ld a, [wc709]
 	push af
@@ -1810,7 +1810,7 @@ Function17dc1f:
 	call IncCrashCheckPointer
 	ld de, wc688
 	ld bc, $6
-	call CopyBytes
+	rst CopyBytes
 	call Function17e32b
 	ldh a, [rSVBK]
 	push af
@@ -1987,11 +1987,11 @@ Function17dd49:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $a
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc711]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70a]
 	cp $c0
 	jr c, .sram
@@ -2012,7 +2012,7 @@ Function17dd49:
 	ld a, [wc711]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70a]
 	cp $c0
 	jr c, .close_sram
@@ -2066,7 +2066,7 @@ Function17ddcd:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $8
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70a]
 	cp $c0
 	jr c, .asm_17dde7
@@ -2126,11 +2126,11 @@ Function17de32:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $9
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc710]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, $6
 	call OpenSRAM
 	call Function17f4f6
@@ -2183,7 +2183,7 @@ Function17de91:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $7
-	call CopyBytes
+	rst CopyBytes
 	ld a, $6
 	call OpenSRAM
 	call Function17f4f6
@@ -2224,7 +2224,7 @@ Function17ded9:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $1f
-	call CopyBytes
+	rst CopyBytes
 	call Function17e32b
 	ldh a, [rSVBK]
 	push af
@@ -2260,7 +2260,7 @@ Function17ded9:
 	ld d, h
 	ld e, l
 	pop hl
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	jr .asm_17df37
 
@@ -2280,7 +2280,7 @@ Function17ded9:
 	ld d, h
 	ld e, l
 	pop hl
-	call CopyBytes
+	rst CopyBytes
 	ld a, [hli]
 	ld b, a
 	push hl
@@ -2405,7 +2405,7 @@ Function17ded9:
 	pop hl
 	push de
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	push hl
 	push de
@@ -2444,7 +2444,7 @@ Function17e0fd:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $6
-	call CopyBytes
+	rst CopyBytes
 	ldh a, [rSVBK]
 	push af
 	ld a, $1
@@ -2479,7 +2479,7 @@ Function17e165:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $5
-	call CopyBytes
+	rst CopyBytes
 	ldh a, [rSVBK]
 	push af
 	ld a, $1
@@ -2514,7 +2514,7 @@ Function17e1a1:
 	call IncCrashCheckPointer
 	ld de, wc708
 	ld bc, $d
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70a]
 	cp $c0
 	jr c, .asm_17e1bb
@@ -2535,7 +2535,7 @@ Function17e1a1:
 	ld a, [wc70b]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70a]
 	cp $c0
 	jr c, .asm_17e1e2
@@ -2567,7 +2567,7 @@ Function17e1a1:
 	ld a, [wc70b]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wc70e]
 	cp $c0
 	jr c, .asm_17e21a
@@ -2717,7 +2717,7 @@ Function17e2a7:
 	ld hl, $aa73
 	ld de, $aa7f
 	ld bc, $c
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 .asm_17e2f7
@@ -2752,10 +2752,10 @@ Function17e32b:
 	ld hl, wc608
 	ld de, $b0b1
 	ld bc, $40
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wBGMapBuffer
 	ld bc, $5b
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 Function17e349:
@@ -2764,10 +2764,10 @@ Function17e349:
 	ld hl, $b0b1
 	ld de, wc608
 	ld bc, $40
-	call CopyBytes
+	rst CopyBytes
 	ld de, wBGMapBuffer
 	ld bc, $5b
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 MACRO inc_crash_check_pointer_farcall
@@ -2905,7 +2905,7 @@ Function17e451:
 	hlcoord 0, 0
 	ld bc, $14
 	ld a, [wcd23]
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wCreditsTimer]
 	ld c, a
 	ld b, 0
@@ -2935,7 +2935,7 @@ Function17e451:
 	push hl
 	pop de
 	pop hl
-	call PlaceString
+	rst PlaceString
 	pop bc
 	pop hl
 	ld a, [wcd26]
@@ -2981,7 +2981,7 @@ Function17e4dd:
 	ld a, [wcd29]
 	hlcoord 0, 0
 	ld bc, $14
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wcd28]
 	ld c, a
 	ld b, 0
@@ -2995,7 +2995,7 @@ Function17e4dd:
 .asm_17e4ff
 	ld a, [wcd2a]
 	ld bc, $14
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wcd42]
 	ld c, a
 	ld a, [wcd2e]
@@ -3019,7 +3019,7 @@ Function17e51b:
 	ld bc, $14
 	ld a, [wcd23]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wCreditsTimer]
 	ld c, a
 	ld b, 0
@@ -3035,7 +3035,7 @@ Function17e51b:
 	ld c, a
 	ld b, 0
 	ld a, $7f
-	call ByteFill
+	rst ByteFill
 	pop hl
 	ld bc, $14
 	add hl, bc
@@ -3063,7 +3063,7 @@ Function17e571:
 	hlcoord 0, 0
 	ld bc, $14
 	ld a, [wcd23]
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wCreditsTimer]
 	ld c, a
 	ld b, 0
@@ -3078,7 +3078,7 @@ Function17e571:
 	ld l, $0
 	ld h, l
 	ld bc, $14
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wcd30]
 	dec a
 	ld c, a
@@ -3144,7 +3144,7 @@ Function17e600:
 	push hl
 	push bc
 	ld a, $7f
-	call ByteFill
+	rst ByteFill
 	pop bc
 	pop hl
 	ld de, $14
@@ -3438,7 +3438,7 @@ Function17f081:
 	push bc
 	ld de, wcd54
 	ld bc, 7
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	push hl
 	push bc
@@ -3523,7 +3523,7 @@ Function17f0f8:
 	push bc
 	ld de, wcd54
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	push hl
 	push bc
@@ -3537,12 +3537,12 @@ Function17f0f8:
 	ld a, [wcd56]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	pop hl
 	ld de, wc608
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3635,7 +3635,7 @@ Function17f181:
 	farcall Function48c63
 	pop hl
 	ld de, wc608
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3689,7 +3689,7 @@ Function17f1d0:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	pop hl
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3750,7 +3750,7 @@ Function17f220:
 	ld a, [hl]
 	ld d, a
 	pop hl
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3808,7 +3808,7 @@ Function17f27b:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3865,12 +3865,12 @@ MobileScript_PlayerName:
 	ld hl, wPlayerName
 	ld de, wc608
 	ld bc, NAME_LENGTH_JAPANESE
-	call CopyBytes
+	rst CopyBytes
 	ld a, $4
 	ldh [rSVBK], a
 	pop hl
 	ld de, wc608
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3913,7 +3913,7 @@ MobileScript_Prefecture:
 	farcall Function48c63
 	pop hl
 	ld de, wc608
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wcd52], a
 	ld a, b
@@ -3972,7 +3972,7 @@ Function17f3c9:
 	ld hl, wcd36
 	ld de, wc708
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ld c, $0
 	farcall Function11c075
@@ -3980,7 +3980,7 @@ Function17f3c9:
 	ld hl, wc708
 	ld de, wcd36
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	pop de
 	and a
@@ -4010,7 +4010,7 @@ Function17f3f0:
 	ld e, l
 	ld d, h
 	pop hl
-	call PlaceString
+	rst PlaceString
 	pop af
 	ld e, a
 	ld d, 0
@@ -4101,7 +4101,7 @@ Function17f44f:
 	push bc
 	ld de, wcd54
 	ld bc, $8
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	push hl
 	push bc
@@ -4125,7 +4125,7 @@ Function17f44f:
 	ld a, [wcd57]
 	ld c, a
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd56]
 	cp $c0
 	jr c, .asm_17f4af
@@ -4343,11 +4343,11 @@ Function17f5e4:
 	ld a, " "
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	ld a, $6
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	hlcoord 2, 1
 	ld b, $1
 	ld c, $e
@@ -4358,7 +4358,7 @@ Function17f5e4:
 	call Function3eea
 	hlcoord 3, 2
 	ld de, MobileCommunicationErrorText
-	call PlaceString
+	rst PlaceString
 	call Function17ff3c
 	jr nc, .asm_17f632
 	hlcoord 11, 2
@@ -4964,7 +4964,7 @@ Function17ff3c:
 	ret c
 	hlcoord 10, 2
 	ld de, String_17ff68
-	call PlaceString
+	rst PlaceString
 	ld a, [wMobileErrorCodeBuffer]
 	push af
 	sub $d0

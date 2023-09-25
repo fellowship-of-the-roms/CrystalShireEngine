@@ -31,7 +31,7 @@ DoMysteryGift:
 	call InitMysteryGiftLayout
 	hlcoord 3, 8
 	ld de, .String_PressAToLink_BToCancel
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 
 	; Prepare the first of two messages for wMysteryGiftPartnerData
@@ -123,7 +123,7 @@ endc
 	ld l, e
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, .MysteryGiftSentHomeText ; sent decoration to home
 	jr .PrintTextAndExit
 
@@ -259,7 +259,7 @@ endc
 	ld hl, wMysteryGiftPartnerName
 	ld de, sMysteryGiftPartnerName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	assert sMysteryGiftPartnerName + NAME_LENGTH == sMysteryGiftUnusedFlag
 	ld a, TRUE
 	ld [de], a
@@ -267,7 +267,7 @@ endc
 	assert sMysteryGiftUnusedFlag + 1 == sMysteryGiftTrainer
 	ld hl, wMysteryGiftTrainer
 	ld bc, wMysteryGiftTrainerEnd - wMysteryGiftTrainer
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 ExchangeMysteryGiftData:
@@ -512,7 +512,7 @@ EndOrContinueMysteryGiftIRCommunication:
 	ld hl, wMysteryGiftTrainer
 	ld de, wMysteryGiftPartnerData
 	ld bc, wMysteryGiftPartnerDataEnd - wMysteryGiftPartnerData
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wMysteryGiftTrainer] ; first byte is the version
 	cp POKEMON_PIKACHU_2_VERSION
 	jr nc, .quit
@@ -1449,7 +1449,7 @@ StagePartyDataForMysteryGift:
 	add hl, bc
 	push bc
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	pop hl
 .next
@@ -1478,7 +1478,7 @@ InitMysteryGiftLayout:
 	hlcoord 0, 0
 	ld a, $42
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	call ByteFill
+	rst ByteFill
 	hlcoord 3, 7
 	lb bc, 9, 15
 	call ClearBox
@@ -1612,7 +1612,7 @@ DoNameCardSwap:
 	call InitNameCardLayout
 	hlcoord 3, 8
 	ld de, .String_PressAToLink_BToCancel_JP
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call StageDataForNameCard
 	call ClearMysteryGiftTrainer
@@ -1734,13 +1734,13 @@ StageDataForNameCard:
 	call OpenSRAM
 	ld hl, sPlayerData + wPlayerName - wPlayerData
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, sPlayerData + wPlayerID - wPlayerData
 	ld bc, 2
-	call CopyBytes
+	rst CopyBytes
 	ld hl, sPlayerData + wSecretID - wPlayerData
 	ld bc, 2
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld a, BANK(sCrystalData)
 	call OpenSRAM
@@ -1751,10 +1751,10 @@ StageDataForNameCard:
 	call OpenSRAM
 	ld hl, s4_a603 ; address of MBC30 bank
 	ld bc, 8
-	call CopyBytes
+	rst CopyBytes
 	ld hl, sEZChatIntroductionMessage ; address of MBC30 bank
 	ld bc, EASY_CHAT_MESSAGE_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 InitNameCardLayout:
@@ -1773,7 +1773,7 @@ InitNameCardLayout:
 	hlcoord 0, 0
 	ld a, $3f
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	call ByteFill
+	rst ByteFill
 	hlcoord 3, 7
 	lb bc, 9, 15
 	call ClearBox
@@ -1844,7 +1844,7 @@ InitNameCardLayout:
 	ld de, wShadowOAMSprite00
 	ld hl, .NameCardOAMData
 	ld bc, 16 * SPRITEOAMSTRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call EnableLCD
 	call WaitBGMap
 	ld b, CRYSTAL_CGB_NAME_CARD

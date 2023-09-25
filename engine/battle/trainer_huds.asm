@@ -103,7 +103,7 @@ DrawPlayerHUDBorder:
 	ld hl, .tiles
 	ld de, wTrainerHUDTiles
 	ld bc, .tiles_end - .tiles
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 18, 10
 	ld de, -1 ; start on right
 	jr PlaceHUDBorderTiles
@@ -119,7 +119,7 @@ DrawPlayerPartyIconHUDBorder:
 	ld hl, .tiles
 	ld de, wTrainerHUDTiles
 	ld bc, .tiles_end - .tiles
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 18, 10
 	ld de, -1 ; start on right
 	jr PlaceHUDBorderTiles
@@ -135,7 +135,7 @@ DrawEnemyHUDBorder:
 	ld hl, .tiles
 	ld de, wTrainerHUDTiles
 	ld bc, .tiles_end - .tiles
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 1, 2
 	ld de, 1 ; start on left
 	call PlaceHUDBorderTiles
@@ -239,10 +239,10 @@ _ShowLinkBattleParticipants:
 	call Textbox
 	hlcoord 4, 5
 	ld de, wPlayerName
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 10
 	ld de, wOTPlayerName
-	call PlaceString
+	rst PlaceString
 	hlcoord 9, 8
 	ld a, "<BOLD_V>"
 	ld [hli], a

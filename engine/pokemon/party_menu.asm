@@ -46,7 +46,7 @@ WritePartyMenuTilemap:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill ; blank the tilemap
+	rst ByteFill ; blank the tilemap
 	call GetPartyMenuQualityIndexes
 .loop
 	ld a, [hli]
@@ -54,7 +54,7 @@ WritePartyMenuTilemap:
 	jr z, .end
 	push hl
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	pop hl
 	jr .loop
 .end
@@ -89,7 +89,7 @@ PlacePartyNicknames:
 	ld a, b
 	call GetNickname
 	pop hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -152,7 +152,7 @@ PlacePartymonHPBar:
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1HP
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	or [hl]
 	jr nz, .not_fainted
@@ -190,7 +190,7 @@ PlacePartyMenuHPDigits:
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1HP
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	pop hl
@@ -231,7 +231,7 @@ PlacePartyMonLevel:
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Level
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	pop hl
@@ -273,7 +273,7 @@ PlacePartyMonStatus:
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Status
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	pop hl
@@ -311,7 +311,7 @@ PlacePartyMonTMHMCompatibility:
 	predef CanLearnTMHMMove
 	pop hl
 	call .PlaceAbleNotAble
-	call PlaceString
+	rst PlaceString
 
 .next
 	pop hl
@@ -356,7 +356,7 @@ PlacePartyMonEvoStoneCompatibility:
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Species
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hl]
 	call GetPokemonIndexFromID
 	ld b, h
@@ -374,7 +374,7 @@ PlacePartyMonEvoStoneCompatibility:
 	ld de, .string_able
 .got_string
 	pop hl
-	call PlaceString
+	rst PlaceString
 
 .next
 	pop hl
@@ -418,7 +418,7 @@ PlacePartyMonGender:
 
 .got_gender
 	pop hl
-	call PlaceString
+	rst PlaceString
 
 .next
 	pop hl
@@ -450,7 +450,7 @@ PlacePartyMonMobileBattleSelection:
 	push bc
 	push hl
 	ld de, .String_Sanka_Shinai
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -466,7 +466,7 @@ PlacePartyMonMobileBattleSelection:
 	sbc $0
 	ld h, a
 	ld de, .String_Kettei_Yameru
-	call PlaceString
+	rst PlaceString
 	ld b, $3
 	ld c, $0
 	ld hl, wd002
@@ -486,7 +486,7 @@ PlacePartyMonMobileBattleSelection:
 .done
 	ld de, .String_Banme
 	push hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	pop bc
 	push bc
@@ -497,7 +497,7 @@ PlacePartyMonMobileBattleSelection:
 	ld d, h
 	ld e, l
 	pop hl
-	call PlaceString
+	rst PlaceString
 	pop bc
 	pop hl
 	inc hl
@@ -692,7 +692,7 @@ PrintPartyMenuText:
 	set NO_TEXT_SCROLL, a
 	ld [wOptions], a
 	hlcoord 1, 16 ; Coord
-	call PlaceString
+	rst PlaceString
 	pop af
 	ld [wOptions], a
 	ret

@@ -162,7 +162,7 @@ FarCopyRadioText::
 	ld h, a
 	ld de, wRadioText
 	ld bc, 2 * SCREEN_WIDTH
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a

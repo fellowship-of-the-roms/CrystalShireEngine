@@ -4,13 +4,13 @@ Function170000:
 	ld hl, wOfferMonSender
 	ld de, wPlayerTrademonSenderName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld hl, wOfferMonOT
 	ld de, wPlayerTrademonOTName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld hl, wOfferMonDVs
@@ -42,13 +42,13 @@ Function17005a:
 	ld hl, sOfferMonSender
 	ld de, wOTTrademonSenderName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld hl, sOfferMonOT
 	ld de, wOTTrademonOTName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld hl, sOfferMonDVs
@@ -77,7 +77,7 @@ Function170be4:
 	xor a
 	ld hl, s5_a894
 	ld bc, 6 + 2
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM
 
 Clears5_a89a:
@@ -391,7 +391,7 @@ Function171a95:
 	farcall Function171ccd
 	hlcoord 2, 8
 	ld de, String_171aa7
-	call PlaceString
+	rst PlaceString
 	jmp Function171c66
 
 String_171aa7:
@@ -411,7 +411,7 @@ Function171ad7:
 	xor a
 	ld hl, wc608
 	ld bc, $66
-	call ByteFill
+	rst ByteFill
 	ld de, wc608
 	ld a, MOBILEAPI_06
 	call MobileAPI
@@ -432,7 +432,7 @@ Function171aec:
 	push hl
 	xor a
 	ld bc, $10
-	call ByteFill
+	rst ByteFill
 	pop hl
 	ld de, $14
 	add hl, de
@@ -587,7 +587,7 @@ Function171beb:
 	farcall ReloadMapPart
 	hlcoord 1, 14
 	ld de, String_171c73
-	call PlaceString
+	rst PlaceString
 	ld a, [wcd4a]
 	cp $2
 	jr z, .asm_171c1f
@@ -649,7 +649,7 @@ Function171c87:
 	ld hl, AsciiFontGFX
 	ld de, vTiles2 tile $00
 	ld bc, $6e tiles
-	call CopyBytes
+	rst CopyBytes
 	ld hl, PasswordSlowpokeLZ
 	ld de, vTiles0 tile $00
 	call Decompress
@@ -657,14 +657,14 @@ Function171c87:
 	ld hl, PasswordTopTilemap
 	decoord 0, 0
 	ld bc, $168
-	call CopyBytes
+	rst CopyBytes
 	ld hl, MobilePasswordAttrmap
 	decoord 0, 0, wAttrmap
 	ld bc, $168
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 3, 2
 	ld de, String_172e31
-	call PlaceString
+	rst PlaceString
 	hlcoord 3, 16
 	ld de, String_172e3f
 	jmp PlaceString
@@ -677,7 +677,7 @@ Function171ccd:
 	ld hl, MobilePasswordPalettes
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wOBPals1 palette 0 color 1
 	ld a, LOW(PALRGB_WHITE)
 	ld [hli], a
@@ -701,7 +701,7 @@ Function171cf0:
 	ld hl, PasswordBottomTilemap
 	decoord 0, 7
 	ld bc, $8c
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 3, 16
 	ld de, String_172e3f
 	jmp PlaceString
@@ -710,7 +710,7 @@ Function171cf0:
 	ld hl, PasswordShiftTilemap
 	decoord 0, 7
 	ld bc, $8c
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 3, 16
 	ld de, String_172e4e
 	jmp PlaceString
@@ -720,7 +720,7 @@ Function171d2b:
 	ld hl, AsciiFontGFX
 	ld de, vTiles2 tile $00
 	ld bc, $6e tiles
-	call CopyBytes
+	rst CopyBytes
 	ld hl, PasswordSlowpokeLZ
 	ld de, vTiles0 tile $00
 	call Decompress
@@ -728,14 +728,14 @@ Function171d2b:
 	ld hl, ChooseMobileCenterTilemap
 	decoord 0, 0
 	ld bc, $168
-	call CopyBytes
+	rst CopyBytes
 	ld hl, ChooseMobileCenterAttrmap
 	decoord 0, 0, wAttrmap
 	ld bc, $168
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 2, 2
 	ld de, String_172e5d
-	call PlaceString
+	rst PlaceString
 	hlcoord 14, 16
 	ld de, String_172e58
 	jmp PlaceString
@@ -783,21 +783,21 @@ Function172e78:
 	ld a, $7f
 	hlcoord 0, 0
 	ld bc, $168
-	call ByteFill
+	rst ByteFill
 	ld a, $7
 	hlcoord 0, 0, wAttrmap
 	ld bc, $168
-	call ByteFill
+	rst ByteFill
 	call DisableLCD
 	ld hl, Stadium2N64GFX
 	ld de, vTiles2 tile $00
 	ld bc, $61 tiles
-	call CopyBytes
+	rst CopyBytes
 	call EnableLCD
 	ld hl, Stadium2N64Tilemap
 	decoord 0, 0
 	ld bc, $168
-	call CopyBytes
+	rst CopyBytes
 	ld hl, Stadium2N64Attrmap
 	decoord 0, 0, wAttrmap
 	ld bc, $168
@@ -811,11 +811,11 @@ Function172eb9:
 	ld hl, Palette_172edf
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, Palette_172edf
 	ld de, wBGPals2
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	call SetPalettes
 	pop af
 	ldh [rSVBK], a

@@ -7,7 +7,7 @@ Mobile_PrintOpponentBattleMessage:
 	dec a
 	ld bc, $c
 	ld hl, w5_MobileOpponentBattleMessages
-	call AddNTimes
+	rst AddNTimes
 	ld de, wMobileOpponentBattleMessage
 	ld bc, $c
 	ld a, BANK(w5_MobileOpponentBattleMessages)

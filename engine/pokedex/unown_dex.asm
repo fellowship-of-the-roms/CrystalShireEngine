@@ -22,7 +22,7 @@ PrintUnownWord:
 	hlcoord 4, 15
 	ld bc, 12
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld a, [wDexCurUnownIndex]
 	ld e, a
 	ld d, 0

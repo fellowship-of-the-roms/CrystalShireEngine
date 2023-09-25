@@ -106,7 +106,7 @@ BattleTower_ExecuteJumptable:
 	push bc
 	call .GetFunctionPointer
 	ld a, c
-	rst JumpTable
+	call JumpTable
 	pop bc
 	pop de
 	ret

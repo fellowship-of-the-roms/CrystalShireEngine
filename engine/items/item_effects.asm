@@ -517,12 +517,12 @@ PokeBallEffect:
 	ld hl, wWildMonMoves
 	ld de, wEnemyMonMoves
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, wWildMonPP
 	ld de, wEnemyMonPP
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 
 .Transformed:
 	ld a, [wEnemyMonSpecies]
@@ -594,7 +594,7 @@ PokeBallEffect:
 	dec a
 	ld hl, wPartyMon1Happiness
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	ld a, FRIEND_BALL_HAPPINESS
 	ld [hl], a
@@ -615,7 +615,7 @@ PokeBallEffect:
 	ld [wCurPartyMon], a
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	ld d, h
 	ld e, l
@@ -676,7 +676,7 @@ PokeBallEffect:
 	ld hl, wMonOrItemNameBuffer
 	ld de, wBufferMonNickname
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, wBufferMonNickname
 	ld de, wStringBuffer1
@@ -686,7 +686,7 @@ PokeBallEffect:
 	ld hl, wBufferMonNickname
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	farcall UpdateStorageBoxMonFromTemp
 
@@ -1229,7 +1229,7 @@ VitaminEffect:
 	ld l, a
 	ld de, wStringBuffer2
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	call Play_SFX_FULL_HEAL
 
@@ -1548,7 +1548,7 @@ INCLUDE "data/items/heal_status.asm"
 
 StatusHealer_Jumptable:
 	ld hl, .dw
-	rst JumpTable
+	call JumpTable
 	ret
 
 .dw
@@ -1746,7 +1746,7 @@ HealHP_SFX_GFX:
 	ld a, [wCurPartyMon]
 	hlcoord 11, 0
 	ld bc, SCREEN_WIDTH * 2
-	call AddNTimes
+	rst AddNTimes
 	ld a, $2
 	ld [wWhichHPBar], a
 	predef_jump AnimateHPBar
@@ -1817,7 +1817,7 @@ ItemActionTextWaitButton:
 	hlcoord 0, 0
 	ld bc, wTilemapEnd - wTilemap
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld a, [wPartyMenuActionText]
 	call ItemActionText
 	ld a, $1
@@ -2477,7 +2477,7 @@ BattleRestorePP:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld de, wBattleMonMoves
 	ld b, NUM_MOVES
 .loop
@@ -3018,7 +3018,7 @@ GetMaxPPOfMove:
 
 GetMthMoveOfNthPartymon:
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 
 GetMthMoveOfCurrentMon:
 	ld a, [wMenuCursorY]

@@ -78,7 +78,7 @@ ChooseMonToLearnTMHM:
 	ld hl, wStringBuffer2
 	ld de, wTMHMMoveNameBackup
 	ld bc, MOVE_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	call ClearBGPalettes
 ChooseMonToLearnTMHM_NoRefresh:
 	farcall LoadPartyMenuGFX
@@ -102,7 +102,7 @@ ChooseMonToLearnTMHM_NoRefresh:
 	ld hl, wTMHMMoveNameBackup
 	ld de, wStringBuffer2
 	ld bc, MOVE_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	pop af ; now contains the original contents of af
 	ret
 
@@ -388,7 +388,7 @@ TMHM_DisplayPocketItems:
 	ld bc, 3
 	add hl, bc
 	push hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	pop bc
 	ld a, c
@@ -422,7 +422,7 @@ TMHM_DisplayPocketItems:
 	inc hl
 	push de
 	ld de, TMHM_CancelString
-	call PlaceString
+	rst PlaceString
 	pop de
 .done
 	ret
@@ -450,7 +450,7 @@ PlaceMoveNameAfterTMHMName: ; unreferenced
 	ld [wPutativeTMHMMove], a
 	call GetMoveName
 	push hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ret
 
@@ -478,7 +478,7 @@ Tutorial_TMHMPocket:
 	hlcoord 9, 3
 	push de
 	ld de, TMHM_CancelString
-	call PlaceString
+	rst PlaceString
 	pop de
 	ret
 

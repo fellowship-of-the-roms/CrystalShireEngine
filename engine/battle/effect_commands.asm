@@ -4844,7 +4844,7 @@ BattleCommand_TriStatusChance:
 	jr z, .loop
 	dec a
 	ld hl, .StatusCommands
-	rst JumpTable
+	call JumpTable
 	ret
 
 .StatusCommands:
@@ -5291,7 +5291,7 @@ CheckPlayerHasMonToSwitchTo:
 
 	ld a, e
 	ld hl, wPartyMon1HP
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	or [hl]
 	jr nz, .not_fainted

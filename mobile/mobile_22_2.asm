@@ -11,7 +11,7 @@ Function8b342::
 .loop
 	push af
 	ld hl, .dw
-	rst JumpTable
+	call JumpTable
 	pop af
 	inc a
 	cp 3
@@ -53,7 +53,7 @@ Function8b36c:
 	ld l, c
 	ld bc, 4
 	ld a, -1
-	call ByteFill
+	rst ByteFill
 	pop bc
 	ret
 
@@ -273,7 +273,7 @@ Function8b493:
 	call Function8b521
 	ld hl, Jumptable_8b4a0
 	pop bc
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_8b4a0:
@@ -440,7 +440,7 @@ Function8b555:
 	ld hl, wd013
 	ld de, s4_a037
 	ld bc, $4
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	call Function89448
 	ld bc, wd013
@@ -589,7 +589,7 @@ Function8b6bb:
 	ld hl, Palette_8b6d5
 	ld de, wBGPals1
 	ld bc, 3 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	jmp Function8949c
@@ -612,7 +612,7 @@ Function8b6ed:
 	hlcoord 0, 0, wAttrmap
 	ld bc, $012c
 	xor a
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 14, wAttrmap
 	ld bc, $0050
 	ld a, $7
@@ -695,7 +695,7 @@ Function8b75d:
 	hlcoord 0, 0
 	ld a, $1
 	ld bc, SCREEN_WIDTH
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 1
 	ld a, $2
 	ld [hl], a
@@ -900,7 +900,7 @@ Function8b88c:
 .asm_8b8a3
 	pop hl
 	push hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ld d, $0
 	ld e, $6
@@ -917,7 +917,7 @@ Function8b88c:
 
 .asm_8b8c0
 	pop hl
-	call PlaceString
+	rst PlaceString
 	jmp CloseSRAM
 
 Function8b8c8:
@@ -937,7 +937,7 @@ Function8b8c8:
 	ld d, h
 	ld e, l
 	hlcoord 1, 16
-	call PlaceString
+	rst PlaceString
 	hlcoord 0, 13
 	ld a, $f
 	ld [hl], a

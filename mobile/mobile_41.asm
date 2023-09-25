@@ -10,24 +10,24 @@ StubbedTrainerRankings_HallOfFame2::
 	ld hl, wGameTimeHours
 	ld de, sTrainerRankingGameTimeHOF
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, sTrainerRankingStepCount
 	ld de, sTrainerRankingStepCountHOF
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 
 	; sTrainerRankingHealings is only a 3-byte value.
 	; One extraneous byte is copied from sTrainerRankingMysteryGift.
 	ld hl, sTrainerRankingHealings
 	ld de, sTrainerRankingHealingsHOF
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, sTrainerRankingBattles
 	ld de, sTrainerRankingBattlesHOF
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 
 	call UpdateTrainerRankingsChecksum
 	jmp CloseSRAM
@@ -549,7 +549,7 @@ InitializeTrainerRankings: ; unreferenced
 	ld hl, sTrainerRankings
 	ld bc, sTrainerRankingsEnd - sTrainerRankings
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	; Initialize the shortest Magikarp to 100.0 cm
 	ld hl, sTrainerRankingShortestMagikarp
@@ -844,7 +844,7 @@ Function10635c:
 	ret nz
 	ld a, [wMobileCommsJumptableIndex]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Jumptable:
@@ -1017,7 +1017,7 @@ Function10649b: ; unreferenced
 	maskbits NUM_FRAMES
 	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
 	ld hl, Frames
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, vTiles2 tile "┌" ; $79

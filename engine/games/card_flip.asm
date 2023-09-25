@@ -36,11 +36,11 @@ _CardFlip:
 	ld hl, CardFlipOffButtonGFX
 	ld de, vTiles0 tile CARDFLIP_LIGHT_OFF
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	ld hl, CardFlipOnButtonGFX
 	ld de, vTiles0 tile CARDFLIP_LIGHT_ON
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 
 	call CardFlip_ShiftDigitsUpOnePixel
 	call CardFlip_InitTilemap
@@ -157,7 +157,7 @@ _CardFlip:
 	hlcoord 9, 0
 	ld bc, SCREEN_WIDTH
 	ld a, [wCardFlipNumCardsPlayed]
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], CARDFLIP_LIGHT_ON
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -323,7 +323,7 @@ CardFlip_ShuffleDeck:
 	ld hl, wDeck
 	ld bc, CARDFLIP_DECK_SIZE
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld de, wDeck
 	ld c, CARDFLIP_DECK_SIZE - 1
 .loop
@@ -350,7 +350,7 @@ CollapseCursorPosition:
 	ld hl, 0
 	ld bc, 6
 	ld a, [wCardFlipCursorY]
-	call AddNTimes
+	rst AddNTimes
 	ld b, $0
 	ld a, [wCardFlipCursorX]
 	ld c, a
@@ -482,7 +482,7 @@ CardFlip_PrintCoinBalance:
 	call Textbox
 	hlcoord 10, 16
 	ld de, .CoinStr
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 16
 	ld de, wCoins
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
@@ -497,7 +497,7 @@ CardFlip_InitTilemap:
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, $29
-	call ByteFill
+	rst ByteFill
 	hlcoord 9, 0
 	ld de, CardFlipTilemap
 	lb bc, 12, 11
@@ -573,7 +573,7 @@ CardFlip_ShiftDigitsUpOnePixel:
 	ld de, vTiles0 tile "0"
 	ld hl, vTiles0 tile "0" + 2
 	ld bc, 10 tiles - 2
-	call CopyBytes
+	rst CopyBytes
 	ld hl, vTiles0 tile "9" + 1 tiles - 2
 	xor a
 	ld [hli], a
@@ -1535,7 +1535,7 @@ CardFlip_InitAttrPals:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 12, 1, wAttrmap
 	lb bc, 2, 2
@@ -1569,7 +1569,7 @@ CardFlip_InitAttrPals:
 	ld hl, .palettes
 	ld de, wBGPals1
 	ld bc, 9 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret

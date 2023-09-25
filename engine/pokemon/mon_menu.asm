@@ -167,7 +167,7 @@ SwitchPartyMons:
 	ld bc, SCREEN_WIDTH * 2
 	ld a, [wSwitchMon]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], "▷"
 	call WaitBGMap
 	call SetPalettes
@@ -210,7 +210,7 @@ GiveTakePartyMonItem:
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wMenuCursorY]
 	cp 1
 	jr nz, .take
@@ -301,7 +301,7 @@ PCGiveItem:
 	ld hl, wBufferMonNickname
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, PokemonHoldItemText
 	call MenuTextboxBackup
@@ -507,10 +507,10 @@ ComposeMailMessage:
 	ld hl, wPlayerName
 	ld de, wTempMailAuthor
 	ld bc, NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wPlayerID
 	ld bc, 2
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	ld [de], a
 	inc de
@@ -519,14 +519,14 @@ ComposeMailMessage:
 	ld a, [wCurPartyMon]
 	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, wTempMail
 	ld bc, MAIL_STRUCT_LENGTH
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 MonMailAction:
@@ -975,13 +975,13 @@ MoveScreenLoop:
 	ld a, " "
 	hlcoord 1, 11
 	ld bc, 5
-	call ByteFill
+	rst ByteFill
 	hlcoord 1, 12
 	lb bc, 5, SCREEN_WIDTH - 2
 	call ClearBox
 	hlcoord 1, 12
 	ld de, String_MoveWhere
-	call PlaceString
+	rst PlaceString
 	jr .joy_loop
 .b_button
 	call PlayClickSFX
@@ -1017,7 +1017,7 @@ MoveScreenLoop:
 .d_left
 	ld a, [wSwappingMove]
 	and a
-	jmp nz, .joy_loop
+	jr nz, .joy_loop
 	ld a, [wCurPartyMon]
 	ld b, a
 	push bc
@@ -1078,7 +1078,7 @@ MoveScreenLoop:
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	call .copy_move
 	pop hl
@@ -1090,7 +1090,7 @@ MoveScreenLoop:
 	ld hl, wBattleMonMoves
 	ld bc, wBattleMonStructEnd - wBattleMon
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	call .copy_move
 	pop hl
@@ -1187,7 +1187,7 @@ SetUpMoveScreenBG:
 	ld a, [wCurPartyMon]
 	call GetNickname
 	hlcoord 5, 1
-	call PlaceString
+	rst PlaceString
 	push bc
 	farcall CopyMonToTempMon
 	pop hl
@@ -1209,7 +1209,7 @@ SetUpMoveList:
 	ld hl, wTempMonMoves
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
 	hlcoord 2, 3
@@ -1230,7 +1230,7 @@ PrepareToPlaceMoveData:
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wMenuCursorY]
 	dec a
 	ld c, a
@@ -1247,13 +1247,13 @@ PlaceMoveData:
 	ldh [hBGMapMode], a
 	hlcoord 0, 10
 	ld de, String_MoveType_Top
-	call PlaceString
+	rst PlaceString
 	hlcoord 0, 11
 	ld de, String_MoveType_Bottom
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 12
 	ld de, String_MoveAtk
-	call PlaceString
+	rst PlaceString
 	ld a, [wCurSpecies]
 	ld b, a
 	hlcoord 2, 12
@@ -1273,7 +1273,7 @@ PlaceMoveData:
 
 .no_power
 	ld de, String_MoveNoPower
-	call PlaceString
+	rst PlaceString
 
 .description
 	hlcoord 1, 14

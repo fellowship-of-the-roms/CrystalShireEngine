@@ -118,7 +118,7 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, PAL_BATTLE_BG_ENEMY_HP
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 4, wAttrmap
 	lb bc, 8, 10
 	ld a, PAL_BATTLE_BG_PLAYER
@@ -142,7 +142,7 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 0, 12, wAttrmap
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, PAL_BATTLE_BG_TEXT
-	call ByteFill
+	rst ByteFill
 	ld hl, BattleObjectPals
 	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
 	ld bc, 6 palettes
@@ -223,7 +223,7 @@ _CGB_StatsScreenHPPals:
 	hlcoord 10, 16, wAttrmap
 	ld bc, 10
 	ld a, $2 ; exp palette
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 13, 5, wAttrmap
 	lb bc, 2, 2
@@ -449,7 +449,7 @@ _CGB_SlotMachine:
 	hlcoord 0, 12, wAttrmap
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, $7 ; text palette
-	call ByteFill
+	rst ByteFill
 	call ApplyAttrmap
 	call ApplyPals
 	ld a, TRUE
@@ -577,7 +577,7 @@ _CGB_Evolution:
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	ld c, l
 	ld b, h
 	ld a, [wPlayerHPPal]
@@ -682,7 +682,7 @@ _CGB_TrainerCard:
 	jr z, .got_gender
 	ld a, $0 ; chris
 .got_gender
-	call ByteFill
+	rst ByteFill
 	; fill trainer sprite area with same-gender palette
 	hlcoord 14, 1, wAttrmap
 	lb bc, 7, 5
@@ -791,7 +791,7 @@ _CGB_TrainerCardKanto:
 	jr z, .got_gender
 	ld a, $0 ; chris
 .got_gender
-	call ByteFill
+	rst ByteFill
 	; fill trainer sprite area with same-gender palette
 	hlcoord 14, 1, wAttrmap
 	lb bc, 7, 5

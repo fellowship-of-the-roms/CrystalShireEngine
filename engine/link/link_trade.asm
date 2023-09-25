@@ -138,7 +138,7 @@ LoadCableTradeBorderTilemap:
 	ld hl, CableTradeBorderTopTilemap
 	decoord 0, 0
 	ld bc, 2 * SCREEN_WIDTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, CableTradeBorderBottomTilemap
 	decoord 0, 16
 	ld bc, 2 * SCREEN_WIDTH
@@ -161,7 +161,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 	predef LinkTextboxAtHL
 	hlcoord 5, 11
 	ld de, .Waiting
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call WaitBGMap2
 	ld c, 50
@@ -281,7 +281,7 @@ LinkTradeMenu:
 
 .skip
 	ld c, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [w2DMenuCursorOffsets]
 	and $f
 	ld c, a

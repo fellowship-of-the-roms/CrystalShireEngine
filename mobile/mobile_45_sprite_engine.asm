@@ -31,7 +31,7 @@ Function115dd3:
 	ld a, $a0
 	ld hl, wShadowOAMSprite31
 	ld bc, 8 * SPRITEOAMSTRUCT_LENGTH
-	call ByteFill
+	rst ByteFill
 	call Function115e22
 	ld a, [wc309]
 	sla a
@@ -346,7 +346,7 @@ Function11619d:
 	ld a, $a0
 	ld hl, wShadowOAM
 	ld bc, 25 * SPRITEOAMSTRUCT_LENGTH
-	call ByteFill
+	rst ByteFill
 
 .asm_1161b4
 	jr Function1161b8
@@ -373,7 +373,7 @@ Function1161d5:
 	ld hl, PichuBorderMobileTilemapAttrmap
 	ld de, wDecompressScratch
 	ld bc, 32 * 12 * 2
-	call CopyBytes
+	rst CopyBytes
 
 	di
 
@@ -491,11 +491,11 @@ Function116294:
 	ld hl, wBGPals1 palette 6
 	ld de, wc320
 	ld bc, 2 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, PichuBorderMobileBGPalettes
 	ld de, wBGPals1 palette 7
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	call SetPalettes
 	pop af
 	ldh [rSVBK], a
@@ -515,7 +515,7 @@ Function1162cb:
 	ld hl, PichuBorderMobileOBPalettes
 	ld de, wOBPals1 + 2 palettes
 	ld bc, 6 palettes
-	call CopyBytes
+	rst CopyBytes
 	call SetPalettes
 	pop af
 	ldh [rSVBK], a
@@ -618,7 +618,7 @@ Function11636e:
 	ld hl, wBGPals2
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call SetPalettes
@@ -629,7 +629,7 @@ Function11636e:
 	ld a, $a0
 	ld hl, wShadowOAM
 	ld bc, 16 * SPRITEOAMSTRUCT_LENGTH
-	call ByteFill
+	rst ByteFill
 	ld a, $90
 	ldh [hWY], a
 	call UpdateSprites
@@ -655,7 +655,7 @@ Function1163c0:
 	ld a, $a0
 	ld hl, wShadowOAM
 	ld bc, 16 * SPRITEOAMSTRUCT_LENGTH
-	call ByteFill
+	rst ByteFill
 	call DelayFrame
 	farcall _RefreshSprites
 	ld b, SCGB_MAPPALS
@@ -667,7 +667,7 @@ Function1163c0:
 	ld hl, wc320
 	ld de, wd030
 	ld bc, $0010
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call SetPalettes

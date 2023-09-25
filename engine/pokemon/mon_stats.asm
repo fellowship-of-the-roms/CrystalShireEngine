@@ -87,7 +87,7 @@ PrintTempMonStats:
 	push bc
 	push hl
 	ld de, .StatNames
-	call PlaceString
+	rst PlaceString
 	pop hl
 	pop bc
 	add hl, bc
@@ -173,7 +173,7 @@ GetGender:
 
 .PartyMon:
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 
 .DVs:
 ; Attack DV
@@ -344,7 +344,7 @@ Unused_PlaceEnemyHPLevel:
 	ld a, [wCurPartyMon]
 	call GetNickname
 	pop hl
-	call PlaceString
+	rst PlaceString
 	call CopyMonToTempMon
 	pop hl
 	ld a, [wCurPartySpecies]
@@ -450,7 +450,7 @@ ListMoves:
 	ld de, wStringBuffer1
 	pop hl
 	push bc
-	call PlaceString
+	rst PlaceString
 	pop bc
 	ld a, b
 	ld [wNumMoves], a

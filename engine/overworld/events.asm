@@ -6,7 +6,7 @@ OverworldLoop::
 .loop
 	ld a, [wMapStatus]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ld a, [wMapStatus]
 	cp MAPSTATUS_DONE
 	jr nz, .loop
@@ -102,7 +102,7 @@ StartMap:
 	ld [wScriptRunning], a
 	ld hl, wMapStatus
 	ld bc, wMapStatusEnd - wMapStatus
-	call ByteFill
+	rst ByteFill
 	farcall InitCallReceiveDelay
 	call ClearJoypad
 EnterMap:
@@ -616,7 +616,7 @@ TryBGEvent:
 .is_bg_event:
 	ld a, [wCurBGEventType]
 	ld hl, BGEventJumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 BGEventJumptable:
@@ -749,7 +749,7 @@ PlayerMovement:
 	farcall DoPlayerMovement
 	ld a, c
 	ld hl, PlayerMovementPointers
-	rst JumpTable
+	call JumpTable
 	ld a, c
 	ret
 
@@ -1047,7 +1047,7 @@ RunMemScript::
 	xor a
 	ld hl, wMapReentryScriptQueueFlag
 	ld bc, 8
-	call ByteFill
+	rst ByteFill
 	pop af
 	ret
 

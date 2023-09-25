@@ -75,7 +75,7 @@ Init::
 	ld hl, WRAM0_Begin
 	ld bc, WRAM0_End - WRAM0_Begin
 	xor a
-	call ByteFill
+	rst ByteFill
 
 ; Move stack to wram
 	ld sp, wStackTop
@@ -88,7 +88,7 @@ Init::
 	xor a
 	ld hl, HRAM_Begin
 	ld bc, HRAM_End - HRAM_Begin
-	call ByteFill
+	rst ByteFill
 	pop af
 	ldh [hSystemBooted], a
 	pop af
@@ -201,7 +201,7 @@ ClearWRAM::
 	xor a
 	ld hl, WRAM1_Begin
 	ld bc, WRAM1_End - WRAM1_Begin
-	call ByteFill
+	rst ByteFill
 	pop af
 	inc a
 	cp 8
@@ -216,5 +216,5 @@ ClearsScratch::
 	ld hl, sScratch
 	ld bc, $20
 	xor a
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM

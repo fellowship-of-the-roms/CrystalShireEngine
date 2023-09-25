@@ -48,7 +48,7 @@ endc
 	ld hl, wTimeSetBuffer
 	ld bc, wTimeSetBufferEnd - wTimeSetBuffer
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, 10 ; default hour = 10 AM
 	ld [wInitHourBuffer], a
 
@@ -128,7 +128,7 @@ endc
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -174,7 +174,7 @@ SetHour:
 	hlcoord 4, 9
 	ld a, " "
 	ld bc, 15
-	call ByteFill
+	rst ByteFill
 	hlcoord 4, 9
 	call DisplayHourOClock
 	call WaitBGMap
@@ -194,7 +194,7 @@ DisplayHourOClock:
 	call PrintHour
 	inc hl
 	ld de, String_oclock
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ret
 
@@ -263,7 +263,7 @@ SetMinutes:
 	hlcoord 12, 9
 	ld a, " "
 	ld bc, 7
-	call ByteFill
+	rst ByteFill
 	hlcoord 12, 9
 	call DisplayMinutesWithMinString
 	call WaitBGMap
@@ -672,7 +672,7 @@ PrintHour:
 	ld h, d
 	push bc
 	call GetTimeOfDayString
-	call PlaceString
+	rst PlaceString
 	ld l, c
 	ld h, b
 	inc hl

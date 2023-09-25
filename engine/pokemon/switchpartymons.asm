@@ -20,14 +20,14 @@ _SwitchPartyMons:
 	push af
 	hlcoord 0, 1
 	ld bc, 2 * SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	pop af
 	ld hl, wShadowOAMSprite00
 	ld bc, 4 * SPRITEOAMSTRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld de, SPRITEOAMSTRUCT_LENGTH
 	ld c, 4
 .gfx_loop
@@ -62,23 +62,23 @@ _SwitchPartyMons:
 	ld a, [wSwitchMonTo]
 	ld hl, wPartyMon1Species
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld de, wSwitchMonBuffer
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wSwitchMonFrom]
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop de
 	push hl
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ld hl, wSwitchMonBuffer
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wSwitchMonTo]
 	ld hl, wPartyMonOTs
 	call SkipNames
@@ -110,25 +110,25 @@ _SwitchPartyMons:
 	ld hl, sPartyMail
 	ld a, [wSwitchMonTo]
 	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld de, wSwitchMonBuffer
 	ld bc, MAIL_STRUCT_LENGTH
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
-	call CopyBytes
+	rst CopyBytes
 	ld hl, sPartyMail
 	ld a, [wSwitchMonFrom]
 	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop de
 	push hl
 	ld bc, MAIL_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ld hl, wSwitchMonBuffer
 	ld bc, MAIL_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	jmp PopBCDEHL
 

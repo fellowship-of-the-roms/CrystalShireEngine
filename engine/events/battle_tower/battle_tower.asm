@@ -25,11 +25,11 @@ Function1700c4:
 	ld hl, w3_dffc
 	ld de, s5_aa41
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	ld hl, w3_d202Name
 	ld de, s5_aa8e
 	ld bc, BATTLETOWER_STREAK_LENGTH * $cc ; length of battle tower struct from japanese games?
-	call CopyBytes
+	rst CopyBytes
 	ld hl, s5_aa5d ; some sort of count
 	ld a, [hl]
 	inc [hl]
@@ -43,7 +43,7 @@ Function1700c4:
 	ld d, h
 	ld hl, w3_dffc
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	pop af
 	ldh [rSVBK], a
@@ -60,7 +60,7 @@ Function170114:
 	ld hl, s5_a948
 	ld de, wc608
 	ld bc, 246
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	jmp Function170c8b
 
@@ -100,7 +100,7 @@ Function170139: ; unreferenced
 	ld d, h
 	ld hl, wPlayerName
 	ld bc, NAME_LENGTH_JAPANESE - 1
-	call CopyBytes
+	rst CopyBytes
 	ld bc, wPlayerID
 	ld de, wPlayerGender
 	farcall GetMobileOTTrainerClass
@@ -124,7 +124,7 @@ Function170139: ; unreferenced
 	ld a, [wcd4a]
 	ld h, a
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, l
 	ld [wcd49], a
 	ld a, h
@@ -134,7 +134,7 @@ Function170139: ; unreferenced
 	ld a, [wcd4c]
 	ld h, a
 	ld bc, 6
-	call CopyBytes
+	rst CopyBytes
 	ld a, l
 	ld [wcd4b], a
 	ld a, h
@@ -147,18 +147,18 @@ Function170139: ; unreferenced
 	call OpenSRAM
 	ld hl, sEZChatBattleMessages
 	ld bc, EASY_CHAT_MESSAGE_LENGTH * 3
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 
 	ld a, BANK(s5_a894) ; aka BANK(s5_a948)
 	call OpenSRAM
 	ld hl, s5_a894
 	ld bc, 6
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wc608
 	ld de, s5_a948
 	ld bc, 246
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 .DecToBin:
@@ -290,7 +290,7 @@ ReadBTTrainerParty:
 	ld h, d
 	ld de, wBT_OTTempMon1Name
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .skip_mon_1
 	ld de, wBT_OTTempMon2Name
@@ -304,7 +304,7 @@ ReadBTTrainerParty:
 	ld h, d
 	ld de, wBT_OTTempMon2Name
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .skip_mon_2
 	ld de, wBT_OTTempMon3Name
@@ -318,7 +318,7 @@ ReadBTTrainerParty:
 	ld h, d
 	ld de, wBT_OTTempMon3Name
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .skip_mon_3
 ; Add the terminator character to each of these names
@@ -342,7 +342,7 @@ ReadBTTrainerParty:
 .done_trainer_name
 	ld de, wOTPlayerName
 	ld bc, NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 
@@ -367,14 +367,14 @@ ReadBTTrainerParty:
 	inc bc
 	push bc
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	push de
 	ld a, [wBGMapBuffer]
 	ld e, a
 	ld a, [wBGMapBuffer + 1]
 	ld d, a
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, e
 	ld [wBGMapBuffer], a
 	ld a, d
@@ -550,7 +550,7 @@ Function17042c:
 	push de
 	ld hl, Unknown_17047e
 	ld bc, BATTLETOWER_TRAINERDATALENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .next_trainer
 	pop hl
@@ -573,7 +573,7 @@ CopyBTTrainer_FromBT_OT_TowBT_OTTemp:
 	ld hl, wBT_OTTrainer
 	ld de, wBT_OTTemp
 	ld bc, BATTLE_TOWER_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -645,26 +645,26 @@ Function1704e1:
 	ld hl, s5_a89c
 	ld de, wStringBuffer3
 	ld bc, 22
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, s5_a8b2
 	ld de, wc608
 	ld bc, 150
-	call CopyBytes
+	rst CopyBytes
 
 	call CloseSRAM
 	hlcoord 1, 1
 	ld de, wStringBuffer3
-	call PlaceString
+	rst PlaceString
 	hlcoord 1, 3
 	ld de, .String_Mail
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 3
 	ld de, wStringBuffer4
-	call PlaceString
+	rst PlaceString
 	hlcoord 8, 3
 	ld de, .String_PastReaders
-	call PlaceString
+	rst PlaceString
 	call .DrawBorder
 	call .PlaceTextItems
 	jr .NextJumptableFunction
@@ -809,7 +809,7 @@ Function1704e1:
 .rejoin
 	ld de, wcd49
 	push bc
-	call PlaceString
+	rst PlaceString
 	ld de, NAME_LENGTH_JAPANESE
 	add hl, de
 	pop bc
@@ -908,7 +908,7 @@ ResetBattleTowerTrainersSRAM:
 	ld a, $ff
 	ld hl, sBTTrainers
 	ld bc, BATTLETOWER_STREAK_LENGTH
-	call ByteFill
+	rst ByteFill
 
 	xor a
 	ld [sNrOfBeatenBattleTowerTrainers], a
@@ -1234,7 +1234,7 @@ Function170923:
 	ld [s5_aa47], a
 	ld hl, s5_aa5d
 	ld bc, MOBILE_LOGIN_PASSWORD_LENGTH
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM
 
 BattleTowerAction_EggTicket:
@@ -1370,7 +1370,7 @@ BattleTowerAction_10:
 	ld hl, s5_b023
 	ld de, wc608
 	ld bc, 105
-	call CopyBytes
+	rst CopyBytes
 	ld a, [sOfferReqGender]
 	ld [wcd30], a
 	ld a, [sOfferReqSpecies]
@@ -1388,7 +1388,7 @@ BattleTowerAction_10:
 	ld hl, wRTC
 	ld de, wc608
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld a, BANK(s5_b08c)
 	call OpenSRAM

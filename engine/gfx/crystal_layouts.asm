@@ -136,11 +136,11 @@ _CrystalCGB_MobileLayout1:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 14, wAttrmap
 	ld bc, 4 * SCREEN_WIDTH
 	ld a, $7
-	call ByteFill
+	rst ByteFill
 	ld a, [wd002]
 	bit 6, a
 	jr z, .asm_49464

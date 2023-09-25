@@ -519,7 +519,7 @@ Place2DMenuCursor:
 
 .got_row
 	ld c, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [w2DMenuCursorOffsets]
 	and $f
 	ld c, a
@@ -696,7 +696,7 @@ RestoreOverworldMapTiles: ; unreferenced
 	hlcoord 0, 0
 	ld de, sScratch
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	call OverworldTextModeSwitch
 	xor a ; sScratch

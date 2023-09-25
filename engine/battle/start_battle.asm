@@ -170,7 +170,7 @@ ClearBattleRAM:
 	ld hl, wBattle
 	ld bc, wBattleEnd - wBattle
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	farcall ResetEnemyStatLevels
 

@@ -276,7 +276,7 @@ LoadMapTimeOfDay:
 	xor a
 	ld bc, vBGMap1 - vBGMap0
 	hlbgcoord 0, 0
-	call ByteFill
+	rst ByteFill
 
 	pop af
 	ldh [rVBK], a
@@ -438,7 +438,7 @@ GetMapScreenCoords::
 	add 1
 	srl a
 .got_block_y
-	call AddNTimes
+	rst AddNTimes
 	ld a, l
 	ld [wOverworldMapAnchor], a
 	ld a, h

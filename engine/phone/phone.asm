@@ -183,7 +183,7 @@ GetAvailableCallers:
 	ld hl, wNumAvailableCallers
 	ld bc, CONTACT_LIST_SIZE + 1
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld de, wPhoneList
 	ld a, CONTACT_LIST_SIZE
 
@@ -194,7 +194,7 @@ GetAvailableCallers:
 	jr z, .not_good_for_call
 	ld hl, PhoneContacts + PHONE_CONTACT_SCRIPT2_TIME
 	ld bc, PHONE_CONTACT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wCheckedTime]
 	and [hl]
 	jr z, .not_good_for_call
@@ -234,7 +234,7 @@ CheckSpecialPhoneCall::
 	ld b, 0
 	ld hl, SpecialPhoneCallList
 	ld a, SPECIALCALL_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -311,7 +311,7 @@ MakePhoneCallFromPokegear:
 	ld [wCurCaller], a
 	ld hl, PhoneContacts
 	ld bc, PHONE_CONTACT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, PHONE_CONTACT_SCRIPT1_TIME
@@ -383,7 +383,7 @@ LoadCallerScript:
 	ld hl, PhoneContacts
 	ld bc, PHONE_CONTACT_SIZE
 	ld a, e
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(PhoneContacts)
 .proceed
 	ld de, wCallerContact
@@ -585,7 +585,7 @@ GetCallerTrainerClass:
 	push hl
 	ld hl, PhoneContacts + PHONE_CONTACT_TRAINER_CLASS
 	ld bc, PHONE_CONTACT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld b, [hl]
 	ld c, a
@@ -600,7 +600,7 @@ GetCallerName:
 	call Phone_GetTrainerName
 	push hl
 	push bc
-	call PlaceString
+	rst PlaceString
 	ld a, ":"
 	ld [bc], a
 	pop bc
@@ -650,7 +650,7 @@ GetCallerLocation:
 	ld a, [wCurCaller]
 	ld hl, PhoneContacts + PHONE_CONTACT_MAP_GROUP
 	ld bc, PHONE_CONTACT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld b, [hl]
 	inc hl
 	ld c, [hl]

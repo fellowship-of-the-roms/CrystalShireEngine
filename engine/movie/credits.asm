@@ -66,7 +66,7 @@ Credits::
 	ld hl, wLYOverrides
 	ld bc, $100
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
@@ -248,7 +248,7 @@ ParseCredits:
 	hlcoord 0, 5
 	ld bc, SCREEN_WIDTH * 12
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 
 ; Then read the script.
 
@@ -308,8 +308,8 @@ ParseCredits:
 ; Print strings spaced every two lines.
 	call .get
 	ld bc, SCREEN_WIDTH * 2
-	call AddNTimes
-	call PlaceString
+	rst AddNTimes
+	rst PlaceString
 	jr .loop
 
 .theend
@@ -405,12 +405,12 @@ ConstructCreditsTilemap:
 	ld a, $28
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	call ByteFill
+	rst ByteFill
 
 	ld a, $7f
 	hlcoord 0, 4
 	ld bc, (SCREEN_HEIGHT - 4) * SCREEN_WIDTH
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 0, 4
 	ld a, $24
@@ -423,22 +423,22 @@ ConstructCreditsTilemap:
 	hlcoord 0, 0, wAttrmap
 	ld bc, 4 * SCREEN_WIDTH
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 0, 4, wAttrmap
 	ld bc, SCREEN_WIDTH
 	ld a, $1
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 0, 5, wAttrmap
 	ld bc, 12 * SCREEN_WIDTH
 	ld a, $2
-	call ByteFill
+	rst ByteFill
 
 	hlcoord 0, 17, wAttrmap
 	ld bc, SCREEN_WIDTH
 	ld a, $1
-	call ByteFill
+	rst ByteFill
 
 	call WaitBGMap2
 	xor a
@@ -521,7 +521,7 @@ GetCreditsPalette:
 	adc HIGH(wBGPals1)
 	ld d, a
 	ld bc, 24
-	call CopyBytes
+	rst CopyBytes
 
 	pop hl
 	pop af

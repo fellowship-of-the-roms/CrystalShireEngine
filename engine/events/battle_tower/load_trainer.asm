@@ -8,7 +8,7 @@ LoadOpponentTrainerAndPokemon:
 	xor a
 	ld hl, wBT_OTTrainer
 	ld bc, BATTLE_TOWER_STRUCT_LENGTH
-	call ByteFill
+	rst ByteFill
 
 	; Write $ff into the Item-Slots
 	ld a, $ff
@@ -57,16 +57,16 @@ LoadOpponentTrainerAndPokemon:
 ; Copy name (10 bytes) and class (1 byte) of trainer
 	ld hl, BattleTowerTrainers
 	ld bc, NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	call LoadRandomBattleTowerMon
 	pop af
 
 	ld hl, BattleTowerTrainerData
 	ld bc, BATTLETOWER_TRAINERDATALENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld bc, BATTLETOWER_TRAINERDATALENGTH
 .copy_bt_trainer_data_loop
 	ld a, BANK(BattleTowerTrainerData)
@@ -97,7 +97,7 @@ LoadRandomBattleTowerMon:
 	dec a
 	ld hl, BattleTowerMons
 	ld bc, BATTLETOWER_NUM_UNIQUE_MON * (NICKNAMED_MON_STRUCT_LENGTH + 6)
-	call AddNTimes
+	rst AddNTimes
 
 	ldh a, [hRandomAdd]
 	ld b, a
@@ -110,7 +110,7 @@ LoadRandomBattleTowerMon:
 	cp BATTLETOWER_NUM_UNIQUE_MON
 	jr nc, .resample
 	ld bc, NICKNAMED_MON_STRUCT_LENGTH + 6
-	call AddNTimes
+	rst AddNTimes
 
 	; hl = pointer to the mon that will be loaded (1 byte species, 1 byte item, 2 -> 1 byte each move, NICKNAMED_MON_STRUCT_LENGTH - 6 bytes data)
 	ld a, [hli]
@@ -208,7 +208,7 @@ LoadRandomBattleTowerMon:
 	dec b
 	jr nz, .move_loop
 	ld c, NICKNAMED_MON_STRUCT_LENGTH - 6
-	call CopyBytes
+	rst CopyBytes
 
 	; rename the Pokémon to its default name (overriding the transliterated Japanese nicknames)
 	push de
@@ -221,7 +221,7 @@ LoadRandomBattleTowerMon:
 	ld l, e
 	pop de
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 
 	pop bc
@@ -233,7 +233,7 @@ LoadRandomBattleTowerMon:
 	ld de, sBTMonPrevPrevTrainer1
 	ld bc, 6
 	push hl
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ld a, [wBT_OTMon1]
 	call .store_index

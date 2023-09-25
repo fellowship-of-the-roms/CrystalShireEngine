@@ -23,7 +23,7 @@ CheckRegisteredItem:
 	rlca
 	rlca
 	ld hl, .Pockets
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Pockets:
@@ -113,7 +113,7 @@ UseRegisteredItem:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .SwitchTo
-	rst JumpTable
+	call JumpTable
 	ret
 
 .SwitchTo:

@@ -23,12 +23,12 @@ CheckPartyFullAfterContest:
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, wContestMon
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOTs
@@ -36,14 +36,14 @@ CheckPartyFullAfterContest:
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call GiveANickname_YesNo
 	jr c, .Party_SkipNickname
 	ld a, [wPartyCount]
@@ -62,7 +62,7 @@ CheckPartyFullAfterContest:
 	ld d, h
 	ld e, l
 	ld hl, wMonOrItemNameBuffer
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMon1Level
@@ -94,11 +94,11 @@ CheckPartyFullAfterContest:
 	ld hl, wContestMon
 	ld de, wBufferMon
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wPlayerName
 	ld de, wBufferMonOT
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	ld [wBufferMonAltSpecies], a
 	ld [wNamedObjectIndex], a
@@ -121,7 +121,7 @@ CheckPartyFullAfterContest:
 .Box_SkipNickname:
 	ld de, wBufferMonNickname
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	farcall UpdateStorageBoxMonFromTemp
 
 .BoxFull:

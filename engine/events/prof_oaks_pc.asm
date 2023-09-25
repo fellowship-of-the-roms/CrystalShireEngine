@@ -64,7 +64,7 @@ Rate:
 	push hl
 	ld a, "@"
 	ld bc, ITEM_NAME_LENGTH
-	call ByteFill
+	rst ByteFill
 	ld hl, sp + 2
 	ld d, h
 	ld e, l

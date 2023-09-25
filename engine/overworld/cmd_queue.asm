@@ -36,7 +36,7 @@ HandleCmdQueue::
 GetNthCmdQueueEntry: ; unreferenced
 	ld hl, wCmdQueue
 	ld bc, CMDQUEUE_ENTRY_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	ret
@@ -138,7 +138,7 @@ CmdQueues_AnonJumptable:
 	add hl, bc
 	ld a, [hl]
 	pop hl
-	rst JumpTable
+	call JumpTable
 	ret
 
 CmdQueues_IncAnonJumptableIndex:

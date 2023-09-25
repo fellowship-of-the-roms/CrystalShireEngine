@@ -259,7 +259,7 @@ MobileTradeAnim_ClearTiles:
 	ld hl, vTiles0
 	ld bc, 3 * $80 tiles
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, $0
 	ldh [rVBK], a
 	ld hl, vTiles0
@@ -273,7 +273,7 @@ MobileTradeAnim_ClearBGMap:
 	hlbgcoord 0, 0
 	ld bc, 2 * BG_MAP_HEIGHT * BG_MAP_WIDTH
 	ld a, $0
-	call ByteFill
+	rst ByteFill
 	ld a, $0
 	ldh [rVBK], a
 	hlbgcoord 0, 0
@@ -501,7 +501,7 @@ MobileTradeAnim_ShowPlayerMonToBeSent:
 	hlcoord 0, 0
 	ld bc, 12 * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld c, 80
 	call WaitMobileTradeSpriteAnims
 	jmp GetMobileTradeAnimByte
@@ -632,7 +632,7 @@ MobileTradeAnim_ShowPlayerMonForGTS:
 	hlcoord 0, 0
 	ld bc, 12 * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld c, 80
 	call WaitMobileTradeSpriteAnims
 	jmp GetMobileTradeAnimByte
@@ -797,7 +797,7 @@ MobileTradeAnim_02:
 	ld hl, MobileTradeBGPalettes
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call LoadMobileAdapterPalette
@@ -841,7 +841,7 @@ MobileTradeAnim_10:
 	ld hl, MobileTradeBGPalettes
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call LoadMobileAdapterPalette
@@ -883,7 +883,7 @@ MobileTradeAnim_11:
 	ld hl, MobileTradeBGPalettes
 	ld de, wBGPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call LoadMobileAdapterPalette
@@ -1231,7 +1231,7 @@ MobileTradeAnim_DisplayEggData:
 	call Textbox
 	hlcoord 6, 2
 	ld de, .EggTemplate
-	call PlaceString
+	rst PlaceString
 	jr MobileTradeAnim_MonDisplay_UpdateBGMap
 
 .EggTemplate:
@@ -1251,7 +1251,7 @@ Function108a33:
 	call Textbox
 	hlcoord 7, 4
 	ld de, .OddEgg
-	call PlaceString
+	rst PlaceString
 	jr MobileTradeAnim_MonDisplay_UpdateBGMap
 
 .OddEgg:
@@ -1300,7 +1300,7 @@ MobileTradeAnim_MonDisplay_PrintOTNameAndGender:
 .got_gender
 	push af
 	hlcoord 8, 4
-	call PlaceString
+	rst PlaceString
 	inc bc
 	pop af
 	ld hl, .GenderChars
@@ -1357,22 +1357,22 @@ Function108af4:
 	ld hl, MobileTradeOB2Palettes
 	ld de, wOBPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, MobileTradeOB2Palettes
 	ld de, wOBPals2
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	jr .done_copy
 
 .copy_MobileTradeOB1Palettes
 	ld hl, MobileTradeOB1Palettes
 	ld de, wOBPals1
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, MobileTradeOB1Palettes
 	ld de, wOBPals2
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 
 .done_copy
 	pop af
@@ -1464,7 +1464,7 @@ Function108b98:
 .asm_108bb0
 	ld de, wBGPals1 + 7 palettes
 	ld bc, 8 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1603,7 +1603,7 @@ LoadMobileAdapterPalette:
 .asm_108d12
 	ld bc, 1 palettes
 	ld hl, MobileAdapterPalettes
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(wBGPals1)
 	ld de, wBGPals1 + 4 palettes
 	ld bc, 1 palettes

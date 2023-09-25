@@ -170,7 +170,7 @@ RunTradeAnimScript:
 	ld hl, vTiles0
 	ld bc, VRAM_End - VRAM_Begin
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, $0
 	ldh [rVBK], a
 
@@ -178,7 +178,7 @@ RunTradeAnimScript:
 	hlbgcoord 0, 0
 	ld bc, VRAM_End - vBGMap0
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld hl, TradeGameBoyLZ
 	ld de, vTiles2 tile $31
 	call Decompress
@@ -341,7 +341,7 @@ TradeAnim_InitTubeAnim:
 	hlbgcoord 20, 3
 	ld bc, 12
 	ld a, $60
-	call ByteFill
+	rst ByteFill
 	pop af
 
 	call TradeAnim_TubeAnimJumptable
@@ -464,7 +464,7 @@ TradeAnim_TubeToPlayer8:
 	hlbgcoord 0, 0
 	ld bc, VRAM_End - vBGMap0
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	xor a
 	ldh [hSCX], a
 	ld a, $90
@@ -527,7 +527,7 @@ TradeAnim_TubeAnimJumptable:
 	inc hl
 	ld bc, 10
 	ld a, $60
-	call ByteFill
+	rst ByteFill
 	hlcoord 3, 2
 	jr TradeAnim_CopyTradeGameBoyTilemap
 
@@ -543,7 +543,7 @@ TradeAnim_TubeAnimJumptable:
 	hlcoord 0, 3
 	ld bc, $11
 	ld a, $60
-	call ByteFill
+	rst ByteFill
 	hlcoord 17, 3
 	ld a, $5d
 	ld [hl], a
@@ -580,10 +580,10 @@ TradeAnim_PlaceTrademonStatsOnTubeAnim:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
 	ld a, "─"
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 1
 	ld de, wLinkPlayer1Name
-	call PlaceString
+	rst PlaceString
 	ld hl, wLinkPlayer2Name
 	ld de, 0
 .find_name_end_loop
@@ -597,11 +597,11 @@ TradeAnim_PlaceTrademonStatsOnTubeAnim:
 	hlcoord 0, 4
 	add hl, de
 	ld de, wLinkPlayer2Name
-	call PlaceString
+	rst PlaceString
 	hlcoord 7, 2
 	ld bc, 6
 	pop af
-	call ByteFill
+	rst ByteFill
 	call WaitBGMap
 	call WaitTop
 	ld a, HIGH(vBGMap0)
@@ -914,7 +914,7 @@ TrademonStats_Egg:
 	call Textbox
 	hlcoord 4, 2
 	ld de, .EggData
-	call PlaceString
+	rst PlaceString
 	jr TrademonStats_WaitBGMap
 
 .EggData:
@@ -958,7 +958,7 @@ TrademonStats_PrintOTName:
 .caught_gender_okay
 	push af
 	hlcoord 7, 4
-	call PlaceString
+	rst PlaceString
 	inc bc
 	pop af
 	ld hl, .Gender
@@ -1184,7 +1184,7 @@ TradeAnim_TakeCareOfText:
 	hlcoord 0, 10
 	ld bc, 8 * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	call WaitBGMap
 	ld hl, .TakeGoodCareOfMonText
 	call PrintText
@@ -1277,7 +1277,7 @@ LinkTradeAnim_LoadTradePlayerNames:
 	push de
 	ld de, wLinkPlayer1Name
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop hl
 	ld de, wLinkPlayer2Name
 	ld bc, NAME_LENGTH

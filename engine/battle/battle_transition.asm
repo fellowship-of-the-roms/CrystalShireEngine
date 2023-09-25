@@ -41,7 +41,7 @@ DoBattleTransition:
 	ld hl, wBGPals1
 	ld bc, 8 palettes
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	pop af
 	ldh [rSVBK], a
@@ -685,11 +685,11 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	push hl
 	ld de, wBGPals1 palette PAL_BG_TEXT
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop hl
 	ld de, wBGPals2 palette PAL_BG_TEXT
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ld a, TRUE
@@ -716,7 +716,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 .copy
 	push hl
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop hl
 	ret
 

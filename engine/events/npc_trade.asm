@@ -327,7 +327,7 @@ Trade_GetAttributeOfCurrentPartymon:
 Trade_GetAttributeOfLastPartymon:
 	ld a, [wPartyCount]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ret
@@ -342,14 +342,14 @@ GetTradeMonName:
 
 Trade_CopyFourCharString: ; unreferenced
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ret
 
 Trade_CopyThreeCharString: ; unreferenced
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ret
@@ -419,7 +419,7 @@ PrintTradeText:
 	pop af
 	ld bc, 2 * 4
 	ld hl, TradeTexts
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wTradeDialog]
 	ld c, a
 	add hl, bc

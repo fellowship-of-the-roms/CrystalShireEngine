@@ -91,7 +91,7 @@ CheckForLuckyNumberWinners:
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2
 	ld bc, BOX_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, .MatchInStorage
 .got_text
 	jmp PrintText

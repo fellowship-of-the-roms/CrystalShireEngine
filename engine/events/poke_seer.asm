@@ -48,7 +48,7 @@ PokeSeer:
 SeerAction:
 	ld a, [wSeerAction]
 	ld hl, SeerActions
-	rst JumpTable
+	call JumpTable
 	ret
 
 SeerActions:
@@ -131,7 +131,7 @@ GetCaughtName:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld de, wSeerNickname
 	ld bc, MON_NAME_LENGTH
 	jmp CopyBytes
@@ -140,7 +140,7 @@ GetCaughtLevel:
 	ld a, "@"
 	ld hl, wSeerCaughtLevelString
 	ld bc, 4
-	call ByteFill
+	rst ByteFill
 
 	; caught level
 	; Limited to between 1 and 63 since it's a 6-bit quantity.
@@ -214,7 +214,7 @@ GetCaughtLocation:
 	ld hl, wStringBuffer1
 	ld de, wSeerCaughtLocation
 	ld bc, 17
-	call CopyBytes
+	rst CopyBytes
 	and a
 	ret
 
@@ -238,10 +238,10 @@ GetCaughtOT:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld de, wSeerOT
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 ; this routine is useless in Western localizations
 	ld hl, .male

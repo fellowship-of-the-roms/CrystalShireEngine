@@ -38,7 +38,7 @@ GiveDratini:
 	ld a, [wScriptVar]
 	ld hl, .Movesets
 	ld bc, .Moveset1 - .Moveset0
-	call AddNTimes
+	rst AddNTimes
 
 	; get address of mon's first move
 	pop de

@@ -1336,7 +1336,7 @@ ClearBattleAnims::
 	ld hl, wLYOverrides
 	ld bc, wBattleAnimEnd - wLYOverrides
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ld hl, wFXAnimID
 	ld e, [hl]

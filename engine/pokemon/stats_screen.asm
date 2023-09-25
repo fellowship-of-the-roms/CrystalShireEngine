@@ -72,7 +72,7 @@ StatsScreenMain:
 	ld a, [wJumptableIndex]
 	and ~(1 << 7)
 	ld hl, StatsScreenPointerTable
-	rst JumpTable
+	call JumpTable
 	call StatsScreen_WaitAnim
 	ld a, [wJumptableIndex]
 	bit 7, a
@@ -93,7 +93,7 @@ StatsScreenMobile:
 	ld a, [wJumptableIndex]
 	and $7f
 	ld hl, StatsScreenPointerTable
-	rst JumpTable
+	call JumpTable
 	call StatsScreen_WaitAnim
 	farcall MobileComms_CheckInactivityTimer
 	jr c, .exit
@@ -201,7 +201,7 @@ if DEF(_DEBUG)
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Happiness
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], 1
 	ld a, 1
 	ld [wTempMonHappiness], a
@@ -209,7 +209,7 @@ if DEF(_DEBUG)
 	ld [wStepCount], a
 	ld de, .HatchSoonString
 	hlcoord 8, 17
-	call PlaceString
+	rst PlaceString
 	ld hl, wStatsScreenFlags
 	set 5, [hl]
 	pop hl
@@ -268,7 +268,7 @@ StatsScreen_CopyToTempMon:
 	ld hl, wBufferMon
 	ld de, wTempMon
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	jr .done
 
 .not_tempmon
@@ -429,7 +429,7 @@ StatsScreen_InitUpperHalf:
 	call GetNicknamePointer
 	call CopyNickname
 	hlcoord 8, 2
-	call PlaceString
+	rst PlaceString
 	hlcoord 18, 0
 	call .PlaceGenderChar
 	hlcoord 9, 4
@@ -438,7 +438,7 @@ StatsScreen_InitUpperHalf:
 	ld a, [wBaseSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	call PlaceString
+	rst PlaceString
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
 	jr StatsScreen_PlaceShinyIcon
@@ -558,7 +558,7 @@ StatsScreen_LoadGFX:
 	maskbits NUM_STAT_PAGES
 	dec a
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Jumptable:
@@ -577,7 +577,7 @@ LoadPinkPage:
 	ld [hl], $41 ; right HP/exp bar end cap
 	ld de, .Status_Type
 	hlcoord 0, 12
-	call PlaceString
+	rst PlaceString
 	ld a, [wTempMonPokerusStatus]
 	ld b, a
 	and $f
@@ -601,11 +601,11 @@ LoadPinkPage:
 .HasPokerus:
 	ld de, .PkrsStr
 	hlcoord 1, 13
-	call PlaceString
+	rst PlaceString
 	jr .done_status
 .StatusOK:
 	ld de, .OK_str
-	call PlaceString
+	rst PlaceString
 .done_status
 	hlcoord 1, 15
 	predef PrintMonTypes
@@ -620,7 +620,7 @@ LoadPinkPage:
 	jr nz, .vertical_divider
 	ld de, .ExpPointStr
 	hlcoord 10, 9
-	call PlaceString
+	rst PlaceString
 	hlcoord 17, 14
 	call .PrintNextLevel
 	hlcoord 13, 10
@@ -634,10 +634,10 @@ LoadPinkPage:
 	call PrintNum
 	ld de, .LevelUpStr
 	hlcoord 10, 12
-	call PlaceString
+	rst PlaceString
 	ld de, .ToStr
 	hlcoord 14, 14
-	call PlaceString
+	rst PlaceString
 	hlcoord 11, 16
 	ld a, [wTempMonLevel]
 	ld b, a
@@ -714,17 +714,17 @@ LoadPinkPage:
 LoadGreenPage:
 	ld de, .Item
 	hlcoord 0, 8
-	call PlaceString
+	rst PlaceString
 	call .GetItemName
 	hlcoord 8, 8
-	call PlaceString
+	rst PlaceString
 	ld de, .Move
 	hlcoord 0, 10
-	call PlaceString
+	rst PlaceString
 	ld hl, wTempMonMoves
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 8, 10
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
@@ -771,10 +771,10 @@ LoadBluePage:
 .PlaceOTInfo:
 	ld de, IDNoString
 	hlcoord 0, 9
-	call PlaceString
+	rst PlaceString
 	ld de, OTString
 	hlcoord 0, 12
-	call PlaceString
+	rst PlaceString
 	hlcoord 2, 10
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	ld de, wTempMonID
@@ -784,7 +784,7 @@ LoadBluePage:
 	call CopyNickname
 	farcall CorrectNickErrors
 	hlcoord 2, 13
-	call PlaceString
+	rst PlaceString
 	ld a, [wTempMonCaughtGender]
 	and a
 	jr z, .done
@@ -903,7 +903,7 @@ StatsScreen_PlaceFrontpic:
 StatsScreen_GetAnimationParam:
 	ld a, [wMonType]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Jumptable:
@@ -918,7 +918,7 @@ StatsScreen_GetAnimationParam:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	jr .CheckEggFaintedFrzSlp
@@ -984,23 +984,23 @@ EggStatsScreen:
 	call StatsScreen_PlaceHorizontalDivider
 	ld de, EggString
 	hlcoord 8, 1
-	call PlaceString
+	rst PlaceString
 	ld de, IDNoString
 	hlcoord 8, 3
-	call PlaceString
+	rst PlaceString
 	ld de, OTString
 	hlcoord 8, 5
-	call PlaceString
+	rst PlaceString
 	ld de, FiveQMarkString
 	hlcoord 11, 3
-	call PlaceString
+	rst PlaceString
 	ld de, FiveQMarkString
 	hlcoord 11, 5
-	call PlaceString
+	rst PlaceString
 if DEF(_DEBUG)
 	ld de, .PushStartString
 	hlcoord 8, 17
-	call PlaceString
+	rst PlaceString
 	jr .placed_push_start
 
 .PushStartString:
@@ -1021,7 +1021,7 @@ endc
 	ld de, EggALotMoreTimeString
 .picked
 	hlcoord 1, 9
-	call PlaceString
+	rst PlaceString
 	ld hl, wStatsScreenFlags
 	set 5, [hl]
 	call SetPalettes ; pals
@@ -1127,7 +1127,7 @@ CopyNickname:
 	ld de, wStringBuffer1
 	ld bc, MON_NAME_LENGTH
 	push de
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ret
 

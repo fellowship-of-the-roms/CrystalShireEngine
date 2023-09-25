@@ -122,11 +122,11 @@ IntroScene1:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -192,11 +192,11 @@ IntroScene3:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -256,11 +256,11 @@ IntroScene5:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -359,12 +359,12 @@ IntroScene7:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -425,15 +425,15 @@ IntroScene9:
 	; first 12 rows have palette 1
 	ld bc, 12 * SCREEN_WIDTH
 	ld a, $1
-	call ByteFill
+	rst ByteFill
 	; middle 3 rows have palette 2
 	ld bc, 3 * SCREEN_WIDTH
 	ld a, $2
-	call ByteFill
+	rst ByteFill
 	; last three rows have palette 3
 	ld bc, 3 * SCREEN_WIDTH
 	ld a, $3
-	call ByteFill
+	rst ByteFill
 	ld a, $2
 	ldh [hBGMapMode], a
 	call DelayFrame
@@ -510,11 +510,11 @@ IntroScene11:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -631,11 +631,11 @@ IntroScene13:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -737,11 +737,11 @@ IntroScene15:
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -809,11 +809,11 @@ IntroScene17:
 	ld hl, IntroSuicuneClosePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroSuicuneClosePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -881,11 +881,11 @@ IntroScene19:
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -1041,11 +1041,11 @@ IntroScene26:
 	ld hl, IntroCrystalUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, IntroCrystalUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -1216,7 +1216,7 @@ CrystalIntro_UnownFade:
 	ld hl, wBGPals2
 	ld bc, 8 palettes
 	xor a
-	call ByteFill
+	rst ByteFill
 	pop bc
 	pop hl
 
@@ -1317,7 +1317,7 @@ Intro_Scene20_AppearUnown:
 	ld d, a
 
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 
 	ld de, wBGPals1
@@ -1329,7 +1329,7 @@ Intro_Scene20_AppearUnown:
 	ld d, a
 
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -1516,7 +1516,7 @@ Intro_ClearBGPals:
 	ld hl, wBGPals2
 	ld bc, 16 palettes
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	pop af
 	ldh [rSVBK], a
@@ -1591,7 +1591,7 @@ Intro_ResetLYOverrides:
 	ld hl, wLYOverrides
 	ld bc, wLYOverridesEnd - wLYOverrides
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	pop af
 	ldh [rSVBK], a
@@ -1615,7 +1615,7 @@ Intro_PerspectiveScrollBG:
 	ld a, [hl]
 	inc a
 	ld bc, $5f
-	call ByteFill
+	rst ByteFill
 .skip
 	; grass in the front
 	ld hl, wLYOverrides + $5f
@@ -1623,7 +1623,7 @@ Intro_PerspectiveScrollBG:
 	inc a
 	inc a
 	ld bc, $31
-	call ByteFill
+	rst ByteFill
 	ld a, [wLYOverrides + 0]
 	ldh [hSCX], a
 	pop af

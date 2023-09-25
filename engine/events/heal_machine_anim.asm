@@ -46,7 +46,7 @@ HealMachineAnim:
 	cp HEALMACHINESTATE_FINISH
 	jr z, .finish
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	jr .jumptable_loop
 
 .finish

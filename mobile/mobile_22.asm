@@ -92,14 +92,14 @@ Function8919e:
 Function891ab:
 	call Mobile22_SetBGMapMode1
 	farcall ReloadMapPart
-	jmp Mobile22_SetBGMapMode0
+	jr Mobile22_SetBGMapMode0
 
 Function891b8:
 	call Mobile22_SetBGMapMode0
 	hlcoord 0, 0
 	ld a, " "
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	jmp DelayFrame
 
 Function891ca:
@@ -123,11 +123,11 @@ Function891de:
 	hlcoord 0, 0, wAttrmap
 	ld a, $7
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 0
 	ld a, " "
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	jr Function891ab
 
 Function891fe:
@@ -273,14 +273,14 @@ Function892b7:
 	add hl, bc
 	ld a, "@"
 	ld bc, 6
-	call ByteFill
+	rst ByteFill
 	ld b, d
 	ld c, e
 	ld hl, 6
 	add hl, bc
 	ld a, "@"
 	ld bc, 6
-	call ByteFill
+	rst ByteFill
 	ld b, d
 	ld c, e
 	ld hl, 12
@@ -299,7 +299,7 @@ Function892b7:
 	add hl, bc
 	ld a, -1
 	ld bc, 8
-	call ByteFill
+	rst ByteFill
 	ld b, d
 	ld c, e
 	ld e, 6
@@ -335,7 +335,7 @@ Function8931b:
 	ld a, [wMenuSelection]
 	dec a
 	ld bc, 37
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	pop hl
@@ -442,7 +442,7 @@ Function89381:
 	push hl
 	ld a, -1
 	ld bc, 8
-	call ByteFill
+	rst ByteFill
 	pop hl
 
 .ok
@@ -578,7 +578,7 @@ Function8949c:
 	ld hl, Palette_894b3
 	ld de, wBGPals1 palette 7
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -625,11 +625,11 @@ Function894dc:
 	ld l, a
 	ld de, wBGPals1
 	ld bc, 3 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, .Pals345
 	ld de, wBGPals1 + 3 palettes
 	ld bc, 3 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -767,7 +767,7 @@ Function895c7:
 	ld hl, Palette_895de
 	ld de, wd030
 	ld bc, 8
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -789,7 +789,7 @@ Function895f2:
 	xor a
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	call Function89605
 	call Function89655
 	pop bc
@@ -826,7 +826,7 @@ Function89605:
 	hlcoord 1, 11, wAttrmap
 	ld a, 4
 	ld bc, 4
-	call ByteFill
+	rst ByteFill
 	ld a, 5
 	ld bc, 14
 	jmp ByteFill
@@ -1283,7 +1283,7 @@ Function898be:
 	dec hl
 
 .asm_898d7
-	call PlaceString
+	rst PlaceString
 	pop bc
 	ret
 
@@ -1299,7 +1299,7 @@ Function898dc:
 
 .asm_898eb
 	hlcoord 6, 4
-	call PlaceString
+	rst PlaceString
 	pop bc
 	ret
 
@@ -1319,7 +1319,7 @@ Function898f3:
 .asm_8990a
 	hlcoord 5, 5
 	ld de, String_89116
-	call PlaceString
+	rst PlaceString
 
 .asm_89913
 	pop bc
@@ -1436,7 +1436,7 @@ Function8998b:
 
 Function8999c:
 	ld de, wPlayerName
-	call PlaceString
+	rst PlaceString
 	inc bc
 	ld h, b
 	ld l, c
@@ -1517,10 +1517,10 @@ Function89a2e:
 	call Textbox
 	hlcoord 13, 13
 	ld de, String_89a4e
-	call PlaceString
+	rst PlaceString
 	hlcoord 13, 14
 	ld de, String_89a53
-	call PlaceString
+	rst PlaceString
 	jmp Function89655
 
 String_89a4e:
@@ -2010,7 +2010,7 @@ Function89d0d:
 	push bc
 	ld hl, .Palette1
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	dec c
 	jr nz, .loop
@@ -2018,7 +2018,7 @@ Function89d0d:
 	ld hl, .Palette2
 	ld de, wBGPals1 + 2 palettes
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rSVBK], a
@@ -2131,7 +2131,7 @@ Function89de0:
 	ld hl, Jumptable_89e04
 	ld a, e
 	dec a
-	rst JumpTable
+	call JumpTable
 	pop bc
 	jr .asm_89dea
 .asm_89dfd
@@ -2149,7 +2149,7 @@ Function89e0a:
 	call Function8b3b0
 	call CloseSRAM
 	ld hl, Jumptable_89e18
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_89e18:
@@ -2168,7 +2168,7 @@ Function89e1e:
 asm_89e2e:
 	ld a, [wd02d]
 	ld hl, Jumptable_89e3c
-	rst JumpTable
+	call JumpTable
 	ret
 
 Function89e36:
@@ -2232,7 +2232,7 @@ Function89e9a:
 	ld hl, Palette_89eb1
 	ld de, wBGPals1 palette 5
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -2455,7 +2455,7 @@ Function89ff6:
 	ld hl, $a603
 	ld a, -1
 	ld bc, 8
-	call ByteFill
+	rst ByteFill
 	ld hl, $a603
 	ld de, wd008
 	call Function89381
@@ -2836,7 +2836,7 @@ Function8a2fe:
 	ld hl, $a603
 	ld bc, $8
 	ld a, -1
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM
 
 Function8a313:
@@ -3181,15 +3181,15 @@ Function8a5b6:
 	ld hl, Palette_8a5e5
 	ld de, wBGPals1 + 4 palettes
 	ld bc, 3 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, Palette_8a5fd
 	ld de, wOBPals1
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	ld hl, Palette_8a605
 	ld de, wOBPals1 + 1 palettes
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -3230,7 +3230,7 @@ Function8a60d:
 	ld hl, Palette_8a624
 	ld de, wOBPals1
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -3272,7 +3272,7 @@ Function8a62c:
 	ld [wMenuSelection], a
 	ld a, c
 	dec a
-	rst JumpTable
+	call JumpTable
 	jr .asm_8a639
 .asm_8a66a
 	call Function891fe
@@ -3306,7 +3306,7 @@ Function8a679:
 	jr z, Function8a679
 	ld hl, Jumptable_8a6bc
 	dec a
-	rst JumpTable
+	call JumpTable
 	jr c, Function8a679
 	call Function891fe
 	call Function8b677
@@ -3356,7 +3356,7 @@ Function8a6cd:
 	call Function89448
 	ld a, [wd011]
 	ld hl, Jumptable_8a74f
-	rst JumpTable
+	call JumpTable
 	jr nc, .asm_8a6e5
 	jr .asm_8a742
 .asm_8a718
@@ -3369,7 +3369,7 @@ Function8a6cd:
 	call Function89a23
 	hlcoord 1, 13
 	ld de, String_89135
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	ld a, $2
 	call Function89254
@@ -3458,7 +3458,7 @@ Function8a7cb:
 	ld hl, wd008
 	ld a, $ff
 	ld bc, $8
-	call ByteFill
+	rst ByteFill
 	ld h, d
 	ld l, e
 	ld de, wd008
@@ -3510,7 +3510,7 @@ Function8a818:
 	call Function89193
 	hlcoord 1, 13
 	ld de, .string_8a868
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call JoyWaitAorB
 .asm_8a863
@@ -3528,7 +3528,7 @@ Function8a818:
 	ld de, String_8911c
 .asm_8a87d
 	hlcoord 1, 13
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call JoyWaitAorB
 	and a
@@ -3546,7 +3546,7 @@ Function8a8a1:
 	call Function89a23
 	hlcoord 1, 13
 	ld de, String_89135
-	call PlaceString
+	rst PlaceString
 	ld a, $2
 	call Function89254
 	jr c, .asm_8a8c1
@@ -3570,7 +3570,7 @@ Function8a8c3:
 	call Function891ab
 	hlcoord 1, 13
 	ld de, String_8a919
-	call PlaceString
+	rst PlaceString
 	ld a, $2
 	call Function89254
 	jr c, .asm_8a90f
@@ -3581,7 +3581,7 @@ Function8a8c3:
 	call Mobile22_SetBGMapMode0
 	hlcoord 1, 13
 	ld de, String_8a926
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call JoyWaitAorB
 .asm_8a90f
@@ -3627,7 +3627,7 @@ Function8a930:
 	ld l, c
 	ld de, wd002
 	ld bc, $25
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	pop bc
 	ld a, c
@@ -3637,11 +3637,11 @@ Function8a930:
 	ld h, b
 	ld l, c
 	ld bc, $25
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ld hl, wd002
 	ld bc, $25
-	call CopyBytes
+	rst CopyBytes
 	ld de, SFX_SWITCH_POKEMON
 	call WaitPlaySFX
 	ld de, SFX_SWITCH_POKEMON
@@ -3663,7 +3663,7 @@ Function8a999:
 	dec e
 	ld a, e
 	ld hl, Jumptable_8a9c5
-	rst JumpTable
+	call JumpTable
 	call Function891fe
 	call Function89b28
 	pop bc
@@ -3754,7 +3754,7 @@ Function8aa0a:
 	ld a, [wd011]
 	dec a
 	ld hl, Jumptable_8aa6d
-	rst JumpTable
+	call JumpTable
 	jr nc, .asm_8aa3a
 	jr .asm_8aa69
 .asm_8aa61
@@ -3781,7 +3781,7 @@ Function8aa73:
 	ld hl, wd008
 	ld a, $ff
 	ld bc, $8
-	call ByteFill
+	rst ByteFill
 	ld h, d
 	ld l, e
 	ld de, wd008
@@ -3817,7 +3817,7 @@ Function8aab6:
 	call Function89193
 	hlcoord 1, 13
 	ld de, String_8aaf0
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call JoyWaitAorB
 .asm_8aaeb
@@ -3831,7 +3831,7 @@ String_8aaf0:
 Function8ab00:
 	ld de, String_8911c
 	hlcoord 1, 13
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	call Mobile22_PromptButton
 	and a
@@ -3848,7 +3848,7 @@ Function8ab11:
 	call Function89a23
 	hlcoord 1, 13
 	ld de, String_89135
-	call PlaceString
+	rst PlaceString
 	ld a, $2
 	call Function89254
 	jr c, .asm_8ab39
@@ -3969,10 +3969,10 @@ Function8aba9:
 	call Textbox
 	hlcoord 1, 14
 	ld de, String_8ac3b
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	call Function8925e
-	jmp c, .asm_8abb3
+	jr c, .asm_8abb3
 	ld a, [wMenuSelection]
 	ld c, a
 	ret
@@ -4120,7 +4120,7 @@ Function8ad0b:
 	call Textbox
 	ld de, String_8ad89
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld a, $2
 	call Function8925e
 	jr c, .asm_8ad87
@@ -4131,7 +4131,7 @@ Function8ad0b:
 	call Textbox
 	ld de, String_8ad9c
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	call Function8925e
 	jr c, .asm_8ad84

@@ -38,7 +38,7 @@ Function16c000: ; unreferenced
 	farcall Function10635c
 	ld a, [wd002]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	call Function16cb2e
 	call Function16cbae
 	ld a, [wd002]
@@ -180,7 +180,7 @@ MobileSystemSplashScreen_InitGFX:
 	hlcoord 0, 0
 	ld bc, 20
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, .Tilemap
 	decoord 0, 1
 	ld bc, $0154
@@ -190,7 +190,7 @@ MobileSystemSplashScreen_InitGFX:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, .Attrmap
 	decoord 0, 1, wAttrmap
 	ld bc, 17 * SCREEN_WIDTH
@@ -219,7 +219,7 @@ Function16c943:
 	ld a, $ff
 	ld bc, 1 palettes
 	ld hl, wBGPals1
-	call ByteFill
+	rst ByteFill
 	pop af
 	ldh [rSVBK], a
 
@@ -636,7 +636,7 @@ Function16cbd1:
 	ld a, [hl]
 	ld bc, 2
 	ld hl, Unknown_16cfa3
-	call AddNTimes
+	rst AddNTimes
 	ld de, wBGPals1 palette 1 color 2
 	ld bc, PAL_COLOR_SIZE
 	ld a, $5

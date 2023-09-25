@@ -96,7 +96,7 @@ LoadMapPart::
 	ld a, "■"
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 
 	ld a, [wTilesetAttributesBank]
 	rst Bankswitch
@@ -338,7 +338,7 @@ CopyWarpData::
 	ld a, c
 	dec a
 	ld bc, WARP_EVENT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld bc, 2 ; warp number
 	add hl, bc
 	ld a, [hli]
@@ -648,7 +648,7 @@ endr
 	ld c, a
 	ld b, 0
 	ld a, WARP_EVENT_SIZE
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld [wYCoord], a
 	ld a, [hli]
@@ -675,7 +675,7 @@ LoadBlockData::
 	ld hl, wOverworldMapBlocks
 	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
 	ld a, 0
-	call ByteFill
+	rst ByteFill
 	call ChangeMap
 	call FillMapConnections
 	ld a, MAPCALLBACK_TILES
@@ -1324,7 +1324,7 @@ LoadTilesetGFX::
 	ld hl, wDecompressScratch
 	ld de, vTiles2
 	ld bc, $7f tiles
-	call CopyBytes
+	rst CopyBytes
 
 	ldh a, [rVBK]
 	push af
@@ -1334,7 +1334,7 @@ LoadTilesetGFX::
 	ld hl, wDecompressScratch + $80 tiles
 	ld de, vTiles5
 	ld bc, $80 tiles
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	ldh [rVBK], a
@@ -1796,7 +1796,7 @@ CheckIfFacingTileCoordIsBGEvent::
 	pop hl
 	ld de, wCurBGEvent
 	ld bc, BG_EVENT_SIZE
-	call CopyBytes
+	rst CopyBytes
 	scf
 	ret
 
@@ -1868,7 +1868,7 @@ CheckCurrentMapCoordEvents::
 	pop hl
 	ld de, wCurCoordEvent
 	ld bc, COORD_EVENT_SIZE
-	call CopyBytes
+	rst CopyBytes
 	scf
 	ret
 
@@ -2044,7 +2044,7 @@ CopyMapPartial::
 	call GetMapPointer
 	ld de, wMapPartial
 	ld bc, wMapPartialEnd - wMapPartial
-	call CopyBytes
+	rst CopyBytes
 
 	pop af
 	rst Bankswitch
@@ -2217,7 +2217,7 @@ LoadMapTileset::
 	ld hl, Tilesets
 	ld bc, TILESET_LENGTH
 	ld a, [wMapTileset]
-	call AddNTimes
+	rst AddNTimes
 
 	ld de, wTilesetBank
 	ld bc, TILESET_LENGTH

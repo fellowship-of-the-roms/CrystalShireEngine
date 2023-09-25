@@ -77,7 +77,7 @@ SwitchItemsInBag:
 	call ItemSwitch_GetItemFormatSize
 	add hl, bc
 	pop bc
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wScrollingMenuCursorPosition]
 	call ItemSwitch_CopyBufferToItem
 	xor a
@@ -214,7 +214,7 @@ ItemSwitch_GetItemOffset:
 	cpl
 .dont_negate
 	ld hl, 0
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	pop hl

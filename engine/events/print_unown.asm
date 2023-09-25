@@ -41,15 +41,15 @@ _UnownPrinter:
 
 	hlcoord 1, 2
 	ld de, AlphRuinsStampString
-	call PlaceString
+	rst PlaceString
 
 	hlcoord 1, 16
 	ld de, UnownDexDoWhatString
-	call PlaceString
+	rst PlaceString
 
 	hlcoord 10, 6
 	ld de, UnownDexMenuString
-	call PlaceString
+	rst PlaceString
 
 	xor a
 	ld [wJumptableIndex], a
@@ -183,13 +183,13 @@ endc
 	call ClearBox
 	hlcoord 1, 9
 	ld de, UnownDexVacantString
-	call PlaceString
+	rst PlaceString
 	xor a ; sScratch
 	call OpenSRAM
 	ld hl, sScratch
 	ld bc, $31 tiles
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, vTiles2 tile $31
 	ld de, sScratch
 	ld c, $31
@@ -225,7 +225,7 @@ PlaceUnownPrinterFrontpic:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 7, 11
 	ld a, $31
 	ldh [hGraphicStartTile], a

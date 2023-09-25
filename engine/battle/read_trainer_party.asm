@@ -16,7 +16,7 @@ ReadTrainerParty:
 	ld hl, wOTPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH * PARTY_LENGTH
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ld a, [wOtherTrainerClass]
 	cp CAL
@@ -292,7 +292,7 @@ CopyTrainerName:
 	ret
 
 IncompleteCopyNameFunction: ; unreferenced
-; Copy of CopyTrainerName but without "call CopyBytes"
+; Copy of CopyTrainerName but without "rst CopyBytes"
 	ld de, wStringBuffer1
 	push de
 	ld bc, NAME_LENGTH

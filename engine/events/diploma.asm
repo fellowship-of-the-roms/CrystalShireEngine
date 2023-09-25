@@ -13,19 +13,19 @@ PlaceDiplomaOnScreen:
 	ld hl, DiplomaPage1Tilemap
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
+	rst CopyBytes
 	ld de, .Player
 	hlcoord 2, 5
-	call PlaceString
+	rst PlaceString
 	ld de, .EmptyString
 	hlcoord 15, 5
-	call PlaceString
+	rst PlaceString
 	ld de, wPlayerName
 	hlcoord 9, 5
-	call PlaceString
+	rst PlaceString
 	ld de, .Certification
 	hlcoord 2, 8
-	call PlaceString
+	rst PlaceString
 	call EnableLCD
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
@@ -51,17 +51,17 @@ PrintDiplomaPage2:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld hl, DiplomaPage2Tilemap
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
+	rst CopyBytes
 	ld de, .GameFreak
 	hlcoord 8, 0
-	call PlaceString
+	rst PlaceString
 	ld de, .PlayTime
 	hlcoord 3, 15
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 15
 	ld de, wGameTimeHours
 	lb bc, 2, 4

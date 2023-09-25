@@ -185,7 +185,7 @@ Function118180:
 	ld hl, wcd69
 	ld de, s5_a89c
 	ld bc, 22
-	call CopyBytes
+	rst CopyBytes
 
 	ldh a, [rSVBK]
 	push af
@@ -205,7 +205,7 @@ Function118180:
 	ld hl, w3_d202
 	ld de, s5_a8b2
 	ld bc, 150
-	call CopyBytes
+	rst CopyBytes
 .reset_banks
 	pop af
 	ldh [rSVBK], a
@@ -1164,10 +1164,10 @@ BattleTowerRoomMenu_PlacePickLevelMenu:
 BattleTowerRoomMenu_UpdatePickLevelMenu:
 	hlcoord 13, 8
 	ld de, String_119d07
-	call PlaceString
+	rst PlaceString
 	hlcoord 13, 10
 	ld de, String_119d07
-	call PlaceString
+	rst PlaceString
 	ld a, [wcd4b]
 	ld l, a
 	ld a, [wcd4c]
@@ -1207,7 +1207,7 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	pop af
 	ldh [rSVBK], a
 	hlcoord 13, 9
-	call PlaceString
+	rst PlaceString
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
@@ -1302,7 +1302,7 @@ Function118a65: ; unreferenced
 	ld hl, BattleDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld de, w3_d000
 	ld bc, $1000
 	jmp Function118b10
@@ -1311,16 +1311,16 @@ SetBattleDownloadURL:
 	ld hl, BattleDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld de, w3_d000
 	ld bc, $1000
-	jmp Function118b10
+	jr Function118b10
 
 SetExchangeDownloadURL:
 	ld hl, ExchangeDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
@@ -1329,7 +1329,7 @@ SetNewsDownloadURL:
 	ld hl, NewsDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld a, $5
 	ldh [rSVBK], a
 	ld de, w3_d100
@@ -1340,7 +1340,7 @@ SetStadiumDownloadURL:
 	ld hl, StadiumDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
@@ -1349,7 +1349,7 @@ SetOddEggDownloadURL:
 	ld hl, OddEggDownloadURL
 	ld de, wcc60
 	ld bc, $80
-	call CopyBytes
+	rst CopyBytes
 	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
@@ -1725,7 +1725,7 @@ Function118eb0:
 	ld hl, w3_d802
 	ld de, wBGMapBuffer
 	ld bc, $000c
-	call CopyBytes
+	rst CopyBytes
 	call Function1192cc
 	ret c
 	jmp BattleTowerRoomMenu_IncrementJumptable
@@ -1736,7 +1736,7 @@ Function118ec6:
 	ld hl, w3_d80e
 	ld de, wc320
 	ld bc, $0026
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld [wc31f], a
 	ld a, LOW(wc320)
@@ -1967,7 +1967,7 @@ Function119054:
 	ld hl, wcd20
 	ld de, s5_aa7f
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wd474) ; aka BANK(wd475)
@@ -1977,7 +1977,7 @@ Function119054:
 	ld hl, wd475
 	ld de, s5_b2f4
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ldh [rSVBK], a
 	call CloseSRAM
@@ -2003,7 +2003,7 @@ Function1190ec:
 	ld hl, wBGMapBuffer
 	ld de, s5_aa73
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld a, BANK(s5_aa72)
 	call OpenSRAM
@@ -2054,7 +2054,7 @@ Function11915d:
 	ld hl, w3_d802
 	ld de, wcd20
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	ld a, BANK(s5_aa7f)
 	call OpenSRAM
 	ld hl, wBGMapBuffer
@@ -2190,7 +2190,7 @@ Function119223:
 	ld hl, wEmailAddress
 	ld de, s5_b092
 	ld bc, 31
-	call CopyBytes
+	rst CopyBytes
 	dec de
 	xor a
 	ld [de], a
@@ -2210,7 +2210,7 @@ Function119223:
 	ld [s5_b1b2], a
 	ld b, a
 	ld de, s5_b1d3
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld e, l
 	ld d, h
@@ -2297,7 +2297,7 @@ Function1192cc:
 	ld hl, s5_aa73
 	ld de, wc608
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld hl, wc608
 	ld de, wcd20
@@ -2776,7 +2776,7 @@ Function1195c4:
 	jr nc, .asm_1195f3
 .asm_1195d9
 	ld de, wcc60
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld [de], a
 	ld a, [wc608]
@@ -3123,7 +3123,7 @@ Function1197dc:
 	ld hl, wd002
 	ld de, wcc60
 	ld bc, $0080
-	call CopyBytes
+	rst CopyBytes
 	dec de
 	xor a
 	ld [de], a
@@ -3691,14 +3691,14 @@ Function119b6b:
 	ld hl, w3_d800
 	ld de, s5_b023
 	ld bc, 105
-	call CopyBytes
+	rst CopyBytes
 	ld a, $3
 	ld [s5_a800], a
 	call CloseSRAM
 	ld hl, w3_d800
 	ld de, wc608
 	ld bc, 105
-	call CopyBytes
+	rst CopyBytes
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 pushc
@@ -3980,7 +3980,7 @@ BattleTower_UbersCheck:
 	ld hl, wStringBuffer1
 	ld de, wcd49
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, $a
 	ld [wBattleTowerRoomMenuJumptableIndex], a
 	pop af
@@ -4196,7 +4196,7 @@ Function119f3f:
 Function119f45:
 	hlcoord 4, 2
 	ld de, String_11a661
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4214,7 +4214,7 @@ Function119f56:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6aa
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4232,7 +4232,7 @@ Function119f76:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a679
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4266,7 +4266,7 @@ Function119f98:
 .asm_119fd4
 	hlcoord 4, 2
 	ld de, String_11a692
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	ld [wc30d], a
 	ld a, $1
@@ -4317,7 +4317,7 @@ Function11a00e:
 	ld hl, wc608
 	ld de, w3_d800
 	ld bc, 246
-	call CopyBytes
+	rst CopyBytes
 	ld a, $1
 	ldh [rSVBK], a
 	call FadeToMenu
@@ -4328,7 +4328,7 @@ Function11a00e:
 	ld hl, w3_d800
 	ld de, wc608
 	ld bc, 246
-	call CopyBytes
+	rst CopyBytes
 	ld a, $1
 	ldh [rSVBK], a
 	farcall Function115d99
@@ -4388,7 +4388,7 @@ Function11a113:
 	farcall Function115e18
 	hlcoord 4, 2
 	ld de, String_11a6c8
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -4409,7 +4409,7 @@ Function11a13d:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -4427,7 +4427,7 @@ Function11a14b:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6f1
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4446,7 +4446,7 @@ Function11a16d:
 	call Function11a1e6
 	hlcoord 4, 2
 	ld de, wc346
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4464,7 +4464,7 @@ Function11a192:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -4477,7 +4477,7 @@ Function11a192:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	scf
 	ret
 
@@ -4523,10 +4523,10 @@ BattleTowerRoomMenu2_PlaceYesNoMenu:
 	call ApplyTilemap
 	hlcoord 16, 8
 	ld de, String_11a2cf
-	call PlaceString
+	rst PlaceString
 	hlcoord 16, 10
 	ld de, String_11a2d3
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 8
 	ld a, $ed
 	ld [hl], a
@@ -4646,7 +4646,7 @@ Function11a2e6:
 	farcall Function115e18
 	hlcoord 4, 2
 	ld de, String_11a71e
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4664,7 +4664,7 @@ Function11a302:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a72a
-	call PlaceString
+	rst PlaceString
 	hlcoord 9, 4
 	ld de, wcd68
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
@@ -4697,7 +4697,7 @@ Function11a357:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a743
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4715,7 +4715,7 @@ Function11a36b:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a755
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4733,7 +4733,7 @@ Function11a38d:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -4750,7 +4750,7 @@ Function11a3c5:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a762
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4768,7 +4768,7 @@ Function11a3d9:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a779
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4786,7 +4786,7 @@ Function11a3f9:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a755
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4804,7 +4804,7 @@ Function11a41b:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -4821,7 +4821,7 @@ Function11a452:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a791
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4830,7 +4830,7 @@ Function11a466:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a7c1
-	call PlaceString
+	rst PlaceString
 	ld a, $80
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
@@ -4852,7 +4852,7 @@ Function11a488:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a7ac
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4870,7 +4870,7 @@ Function11a49e:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	ld a, $14
 	ld [wcf66], a
 	and a
@@ -4895,7 +4895,7 @@ Function11a4e8:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a7d7
-	call PlaceString
+	rst PlaceString
 	call Function11a5f5
 	xor a
 	ld [wMobileInactivityTimerMinutes], a
@@ -4913,7 +4913,7 @@ Function11a4fe:
 	call Function11a63c
 	hlcoord 4, 2
 	ld de, String_11a6d2
-	call PlaceString
+	rst PlaceString
 	and a
 	ret
 
@@ -5048,10 +5048,10 @@ Function11a5f5:
 	call Function3eea
 	hlcoord 16, 7
 	ld de, String_11a2cf
-	call PlaceString
+	rst PlaceString
 	hlcoord 16, 9
 	ld de, String_11a2d3
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 7
 	ld a, $ed
 	ld [hl], a
@@ -5060,13 +5060,13 @@ Function11a5f5:
 Function11a63c:
 	hlcoord 4, 1
 	ld de, String_11a7f4
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 2
 	ld de, String_11a7f4
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 3
 	ld de, String_11a7f4
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 4
 	ld de, String_11a7f4
 	jmp PlaceString
@@ -5267,7 +5267,7 @@ Function11a90f:
 	ld a, $50
 	ld hl, wc320
 	ld bc, $008c
-	call ByteFill
+	rst ByteFill
 	ld a, [wc31b]
 	ld l, a
 	ld a, [wc31c]
@@ -5355,7 +5355,7 @@ Function11a971:
 	ld a, [wc31e]
 	ld h, a
 	ld de, wcd8d
-	call PlaceString
+	rst PlaceString
 	ld a, c
 	ld [wc31d], a
 	ld a, b
@@ -5582,7 +5582,7 @@ Function11acb7:
 	ld [de], a
 	decoord 0, 7
 	ld bc, 7
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd49]
 	inc a
 	ld [wcd49], a
@@ -5605,7 +5605,7 @@ Function11acb7:
 	add hl, bc
 	decoord 3, 9
 	ld bc, 7
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd4a]
 	inc a
 	ld [wcd4a], a
@@ -5639,7 +5639,7 @@ Function11ad1b:
 	ld hl, wPokedexOrder
 	ld bc, $0115
 	xor a
-	call ByteFill
+	rst ByteFill
 	xor a
 	ld [wJumptableIndex], a
 	ld [wcf64], a
@@ -5683,7 +5683,7 @@ Function11ad95:
 	call MenuBox
 	hlcoord 12, 12
 	ld de, String_11ae40
-	call PlaceString
+	rst PlaceString
 	hlcoord 10, 10, wAttrmap
 	lb bc, 8, 8
 	call Function11afd6
@@ -5785,13 +5785,13 @@ Function11ae4e:
 	call MenuBox
 	hlcoord 10, 14
 	ld de, String_11aff0
-	call PlaceString
+	rst PlaceString
 	ld hl, MenuHeader_11b013
 	call LoadMenuHeader
 	call MenuBox
 	hlcoord 16, 8
 	ld de, String_11b01b
-	call PlaceString
+	rst PlaceString
 	hlcoord 14, 7, wAttrmap
 	lb bc, 5, 6
 	call Function11afd6
@@ -5873,13 +5873,13 @@ Function11af04:
 	call MenuBox
 	hlcoord 10, 14
 	ld de, String_11b003
-	call PlaceString
+	rst PlaceString
 	ld hl, MenuHeader_11b013
 	call LoadMenuHeader
 	call MenuBox
 	hlcoord 16, 8
 	ld de, String_11b01b
-	call PlaceString
+	rst PlaceString
 	hlcoord 14, 7, wAttrmap
 	lb bc, 5, 6
 	call Function11afd6
@@ -6168,7 +6168,7 @@ Function11b099:
 
 	inc hl
 	ld de, .EmptySlot
-	call PlaceString
+	rst PlaceString
 	scf
 	ret
 
@@ -6419,7 +6419,7 @@ Function11b239:
 Function11b242:
 	hlcoord 3, 4
 	ld de, wStringBuffer3
-	call PlaceString
+	rst PlaceString
 	xor a
 	ld [wMonType], a
 	farcall GetGender
@@ -6474,10 +6474,10 @@ Function11b279:
 Function11b295:
 	hlcoord 4, 13
 	ld de, String_11b308
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 14
 	ld de, String_11b308
-	call PlaceString
+	rst PlaceString
 	call Function11b20b
 	call CheckSeenMemMon
 	jr z, .asm_11b2d1
@@ -6709,7 +6709,7 @@ Function11b3d9:
 	jr z, .skip
 	ld hl, 0
 	ld bc, $70
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ld b, 0
@@ -7000,7 +7000,7 @@ Function11b570:
 	ld hl, w3_d800
 	ld de, wc608
 	ld bc, w3_d88f - w3_d800
-	call CopyBytes
+	rst CopyBytes
 
 	ld a, $1
 	ldh [rSVBK], a
@@ -7013,7 +7013,7 @@ Function11b570:
 	inc de
 	ld hl, wc608
 	ld bc, w3_d88f - w3_d800
-	call CopyBytes
+	rst CopyBytes
 
 	push de
 	pop hl
@@ -7054,14 +7054,14 @@ Function11b5e8:
 	ld hl, wRTC
 	ld de, wc608
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld a, $5
 	call OpenSRAM
 	ld hl, wc608
 	ld de, $b08c
 	ld bc, 4
-	call CopyBytes
+	rst CopyBytes
 	ld a, $2
 	ld [$a800], a
 	ld a, [$a81f]
@@ -7287,7 +7287,7 @@ Function11b7e5:
 	ld hl, wMobileMonOT ; OT
 	ld de, wOTTrademonOTName
 	ld bc, 5
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 	ld a, [wMobileMonID]
@@ -7395,7 +7395,7 @@ Function11b879:
 	ld e, a
 	ld a, [wcd4c]
 	ld c, $3c
-	call AddNTimes
+	rst AddNTimes
 	add hl, de
 	push hl
 	xor a
@@ -7407,7 +7407,7 @@ Function11b879:
 	ld e, a
 	ld a, [wcd4a]
 	ld c, $3c
-	call AddNTimes
+	rst AddNTimes
 	add hl, de
 	ld a, l
 	cpl
@@ -7434,7 +7434,7 @@ Function11b920:
 	ld hl, sOfferTrainerID
 	ld de, wOfferTrainerID
 	ld bc, 8
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	jmp Function118000
 
@@ -7446,7 +7446,7 @@ Function11b93b:
 	ld hl, sOfferGender
 	ld de, wc608
 	ld bc, TRADE_CORNER_REQUEST_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 
 	ld a, LOW(wUnknownGender)
@@ -7517,7 +7517,7 @@ AddMobileMonToParty:
 	ld a, [wMobileMonStructPointer + 1]
 	ld h, a
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
@@ -7534,7 +7534,7 @@ AddMobileMonToParty:
 	ld a, [wMobileMonOTPointer + 1]
 	ld h, a
 	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 
@@ -7553,7 +7553,7 @@ AddMobileMonToParty:
 	ld a, [wMobileMonNicknamePointer + 1]
 	ld h, a
 	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [de], a
 
@@ -7574,7 +7574,7 @@ AddMobileMonToParty:
 	ld a, [wMobileMonMailPointer + 1]
 	ld h, a
 	ld bc, MAIL_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	jmp CloseSRAM
 

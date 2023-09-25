@@ -88,7 +88,7 @@ AnimateHallOfFame:
 	jr nc, .done
 	ld hl, wHallOfFameTempMon1 + 1
 	ld bc, wHallOfFameTempMon1End - wHallOfFameTempMon1
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hld]
 	and [hl]
 	inc a
@@ -114,7 +114,7 @@ AnimateHallOfFame:
 	call DisplayHOFMon
 	ld de, .String_NewHallOfFamer
 	hlcoord 1, 2
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	decoord 6, 5
 	ld c, ANIM_MON_HOF
@@ -131,7 +131,7 @@ GetHallOfFameParty:
 	ld hl, wHallOfFamePokemonList
 	ld bc, HOF_LENGTH
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, [wHallOfFameCount]
 	ld de, wHallOfFamePokemonList
 	ld [de], a
@@ -155,7 +155,7 @@ GetHallOfFameParty:
 	ld a, c
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld c, l
 	ld b, h
 
@@ -199,9 +199,9 @@ GetHallOfFameParty:
 	ld a, c
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 
 	pop bc
 	inc c
@@ -245,7 +245,7 @@ AnimateHOFMonEntrance:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	ld de, vTiles2 tile $31
 	predef GetMonBackpic
 	ld a, $31
@@ -269,7 +269,7 @@ AnimateHOFMonEntrance:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 6, 5
 	call _PrepMonFrontpic
 	call WaitBGMap
@@ -354,7 +354,7 @@ _HallOfFamePC:
 	jr nc, .fail
 	ld hl, wHallOfFameTempMon1 + 1
 	ld bc, wHallOfFameTempMon1End - wHallOfFameTempMon1
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hld]
 	and [hl]
 	inc a
@@ -374,14 +374,14 @@ _HallOfFamePC:
 	jr c, .print_num_hof
 	ld de, .HOFMaster
 	hlcoord 1, 2
-	call PlaceString
+	rst PlaceString
 	hlcoord 13, 2
 	jr .finish
 
 .print_num_hof
 	ld de, .TimeFamer
 	hlcoord 1, 2
-	call PlaceString
+	rst PlaceString
 	hlcoord 2, 2
 	ld de, wHallOfFameTempWinCount
 	lb bc, 1, 3
@@ -390,7 +390,7 @@ _HallOfFamePC:
 
 .finish
 	ld de, .EmptyString
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
@@ -416,7 +416,7 @@ LoadHOFTeam:
 	jr nc, .invalid
 	ld hl, sHallOfFame
 	ld bc, HOF_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(sHallOfFame)
 	call OpenSRAM
 	ld a, [hl]
@@ -424,7 +424,7 @@ LoadHOFTeam:
 	jr z, .absent
 	ld de, wHallOfFameTemp
 	ld bc, HOF_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	and a
 	ret
@@ -459,13 +459,13 @@ DisplayHOFMon:
 	ld [wTempMonLevel], a
 	ld de, wStringBuffer2
 	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [wStringBuffer2 + MON_NAME_LENGTH - 1], a
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 0
 	lb bc, 3, SCREEN_WIDTH - 2
 	call Textbox
@@ -504,7 +504,7 @@ DisplayHOFMon:
 	ld [wNamedObjectIndex], a
 	call GetBasePokemonName
 	hlcoord 7, 13
-	call PlaceString
+	rst PlaceString
 	ld a, TEMPMON
 	ld [wMonType], a
 	farcall GetGender
@@ -521,7 +521,7 @@ DisplayHOFMon:
 	ld a, "/"
 	ld [hli], a
 	ld de, wStringBuffer2
-	call PlaceString
+	rst PlaceString
 	hlcoord 1, 16
 	call PrintLevel
 
@@ -542,7 +542,7 @@ HOF_AnimatePlayerPic:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	farcall GetPlayerBackpic
 	ld a, $31
 	ldh [hGraphicStartTile], a
@@ -566,7 +566,7 @@ HOF_AnimatePlayerPic:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	farcall HOF_LoadTrainerFrontpic
 	xor a
 	ldh [hGraphicStartTile], a
@@ -590,7 +590,7 @@ HOF_AnimatePlayerPic:
 	call Textbox
 	hlcoord 2, 4
 	ld de, wPlayerName
-	call PlaceString
+	rst PlaceString
 	hlcoord 1, 6
 	ld a, "<ID>"
 	ld [hli], a
@@ -603,7 +603,7 @@ HOF_AnimatePlayerPic:
 	call PrintNum
 	hlcoord 1, 8
 	ld de, .PlayTime
-	call PlaceString
+	rst PlaceString
 	hlcoord 3, 9
 	ld de, wGameTimeHours
 	lb bc, 2, 3

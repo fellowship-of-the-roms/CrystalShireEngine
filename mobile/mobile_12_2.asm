@@ -25,7 +25,7 @@ Function4a94e:
 	ld a, -1
 	ld hl, wd002
 	ld bc, 3
-	call ByteFill
+	rst ByteFill
 	xor a
 	ld [wd018], a
 	ld [wd019], a
@@ -60,7 +60,7 @@ Function4a94e:
 	ld hl, wd002
 	ld a, -1
 	ld bc, 3
-	call ByteFill
+	rst ByteFill
 	scf
 	jr .asm_4a9af
 
@@ -112,7 +112,7 @@ Function4a9d7:
 	ld l, e
 	ld de, wMobileParticipant1Nickname
 	ld bc, NAME_LENGTH_JAPANESE
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wd003]
 	ld hl, wPartyMonNicknames
 	call GetNickname
@@ -120,7 +120,7 @@ Function4a9d7:
 	ld l, e
 	ld de, wMobileParticipant2Nickname
 	ld bc, NAME_LENGTH_JAPANESE
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wd004]
 	ld hl, wPartyMonNicknames
 	call GetNickname
@@ -128,7 +128,7 @@ Function4a9d7:
 	ld l, e
 	ld de, wMobileParticipant3Nickname
 	ld bc, NAME_LENGTH_JAPANESE
-	call CopyBytes
+	rst CopyBytes
 	ld hl, MobileUseTheseThreeMonText
 	call PrintText
 	jmp YesNoBox
@@ -246,7 +246,7 @@ Function4aab6:
 	push hl
 	hlcoord 0, 1
 	ld bc, $28
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], $ec
 	pop hl
 	pop de
@@ -296,7 +296,7 @@ Function4ab06:
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1HP
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -513,7 +513,7 @@ Function4ac58:
 	call Textbox
 	hlcoord 13, 14
 	ld de, String_4ada7
-	call PlaceString
+	rst PlaceString
 	jr .asm_4ac96
 
 .asm_4ac89
@@ -646,7 +646,7 @@ Function4ad67: ; unreferenced
 Function4ad68:
 	hlcoord 13, 12
 	ld de, String_4ad88
-	call PlaceString
+	rst PlaceString
 	call Function4adb2
 	jr c, .asm_4ad7e
 	hlcoord 13, 10

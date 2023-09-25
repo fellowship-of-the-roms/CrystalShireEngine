@@ -19,7 +19,7 @@ Function49f16:
 	call Function48cdc
 	hlcoord 6, 2
 	ld de, MobileString1
-	call PlaceString
+	rst PlaceString
 	hlcoord 0, 12
 	ld b, 4
 	ld c, SCREEN_HEIGHT
@@ -27,7 +27,7 @@ Function49f16:
 	xor a
 	ld de, String_0x49fe9
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap2
 	call SetPalettes
 	call StaticMenuJoypad
@@ -84,7 +84,7 @@ Function49f16:
 	ld c, SCREEN_HEIGHT
 	call ClearBox
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	jr .useless_jump
 
 .useless_jump
@@ -179,7 +179,7 @@ Function4a0c2:
 	ld hl, sPlayerData + wPlayerName - wPlayerData
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH_JAPANESE
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	farcall _LoadData
 	ld c, 2
@@ -249,7 +249,7 @@ Function4a149:
 	call Function48cdc
 	hlcoord 3, 4
 	ld de, String_4a1ef
-	call PlaceString
+	rst PlaceString
 	hlcoord 0, 12
 	ld b, $4
 	ld c, $12
@@ -265,7 +265,7 @@ Function4a149:
 	ld c, $12
 	call ClearBox
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	farcall Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	call SetPalettes
 	call StaticMenuJoypad
@@ -311,7 +311,7 @@ asm_4a19d:
 	ld c, $12
 	call ClearBox
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	jr .asm_4a1db
 .asm_4a1db
 	call Function4a373
@@ -384,7 +384,7 @@ Function4a28a:
 	call Function48cdc
 	hlcoord 14, 1
 	ld de, String_4a34b
-	call PlaceString
+	rst PlaceString
 	farcall Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	call Function4a118
 	call ScrollingMenuJoypad
@@ -428,7 +428,7 @@ Function4a28a:
 	ld hl, sMobileLoginPassword
 	xor a
 	ld bc, MOBILE_LOGIN_PASSWORD_LENGTH
-	call ByteFill
+	rst ByteFill
 	call CloseSRAM
 	ld hl, DeletedTheLoginPasswordText
 	call PrintText
@@ -571,22 +571,22 @@ Function4a449: ; unreferenced
 	ld bc, 3 * SCREEN_WIDTH
 	ld a, $0
 	hlcoord 0, 0
-	call ByteFill
+	rst ByteFill
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, $1
-	call ByteFill
+	rst ByteFill
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, $0
-	call ByteFill
+	rst ByteFill
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, $1
-	call ByteFill
+	rst ByteFill
 	ld bc, SCREEN_WIDTH
 	ld a, $2
-	call ByteFill
+	rst ByteFill
 	ld bc, SCREEN_WIDTH
 	ld a, $3
-	call ByteFill
+	rst ByteFill
 	ld bc, SCREEN_WIDTH
 	ld a, " "
 	jmp ByteFill
@@ -639,19 +639,19 @@ Function4a4c4:
 	call Function48cdc
 	hlcoord 4, 2
 	ld de, String_4a5c5
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 4
 	ld de, String_4a5cd
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 6
 	ld de, String_4a5da
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 8
 	ld de, String_4a5e6
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 10
 	ld de, String_4a5f2
-	call PlaceString
+	rst PlaceString
 	hlcoord 0, 12
 	ld b, $4
 	ld c, $12
@@ -661,14 +661,14 @@ Function4a4c4:
 	ld d, h
 	ld e, l
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	ld hl, Strings_4a5f6
 	call GetNthString
 	ld d, h
 	ld e, l
 	hlcoord 1, 16
-	call PlaceString
+	rst PlaceString
 	call WaitBGMap2
 	call SetPalettes
 	call StaticMenuJoypad
@@ -722,7 +722,7 @@ asm_4a54d:
 	ld c, $12
 	call ClearBox
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	pop af
 	inc a
 	ld hl, Strings_4a5f6
@@ -730,7 +730,7 @@ asm_4a54d:
 	ld d, h
 	ld e, l
 	hlcoord 1, 16
-	call PlaceString
+	rst PlaceString
 	jr Function4a5b0
 
 Function4a5b0:

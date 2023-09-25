@@ -65,7 +65,7 @@ ShakeHeadbuttTree:
 	ld hl, wShadowOAMSprite36
 	ld bc, wShadowOAMEnd - wShadowOAMSprite36
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld de, Font
 	ld hl, vTiles1
 	lb bc, BANK(Font), 12

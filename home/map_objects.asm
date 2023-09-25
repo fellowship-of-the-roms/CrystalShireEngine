@@ -190,7 +190,7 @@ GetMapObject::
 ; Return the location of map object a in bc.
 	ld hl, wMapObjects
 	ld bc, MAPOBJECT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	ret
@@ -533,7 +533,7 @@ UpdateSprites::
 GetObjectStruct::
 	ld bc, OBJECT_LENGTH
 	ld hl, wObjectStructs
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	ret

@@ -40,13 +40,13 @@ _GiveOddEgg:
 	push bc
 	ld hl, OddEggs
 	ld a, NICKNAMED_MON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	; Writes to wOddEgg, wOddEggName, and wOddEggOT,
 	; even though OddEggs does not have data for wOddEggOT
 	ld de, wOddEgg
 	ld bc, NICKNAMED_MON_STRUCT_LENGTH + NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	; Loads the actual species and overwrites the zero in wOddEggSpecies
 	pop hl
@@ -112,7 +112,7 @@ _GiveOddEgg:
 	ld hl, .Odd
 	ld de, wTempOddEggNickname
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	; load pointer to wTempOddEggNickname in wMobileMonOTPointer
 	ld a, LOW(wTempOddEggNickname)

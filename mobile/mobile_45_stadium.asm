@@ -23,10 +23,10 @@ Function11766b:
 	ld hl, $b1f3
 	ld de, wcd49
 	ld bc, $8
-	call CopyBytes
+	rst CopyBytes
 	ld de, wc708
 	ld bc, $11
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	pop af
 	ldh [rSVBK], a
@@ -38,10 +38,10 @@ Function117699:
 	ld hl, wcd49
 	ld de, $b1f3
 	ld bc, $8
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wc708
 	ld bc, $11
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	xor a
 	ld [wcd49], a
@@ -53,7 +53,7 @@ Function117699:
 	ld [wcd4f], a
 	ld hl, wc708
 	ld bc, $11
-	call ByteFill
+	rst ByteFill
 	call ClearBGPalettes
 	call ClearSprites
 	farcall Function171c87
@@ -324,13 +324,13 @@ Function1178aa:
 	farcall ReloadMapPart
 	hlcoord 16, 8
 	ld de, YessNoString_1179c5
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 10
 	ld a, "▶"
 	ld [hl], a
 	hlcoord 1, 14
 	ld de, AskSavePasswordString
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	ld [wcd4e], a
 	jmp MobilePassword_IncrementJumptable
@@ -391,7 +391,7 @@ Function117942:
 	call SpeechTextbox
 	hlcoord 1, 14
 	ld de, SavedPasswordString
-	call PlaceString
+	rst PlaceString
 	ld a, $1e
 	ld [wcd4e], a
 	ld a, BANK(sMobileLoginPassword)
@@ -401,7 +401,7 @@ Function117942:
 	ld hl, wc708
 	ld de, sMobileLoginPassword + 1
 	ld bc, MOBILE_LOGIN_PASSWORD_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld a, [wcd4f]
 	and a
@@ -426,7 +426,7 @@ Function117984:
 	farcall ReloadMapPart
 	hlcoord 1, 14
 	ld de, NotAPokemonPasswordString
-	call PlaceString
+	rst PlaceString
 	ld a, $1e
 	ld [wcd4e], a
 	call MobilePassword_IncrementJumptable
@@ -575,7 +575,7 @@ Function117b31:
 	call MenuBoxCoord2Tile
 	hlcoord 16, 8
 	ld de, YesNo117ccc
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 8
 	ld a, "▶"
 	ld [hl], a
@@ -707,7 +707,7 @@ Function117bb6:
 	ld hl, w3_d002
 	ld de, $b000
 	ld bc, $1000
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	pop af
 	ldh [rSVBK], a
@@ -771,7 +771,7 @@ Function117c89:
 	ld hl, $bfea
 	ld de, wcd69
 	ld bc, $10
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 MenuHeader_117cbc:

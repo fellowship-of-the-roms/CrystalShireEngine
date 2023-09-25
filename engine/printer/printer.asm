@@ -481,7 +481,7 @@ PlacePrinterStatusString:
 	call PlaceFarString
 	hlcoord 2, 15
 	ld de, String_PressBToCancel
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
 	xor a
@@ -514,7 +514,7 @@ PlacePrinterStatusStringBorderless: ; unreferenced
 	call PlaceFarString
 	hlcoord 4, 15
 	ld de, String_PressBToCancel
-	call PlaceString
+	rst PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
 	xor a

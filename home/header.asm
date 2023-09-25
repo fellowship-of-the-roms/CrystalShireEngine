@@ -8,11 +8,13 @@ SECTION "rst8", ROM0[$0008]
 FarCall::
 	jmp RstFarCall
 
-SwapHLDE::
-	push de
-	ld d, h
-	ld e, l
+PopAFBCDEHL::
+	pop af
+PopBCDEHL::
+	pop bc
+	pop de
 	pop hl
+DoNothing::
 	ret
 
 SECTION "rst10", ROM0[$0010]
@@ -23,34 +25,33 @@ Bankswitch::
 
 SECTION "rst18", ROM0[$0018]
 
+AddNTimes::
+	jmp _AddNTimes
+
 SECTION "rst20", ROM0[$0020]
-	rst $38
+
+CopyBytes::
+	jmp _CopyBytes
 
 SECTION "rst28", ROM0[$0028]
-JumpTable::
+
+ByteFill::
+	jmp _ByteFill
+
+SECTION "rst30", ROM0[$0030]
+
+PlaceString::
+	jmp _PlaceString
+
+SwapHLDE::
 	push de
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-; SECTION "rst30", ROM0[$0030]
-	ld l, a
-	pop de
-	jp hl
+	ld d, h
+	ld e, l
+	pop hl
+	ret
 
 SECTION "rst38", ROM0[$0038]
 	rst $38
-
-PopAFBCDEHL::
-	pop af
-PopBCDEHL::
-	pop bc
-	pop de
-	pop hl
-DoNothing::
-	ret
 
 ; Game Boy hardware interrupts
 

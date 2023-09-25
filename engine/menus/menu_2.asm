@@ -140,10 +140,10 @@ DisplayCoinCaseBalance:
 	call Textbox
 	hlcoord 12, 0
 	ld de, CoinString
-	call PlaceString
+	rst PlaceString
 	hlcoord 17, 1
 	ld de, ShowMoney_TerminatorString
-	call PlaceString
+	rst PlaceString
 	ld de, wCoins
 	lb bc, 2, 4
 	hlcoord 13, 1
@@ -156,14 +156,14 @@ DisplayMoneyAndCoinBalance:
 	call Textbox
 	hlcoord 6, 1
 	ld de, MoneyString
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 1
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 6, 3
 	ld de, CoinString
-	call PlaceString
+	rst PlaceString
 	hlcoord 15, 3
 	ld de, wCoins
 	lb bc, 2, 4
@@ -191,10 +191,10 @@ StartMenu_PrintSafariGameStatus: ; unreferenced
 	call PrintNum
 	hlcoord 4, 1
 	ld de, .slash_500
-	call PlaceString
+	rst PlaceString
 	hlcoord 1, 3
 	ld de, .booru_ko
-	call PlaceString
+	rst PlaceString
 	hlcoord 5, 3
 	ld de, wSafariBallsRemaining
 	lb bc, 1, 2
@@ -222,14 +222,14 @@ StartMenu_PrintBugContestStatus:
 	call StartMenu_DrawBugContestStatusBox
 	hlcoord 1, 5
 	ld de, .BallsString
-	call PlaceString
+	rst PlaceString
 	hlcoord 8, 5
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
 	hlcoord 1, 1
 	ld de, .CaughtString
-	call PlaceString
+	rst PlaceString
 	ld a, [wContestMon]
 	and a
 	ld de, .NoneString
@@ -239,13 +239,13 @@ StartMenu_PrintBugContestStatus:
 
 .no_contest_mon
 	hlcoord 8, 1
-	call PlaceString
+	rst PlaceString
 	ld a, [wContestMon]
 	and a
 	jr z, .skip_level
 	hlcoord 1, 3
 	ld de, .LevelString
-	call PlaceString
+	rst PlaceString
 	ld a, [wContestMonLevel]
 	ld h, b
 	ld l, c
@@ -277,7 +277,7 @@ FindApricornsInBag:
 	assert wKurtApricornCount + 1 == wKurtApricornItems
 	dec a
 	ld bc, 10
-	call ByteFill
+	rst ByteFill
 
 	ld hl, ApricornBalls
 .loop

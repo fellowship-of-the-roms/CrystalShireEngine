@@ -221,7 +221,7 @@ OaksPKMNTalk4:
 	ld bc, 5
 	add hl, bc
 	ld c, 3 * NUM_GRASSMON
-	call AddNTimes
+	rst AddNTimes
 
 .loop3
 	; Choose one of the middle three Pokemon.
@@ -246,7 +246,7 @@ OaksPKMNTalk4:
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	; Now that we've chosen our wild Pokemon,
 	; let's recover the map index info and get its name.
@@ -615,7 +615,7 @@ ClearBottomLine:
 	hlcoord 1, 15
 	ld bc, SCREEN_WIDTH - 2
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 1, 16
 	ld bc, SCREEN_WIDTH - 2
 	ld a, " "
@@ -1408,7 +1408,7 @@ BuenasPassword1:
 	ldh [hBGMapMode], a
 	ld de, BuenasPasswordChannelName
 	hlcoord 2, 9
-	call PlaceString
+	rst PlaceString
 	pop af
 	ldh [hBGMapMode], a
 	ld hl, BuenaRadioText1

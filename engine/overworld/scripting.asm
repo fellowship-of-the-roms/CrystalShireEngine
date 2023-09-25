@@ -12,7 +12,7 @@ ScriptEvents::
 .loop
 	ld a, [wScriptMode]
 	ld hl, .modes
-	rst JumpTable
+	call JumpTable
 	call CheckScript
 	jr nz, .loop
 	ret
@@ -55,7 +55,7 @@ WaitScriptMovement:
 RunScriptCommand:
 	call GetScriptByte
 	ld hl, ScriptCommandTable
-	rst JumpTable
+	call JumpTable
 	ret
 
 ScriptCommandTable:
@@ -1054,7 +1054,7 @@ Script_earthquake:
 	ld hl, EarthquakeMovement
 	ld de, wEarthquakeMovementDataBuffer
 	ld bc, EarthquakeMovement.End - EarthquakeMovement
-	call CopyBytes
+	rst CopyBytes
 	call GetScriptByte
 	ld [wEarthquakeMovementDataBuffer + 1], a
 	and %00111111
@@ -1540,7 +1540,7 @@ GetStringBuffer:
 CopyConvertedText:
 	ld hl, wStringBuffer3
 	ld bc, STRING_BUFFER_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	jmp CopyName2
 
 Script_getitemname:

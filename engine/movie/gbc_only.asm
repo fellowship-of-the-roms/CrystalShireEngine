@@ -56,7 +56,7 @@ DrawGBCOnlyScreen:
 
 	ld de, GBCOnlyString
 	hlcoord 1, 10
-	call PlaceString
+	rst PlaceString
 
 	ret
 

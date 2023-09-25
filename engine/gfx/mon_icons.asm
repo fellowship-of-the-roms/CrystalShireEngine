@@ -125,7 +125,7 @@ GetMonPalInBCDE:
 	; Now we have the target color. Get the palette (+ 2 to avoid white).
 	ld hl, PartyMenuOBPals + 2
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 
 	push hl
 	ld a, BANK(PartyMenuOBPals)
@@ -200,7 +200,7 @@ Unused_GetPartyMenuMonIcon:
 	ldh a, [hObjectStructIndex]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld a, [hl]
 	and a
@@ -273,7 +273,7 @@ PartyMenu_InitAnimatedMonIcon:
 	ldh a, [hObjectStructIndex]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld a, [hl]
 	and a

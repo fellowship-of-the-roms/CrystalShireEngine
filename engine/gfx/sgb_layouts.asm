@@ -69,7 +69,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld a, [wPlayerHPPal]
 	ld l, a
@@ -108,7 +108,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal23
 	ld de, wSGBPals + PALPACKET_LENGTH
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	call GetBattlemonBackpicPalettePointer
 
@@ -140,7 +140,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_AllPal0
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld hl, wSGBPals + 1
 	ld [hl], $10
@@ -163,7 +163,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurHPPal]
 	ld l, a
 	ld h, 0
@@ -203,7 +203,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wSGBPals + 3
 	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
 	inc hl
@@ -230,7 +230,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wSGBPals + 3
 	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
 	inc hl
@@ -263,7 +263,7 @@ SGBLayoutJumptable:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wSGBPals + 3
 	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
 	inc hl
@@ -338,7 +338,7 @@ endr
 	ld hl, BlkPacket_AllPal0
 	ld de, wBetaPokerSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, PalPacket_BetaPoker
 	ld de, BlkPacket_AllPal0
 	ret
@@ -347,7 +347,7 @@ endr
 	ld hl, PalPacket_AllPal0
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call .GetMapPalsIndex
 	ld hl, wSGBPals + 1
 	ld [hld], a
@@ -361,7 +361,7 @@ endr
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	ld a, c
 	and a
@@ -381,7 +381,7 @@ endr
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	ld c, l
 	ld b, h
 	ld a, [wPlayerHPPal]
@@ -416,11 +416,11 @@ endr
 	ld hl, PalPacket_AllPal0
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, BlkPacket_AllPal0
 	ld de, wSGBPals + PALPACKET_LENGTH
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	call .GetMapPalsIndex
 	ld hl, wSGBPals + 1
 	ld [hl], a
@@ -445,7 +445,7 @@ endr
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	call GetPokemonIndexFromID
 	add hl, hl
@@ -481,7 +481,7 @@ endr
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
@@ -506,7 +506,7 @@ endr
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetFrontpicPalettePointer

@@ -24,18 +24,18 @@ DrawPokedexListWindow:
 	ld a, $32
 	hlcoord 0, 17
 	ld bc, 12
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 1
 	lb bc, 15, 11
 	call ClearBox
 	ld a, $34
 	hlcoord 0, 0
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	ld a, $39
 	hlcoord 0, 16
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	hlcoord 5, 0
 	ld [hl], $3f
 	hlcoord 5, 16
@@ -69,11 +69,11 @@ DrawPokedexSearchResultsWindow:
 	ld a, $34
 	hlcoord 0, 0
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	ld a, $39
 	hlcoord 0, 10
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	hlcoord 5, 0
 	ld [hl], $3f
 	hlcoord 5, 10
@@ -88,11 +88,11 @@ DrawPokedexSearchResultsWindow:
 	ld a, $34
 	hlcoord 0, 11
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	ld a, $39
 	hlcoord 0, 17
 	ld bc, 11
-	call ByteFill
+	rst ByteFill
 	hlcoord 11, 11
 	ld [hl], $66
 	ld a, $67

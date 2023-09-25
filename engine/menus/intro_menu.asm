@@ -20,7 +20,7 @@ PrintDayOfWeek:
 	ld d, h
 	ld e, l
 	pop hl
-	call PlaceString
+	rst PlaceString
 	ld h, b
 	ld l, c
 	ld de, .Day
@@ -97,13 +97,13 @@ _ResetWRAM:
 	ld hl, wPokemonIndexTable
 	ld bc, wPokemonIndexTableEnd - wPokemonIndexTable
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, wMoveIndexTable
 	ld bc, wMoveIndexTableEnd - wMoveIndexTable
-	call ByteFill
+	rst ByteFill
 	ld hl, wItemIndexTable
 	ld bc, wItemIndexTableEnd - wItemIndexTable
-	call ByteFill
+	rst ByteFill
 
 	ld a, 1
 	ldh [rSVBK], a
@@ -111,17 +111,17 @@ _ResetWRAM:
 	ld hl, wShadowOAM
 	ld bc, wOptions - wShadowOAM
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ld hl, WRAM1_Begin
 	ld bc, wGameData - WRAM1_Begin
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ld hl, wGameData
 	ld bc, wGameDataEnd - wGameData
 	xor a
-	call ByteFill
+	rst ByteFill
 
 	ldh a, [rLY]
 	ldh [hUnusedBackup], a
@@ -528,7 +528,7 @@ Continue_DisplayBadgesDexPlayerName:
 	decoord 8, 2, 0
 	add hl, de
 	ld de, .Player
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ret
 
@@ -760,7 +760,7 @@ StorePlayerName:
 	ld a, "@"
 	ld bc, NAME_LENGTH
 	ld hl, wPlayerName
-	call ByteFill
+	rst ByteFill
 	ld hl, wPlayerName
 	ld de, wStringBuffer2
 	jmp CopyName2
@@ -1051,7 +1051,7 @@ TitleScreenEntrance:
 	ld e, a
 	ld hl, wLYOverrides
 	ld bc, 8 * 10 ; logo height
-	call ByteFill
+	rst ByteFill
 
 ; Reversed signage for every other line's position.
 ; This is responsible for the interlaced effect.

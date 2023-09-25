@@ -228,11 +228,11 @@ MagnetTrain_InitLYOverrides:
 	ld hl, wLYOverrides
 	ld bc, wLYOverridesEnd - wLYOverrides
 	ld a, [wMagnetTrainInitPosition]
-	call ByteFill
+	rst ByteFill
 	ld hl, wLYOverridesBackup
 	ld bc, wLYOverridesBackupEnd - wLYOverridesBackup
 	ld a, [wMagnetTrainInitPosition]
-	call ByteFill
+	rst ByteFill
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	ret
@@ -245,25 +245,25 @@ SetMagnetTrainPals:
 	hlbgcoord 0, 0
 	ld bc, 4 * BG_MAP_WIDTH
 	ld a, PAL_BG_GREEN
-	call ByteFill
+	rst ByteFill
 
 	; train
 	hlbgcoord 0, 4
 	ld bc, 10 * BG_MAP_WIDTH
 	xor a ; PAL_BG_GRAY
-	call ByteFill
+	rst ByteFill
 
 	; more bushes
 	hlbgcoord 0, 14
 	ld bc, 4 * BG_MAP_WIDTH
 	ld a, PAL_BG_GREEN
-	call ByteFill
+	rst ByteFill
 
 	; train window
 	hlbgcoord 7, 8
 	ld bc, 6
 	ld a, PAL_BG_YELLOW
-	call ByteFill
+	rst ByteFill
 
 	ld a, 0
 	ldh [rVBK], a

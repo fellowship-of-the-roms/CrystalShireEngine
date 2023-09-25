@@ -149,7 +149,7 @@ BankOfMom:
 	ld hl, wStringBuffer2
 	ld de, wStringBuffer2 + 3
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld bc, wMomsMoney
 	ld de, wStringBuffer2
 	farcall GiveMoney
@@ -160,7 +160,7 @@ BankOfMom:
 	ld hl, wStringBuffer2
 	ld de, wMomsMoney
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -209,7 +209,7 @@ BankOfMom:
 	ld hl, wStringBuffer2
 	ld de, wStringBuffer2 + 3
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld de, wMomsMoney
 	ld bc, wStringBuffer2
 	farcall CompareMoney
@@ -224,7 +224,7 @@ BankOfMom:
 	ld hl, wStringBuffer2
 	ld de, wMoney
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -410,21 +410,21 @@ Mom_ContinueMenuSetup:
 	call Textbox
 	hlcoord 1, 2
 	ld de, Mom_SavedString
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 2
 	ld de, wMomsMoney
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 1, 4
 	ld de, Mom_HeldString
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 4
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 1, 6
 	pop de
-	call PlaceString
+	rst PlaceString
 	hlcoord 12, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
@@ -452,7 +452,7 @@ Mom_WithdrawDepositMenuJoypad:
 	hlcoord 12, 6
 	ld bc, 7
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 12, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6

@@ -358,7 +358,7 @@ ShortHPBar_CalcPixelFrame:
 	jr nc, .return_max
 	and a
 	jr z, .return_zero
-	call AddNTimes
+	rst AddNTimes
 
 	ld b, 0
 .loop

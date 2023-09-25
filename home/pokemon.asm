@@ -249,7 +249,7 @@ GetBaseData::
 	rst Bankswitch
 	ld de, wCurBaseData
 	ld bc, BASE_DATA_SIZE
-	call CopyBytes
+	rst CopyBytes
 	jr .end
 
 .egg
@@ -295,7 +295,7 @@ GetNickname::
 
 	push de
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 
 	farcall CorrectNickErrors

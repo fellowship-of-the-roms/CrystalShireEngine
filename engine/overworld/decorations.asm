@@ -442,7 +442,7 @@ DoDecorationAction2:
 	add hl, de
 	ld a, [hl]
 	ld hl, .DecoActions
-	rst JumpTable
+	call JumpTable
 	ret
 
 .DecoActions:
@@ -498,7 +498,7 @@ GetDecoName:
 	ld bc, wStringBuffer2
 	push bc
 	ld hl, .NameFunctions
-	rst JumpTable
+	call JumpTable
 	pop de
 	ret
 
@@ -968,7 +968,7 @@ INCLUDE "data/decorations/decorations.asm"
 DescribeDecoration::
 	ld a, b
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Jumptable:

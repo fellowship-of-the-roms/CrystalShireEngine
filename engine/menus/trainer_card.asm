@@ -246,13 +246,13 @@ TrainerCard_PrintTopHalfOfCard:
 	call TrainerCard_InitBorder
 	hlcoord 2, 2
 	ld de, .Name_Money
-	call PlaceString
+	rst PlaceString
 	hlcoord 2, 4
 	ld de, .ID_No
 	call TrainerCardSetup_PlaceTilemapString
 	hlcoord 7, 2
 	ld de, wPlayerName
-	call PlaceString
+	rst PlaceString
 	hlcoord 5, 4
 	ld de, wPlayerID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
@@ -285,10 +285,10 @@ TrainerCard_PrintTopHalfOfCard:
 TrainerCard_Page1_PrintDexCaught_GameTime:
 	hlcoord 2, 10
 	ld de, .Dex_PlayTime
-	call PlaceString
+	rst PlaceString
 	hlcoord 10, 15
 	ld de, .Badges
-	call PlaceString
+	rst PlaceString
 	ld hl, wPokedexCaught
 	ld bc, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits16

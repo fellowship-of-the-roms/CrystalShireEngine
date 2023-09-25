@@ -109,7 +109,7 @@ SetUpPokeAnim:
 	add hl, bc
 	ld a, [hl]
 	ld hl, PokeAnim_SetupCommands
-	rst JumpTable
+	call JumpTable
 	ld a, [wPokeAnimSceneIndex]
 	ld c, a
 	pop af
@@ -283,7 +283,7 @@ PokeAnim_InitPicAttributes:
 	ld hl, wPokeAnimStruct
 	ld bc, wPokeAnimStructEnd - wPokeAnimStruct
 	xor a
-	call ByteFill
+	rst ByteFill
 	pop hl
 	pop de
 	pop bc
@@ -332,7 +332,7 @@ PokeAnim_InitAnim:
 	ld hl, wPokeAnimIdleFlag
 	ld bc, wPokeAnimStructEnd - wPokeAnimIdleFlag
 	xor a
-	call ByteFill
+	rst ByteFill
 	pop bc
 	ld a, b
 	ld [wPokeAnimSpeed], a
@@ -352,7 +352,7 @@ PokeAnim_DoAnimScript:
 	ld a, [wPokeAnimJumptableIndex]
 	and $7f
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Jumptable:
@@ -407,7 +407,7 @@ PokeAnim_GetDuration:
 	ld b, 0
 	ld hl, 0
 	ld a, [wPokeAnimSpeed]
-	call AddNTimes
+	rst AddNTimes
 	ld a, h
 	swap a
 	and $f0
@@ -514,7 +514,7 @@ PokeAnim_CopyBitmaskToBuffer:
 	ld h, [hl]
 	ld l, a
 	ld a, [wPokeAnimCurBitmask]
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld de, wPokeAnimBitmaskBuffer
 	ld a, [wPokeAnimBitmaskBank]
@@ -625,7 +625,7 @@ PokeAnim_ConvertAndApplyBitmask:
 	call .GetStartCoord
 	ld a, [wPokeAnimBitmaskCurRow]
 	ld bc, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wBoxAlignment]
 	and a
 	jr nz, .subtract
@@ -983,7 +983,7 @@ GetMonFramesPointer:
 	ld c, l
 	ld b, h
 	pop hl
-	call AddNTimes
+	rst AddNTimes
 	pop af
 	jr z, .no_bank
 	ld c, a

@@ -344,7 +344,7 @@ endr
 	ld [hli], a
 	ld a, -1
 	ld bc, wMenuItemsListEnd - (wMenuItemsList + 1)
-	call ByteFill
+	rst ByteFill
 	ld de, wMenuItemsList + 1
 	ld c, 0
 	ret

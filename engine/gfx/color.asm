@@ -82,7 +82,7 @@ SGB_ApplyCreditsPals: ; unreferenced
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	pop de
 	ld a, c
@@ -126,7 +126,7 @@ SGB_ApplyPartyMenuHPPals:
 	ld hl, wSGBPals + 10
 	ld bc, $6
 	ld a, [wSGBPals]
-	call AddNTimes
+	rst AddNTimes
 	pop de
 	ld [hl], e
 	ret
@@ -209,7 +209,7 @@ GSIntro_LoadMonPalette: ; unreferenced
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	call GetMonPalettePointer
 	ld a, [hli]
@@ -401,7 +401,7 @@ LoadMailPalettes:
 	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop hl
 	inc hl
 	inc hl
@@ -874,7 +874,7 @@ InitCGBPals::
 	ld hl, vTiles3
 	ld bc, $200 tiles
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, BANK(vTiles0)
 	ldh [rVBK], a
 	ld a, 1 << rBGPI_AUTO_INCREMENT
@@ -1254,7 +1254,7 @@ LoadMapPals:
 	maskbits NUM_DAYTIMES
 	ld bc, 8 palettes
 	ld hl, MapObjectPals
-	call AddNTimes
+	rst AddNTimes
 	ld de, wOBPals1
 	ld bc, 8 palettes
 	ld a, BANK(wOBPals1)

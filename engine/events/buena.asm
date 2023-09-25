@@ -196,7 +196,7 @@ PrintBlueCardBalance:
 	ld bc, SCREEN_WIDTH + 1
 	add hl, bc
 	ld de, .Points_string
-	call PlaceString
+	rst PlaceString
 	ld h, b
 	ld l, c
 	inc hl

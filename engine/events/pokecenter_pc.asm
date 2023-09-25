@@ -325,7 +325,7 @@ ClearPCItemScreen:
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 0
 	lb bc, 10, 18
 	call Textbox
@@ -495,7 +495,7 @@ PlayerDepositItemMenu:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .dw
-	rst JumpTable
+	call JumpTable
 	pop af
 	ld [wSpriteUpdatesEnabled], a
 	ret

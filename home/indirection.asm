@@ -63,7 +63,7 @@ LoadIndirectPointer::
 	ld c, e
 	ld e, b
 	ld b, d
-	call AddNTimes
+	rst AddNTimes
 	ld b, e
 	jr .done
 

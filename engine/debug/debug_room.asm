@@ -42,7 +42,7 @@ _DebugRoom:
 	ld hl, wTilemap
 	ld bc, wTilemapEnd - wTilemap
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	call DebugRoom_PrintStackBottomTop
 	call DebugRoom_PrintWindowStackBottomTop
 	call DebugRoom_PrintRTCHaltChk
@@ -65,7 +65,7 @@ _DebugRoom:
 	jr z, .done
 	ld a, [wMenuSelection]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	jr .loop
 .done
 	pop af
@@ -228,7 +228,7 @@ DebugRoom_PrintStackBottomTop:
 	call CloseSRAM
 	hlcoord 16, 12
 	ld de, .SPString
-	call PlaceString
+	rst PlaceString
 	ld d, LOW(wStackBottom)
 	ld e, HIGH(wStackBottom)
 	push de
@@ -265,7 +265,7 @@ DebugRoomMenu_WinWorkClr:
 	ld c, l
 	ld hl, wWindowStack
 	xor a
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM
 
 DebugRoom_PrintWindowStackBottomTop:
@@ -352,11 +352,11 @@ DebugRoomMenu_PokedexClr:
 	ld hl, sPlayerData + (wPokedexCaught - wPlayerData)
 	ld bc, wEndPokedexSeen - wPokedexCaught
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld hl, sGameData + (wUnownDex - wGameData)
 	ld bc, NUM_UNOWN
 	xor a
-	call ByteFill
+	rst ByteFill
 	call CloseSRAM
 	jmp DebugRoom_SaveChecksum
 
@@ -381,7 +381,7 @@ DebugRoomMenu_BattleSkip:
 DebugRoom_PrintBattleSkip:
 	hlcoord 16, 6
 	ld de, .BTLString
-	call PlaceString
+	rst PlaceString
 	ld a, BANK(sSkipBattle)
 	call OpenSRAM
 	ld a, [sSkipBattle]
@@ -413,7 +413,7 @@ DebugRoomMenu_ChangeSex:
 DebugRoom_PrintGender:
 	hlcoord 16, 0
 	ld de, .SexString
-	call PlaceString
+	rst PlaceString
 	ld a, BANK(sCrystalData)
 	call OpenSRAM
 	ld a, [sCrystalData + (wPlayerGender - wCrystalData)]
@@ -445,7 +445,7 @@ DebugRoomMenu_TelDebug:
 DebugRoom_PrintTelDebug:
 	hlcoord 16, 16
 	ld de, .TelString
-	call PlaceString
+	rst PlaceString
 	ld a, BANK(sDebugTimeCyclesSinceLastCall)
 	call OpenSRAM
 	ld a, [sDebugTimeCyclesSinceLastCall]
@@ -571,7 +571,7 @@ DebugRoom_EditPagedValues:
 	call Textbox
 	hlcoord 8, 17
 	ld de, DebugRoom_PageString
-	call PlaceString
+	rst PlaceString
 	call DebugRoom_InitializePagedValues
 	xor a
 	call DebugRoom_PrintPage
@@ -793,7 +793,7 @@ DebugRoom_ShowHideCursor:
 	hlcoord 1, 1
 	ld bc, SCREEN_WIDTH * 2
 	ld a, [wDebugRoomCurValue]
-	call AddNTimes
+	rst AddNTimes
 	pop af
 	ld [hl], a
 	ret
@@ -850,7 +850,7 @@ DebugRoom_InitializePagedValues:
 	ld a, c
 	push bc
 	ld bc, PAGED_VALUE_SIZE
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld e, [hl] ; de = value address
 	inc hl
@@ -917,7 +917,7 @@ DebugRoom_PrintPagedValue:
 	ld a, c
 	push bc
 	ld bc, PAGED_VALUE_SIZE
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld e, [hl] ; de = value address
 	inc hl
@@ -935,9 +935,9 @@ DebugRoom_PrintPagedValue:
 	hlcoord 2, 1
 	ld a, c
 	ld bc, SCREEN_WIDTH * 2
-	call AddNTimes
+	rst AddNTimes
 	push hl
-	call PlaceString
+	rst PlaceString
 	pop hl
 	ld bc, SCREEN_WIDTH - 7
 	add hl, bc
@@ -1138,12 +1138,12 @@ DebugRoom_SavePokemon:
 ;	push hl
 ;	ld a, e
 ;	ld bc, BOXMON_STRUCT_LENGTH
-;	call AddNTimes
+;	rst AddNTimes
 ;	ld d, h
 ;	ld e, l
 ;	ld hl, wDebugRoomMon
 ;	ld bc, BOXMON_STRUCT_LENGTH
-;	call CopyBytes
+;	rst CopyBytes
 ;	pop hl
 ;	pop de
 ;	; skip box mons
@@ -1154,12 +1154,12 @@ DebugRoom_SavePokemon:
 ;	push hl
 ;	ld a, e
 ;	ld bc, NAME_LENGTH
-;	call AddNTimes
+;	rst AddNTimes
 ;	ld d, h
 ;	ld e, l
 ;	ld hl, .OTString
 ;	ld bc, NAME_LENGTH
-;	call CopyBytes
+;	rst CopyBytes
 ;	pop hl
 ;	pop de
 ;	; skip OT names
@@ -1170,12 +1170,12 @@ DebugRoom_SavePokemon:
 ;	push hl
 ;	ld a, e
 ;	ld bc, MON_NAME_LENGTH
-;	call AddNTimes
+;	rst AddNTimes
 ;	ld d, h
 ;	ld e, l
 ;	ld hl, .NicknameString
 ;	ld bc, MON_NAME_LENGTH
-;	call CopyBytes
+;	rst CopyBytes
 ;	pop hl
 ;	pop de
 ;	call CloseSRAM
@@ -1239,7 +1239,7 @@ DebugRoom_UpdateExpForLevel:
 	ld bc, BASE_DATA_SIZE
 	ld a, [wDebugRoomMonSpecies]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(BaseData)
 	call GetFarByte
 	ld [wBaseGrowthRate], a
@@ -1362,7 +1362,7 @@ DebugRoomMenu_RTCEdit_UpdateClock:
 	call DebugRoom_GetClock
 	ld de, DebugRoom_DayHTimeString
 	hlcoord 3, 14
-	call PlaceString
+	rst PlaceString
 	ld a, [wDebugRoomRTCCurDay + 0]
 	ld h, a
 	ld a, [wDebugRoomRTCCurDay + 1]
@@ -1456,7 +1456,7 @@ DebugRoomMenu_HaltChkClr:
 DebugRoom_PrintRTCHaltChk:
 	hlcoord 16, 9
 	ld de, .RTCString
-	call PlaceString
+	rst PlaceString
 	ld a, BANK(sRTCHaltCheckValue)
 	ld hl, sRTCHaltCheckValue
 	call OpenSRAM
@@ -1527,7 +1527,7 @@ DebugRoomMenu_BtlRecClr:
 	xor a
 	ld hl, sLinkBattleStats
 	ld bc, sLinkBattleStatsEnd - sLinkBattleStats
-	call ByteFill
+	rst ByteFill
 	jmp CloseSRAM
 
 DebugRoomMenu_HOFClear:
@@ -1540,7 +1540,7 @@ DebugRoomMenu_HOFClear:
 	xor a
 	ld hl, sHallOfFame
 	ld bc, sHallOfFameEnd - sHallOfFame
-	call ByteFill
+	rst ByteFill
 	call CloseSRAM
 	jmp DebugRoom_SaveChecksum
 
@@ -1607,7 +1607,7 @@ ComputeROMChecksum:
 DebugRoom_PrintROMChecksum: ; unreferenced
 	hlcoord 16, 0
 	ld de, .SumString
-	call PlaceString
+	rst PlaceString
 	hlcoord 16, 1
 	ld de, wDebugRoomROMChecksum
 	ld c, 2

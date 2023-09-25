@@ -146,7 +146,7 @@ CopyMenuData::
 	ld l, a
 	ld de, wMenuData
 	ld bc, wMenuDataEnd - wMenuData
-	call CopyBytes
+	rst CopyBytes
 	jmp PopAFBCDEHL
 
 GetWindowStackTop::
@@ -174,7 +174,7 @@ PlaceVerticalMenuItems::
 	ld b, a
 .loop
 	push bc
-	call PlaceString
+	rst PlaceString
 	inc de
 	ld bc, 2 * SCREEN_WIDTH
 	add hl, bc
@@ -301,7 +301,7 @@ LoadMenuHeader::
 CopyMenuHeader::
 	ld de, wMenuHeader
 	ld bc, wMenuHeaderEnd - wMenuHeader
-	call CopyBytes
+	rst CopyBytes
 	ldh a, [hROMBank]
 	ld [wMenuDataBank], a
 	ret
@@ -777,7 +777,7 @@ Place2DMenuItemName::
 	ldh a, [hTempBank]
 	rst Bankswitch
 
-	call PlaceString
+	rst PlaceString
 	pop af
 	rst Bankswitch
 

@@ -311,7 +311,7 @@ GetTrainerPic:
 	ld a, [wTrainerClass]
 	dec a
 	ld bc, 3
-	call AddNTimes
+	rst AddNTimes
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wDecompressScratch)

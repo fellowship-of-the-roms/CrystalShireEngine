@@ -4,7 +4,7 @@ PrintPage1:
 	hlcoord 0, 0
 	decoord 0, 0, wPrinterTilemapBuffer
 	ld bc, 17 * SCREEN_WIDTH
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 17, 1, wPrinterTilemapBuffer
 	ld a, $62
 	ld [hli], a
@@ -54,7 +54,7 @@ PrintPage2:
 	hlcoord 0, 0, wPrinterTilemapBuffer
 	ld bc, 8 * SCREEN_WIDTH
 	ld a, " "
-	call ByteFill
+	rst ByteFill
 	hlcoord 0, 0, wPrinterTilemapBuffer
 	ld a, $36
 	ld b, 6
@@ -68,12 +68,12 @@ PrintPage2:
 	inc hl
 	ld a, $39
 	ld bc, SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	ld [hl], $3a
 	hlcoord 0, 7, wPrinterTilemapBuffer
 	ld bc, SCREEN_WIDTH
 	ld a, $32
-	call ByteFill
+	rst ByteFill
 	ld a, [wTempSpecies]
 	call CheckCaughtMon
 	push af
@@ -173,12 +173,12 @@ PrintPartyMonPage1:
 	ld hl, wPartyMonNicknames
 	call GetCurPartyMonName
 	hlcoord 8, 4
-	call PlaceString
+	rst PlaceString
 	hlcoord 9, 6
 	ld [hl], "/"
 	call GetPokemonName
 	hlcoord 10, 6
-	call PlaceString
+	rst PlaceString
 	hlcoord 8, 0
 	ld [hl], "№"
 	inc hl
@@ -189,21 +189,21 @@ PrintPartyMonPage1:
 	call PrintNum
 	hlcoord 1, 9
 	ld de, PrintParty_OTString
-	call PlaceString
+	rst PlaceString
 	ld hl, wPartyMonOTs
 	call GetCurPartyMonName
 	hlcoord 4, 9
-	call PlaceString
+	rst PlaceString
 	hlcoord 1, 11
 	ld de, PrintParty_IDNoString
-	call PlaceString
+	rst PlaceString
 	hlcoord 4, 11
 	ld de, wTempMonID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 1, 14
 	ld de, PrintParty_MoveString
-	call PlaceString
+	rst PlaceString
 	hlcoord 7, 14
 	ld a, [wTempMonMoves + 0]
 	call PlaceMoveNameString
@@ -259,7 +259,7 @@ PrintPartyMonPage2:
 	ld bc, SCREEN_WIDTH
 	decoord 0, 0
 	hlcoord 0, 1
-	call CopyBytes
+	rst CopyBytes
 	hlcoord 7, 0
 	ld a, [wTempMonMoves + 1]
 	call PlaceMoveNameString
@@ -271,7 +271,7 @@ PrintPartyMonPage2:
 	call PlaceMoveNameString
 	hlcoord 7, 7
 	ld de, PrintParty_StatsString
-	call PlaceString
+	rst PlaceString
 	hlcoord 16, 7
 	ld de, wTempMonAttack
 	call .PrintTempMonStats
@@ -299,7 +299,7 @@ PrintPartyMonPage2:
 GetCurPartyMonName:
 	ld bc, NAME_LENGTH
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ret

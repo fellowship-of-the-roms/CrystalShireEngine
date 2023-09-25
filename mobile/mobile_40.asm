@@ -55,11 +55,11 @@ SetRAMStateForMobile:
 	xor a
 	ld hl, wBGMapBuffer
 	ld bc, $65
-	call ByteFill
+	rst ByteFill
 	xor a
 	ld hl, wMobileWRAM
 	ld bc, wMobileWRAMEnd - wMobileWRAM
-	call ByteFill
+	rst ByteFill
 	ldh a, [rIE]
 	ld [wBGMapBuffer], a
 	xor a
@@ -71,7 +71,7 @@ EnableMobile:
 	xor a
 	ld hl, wOverworldMapBlocks
 	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
-	call ByteFill
+	rst ByteFill
 
 	di
 	call DoubleSpeed
@@ -319,7 +319,7 @@ Function100232:
 	call UpdateSprites
 	hlcoord 1, 2
 	pop de
-	call PlaceString
+	rst PlaceString
 	call Function100320
 	jmp JoyWaitAorB
 
@@ -485,7 +485,7 @@ Function10034d:
 Function100382:
 	ld a, [wcd27]
 	ld hl, Jumptable_10044e
-	rst JumpTable
+	call JumpTable
 	ret
 
 Function10038a:
@@ -753,7 +753,7 @@ Function100513:
 Function100522:
 	ld a, [wcd28]
 	ld hl, Jumptable_10052a
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_10052a:
@@ -808,7 +808,7 @@ Function10054d:
 Function100579:
 	ld a, [wcd26]
 	ld hl, Jumptable_100581
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_100581:
@@ -856,7 +856,7 @@ MenuData_1005ba:
 Function1005c3:
 	ld a, [wcd26]
 	ld hl, Jumptable_1005cb
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_1005cb:
@@ -1000,7 +1000,7 @@ Function100697:
 	push de
 	call .asm_1006b4
 	ld de, String1006c2
-	call PlaceString
+	rst PlaceString
 	ld h, b
 	ld l, c
 	pop de
@@ -1280,7 +1280,7 @@ Function100846:
 	ld [wStringBuffer2], a
 	ld de, String_10088e
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld de, wStringBuffer2
 	hlcoord 4, 16
 	jmp Function100697
@@ -1288,7 +1288,7 @@ Function100846:
 .asm_10087c
 	ld de, String_10088e
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld h, b
 	ld l, c
 	ld de, String_10089f
@@ -1372,7 +1372,7 @@ Function100902:
 	jr z, .asm_10093f
 	ld de, .string_100966
 	hlcoord 4, 11
-	call PlaceString
+	rst PlaceString
 	hlcoord 8, 11
 	lb bc, 1, 2
 	ld de, wStringBuffer2
@@ -1386,7 +1386,7 @@ Function100902:
 .asm_10093f
 	ld de, .string_10095a
 	hlcoord 4, 11
-	call PlaceString
+	rst PlaceString
 	ld de, SFX_4_NOTE_DITTY
 	call PlaySFX
 	farcall ReloadMapPart
@@ -1855,7 +1855,7 @@ Mobile_MoveSelectionScreen:
 	ld hl, wBattleMonMoves
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
 	hlcoord 2, 10
@@ -2140,7 +2140,7 @@ Function100e72:
 Function100e84:
 	ld a, [wcd67]
 	ld hl, Jumptable_100e8c
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_100e8c:
@@ -2358,7 +2358,7 @@ Function100f8d:
 
 .sram
 	call OpenSRAM
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 MACRO macro_100fc0
@@ -2424,18 +2424,18 @@ endr
 	ld hl, wc608
 	ld de, s7_a001
 	ld bc, wc7bd - wc608
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 Function10107d:
 	xor a
 	ld hl, wc608
 	ld bc, wc7bd - wc608
-	call ByteFill
+	rst ByteFill
 	ld hl, wOTPlayerName
 	ld de, wc608
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wd271
 	ld a, [hli]
 	ld [wc608 + 11], a
@@ -2463,7 +2463,7 @@ Function10107d:
 	push hl
 	ld hl, 0
 	ld a, [wOTPartyCount]
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	pop hl
@@ -2492,7 +2492,7 @@ LoadSelectedPartiesForColosseum:
 	xor a
 	ld hl, wStringBuffer2
 	ld bc, 9
-	call ByteFill
+	rst ByteFill
 	ld hl, wPlayerMonSelection
 	ld de, wPartyCount
 	call .CopyThreeSpecies
@@ -2539,7 +2539,7 @@ LoadSelectedPartiesForColosseum:
 	inc de
 	ld hl, wStringBuffer2 + NAME_LENGTH_JAPANESE
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld a, $ff
 	ld [de], a
 	ret
@@ -2600,12 +2600,12 @@ LoadSelectedPartiesForColosseum:
 	call .GetDestinationAddress
 	call .GetCopySize
 	pop af
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wStringBuffer2]
 	ld e, a
 	ld a, [wStringBuffer2 + 1]
 	ld d, a
-	call CopyBytes
+	rst CopyBytes
 	ld a, e
 	ld [wStringBuffer2], a
 	ld a, d
@@ -2617,7 +2617,7 @@ LoadSelectedPartiesForColosseum:
 	call .GetCopySize
 	ld a, 3
 	ld hl, 0
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	call .GetDestinationAddress
@@ -2687,7 +2687,7 @@ Function10123d:
 	ld [wScriptVar], a
 	ld a, c
 	ld hl, Jumptable_101247
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_101247:
@@ -2993,7 +2993,7 @@ Function101438:
 	set 6, [hl]
 	ld a, [wcd26]
 	ld hl, Jumptable_101457
-	rst JumpTable
+	call JumpTable
 	ld a, [wcd26]
 	bit 7, a
 	ret z
@@ -3029,7 +3029,7 @@ Function101475:
 	set 6, [hl]
 	ld a, [wcd26]
 	ld hl, Jumptable_101494
-	rst JumpTable
+	call JumpTable
 	ld a, [wcd26]
 	bit 7, a
 	ret z
@@ -3315,7 +3315,7 @@ Function10168e:
 	ret c
 	ld a, [wcd26]
 	ld hl, Jumptable_1016c3
-	rst JumpTable
+	call JumpTable
 	ld hl, wcd29
 	set 6, [hl]
 	ld a, [wcd26]
@@ -3413,7 +3413,7 @@ Function10173b:
 	ld c, a
 	ld b, 0
 	pop af
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ret
 
@@ -3448,7 +3448,7 @@ Function10177b:
 	ld b, 0
 	ld a, [wcd3a]
 	ld hl, 0
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ld hl, wcd40
@@ -3735,7 +3735,7 @@ _SelectMonsForMobileBattle:
 	ld hl, wPlayerMonSelection
 	ld de, wccb5
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wcd6c
 	ld a, [hli]
 	ld [wccb8], a
@@ -3791,7 +3791,7 @@ _StartMobileBattle:
 	ld hl, wOTPlayerName
 	ld de, wOTClassName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd2f]
 	and a
 	ld a, USING_INTERNAL_CLOCK
@@ -3840,7 +3840,7 @@ CopyOtherPlayersBattleMonSelection:
 	ld hl, wcc61
 	ld de, wOTMonSelection
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	ld de, wcc64
 	farcall Function100772
 	farcall Function101050
@@ -4186,7 +4186,7 @@ Function101d2a:
 	set 6, [hl]
 	ld a, [wcd26]
 	ld hl, Jumptable_101d4d
-	rst JumpTable
+	call JumpTable
 	ld a, [wcd26]
 	bit 7, a
 	ret z
@@ -4593,7 +4593,7 @@ Function10208e:
 	ld l, e
 	ld de, wdc42
 	ld bc, 8
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ret
 
@@ -4623,7 +4623,7 @@ Function1020bf:
 	dec a
 	ld hl, $a04c
 	ld bc, $25
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld a, $04
@@ -4803,7 +4803,7 @@ Function1021f9:
 	call Function1022ca
 	ld a, [wcd49]
 	ld hl, Jumptable_1022f5
-	rst JumpTable
+	call JumpTable
 	call Function102241
 	call Function1022d0
 	jr c, .asm_102231
@@ -4825,7 +4825,7 @@ Function102233:
 	ld hl, wcd49
 	ld bc, 10
 	xor a
-	call ByteFill
+	rst ByteFill
 	jmp Function10304f
 
 Function102241:
@@ -5162,7 +5162,7 @@ Function1024af:
 	call GetJoypad
 	ld a, [wcd4a]
 	ld hl, Jumptable_1024ba
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_1024ba:
@@ -5457,7 +5457,7 @@ Function1026c8:
 	ret c
 	ld a, [wcd4a]
 	ld hl, Jumptable_1026da
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_1026da:
@@ -5533,7 +5533,7 @@ Function102754:
 	ret c
 	ld a, [wcd4a]
 	ld hl, Jumptable_102766
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_102766:
@@ -5764,7 +5764,7 @@ Function1028fc:
 .asm_102909
 	ld a, [wcd4a]
 	ld hl, Jumptable_102917
-	rst JumpTable
+	call JumpTable
 	ret nc
 	ld a, 0
 	ld [wcd4a], a
@@ -5780,7 +5780,7 @@ Jumptable_102917:
 Function102921:
 	ld a, [wcd4a]
 	ld hl, Jumptable_10292f
-	rst JumpTable
+	call JumpTable
 	ret nc
 	ld a, 0
 	ld [wcd4a], a
@@ -5877,7 +5877,7 @@ MenuHeader_1029bb:
 Function1029c3:
 	ld a, [wcd4a]
 	ld hl, Jumptable_1029cb
-	rst JumpTable
+	call JumpTable
 	ret
 
 Jumptable_1029cb:
@@ -5894,7 +5894,7 @@ Function1029cf:
 	farcall _LinkTextbox
 	ld de, String_102a26
 	hlcoord 12, 8
-	call PlaceString
+	rst PlaceString
 	ld hl, wcd4b
 	set 1, [hl]
 	ld de, MenuData3_102a33
@@ -5947,7 +5947,7 @@ Function102a3b:
 	ld hl, wPlayerName
 	ld de, wPlayerTrademonSenderName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd4c]
 	dec a
 	ld c, a
@@ -5962,7 +5962,7 @@ Function102a3b:
 	call SkipNames
 	ld de, wPlayerTrademonOTName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd4c]
 	dec a
 	ld hl, wPartyMon1ID
@@ -5991,7 +5991,7 @@ Function102a3b:
 	ld hl, wOTPlayerName
 	ld de, wOTTrademonSenderName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld a, [wcd4d]
 	dec a
@@ -6007,7 +6007,7 @@ Function102a3b:
 	call SkipNames
 	ld de, wOTTrademonOTName
 	ld bc, NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd4d]
 	dec a
 	ld hl, wOTPartyMon1ID
@@ -6114,7 +6114,7 @@ Function102b9c:
 	dec a
 	hlcoord 6, 9
 	ld bc, $14
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], $ec
 	ret
 
@@ -6215,13 +6215,13 @@ Function102c48:
 Function102c71:
 	ld a, [wcd4c]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld h, d
 	ld l, e
 	ld a, [wcd4d]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	pop de
 	jmp SwapBytes
 
@@ -6272,7 +6272,7 @@ Function102cee:
 	call Function102d34
 	ld de, wd002
 	ld bc, $2f
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wJumptableIndex]
 	ld c, a
 	ld a, $06
@@ -6280,7 +6280,7 @@ Function102cee:
 	ret z
 	ld bc, $2f
 	ld hl, 0
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld a, [wJumptableIndex]
 	dec a
@@ -6290,7 +6290,7 @@ Function102cee:
 	ld hl, $2f
 	add hl, de
 	pop bc
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcf64]
 	dec a
 	call Function102d34
@@ -6307,7 +6307,7 @@ Function102d34:
 
 Function102d3e:
 	call OpenSRAM
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 Function102d48:
@@ -6325,7 +6325,7 @@ Function102d48:
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Happiness
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], BASE_HAPPINESS
 
 .asm_102d6d
@@ -6349,7 +6349,7 @@ Function102d48:
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1DVs
-	call AddNTimes
+	rst AddNTimes
 	predef GetUnownLetter
 	farcall UpdateUnownDex
 	ld a, [wFirstUnownSeen]
@@ -6366,11 +6366,11 @@ Function102d9a:
 	ld a, " "
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	ld a, $07
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
+	rst ByteFill
 	farjp HDMATransferAttrmapAndTilemapToWRAMBank3
 
 Function102db7:
@@ -6447,12 +6447,12 @@ Function102e4f:
 	farcall _InitMG_Mobile_LinkTradePalMap
 	ld de, wPlayerName
 	hlcoord 4, 0
-	call PlaceString
+	rst PlaceString
 	ld a, $14
 	ld [bc], a
 	ld de, wOTPlayerName
 	hlcoord 4, 8
-	call PlaceString
+	rst PlaceString
 	ld a, $14
 	ld [bc], a
 	hlcoord 7, 1
@@ -6477,7 +6477,7 @@ Function102e4f:
 	ldh [hDividend], a
 	call GetPokemonName
 	pop hl
-	call PlaceString
+	rst PlaceString
 	pop de
 	inc de
 	pop hl
@@ -6501,7 +6501,7 @@ Function102ea8:
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2
 	ld bc, 11
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wcd4d]
 	dec a
 	ld c, a
@@ -6577,10 +6577,10 @@ Function102f85:
 	call Function102dc3
 	ld de, String_102fb2
 	hlcoord 1, 14
-	call PlaceString
+	rst PlaceString
 	ld de, wStringBuffer1
 	hlcoord 13, 14
-	call PlaceString
+	rst PlaceString
 	ld de, String_102fcc
 	jmp PlaceString
 
@@ -6840,7 +6840,7 @@ Function103309:
 	ld hl, wd1ea
 	ld bc, 10
 	xor a
-	call ByteFill
+	rst ByteFill
 	ld a, BANK(s4_a60c)
 	call OpenSRAM
 	ld a, [wdc41]
@@ -7103,7 +7103,7 @@ Function1034f7:
 	add hl, bc
 	ld a, [wd1ef]
 	ld bc, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [wd1f2]
 	dec a
 	ld bc, 40
@@ -7114,7 +7114,7 @@ Function10350f:
 	push bc
 	ld hl, Unknown_103522
 	ld bc, 9
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	add hl, bc
 	ld a, [hli]
@@ -7552,7 +7552,7 @@ Function10383c:
 	ld hl, wd002
 	ld de, wPlayerMonSelection
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	xor a
 	ld [wScriptVar], a
 	ret

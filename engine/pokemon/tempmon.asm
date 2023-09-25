@@ -25,10 +25,10 @@ CopyMonToTempMon:
 
 .copywholestruct
 	ld a, [wCurPartyMon]
-	call AddNTimes
+	rst AddNTimes
 	ld de, wTempMon
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .done
 	ret
@@ -72,7 +72,7 @@ _TempMonStatsCalculation:
 	ld hl, MON_MAXHP
 	add hl, bc
 	ld bc, 2
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 
 .zero_status

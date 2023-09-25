@@ -16,7 +16,7 @@ PlaceWaitingText::
 .proceed
 	hlcoord 4, 11
 	ld de, .Waiting
-	call PlaceString
+	rst PlaceString
 	ld c, 50
 	jmp DelayFrames
 

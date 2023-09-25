@@ -275,7 +275,7 @@ EvolveAfterBattle_MasterLoop:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ld bc, MON_MAXHP
@@ -300,7 +300,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld hl, wTempMonSpecies
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	ld a, [wCurSpecies]
 	ld [wTempSpecies], a
@@ -393,7 +393,7 @@ UpdateSpeciesNameIfNotNicknamed:
 	ld a, [wCurPartyMon]
 	ld bc, MON_NAME_LENGTH
 	ld hl, wPartyMonNicknames
-	call AddNTimes
+	rst AddNTimes
 	push hl
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndex], a
@@ -414,7 +414,7 @@ IsMonHoldingEverstone:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hl]
 	call GetItemIndexFromID
 	cphl16 EVERSTONE
@@ -471,7 +471,7 @@ LearnLevelMoves:
 	ld hl, wPartyMon1Moves
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	ld b, NUM_MOVES
 .check_move

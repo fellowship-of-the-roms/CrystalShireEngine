@@ -7,7 +7,7 @@ _ReceiveItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Pockets:
@@ -48,7 +48,7 @@ _TossItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Pockets:
@@ -91,7 +91,7 @@ _CheckItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	rst JumpTable
+	call JumpTable
 	ret
 
 .Pockets:

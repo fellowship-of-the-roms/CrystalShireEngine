@@ -285,29 +285,29 @@ DoPartySwap:
 	push de
 	push hl
 	ld a, d
-	call AddNTimes
+	rst AddNTimes
 	ld a, e
 	ld d, h
 	ld e, l
 	pop hl
-	call AddNTimes
+	rst AddNTimes
 
 	; Now hl and de points to which bytes to swap
 	push de
 	ld de, wSwitchMonBuffer
 	push bc
 	push hl
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	pop bc
 	pop hl
 	push hl
 	push bc
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	pop de
 	ld hl, wSwitchMonBuffer
-	call CopyBytes
+	rst CopyBytes
 	pop de
 	ret
 
@@ -422,7 +422,7 @@ FlushStorageSystem:
 	xor a
 	ld hl, wPokeDBUsedEntries
 	ld bc, wPokeDBUsedEntriesEnd - wPokeDBUsedEntries
-	call ByteFill
+	rst ByteFill
 
 	; Now, set flags as per box usage.
 	ld b, 1
@@ -457,7 +457,7 @@ GetStorageBoxPointer:
 	ld a, b
 	ld hl, sNewBox1Entries - (sNewBox2 - sNewBox1)
 	ld bc, sNewBox2 - sNewBox1
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	push bc
 	dec c
@@ -546,7 +546,7 @@ SetStorageBoxPointer:
 	ld a, b
 	ld hl, sNewBox1Entries - (sNewBox2 - sNewBox1)
 	ld bc, sNewBox2 - sNewBox1
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	push bc
 
@@ -655,7 +655,7 @@ CopyBetweenPartyAndTemp:
 .got_party
 	ld b, 0
 	push af
-	call AddNTimes
+	rst AddNTimes
 	pop af
 	pop bc
 	push bc
@@ -663,7 +663,7 @@ CopyBetweenPartyAndTemp:
 	bit 0, b
 	call z, SwapHLDE
 	ld b, 0
-	call CopyBytes
+	rst CopyBytes
 	pop bc
 	ret
 
@@ -694,7 +694,7 @@ AddStorageMon:
 	ld e, l
 	ld hl, wEncodedBufferMon
 	ld bc, SAVEMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	call DecodeBufferMon
 	call CloseSRAM
@@ -728,7 +728,7 @@ OpenPokeDB:
 	ld l, a
 	ld b, 0
 	ld a, SAVEMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ret
 
@@ -816,11 +816,11 @@ EncodeBufferMon:
 	ld hl, wBufferMonNickname
 	ld de, wEncodedBufferMonNickname
 	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld hl, wBufferMonOT
 	ld de, wEncodedBufferMonOT
 	ld bc, PLAYER_NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 
 	; Convert nickname+OT characters into reversible 7bit.
 	ld hl, wEncodedBufferMonNickname
@@ -907,7 +907,7 @@ ChecksumBufferMon:
 	ld b, 0
 	ld c, a
 	ld a, e
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	jr .DoChecksum
 
@@ -1039,7 +1039,7 @@ DecodeBufferMon:
 	ld hl, BadEgg
 	ld de, wBufferMon
 	ld bc, BadEggEnd - BadEgg
-	call CopyBytes
+	rst CopyBytes
 	call SetTempPartyMonData
 	scf
 	ret
@@ -1161,7 +1161,7 @@ InitializeBoxes:
 	ld e, b
 	ld bc, sNewBox1Name - sNewBox1
 	xor a
-	call ByteFill
+	rst ByteFill
 	push hl
 	push de
 	ld de, .Box
@@ -1289,13 +1289,13 @@ CopyBoxName:
 	dec a
 	push bc
 	ld bc, sNewBox2 - sNewBox1
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ld de, wStringBuffer1
 	dec c
 	call z, SwapHLDE
 	ld bc, BOX_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	jmp CloseSRAM
 
 PrevStorageBoxMon:
@@ -1419,7 +1419,7 @@ GetStorageMon:
 	; Write to wEncodedBufferMon and then decode it.
 	ld de, wEncodedBufferMon
 	ld bc, SAVEMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 	; Decode the result. This also returns a Bad Egg failsafe on a checksum
 	; error.

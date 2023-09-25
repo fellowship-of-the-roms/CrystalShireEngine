@@ -13,7 +13,7 @@ OpenMartDialog::
 	call LoadMartPointer
 	ld a, [wMartType]
 	ld hl, .dialogs
-	rst JumpTable
+	call JumpTable
 	ret
 
 .dialogs
@@ -100,7 +100,7 @@ LoadMartPointer:
 	assert wCurMartCount + 1 == wCurMartItems
 	xor a
 	ld bc, 16
-	call ByteFill
+	rst ByteFill
 	xor a ; STANDARDMART_HOWMAYIHELPYOU
 	ld [wMartJumptableIndex], a
 	ld [wBargainShopFlags], a
@@ -140,7 +140,7 @@ StandardMart:
 .loop
 	ld a, [wMartJumptableIndex]
 	ld hl, .MartFunctions
-	rst JumpTable
+	call JumpTable
 	ld [wMartJumptableIndex], a
 	cp STANDARDMART_EXIT
 	jr nz, .loop
@@ -788,7 +788,7 @@ SellMenu:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .dw
-	rst JumpTable
+	call JumpTable
 	ret
 
 .dw

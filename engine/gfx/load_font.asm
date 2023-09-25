@@ -51,7 +51,7 @@ LoadFrame:
 	maskbits NUM_FRAMES
 	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
 	ld hl, Frames
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, vTiles0 tile "┌" ; $ba

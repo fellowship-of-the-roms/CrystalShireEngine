@@ -6,7 +6,7 @@ FieldMoveJumptableReset:
 
 FieldMoveJumptable:
 	ld a, [wFieldMoveJumptableIndex]
-	rst JumpTable
+	call JumpTable
 	ld [wFieldMoveJumptableIndex], a
 	bit 7, a
 	jr nz, .okay
@@ -85,7 +85,7 @@ CheckPartyMove:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Moves
 	ld a, e
-	call AddNTimes
+	rst AddNTimes
 	ld b, NUM_MOVES
 .check
 	ld a, [hli]
@@ -792,7 +792,7 @@ EscapeRopeOrDig:
 	ld hl, wDigWarpNumber
 	ld de, wNextWarp
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 	call GetPartyNickname
 	ld a, [wEscapeRopeOrDigType]
 	cp $2

@@ -2,7 +2,7 @@ LoadObjectMasks:
 	ld hl, wObjectMasks
 	xor a
 	ld bc, NUM_OBJECTS
-	call ByteFill
+	rst ByteFill
 	ld bc, wMapObjects
 	ld de, wObjectMasks
 	xor a

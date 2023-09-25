@@ -44,7 +44,7 @@ MainMenu:
 	call ClearTilemap
 	ld a, [wMenuSelection]
 	ld hl, .Jumptable
-	rst JumpTable
+	call JumpTable
 	jr .loop
 
 .quit
@@ -333,7 +333,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	ld d, h
 	ld e, l
 	pop hl
-	call PlaceString
+	rst PlaceString
 	ld h, b
 	ld l, c
 	ld de, .Day
