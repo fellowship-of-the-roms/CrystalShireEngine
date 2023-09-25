@@ -130,7 +130,7 @@ _SwitchPartyMons:
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
 	call CloseSRAM
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .CopyNameToSwitchMonBuffer:
 	ld de, wSwitchMonBuffer

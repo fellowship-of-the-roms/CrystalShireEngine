@@ -496,15 +496,15 @@ Movement_normal_step:
 
 Movement_big_step_down:
 	ld a, STEP_RUN << 2 | DOWN
-	jp Movement_do_run
+	jr Movement_do_run
 
 Movement_big_step_up:
 	ld a, STEP_RUN << 2 | UP
-	jp Movement_do_run
+	jr Movement_do_run
 
 Movement_big_step_left:
 	ld a, STEP_RUN << 2 | LEFT
-	jp Movement_do_run
+	jr Movement_do_run
 
 Movement_big_step_right:
 	ld a, STEP_RUN << 2 | RIGHT

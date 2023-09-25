@@ -69,7 +69,7 @@ BattleCommand_SleepTalk:
 	push de
 	push bc
 	call .check_has_usable_move
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .check_has_usable_move
 	ldh a, [hBattleTurn]

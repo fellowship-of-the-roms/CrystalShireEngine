@@ -130,7 +130,7 @@ PlayBattleMusic:
 .done
 	call PlayMusic
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 ClearBattleRAM:
 	xor a

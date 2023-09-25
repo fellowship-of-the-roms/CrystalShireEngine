@@ -1236,7 +1236,7 @@ CalcMonStatC:
 	ldh [hMultiplicand + 2], a
 
 .stat_value_okay
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GivePoke::
 	push de

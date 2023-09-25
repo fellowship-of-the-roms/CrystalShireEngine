@@ -161,7 +161,7 @@ NextOverworldFrame:
 	; of a busy LY overflow, perform that now.
 	ld a, [hDelayFrameLY]
 	inc a
-	jp nz, DelayFrame
+	jmp nz, DelayFrame
 	xor a
 	ld [hDelayFrameLY], a
 	ret

@@ -51,7 +51,7 @@ _InitSound::
 	ld a, MAX_VOLUME
 	ld [wVolume], a
 	call MusicOn
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 MusicFadeRestart:
 ; restart but keep the music id to fade in to

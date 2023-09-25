@@ -710,7 +710,7 @@ EggHatch_DoAnimFrame:
 	push bc
 	farcall PlaySpriteAnimations
 	call DelayFrame
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 EggHatch_AnimationSequence:
 	ld a, [wNamedObjectIndex]

@@ -2803,7 +2803,7 @@ ApplyBGMapAnchorToObjects:
 	xor a
 	ld [wPlayerBGMapOffsetX], a
 	ld [wPlayerBGMapOffsetY], a
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 DEF PRIORITY_LOW  EQU $10
 DEF PRIORITY_NORM EQU $20

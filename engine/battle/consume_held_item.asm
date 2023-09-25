@@ -27,7 +27,7 @@ ConsumeHeldItem:
 	jr nz, .loop
 	pop af
 	pop hl
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .ok
 	xor a
@@ -46,6 +46,6 @@ ConsumeHeldItem:
 	ld [hl], NO_ITEM
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 INCLUDE "data/battle/held_consumables.asm"

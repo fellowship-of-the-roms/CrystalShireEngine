@@ -2788,7 +2788,7 @@ AICheckEnemyHalfHP:
 	cp c
 	ld a, [hl]
 	sbc b
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 AICheckEnemyQuarterHP:
 	push hl
@@ -2808,7 +2808,7 @@ AICheckEnemyQuarterHP:
 	cp c
 	ld a, [hl]
 	sbc b
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 AICheckPlayerQuarterHP:
 	push hl
@@ -3258,7 +3258,7 @@ AIGetEnemyMove:
 	ld de, wEnemyMoveStruct
 	call GetMoveData
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 AI_80_20:
 	call Random

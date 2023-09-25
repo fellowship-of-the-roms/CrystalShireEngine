@@ -298,7 +298,7 @@ HandleBetweenTurnEffects:
 
 HasAnyoneFainted:
 	call HasPlayerFainted
-	jp nz, HasEnemyFainted
+	jmp nz, HasEnemyFainted
 	ret
 
 CheckFaint_PlayerThenEnemy:
@@ -4454,7 +4454,7 @@ ItemRecoveryAnim:
 	ld [wFXAnimID], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 UseHeldStatusHealingItem:
 	farcall GetOpponentItem
@@ -4647,7 +4647,7 @@ UpdateBattleHUDs:
 	call DrawEnemyHUD
 	ld hl, wEnemyHPPal
 	call SetHPPal
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 UpdatePlayerHUD::
 	push hl
@@ -4656,7 +4656,7 @@ UpdatePlayerHUD::
 	call DrawPlayerHUD
 	call UpdatePlayerHPPal
 	call CheckDanger
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 DrawPlayerHUD:
 	xor a
@@ -4791,7 +4791,7 @@ UpdateEnemyHUD::
 	push bc
 	call DrawEnemyHUD
 	call UpdateEnemyHPPal
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 DrawEnemyHUD:
 	xor a
@@ -6659,7 +6659,7 @@ BattleWinSlideInEnemyTrainerFrontpic:
 	dec e
 	jr nz, .loop
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 ApplyStatusEffectOnPlayerStats:
 	ld a, 1

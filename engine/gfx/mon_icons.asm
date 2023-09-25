@@ -99,7 +99,7 @@ _ApplyMenuMonIconColor:
 	jr nz, .loop
 	; fallthrough
 _FinishMenuMonIconColor:
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 GetMonPalInBCDE:
 ; Sets BCDE to mon icon palette.
@@ -168,7 +168,7 @@ LoadMenuMonIcon:
 	push de
 	push bc
 	call .LoadIcon
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .LoadIcon:
 	ld d, 0

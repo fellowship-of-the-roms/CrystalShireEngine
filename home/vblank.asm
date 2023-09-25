@@ -139,7 +139,7 @@ VBlank2::
 
 	ld a, BANK(_UpdateSound)
 	rst Bankswitch
-	jp _UpdateSound
+	jmp _UpdateSound
 
 VBlank1::
 ; scx, scy
@@ -285,7 +285,7 @@ VBlank4::
 
 	call UpdateJoypad
 
-	jp VBlank2
+	jmp VBlank2
 
 VBlank5::
 ; scx
@@ -343,7 +343,7 @@ VBlank6::
 	call DMATransfer
 .done
 
-	jp VBlank2
+	jmp VBlank2
 
 VBlank7:
 	; special vblank routine

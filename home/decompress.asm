@@ -309,4 +309,4 @@ endr
 	inc de ; positive offset is two bytes
 .next
 	inc de
-	jp .Main
+	jmp .Main

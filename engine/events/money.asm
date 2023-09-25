@@ -86,7 +86,7 @@ CompareFunds:
 	and a
 	scf
 .skip_carry
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 SubtractMoney:
 	ld a, 3
@@ -118,7 +118,7 @@ SubtractFunds:
 	dec hl
 	dec b
 	jr nz, .loop2
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 AddMoney:
 	ld a, 3
@@ -151,7 +151,7 @@ AddFunds:
 	dec b
 	jr nz, .loop2
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GiveCoins::
 	ld a, 2

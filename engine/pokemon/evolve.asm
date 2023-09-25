@@ -609,7 +609,7 @@ FillMoves:
 	jr .NextMove
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 ShiftMoves:
 	ld c, NUM_MOVES - 1

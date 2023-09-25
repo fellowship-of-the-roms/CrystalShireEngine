@@ -39,11 +39,11 @@ EnterMapConnection:
 ; Return carry if a connection has been entered.
 	ld a, [wPlayerStepDirection]
 	and a ; DOWN
-	jp z, .south
+	jmp z, .south
 	dec a ; UP
-	jp z, .north
+	jr z, .north
 	dec a ; LEFT
-	jp z, .west
+	jr z, .west
 	dec a ; RIGHT
 	ret nz
 	; fallthrough

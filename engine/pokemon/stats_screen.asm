@@ -969,7 +969,7 @@ StatsScreen_LoadTextboxSpaceGFX:
 	call Get2bpp
 	pop af
 	ldh [rVBK], a
-	jp PopAFBCDEHL
+	jmp PopAFBCDEHL
 
 StatsScreenSpaceGFX: ; unreferenced
 INCBIN "gfx/font/space.2bpp"

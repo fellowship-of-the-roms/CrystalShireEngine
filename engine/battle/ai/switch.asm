@@ -86,7 +86,7 @@ CheckPlayerMoveTypeMatchups:
 
 .done
 	call .CheckEnemyMoveMatchups
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 .CheckEnemyMoveMatchups:
 	ld de, wEnemyMonMoves
