@@ -1522,10 +1522,7 @@ CheckTypeMatchup:
 	jr .TypesLoop
 
 .End:
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 BattleCommand_ResetTypeMatchup:
 ; Reset the type matchup multiplier to 1.0, if the type matchup is not 0.
@@ -6739,10 +6736,7 @@ AnimateCurrentMoveEitherSide:
 	ld [wBattleAnimParam], a
 	call PlayDamageAnim
 	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 AnimateCurrentMove:
 	push hl
@@ -6755,10 +6749,7 @@ AnimateCurrentMove:
 	ld [wBattleAnimParam], a
 	call LoadMoveAnim
 	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 PlayDamageAnim:
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -6799,10 +6790,7 @@ PlayUserBattleAnim:
 	push de
 	push bc
 	farcall PlayBattleAnim
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 SetMoveAnimationID:
 	push hl
@@ -6830,10 +6818,7 @@ PlayOpponentBattleAnim:
 	farcall PlayBattleAnim
 
 	call BattleCommand_SwitchTurn
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 CallBattleCore:
 	ld a, BANK("Battle Core")
@@ -6889,10 +6874,7 @@ _CheckBattleScene:
 	push de
 	push bc
 	farcall CheckBattleScene
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 CompareMove:
 	; checks if the move ID in a matches the move in bc
