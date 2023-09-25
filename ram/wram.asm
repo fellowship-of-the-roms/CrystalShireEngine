@@ -909,6 +909,10 @@ SECTION UNION "Overworld Map", WRAM0
 
 ; bill's pc data
 
+	; LCD hblank code block. Labels are defined as part of the code.
+	ds $cf
+	assert BillsPC_LCDCodeEnd - BillsPC_LCDCode == @ - STARTOF("Overworld Map")
+
 ; If you change ordering of this, remember to fix LCD hblank code too.
 ; Note that (as of when comment was written), hblank can't always keep up
 ; if doing 4 pals in one go during party shifting.
