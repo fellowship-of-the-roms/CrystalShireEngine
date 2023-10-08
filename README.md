@@ -36,3 +36,4 @@ We warmly welcome contributions to the CrystalShireEngine project. If you're int
 
 - **core:** The default branch, aimed at integrating optimizations, bug & design flaw fixes, and various other engine improvements to support rom hacking.
 - **gen3, gen4, ...:** Upcoming branches set to incorporate a plethora of features (pokemon, moves, mechanics, etc.) from respective generations into the Crystal engine.
+- **newbag:** A branch that incorportates a refactor of the backpack, which includes the ability to expand pockets in the bag.
