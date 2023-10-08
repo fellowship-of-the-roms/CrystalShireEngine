@@ -969,24 +969,16 @@ _CGB_PackPals:
 	call FarCopyWRAM
 	call WipeAttrmap
 	hlcoord 0, 0, wAttrmap
-	lb bc, 1, 10
+	lb bc, 1, SCREEN_WIDTH
 	ld a, $1
-	call FillBoxCGB
-	hlcoord 10, 0, wAttrmap
-	lb bc, 1, 10
-	ld a, $2
 	call FillBoxCGB
 	hlcoord 7, 2, wAttrmap
 	lb bc, 9, 1
 	ld a, $3
 	call FillBoxCGB
-	hlcoord 0, 7, wAttrmap
-	lb bc, 3, 5
-	ld a, $4
-	call FillBoxCGB
 	hlcoord 0, 3, wAttrmap
-	lb bc, 3, 5
-	ld a, $5
+	lb bc, 3, 7
+	ld a, $1
 	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals

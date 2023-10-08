@@ -69,6 +69,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -95,6 +96,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -121,6 +123,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	xor a
 	ldh [hBGMapMode], a
 	call WaitBGMap_DrawPackGFX
@@ -213,6 +216,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -636,6 +640,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -662,6 +667,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -688,6 +694,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	xor a
 	ldh [hBGMapMode], a
 	call WaitBGMap_DrawPackGFX
@@ -709,6 +716,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	jmp Pack_JumptableNext
 
@@ -955,6 +963,7 @@ InitPocket:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	jmp WaitBGMap_DrawPackGFX
 
 DepositSellTutorial_InterpretJoypad:
@@ -1288,16 +1297,15 @@ Pack_InitGFX:
 	hlcoord 5, 1
 	lb bc, 11, 15
 	call ClearBox
-; ◀▶ POCKET       ▼▲ ITEMS
 	hlcoord 0, 0
 	ld a, $28
 	ld c, SCREEN_WIDTH
 .loop
 	ld [hli], a
-	inc a
 	dec c
 	jr nz, .loop
 	call DrawPocketName
+	call DrawPocketGFX
 	call PlacePackGFX
 ; Place the textbox for displaying the item description
 	hlcoord 0, SCREEN_HEIGHT - 4 - 2
@@ -1307,7 +1315,7 @@ Pack_InitGFX:
 	jmp DrawPackGFX
 
 PlacePackGFX:
-	hlcoord 0, 3
+	hlcoord 0, 5
 	ld a, $50
 	ld de, SCREEN_WIDTH - 5
 	ld b, 3
@@ -1323,20 +1331,64 @@ PlacePackGFX:
 	jr nz, .row
 	ret
 
-DrawPocketName:
+DrawPocketGFX:
 	ld a, [wCurPocket]
-	; * 15
-	ld d, a
-	swap a
-	sub d
+	; * 6
+	push bc
+	ld c, 5
+	ld b, a
+.multloop
+	add b
+	dec c
+	jr nz, .multloop
+	pop bc
+; done
 	ld d, 0
 	ld e, a
 	ld hl, .tilemap
 	add hl, de
 	ld d, h
 	ld e, l
-	hlcoord 0, 7
-	ld c, 3
+	hlcoord 9, 0
+	ld b, 6
+.col
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec b
+	jr nz, .col
+	ret
+
+.tilemap
+	; Regular Items
+	db $2d, $4c, $2c, $2c, $2c, $2e
+	; Balls
+	db $2d, $2c, $4d, $2c, $2c, $2e
+	; TMs
+	db $2d, $2c, $2c, $4e, $2c, $2e
+	; Key Items
+	db $2d, $2c, $2c, $2c, $4f, $2e
+
+DrawPocketName:
+	ld a, [wCurPocket]
+	; * 4
+	push bc
+	ld c, 4
+	ld b, a
+.multloop
+	add b
+	dec c
+	jr nz, .multloop
+	pop bc
+; done
+	ld d, 0
+	ld e, a
+	ld hl, .tilemap
+	add hl, de
+	ld d, h
+	ld e, l
+	hlcoord 0, 0
+	ld c, 1
 .row
 	ld b, 5
 .col
@@ -1353,9 +1405,23 @@ DrawPocketName:
 	jr nz, .row
 	ret
 
-.tilemap: ; 5x12
-; the 5x3 pieces correspond to *_POCKET constants
-INCBIN "gfx/pack/pack_menu.tilemap"
+.tilemap
+; ITEM_POCKET
+	; db $00, $04, $04, $04, $01 ; top border
+	db $06, $07, $08, $09, $0a ; Items
+	; db $02, $05, $05, $05, $03 ; bottom border
+; BALL_POCKET
+	; db $00, $04, $04, $04, $01 ; top border
+	db $15, $16, $17, $18, $19 ; Balls
+	; db $02, $05, $05, $05, $03 ; bottom border
+; KEY_ITEM_POCKET
+	; db $00, $04, $04, $04, $01 ; top border
+	db $0b, $0c, $0d, $0e, $0f ; Key Items
+	; db $02, $05, $05, $05, $03 ; bottom border
+; TM_HM_POCKET
+	; db $00, $04, $04, $04, $01 ; top border
+	db $10, $11, $12, $13, $14 ; TM/HM
+	; db $02, $05, $05, $05, $03 ; bottom border
 
 Pack_GetItemName:
 	ld a, [wCurItem]
