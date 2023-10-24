@@ -112,7 +112,7 @@ DEF PARTYMON_STRUCT_LENGTH EQU _RS
 ; savemon_struct members (see macros/wram.asm)
 rsreset
 DEF SAVEMON_SPECIES_LOW        rb
-DEF SAVEMON_ITEM               rb
+DEF SAVEMON_ITEM_LOW           rb
 DEF SAVEMON_MOVES_LOW          rb NUM_MOVES
 DEF SAVEMON_ID                 rw
 DEF SAVEMON_EXP                rb 3
@@ -145,6 +145,7 @@ DEF SAVEMON_CAUGHTLOCATION     rb
 DEF SAVEMON_LEVEL              rb
 ; savemon_struct is different from party_struct beyond this point
 DEF SAVEMON_SPECIES_HIGH       rb
+DEF SAVEMON_ITEM_HIGH          rb
 DEF SAVEMON_NICKNAME           rb MON_NAME_LENGTH - 1
 DEF SAVEMON_OT                 rb PLAYER_NAME_LENGTH - 1
 DEF SAVEMON_STRUCT_LENGTH EQU _RS
@@ -183,9 +184,9 @@ DEF PARTY_LENGTH EQU 6
 ; boxes
 DEF MONS_PER_BOX EQU 20
 
-DEF MONDB_ENTRIES   EQU 163
+DEF MONDB_ENTRIES   EQU 160
 DEF MIN_MONDB_SLACK EQU 10
-DEF NUM_BOXES       EQU (MONDB_ENTRIES * 2 - MIN_MONDB_SLACK) / MONS_PER_BOX ; 16
+DEF NUM_BOXES       EQU (MONDB_ENTRIES * 2 - MIN_MONDB_SLACK) / MONS_PER_BOX ; 15
 
 ; hall of fame
 ; hof_mon: species, id, dvs, level, nicknames

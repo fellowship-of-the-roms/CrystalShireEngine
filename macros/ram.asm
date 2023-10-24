@@ -31,7 +31,7 @@ ENDM
 
 MACRO savemon_struct
 \1SpeciesLow::     db
-\1Item::           db
+\1ItemLow::        db
 \1MovesLow::       ds NUM_MOVES
 \1ID::             dw
 \1IsEgg::
@@ -54,6 +54,7 @@ MACRO savemon_struct
 \1CaughtLocation:: db
 \1Level::          db
 \1SpeciesHigh::    db
+\1ItemHigh::       db
 \1Nickname::       ds MON_NAME_LENGTH - 1 ; terminator is implicit
 \1OT::             ds PLAYER_NAME_LENGTH - 1 ; terminator is implicit
 \1End::

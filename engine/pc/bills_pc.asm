@@ -764,6 +764,13 @@ EncodeBufferMon:
 	ld a, h
 	ld [wEncodedBufferMonSpeciesHigh], a
 
+	ld a, [wBufferMonItem]
+	call GetItemIndexFromID
+	ld a, l
+	ld [wEncodedBufferMonItemLow], a
+	ld a, h
+	ld [wEncodedBufferMonItemHigh], a
+
 	; Convert 4 PP bytes to 1 PP Up byte.
 	ld hl, wEncodedBufferMonPPUps
 	ld b, NUM_MOVES
@@ -958,6 +965,14 @@ DecodeBufferMon:
 	ld de, wBufferMonNickname + MON_NAME_LENGTH - 1
 	ld c, MON_NAME_LENGTH - 1
 	jr nz, .outer_loop
+
+	; Convert 16-bit item index back to 8-bit ID.
+	ld a, [wEncodedBufferMonItemLow]
+	ld l, a
+	ld a, [wEncodedBufferMonItemHigh]
+	ld h, a
+	call GetItemIDFromIndex
+	ld [wBufferMonItem], a
 
 	; Convert 16-bit species index back to 8-bit ID.
 	ld a, [wEncodedBufferMonSpeciesLow]
