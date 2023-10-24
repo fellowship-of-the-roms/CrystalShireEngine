@@ -151,14 +151,6 @@ ItemTableGarbageCollection:
 	pop af
 	call OpenSRAM
 
-	ldh a, [hSRAMBank]
-	push af
-	ld a, BANK(sBox)
-	call OpenSRAM
-	___conversion_bitmap_check_structs sBoxMon1Item, BOXMON_STRUCT_LENGTH, MONS_PER_BOX, .set_bit
-	pop af
-	call OpenSRAM ;will close SRAM if hSRAMBank was -1
-
 	pop de
 	ret
 
