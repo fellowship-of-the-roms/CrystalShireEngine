@@ -45,6 +45,8 @@ JumpTable::
 SECTION "rst38", ROM0[$0038]
 	rst $38
 
+PopAFBCDEHL::
+	pop af
 PopBCDEHL::
 	pop bc
 	pop de

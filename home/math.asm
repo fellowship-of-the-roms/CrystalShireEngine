@@ -43,7 +43,4 @@ Divide::
 	push de
 	push bc
 	homecall _Divide
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL

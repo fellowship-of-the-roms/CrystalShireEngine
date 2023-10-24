@@ -7,10 +7,7 @@ CheckTossableItem::
 	push de
 	push bc
 	farcall _CheckTossableItem
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 TossItem::
 	push hl
@@ -26,10 +23,7 @@ TossItem::
 	pop bc
 	ld a, b
 	rst Bankswitch
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
 
 ReceiveItem::
 	push bc
@@ -73,7 +67,4 @@ CheckItem::
 	pop bc
 	ld a, b
 	rst Bankswitch
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PopBCDEHL
