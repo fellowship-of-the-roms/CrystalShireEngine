@@ -2474,8 +2474,6 @@ BattleCommand_CheckFaint:
 	jr EndMoveEffect
 
 BattleCommand_BuildOpponentRage:
-	jr .start
-
 .start
 	ld a, [wAttackMissed]
 	and a
@@ -3310,8 +3308,6 @@ BattleCommand_ConstantDamage:
 	ld a, 0
 	jr nz, .got_power
 	ld b, 1
-	jr .got_power
-
 .got_power
 	ld hl, wCurDamage
 	ld [hli], a
@@ -4237,8 +4233,7 @@ BattleCommand_AccuracyUp2:
 
 BattleCommand_EvasionUp2:
 	ld b, $10 | EVASION
-	jr BattleCommand_StatUp
-
+; fallthrough
 BattleCommand_StatUp:
 	call RaiseStat
 	ld a, [wFailedMessage]
@@ -6693,8 +6688,7 @@ GetOpponentItem:
 	ld hl, wBattleMonItem
 .go
 	ld b, [hl]
-	jr GetItemHeldEffect
-
+; fallthrough
 GetItemHeldEffect:
 ; Return the effect of item b in bc.
 	ld a, b

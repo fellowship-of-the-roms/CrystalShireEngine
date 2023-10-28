@@ -349,8 +349,7 @@ Function11619d:
 	rst ByteFill
 
 .asm_1161b4
-	jr Function1161b8
-
+; fallthrough
 Function1161b8:
 	jumptable .Jumptable, wc319
 

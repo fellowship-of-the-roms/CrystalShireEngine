@@ -197,8 +197,7 @@ LinkBattle_TrainerHuds:
 	ld [hli], a
 	ld [hl], 13 * TILE_WIDTH
 	ld hl, wShadowOAMSprite00 + PARTY_LENGTH * SPRITEOAMSTRUCT_LENGTH
-	jr LoadTrainerHudOAM
-
+; fallthrough
 LoadTrainerHudOAM:
 	ld de, wBattleHUDTiles
 	ld c, PARTY_LENGTH

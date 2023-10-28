@@ -747,8 +747,7 @@ CGBCopyTwoPredefObjectPals: ; unreferenced
 	call .PushPalette
 	ld a, PREDEFPAL_RB_GREENMON
 	call GetPredefPal
-	jr .PushPalette
-
+; fallthrough
 .PushPalette:
 	ld c, 1 palettes
 .loop

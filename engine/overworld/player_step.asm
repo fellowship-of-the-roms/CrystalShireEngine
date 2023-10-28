@@ -16,8 +16,6 @@ _HandlePlayerStep::
 
 .update_player_coords
 	call UpdatePlayerCoords
-	jr .finish
-
 .finish
 	call HandlePlayerStep
 	ld a, [wPlayerStepVectorX]

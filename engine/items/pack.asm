@@ -232,8 +232,7 @@ Pack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	jr .ItemBallsKey_LoadSubmenu
-
+; fallthrough
 .ItemBallsKey_LoadSubmenu:
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
@@ -757,8 +756,7 @@ BattlePack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	jr ItemSubmenu
-
+; fallthrough
 ItemSubmenu:
 	farcall CheckItemContext
 	ld a, [wItemAttributeValue]

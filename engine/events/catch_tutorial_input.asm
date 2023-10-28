@@ -8,8 +8,7 @@ _DudeAutoInput_RightA:
 
 _DudeAutoInput_DownA:
 	ld hl, DudeAutoInput_DownA
-	jr _DudeAutoInput
-
+; fallthrough
 _DudeAutoInput:
 	ld a, BANK(DudeAutoInputs)
 	jmp StartAutoInput

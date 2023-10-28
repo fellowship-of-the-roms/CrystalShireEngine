@@ -706,8 +706,7 @@ Slots_InitReelTiles:
 	ld hl, REEL_X_COORD
 	add hl, bc
 	ld [hl], 14 * TILE_WIDTH
-	jr .OAM
-
+; fallthrough
 .OAM:
 	ld hl, REEL_ACTION
 	add hl, bc
@@ -726,8 +725,7 @@ Slots_SpinReels:
 	ld bc, wReel2
 	call .SpinReel
 	ld bc, wReel3
-	jr .SpinReel
-
+; fallthrough
 .SpinReel:
 	ld hl, REEL_SPIN_DISTANCE
 	add hl, bc

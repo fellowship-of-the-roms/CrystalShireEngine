@@ -117,8 +117,7 @@ PlateauRivalBattleCommon:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	sjump PlateauRivalPostBattle
-
+; fallthrough
 PlateauRivalPostBattle:
 	playmusic MUSIC_RIVAL_AFTER
 	opentext

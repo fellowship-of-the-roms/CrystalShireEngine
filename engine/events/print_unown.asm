@@ -133,8 +133,7 @@ endc
 	inc [hl]
 
 .return
-	jr .UpdateUnownFrontpic
-
+; fallthrough
 .UpdateUnownFrontpic:
 	ld a, [wJumptableIndex]
 	cp NUM_UNOWN

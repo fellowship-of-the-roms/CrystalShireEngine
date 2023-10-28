@@ -213,8 +213,7 @@ DebugRoomMenu_SpClear:
 	ld [hli], a
 	ld [hl], a
 	call CloseSRAM
-	jr DebugRoom_PrintStackBottomTop
-
+; fallthrough
 DebugRoom_PrintStackBottomTop:
 	ld a, BANK(sStackTop)
 	call OpenSRAM
@@ -898,8 +897,7 @@ DebugRoom_PrintPageBValueC:
 	ld b, a
 	ld a, [wDebugRoomCurValue]
 	ld c, a
-	jr DebugRoom_PrintPagedValue
-
+; fallthrough
 DebugRoom_PrintPagedValue:
 ; Print the value for page b, value c
 	ld h, 0
@@ -1223,8 +1221,7 @@ DebugRoom_PrintMoveName:
 	ld [wNamedObjectIndex], a
 	push bc
 	call GetMoveName
-	jr _DebugRoom_FinishGetName
-
+; fallthrough
 _DebugRoom_FinishGetName:
 	pop hl
 	push hl
@@ -1443,8 +1440,7 @@ DebugRoomMenu_HaltChkClr:
 	ld [hli], a
 	ld [hl], a
 	call CloseSRAM
-	jr DebugRoom_PrintRTCHaltChk
-
+; fallthrough
 DebugRoom_PrintRTCHaltChk:
 	hlcoord 16, 9
 	ld de, .RTCString

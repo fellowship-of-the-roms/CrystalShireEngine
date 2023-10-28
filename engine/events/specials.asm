@@ -59,8 +59,7 @@ FindPartyMonThatSpeciesYourTrainerID:
 	ld b, a
 	farcall _FindPartyMonThatSpeciesYourTrainerID
 	jr z, FoundNone
-	jr FoundOne
-
+; fallthrough
 FoundOne:
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -189,8 +188,7 @@ UnusedMemoryGame:
 	ret c
 	ld a, BANK(_MemoryGame)
 	ld hl, _MemoryGame
-	jr StartGameCornerGame
-
+; fallthrough
 StartGameCornerGame:
 	call FarQueueScript
 	call FadeToMenu

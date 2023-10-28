@@ -23,8 +23,7 @@ Elevator::
 	ld [wElevatorPointer], a
 	ld a, d
 	ld [wElevatorPointer + 1], a
-	jr .LoadFloors
-
+; fallthrough
 .LoadFloors:
 	ld de, wCurElevatorCount
 	ld bc, wElevatorDataEnd - wElevatorData

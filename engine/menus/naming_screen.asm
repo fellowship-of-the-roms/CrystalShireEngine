@@ -242,8 +242,7 @@ NamingScreen:
 	; the terminator isn't saved, so no "- 1" is needed.
 	ld a, BOX_NAME_LENGTH
 	hlcoord 5, 4
-	jr .StoreParams
-
+; fallthrough
 .StoreParams:
 	ld [wNamingScreenMaxNameLength], a
 	ld a, l

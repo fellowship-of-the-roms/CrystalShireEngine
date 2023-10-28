@@ -211,8 +211,7 @@ CheckBTRule_PartyCountEq3:
 
 CheckBTRule_PartySpeciesAreUnique:
 	ld hl, wPartyMon1Species
-	jr CheckPartyValueIsUnique
-
+; fallthrough
 CheckPartyValueIsUnique:
 	ld de, wPartyCount
 	ld a, [de]

@@ -182,8 +182,7 @@ Kurt1:
 
 .Pnk:
 	setevent EVENT_GAVE_KURT_PNK_APRICORN
-	sjump .GaveKurtApricorns
-
+; fallthrough
 .GaveKurtApricorns:
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	setflag ENGINE_KURT_MAKING_BALLS

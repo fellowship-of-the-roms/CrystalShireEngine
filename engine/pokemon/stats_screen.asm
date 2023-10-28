@@ -22,8 +22,7 @@ StatsScreenInit:
 
 _MobileStatsScreenInit:
 	ld hl, StatsScreenMobile
-	jr StatsScreenInit_gotaddress
-
+; fallthrough
 StatsScreenInit_gotaddress:
 	ldh a, [hMapAnims]
 	push af

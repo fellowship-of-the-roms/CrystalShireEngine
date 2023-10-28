@@ -74,8 +74,7 @@ CheckRegisteredItem:
 	ret
 
 .CheckTMHM:
-	jr .NoRegisteredItem
-
+; fallthrough
 .NoRegisteredItem:
 	xor a
 	ld [wWhichRegisteredItem], a

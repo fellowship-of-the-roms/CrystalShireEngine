@@ -194,8 +194,7 @@ Credits_UpdateGFXRequestPath:
 	ld [wRequested2bppDest], a
 	ld a, HIGH(vTiles2)
 	ld [wRequested2bppDest + 1], a
-	jr Credits_RequestGFX
-
+; fallthrough
 Credits_RequestGFX:
 	xor a
 	ldh [hBGMapMode], a

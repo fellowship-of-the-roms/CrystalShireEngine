@@ -646,8 +646,7 @@ BGEventJumptable:
 
 .left:
 	ld b, OW_LEFT
-	jr .checkdir
-
+; fallthrough
 .checkdir:
 	ld a, [wPlayerDirection]
 	and %1100
@@ -1155,8 +1154,6 @@ RandomEncounter::
 .ok_bug_contest
 	ld a, BANK(BugCatchingContestBattleScript)
 	ld hl, BugCatchingContestBattleScript
-	jr .done
-
 .done
 	call CallScript
 	scf

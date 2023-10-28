@@ -22,8 +22,7 @@ GoldenRodDeptStoreB1FClearBoxesCallback:
 
 .GotCardKey:
 	changeblock 16, 4, $0d ; floor
-	sjump .Continue
-
+; fallthrough
 .Continue:
 	checkevent EVENT_GOLDENROD_DEPT_STORE_B1F_LAYOUT_2
 	iftrue .Layout2

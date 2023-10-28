@@ -128,8 +128,7 @@ RadioTower5FRocketBossScript:
 	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
 	setevent EVENT_GOT_CLEAR_BELL
 	setevent EVENT_TEAM_ROCKET_DISBANDED
-	sjump .UselessJump
-
+; fallthrough
 .UselessJump:
 	applymovement RADIOTOWER5F_DIRECTOR, RadioTower5FDirectorWalksOut
 	playsound SFX_EXIT_BUILDING

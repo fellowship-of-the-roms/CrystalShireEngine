@@ -64,8 +64,7 @@ MeetMomScript:
 	writetext ComeHomeForDSTText
 	yesorno
 	iffalse .ExplainPhone
-	sjump .KnowPhone
-
+; fallthrough
 .KnowPhone:
 	writetext KnowTheInstructionsText
 	promptbutton
@@ -74,8 +73,7 @@ MeetMomScript:
 .ExplainPhone:
 	writetext DontKnowTheInstructionsText
 	promptbutton
-	sjump .FinishPhone
-
+; fallthrough
 .FinishPhone:
 	writetext InstructionsNextText
 	waitbutton
@@ -92,8 +90,7 @@ MeetMomScript:
 
 .FromLeft:
 	applymovement PLAYERSHOUSE1F_MOM1, MomWalksBackMovement
-	sjump .Finish
-
+; fallthrough
 .Finish:
 	special RestartMapMusic
 	turnobject PLAYERSHOUSE1F_MOM1, LEFT
@@ -173,8 +170,7 @@ NeighborScript:
 .NiteScript:
 	writetext NeighborNiteIntroText
 	promptbutton
-	sjump .Main
-
+; fallthrough
 .Main:
 	writetext NeighborText
 	waitbutton

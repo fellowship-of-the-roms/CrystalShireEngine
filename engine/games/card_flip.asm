@@ -473,8 +473,7 @@ CardFlip_UpdateCoinBalanceDisplay:
 	call Textbox
 	pop hl
 	call PrintTextboxText
-	jr CardFlip_PrintCoinBalance
-
+; fallthrough
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15
 	ld b, 1

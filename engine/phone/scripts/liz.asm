@@ -96,7 +96,6 @@ LizGossip:
 
 .PokefanM:
 	gettrainerclassname STRING_BUFFER_4, POKEFANM
-	sjump LizGossipScript
-
+; fallthrough
 LizGossipScript:
 	farsjump LizGossipRandomScript

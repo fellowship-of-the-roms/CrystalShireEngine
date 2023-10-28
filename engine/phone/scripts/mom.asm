@@ -64,8 +64,7 @@ MomPhoneOnRoute:
 MomPhoneOther:
 	farwritetext MomDeterminedText
 	promptbutton
-	sjump MomSavingMoney
-
+; fallthrough
 MomSavingMoney:
 	checkflag ENGINE_MOM_SAVING_MONEY
 	iffalse .NotSaving
@@ -114,8 +113,7 @@ MomPhoneWontSaveMoneyScript:
 	clearflag ENGINE_MOM_SAVING_MONEY
 	farwritetext MomPhoneWontSaveMoneyText
 	promptbutton
-	sjump MomPhoneHangUpScript
-
+; fallthrough
 MomPhoneHangUpScript:
 	farwritetext MomPhoneHangUpText
 	end

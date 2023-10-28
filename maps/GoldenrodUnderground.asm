@@ -225,8 +225,6 @@ OlderHaircutBrotherScript:
 	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
 .then
 	takemoney YOUR_MONEY, GOLDENRODUNDERGROUND_OLDER_HAIRCUT_PRICE
 	special PlaceMoneyTopRight
@@ -308,8 +306,6 @@ YoungerHaircutBrotherScript:
 	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
 .then
 	takemoney YOUR_MONEY, GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE
 	special PlaceMoneyTopRight

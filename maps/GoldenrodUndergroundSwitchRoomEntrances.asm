@@ -195,8 +195,7 @@ UndergroundRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	sjump .FinishRivalBattle
-
+; fallthrough
 .FinishRivalBattle:
 	playmusic MUSIC_RIVAL_AFTER
 	opentext

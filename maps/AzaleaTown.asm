@@ -88,8 +88,7 @@ AzaleaTownRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	sjump .AfterBattle
-
+; fallthrough
 .AfterBattle:
 	playmusic MUSIC_RIVAL_AFTER
 	opentext

@@ -29,8 +29,7 @@ Route34EggCheckCallback:
 .PutDayCareManOutside:
 	setevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
 	clearevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
-	sjump .CheckMon1
-
+; fallthrough
 .CheckMon1:
 	checkflag ENGINE_DAY_CARE_MAN_HAS_MON
 	iffalse .HideMon1
@@ -39,8 +38,7 @@ Route34EggCheckCallback:
 
 .HideMon1:
 	setevent EVENT_DAY_CARE_MON_1
-	sjump .CheckMon2
-
+; fallthrough
 .CheckMon2:
 	checkflag ENGINE_DAY_CARE_LADY_HAS_MON
 	iffalse .HideMon2

@@ -362,8 +362,7 @@ FlyToAnim:
 .exit
 	pop af
 	ld [wVramState], a
-	jr .RestorePlayerSprite_DespawnLeaves
-
+; fallthrough
 .RestorePlayerSprite_DespawnLeaves:
 	ld hl, wShadowOAMSprite00TileID
 	xor a

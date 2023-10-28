@@ -439,8 +439,7 @@ RingTwice_StartCall:
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	jr .CallerTextboxWithName
-
+; fallthrough
 .CallerTextboxWithName:
 	ld a, [wCurCaller]
 	ld b, a
@@ -464,8 +463,7 @@ PhoneCall::
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	jr .CallerTextboxWithName
-
+; fallthrough
 .CallerTextboxWithName:
 	call Phone_CallerTextbox
 	hlcoord 1, 2
@@ -535,8 +533,7 @@ Phone_StartRinging:
 	farjp PhoneRing_CopyTilemapAtOnce
 
 HangUp_Wait20Frames:
-	jr Phone_Wait20Frames
-
+; fallthrough
 Phone_Wait20Frames:
 	ld c, 20
 	call DelayFrames

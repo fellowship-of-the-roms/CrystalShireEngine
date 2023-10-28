@@ -1581,8 +1581,7 @@ Function89a57:
 .MoveCursorUp:
 	ld d,  1
 	ld e, -1
-	jr .ApplyCursorMovement
-
+; fallthrough
 .ApplyCursorMovement:
 	ld a, [wMenuSelection]
 	ld c, a
@@ -3058,8 +3057,7 @@ Function8a4fc:
 	ld b, a
 	ld c, $80
 	call Function89cdf
-	jr Function8a515
-
+; fallthrough
 Function8a515:
 	ld hl, wd012
 	ld a, [hl]

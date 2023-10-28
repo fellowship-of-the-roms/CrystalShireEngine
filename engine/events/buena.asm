@@ -182,8 +182,7 @@ Buena_DisplayBlueCardBalance:
 
 PrintBlueCardBalance:
 	ld de, wBlueCardBalance
-	jr .DrawBox
-
+; fallthrough
 .DrawBox:
 	push de
 	xor a

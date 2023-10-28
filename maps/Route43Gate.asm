@@ -60,8 +60,7 @@ RocketScript_TollSouth:
 RocketScript_YoureBrokeSouth:
 	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
 	writetext RocketText_AllYouGot
-	sjump RocketScript_ShakeDownSouth
-
+; fallthrough
 RocketScript_ShakeDownSouth:
 	promptbutton
 	closetext
@@ -92,8 +91,7 @@ RocketScript_TollNorth:
 RocketScript_YoureBrokeNorth:
 	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
 	writetext RocketText_AllYouGot
-	sjump RocketScript_ShakeDownNorth
-
+; fallthrough
 RocketScript_ShakeDownNorth:
 	promptbutton
 	closetext

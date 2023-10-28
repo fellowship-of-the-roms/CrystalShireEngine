@@ -25,8 +25,7 @@ VioletCityEarlScript:
 	writetext Text_EarlAsksIfYouBeatFalkner
 	yesorno
 	iffalse .FollowEarl
-	sjump .PointlessJump
-
+; fallthrough
 .PointlessJump:
 	writetext Text_VeryNiceIndeed
 	waitbutton

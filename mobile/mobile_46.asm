@@ -2153,8 +2153,7 @@ Function1191d3:
 	ld a, [wcd4a]
 	ld a, h
 	ld [wcd58], a
-	jr Function11920f
-
+; fallthrough
 Function11920f:
 .asm_11920f
 	call Function118b9a
@@ -6031,8 +6030,7 @@ Function11b022:
 	cp $3
 	ret z
 	ld hl, wStringBuffer4
-	jr Function11b03d
-
+; fallthrough
 Function11b03d:
 	push hl
 	push af
@@ -6443,8 +6441,7 @@ Function11b272:
 	ret
 
 Function11b275:
-	jr Function11b279
-
+; fallthrough
 Function11b279:
 	ld a, [wTempSpecies]
 	ld [wCurSpecies], a
@@ -7073,8 +7070,6 @@ Function11b5e8:
 	ld [wcd31], a
 	call CloseSRAM
 	call Mobile46_InitJumptable
-	jr .loop
-
 .loop
 	call .RunJumptable
 	call DelayFrame

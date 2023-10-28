@@ -291,8 +291,7 @@ Function10016f:
 	ld [wMobileErrorCodeBuffer + 2], a
 	ld a, [wcd2d]
 	ld [wMobileErrorCodeBuffer + 1], a
-	jr Function10020b
-
+; fallthrough
 Function10020b:
 	xor a
 	ld [wc303], a
@@ -654,8 +653,7 @@ Function100493:
 	jr asm_100497
 
 Function100495:
-	jr asm_100497
-
+; fallthrough
 asm_100497:
 	call Function100337
 	ret c
@@ -1409,8 +1407,7 @@ Function100989:
 	farcall ReloadMapPart
 ;	ld hl, w3_dd68
 	decoord 0, 0, wAttrmap
-	jr Function1009a5
-
+; fallthrough
 Function1009a5:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, $03
@@ -1616,8 +1613,6 @@ endc
 .asm_100ac7
 	ld a, $0f
 	ld [wd430], a
-	jr .asm_100ace
-
 .asm_100ace
 	ret
 
@@ -2184,8 +2179,7 @@ Function100ec5:
 
 Function100eca:
 	farcall Mobile_InitPartyMenuBGPal7
-	jr Function100ed4
-
+; fallthrough
 Function100ed4:
 	farcall ApplyPals
 	ld a, TRUE
@@ -2215,8 +2209,7 @@ Function100ef4:
 Function100efb: ; unreferenced
 	ld hl, Unknown_10102c
 	ld c, 1
-	jr Function100f02
-
+; fallthrough
 Function100f02:
 	ld a, c
 	ld [wStringBuffer2], a
@@ -2673,8 +2666,7 @@ Function101231:
 	ld e, BANK(Jumptable_101297)
 	ld bc, Jumptable_101297
 	call Function100000
-	jr Function10123d
-
+; fallthrough
 Function10123d:
 	xor a
 	ld [wScriptVar], a
@@ -4526,8 +4518,7 @@ Function10202c:
 	jmp Function100681
 
 Function102048:
-	jr Function10204c
-
+; fallthrough
 Function10204c:
 	hlcoord 3, 2
 	ld c, $10
@@ -4824,8 +4815,7 @@ Function102233:
 Function102241:
 	call Function10226a
 	call Function102274
-	jr Function10224b
-
+; fallthrough
 Function10224b:
 	ld hl, wcd4b
 	bit 1, [hl]
@@ -5261,8 +5251,6 @@ Function10250c:
 
 .asm_102572
 	call Function102fce
-	jr .asm_102577
-
 .asm_102577
 	ld hl, wcd4b
 	set 1, [hl]
@@ -6453,8 +6441,7 @@ Function102e4f:
 	call .PlaceSpeciesNames
 	hlcoord 7, 9
 	ld de, wOTPartySpecies
-	jr .PlaceSpeciesNames
-
+; fallthrough
 .PlaceSpeciesNames:
 	ld c, 0
 .count_loop
@@ -6633,8 +6620,7 @@ Function10305d:
 	call Function10307f
 	ret c
 	call Function103094
-	jr Function10306e
-
+; fallthrough
 Function10306e:
 	ld a, $01
 	ldh [hOAMUpdate], a
@@ -7025,8 +7011,7 @@ Function10343c:
 .asm_10347d
 	call Function10350f
 	ld bc, 11
-	jr Function103487
-
+; fallthrough
 Function103487:
 	push de
 	call Function1034f7

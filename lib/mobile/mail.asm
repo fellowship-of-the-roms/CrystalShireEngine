@@ -3719,8 +3719,7 @@ Function1155af:
 	ld a, e
 	ld [hli], a
 	ld [hl], d
-	jr Function1155d1
-
+; fallthrough
 Function1155d1:
 	ld a, [$dc0d]
 	ld l, a

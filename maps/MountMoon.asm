@@ -54,8 +54,7 @@ MountMoonRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	sjump .FinishBattle
-
+; fallthrough
 .FinishBattle:
 	playmusic MUSIC_RIVAL_AFTER
 	opentext

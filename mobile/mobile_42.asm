@@ -1091,8 +1091,6 @@ MobileTradeAnim_GetTrademon2:
 	call MobileTradeAnim_DeleteSprites
 	ld a, $1
 	call Function108ad4
-	jr .asm_1088e7
-
 .asm_1088e7
 	ld c, 1
 	call WaitMobileTradeSpriteAnims

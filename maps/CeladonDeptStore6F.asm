@@ -61,8 +61,7 @@ CeladonDeptStore6FVendingMachine:
 	iffalse .NotEnoughSpace
 	takemoney YOUR_MONEY, CELADONDEPTSTORE6F_LEMONADE_PRICE
 	getitemname STRING_BUFFER_3, LEMONADE
-	sjump .VendItem
-
+; fallthrough
 .VendItem:
 	pause 10
 	playsound SFX_ENTER_DOOR

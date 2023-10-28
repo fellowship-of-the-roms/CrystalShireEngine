@@ -100,8 +100,6 @@ PokecenterNurseScript:
 .nite_comcenter
 	farwritetext PokeComNurseNiteText
 	promptbutton
-	sjump .ok
-
 .ok
 	; only do this once
 	clearevent EVENT_WELCOMED_TO_POKECOM_CENTER

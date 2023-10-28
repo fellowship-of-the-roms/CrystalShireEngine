@@ -88,8 +88,6 @@ BurnedTowerRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	sjump .returnfrombattle
-
 .returnfrombattle
 	playmusic MUSIC_RIVAL_AFTER
 	opentext

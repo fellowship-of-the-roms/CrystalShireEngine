@@ -172,8 +172,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 
 LinkTradeMenu:
 	call .MenuAction
-	jr .GetJoypad
-
+; fallthrough
 .GetJoypad:
 	push bc
 	push af
