@@ -1006,10 +1006,10 @@ Function106464::
 	ld c, 9
 	ld b, BANK(MobileDialingFrameGFX)
 	call Get2bpp
-	ld de, $40b0
-	ld hl, vTiles2 tile $6b
-	ld b, $0f ; no graphics at 0f:40b0; JP leftover???
-	call Get2bpp
+;	ld de, $40b0
+;	ld hl, vTiles2 tile $6b
+;	ld b, $0f ; no graphics at 0f:40b0; JP leftover???
+;	call Get2bpp
 	farjp LoadFrame
 
 Function10649b: ; unreferenced

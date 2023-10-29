@@ -1357,7 +1357,7 @@ Function17d85d:
 .asm_17d8c7
 	call HlToCrashCheckPointer
 	push bc
-	ld a, $3
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	ld hl, wc608
 	ld de, wBGPals1

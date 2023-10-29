@@ -344,6 +344,7 @@ WRAMX 2
 	"Pic Animations"
 	align 8
 	"16-bit WRAM tables"
+	"Battle Tower RAM"
 WRAMX 3
 	org $d000
 	"Metatiles"

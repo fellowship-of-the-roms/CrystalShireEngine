@@ -138,7 +138,7 @@ pokecrystal_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 
 pokecrystal_vc_opt      = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
 %.gbc: $$(%_obj) layout.link
-	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
+	$(RGBLINK) -n $*.sym -m $*.map -M -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) $($*_opt) $@
 	tools/stadium $@
 

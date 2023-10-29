@@ -24,9 +24,9 @@ BattleTowerHallwayChooseBattleRoomScript:
 	ldh a, [rSVBK]
 	push af
 
-;	ld a, BANK(wBTChoiceOfLvlGroup) TODO: Fix Battle Tower Map Scripts
+	ld a, BANK(wBTChoiceOfLvlGroup)
 	ldh [rSVBK], a
-;	ld a, [wBTChoiceOfLvlGroup] TODO: Fix Battle Tower Map Scripts
+	ld a, [wBTChoiceOfLvlGroup]
 	ld [wScriptVar], a
 
 	pop af

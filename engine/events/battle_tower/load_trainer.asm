@@ -1,24 +1,23 @@
 LoadOpponentTrainerAndPokemon:
-; TODO: Fix Battle Tower Code
 	ldh a, [rSVBK]
 	push af
-;	ld a, BANK(wBT_OTTrainer)
+	ld a, BANK(wBT_OTTrainer)
 	ldh [rSVBK], a
 
 	; Fill wBT_OTTrainer with zeros
 	xor a
-;	ld hl, wBT_OTTrainer
+	ld hl, wBT_OTTrainer
 	ld bc, BATTLE_TOWER_STRUCT_LENGTH
 	rst ByteFill
 
 	; Write $ff into the Item-Slots
 	ld a, $ff
-;	ld [wBT_OTMon1Item], a
-;	ld [wBT_OTMon2Item], a
-;	ld [wBT_OTMon3Item], a
+	ld [wBT_OTMon1Item], a
+	ld [wBT_OTMon2Item], a
+	ld [wBT_OTMon3Item], a
 
 	; Set wBT_OTTrainer as start address to write the following data to
-;	ld de, wBT_OTTrainer
+	ld de, wBT_OTTrainer
 
 	ldh a, [hRandomAdd]
 	ld b, a
@@ -94,7 +93,7 @@ LoadRandomBattleTowerMon:
 
 .FindARandomBattleTowerMon:
 	; a = 1, 2, ..., 10 indicating level 10, 20, ..., 100 opponents
-;	ld a, [wBTChoiceOfLvlGroup]
+	ld a, [wBTChoiceOfLvlGroup]
 	dec a
 	ld hl, BattleTowerMons
 	ld bc, BATTLETOWER_NUM_UNIQUE_MON * (NICKNAMED_MON_STRUCT_LENGTH + 6)
@@ -139,20 +138,20 @@ LoadRandomBattleTowerMon:
 	ld hl, wTempSpecies
 	ld [hl], a
 	; check if it matches any of the current trainer's first two Pokémon (no need to check for the last one)
-;	ld a, [wBT_OTMon1]
+	ld a, [wBT_OTMon1]
 	cp [hl]
 	jr z, .pop_and_retry
-;	ld a, [wBT_OTMon2]
+	ld a, [wBT_OTMon2]
 .pop_and_retry
 	pop de
 	pop hl
 	jr z, .FindARandomBattleTowerMon
 
 	; check if the held item matches any of the current trainer's first two Pokémon's held items
-;	ld a, [wBT_OTMon1Item]
+	ld a, [wBT_OTMon1Item]
 	cp [hl]
 	jr z, .FindARandomBattleTowerMon
-;	ld a, [wBT_OTMon2Item]
+	ld a, [wBT_OTMon2Item]
 	cp [hl]
 	jr z, .FindARandomBattleTowerMon
 
@@ -163,11 +162,11 @@ LoadRandomBattleTowerMon:
 	lb bc, LOCKED_ITEM_ID_BATTLE_TOWER_1, (LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1 >> 2) | ((LOCKED_MOVE_ID_BATTLE_TOWER_MON1_MOVE1 & 3) << 6)
 	ld a, e
 	; assume that NICKNAMED_MON_STRUCT_LENGTH is not a multiple of $80 (it's actually far less than $80)
-;	cp LOW(wBT_OTMon1)
+	cp LOW(wBT_OTMon1)
 	jr z, .got_index
 	inc l
 	inc c
-;	cp LOW(wBT_OTMon2)
+	cp LOW(wBT_OTMon2)
 	jr z, .got_index
 	inc l
 	inc c
@@ -236,11 +235,11 @@ LoadRandomBattleTowerMon:
 	push hl
 	rst CopyBytes
 	pop de
-;	ld a, [wBT_OTMon1]
+	ld a, [wBT_OTMon1]
 	call .store_index
-;	ld a, [wBT_OTMon2]
+	ld a, [wBT_OTMon2]
 	call .store_index
-;	ld a, [wBT_OTMon3]
+	ld a, [wBT_OTMon3]
 	call .store_index
 	pop de
 	jmp CloseSRAM

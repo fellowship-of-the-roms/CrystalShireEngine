@@ -96,7 +96,6 @@ DisableMobile:
 	ldh [hMobile], a
 	xor a
 	ldh [hVBlank], a
-	call NormalSpeed
 	xor a
 	ldh [rIF], a
 	ld a, [wBGMapBuffer]
@@ -499,14 +498,14 @@ Function100393:
 
 Function10039c:
 	ld hl, wcc60
-;	ld de, w3_d000
+	ld de, w3_d000
 	ld bc, $54
 	ld a, $03
 	jmp FarCopyWRAM
 
 Function1003ba:
 	ld hl, wccb4
-;	ld de, w3_d080
+	ld de, w3_d080
 	ld bc, $54
 	ld a, $03
 	jmp FarCopyWRAM
@@ -1416,7 +1415,7 @@ Function1009a5:
 Function1009ae:
 	ldh a, [rSVBK]
 	push af
-	ld a, $03
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 
 ;	ld hl, w3_d800
@@ -1444,7 +1443,7 @@ Function1009ae:
 Function1009d2:
 	ldh a, [rSVBK]
 	push af
-	ld a, $03
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 
 	ldh a, [rVBK]

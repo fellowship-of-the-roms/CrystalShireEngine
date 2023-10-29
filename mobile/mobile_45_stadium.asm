@@ -663,15 +663,15 @@ Function117bb6:
 .asm_117be7
 	ldh a, [rSVBK]
 	push af
-	ld a, $3
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	ld a, [wcd89]
 	and $1
 	jr nz, .asm_117c16
-;	ld a, [w3_d000]
+	ld a, [w3_d000]
 	cp $fe
 	jr nz, .asm_117c16
-;	ld a, [w3_d001]
+	ld a, [w3_d001]
 	cp $f
 	jr nz, .asm_117c16
 ;	ld hl, w3_dfec
@@ -700,11 +700,11 @@ Function117bb6:
 	farcall Function172eb9
 	ldh a, [rSVBK]
 	push af
-	ld a, $3
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	ld a, $7
 	call OpenSRAM
-;	ld hl, w3_d002
+	ld hl, w3_d002
 	ld de, $b000
 	ld bc, $1000
 	rst CopyBytes
