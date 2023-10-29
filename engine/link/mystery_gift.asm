@@ -1614,7 +1614,6 @@ DoNameCardSwap:
 	ld de, .String_PressAToLink_BToCancel_JP
 	rst PlaceString
 	call WaitBGMap
-	call StageDataForNameCard
 	call ClearMysteryGiftTrainer
 	ld a, wNameCardDataEnd - wNameCardData
 	ld [wMysteryGiftStagedDataLength], a
@@ -1727,35 +1726,6 @@ endr
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	jmp SetPalettes
-
-StageDataForNameCard:
-	ld de, wMysteryGiftStaging
-	ld a, BANK(sPlayerData)
-	call OpenSRAM
-	ld hl, sPlayerData + wPlayerName - wPlayerData
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-	ld hl, sPlayerData + wPlayerID - wPlayerData
-	ld bc, 2
-	rst CopyBytes
-	ld hl, sPlayerData + wSecretID - wPlayerData
-	ld bc, 2
-	rst CopyBytes
-	call CloseSRAM
-	ld a, BANK(sCrystalData)
-	call OpenSRAM
-	ld a, [sCrystalData + 0]
-	ld [de], a
-	inc de
-	ld a, BANK(s4_a603) ; aka BANK(sEZChatMessages) ; MBC30 bank used by JP Crystal; inaccessible by MBC3
-	call OpenSRAM
-	ld hl, s4_a603 ; address of MBC30 bank
-	ld bc, 8
-	rst CopyBytes
-	ld hl, sEZChatIntroductionMessage ; address of MBC30 bank
-	ld bc, EASY_CHAT_MESSAGE_LENGTH
-	rst CopyBytes
-	jmp CloseSRAM
 
 InitNameCardLayout:
 	call ClearBGPalettes

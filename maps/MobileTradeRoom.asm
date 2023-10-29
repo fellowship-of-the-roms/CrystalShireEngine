@@ -17,15 +17,6 @@ MobileTradeRoomInitializeAndPreparePokecenter2FScript:
 	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_MOBILE_TRADE_ROOM
 	end
 
-MobileTradeRoomConsoleScript:
-	refreshscreen
-	special Function1037c2
-	writetext MobileTradeRoom_EstablishingCommsText
-	waitbutton
-	reloadmappart
-	closetext
-	end
-
 MobileTradeRoom_EstablishingCommsText:
 	text "Establishing"
 	line "communications…"
@@ -41,6 +32,5 @@ MobileTradeRoom_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  4,  2, BGEVENT_UP, MobileTradeRoomConsoleScript
 
 	def_object_events

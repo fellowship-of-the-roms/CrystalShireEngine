@@ -40,12 +40,6 @@ Function8b35d: ; unreferenced
 	cp e
 	ret
 
-Function8b363: ; unreferenced
-	push bc
-	farcall CheckMobileAdapterStatus
-	pop bc
-	ret
-
 Function8b36c:
 	; [bc + (0:4)] = -1
 	push bc
@@ -115,23 +109,6 @@ Function8b3a4:
 	call Function89185
 	pop bc
 	pop de
-	ret
-
-Function8b3b0:
-	ld bc, s4_a037
-	ld a, [s4_a60b]
-	and a
-	jr z, .asm_8b3c2
-	cp $3
-	jr nc, .asm_8b3c2
-	call Function8b391
-	jr c, .asm_8b3c9
-.asm_8b3c2
-	call Function8b36c
-	xor a
-	ld [s4_a60b], a
-.asm_8b3c9
-	ld a, [s4_a60b]
 	ret
 
 Function8b3cd:
@@ -401,59 +378,6 @@ Function8b539:
 	call Function89c44
 	jmp CGBOnly_CopyTilemapAtOnce
 
-Function8b555:
-.loop
-	ld hl, EnterNewPasscodeText
-	call PrintText
-	ld bc, wd017
-	call Function8b45c
-	jr c, .asm_8b5c8
-	call Function89448
-	ld bc, wd017
-	call Function8b493
-	ld bc, wd017
-	call Function8b664
-	jr nz, .asm_8b57c
-	ld hl, FourZerosInvalidText
-	call PrintText
-	jr .loop
-
-.asm_8b57c
-	ld hl, ConfirmPasscodeText
-	call PrintText
-	ld bc, wd013
-	call Function8b45c
-	jr c, .loop
-	ld bc, wd017
-	ld hl, wd013
-	call Function8b3a4
-	jr z, .strings_equal
-	call Function89448
-	ld bc, wd013
-	call Function8b493
-	ld hl, PasscodesNotSameText
-	call PrintText
-	jr .asm_8b57c
-
-.strings_equal
-	call OpenSRAMBank4
-	ld hl, wd013
-	ld de, s4_a037
-	ld bc, $4
-	rst CopyBytes
-	call CloseSRAM
-	call Function89448
-	ld bc, wd013
-	call Function8b493
-	ld hl, PasscodeSetText
-	call PrintText
-	and a
-.asm_8b5c8
-	push af
-	call Function89448
-	pop af
-	ret
-
 EnterNewPasscodeText:
 	text_far _EnterNewPasscodeText
 	text_end
@@ -473,46 +397,6 @@ PasscodeSetText:
 FourZerosInvalidText:
 	text_far _FourZerosInvalidText
 	text_end
-
-Function8b5e7:
-	ld bc, wd013
-	call Function8b36c
-	xor a
-	ld [wd012], a
-	ld [wd02e], a
-	call Function8b493
-	call Function891ab
-	call Function8b4fd
-	ld e, $0
-	call Function89c44
-.asm_8b602
-	ld hl, EnterPasscodeText
-	call PrintText
-	ld bc, wd013
-	call Function8b45c
-	jr c, .asm_8b63c
-	call Function89448
-	ld bc, wd013
-	call Function8b493
-	call OpenSRAMBank4
-	ld hl, s4_a037
-	call Function8b3a4
-	call CloseSRAM
-	jr z, .asm_8b635
-	ld hl, IncorrectPasscodeText
-	call PrintText
-	ld bc, wd013
-	call Function8b36c
-	jr .asm_8b602
-.asm_8b635
-	ld hl, UnknownText_0x8b64c
-	call PrintText
-	and a
-.asm_8b63c
-	push af
-	call Function89448
-	pop af
-	ret
 
 EnterPasscodeText:
 	text_far _EnterPasscodeText
@@ -760,68 +644,6 @@ Function8b79e:
 	jr nz, .asm_8b7a9
 	ret
 
-Function8b7bd:
-	call Function8b855
-	ld hl, MenuHeader_0x8b867
-	call CopyMenuHeader
-	ld a, [wd030]
-	ld [wMenuCursorPosition], a
-	ld a, [wd031]
-	ld [wMenuScrollPosition], a
-	ld a, [wd032]
-	and a
-	jr z, .asm_8b7e0
-	ld a, [wMenuFlags]
-	set 3, a
-	ld [wMenuFlags], a
-
-.asm_8b7e0
-	ld a, [wd0e3]
-	and a
-	jr z, .asm_8b7ea
-	dec a
-	ld [wScrollingMenuCursorPosition], a
-
-.asm_8b7ea
-	hlcoord 0, 2
-	ld b, $b
-	ld c, $12
-	call Function8b703
-	call Function8b75d
-	call UpdateSprites
-	call Mobile_EnableSpriteUpdates
-	call ScrollingMenu
-	call Mobile_DisableSpriteUpdates
-	ld a, [wMenuJoypad]
-	cp B_BUTTON
-	jr z, .asm_8b823
-	cp D_LEFT
-	jr nz, .asm_8b813
-	call Function8b832
-	jr .asm_8b7ea
-
-.asm_8b813
-	cp D_RIGHT
-	jr nz, .asm_8b81c
-	call Function8b83e
-	jr .asm_8b7ea
-
-.asm_8b81c
-	ld a, [wMenuSelection]
-	cp $ff
-	jr nz, .asm_8b824
-
-.asm_8b823
-	xor a
-
-.asm_8b824
-	ld c, a
-	ld a, [wMenuCursorY]
-	ld [wd030], a
-	ld a, [wMenuScrollPosition]
-	ld [wd031], a
-	ret
-
 Function8b832:
 	ld a, [wMenuScrollPosition]
 	ld hl, wMenuDataItems
@@ -859,66 +681,12 @@ Function8b855:
 	ld [hl], a
 	ret
 
-MenuHeader_0x8b867:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 1, 3, 18, 13
-	dw MenuData_0x8b870
-	db 1 ; default option
-
-	db 0
-
-MenuData_0x8b870:
-	db SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT ; flags
-	db 5, 3 ; rows, columns
-	db SCROLLINGMENU_ITEMS_NORMAL ; item format
-	dbw 0, wd002
-	dba Function8b880
-	dba Function8b88c
-	dba Function8b8c8
-
 Function8b880:
 	ld h, d
 	ld l, e
 	ld de, wMenuSelection
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum
-
-Function8b88c:
-	call OpenSRAMBank4
-	ld h, d
-	ld l, e
-	push hl
-	ld de, String_89116
-	call Function8931b
-	call Function8932d
-	jr c, .asm_8b8a3
-	ld hl, 0
-	add hl, bc
-	ld d, h
-	ld e, l
-
-.asm_8b8a3
-	pop hl
-	push hl
-	rst PlaceString
-	pop hl
-	ld d, $0
-	ld e, $6
-	add hl, de
-	push hl
-	ld de, String_89116
-	call Function8931b
-	call Function8934a
-	jr c, .asm_8b8c0
-	ld hl, $0006
-	add hl, bc
-	ld d, h
-	ld e, l
-
-.asm_8b8c0
-	pop hl
-	rst PlaceString
-	jmp CloseSRAM
 
 Function8b8c8:
 	hlcoord 0, 14
@@ -973,38 +741,6 @@ Function8b94a:
 	ld [wd030], a
 	ret
 
-Function8b960:
-	ld hl, MenuHeader_0x8b9ac
-	call LoadMenuHeader
-	call Function8b9e9
-	jr c, .asm_8b97a
-	hlcoord 11, 0
-	ld b, $6
-	ld c, $7
-	call Function8b703
-	ld hl, MenuHeader_0x8b9b1
-	jr .asm_8b987
-.asm_8b97a
-	hlcoord 11, 0
-	ld b, $a
-	ld c, $7
-	call Function8b703
-	ld hl, MenuHeader_0x8b9ca
-.asm_8b987
-	ld a, $1
-	call Function89d5e
-	ld hl, Function8b9ab
-	call Function89d85
-	call ExitMenu
-	jr c, .asm_8b99c
-	call Function8b99f
-	jr nz, .asm_8b99d
-.asm_8b99c
-	xor a
-.asm_8b99d
-	ld c, a
-	ret
-
 Function8b99f:
 	ld hl, wd002
 	dec a
@@ -1049,38 +785,6 @@ MenuData_0x8b9d2:
 	db "いれかえ@"   ; REPLACE
 	db "けす@"       ; ERASE
 	db "やめる@"     ; QUIT
-
-Function8b9e9:
-	call OpenSRAMBank4
-	call Function8931b
-	call Function8932d
-	jr nc, .asm_8b9f6
-	jr .asm_8b9ff
-.asm_8b9f6
-	ld hl, $11
-	add hl, bc
-	call Function89b45
-	jr c, .asm_8ba08
-.asm_8b9ff
-	call Function892b4
-	and a
-	ld de, Unknown_8ba1c
-	jr .asm_8ba0c
-.asm_8ba08
-	ld de, Unknown_8ba1f
-	scf
-.asm_8ba0c
-	push af
-	ld hl, wd002
-.asm_8ba10
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp $ff
-	jr nz, .asm_8ba10
-	call CloseSRAM
-	pop af
-	ret
 
 Unknown_8ba1c:
 	db 2, 4, -1

@@ -3352,59 +3352,6 @@ INCBIN "gfx/mobile/pokemon_news.bin"
 PokemonNewsPalettes:
 INCLUDE "gfx/mobile/pokemon_news.pal"
 
-RunMobileScript::
-	ld a, $6
-	call OpenSRAM
-	inc de
-.loop
-	call _RunMobileScript
-	jr c, .finished
-	jr .loop
-
-.finished
-	jmp CloseSRAM
-
-_RunMobileScript:
-	ld a, [de]
-	inc de
-	cp "@"
-	jr z, .finished
-	cp $10 ; jumptable size
-	jr nc, .finished
-	dec a
-	push de
-	ld e, a
-	ld d, 0
-	ld hl, .Jumptable
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.finished
-	scf
-	ret
-
-.Jumptable:
-	dw Function17f081 ; 0
-	dw Function17f0f8 ; 1
-	dw Function17f154 ; 2
-	dw Function17f181 ; 3
-	dw Function17f1d0 ; 4
-	dw Function17f220 ; 5
-	dw Function17f27b ; 6
-	dw Function17f2cb ; 7
-	dw MobileScript_PlayerName ; 8
-	dw MobileScript_Prefecture ; 9
-	dw Function17f382 ; a
-	dw Function17f3c9 ; b
-	dw Function17f3f0 ; c
-	dw Function17f41d ; d
-	dw Function17f44f ; e
-	dw Function17f44f ; f
-
 Function17f081:
 	pop hl
 	call Function17f524
@@ -3960,25 +3907,6 @@ Function17f382:
 	pop hl
 	ld a, [wcd54]
 	call Function17f50f
-	pop de
-	and a
-	ret
-
-Function17f3c9:
-	push bc
-	ld hl, wcd36
-	ld de, wc708
-	ld bc, 12
-	rst CopyBytes
-	pop de
-	ld c, $0
-	farcall Function11c075
-	push hl
-	ld hl, wc708
-	ld de, wcd36
-	ld bc, 12
-	rst CopyBytes
-	pop bc
 	pop de
 	and a
 	ret

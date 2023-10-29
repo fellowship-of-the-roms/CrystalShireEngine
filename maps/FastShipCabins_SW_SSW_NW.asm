@@ -47,17 +47,8 @@ TrainerGuitaristClyde:
 
 .Script:
 	endifjustbattled
-	special CheckMobileAdapterStatusSpecial
-	iftrue .mobile
 	opentext
 	writetext GuitaristClydeAfterBattleText
-	waitbutton
-	closetext
-	end
-
-.mobile
-	opentext
-	writetext GuitaristClydeAfterBattleMobileText
 	waitbutton
 	closetext
 	end

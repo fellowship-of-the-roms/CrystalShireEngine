@@ -1005,52 +1005,6 @@ Function1006dc:
 	ld [de], a
 	ret
 
-MobileBattleResetTimer:
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	jmp CloseSRAM
-
-MobileBattleFixTimer:
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	xor a ; MOBILE_BATTLE_ALLOWED_SECONDS
-	ld [hli], a
-	ld a, MOBILE_BATTLE_ALLOWED_MINUTES
-	ld [hli], a
-	xor a
-	ld [hli], a
-	jmp CloseSRAM
-
-Function100720:
-	xor a
-	ld [wcd6a], a
-	call UpdateTime
-	ldh a, [hHours]
-	ld [wcd72], a
-	ldh a, [hMinutes]
-	ld [wcd73], a
-	ldh a, [hSeconds]
-	ld [wcd74], a
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	ld a, [hli]
-	ld [wcd6c], a
-	ld a, [hli]
-	ld [wcd6d], a
-	ld a, [hli]
-	ld [wcd6e], a
-	call CloseSRAM
-	ld a, [wcd6d]
-	ld [wcd6b], a
-	ret
-
 Function100754:
 	call UpdateTime
 	ldh a, [hHours]
@@ -1244,43 +1198,6 @@ String_10088e:
 
 String_10089f:
 	db "　むせいげん@"
-
-MobileBattleGetRemainingTime:
-; Calculates the difference between 10 minutes and sMobileBattleTimer
-; Returns minutes in c and seconds in b
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	ld a, [hli]
-	ld [wStringBuffer2], a
-	ld a, [hli]
-	ld [wStringBuffer2 + 1], a
-	ld a, [hli]
-	ld [wStringBuffer2 + 2], a
-	call CloseSRAM
-	ld a, [wStringBuffer2 + 2]
-	ld b, a
-	ld a, MOBILE_BATTLE_ALLOWED_SECONDS
-	sub b
-	jr nc, .no_carry_seconds
-	add 60
-.no_carry_seconds
-	ld b, a
-	ld a, [wStringBuffer2 + 1]
-	ld c, a
-	ld a, MOBILE_BATTLE_ALLOWED_MINUTES
-	sbc c
-	ld c, a
-	jr c, .fail
-	ld a, [wStringBuffer2]
-	and a
-	jr nz, .fail
-	ret
-
-.fail
-	call MobileBattleFixTimer
-	ld c, 0
-	ret
 
 Function1008e0:
 	ldh a, [hBGMapMode]
@@ -2154,11 +2071,6 @@ Function100eed:
 	ld c, 1
 	jr Function100f02
 
-Function100ef4:
-	ld hl, Unknown_100ff3
-	ld c, 1
-	jr Function100f02
-
 Function100efb: ; unreferenced
 	ld hl, Unknown_10102c
 	ld c, 1
@@ -2325,17 +2237,6 @@ Unknown_100fc0:
 
 Unknown_100feb:
 	macro_100fc0 sPartyMail,           MAIL_STRUCT_LENGTH * PARTY_LENGTH
-	db -1 ; end
-
-Unknown_100ff3:
-	macro_100fc0 wdc41,           1
-	macro_100fc0 wPlayerName,     NAME_LENGTH
-	macro_100fc0 wPlayerName,     NAME_LENGTH
-	macro_100fc0 wPlayerID,       2
-	macro_100fc0 wSecretID,       2
-	macro_100fc0 wPlayerGender,   1
-	macro_100fc0 s4_a603,         8
-	macro_100fc0 sEZChatMessages, EASY_CHAT_MESSAGE_LENGTH * 4
 	db -1 ; end
 
 Unknown_10102c:
@@ -2579,29 +2480,6 @@ LoadSelectedPartiesForColosseum:
 	ld b, a
 	ret
 
-Function1011f1:
-	ld a, BANK(s4_a60c)
-	call OpenSRAM
-	ld a, [s4_a60c]
-	ld [wdc41], a
-	call CloseSRAM
-	ld hl, wdc41
-	res 4, [hl]
-	ld hl, wGameTimerPaused
-	bit GAME_TIMER_MOBILE_F, [hl]
-	jr z, .skip
-	ld hl, wdc41
-	set 4, [hl]
-
-.skip
-	call Function10209c
-	xor a
-	ld [wdc5f], a
-	ld [wdc60], a
-	ld a, LINK_MOBILE
-	ld [wLinkMode], a
-	ret
-
 Function101220:
 	xor a
 	ld [wLinkMode], a
@@ -2621,29 +2499,6 @@ Function10127c:
 	ret
 
 Function10127d:
-	ret
-
-Function10138b:
-	farcall Function8adcc
-	ld c, 0
-	jr c, .asm_101396
-	inc c
-
-.asm_101396
-	sla c
-	ld a, [wcd2f]
-	and a
-	jr z, .asm_10139f
-	inc c
-
-.asm_10139f
-	sla c
-	ld a, [wcd21]
-	cp $01
-	jr z, .asm_1013a9
-	inc c
-
-.asm_1013a9
 	ret
 
 Function1013aa:
@@ -2835,14 +2690,6 @@ Function1014b7:
 	ld a, [wcd26]
 	set 7, a
 	ld [wcd26], a
-	ret
-
-Function1014ce:
-	farcall Function100720
-	farcall StartMobileInactivityTimer
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
 	ret
 
 Function1014e2:
@@ -3206,47 +3053,6 @@ Function1017f5:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function101826:
-	ld a, [wcd21]
-	cp $02
-	jr z, .asm_101833
-	cp $01
-	jr z, .asm_101844
-	jr .asm_101869
-
-.asm_101833
-	ld hl, Unknown_10186f
-	ld de, wccb4
-	call Function1013f5
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-.asm_101844
-	farcall Function103654
-	ld a, c
-	ld hl, Unknown_101882
-	cp $01
-	jr z, .asm_10185b
-	ld hl, Unknown_101895
-	cp $02
-	jr z, .asm_10185b
-	jr .asm_101869
-
-.asm_10185b
-	ld de, wccb4
-	call Function1013f5
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-.asm_101869
-	ld a, $fe
-	ld [wcd2b], a
 	ret
 
 pushc
@@ -3822,19 +3628,6 @@ Function101d6b:
 	ld [wMobileCommsJumptableIndex], a
 	ret
 
-Function101d7b:
-	farcall Function10138b
-	ld b, 0
-	ld hl, Unknown_101d8d
-	add hl, bc
-	ld c, [hl]
-	ld a, c
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Unknown_101d8d:
-	db $15, $15, $1f, $1f, $0c, $12, $3a, $3a
-
 Function101d95:
 	call Function101ee2
 	call LoadStandardMenuHeader
@@ -3847,22 +3640,6 @@ Function101d95:
 	ld [wMobileCommsJumptableIndex], a
 	ld a, 0
 	ld [wcd26], a
-	ret
-
-Function101db2:
-	farcall Function103302
-	call ExitMenu
-	ld hl, wcd29
-	set 5, [hl]
-	jr c, .asm_101dca
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-.asm_101dca
-	ld a, $02
-	ld [wcd2b], a
 	ret
 
 Function101dd0:
@@ -3882,21 +3659,6 @@ Function101e31:
 	ld a, $3a
 	ld [wMobileCommsJumptableIndex], a
 	jmp Function101c2b
-
-Function101e39:
-	call Function1020bf
-	push af
-	call Function101ed3
-	pop af
-	jr c, .asm_101e49
-	ld a, $2a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-.asm_101e49
-	ld a, $02
-	ld [wcd2b], a
-	ret
 
 Function101e4f:
 	ld e, $06
@@ -4148,67 +3910,6 @@ Function1020a8:
 	call Function10208e
 	call Function102068
 	xor a
-	ret
-
-Function1020bf:
-	call ClearSprites
-	farcall Function8aba9
-	ld a, c
-	and a
-	jr z, .asm_1020e8
-	dec a
-	ld hl, $a04c
-	ld bc, $25
-	rst AddNTimes
-	ld d, h
-	ld e, l
-	ld a, $04
-	call OpenSRAM
-	call Function10208e
-	call Function102068
-	call CloseSRAM
-	xor a
-	ret
-
-.asm_1020e8
-	scf
-	ret
-
-Function102112:
-	ld a, BANK(s4_a03b)
-	call OpenSRAM
-	ld hl, s4_a03b + 6
-	ld c, 40
-.outer_loop
-	push hl
-	ld de, wc60f
-	ld b, 31
-.inner_loop
-	ld a, [de]
-	cp [hl]
-	jr nz, .not_matching
-	inc de
-	inc hl
-	dec b
-	jr nz, .inner_loop
-	pop hl
-	xor a
-	jr .done
-
-.not_matching
-	pop hl
-	ld de, 37
-	add hl, de
-	dec c
-	jr nz, .outer_loop
-	ld a, $01
-	and a
-	jr .done ; useless jr
-
-.done
-	push af
-	call CloseSRAM
-	pop af
 	ret
 
 Function102180:
@@ -6114,80 +5815,6 @@ INCBIN "gfx/mobile/mobile_trade_lights.2bpp"
 MobileTradeLightsPalettes:
 INCLUDE "gfx/mobile/mobile_trade_lights.pal"
 
-Function103302:
-	call Function103309
-	jr Function103362
-
-Function103309:
-	xor a
-	ldh [hBGMapMode], a
-	ld hl, wd1ea
-	ld bc, 10
-	xor a
-	rst ByteFill
-	ld a, BANK(s4_a60c)
-	call OpenSRAM
-	ld a, [wdc41]
-	ld [s4_a60c], a
-	ld [wd1ea], a
-	call CloseSRAM
-	call Function1035c6
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld [wd1ef], a
-	ld a, [hli]
-	ld [wd1ec], a
-	ld a, [hli]
-	ld [wd1ed], a
-	ld h, d
-	ld l, e
-	call Function3eea
-	ld hl, wd1ec
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [hl]
-	ld [wd1ee], a
-	call Function1034be
-	call UpdateSprites
-	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
-	ld a, $01
-	ld [wd1f0], a
-	jr Function10339a
-
-Function103362:
-.asm_103362
-	ld a, [wd1f0]
-	ld [wd1f1], a
-	call Function1033af
-	call Function10339a
-	call Function10342c
-	farcall HDMATransferTilemapToWRAMBank3
-	ld a, [wd1eb]
-	bit 7, a
-	jr z, .asm_103362
-	ld hl, wd1eb
-	bit 6, [hl]
-	jr z, .asm_103398
-	ld a, BANK(s4_a60c)
-	call OpenSRAM
-	ld a, [wd1ea]
-	ld [s4_a60c], a
-	ld [wdc41], a
-	call CloseSRAM
-	xor a
-	ret
-
-.asm_103398
-	scf
-	ret
 
 Function10339a:
 	ld a, [wd1f0]
@@ -6441,27 +6068,6 @@ String_1035ba: db "する@"
 String_1035bd: db "しない@"
 String_1035c1: db "けってい@"
 
-Function1035c6:
-	farcall Function10138b
-	ld b, 0
-	ld hl, Unknown_1035d7
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-Unknown_1035d7:
-	dw Unknown_1035e7
-	dw Unknown_1035f3
-	dw Unknown_103608
-	dw Unknown_103608
-	dw Unknown_1035fe
-	dw AskMobileOrCable
-	dw AskMobileOrCable
-	dw AskMobileOrCable
-
 Unknown_1035e7:
 	dwcoord 0, 6
 	db $12, $07, $07
@@ -6528,140 +6134,9 @@ MenuData_103648:
 	db "モバイル@"
 	db "ケーブル@"
 
-Function103654:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	jr nz, .asm_103666
-	ld hl, wcd2a
-	res 5, [hl]
-	ld c, $02
-	ret
-
-.asm_103666
-	ld hl, wcd2a
-	set 5, [hl]
-	ld c, $01
-	ret
-
-Mobile_SelectThreeMons:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	jr z, .asm_10369b
-	ld hl, MobileBattleMustPickThreeMonText
-	call PrintText
-	call YesNoBox
-	jr c, .asm_103696
-	farcall CheckForMobileBattleRules
-	jr nc, .asm_103690
-	call JoyWaitAorB
-	jr .asm_103696
-
-.asm_103690
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.asm_103696
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.asm_10369b
-	ld hl, wMobileOrCable_LastSelection
-	bit 7, [hl]
-	set 7, [hl]
-	jr nz, .asm_1036b5
-	ld hl, MobileBattleMoreInfoText
-	call PrintText
-	call YesNoBox
-	jr c, .asm_1036b5
-	call Function1036f9
-	call JoyWaitAorB
-
-.asm_1036b5
-	call Function103700
-	jr c, .asm_1036f4
-	ld hl, MenuHeader_103747
-	call LoadMenuHeader
-	call VerticalMenu
-	call ExitMenu
-	jr c, .asm_1036f4
-	ld a, [wMenuCursorY]
-	cp $01
-	jr z, .asm_1036d9
-	cp $02
-	jr z, .asm_1036f4
-	cp $03
-	jr z, .asm_1036ec
-	jr .asm_1036b5
-
-.asm_1036d9
-	farcall CheckForMobileBattleRules
-	jr nc, .asm_1036e6
-	call JoyWaitAorB
-	jr .asm_1036f4
-
-.asm_1036e6
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.asm_1036ec
-	call Function1036f9
-	call JoyWaitAorB
-	jr .asm_1036b5
-
-.asm_1036f4
-	xor a
-	ld [wScriptVar], a
-	ret
-
 Function1036f9:
 	ld hl, MobileBattleRulesText
 	jmp PrintText
-
-Function103700:
-	ld c, 10
-	ld hl, wSwarmFlags
-	bit SWARMFLAGS_MOBILE_4_F, [hl]
-	jr z, .asm_10370f
-	farcall MobileBattleGetRemainingTime
-.asm_10370f
-	ld a, c
-	ld [wStringBuffer2], a
-	ld a, [wStringBuffer2]
-	cp 5
-	jr nc, .five_or_more_mins
-	cp 2
-	jr nc, .two_to_five_mins
-	cp 1
-	jr nc, .one_min
-	jr .times_up
-
-.five_or_more_mins
-	ld hl, WouldYouLikeToMobileBattleText
-	call PrintText
-	and a
-	ret
-
-.two_to_five_mins
-	ld hl, WantAQuickMobileBattleText
-	call PrintText
-	and a
-	ret
-
-.one_min
-	ld hl, WantToRushThroughAMobileBattleText
-	call PrintText
-	and a
-	ret
-
-.times_up
-	ld hl, PleaseTryAgainTomorrowText
-	call PrintText
-	call JoyWaitAorB
-	scf
-	ret
 
 MenuHeader_103747:
 	db MENU_BACKUP_TILES ; flags
@@ -6704,94 +6179,9 @@ PleaseTryAgainTomorrowText:
 	text_far _PleaseTryAgainTomorrowText
 	text_end
 
-Function103780:
-	ld a, [wChosenCableClubRoom]
-	push af
-	call Function10378c
-	pop af
-	ld [wChosenCableClubRoom], a
-	ret
-
-Function10378c:
-	ld c, 0
-	ld hl, wSwarmFlags
-	bit SWARMFLAGS_MOBILE_4_F, [hl]
-	jr nz, .already_set
-	ld c, 1
-	ld hl, wSwarmFlags
-	set SWARMFLAGS_MOBILE_4_F, [hl]
-
-.already_set
-	push bc
-	farcall Link_SaveGame
-	pop bc
-	jr c, .failed_to_save
-	ld a, 1
-	ld [wScriptVar], a
-	ld a, c
-	and a
-	ret z
-	farjp MobileBattleResetTimer
-
-.failed_to_save
-	xor a
-	ld [wScriptVar], a
-	ld a, c
-	and a
-	ret z
-	ld hl, wSwarmFlags
-	res SWARMFLAGS_MOBILE_4_F, [hl]
-	ret
-
-Function1037c2:
-	call MobileCheckRemainingBattleTime
-	jr c, .nope
-	ld a, [wdc5f]
-	and a
-	jr z, .nope
-	ld hl, TryAgainUsingSameSettingsText
-	call PrintText
-	call YesNoBox
-	jr c, .nope
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.nope
-	xor a
-	ld [wdc5f], a
-	ld [wScriptVar], a
-	ret
-
 TryAgainUsingSameSettingsText:
 	text_far _TryAgainUsingSameSettingsText
 	text_end
-
-Function1037eb:
-	call MobileCheckRemainingBattleTime
-	jr nc, .asm_103807
-	ld hl, MobileBattleLessThanOneMinuteLeftText
-	call PrintText
-	call JoyWaitAorB
-	ld hl, MobileBattleNoTimeLeftForLinkingText
-	call PrintText
-	call JoyWaitAorB
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.asm_103807
-	ld a, [wdc60]
-	and a
-	jr nz, .asm_103813
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.asm_103813
-	ld a, $02
-	ld [wScriptVar], a
-	ret
 
 MobileBattleLessThanOneMinuteLeftText:
 	text_far _MobileBattleLessThanOneMinuteLeftText
@@ -6800,23 +6190,6 @@ MobileBattleLessThanOneMinuteLeftText:
 MobileBattleNoTimeLeftForLinkingText:
 	text_far _MobileBattleNoTimeLeftForLinkingText
 	text_end
-
-MobileCheckRemainingBattleTime:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	jr nz, .ok
-	farcall MobileBattleGetRemainingTime
-	ld a, c
-	cp 1
-	jr c, .fail
-
-.ok
-	xor a
-	ret
-
-.fail
-	scf
-	ret
 
 Function10383c:
 	ld a, $01
@@ -6848,17 +6221,6 @@ Function10383c:
 PickThreeMonForMobileBattleText:
 	text_far _PickThreeMonForMobileBattleText
 	text_end
-
-Function10387b:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	ret nz
-	farcall MobileBattleGetRemainingTime
-	ld a, c
-	ld [wStringBuffer2], a
-	ld hl, MobileBattleRemainingTimeText
-	call PrintText
-	jmp JoyWaitAorB
 
 MobileBattleRemainingTimeText:
 	text_far _MobileBattleRemainingTimeText

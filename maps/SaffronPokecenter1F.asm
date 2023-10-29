@@ -13,12 +13,7 @@ SaffronPokecenter1FNurseScript:
 	jumpstd PokecenterNurseScript
 
 SaffronPokecenter1FTeacherScript:
-	special CheckMobileAdapterStatusSpecial
-	iftrue .mobile
 	jumptextfaceplayer SaffronPokecenter1FTeacherText
-
-.mobile
-	jumptextfaceplayer SaffronPokecenter1FTeacherMobileText
 
 SaffronPokecenter1FFisherScript:
 	faceplayer
