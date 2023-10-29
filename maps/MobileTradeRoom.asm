@@ -23,7 +23,6 @@ MobileTradeRoomConsoleScript:
 	writetext MobileTradeRoom_EstablishingCommsText
 	waitbutton
 	reloadmappart
-	special Function101231
 	closetext
 	end
 

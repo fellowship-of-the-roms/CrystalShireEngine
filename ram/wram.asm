@@ -3668,23 +3668,10 @@ wSurfWaveBGEffectEnd::
 ENDU
 
 
-SECTION "Mobile RAM and Pokedex Listings", WRAMX
+SECTION "Pokedex Listings", WRAMX
 
-UNION
-w5_d800:: ds $200
-w5_da00:: ds $200
-w5_dc00:: ds $d
-w5_dc0d:: ds 4
-w5_dc11:: ds 9
-w5_MobileOpponentBattleMessages:: ds $c
-w5_MobileOpponentBattleStartMessage:: ds $c
-w5_MobileOpponentBattleWinMessage:: ds $c
-w5_MobileOpponentBattleLossMessage:: ds $c
-
-NEXTU
 wPokedexOrder:: ds 2 * (NUM_POKEMON + 1) ; enough room to expand to 1,407 entries
 
-ENDU
 
 SECTION "Scratch RAM", WRAMX
 

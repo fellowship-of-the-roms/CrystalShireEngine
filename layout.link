@@ -357,7 +357,7 @@ WRAMX 5
 	org $d300
 	"Battle Animations"
 	org $d500
-	"Mobile RAM and Pokedex Listings"
+	"Pokedex Listings"
 WRAMX 6
 	"Scratch RAM"
 WRAMX 7

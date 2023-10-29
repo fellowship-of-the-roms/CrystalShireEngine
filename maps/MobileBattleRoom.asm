@@ -48,7 +48,6 @@ MobileBattleRoomConsoleScript:
 	writetext MobileBattleRoom_EstablishingCommsText
 	waitbutton
 	reloadmappart
-	special Function101225
 .false
 	closetext
 	end

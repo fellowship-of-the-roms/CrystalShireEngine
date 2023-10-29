@@ -143,11 +143,8 @@ SpecialsPointers::
 	add_special Reset ; bank 0
 	add_special Function1011f1
 	add_special Function101220
-	add_special Function101225
-	add_special Function101231
 	add_special MoveTutor
 	add_special OmanyteChamber
-	add_special Function11c1ab
 	add_special BattleTowerAction
 	add_special DisplayUnownWords
 	add_special Menu_ChallengeExplanationCancel
@@ -156,7 +153,6 @@ SpecialsPointers::
 	add_special BattleTowerMobileError
 	add_special AskMobileOrCable
 	add_special HoOhChamber
-	add_special Function102142
 	add_special CelebiShrineEvent
 	add_special CheckCaughtCelebi
 	add_special PokeSeer

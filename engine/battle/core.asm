@@ -2431,8 +2431,6 @@ WinTrainerBattle:
 	ld hl, BattleText_EnemyWasDefeated
 	call StdBattleTextbox
 
-	call IsMobileBattle
-	jr z, .mobile
 	ld a, [wLinkMode]
 	and a
 	ret nz
@@ -2458,13 +2456,6 @@ WinTrainerBattle:
 .skip_win_loss_text
 
 	jr .give_money
-
-.mobile
-	call BattleWinSlideInEnemyTrainerFrontpic
-	ld c, 40
-	call DelayFrames
-	ld c, $4 ; win
-	farjp Mobile_PrintOpponentBattleMessage
 
 .battle_tower
 	call BattleWinSlideInEnemyTrainerFrontpic
@@ -3044,28 +3035,11 @@ LostBattle:
 
 .not_tied
 	ld hl, LostAgainstText
-	call IsMobileBattle
-	jr z, .mobile
 
 .text
 	call StdBattleTextbox
 
 .end
-	scf
-	ret
-
-.mobile
-; Remove the enemy from the screen.
-	hlcoord 0, 0
-	lb bc, 8, 21
-	call ClearBox
-	call BattleWinSlideInEnemyTrainerFrontpic
-
-	ld c, 40
-	call DelayFrames
-
-	ld c, $3 ; lost
-	farcall Mobile_PrintOpponentBattleMessage
 	scf
 	ret
 
@@ -9271,13 +9245,6 @@ BattleStartMessage:
 	farcall BattleStart_TrainerHuds
 	pop hl
 	call StdBattleTextbox
-
-	call IsMobileBattle2
-	ret nz
-
-	ld c, $2 ; start
-	farcall Mobile_PrintOpponentBattleMessage
-
 	ret
 
 GetWeatherImage:
