@@ -387,7 +387,7 @@ SRAM $03
 SRAM $04
 	"SRAM Bank 4"
 SRAM $05
-	"SRAM Mobile 2"
+	"SRAM Trainer Rankings"
 SRAM $06
 	"SRAM Mobile 3"
 SRAM $07

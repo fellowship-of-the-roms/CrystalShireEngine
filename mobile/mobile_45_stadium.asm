@@ -85,8 +85,6 @@ Jumptable_117728:
 	dw Function117764
 	dw Function1178aa
 	dw Function1178e8
-	dw Function117942
-	dw Function117976
 	dw Function117984
 	dw Function1179a7
 
@@ -387,37 +385,6 @@ Function1178e8:
 	call ExitMenu
 	jmp MobilePassword_IncrementJumptable
 
-Function117942:
-	call SpeechTextbox
-	hlcoord 1, 14
-	ld de, SavedPasswordString
-	rst PlaceString
-	ld a, $1e
-	ld [wcd4e], a
-	ld a, BANK(sMobileLoginPassword)
-	call OpenSRAM
-	ld a, [wcd4f]
-	ld [sMobileLoginPassword], a
-	ld hl, wc708
-	ld de, sMobileLoginPassword + 1
-	ld bc, MOBILE_LOGIN_PASSWORD_LENGTH
-	rst CopyBytes
-	call CloseSRAM
-	ld a, [wcd4f]
-	and a
-	jr z, asm_11797e
-	call MobilePassword_IncrementJumptable
-
-Function117976:
-	ld hl, wcd4e
-	dec [hl]
-	ret nz
-	call ExitMenu
-asm_11797e:
-	ld a, $80
-	ld [wcd49], a
-	ret
-
 Function117984:
 	ld hl, MenuHeader_1179b5
 	call LoadMenuHeader
@@ -544,7 +511,6 @@ Function117ae9:
 	dw Function117b28
 	dw Function117b31
 	dw Function117b4f
-	dw Function117bb6
 	dw Function117c4a
 
 Function117b06:
@@ -635,83 +601,6 @@ Function117b4f:
 	ld a, $80
 	ld [wJumptableIndex], a
 	ret
-
-Function117bb6:
-	call Function117c89
-	ld a, $1
-	ldh [hBGMapMode], a
-	farcall Function118284
-	call ClearSprites
-	ld a, [wMobileErrorCodeBuffer]
-	and a
-	jr z, .asm_117be7
-	cp $a
-	jr z, .asm_117be1
-.asm_117bd0
-	ld a, $2
-	ld [wc303], a
-	farcall DisplayMobileError
-	ld a, $80
-	ld [wJumptableIndex], a
-	ret
-
-.asm_117be1
-	ld a, $80
-	ld [wJumptableIndex], a
-	ret
-
-.asm_117be7
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	ld a, [wcd89]
-	and $1
-	jr nz, .asm_117c16
-	ld a, [w3_d000]
-	cp $fe
-	jr nz, .asm_117c16
-	ld a, [w3_d001]
-	cp $f
-	jr nz, .asm_117c16
-;	ld hl, w3_dfec
-	ld de, wcd69
-	ld c, $10
-.asm_117c0b
-	ld a, [de]
-	inc de
-	cp [hl]
-	jr nz, .asm_117c16
-	inc hl
-	dec c
-	jr nz, .asm_117c0b
-	jr .asm_117c20
-
-.asm_117c16
-	pop af
-	ldh [rSVBK], a
-	ld a, $d3
-	ld [wMobileErrorCodeBuffer], a
-	jr .asm_117bd0
-
-.asm_117c20
-	pop af
-	ldh [rSVBK], a
-	farcall Function172eb9
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	ld a, $7
-	call OpenSRAM
-	ld hl, w3_d002
-	ld de, $b000
-	ld bc, $1000
-	rst CopyBytes
-	call CloseSRAM
-	pop af
-	ldh [rSVBK], a
-	jmp MobileStudium_JumptableIncrement
 
 Function117c4a:
 	ld hl, MenuHeader_117cbc

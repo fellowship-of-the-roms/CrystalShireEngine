@@ -41,8 +41,6 @@ BattleTower1FCheckStateScene:
 	sdefer BattleTower_LeftWithoutSaving
 	setval BATTLETOWERACTION_CHALLENGECANCELED
 	special BattleTowerAction
-	setval BATTLETOWERACTION_06
-	special BattleTowerAction
 .SkipEverything:
 	setscene SCENE_BATTLETOWER1F_NOOP
 	; fallthrough
@@ -96,9 +94,6 @@ Script_ChooseChallenge:
 	special BattleTowerAction
 	special BattleTowerRoomMenu
 	ifequal $a, Script_Menu_ChallengeExplanationCancel
-	ifnotequal $0, Script_MobileError
-	setval BATTLETOWERACTION_11
-	special BattleTowerAction
 	writetext Text_RightThisWayToYourBattleRoom
 	waitbutton
 	closetext
@@ -164,69 +159,10 @@ Script_BattleTowerHopeToServeYouAgain:
 	closetext
 	end
 
-Script_MobileError2: ; unreferenced
-	special BattleTowerMobileError
-	closetext
-	end
-
 Script_WaitButton:
 	waitbutton
 	closetext
 	end
-
-Script_ChooseChallenge2: ; unreferenced
-	writetext Text_SaveBeforeEnteringBattleRoom
-	yesorno
-	iffalse Script_Menu_ChallengeExplanationCancel
-	special TryQuickSave
-	iffalse Script_Menu_ChallengeExplanationCancel
-	setval BATTLETOWERACTION_SET_EXPLANATION_READ
-	special BattleTowerAction
-	special Function1700ba
-	ifequal $a, Script_Menu_ChallengeExplanationCancel
-	ifnotequal $0, Script_MobileError
-	writetext Text_ReceivedAListOfLeadersOnTheHonorRoll
-	turnobject BATTLETOWER1F_RECEPTIONIST, LEFT
-	writetext Text_PleaseConfirmOnThisMonitor
-	waitbutton
-	turnobject BATTLETOWER1F_RECEPTIONIST, DOWN
-	closetext
-	end
-
-Script_StartChallenge: ; unreferenced
-	setval BATTLETOWERACTION_LEVEL_CHECK
-	special BattleTowerAction
-	ifnotequal $0, Script_AMonLevelExceeds
-	setval BATTLETOWERACTION_UBERS_CHECK
-	special BattleTowerAction
-	ifnotequal $0, Script_MayNotEnterABattleRoomUnderL70
-	special CheckForBattleTowerRules
-	ifnotequal FALSE, Script_WaitButton
-	setval BATTLETOWERACTION_05
-	special BattleTowerAction
-	ifequal $0, .zero
-	writetext Text_CantBeRegistered_PreviousRecordDeleted
-	sjump .continue
-
-.zero
-	writetext Text_CantBeRegistered
-.continue
-	yesorno
-	iffalse Script_Menu_ChallengeExplanationCancel
-	writetext Text_SaveBeforeReentry
-	yesorno
-	iffalse Script_Menu_ChallengeExplanationCancel
-	setscene SCENE_BATTLETOWER1F_CHECKSTATE
-	special TryQuickSave
-	iffalse Script_Menu_ChallengeExplanationCancel
-	setscene SCENE_BATTLETOWER1F_NOOP
-	setval BATTLETOWERACTION_06
-	special BattleTowerAction
-	setval BATTLETOWERACTION_12
-	special BattleTowerAction
-	writetext Text_RightThisWayToYourBattleRoom
-	waitbutton
-	sjump Script_ResumeBattleTowerChallenge
 
 Script_ReachedBattleLimit: ; unreferenced
 	writetext Text_FiveDayBattleLimit_Mobile
@@ -242,11 +178,6 @@ Script_MayNotEnterABattleRoomUnderL70:
 	writetext Text_MayNotEnterABattleRoomUnderL70
 	waitbutton
 	sjump Script_Menu_ChallengeExplanationCancel
-
-Script_MobileError:
-	special BattleTowerMobileError
-	closetext
-	end
 
 BattleTower_LeftWithoutSaving:
 	opentext

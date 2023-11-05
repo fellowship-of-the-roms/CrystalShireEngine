@@ -220,9 +220,7 @@ SECTION "SRAM Bank 4", SRAM
 
 
 
-SECTION "SRAM Mobile 2", SRAM
-
-sGSBallFlagJP:: db ; unused
+SECTION "SRAM Trainer Rankings", SRAM
 
 sTrainerRankings::
 sTrainerRankingGameTimeHOF:: ds 4
@@ -270,106 +268,7 @@ sTrainerRankingBugContestScore:: ds 2
 sTrainerRankingsChecksum:: ds 2
 sTrainerRankingsEnd::
 
-sGSBallFlagBackupJP:: db ; unused
-
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
-
-	ds $6fa
-
-s5_a800:: db
-
-sOfferEmail::      ds MOBILE_EMAIL_LENGTH
-sOfferTrainerID::  dw
-sOfferSecretID::   dw
-sOfferGender::     db
-sOfferSpecies::    db
-sOfferReqGender::  db
-sOfferReqSpecies:: db
-sOfferMonSender::  ds NAME_LENGTH_JAPANESE - 1
-sOfferMon::        party_struct sOfferMon
-sOfferMonOT::      ds NAME_LENGTH_JAPANESE - 1
-sOfferMonNick::    ds NAME_LENGTH_JAPANESE - 1
-sOfferMonMail::    mailmsg_jp sOfferMonMail
-
-s5_a890:: db
-s5_a891:: db
-s5_a892:: db
-s5_a893:: db
-s5_a894:: ds 6
-s5_a89a:: dw
-s5_a89c:: ds 22
-s5_a8b2:: ds 150
-
-s5_a948:: ds 246
-
-	ds $3
-
-s5_aa41:: ds 4
-
-	ds $2
-
-s5_aa47:: db
-s5_aa48:: db
-
-	ds $1
-
-s5_aa4a:: db
-
-sMobileLoginPassword:: ds MOBILE_LOGIN_PASSWORD_LENGTH
-
-	ds $1
-
-s5_aa5d:: ds MOBILE_LOGIN_PASSWORD_LENGTH
-
-	ds $4
-
-s5_aa72:: db
-s5_aa73:: ds 12
-s5_aa7f:: ds 12
-
-s5_aa8b:: db
-s5_aa8c:: db
-s5_aa8d:: db
-s5_aa8e:: ds 7 * $cc
-
-	ds $1
-
-s5_b023:: ds 105
-s5_b08c:: ds 4
-s5_b090:: db
-s5_b091:: db
-s5_b092:: ds 31
-
-	ds $100
-
-s5_b1b1:: db
-s5_b1b2:: db
-s5_b1b3:: db
-s5_b1b4:: db
-
-	ds $1e
-
-s5_b1d3::
-
-	ds $120
-
-s5_b2f3:: db
-s5_b2f4:: ds 4
-
-	ds $1
-
-s5_b2f9:: db
-s5_b2fa:: db
-s5_b2fb:: db
-
-	ds $b49
-
-s5_be45:: db
-s5_be46:: db
-
-	ds $1b8
-
-s5_bfff:: db
 
 
 SECTION "SRAM Mobile 3", SRAM

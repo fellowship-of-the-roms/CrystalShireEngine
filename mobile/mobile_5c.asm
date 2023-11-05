@@ -34,161 +34,7 @@ Function170000:
 	ld bc, TRADE_CORNER_REQUEST_LENGTH
 	jmp CopyBytes
 
-Function17005a:
-	ld a, BANK(sOfferMon)
-	call OpenSRAM
-	ld a, [sOfferSpecies]
-	ld [wOTTrademonSpecies], a
-	ld hl, sOfferMonSender
-	ld de, wOTTrademonSenderName
-	ld bc, NAME_LENGTH_JAPANESE - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-	ld hl, sOfferMonOT
-	ld de, wOTTrademonOTName
-	ld bc, NAME_LENGTH_JAPANESE - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-	ld hl, sOfferMonDVs
-	ld a, [hli]
-	ld [wOTTrademonDVs], a
-	ld a, [hl]
-	ld [wOTTrademonDVs + 1], a
-	ld hl, sOfferMonID
-	ld a, [hli]
-	ld [wOTTrademonID], a
-	ld a, [hl]
-	ld [wOTTrademonID + 1], a
-	ld bc, sOfferMon
-	farcall GetCaughtGender
-	ld a, c
-	ld [wOTTrademonCaughtData], a
-	ld a, [wcd81]
-	ld [wc74e], a
-	jmp CloseSRAM
-
 INCLUDE "engine/events/battle_tower/battle_tower.asm"
-
-Function170be4:
-	ld a, BANK(s5_a894)
-	call OpenSRAM
-	xor a
-	ld hl, s5_a894
-	ld bc, 6 + 2
-	rst ByteFill
-	jmp CloseSRAM
-
-Clears5_a89a:
-	ld a, BANK(s5_a89a)
-	call OpenSRAM
-	ld hl, s5_a89a
-	xor a
-	ld [hli], a
-	ld [hl], a
-	jmp CloseSRAM
-
-Function170c06: ; unreferenced
-	ld a, BANK(s5_a894)
-	call OpenSRAM
-	ld hl, s5_a894
-	ld a, [wBattleResult]
-	and a ; WIN?
-	jr nz, .asm_170c15
-	inc [hl]
-
-.asm_170c15
-	inc hl
-	inc hl
-	ld a, [s5_a89a + 1]
-	add [hl]
-	ld [hld], a
-	ld a, [s5_a89a]
-	adc [hl]
-	ld [hli], a
-	jr nc, .asm_170c27
-	ld a, $ff
-	ld [hld], a
-	ld [hli], a
-
-.asm_170c27
-	inc hl
-	push hl
-	ld de, 0
-	xor a
-	ld [wTempByteValue], a
-.asm_170c30
-	ld hl, wPartyMon1HP
-	ld a, [wTempByteValue]
-	call GetPartyLocation
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	inc hl
-	inc hl
-	ld a, [hld]
-	sub c
-	ld c, a
-	ld a, [hl]
-	sbc b
-	ld b, a
-	push de
-	pop hl
-	add hl, bc
-	push hl
-	pop de
-	jr c, .asm_170c58
-	ld a, [wTempByteValue]
-	inc a
-	ld [wTempByteValue], a
-	cp $3
-	jr c, .asm_170c30
-	jr .asm_170c5b
-
-.asm_170c58
-	ld de, -1
-
-.asm_170c5b
-	pop hl
-	inc hl
-	ld a, e
-	add [hl]
-	ld [hld], a
-	ld a, d
-	adc [hl]
-	ld [hli], a
-	jr nc, .asm_170c69
-	ld a, $ff
-	ld [hld], a
-	ld [hli], a
-
-.asm_170c69
-	inc hl
-	push hl
-	ld b, $0
-	ld c, $0
-.asm_170c6f
-	ld hl, wPartyMon1HP
-	ld a, b
-	push bc
-	call GetPartyLocation
-	pop bc
-	ld a, [hli]
-	or [hl]
-	jr nz, .asm_170c7d
-	inc c
-
-.asm_170c7d
-	inc b
-	ld a, b
-	cp $3
-	jr c, .asm_170c6f
-	pop hl
-	ld a, [hl]
-	add c
-	ld [hl], a
-	jmp CloseSRAM
 
 Function170c8b:
 	ld hl, wLastEnemyCounterMove
@@ -354,9 +200,7 @@ Jumptable_171a45:
 	dw Function171b4b
 	dw Function171b85
 	dw Function171bcc
-	dw Function171c2c
 	dw Function171c39
-	dw Function171c41
 
 Function171a5d:
 	ld a, [wc821]
@@ -575,10 +419,10 @@ Function171bdc:
 	ret
 
 Function171beb:
-	ld a, BANK(s5_aa4a)
+;	ld a, BANK(s5_aa4a)
 	call OpenSRAM
 	ld a, [wcd4a]
-	ld [s5_aa4a], a
+;	ld [s5_aa4a], a
 	call CloseSRAM
 	ld hl, MenuHeader_171c6b
 	call LoadMenuHeader
@@ -601,33 +445,10 @@ Function171beb:
 	ld [wcd4c], a
 	call Function171c66
 
-Function171c2c:
-	ld hl, wcd4c
-	dec [hl]
-	ret nz
-	call ExitMenu
-	call ClearBGPalettes
-	jr asm_171c60
-
 Function171c39:
 	ld a, $28
 	ld [wcd4c], a
 	call Function171c66
-
-Function171c41:
-	ld hl, wcd4c
-	dec [hl]
-	ret nz
-	call ClearBGPalettes
-	farcall Stubbed_Function106462
-	farcall Function106464
-	ld a, $2
-	ld [wc303], a
-	farcall DisplayMobileError
-asm_171c60:
-	ld a, $80
-	ld [wcd49], a
-	ret
 
 Function171c66:
 	ld hl, wcd49

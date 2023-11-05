@@ -263,63 +263,6 @@ CheckStringForErrors_IgnoreTerminator:
 	and a
 	ret
 
-Function17d0f3:
-	ld a, [wMobileMonSpecies]
-	ld [wOTTrademonSpecies], a
-	ld [wCurPartySpecies], a
-	ld a, [wcd81]
-	ld [wc74e], a
-	ld hl, wMobileMonOT
-	ld de, wOTTrademonOTName
-	ld bc, NAME_LENGTH_JAPANESE - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-	ld a, [wMobileMonID]
-	ld [wOTTrademonID], a
-	ld a, [wMobileMonID + 1]
-	ld [wOTTrademonID + 1], a
-	ld hl, wMobileMonDVs
-	ld a, [hli]
-	ld [wOTTrademonDVs], a
-	ld a, [hl]
-	ld [wOTTrademonDVs + 1], a
-	ld bc, wMobileMonSpecies
-	farcall GetCaughtGender
-	ld a, c
-	ld [wOTTrademonCaughtData], a
-	call SpeechTextbox
-	call FadeToMenu
-	farcall Function10804d
-	farcall Function17d1f1
-	ld a, $1
-	ld [wForceEvolution], a
-	ld a, LINK_TRADECENTER
-	ld [wLinkMode], a
-	farcall EvolvePokemon
-	xor a
-	ld [wLinkMode], a
-	farcall SaveAfterLinkTrade
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	ld a, BANK(s5_a800)
-	ld [s5_a800], a
-	call CloseSRAM
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetMapSceneID
-	ld a, d
-	or e
-	jr z, .asm_17d180
-	ld a, $1
-	ld [de], a
-
-.asm_17d180
-	call CloseSubmenu
-	jmp RestartMapMusic
-
 Mobile_CopyDefaultOTName:
 	ld hl, Mobile5F_PlayersName
 	ld de, wMobileMonOT
@@ -506,92 +449,6 @@ Function17d2c0:
 	ld [wcf64], a
 	ld [wcf65], a
 	ld [wcf66], a
-	ret
-
-Function17d2ce:
-	ld a, BANK(s5_aa72)
-	call OpenSRAM
-	ld a, [s5_aa72]
-	call CloseSRAM
-	and a
-	jr nz, .asm_17d2e2
-	ld a, $1
-	ld [wScriptVar], a
-	ret
-
-.asm_17d2e2
-	call Function17d314
-	ret c
-	call SpeechTextbox
-	call FadeToMenu
-	ldh a, [rSVBK]
-	push af
-	ld a, $4
-	ldh [rSVBK], a
-	call Function17d370
-	call Function17d45a
-	pop af
-	ldh [rSVBK], a
-	ld de, MUSIC_MOBILE_CENTER
-	ld a, e
-	ld [wMapMusic], a
-	ld [wMusicFadeID], a
-	ld a, d
-	ld [wMusicFadeID + 1], a
-	call PlayMusic
-	call ReturnToMapFromSubmenu
-	jmp CloseSubmenu
-
-Function17d314:
-	ld a, BANK(s5_b1b1)
-	call OpenSRAM
-	ld a, [s5_b1b1]
-	call CloseSRAM
-	cp $21
-	jr nc, .asm_17d354
-	ld a, BANK(s6_a006)
-	call OpenSRAM
-	ld l, 0
-	ld h, l
-	ld de, s6_a006
-	ld a, [s6_a004]
-	ld c, a
-	ld a, [s6_a005]
-	ld b, a
-.asm_17d336
-	push bc
-	ld a, [de]
-	inc de
-	ld c, a
-	ld b, 0
-	add hl, bc
-	pop bc
-	dec bc
-	ld a, b
-	or c
-	jr nz, .asm_17d336
-	ld a, [s6_a002]
-	cp l
-	jr nz, .asm_17d354
-	ld a, [s6_a003]
-	cp h
-	jr nz, .asm_17d354
-	call CloseSRAM
-	and a
-	ret
-
-.asm_17d354
-	call CloseSRAM
-	ld a, $5
-	call OpenSRAM
-	xor a
-	ld hl, $aa73
-	ld bc, $c
-	rst ByteFill
-	call CloseSRAM
-	ld a, $2
-	ld [wScriptVar], a
-	scf
 	ret
 
 Function17d370:
@@ -1123,8 +980,6 @@ Jumptable17d72a:
 	dw Function17d7e5
 	dw Function17d818
 	dw Function17d833
-	dw Function17d85d
-	dw Function17d902
 	dw Function17d93a
 	dw Function17d98b
 	dw Function17d9e3
@@ -1155,7 +1010,6 @@ Jumptable17d72a:
 	dw Function17e270
 	dw Function17e27f
 	dw Function17e293
-	dw Function17e2a7
 	dw IncCrashCheckPointer_SaveGameData
 	dw IncCrashCheckPointer_SaveAfterLinkTrade
 	dw IncCrashCheckPointer_SaveBox
@@ -1282,136 +1136,6 @@ Function17d833:
 	ld e, l
 	ld d, h
 	farcall Function11c08f
-	jmp Function17e349
-
-Function17d85d:
-	call IncCrashCheckPointer
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	push hl
-	ld hl, wBGPals1
-	add hl, de
-	ld de, wcc60
-.asm_17d86c
-	ld a, [hli]
-	ld [de], a
-	inc de
-	and a
-	jr nz, .asm_17d86c
-	pop hl
-	ld de, wc608
-	ld c, $0
-.asm_17d878
-	ld a, [hli]
-	cp $ff
-	jr z, .asm_17d8c7
-	ld [wcd4f], a
-	ld a, [hli]
-	ld [wcd50], a
-	ld a, [hli]
-	ld [wcd51], a
-	ld a, [hli]
-	ld [wcd52], a
-	ld a, [wcd51]
-	push af
-	cp $c0
-	jr c, .asm_17d89b
-	ld a, [wcd4f]
-	ldh [rSVBK], a
-	jr .asm_17d8a1
-
-.asm_17d89b
-	ld a, [wcd4f]
-	call OpenSRAM
-
-.asm_17d8a1
-	push hl
-	ld a, [wcd50]
-	ld l, a
-	ld a, [wcd51]
-	ld h, a
-	ld a, [wcd52]
-.asm_17d8ad
-	push af
-	ld a, [hli]
-	ld [de], a
-	inc de
-	inc c
-	pop af
-	dec a
-	jr nz, .asm_17d8ad
-	pop hl
-	pop af
-	cp $c0
-	jr c, .asm_17d8c2
-	ld a, $4
-	ldh [rSVBK], a
-	jr .asm_17d878
-
-.asm_17d8c2
-	call CloseSRAM
-	jr .asm_17d878
-
-.asm_17d8c7
-	call HlToCrashCheckPointer
-	push bc
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	ld hl, wc608
-	ld de, wBGPals1
-	ld b, $0
-	rst CopyBytes
-	ld a, $4
-	ldh [rSVBK], a
-	call Function17e32b
-	pop bc
-	ld a, c
-	ld [wcd3b], a
-	xor a
-	ld [wcf66], a
-	farcall Function118329
-	ld a, [wMobileErrorCodeBuffer]
-	and a
-	jr z, .asm_17d8fe
-	cp $a
-	jr z, .asm_17d8fe
-	jmp Function17e309
-
-.asm_17d8fe
-	jmp Function17e349
-
-Function17d902:
-	call IncCrashCheckPointer
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	push de
-	call HlToCrashCheckPointer
-	call Function17e32b
-	pop de
-	ld hl, wBGPals1
-	add hl, de
-	ld de, wcc60
-.asm_17d918
-	ld a, [hli]
-	ld [de], a
-	inc de
-	and a
-	jr nz, .asm_17d918
-	xor a
-	ld [wcf66], a
-	farcall Function11837a
-	ld a, [wMobileErrorCodeBuffer]
-	and a
-	jr z, .asm_17d936
-	cp $a
-	jr z, .asm_17d936
-	jmp Function17e309
-
-.asm_17d936
 	jmp Function17e349
 
 Function17d93a:
@@ -2687,65 +2411,6 @@ Function17e293:
 	ld [de], a
 	ret
 
-Function17e2a7:
-	call IncCrashCheckPointer
-	call HlToCrashCheckPointer
-	call Function17e32b
-	xor a
-	ld [wcf66], a
-	farcall Function118233
-	ld de, PostalMarkGFX
-	ld hl, vTiles2 tile $60
-	lb bc, BANK(PostalMarkGFX), 1
-	call Get2bpp
-	ld a, [wMobileErrorCodeBuffer]
-	and a
-	jr z, .asm_17e2d8
-	cp $a
-	jr z, .asm_17e2f7
-	cp $b
-	jr z, .asm_17e300
-	jr Function17e309
-
-.asm_17e2d8
-	call Function17d60b
-	call Function17e349
-	xor a
-	ld [wcd7a], a
-	ld a, $5
-	call OpenSRAM
-	ld hl, $aa73
-	ld de, $aa7f
-	ld bc, $c
-	rst CopyBytes
-	jmp CloseSRAM
-
-.asm_17e2f7
-	call Function17e349
-	ld a, $1
-	ld [wcd7a], a
-	ret
-
-.asm_17e300
-	call Function17e349
-	ld a, $2
-	ld [wcd7a], a
-	ret
-
-Function17e309:
-	ld a, $2
-	ld [wc303], a
-	call Function17dcaf
-	call ClearScreen
-	call Function17e349
-	call Function17d5f6
-	farcall DisplayMobileError
-	call Function17e349
-	call Function17dcaf
-	xor a
-	ld [wcd77], a
-	ret
-
 Function17e32b:
 	ld a, $5
 	call OpenSRAM
@@ -3825,92 +3490,6 @@ MobileScript_PlayerName:
 	and a
 	ret
 
-MobileScript_Prefecture:
-	pop hl
-	push bc
-	ld a, [hli]
-	ld [wcd55], a
-	and $f
-	ld [wcd54], a
-	pop bc
-	push hl
-	ld l, c
-	ld h, b
-	push hl
-	ld a, [wcd55]
-	bit 7, a
-	jr nz, .asm_17f355
-	ld a, BANK(sCrystalData)
-	call OpenSRAM
-	ld a, [sCrystalData + 2]
-	jr .asm_17f35d
-
-.asm_17f355
-	ld a, BANK(s5_b2f3)
-	call OpenSRAM
-	ld a, [s5_b2f3]
-
-.asm_17f35d
-	ld c, a
-	call CloseSRAM
-	ld de, wc608
-	farcall Function48c63
-	pop hl
-	ld de, wc608
-	rst PlaceString
-	ld a, c
-	ld [wcd52], a
-	ld a, b
-	ld [wcd53], a
-	ld a, [wcd54]
-	call Function17f50f
-	pop de
-	and a
-	ret
-
-Function17f382:
-	pop hl
-	push bc
-	ld a, [hli]
-	ld [wcd55], a
-	and $f
-	ld [wcd54], a
-	pop bc
-	push hl
-	push bc
-	ld l, c
-	ld h, b
-	ld a, [wcd55]
-	bit 7, a
-	jr nz, .asm_17f3a3
-	ld a, BANK(sCrystalData)
-	call OpenSRAM
-	ld de, sCrystalData + 3
-	jr .asm_17f3ab
-
-.asm_17f3a3
-	ld a, BANK(s5_b2f4)
-	call OpenSRAM
-	ld de, s5_b2f4
-
-.asm_17f3ab
-	ld a, PRINTNUM_LEADINGZEROS | 2
-	ld b, a
-	ld a, 3
-	ld c, a
-	call PrintNum
-	call CloseSRAM
-	ld a, l
-	ld [wcd52], a
-	ld a, h
-	ld [wcd53], a
-	pop hl
-	ld a, [wcd54]
-	call Function17f50f
-	pop de
-	and a
-	ret
-
 Function17f3f0:
 	pop hl
 	push hl
@@ -4165,80 +3744,6 @@ Function17f524:
 .asm_17f53a
 	scf
 	jr .asm_17f536
-
-BattleTowerMobileError:
-	call FadeToMenu
-	xor a
-	ld [wc303], a
-	ldh a, [rSVBK]
-	push af
-	ld a, $1
-	ldh [rSVBK], a
-
-	call DisplayMobileError
-
-	pop af
-	ldh [rSVBK], a
-	jmp ExitAllMenus
-
-DisplayMobileError:
-.loop
-	call JoyTextDelay
-	call .RunJumptable
-	ld a, [wc303]
-	bit 7, a
-	jr nz, .quit
-	farcall HDMATransferAttrmapAndTilemapToWRAMBank3
-	jr .loop
-
-.quit
-.deinit
-	ld a, [wMobileErrorCodeBuffer]
-	cp $22
-	jr z, .asm_17f597
-	cp $31
-	jr z, .asm_17f58a
-	cp $33
-	ret nz
-	ld a, [wMobileErrorCodeBuffer + 1]
-	cp $1
-	ret nz
-	ld a, [wMobileErrorCodeBuffer + 2]
-	cp $2
-	ret nz
-	jr .asm_17f5a1
-
-.asm_17f58a
-	ld a, [wMobileErrorCodeBuffer + 1]
-	cp $3
-	ret nz
-	ld a, [wMobileErrorCodeBuffer + 2]
-	and a
-	ret nz
-	jr .asm_17f5a1
-
-.asm_17f597
-	ld a, [wMobileErrorCodeBuffer + 1]
-	and a
-	ret nz
-	ld a, [wMobileErrorCodeBuffer + 2]
-	and a
-	ret nz
-
-.asm_17f5a1
-	ld a, BANK(sMobileLoginPassword)
-	call OpenSRAM
-	xor a
-	ld [sMobileLoginPassword], a
-	jmp CloseSRAM
-
-.RunJumptable:
-	jumptable .Jumptable, wc303
-
-.Jumptable:
-	dw Function17f5c3
-	dw Function17ff23
-	dw Function17f5d2
 
 Function17f5c3:
 	call Function17f5e4

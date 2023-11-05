@@ -240,12 +240,6 @@ StubbedTrainerRankings_StepCount:
 
 StubbedTrainerRankings_BattleTowerWins: ; unreferenced
 	ret
-	ld a, BANK(s5_aa8d)
-	call OpenSRAM
-	ld a, [s5_aa8d]
-	and a
-	call CloseSRAM
-	ret nz
 	ld hl, sTrainerRankingBattleTowerWins
 	jmp StubbedTrainerRankings_Increment2Byte
 

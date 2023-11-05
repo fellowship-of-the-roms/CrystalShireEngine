@@ -124,17 +124,9 @@ SpecialsPointers::
 
 ; Crystal only
 	add_special Function11ac3e
-	add_special TradeCornerHoldMon
-	add_special Function11b5e8
-	add_special Function11b7e5
-	add_special Function11b879
-	add_special Function11b920
-	add_special Function11b93b
 	add_special BattleTowerRoomMenu
 	add_special Function1700ba
-	add_special Function170114
 	add_special BattleTowerBattle
-	add_special Function1704e1
 	add_special UnusedBattleTowerDummySpecial1
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
 	add_special Function11ba38
@@ -148,8 +140,6 @@ SpecialsPointers::
 	add_special DisplayUnownWords
 	add_special Menu_ChallengeExplanationCancel
 	add_special Function17d2b6
-	add_special Function17d2ce
-	add_special BattleTowerMobileError
 	add_special AskMobileOrCable
 	add_special HoOhChamber
 	add_special CelebiShrineEvent
