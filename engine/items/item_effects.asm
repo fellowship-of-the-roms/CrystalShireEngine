@@ -26,6 +26,8 @@ ItemEffects:
 	indirect_entries (FIRST_KEY_ITEM - 1) + NUM_KEY_ITEM_POCKET, ItemEffectsKeyItems
 	indirect_entries FIRST_BALL_ITEM - 1 ; sparse table
 	indirect_entries (FIRST_BALL_ITEM - 1) + NUM_BALL_ITEM_POCKET, ItemEffectsBalls
+	indirect_entries FIRST_BERRY_ITEM - 1 ; sparse table
+	indirect_entries (FIRST_BERRY_ITEM - 1) + NUM_BERRY_ITEM_POCKET, ItemEffectsBerries
 	indirect_table_end
 
 ItemEffects1:
@@ -228,6 +230,10 @@ ItemEffectsBalls:
 	dw PokeBallEffect ; MOON_BALL
 	dw PokeBallEffect ; LOVE_BALL
 	dw PokeBallEffect ; PARK_BALL
+.IndirectEnd:
+
+ItemEffectsBerries:
+	dw PokeBallEffect
 .IndirectEnd:
 
 PokeBallEffect:

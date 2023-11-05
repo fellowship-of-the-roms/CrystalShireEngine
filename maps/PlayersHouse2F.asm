@@ -60,6 +60,7 @@ if DEF(_DEBUG)
 	; useful items
 	giveitem MAX_REPEL, 99
 	giveitem MASTER_BALL, 99
+	giveitem TEST_BERRY, 2
 	; all badges
 	setflag ENGINE_ZEPHYRBADGE
 	setflag ENGINE_HIVEBADGE

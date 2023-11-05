@@ -579,6 +579,18 @@ CheckItemPocketConversion:
 	ret
 
 .not_ball_pocket
+	cp BERRY_POCKET
+	jr nz, .not_berry_pocket
+	ld a, [wCurItem]
+	push hl
+	ld h, HIGH(FIRST_BERRY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	pop hl
+	ld [wCurItem], a
+	ret
+
+.not_berry_pocket
 	cp KEY_ITEM_POCKET
 	ret nz
 	ld a, [wCurItem]

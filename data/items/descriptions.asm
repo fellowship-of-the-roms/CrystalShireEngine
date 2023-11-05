@@ -5,6 +5,8 @@ ItemDescriptions:
 	indirect_entries (FIRST_KEY_ITEM - 1) + NUM_KEY_ITEM_POCKET, ItemDescriptionsKeyItems
 	indirect_entries FIRST_BALL_ITEM - 1 ; sparse Table
 	indirect_entries (FIRST_BALL_ITEM - 1) + NUM_BALL_ITEM_POCKET, ItemDescriptionsBalls
+	indirect_entries FIRST_BERRY_ITEM - 1 ; sparse Table
+	indirect_entries (FIRST_BERRY_ITEM - 1) + NUM_BERRY_ITEM_POCKET, ItemDescriptionsBerries
 	indirect_table_end
 
 ItemDescriptions1:
@@ -209,6 +211,14 @@ ItemDescriptionsBalls:
 	dw LoveBallDesc   ; 020A
 	dw ParkBallDesc   ; 020B
 .IndirectEnd:
+
+ItemDescriptionsBerries:
+	dw TestBerryDesc
+.IndirectEnd:
+
+TestBerryDesc:
+	db "This is a test"
+	next "berry.@"
 
 MasterBallDesc:
 	db   "The best BALL. It"

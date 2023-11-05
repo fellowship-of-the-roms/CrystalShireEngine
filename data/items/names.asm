@@ -202,3 +202,8 @@ BallNames::
 	li "LOVE BALL"   ; 020A
 	li "PARK BALL"   ; 020B
 	assert_list_length NUM_BALL_ITEM_POCKET
+
+BerryNames::
+	list_start BerryNames
+	li "TEST BERRY" ; 0300
+	assert_list_length NUM_BERRY_ITEM_POCKET

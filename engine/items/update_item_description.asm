@@ -9,8 +9,7 @@ UpdateItemDescription:
 	cp -1
 	ret z
 	decoord 1, 14
-	farcall PrintItemDescription
-	ret
+	farjp PrintItemDescription
 
 UpdateItemBallDescription:
 	ld a, [wMenuSelection]
@@ -26,8 +25,23 @@ UpdateItemBallDescription:
 	cp -1
 	ret z
 	decoord 1, 14
-	farcall PrintItemDescription
-	ret
+	farjp PrintItemDescription
+
+UpdateItemBerryDescription:
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BERRY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wCurSpecies], a
+	hlcoord 0, 12
+	ld b, 4
+	ld c, SCREEN_WIDTH - 2
+	call Textbox
+	ld a, [wMenuSelection]
+	cp -1
+	ret z
+	decoord 1, 14
+	farjp PrintItemDescription
 
 UpdateKeyItemDescription:
 	ld a, [wMenuSelection]

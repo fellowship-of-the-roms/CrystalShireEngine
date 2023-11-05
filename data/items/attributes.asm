@@ -13,6 +13,8 @@ ItemAttributes:
 	indirect_entries (FIRST_KEY_ITEM - 1) + NUM_KEY_ITEM_POCKET, ItemKeyAttributes
 	indirect_entries FIRST_BALL_ITEM - 1 ; sparse table
 	indirect_entries (FIRST_BALL_ITEM - 1) + NUM_BALL_ITEM_POCKET, ItemBallAttributes
+	indirect_entries FIRST_BERRY_ITEM - 1 ; sparse table
+	indirect_entries (FIRST_BERRY_ITEM - 1) + NUM_BERRY_ITEM_POCKET, ItemBerryAttributes
 	indirect_entries FIRST_TMHM_ITEM - 1; sparse table
 	indirect_entries ((FIRST_TMHM_ITEM - 1)+ NUM_TMS), ItemTMAttributes
 	indirect_entries ((FIRST_TMHM_ITEM - 1) + NUM_TMS + NUM_HMS), ItemHMAttributes
@@ -413,6 +415,11 @@ ItemBallAttributes:
 	item_attribute 150, HELD_NONE, 0, CANT_SELECT, BALL, ITEMMENU_NOUSE, ITEMMENU_CLOSE
 ; PARK_BALL
 	item_attribute 0, HELD_NONE, 0, CANT_SELECT, BALL, ITEMMENU_NOUSE, ITEMMENU_CLOSE
+.IndirectEnd::
+
+ItemBerryAttributes:
+; TEST_BERRY
+	item_attribute 10, HELD_HEAL_BURN, 0, CANT_SELECT, BERRIES, ITEMMENU_PARTY, ITEMMENU_PARTY
 .IndirectEnd::
 
 ItemTMAttributes:

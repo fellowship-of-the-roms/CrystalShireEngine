@@ -61,6 +61,41 @@ PlaceMenuItemBallQuantity:
 .done
 	ret
 
+PlaceMenuItemBerryName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BERRY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	pop hl
+	call PlaceString
+	ret
+
+PlaceMenuItemBerryQuantity:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BERRY_ITEM)
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	farcall _CheckTossableItem
+	ld a, [wItemAttributeValue]
+	pop hl
+	and a
+	jr nz, .done
+	ld de, $15
+	add hl, de
+	ld [hl], "×"
+	inc hl
+	ld de, wMenuSelectionQuantity
+	lb bc, 1, 2
+	call PrintNum
+
+.done
+	ret
+
 PlaceMenuKeyItemName:
 	push de
 	ld a, [wMenuSelection]

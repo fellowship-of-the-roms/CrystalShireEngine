@@ -194,7 +194,7 @@ DEF FIRST_KEY_ITEM EQU const_value
 DEF NUM_KEY_ITEM_POCKET EQU const_value - FIRST_KEY_ITEM
 assert NUM_KEY_ITEM_POCKET <= $ff
 
-	const_align 8; Ball items assume the value of HIGH(FIRST_BALL_ITEM) when storing in bag.
+	const_align 8 ; Ball items assume the value of HIGH(FIRST_BALL_ITEM) when storing in bag.
 DEF FIRST_BALL_ITEM EQU const_value
 	const MASTER_BALL  ; 0200
 	const ULTRA_BALL   ; 0201
@@ -210,6 +210,13 @@ DEF FIRST_BALL_ITEM EQU const_value
 	const PARK_BALL    ; 020B
 DEF NUM_BALL_ITEM_POCKET EQU const_value - FIRST_BALL_ITEM
 assert NUM_BALL_ITEM_POCKET <= $ff
+
+	const_align 8 ; Berry items assume the value of HIGH(FIRST_BERRY_ITEM) when storing in bag.
+DEF FIRST_BERRY_ITEM EQU const_value
+	const TEST_BERRY
+DEF NUM_BERRY_ITEM_POCKET EQU const_value - FIRST_BERRY_ITEM
+assert NUM_BERRY_ITEM_POCKET <= $ff
+
 DEF NUM_ITEMS EQU const_value - 1
 
 DEF __tmhm_value__ = 1

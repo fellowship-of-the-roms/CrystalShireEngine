@@ -176,6 +176,8 @@ GetItemName::
 	ld c, l
 	pop hl
 
+	cphl16 FIRST_BERRY_ITEM
+	jr nc, .Berries
 	cphl16 FIRST_BALL_ITEM
 	jr nc, .Balls
 	cphl16 FIRST_KEY_ITEM
@@ -189,6 +191,13 @@ GetItemName::
 	ld b, h
 	ld c, l
 	ld hl, KeyItemNames
+	jr .get_nth_string_16
+.Berries
+	ld hl, -(FIRST_BERRY_ITEM)
+	add hl, bc
+	ld b, h
+	ld c, l
+	ld hl, BerryNames
 	jr .get_nth_string_16
 .Balls
 	ld hl, -(FIRST_BALL_ITEM)
