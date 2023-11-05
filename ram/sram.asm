@@ -271,16 +271,6 @@ sTrainerRankingsEnd::
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
 
 
-SECTION "SRAM Mobile 3", SRAM
-
-s6_a000:: db
-	db
-s6_a002:: db
-s6_a003:: db
-s6_a004:: db
-s6_a005:: db
-s6_a006:: ds $1000
-
 SECTION "SRAM Mobile 4", SRAM
 
 sMobileStadiumFlag:: db

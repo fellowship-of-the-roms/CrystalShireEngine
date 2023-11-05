@@ -312,7 +312,6 @@ ROMX $7b
 ROMX $7c
 	"Battle Tower Trainer Data"
 ROMX $7d
-	"Mobile News Data"
 ROMX $7e
 	"Crystal Events"
 ROMX $7f
@@ -389,7 +388,6 @@ SRAM $04
 SRAM $05
 	"SRAM Trainer Rankings"
 SRAM $06
-	"SRAM Mobile 3"
 SRAM $07
 	"SRAM Mobile 4"
 HRAM
