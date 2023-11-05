@@ -158,24 +158,6 @@ CeladonCityTeacher2Text:
 	line "a sales clerk."
 	done
 
-CeladonCityLassText_Mobile: ; unreferenced
-	text "I love being"
-	line "surrounded by tall"
-	cont "buildings!"
-
-	para "Isn't it true that"
-	line "GOLDENROD #MON"
-
-	para "CENTER was made"
-	line "much, much bigger?"
-
-	para "That is so neat!"
-	line "I wish we had a"
-
-	para "place like that in"
-	line "KANTO…"
-	done
-
 CeladonCityLassText:
 	text "Looking at the"
 	line "ground while I was"

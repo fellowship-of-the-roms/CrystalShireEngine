@@ -162,14 +162,6 @@ SailorHueyBeatenText:
 	line "I lose!"
 	done
 
-SailorHueyUnusedText: ; unreferenced
-	text "What power!"
-	line "How would you like"
-
-	para "to sail the seas"
-	line "with me?"
-	done
-
 GentlemanAlfredSeenText:
 	text "Hm? This is no"
 	line "place for playing."

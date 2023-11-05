@@ -1,11 +1,4 @@
 DEF SPECIALCELEBIEVENT_CELEBI EQU $84
-
-UnusedForestTreeFrames: ; unreferenced
-INCBIN "gfx/tilesets/forest-tree/1.2bpp"
-INCBIN "gfx/tilesets/forest-tree/2.2bpp"
-INCBIN "gfx/tilesets/forest-tree/3.2bpp"
-INCBIN "gfx/tilesets/forest-tree/4.2bpp"
-
 CelebiShrineEvent:
 	call DelayFrame
 	ld a, [wVramState]
@@ -99,25 +92,6 @@ CelebiEvent_CountDown:
 .done
 	ld hl, wJumptableIndex
 	set 7, [hl]
-	ret
-
-CelebiEvent_SpawnLeaf: ; unreferenced
-	ld hl, wFrameCounter2
-	ld a, [hl]
-	inc [hl]
-	and $7
-	ret nz
-	ld a, [hl]
-	and $18
-	sla a
-	add $40
-	ld d, a
-	ld e, $0
-	ld a, SPRITE_ANIM_OBJ_FLY_LEAF ; fly land
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], $80
 	ret
 
 SpecialCelebiLeafGFX:

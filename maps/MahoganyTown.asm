@@ -121,10 +121,6 @@ MahoganyGymSign:
 MahoganyTownPokecenterSign:
 	jumpstd PokecenterSignScript
 
-MahoganyTownCollideDownFaceLeftMovement: ; unreferenced
-	step DOWN
-	big_step UP
-	turn_head DOWN
 MahoganyTownPlayerStepLeftMovement:
 	step LEFT
 	step_end

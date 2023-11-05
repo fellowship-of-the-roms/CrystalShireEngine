@@ -142,15 +142,6 @@ AzaleaTownSlowpokeScript:
 	closetext
 	end
 
-UnusedWoosterScript: ; unreferenced
-	faceplayer
-	opentext
-	writetext WoosterText
-	cry QUAGSIRE
-	waitbutton
-	closetext
-	end
-
 AzaleaTownCelebiScene:
 	applymovement PLAYER, AzaleaTownPlayerLeavesKurtsHouseMovement
 	opentext

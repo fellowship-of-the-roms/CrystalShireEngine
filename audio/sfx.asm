@@ -948,13 +948,6 @@ Sfx_Fanfare2:
 	channel 6, Sfx_Fanfare2_Ch6
 	channel 8, Sfx_Fanfare2_Ch8
 
-Sfx_Unused: ; unreferenced
-	channel_count 4
-	channel 5, Sfx_Unused_Ch5
-	channel 6, Sfx_Unused_Ch6
-	channel 7, Sfx_Unused_Ch7
-	channel 8, Sfx_Unused_Ch8
-
 Sfx_Unused_Ch5:
 	toggle_sfx
 	tempo 124

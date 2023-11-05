@@ -68,10 +68,6 @@ Strings_4a23d:
 	db   "@"
 
 
-MenuHeader_0x4a346: ; unreferenced
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 12, 0, SCREEN_WIDTH - 1, 6
-
 String_4a34b:
 	db   "いれなおす"
 	next "けす"
@@ -185,30 +181,6 @@ Function4a3aa:
 	lb bc, 1, 1
 	ld a, " "
 	jmp Function4a6d8
-
-Function4a449: ; unreferenced
-	ld bc, 3 * SCREEN_WIDTH
-	ld a, $0
-	hlcoord 0, 0
-	rst ByteFill
-	ld bc, 2 * SCREEN_WIDTH
-	ld a, $1
-	rst ByteFill
-	ld bc, 2 * SCREEN_WIDTH
-	ld a, $0
-	rst ByteFill
-	ld bc, 2 * SCREEN_WIDTH
-	ld a, $1
-	rst ByteFill
-	ld bc, SCREEN_WIDTH
-	ld a, $2
-	rst ByteFill
-	ld bc, SCREEN_WIDTH
-	ld a, $3
-	rst ByteFill
-	ld bc, SCREEN_WIDTH
-	ld a, " "
-	jmp ByteFill
 
 Function4a492:
 	jmp _CrystalCGB_MobileLayout0

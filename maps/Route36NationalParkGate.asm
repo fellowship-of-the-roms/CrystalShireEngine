@@ -463,10 +463,6 @@ BugCatchingContestant10BScript:
 	closetext
 	end
 
-UnusedBugCatchingContestExplanationSign: ; unreferenced
-; duplicate of BugCatchingContestExplanationSign in Route35NationalParkGate.asm
-	jumptext UnusedBugCatchingContestExplanationText
-
 Route36NationalParkGatePlayerWaitWithContestantsMovement:
 	big_step DOWN
 	big_step RIGHT
@@ -793,18 +789,6 @@ BugCatchingContestant10BStillCompetingText:
 
 	para "not good enough to"
 	line "win."
-	done
-
-UnusedSilphScope2Text: ; unreferenced
-; This text is referring to Sudowoodo.
-; The SILPHSCOPE2 was later reworked into the SQUIRTBOTTLE.
-	text "I hear there's a"
-	line "#MON that looks"
-	cont "just like a tree."
-
-	para "You can reveal its"
-	line "identity using a"
-	cont "SILPHSCOPE 2."
 	done
 
 UnusedBugCatchingContestExplanationText:

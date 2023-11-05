@@ -844,11 +844,3 @@ ENDM
 	dec b
 	jr nz, .row
 	ret
-
-UnusedWaitBGMapOnce: ; unreferenced
-	ld a, 1
-	ldh [hBGMapMode], a ; redundant
-	call WaitBGMap
-	xor a
-	ldh [hBGMapMode], a
-	ret

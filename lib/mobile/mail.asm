@@ -1962,13 +1962,6 @@ Function114c0b:
 	jr z, .asm_114c24
 	jr .asm_114c18
 
-Function114c55: ; unreferenced
-	push bc
-	ld bc, $dc00
-	call Function115d80
-	pop bc
-	ret
-
 Function114c5e:
 	ld de, wPartyMon5Defense
 	push hl

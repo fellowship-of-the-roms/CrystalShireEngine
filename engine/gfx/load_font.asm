@@ -3,18 +3,6 @@ INCLUDE "gfx/font.asm"
 EnableHDMAForGraphics:
 	db FALSE
 
-Get1bppOptionalHDMA: ; unreferenced
-	ld a, [EnableHDMAForGraphics]
-	and a
-	jmp nz, Get1bppViaHDMA
-	jmp Get1bpp
-
-Get2bppOptionalHDMA: ; unreferenced
-	ld a, [EnableHDMAForGraphics]
-	and a
-	jmp nz, Get2bppViaHDMA
-	jmp Get2bpp
-
 _LoadStandardFont::
 	ld de, Font
 	ld hl, vTiles1

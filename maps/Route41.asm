@@ -125,9 +125,6 @@ TrainerSwimmermMathew:
 	closetext
 	end
 
-Route41Rock: ; unreferenced
-	jumpstd SmashRockScript
-
 Route41HiddenMaxEther:
 	hiddenitem MAX_ETHER, EVENT_ROUTE_41_HIDDEN_MAX_ETHER
 

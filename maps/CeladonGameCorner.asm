@@ -141,11 +141,6 @@ CeladonGameCornerSodaCanScript:
 	closetext
 	end
 
-CeladonGameCornerUnusedMovementData: ; unreferenced
-	step RIGHT
-	turn_head LEFT
-	step_end
-
 CeladonGameCornerReceptionistText:
 	text "Welcome!"
 

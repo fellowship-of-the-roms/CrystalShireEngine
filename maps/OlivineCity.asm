@@ -281,11 +281,6 @@ OlivineCityBattleTowerSignText:
 	line "Opening Now!"
 	done
 
-OlivineCityBattleTowerSignText_NotYetOpen: ; unreferenced
-; originally shown when the Battle Tower was closed
-	text "BATTLE TOWER AHEAD"
-	done
-
 OlivineCity_MapEvents:
 	db 0, 0 ; filler
 

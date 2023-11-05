@@ -430,13 +430,6 @@ SetOWFlyMonColor:
 	ld e, a
 	farjp SetFirstOBJPalette
 
-GetMonIconDE: ; unreferenced
-	push de
-	ld a, [wTempIconSpecies]
-	ld [wCurIcon], a
-	pop de
-	jr GetIcon_de
-
 GetMemIconGFX:
 	ld a, [wCurIconTile]
 GetIconGFX:

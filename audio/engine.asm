@@ -328,13 +328,6 @@ UpdateChannels:
 	ldh [rNR21], a
 	ret
 
-.ch2_frequency_override ; unreferenced
-	ld a, [wCurTrackFrequency]
-	ldh [rNR23], a
-	ld a, [wCurTrackFrequency + 1]
-	ldh [rNR24], a
-	ret
-
 .ch2_vibrato_override
 	ld a, [wCurTrackDuty]
 	ld d, a
@@ -377,13 +370,6 @@ UpdateChannels:
 	jr nz, .ch3_noise_sampling
 	bit NOTE_VIBRATO_OVERRIDE, [hl]
 	jr nz, .ch3_vibrato_override
-	ret
-
-.ch3_frequency_override ; unreferenced
-	ld a, [wCurTrackFrequency]
-	ldh [rNR33], a
-	ld a, [wCurTrackFrequency + 1]
-	ldh [rNR34], a
 	ret
 
 .ch3_vibrato_override
@@ -475,11 +461,6 @@ endr
 	jr nz, .ch4_rest
 	bit NOTE_NOISE_SAMPLING, [hl]
 	jr nz, .ch4_noise_sampling
-	ret
-
-.ch4_frequency_override ; unreferenced
-	ld a, [wCurTrackFrequency]
-	ldh [rNR43], a
 	ret
 
 .ch4_rest

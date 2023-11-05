@@ -76,28 +76,6 @@ Unused_CheckShininess:
 	and a
 	ret
 
-SGB_ApplyCreditsPals: ; unreferenced
-	push de
-	push bc
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
-	rst CopyBytes
-	pop bc
-	pop de
-	ld a, c
-	ld [wSGBPals + 3], a
-	ld a, b
-	ld [wSGBPals + 4], a
-	ld a, e
-	ld [wSGBPals + 5], a
-	ld a, d
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	call PushSGBPals
-	ld hl, BlkPacket_AllPal0
-	jmp PushSGBPals
-
 InitPartyMenuPalettes:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
@@ -130,104 +108,6 @@ SGB_ApplyPartyMenuHPPals:
 	pop de
 	ld [hl], e
 	ret
-
-Intro_LoadMagikarpPalettes: ; unreferenced
-	call CheckCGB
-	ret z
-
-; CGB only
-	ld hl, .MagikarpBGPal
-	ld de, wBGPals1
-	ld bc, 1 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-
-	ld hl, .MagikarpOBPal
-	ld de, wOBPals1
-	ld bc, 1 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
-
-.MagikarpBGPal:
-INCLUDE "gfx/intro/gs_magikarp_bg.pal"
-
-.MagikarpOBPal:
-INCLUDE "gfx/intro/gs_magikarp_ob.pal"
-
-Intro_LoadAllPal0: ; unreferenced
-	call CheckCGB
-	ret nz
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, BlkPacket_AllPal0
-	jmp PushSGBPals
-
-Intro_LoadBetaIntroVenusaurPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_BetaIntroVenusaur
-	jmp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_BETA_INTRO_VENUSAUR
-	call GetPredefPal
-	jmp LoadHLPaletteIntoDE
-
-Intro_LoadPackPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_Pack
-	jmp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_PACK
-	call GetPredefPal
-	jmp LoadHLPaletteIntoDE
-
-GSIntro_LoadMonPalette: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld a, c
-	push af
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
-	rst CopyBytes
-	pop af
-	call GetMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hl]
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	jmp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, c
-	call GetMonPalettePointer
-	jmp LoadPalette_White_Col1_Col2_Black
 
 LoadTrainerClassPaletteAsNthBGPal:
 	ld a, [wTrainerClass]
@@ -263,35 +143,6 @@ LoadNthMiddleBGPal:
 	ld d, h
 	pop hl
 	jmp LoadPalette_White_Col1_Col2_Black
-
-LoadBetaPokerPalettes: ; unreferenced
-	ldh a, [hCGB]
-	and a
-	jr nz, .cgb
-	ld hl, wBetaPokerSGBPals
-	jmp PushSGBPals
-
-.cgb
-	ld a, [wBetaPokerSGBCol]
-	ld c, a
-	ld a, [wBetaPokerSGBRow]
-	hlcoord 0, 0, wAttrmap
-	ld de, SCREEN_WIDTH
-.loop
-	and a
-	jr z, .done
-	add hl, de
-	dec a
-	jr .loop
-
-.done
-	ld b, 0
-	add hl, bc
-	lb bc, 6, 4
-	ld a, [wBetaPokerSGBAttr]
-	and $3
-	call FillBoxCGB
-	jmp CopyTilemapAtOnce
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
@@ -714,48 +565,8 @@ GetTrainerPalettePointer:
 GetMonPalettePointer:
 	jr _GetMonPalettePointer
 
-CGBCopyBattleObjectPals: ; unreferenced
-; dummied out
-	ret
-	call CheckCGB
-	ret z
-	ld hl, BattleObjectPals
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
-	ldh [rOBPI], a
-	ld c, 6 palettes
-.loop
-	ld a, [hli]
-	ldh [rOBPD], a
-	dec c
-	jr nz, .loop
-	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette 2
-	ld bc, 2 palettes
-	ld a, BANK(wOBPals1)
-	jmp FarCopyWRAM
-
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
-
-CGBCopyTwoPredefObjectPals: ; unreferenced
-	call CheckCGB
-	ret z
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
-	ldh [rOBPI], a
-	ld a, PREDEFPAL_TRADE_TUBE
-	call GetPredefPal
-	call .PushPalette
-	ld a, PREDEFPAL_RB_GREENMON
-	call GetPredefPal
-; fallthrough
-.PushPalette:
-	ld c, 1 palettes
-.loop
-	ld a, [hli]
-	ldh [rOBPD], a
-	dec c
-	jr nz, .loop
-	ret
 
 _GetMonPalettePointer:
 	call GetPokemonIndexFromID
@@ -946,20 +757,6 @@ _InitSGBBorderPals:
 	dw DataSndPacket6
 	dw DataSndPacket7
 	dw DataSndPacket8
-
-UpdateSGBBorder: ; unreferenced
-	di
-	xor a
-	ldh [rJOYP], a
-	ld hl, MaskEnFreezePacket
-	call _PushSGBPals
-	call PushSGBBorder
-	call SGBDelayCycles
-	call SGB_ClearVRAM
-	ld hl, MaskEnCancelPacket
-	call _PushSGBPals
-	ei
-	ret
 
 PushSGBBorder:
 	call .LoadSGBBorderPointers

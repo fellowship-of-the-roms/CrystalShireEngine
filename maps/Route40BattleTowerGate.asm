@@ -18,26 +18,6 @@ Route40BattleTowerGateRockerScript:
 Route40BattleTowerGateTwinScript:
 	jumptextfaceplayer Route40BattleTowerGateTwinText
 
-Route40BattleTowerGateUnusedText1: ; unreferenced
-	text "Did you come to"
-	line "see the BATTLE"
-	cont "TOWER too?"
-
-	para "But I guess you"
-	line "can't go in yet."
-	done
-
-Route40BattleTowerGateUnusedText2: ; unreferenced
-	text "BATTLE TOWER has"
-	line "opened."
-
-	para "I want to go, but"
-	line "I haven't thought"
-
-	para "up a cool line for"
-	line "when I win."
-	done
-
 Route40BattleTowerGateRockerText:
 	text "Are you going to"
 	line "the BATTLE TOWER?"
@@ -47,14 +27,6 @@ Route40BattleTowerGateRockerText:
 
 	para "whole lot, you can"
 	line "win special gifts."
-	done
-
-Route40BattleTowerGateUnusedText3: ; unreferenced
-	text "I'm going to train"
-	line "my #MON so I'll"
-
-	para "be all ready for"
-	line "the BATTLE TOWER."
 	done
 
 Route40BattleTowerGateTwinText:

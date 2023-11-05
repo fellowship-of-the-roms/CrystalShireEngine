@@ -8,11 +8,6 @@ LoadBattleMenu:
 	ld [wBattleMenuCursorPosition], a
 	jmp ExitMenu
 
-SafariBattleMenu: ; unreferenced
-	ld hl, SafariBattleMenuHeader
-	call LoadMenuHeader
-	jr CommonBattleMenu
-
 ContestBattleMenu:
 	ld hl, ContestBattleMenuHeader
 	call LoadMenuHeader

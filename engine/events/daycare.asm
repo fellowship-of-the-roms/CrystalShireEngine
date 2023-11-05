@@ -160,10 +160,6 @@ DayCareAskDepositPokemon:
 	scf
 	ret
 
-.DaycareDummyText: ; unreferenced
-	text_far _DaycareDummyText
-	text_end
-
 DayCare_DepositPokemonText:
 	ld a, DAYCARETEXT_DEPOSIT
 	call PrintDayCareText

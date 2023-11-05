@@ -291,14 +291,6 @@ CopyTrainerName:
 	pop de
 	ret
 
-IncompleteCopyNameFunction: ; unreferenced
-; Copy of CopyTrainerName but without "rst CopyBytes"
-	ld de, wStringBuffer1
-	push de
-	ld bc, NAME_LENGTH
-	pop de
-	ret
-
 GetNextTrainerDataByte:
 	ld a, [wTrainerGroupBank]
 	call GetFarByte

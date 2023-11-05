@@ -18,9 +18,6 @@ RadioTower2F_MapScripts:
 
 	def_callbacks
 
-RadioTower2FNoopScene: ; unreferenced
-	end
-
 RadioTower2FSuperNerdScript:
 	jumptextfaceplayer RadioTower2FSuperNerdText
 

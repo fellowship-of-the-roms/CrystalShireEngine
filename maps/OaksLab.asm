@@ -9,9 +9,6 @@ OaksLab_MapScripts:
 
 	def_callbacks
 
-OaksLabNoopScene: ; unreferenced
-	end
-
 Oak:
 	faceplayer
 	opentext

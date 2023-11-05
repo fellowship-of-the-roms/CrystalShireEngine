@@ -157,29 +157,6 @@ VioletPokecenterElmsAideAskEggText:
 	line "take the EGG?"
 	done
 
-VioletPokecenterFarawayLinkText: ; unreferenced
-	text "I've been thinking"
-	line "it'd be great to"
-
-	para "be able to link up"
-	line "and battle with my"
-
-	para "friends who live"
-	line "far away."
-	done
-
-VioletPokecenterMobileAdapterText: ; unreferenced
-	text "I just battled a"
-	line "friend in CIANWOOD"
-	cont "over a link."
-
-	para "If you connect a"
-	line "MOBILE ADAPTER,"
-
-	para "you can link with"
-	line "a friend far away."
-	done
-
 VioletPokecenter1FGameboyKidText:
 	text "A guy named BILL"
 	line "made the #MON"

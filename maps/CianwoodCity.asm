@@ -118,9 +118,6 @@ CianwoodCityPokefanM:
 CianwoodCityLass:
 	jumptextfaceplayer CianwoodCityLassText
 
-CianwoodCityUnusedScript: ; unreferenced
-	jumptextfaceplayer CianwoodCityUnusedText
-
 CianwoodCitySign:
 	jumptext CianwoodCitySignText
 

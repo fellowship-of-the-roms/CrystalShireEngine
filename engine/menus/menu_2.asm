@@ -258,8 +258,6 @@ StartMenu_PrintBugContestStatus:
 	ld [wOptions], a
 	ret
 
-.BallsJPString: ; unreferenced
-	db "ボール　　　こ@"
 .CaughtString:
 	db "CAUGHT@"
 .BallsString:

@@ -164,11 +164,6 @@ Script_WaitButton:
 	closetext
 	end
 
-Script_ReachedBattleLimit: ; unreferenced
-	writetext Text_FiveDayBattleLimit_Mobile
-	waitbutton
-	sjump Script_BattleTowerHopeToServeYouAgain
-
 Script_AMonLevelExceeds:
 	writetext Text_AMonLevelExceeds
 	waitbutton
@@ -305,66 +300,6 @@ Text_RightThisWayToYourBattleRoom:
 	line "your BATTLE ROOM."
 	done
 
-Text_BattleTowerIntroduction_1: ; unreferenced
-	text "BATTLE TOWER is a"
-	line "facility made for"
-	cont "#MON battles."
-
-	para "Countless #MON"
-	line "trainers gather"
-
-	para "from all over to"
-	line "hold battles in"
-
-	para "specially designed"
-	line "BATTLE ROOMS."
-
-	para "There are many"
-	line "BATTLE ROOMS in"
-	cont "the BATTLE TOWER."
-
-	para "Each ROOM holds"
-	line "seven trainers."
-
-	para "If you defeat the"
-	line "seven in a ROOM,"
-
-	para "and you have a"
-	line "good record, you"
-
-	para "could become the"
-	line "ROOM's LEADER."
-
-	para "All LEADERS will"
-	line "be recorded in the"
-
-	para "HONOR ROLL for"
-	line "posterity."
-
-	para "You may challenge"
-	line "in up to five"
-
-	para "BATTLE ROOMS each"
-	line "day."
-
-	para "However, you may"
-	line "battle only once a"
-
-	para "day in any given"
-	line "ROOM."
-
-	para "To interrupt a"
-	line "session, you must"
-
-	para "SAVE. If not, you"
-	line "won't be able to"
-
-	para "resume your ROOM"
-	line "challenge."
-
-	para ""
-	done
-
 Text_BattleTowerIntroduction_2:
 	text "BATTLE TOWER is a"
 	line "facility made for"
@@ -414,33 +349,9 @@ Text_PleaseConfirmOnThisMonitor:
 	line "this monitor."
 	done
 
-Text_ThankYou: ; unreferenced
-	text "Thank you!"
-
-	para ""
-	done
-
 Text_ThanksForVisiting:
 	text "Thanks for"
 	line "visiting!"
-	done
-
-Text_BeatenAllTheTrainers_Mobile: ; unreferenced
-	text "Congratulations!"
-
-	para "You've beaten all"
-	line "the trainers!"
-
-	para "Your feat may be"
-	line "worth registering,"
-
-	para "<PLAYER>. With your"
-	line "results, you may"
-
-	para "be chosen as a"
-	line "ROOM LEADER."
-
-	para ""
 	done
 
 Text_CongratulationsYouveBeatenAllTheTrainers:
@@ -453,14 +364,6 @@ Text_CongratulationsYouveBeatenAllTheTrainers:
 	line "this great prize!"
 
 	para ""
-	done
-
-Text_AskRegisterRecord_Mobile: ; unreferenced
-	text "Would you like to"
-	line "register your"
-
-	para "record with the"
-	line "CENTER?"
 	done
 
 Text_PlayerGotFive:
@@ -478,13 +381,6 @@ Text_YourPackIsStuffedFull:
 
 	para "Please make room"
 	line "and come back."
-	done
-
-Text_YourRegistrationIsComplete: ; unreferenced
-	text "Your registration"
-	line "is complete."
-
-	para "Please come again!"
 	done
 
 Text_WeHopeToServeYouAgain:
@@ -521,11 +417,6 @@ Text_CantBeRegistered_PreviousRecordDeleted:
 	para "Also, the existing"
 	line "record will be"
 	cont "deleted. OK?"
-	done
-
-Text_CheckTheLeaderHonorRoll: ; unreferenced
-	text "Check the LEADER"
-	line "HONOR ROLL?"
 	done
 
 Text_ReadBattleTowerRules:
@@ -580,14 +471,6 @@ Text_NextUpOpponentNo:
 	text ". Ready?"
 	done
 
-Text_SaveBeforeConnecting_Mobile: ; unreferenced
-	text "Your session will"
-	line "be SAVED before"
-
-	para "connecting with"
-	line "the CENTER."
-	done
-
 Text_SaveBeforeEnteringBattleRoom:
 	text "Before entering"
 	line "the BATTLE ROOM,"
@@ -614,15 +497,6 @@ Text_CancelYourBattleRoomChallenge:
 	line "ROOM challenge?"
 	done
 
-Text_RegisterRecordOnFile_Mobile: ; unreferenced
-	text "We have your"
-	line "previous record on"
-
-	para "file. Would you"
-	line "like to register"
-	cont "it at the CENTER?"
-	done
-
 Text_WeveBeenWaitingForYou:
 	text "We've been waiting"
 	line "for you. This way"
@@ -646,22 +520,6 @@ Text_TooMuchTimeElapsedNoRegister:
 
 	para "register your"
 	line "current record at"
-
-	para "the CENTER because"
-	line "too much time has"
-
-	para "elapsed since the"
-	line "start of your"
-	cont "challenge."
-	done
-
-Text_RegisterRecordTimedOut_Mobile: ; unreferenced
-; duplicate of Text_TooMuchTimeElapsedNoRegister
-	text "Sorry, but it's"
-	line "not possible to"
-
-	para "register your most"
-	line "recent record at"
 
 	para "the CENTER because"
 	line "too much time has"

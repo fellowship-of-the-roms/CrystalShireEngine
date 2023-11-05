@@ -468,9 +468,6 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route34IlexForestSign: ; unreferenced
-	jumptext Route34IlexForestSignText
-
 Route34Sign:
 	jumptext Route34SignText
 
@@ -511,17 +508,6 @@ YoungsterSamuelSeenText:
 YoungsterSamuelBeatenText:
 	text "Beaten by a"
 	line "passing stranger!"
-	done
-
-YoungsterSamuelMobileText: ; unreferenced
-	text "Have you been to"
-	line "GOLDENROD CITY?"
-
-	para "Weren't you amazed"
-	line "by how they've"
-
-	para "changed the"
-	line "#MON CENTER?"
 	done
 
 YoungsterSamuelAfterText:

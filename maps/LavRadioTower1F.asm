@@ -72,9 +72,6 @@ LavRadioTower1FDirectory:
 LavRadioTower1FPokeFluteSign:
 	jumptext LavRadioTower1FPokeFluteSignText
 
-LavRadioTower1FReferenceLibrary: ; unreferenced
-	jumptext LavRadioTower1FReferenceLibraryText
-
 LavRadioTower1FReceptionistText:
 	text "Welcome!"
 	line "Feel free to look"

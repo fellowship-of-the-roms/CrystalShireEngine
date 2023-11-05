@@ -18,9 +18,6 @@ LavenderNameRater:
 	closetext
 	end
 
-LavenderNameRaterUnusedBookshelf: ; unreferenced
-	jumpstd DifficultBookshelfScript
-
 LavenderNameRater_MapEvents:
 	db 0, 0 ; filler
 

@@ -476,11 +476,6 @@ GoldenrodCityUndergroundSignSouthText:
 	line "ENTRANCE"
 	done
 
-GoldenrodCityPokeComCenterSignText: ; unreferenced
-	text "For Mobile Tips!"
-	line "#COM CENTER"
-	done
-
 GoldenrodCityFlowerShopSignText:
 	text "Blooming Beautiful"
 	line "FLOWER SHOP"

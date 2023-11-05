@@ -56,12 +56,3 @@ ToddRematchText:
 	para "shopping to raise"
 	line "my #MON better!"
 	done
-
-ToddSaleText: ; unreferenced
-; This is a duplicate of CamperToddSaleText in maps/Route34.asm.
-	text "Shopping under the"
-	line "sky!"
-
-	para "It feels so nice"
-	line "up on a rooftop."
-	done

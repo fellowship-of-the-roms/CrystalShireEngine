@@ -155,12 +155,6 @@ BurnedTowerSuicuneMovement2:
 	remove_sliding
 	step_end
 
-BurnedTowerUnusedMovement: ; unreferenced
-	set_sliding
-	big_step DOWN
-	remove_sliding
-	step_end
-
 BurnedTowerSuicuneMovement3:
 	set_sliding
 	big_step UP

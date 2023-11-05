@@ -245,49 +245,6 @@ SpriteAnimFrameData:
 	oamframe SPRITE_ANIM_OAMSET_MAGNET_TRAIN_2,  8, OAM_X_FLIP
 	oamrestart
 
-.Frameset_Unknown1: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_43,  8
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_44,  8
-	oamrestart
-
-.Frameset_Unknown2: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_45,  8
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_46,  8
-	oamrestart
-
-.Frameset_Unknown3: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_47,  8
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_48,  8
-	oamrestart
-
-.Frameset_Unknown4: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_49,  1
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_49,  1, OAM_X_FLIP
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_49,  1, OAM_X_FLIP, OAM_Y_FLIP
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_49,  1, OAM_Y_FLIP
-	oamrestart
-
-.Frameset_Unknown5: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_4A, 32
-	oamend
-
-.Frameset_Unknown6: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_4B, 32
-	oamend
-
-.Frameset_Unknown7: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_4C, 32
-	oamend
-
-.Frameset_Unknown8: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_4D, 32
-	oamend
-
-.Frameset_Unknown9: ; unreferenced
-	oamframe SPRITE_ANIM_OAMSET_UNUSED_4E,  3
-	oamwait 3
-	oamrestart
-
 .Frameset_Unused1C:
 	oamwait 32
 	oamend
