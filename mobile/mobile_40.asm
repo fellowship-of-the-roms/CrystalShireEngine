@@ -2138,26 +2138,6 @@ Unknown_10102c:
 	macro_100fc0 wOTPartyMons,         PARTYMON_STRUCT_LENGTH * PARTY_LENGTH
 	db -1 ; end
 
-Function101050:
-	call Function10107d
-	ld a, [wOTPartyCount]
-rept 2 ; ???
-	ld hl, wc608
-endr
-	ld bc, wc7bb - wc608
-	call Function1010de
-	ld hl, wc7bb
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld a, BANK(s7_a001)
-	call OpenSRAM
-	ld hl, wc608
-	ld de, s7_a001
-	ld bc, wc7bd - wc608
-	rst CopyBytes
-	jmp CloseSRAM
-
 Function10107d:
 	xor a
 	ld hl, wc608
@@ -3128,16 +3108,6 @@ Function101a4f:
 	ld [wMobileCommsJumptableIndex], a
 	ret
 
-CopyOtherPlayersBattleMonSelection:
-	ld hl, wcc61
-	ld de, wOTMonSelection
-	ld bc, 3
-	rst CopyBytes
-	ld de, wcc64
-	farcall Function100772
-	farcall Function101050
-	farjp LoadSelectedPartiesForColosseum
-
 Function101a97:
 	farcall Function115d99
 	ld hl, wcd29
@@ -3562,38 +3532,6 @@ Function101e4f:
 	ld [wcd26], a
 	ret
 
-Function101e64:
-	call Function101ecc
-	call Function1020a8
-	push af
-	call Function101ed3
-	pop af
-	jr c, .asm_101e77
-	ld a, $24
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-.asm_101e77
-	ld hl, wcd29
-	set 5, [hl]
-	ld a, $02
-	ld [wcd2b], a
-	ret
-
-Function101e82: ; unreferenced
-	call Function101ecc
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function101e8d: ; unreferenced
-	call Function101ed3
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
 Function101ead:
 	ld hl, wGameTimerPaused
 	bit GAME_TIMER_MOBILE_F, [hl]
@@ -3791,17 +3729,6 @@ Function10209c:
 	ld hl, wdc42
 	ld bc, 8
 	jmp ByteFill
-
-Function1020a8:
-	call Function10209c
-	ld c, $01
-	ld de, wdc42
-	farcall Function17a68f
-	ret c
-	call Function10208e
-	call Function102068
-	xor a
-	ret
 
 Function102180:
 	ld hl, wc608 + 1
@@ -4004,15 +3931,6 @@ Function1023a1:
 	ld hl, wcd4b
 	set 1, [hl]
 	ld a, $1d
-	ld [wcd49], a
-	ret
-
-Function1023b5:
-	call Function10228e
-	call Function102a3b
-	call Function102b12
-	ld a, [wcd49]
-	inc a
 	ld [wcd49], a
 	ret
 
@@ -4967,23 +4885,6 @@ Function102a3b:
 	farcall GetCaughtGender
 	ld a, c
 	ld [wOTTrademonCaughtData], a
-	ret
-
-Function102b12:
-	ld c, 100
-	call DelayFrames
-	call Function102d9a
-	call LoadFontsBattleExtra
-	ld a, [wcd2f]
-	and a
-	jr nz, .asm_102b2b
-	farcall Function108026
-	jr .asm_102b31
-
-.asm_102b2b
-	farcall Function10802a
-
-.asm_102b31
 	ret
 
 Function102b32:
@@ -6081,33 +5982,6 @@ MobileBattleLessThanOneMinuteLeftText:
 MobileBattleNoTimeLeftForLinkingText:
 	text_far _MobileBattleNoTimeLeftForLinkingText
 	text_end
-
-Function10383c:
-	ld a, $01
-	ld [wdc60], a
-	xor a
-	ld hl, wPlayerMonSelection
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, PickThreeMonForMobileBattleText
-	call PrintText
-	call JoyWaitAorB
-	farcall Script_reloadmappart
-	farcall Function4a94e
-	jr c, .asm_103870
-	ld hl, wd002
-	ld de, wPlayerMonSelection
-	ld bc, 3
-	rst CopyBytes
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.asm_103870
-	ld a, $01
-	ld [wScriptVar], a
-	ret
 
 PickThreeMonForMobileBattleText:
 	text_far _PickThreeMonForMobileBattleText

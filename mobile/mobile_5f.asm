@@ -928,7 +928,6 @@ Jumptable17d72a:
 	dw Function17d7d3
 	dw Function17d7e5
 	dw Function17d818
-	dw Function17d833
 	dw Function17d93a
 	dw Function17d98b
 	dw Function17d9e3
@@ -1041,32 +1040,6 @@ Function17d818:
 	hlcoord 0, 0
 	add hl, bc
 	jmp PlaceString
-
-Function17d833:
-	call IncCrashCheckPointer
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	call HlToCrashCheckPointer
-	push de
-	push bc
-	call Function17e32b
-	pop bc
-	pop de
-	call Function17e43d
-	ld c, l
-	ld b, h
-	hlcoord 0, 0
-	add hl, de
-	ld e, l
-	ld d, h
-	farcall Function11c08f
-	jmp Function17e349
 
 Function17d93a:
 	call IncCrashCheckPointer
@@ -3087,99 +3060,6 @@ Function17f0f8:
 	ld a, b
 	ld [wcd53], a
 	ld a, [wcd57]
-	call Function17f50f
-	pop de
-	and a
-	ret
-
-Function17f154:
-	pop hl
-	call Function17f524
-	jr c, .asm_17f167
-	inc hl
-	inc hl
-	ld e, l
-	ld d, h
-	ld a, [de]
-	cp "@"
-	jr z, .asm_17f165
-	and a
-	ret
-
-.asm_17f165
-	scf
-	ret
-
-.asm_17f167
-	push bc
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	pop bc
-	push hl
-	push bc
-	call Function17f4f6
-	add hl, de
-	ld c, l
-	ld b, h
-	pop de
-	farcall Function11c08f
-	ld c, l
-	ld b, h
-	pop de
-	and a
-	ret
-
-Function17f181:
-	pop hl
-	call Function17f524
-	jr c, .asm_17f19d
-	ld de, $2
-	add hl, de
-	ld a, [hli]
-	ld e, l
-	ld d, h
-	ld l, c
-	ld h, b
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [de]
-	cp "@"
-	jr z, .asm_17f19b
-	and a
-	ret
-
-.asm_17f19b
-	scf
-	ret
-
-.asm_17f19d
-	push bc
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld [wcd54], a
-	pop bc
-	push hl
-	push bc
-	call Function17f4f6
-	add hl, de
-	ld a, [hl]
-	ld c, a
-	ld de, wc608
-	farcall Function48c63
-	pop hl
-	ld de, wc608
-	rst PlaceString
-	ld a, c
-	ld [wcd52], a
-	ld a, b
-	ld [wcd53], a
-	ld a, [wcd54]
 	call Function17f50f
 	pop de
 	and a

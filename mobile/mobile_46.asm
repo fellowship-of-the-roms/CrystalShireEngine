@@ -794,7 +794,6 @@ Function118746:
 	dw Function11878d
 	dw Function118e6d
 	dw Function11878d
-	dw Function119800
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
@@ -2558,39 +2557,6 @@ Function1197dc:
 	ld bc, $1000
 	ld a, MOBILEAPI_15
 	jmp Function119e2b
-
-Function119800:
-	ld a, $fd
-	ld [wc6d0], a
-	ld [wOTTrademonSpecies], a
-	ld a, [wcd81]
-	ld [wc74e], a
-	ld a, [wJumptableIndex]
-	push af
-	ld a, [wcf64]
-	push af
-	ld a, [wcf65]
-	push af
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	push af
-	ld a, $1
-	ldh [rSVBK], a
-	call FadeToMenu
-	farcall Function10803d
-	call Function11a9ce
-	call RestartMapMusic
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	pop af
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	pop af
-	ld [wcf65], a
-	pop af
-	ld [wcf64], a
-	pop af
-	ld [wJumptableIndex], a
-	farcall Function115dc3
-	jmp BattleTowerRoomMenu_IncrementJumptable
 
 Function1198ee:
 	ld hl, Text_RegisteringRecord
@@ -5873,8 +5839,7 @@ Function11b6b4:
 	inc de
 	ld a, [de]
 	ld [hl], a
-	jmp AddMobileMonToParty
-
+	; fallthrough
 AddMobileMonToParty:
 	ld hl, wPartyCount
 	ld a, [hl]

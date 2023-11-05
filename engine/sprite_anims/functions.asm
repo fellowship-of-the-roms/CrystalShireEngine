@@ -40,9 +40,6 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_FlyLeaf
 	dw SpriteAnimFunc_FlyTo
 	dw SpriteAnimFunc_GSIntroHoOhLugia
-	dw SpriteAnimFunc_EZChatCursor
-	dw SpriteAnimFunc_MobileTradeSentPulse
-	dw SpriteAnimFunc_MobileTradeOTPulse
 	dw SpriteAnimFunc_IntroSuicune
 	dw SpriteAnimFunc_IntroPichuWooper
 	dw SpriteAnimFunc_Celebi
@@ -722,12 +719,6 @@ SpriteAnimFunc_FlyTo:
 	ld [hl], a
 	ret
 
-SpriteAnimFunc_MobileTradeSentPulse:
-	farjp MobileTradeAnim_AnimateSentPulse
-
-SpriteAnimFunc_MobileTradeOTPulse:
-	farjp MobileTradeAnim_AnimateOTPulse
-
 SpriteAnimFunc_IntroSuicune:
 	ld a, [wIntroSceneTimer]
 	and a
@@ -814,9 +805,6 @@ SpriteAnimFunc_IntroSuicuneAway:
 	add 16
 	ld [hl], a
 	ret
-
-SpriteAnimFunc_EZChatCursor:
-	farjp AnimateEZChatCursor
 
 SpriteAnimFunc_Celebi:
 	farjp UpdateCelebiPosition

@@ -269,11 +269,3 @@ sTrainerRankingsChecksum:: ds 2
 sTrainerRankingsEnd::
 
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
-
-
-SECTION "SRAM Mobile 4", SRAM
-
-sMobileStadiumFlag:: db
-s7_a001:: db
-
-	ds $7fe

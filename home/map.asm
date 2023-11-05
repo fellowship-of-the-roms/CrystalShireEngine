@@ -2002,7 +2002,6 @@ GetMapMusic::
 	jr z, .mahoganymart
 	cp MUSIC_RADIO_TOWER
 	jr z, .radiotower
-	farcall Function8b342
 	ld e, c
 	ld d, 0
 .done

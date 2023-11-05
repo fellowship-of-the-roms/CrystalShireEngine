@@ -298,3 +298,8 @@ MainMenu_Continue:
 
 MainMenu_MysteryGift:
 	farjp MysteryGift
+
+if DEF(_DEBUG)
+MainMenu_DebugRoom:
+	farjp _DebugRoom
+endc

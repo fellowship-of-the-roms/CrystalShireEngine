@@ -64,26 +64,19 @@ DEF NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_OBJ_GS_INTRO_HO_OH_LUGIA      ; 1a
 	const SPRITE_ANIM_OBJ_HEADBUTT                  ; 1b
 	const SPRITE_ANIM_OBJ_EGG_HATCH                 ; 1c
-	const SPRITE_ANIM_OBJ_EZCHAT_CURSOR             ; 1d
-	const SPRITE_ANIM_OBJ_BLUE_WALK                 ; 1e
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_SENT_BALL    ; 1f
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_OT_BALL      ; 20
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_CABLE_BULGE  ; 21
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_SENT_PULSE   ; 22
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_OT_PULSE     ; 23
-	const SPRITE_ANIM_OBJ_MOBILE_TRADE_PING         ; 24
-	const SPRITE_ANIM_OBJ_INTRO_SUICUNE             ; 25
-	const SPRITE_ANIM_OBJ_INTRO_PICHU               ; 26
-	const SPRITE_ANIM_OBJ_INTRO_WOOPER              ; 27
-	const SPRITE_ANIM_OBJ_INTRO_UNOWN               ; 28
-	const SPRITE_ANIM_OBJ_INTRO_UNOWN_F             ; 29
-	const SPRITE_ANIM_OBJ_INTRO_SUICUNE_AWAY        ; 2a
-	const SPRITE_ANIM_OBJ_CELEBI                    ; 2b
-	const SPRITE_ANIM_OBJ_PC_CURSOR                 ; 2c
-	const SPRITE_ANIM_OBJ_PC_QUICK                  ; 2d
-	const SPRITE_ANIM_OBJ_PC_MODE                   ; 2e
-	const SPRITE_ANIM_OBJ_PC_MODE2                  ; 2f
-	const SPRITE_ANIM_OBJ_PC_PACK                   ; 30
+	const SPRITE_ANIM_OBJ_BLUE_WALK                 ; 1d
+	const SPRITE_ANIM_OBJ_INTRO_SUICUNE             ; 1e
+	const SPRITE_ANIM_OBJ_INTRO_PICHU               ; 1f
+	const SPRITE_ANIM_OBJ_INTRO_WOOPER              ; 20
+	const SPRITE_ANIM_OBJ_INTRO_UNOWN               ; 21
+	const SPRITE_ANIM_OBJ_INTRO_UNOWN_F             ; 22
+	const SPRITE_ANIM_OBJ_INTRO_SUICUNE_AWAY        ; 23
+	const SPRITE_ANIM_OBJ_CELEBI                    ; 24
+	const SPRITE_ANIM_OBJ_PC_CURSOR                 ; 25
+	const SPRITE_ANIM_OBJ_PC_QUICK                  ; 26
+	const SPRITE_ANIM_OBJ_PC_MODE                   ; 27
+	const SPRITE_ANIM_OBJ_PC_MODE2                  ; 28
+	const SPRITE_ANIM_OBJ_PC_PACK                   ; 29
 DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 
 ; DoSpriteAnimFrame.Jumptable indexes (see engine/sprite_anims/functions.asm)
@@ -114,19 +107,16 @@ DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 	const SPRITE_ANIM_FUNC_FLY_LEAF                  ; 17
 	const SPRITE_ANIM_FUNC_FLY_TO                    ; 18
 	const SPRITE_ANIM_FUNC_GS_INTRO_HO_OH_LUGIA      ; 19
-	const SPRITE_ANIM_FUNC_EZCHAT_CURSOR             ; 1a
-	const SPRITE_ANIM_FUNC_MOBILE_TRADE_SENT_PULSE   ; 1b
-	const SPRITE_ANIM_FUNC_MOBILE_TRADE_OT_PULSE     ; 1c
-	const SPRITE_ANIM_FUNC_INTRO_SUICUNE             ; 1d
-	const SPRITE_ANIM_FUNC_INTRO_PICHU_WOOPER        ; 1e
-	const SPRITE_ANIM_FUNC_CELEBI                    ; 1f
-	const SPRITE_ANIM_FUNC_INTRO_UNOWN               ; 20
-	const SPRITE_ANIM_FUNC_INTRO_UNOWN_F             ; 21
-	const SPRITE_ANIM_FUNC_INTRO_SUICUNE_AWAY        ; 22
-	const SPRITE_ANIM_FUNC_PC_CURSOR                 ; 23
-	const SPRITE_ANIM_FUNC_PC_QUICK                  ; 24
-	const SPRITE_ANIM_FUNC_PC_MODE                   ; 25
-	const SPRITE_ANIM_FUNC_PC_PACK                   ; 26
+	const SPRITE_ANIM_FUNC_INTRO_SUICUNE             ; 1a
+	const SPRITE_ANIM_FUNC_INTRO_PICHU_WOOPER        ; 1b
+	const SPRITE_ANIM_FUNC_CELEBI                    ; 1c
+	const SPRITE_ANIM_FUNC_INTRO_UNOWN               ; 1d
+	const SPRITE_ANIM_FUNC_INTRO_UNOWN_F             ; 1e
+	const SPRITE_ANIM_FUNC_INTRO_SUICUNE_AWAY        ; 1f
+	const SPRITE_ANIM_FUNC_PC_CURSOR                 ; 20
+	const SPRITE_ANIM_FUNC_PC_QUICK                  ; 21
+	const SPRITE_ANIM_FUNC_PC_MODE                   ; 22
+	const SPRITE_ANIM_FUNC_PC_PACK                   ; 23
 DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)

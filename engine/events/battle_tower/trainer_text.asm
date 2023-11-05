@@ -73,8 +73,6 @@ BattleTowerText::
 	ldh [rSVBK], a
 	jmp PlaceHLTextAtBC
 
-INCLUDE "mobile/fixed_words.asm"
-
 INCLUDE "data/trainers/genders.asm"
 
 BTMaleTrainerTexts:

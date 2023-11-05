@@ -184,7 +184,6 @@ ROMX $41
 	"bank41"
 	"Enemy Trainer Parties 1"
 ROMX $42
-	"mobile42"
 	"Intro Logo"
 	"Credits"
 ROMX $43
@@ -241,14 +240,12 @@ ROMX $5a
 ROMX $5b
 	"bank5B"
 ROMX $5c
-	"mobile5C"
 ROMX $5d
 	"Crystal Phone Text 2"
 ROMX $5e
 	"UpdateBattleHUDs"
 	"Songs 5"
 	"Crystal Sound Effects"
-	"mobile5E"
 ROMX $5f
 	"mobile5F"
 ROMX $60
@@ -389,7 +386,6 @@ SRAM $05
 	"SRAM Trainer Rankings"
 SRAM $06
 SRAM $07
-	"SRAM Mobile 4"
 HRAM
 	"OAM DMA"
 	"HRAM"

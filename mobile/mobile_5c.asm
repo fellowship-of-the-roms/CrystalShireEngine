@@ -197,7 +197,6 @@ Jumptable_171a45:
 	dw Function171ad7
 	dw Function171a5d
 	dw Function171aec
-	dw Function171b4b
 	dw Function171b85
 	dw Function171bcc
 	dw Function171c39
@@ -321,37 +320,6 @@ Function171b42:
 	ld [hli], a
 	jr Function171b42
 
-Function171b4b:
-	depixel 8, 2
-	ld a, SPRITE_ANIM_OBJ_EZCHAT_CURSOR
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, $8
-	ld [hl], a
-
-	depixel 8, 19
-	ld a, SPRITE_ANIM_OBJ_EZCHAT_CURSOR
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, $9
-	ld [hl], a
-
-	depixel 17, 14, 2, 0
-	ld a, SPRITE_ANIM_OBJ_EZCHAT_CURSOR
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, $a
-	ld [hl], a
-
-	ld a, $4
-	ld [wcd23], a
-	ld a, $8
-	ld [wcd24], a
-	jmp Function171c66
-
 Function171b85:
 	ld hl, hJoyPressed
 	ld a, [hl]
@@ -397,7 +365,7 @@ Function171bbd:
 	ld [wcd23], a
 	xor a
 	ld [wcd24], a
-	jmp Function171c66
+	jr Function171c66
 
 Function171bcc:
 	ld hl, hJoyPressed

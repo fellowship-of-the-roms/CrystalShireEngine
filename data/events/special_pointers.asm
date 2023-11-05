@@ -152,12 +152,10 @@ SpecialsPointers::
 	add_special BeastsCheck
 	add_special MonCheck
 	add_special UnusedBattleTowerDummySpecial2
-	add_special Function10383c
 	add_special StubbedTrainerRankings_Healings
 	add_special RefreshSprites
 	add_special AskRememberPassword
 	add_special LoadMapPalettes
-	add_special UnusedFindItemInPCOrBag
 
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag

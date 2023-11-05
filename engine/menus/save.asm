@@ -322,13 +322,6 @@ EraseBattleTowerStatus:
 SaveData:
 	jmp _SaveData
 
-DisableMobileStadium: ; unreferenced
-	ld a, BANK(sMobileStadiumFlag)
-	call OpenSRAM
-	xor a
-	ld [sMobileStadiumFlag], a
-	jmp CloseSRAM
-
 HallOfFame_InitSaveIfNeeded:
 	ld a, [wSavedAtLeastOnce]
 	and a
