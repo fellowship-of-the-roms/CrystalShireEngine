@@ -381,9 +381,9 @@ SRAM $02
 SRAM $03
 	"PokeDB Bank 2"
 SRAM $04
-	"SRAM Bank 4"
 SRAM $05
 	"SRAM Trainer Rankings"
+	"SRAM Bank 5"
 SRAM $06
 SRAM $07
 HRAM

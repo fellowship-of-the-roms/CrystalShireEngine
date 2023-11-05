@@ -216,9 +216,6 @@ SECTION "PokeDB Bank 2", SRAM
 sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
 
-SECTION "SRAM Bank 4", SRAM
-
-
 
 SECTION "SRAM Trainer Rankings", SRAM
 
@@ -269,3 +266,11 @@ sTrainerRankingsChecksum:: ds 2
 sTrainerRankingsEnd::
 
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
+
+
+SECTION "SRAM Bank 5", SRAM
+
+s5_a89c:: ds 22
+s5_a8b2:: ds 150
+s5_aa8d:: db
+s5_a89a:: dw

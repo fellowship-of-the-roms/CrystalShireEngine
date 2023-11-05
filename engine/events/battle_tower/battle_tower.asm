@@ -76,6 +76,7 @@ RunBattleTowerTrainer:
 	farcall StubbedTrainerRankings_Healings
 	farcall HealParty
 	call ReadBTTrainerParty
+	call Clears5_a89a
 
 	predef StartBattle
 
@@ -319,6 +320,7 @@ BattleTowerAction:
 	jumptable .dw, wScriptVar
 
 .dw
+	table_width 2, .dw
 	dw BattleTowerAction_CheckExplanationRead
 	dw BattleTowerAction_SetExplanationRead
 	dw BattleTowerAction_GetChallengeState
@@ -331,6 +333,8 @@ BattleTowerAction:
 	dw BattleTowerAction_GSBall
 	dw BattleTowerAction_EggTicket
 	dw BattleTowerAction_0F
+	dw BattleTowerAction_11
+	dw BattleTowerAction_12
 	dw BattleTowerAction_14
 	dw BattleTowerAction_15
 	dw ResetBattleTowerTrainersSRAM
@@ -339,6 +343,7 @@ BattleTowerAction:
 	dw BattleTowerAction_1D
 	dw BattleTower_RandomlyChooseReward
 	dw BattleTower_SaveOptions
+	assert_table_length NUM_BATTLETOWERACTIONS
 
 ; Reset the save memory for BattleTower-Trainers (Counter and all 7 TrainerBytes)
 ResetBattleTowerTrainersSRAM:
@@ -601,6 +606,20 @@ BattleTowerAction_0F:
 	ld [wScriptVar], a
 	pop af
 	ldh [rSVBK], a
+	ret
+
+BattleTowerAction_11:
+	ld c, FALSE
+	jr Set_s5_aa8d
+
+BattleTowerAction_12:
+	ld c, TRUE
+Set_s5_aa8d:
+	ld a, BANK(s5_aa8d)
+	call OpenSRAM
+	ld a, c
+	ld [s5_aa8d], a
+	call CloseSRAM
 	ret
 
 BattleTowerAction_14:

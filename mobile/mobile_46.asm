@@ -170,7 +170,53 @@ Function118125:
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
+	call Function118180
 	jmp ReturnToMapFromSubmenu
+
+Function118180:
+	ld a, [wScriptVar]
+	and a
+	ret nz
+	ld a, [wcd38]
+	and a
+	ret z
+	ld a, BANK(s5_a89c) ; aka BANK(s5_a8b2)
+	call OpenSRAM
+	ld hl, wcd69
+	ld de, s5_a89c
+	ld bc, 22
+	call CopyBytes
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(w3_d202)
+	ldh [rSVBK], a
+
+	ld de, w3_d202
+	ld c, $96
+	farcall CheckStringForErrors_IgnoreTerminator
+	jr c, .return_d3
+
+	ld de, w3_d202
+	lb bc, 1, $96
+	farcall CheckStringContainsLessThanBNextCharacters
+	jr c, .return_d3
+
+	ld hl, w3_d202
+	ld de, s5_a8b2
+	ld bc, 150
+	call CopyBytes
+.reset_banks
+	pop af
+	ldh [rSVBK], a
+	call CloseSRAM
+	ret
+
+.return_d3
+	ld a, $d3
+	ld [wMobileErrorCodeBuffer], a
+	ld [wScriptVar], a
+	jr .reset_banks
 
 Function1181da:
 	call BattleTowerRoomMenu_InitRAM
