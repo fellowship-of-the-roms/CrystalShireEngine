@@ -3233,9 +3233,10 @@ wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
-
 wLuckyNumberDayTimer:: dw
+
 wSpecialPhoneCallID:: db
+
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
 wUnusedTwoDayTimerOn:: db
 wUnusedTwoDayTimer:: db
@@ -3257,7 +3258,9 @@ wdc60:: db
 
 wStepCount:: db
 wPoisonStepCount:: db
+
 wHappinessStepCount:: db
+
 
 wParkBallsRemaining::
 wSafariBallsRemaining:: db

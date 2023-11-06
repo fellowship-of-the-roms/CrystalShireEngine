@@ -404,10 +404,10 @@ AI_Items:
 
 .Potion:
 	call .HealItem
-	jmp c, .DontUse
+	jr c, .DontUse
 	ld b, 20
 	call EnemyUsedPotion
-	jmp .Use
+	jr .Use
 
 .XAccuracy:
 	call .XItem
@@ -720,7 +720,7 @@ EnemyUsedXAccuracy:
 	ld hl, X_ACCURACY
 	call GetItemIDFromIndex
 	pop hl
-	jmp PrintText_UsedItemOn_AND_AIUpdateHUD
+	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedGuardSpec:
 	call AIUsedItemSound
