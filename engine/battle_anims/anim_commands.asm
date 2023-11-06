@@ -133,7 +133,7 @@ RunBattleAnimScript:
 	bit BATTLEANIM_STOP_F, a
 	jr z, .playframe
 
-	jmp BattleAnim_ClearOAM
+	jr BattleAnim_ClearOAM
 
 BattleAnimClearHud:
 	call DelayFrame
