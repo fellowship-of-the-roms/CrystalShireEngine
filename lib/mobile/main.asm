@@ -9468,7 +9468,7 @@ Function113f2d:
 	ld a, [wMobileSDK_SendCommandID]
 	cp $91
 	jr z, .asm_113f4f
-	jmp Function113eb8
+	jr Function113eb8
 
 .asm_113f4f
 	xor a
