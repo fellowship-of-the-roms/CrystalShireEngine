@@ -57,108 +57,91 @@ ItemNames::
 	li "ELIXER"       ; 0037
 	li "MOOMOO MILK"  ; 0038
 	li "QUICK CLAW"   ; 0039
-	li "PSNCUREBERRY" ; 003A
-	li "GOLD LEAF"    ; 003B
-	li "SOFT SAND"    ; 003C
-	li "SHARP BEAK"   ; 003D
-	li "PRZCUREBERRY" ; 003E
-	li "BURNT BERRY"  ; 003F
-	li "ICE BERRY"    ; 0040
-	li "POISON BARB"  ; 0041
-	li "KING'S ROCK"  ; 0042
-	li "BITTER BERRY" ; 0043
-	li "MINT BERRY"   ; 0044
-	li "RED APRICORN" ; 0045
-	li "TINYMUSHROOM" ; 0046
-	li "BIG MUSHROOM" ; 0047
-	li "SILVERPOWDER" ; 0048
-	li "BLU APRICORN" ; 0049
-	li "TERU-SAMA"    ; 004A
-	li "AMULET COIN"  ; 004B
-	li "YLW APRICORN" ; 004C
-	li "GRN APRICORN" ; 004D
-	li "CLEANSE TAG"  ; 004E
-	li "MYSTIC WATER" ; 004F
-	li "TWISTEDSPOON" ; 0050
-	li "WHT APRICORN" ; 0051
-	li "BLACKBELT"    ; 0052
-	li "BLK APRICORN" ; 0053
-	li "TERU-SAMA"    ; 0054
-	li "PNK APRICORN" ; 0055
-	li "BLACKGLASSES" ; 0056
-	li "SLOWPOKETAIL" ; 0057
-	li "PINK BOW"     ; 0058
-	li "STICK"        ; 0059
-	li "SMOKE BALL"   ; 005A
-	li "NEVERMELTICE" ; 005B
-	li "MAGNET"       ; 005C
-	li "MIRACLEBERRY" ; 005D
-	li "PEARL"        ; 005E
-	li "BIG PEARL"    ; 005F
-	li "EVERSTONE"    ; 0060
-	li "SPELL TAG"    ; 0061
-	li "RAGECANDYBAR" ; 0062
-	li "MIRACLE SEED" ; 0063
-	li "THICK CLUB"   ; 0064
-	li "FOCUS BAND"   ; 0065
-	li "TERU-SAMA"    ; 0066
-	li "ENERGYPOWDER" ; 0067
-	li "ENERGY ROOT"  ; 0068
-	li "HEAL POWDER"  ; 0069
-	li "REVIVAL HERB" ; 006A
-	li "HARD STONE"   ; 006B
-	li "LUCKY EGG"    ; 006C
-	li "STARDUST"     ; 006D
-	li "STAR PIECE"   ; 006E
-	li "ZINC"         ; 0071
+	li "GOLD LEAF"    ; 003A
+	li "SOFT SAND"    ; 003B
+	li "SHARP BEAK"   ; 003C
+	li "POISON BARB"  ; 003D
+	li "KING'S ROCK"  ; 003E
+	li "TINYMUSHROOM" ; 003F
+	li "BIG MUSHROOM" ; 0040
+	li "SILVERPOWDER" ; 0041
+	li "TERU-SAMA"    ; 0042
+	li "AMULET COIN"  ; 0043
+	li "CLEANSE TAG"  ; 0044
+	li "MYSTIC WATER" ; 0045
+	li "TWISTEDSPOON" ; 0046
+	li "BLACKBELT"    ; 0047
+	li "TERU-SAMA"    ; 0048
+	li "BLACKGLASSES" ; 0049
+	li "SLOWPOKETAIL" ; 004A
+	li "PINK BOW"     ; 004B
+	li "STICK"        ; 004C
+	li "SMOKE BALL"   ; 004D
+	li "NEVERMELTICE" ; 004E
+	li "MAGNET"       ; 004F
+	li "PEARL"        ; 0050
+	li "BIG PEARL"    ; 0051
+	li "EVERSTONE"    ; 0052
+	li "SPELL TAG"    ; 0053
+	li "RAGECANDYBAR" ; 0054
+	li "MIRACLE SEED" ; 0055
+	li "THICK CLUB"   ; 0056
+	li "FOCUS BAND"   ; 0057
+	li "TERU-SAMA"    ; 0058
+	li "ENERGYPOWDER" ; 0059
+	li "ENERGY ROOT"  ; 005A
+	li "HEAL POWDER"  ; 005B
+	li "REVIVAL HERB" ; 005C
+	li "HARD STONE"   ; 005D
+	li "LUCKY EGG"    ; 005E
+	li "STARDUST"     ; 005F
+	li "STAR PIECE"   ; 0060
+	li "ZINC"         ; 0061
+	li "TERU-SAMA"    ; 0062
+	li "TERU-SAMA"    ; 0063
+	li "CHARCOAL"     ; 0064
+	li "BERRY JUICE"  ; 0065
+	li "SCOPE LENS"   ; 0066
+	li "TERU-SAMA"    ; 0067
+	li "TERU-SAMA"    ; 0068
+	li "METAL COAT"   ; 0069
+	li "DRAGON FANG"  ; 006A
+	li "TERU-SAMA"    ; 006B
+	li "LEFTOVERS"    ; 006C
+	li "TERU-SAMA"    ; 006D
+	li "TERU-SAMA"    ; 006E
 	li "TERU-SAMA"    ; 006F
-	li "TERU-SAMA"    ; 0070
-	li "CHARCOAL"     ; 0072
-	li "BERRY JUICE"  ; 0073
-	li "SCOPE LENS"   ; 0074
-	li "TERU-SAMA"    ; 0076
-	li "TERU-SAMA"    ; 0075
-	li "METAL COAT"   ; 0077
-	li "DRAGON FANG"  ; 0078
-	li "TERU-SAMA"    ; 0079
-	li "LEFTOVERS"    ; 007A
+	li "DRAGON SCALE" ; 0070
+	li "BERSERK GENE" ; 0071
+	li "TERU-SAMA"    ; 0072
+	li "TERU-SAMA"    ; 0073
+	li "TERU-SAMA"    ; 0074
+	li "SACRED ASH"   ; 0075
+	li "FLOWER MAIL"  ; 0076
+	li "TERU-SAMA"    ; 0077
+	li "LIGHT BALL"   ; 0078
+	li "NORMAL BOX"   ; 0079
+	li "GORGEOUS BOX" ; 007A
+	li "SUN STONE"    ; 007B
+	li "POLKADOT BOW" ; 007C
 	li "TERU-SAMA"    ; 007D
-	li "TERU-SAMA"    ; 007B
-	li "TERU-SAMA"    ; 007C
-	li "MYSTERYBERRY" ; 007E
-	li "DRAGON SCALE" ; 007F
-	li "BERSERK GENE" ; 0080
-	li "TERU-SAMA"    ; 0083
-	li "TERU-SAMA"    ; 0081
-	li "TERU-SAMA"    ; 0082
-	li "SACRED ASH"   ; 0084
-	li "FLOWER MAIL"  ; 0085
-	li "TERU-SAMA"    ; 0086
-	li "LIGHT BALL"   ; 0087
-	li "NORMAL BOX"   ; 0088
-	li "GORGEOUS BOX" ; 0089
-	li "SUN STONE"    ; 008A
-	li "POLKADOT BOW" ; 008B
+	li "UP-GRADE"     ; 007E
+	li "TERU-SAMA"    ; 007F
+	li "TERU-SAMA"    ; 0080
+	li "BRICK PIECE"  ; 0081
+	li "SURF MAIL"    ; 0082
+	li "LITEBLUEMAIL" ; 0083
+	li "PORTRAITMAIL" ; 0084
+	li "LOVELY MAIL"  ; 0085
+	li "EON MAIL"     ; 0086
+	li "MORPH MAIL"   ; 0087
+	li "BLUESKY MAIL" ; 0088
+	li "MUSIC MAIL"   ; 0089
+	li "MIRAGE MAIL"  ; 008A
+	li "TERU-SAMA"    ; 008B
 	li "TERU-SAMA"    ; 008C
-	li "UP-GRADE"     ; 008D
-	li "BERRY"        ; 008E
-	li "GOLD BERRY"   ; 008F
-	li "TERU-SAMA"    ; 0091
-	li "TERU-SAMA"    ; 0090
-	li "BRICK PIECE"  ; 0092
-	li "SURF MAIL"    ; 0093
-	li "LITEBLUEMAIL" ; 0094
-	li "PORTRAITMAIL" ; 0095
-	li "LOVELY MAIL"  ; 0096
-	li "EON MAIL"     ; 0097
-	li "MORPH MAIL"   ; 0098
-	li "BLUESKY MAIL" ; 0099
-	li "MUSIC MAIL"   ; 009A
-	li "MIRAGE MAIL"  ; 009B
-	li "TERU-SAMA"    ; 009F
-	li "TERU-SAMA"    ; 009C
-	li "TERU-SAMA"    ; 009D
-	li "TERU-SAMA"    ; 009E
+	li "TERU-SAMA"    ; 008D
+	li "TERU-SAMA"    ; 008E
 	assert_list_length NUM_ITEM_POCKET
 
 KeyItemNames::
@@ -205,5 +188,21 @@ BallNames::
 
 BerryNames::
 	list_start BerryNames
-	li "TEST BERRY" ; 0300
+	li "RED APRICORN" ; 0300
+	li "BLU APRICORN" ; 0301
+	li "YLW APRICORN" ; 0302
+	li "GRN APRICORN" ; 0303
+	li "WHT APRICORN" ; 0304
+	li "BLK APRICORN" ; 0305
+	li "PNK APRICORN" ; 0306
+	li "PSNCUREBERRY" ; 0307
+	li "PRZCUREBERRY" ; 0308
+	li "BURNT BERRY"  ; 0309
+	li "ICE BERRY"    ; 030A
+	li "BITTER BERRY" ; 030B
+	li "MINT BERRY"   ; 030C
+	li "MIRACLEBERRY" ; 030D
+	li "MYSTERYBERRY" ; 030E
+	li "BERRY"        ; 030F
+	li "GOLD BERRY"   ; 0310
 	assert_list_length NUM_BERRY_ITEM_POCKET
