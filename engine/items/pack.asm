@@ -229,6 +229,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
 	call Pack_JumptableNext
 	ret
@@ -1298,7 +1299,8 @@ PackGFXPointers:
 	dw PackGFX + (15 tiles) * 1 ; ITEM_POCKET
 	dw PackGFX + (15 tiles) * 3 ; BALL_POCKET
 	dw PackGFX + (15 tiles) * 0 ; KEY_ITEM_POCKET
-	dw PackGFX + (15 tiles) * 2 ; TM_HM_POCKET
+	dw PackGFX + (15 tiles) * 4 ; TM_HM_POCKET
+	dw PackGFX + (15 tiles) * 2 ; BERRY_POCKET
 
 Pack_InterpretJoypad:
 	ld hl, wMenuJoypad
@@ -1391,7 +1393,7 @@ Pack_InitGFX:
 	call DisableLCD
 	ld hl, PackMenuGFX
 	ld de, vTiles2
-	ld bc, $60 tiles
+	ld bc, $78 tiles
 	ld a, BANK(PackMenuGFX)
 	call FarCopyBytes
 ; Background (blue if male, pink if female)
@@ -1441,7 +1443,7 @@ DrawPocketGFX:
 	ld a, [wCurPocket]
 	; * 6
 	push bc
-	ld c, 5
+	ld c, 6
 	ld b, a
 .multloop
 	add b
@@ -1456,7 +1458,7 @@ DrawPocketGFX:
 	ld d, h
 	ld e, l
 	hlcoord 9, 0
-	ld b, 6
+	ld b, 7
 .col
 	ld a, [de]
 	inc de
@@ -1467,13 +1469,15 @@ DrawPocketGFX:
 
 .tilemap
 	; Regular Items
-	db $2d, $4c, $2c, $2c, $2c, $2e
+	db $2d, $4b, $2c, $2c, $2c, $2c, $2e
 	; Balls
-	db $2d, $2c, $4d, $2c, $2c, $2e
-	; TMs
-	db $2d, $2c, $2c, $4e, $2c, $2e
+	db $2d, $2c, $4c, $2c, $2c, $2c, $2e
 	; Key Items
-	db $2d, $2c, $2c, $2c, $4f, $2e
+	db $2d, $2c, $2c, $2c, $4e, $2c, $2e
+	; TMs
+	db $2d, $2c, $2c, $2c, $2c, $4f, $2e
+	; Berries
+	db $2d, $2c, $2c, $4d, $2c, $2c, $2e
 
 DrawPocketName:
 	ld a, [wCurPocket]
@@ -1528,6 +1532,8 @@ DrawPocketName:
 	; db $00, $04, $04, $04, $01 ; top border
 	db $10, $11, $12, $13, $14 ; TM/HM
 	; db $02, $05, $05, $05, $03 ; bottom border
+; BERRY_POCKET
+	db $1a, $1b, $1c, $1d, $1e
 
 Pack_GetItemName:
 	ld a, [wCurItem]
