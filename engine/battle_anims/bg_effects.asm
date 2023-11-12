@@ -961,6 +961,8 @@ BattleBGEffect_Whirlpool:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	ldh [hLCDCPointer], a
 	xor a
@@ -978,6 +980,8 @@ BattleBGEffect_Whirlpool:
 
 BattleBGEffect_StartWater:
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
 	jmp EndBattleBGEffect
@@ -1029,6 +1033,8 @@ BattleBGEffect_Psychic:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	xor a
@@ -1064,6 +1070,8 @@ BattleBGEffect_Teleport:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	lb de, 6, 5
@@ -1085,6 +1093,8 @@ BattleBGEffect_NightShade:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1112,6 +1122,8 @@ BattleBGEffect_DoubleTeam:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1199,6 +1211,8 @@ BattleBGEffect_AcidArmor:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1260,6 +1274,8 @@ BattleBGEffect_Withdraw:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1308,6 +1324,8 @@ BattleBGEffect_Dig:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1376,6 +1394,8 @@ BattleBGEffect_Tackle:
 ; BG_EFFECT_STRUCT_BATTLE_TURN is set to 2 or -2 depending on target
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1412,6 +1432,8 @@ BattleBGEffect_BodySlam:
 ; BG_EFFECT_STRUCT_BATTLE_TURN is set to 2 or -2 depending on target
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms2
 	ldh a, [hLYOverrideEnd]
@@ -1553,6 +1575,8 @@ VitalThrow_MoveBackwards:
 ; BG_EFFECT_STRUCT_PARAM: keeps track of distance moved, so it's reset to 0 here
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1597,6 +1621,8 @@ BattleBGEffect_WobbleMon:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1634,6 +1660,8 @@ BattleBGEffect_Flail:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1687,6 +1715,8 @@ BattleBGEffect_WaveDeformMon:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	jmp BattleBGEffect_SetLCDStatCustoms1
 
@@ -1725,6 +1755,8 @@ BattleBGEffect_BounceDown:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms2
 	ldh a, [hLYOverrideEnd]
@@ -1778,6 +1810,8 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, $47
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -1877,6 +1911,8 @@ BattleBGEffect_BetaSendOutMon2: ; unused
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -1916,6 +1952,8 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rBGP)
 	ldh [hLCDCPointer], a
 	xor a
@@ -2139,6 +2177,8 @@ BattleBGEffect_VibrateMon:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -2183,6 +2223,8 @@ BattleBGEffect_WobblePlayer:
 .zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	xor a
@@ -2346,6 +2388,8 @@ BGEffect_RapidCyclePals:
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
 	ld a, $47
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
@@ -2612,11 +2656,15 @@ BattleAnim_ResetLCDStatCustom:
 	ldh [hLYOverrideStart], a
 	ldh [hLYOverrideEnd], a
 	call BattleBGEffects_ClearLYOverrides
+	ld a, RETI_INSTRUCTION
+	ld [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	jmp EndBattleBGEffect
 
 BattleBGEffects_ResetVideoHRAM:
+	ld a, RETI_INSTRUCTION
+	ld [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	ld a, %11100100

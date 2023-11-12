@@ -2,10 +2,6 @@
 
 LCDGeneric::
 	push af
-	ldh a, [hLCDCPointer]
-	and a
-	jr z, .done
-
 ; At this point it's assumed we're in BANK(wLYOverrides)!
 	push bc
 	ldh a, [rLY]
@@ -18,8 +14,6 @@ LCDGeneric::
 	ld a, b
 	ldh [c], a
 	pop bc
-
-.done
 	pop af
 	reti
 
