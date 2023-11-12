@@ -17,7 +17,7 @@ MACRO box_struct
 \1SpdEV::          db
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
-\1Padding::        ds 4
+\1Padding::        ds 5
 \1DVs::            dw
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
@@ -45,7 +45,7 @@ MACRO savemon_struct
 \1SpdEV::          db
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
-\1Padding::        ds 4
+\1Padding::        ds 5
 \1DVs::            dw
 \1MovesHigh::
 \1PPUps::          ds NUM_MOVES

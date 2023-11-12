@@ -86,7 +86,7 @@ DEF MON_DEF_EV             rb
 DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
-                           rb_skip 4
+                           rb_skip 5
 DEF MON_DVS                rw
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
@@ -132,7 +132,7 @@ DEF SAVEMON_DEF_EV             rb
 DEF SAVEMON_SPD_EV             rb
 DEF SAVEMON_SAT_EV             rb
 DEF SAVEMON_SDF_EV             rb
-                               rb_skip 4
+                               rb_skip 5
 DEF SAVEMON_DVS                rw
 ; savemon_struct is identical to party_struct before this point
 DEF SAVEMON_MOVES_HIGH         rb NUM_MOVES
@@ -190,7 +190,7 @@ DEF PARTY_LENGTH EQU 6
 ; boxes
 DEF MONS_PER_BOX EQU 20
 
-DEF MONDB_ENTRIES   EQU 160
+DEF MONDB_ENTRIES   EQU 157
 DEF MIN_MONDB_SLACK EQU 10
 DEF NUM_BOXES       EQU (MONDB_ENTRIES * 2 - MIN_MONDB_SLACK) / MONS_PER_BOX ; 15
 
