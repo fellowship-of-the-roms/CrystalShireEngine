@@ -38,12 +38,14 @@ MACRO savemon_struct
 \1ID::             dw
 \1IsEgg::
 \1Exp::            ds 3
-\1StatExp::
-\1HPExp::          dw
-\1AtkExp::         dw
-\1DefExp::         dw
-\1SpdExp::         dw
-\1SpcExp::         dw
+\1EVs::
+\1HPEV::           db
+\1AtkEV::          db
+\1DefEV::          db
+\1SpdEV::          db
+\1SpclAtkEV::      db
+\1SpclDefEV::      db
+\1Padding::        ds 4
 \1DVs::            dw
 \1MovesHigh::
 \1PPUps::          ds NUM_MOVES
