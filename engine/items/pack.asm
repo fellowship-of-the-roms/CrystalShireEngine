@@ -777,7 +777,7 @@ BattlePack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	jmp ItemSubmenu
+	jr ItemSubmenu
 
 .BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader
