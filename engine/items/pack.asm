@@ -231,8 +231,7 @@ Pack:
 	call DrawPocketName
 	call DrawPocketGFX
 	call WaitBGMap_DrawPackGFX
-	call Pack_JumptableNext
-	ret
+	jmp Pack_JumptableNext
 
 .BerryPocketMenu:
 	ld hl, BerryPocketMenuHeader
@@ -760,8 +759,7 @@ BattlePack:
 	call ClearPocketList
 	call DrawPocketName
 	call WaitBGMap_DrawPackGFX
-	call Pack_JumptableNext
-	ret
+	jmp Pack_JumptableNext
 
 .BerryPocketMenu:
 	ld hl, BerryPocketMenuHeader
@@ -779,8 +777,7 @@ BattlePack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call ItemSubmenu
-	ret
+	jmp ItemSubmenu
 
 .BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader

@@ -69,8 +69,7 @@ PlaceMenuItemBerryName:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceMenuItemBerryQuantity:
 	push de
