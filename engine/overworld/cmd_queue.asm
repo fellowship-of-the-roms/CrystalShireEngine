@@ -138,8 +138,7 @@ CmdQueues_AnonJumptable:
 	add hl, bc
 	ld a, [hl]
 	pop hl
-	call JumpTable
-	ret
+	jmp JumpTable
 
 CmdQueues_IncAnonJumptableIndex:
 	ld hl, CMDQUEUE_JUMPTABLE_INDEX

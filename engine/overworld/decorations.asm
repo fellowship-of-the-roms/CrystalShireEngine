@@ -442,8 +442,7 @@ DoDecorationAction2:
 	add hl, de
 	ld a, [hl]
 	ld hl, .DecoActions
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .DecoActions:
 	table_width 2, DoDecorationAction2.DecoActions
@@ -968,8 +967,7 @@ INCLUDE "data/decorations/decorations.asm"
 DescribeDecoration::
 	ld a, b
 	ld hl, .Jumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Jumptable:
 ; entries correspond to DECODESC_* constants

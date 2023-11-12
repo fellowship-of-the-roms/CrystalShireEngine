@@ -7,8 +7,7 @@ _ReceiveItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Pockets:
 ; entries correspond to item types
@@ -48,8 +47,7 @@ _TossItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Pockets:
 ; entries correspond to item types
@@ -91,8 +89,7 @@ _CheckItem::
 	ld a, [wItemAttributeValue]
 	dec a
 	ld hl, .Pockets
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Pockets:
 ; entries correspond to item types

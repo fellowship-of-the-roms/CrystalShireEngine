@@ -48,8 +48,7 @@ PokeSeer:
 SeerAction:
 	ld a, [wSeerAction]
 	ld hl, SeerActions
-	call JumpTable
-	ret
+	jmp JumpTable
 
 SeerActions:
 	dw SeerAction0

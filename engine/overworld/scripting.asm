@@ -55,8 +55,7 @@ WaitScriptMovement:
 RunScriptCommand:
 	call GetScriptByte
 	ld hl, ScriptCommandTable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 ScriptCommandTable:
 ; entries correspond to *_command constants (see macros/scripts/events.asm)

@@ -43,8 +43,7 @@ Clears5_a89a:
 	xor a
 	ld [hli], a
 	ld [hl], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function170c8b:
 	ld hl, wLastEnemyCounterMove

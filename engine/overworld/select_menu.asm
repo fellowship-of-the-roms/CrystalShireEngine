@@ -23,8 +23,7 @@ CheckRegisteredItem:
 	rlca
 	rlca
 	ld hl, .Pockets
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Pockets:
 ; entries correspond to *_POCKET constants
@@ -112,8 +111,7 @@ UseRegisteredItem:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .SwitchTo
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .SwitchTo:
 ; entries correspond to ITEMMENU_* constants

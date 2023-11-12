@@ -4839,8 +4839,7 @@ BattleCommand_TriStatusChance:
 	jr z, .loop
 	dec a
 	ld hl, .StatusCommands
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .StatusCommands:
 	dw BattleCommand_ParalyzeTarget ; paralyze

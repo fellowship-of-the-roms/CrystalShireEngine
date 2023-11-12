@@ -616,8 +616,7 @@ TryBGEvent:
 .is_bg_event:
 	ld a, [wCurBGEventType]
 	ld hl, BGEventJumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 BGEventJumptable:
 	table_width 2, BGEventJumptable

@@ -424,8 +424,7 @@ UseItem:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .dw
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .dw
 ; entries correspond to ITEMMENU_* constants
@@ -796,8 +795,7 @@ TMHMSubmenu:
 	farcall CheckItemContext
 	ld a, [wItemAttributeValue]
 	ld hl, .ItemFunctionJumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .ItemFunctionJumptable:
 ; entries correspond to ITEMMENU_* constants

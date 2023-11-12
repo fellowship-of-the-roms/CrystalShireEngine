@@ -619,8 +619,7 @@ Set_s5_aa8d:
 	call OpenSRAM
 	ld a, c
 	ld [s5_aa8d], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_14:
 	call BattleTower_CheckSaveFileExistsAndIsYours

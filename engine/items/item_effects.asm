@@ -1582,8 +1582,7 @@ INCLUDE "data/items/heal_status.asm"
 
 StatusHealer_Jumptable:
 	ld hl, .dw
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .dw
 	dw StatusHealer_ClearPalettes
