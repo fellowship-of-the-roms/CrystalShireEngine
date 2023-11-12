@@ -325,8 +325,7 @@ Function10034d:
 Function100382:
 	ld a, [wcd27]
 	ld hl, Jumptable_10044e
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Function10038a:
 	ld hl, wccb4
@@ -585,8 +584,7 @@ Function100513:
 Function100522:
 	ld a, [wcd28]
 	ld hl, Jumptable_10052a
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_10052a:
 	dw Function100534
@@ -640,8 +638,7 @@ Function10054d:
 Function100579:
 	ld a, [wcd26]
 	ld hl, Jumptable_100581
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_100581:
 	dw Function100585
@@ -688,8 +685,7 @@ MenuData_1005ba:
 Function1005c3:
 	ld a, [wcd26]
 	ld hl, Jumptable_1005cb
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_1005cb:
 	dw Function1005cf
@@ -1886,8 +1882,7 @@ Function100e72:
 Function100e84:
 	ld a, [wcd67]
 	ld hl, Jumptable_100e8c
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_100e8c:
 	dw Function100ea2
@@ -3944,8 +3939,7 @@ Function1024af:
 	call GetJoypad
 	ld a, [wcd4a]
 	ld hl, Jumptable_1024ba
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_1024ba:
 	dw Function1024c0
@@ -4237,8 +4231,7 @@ Function1026c8:
 	ret c
 	ld a, [wcd4a]
 	ld hl, Jumptable_1026da
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_1026da:
 	dw Function1026de
@@ -4313,8 +4306,7 @@ Function102754:
 	ret c
 	ld a, [wcd4a]
 	ld hl, Jumptable_102766
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_102766:
 	dw Function102770
@@ -4657,8 +4649,7 @@ MenuHeader_1029bb:
 Function1029c3:
 	ld a, [wcd4a]
 	ld hl, Jumptable_1029cb
-	call JumpTable
-	ret
+	jmp JumpTable
 
 Jumptable_1029cb:
 	dw Function1029cf

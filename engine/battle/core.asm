@@ -9095,8 +9095,7 @@ BattleStartMessage:
 	push hl
 	farcall BattleStart_TrainerHuds
 	pop hl
-	call StdBattleTextbox
-	ret
+	jmp StdBattleTextbox
 
 GetWeatherImage:
 	ld a, [wBattleWeather]

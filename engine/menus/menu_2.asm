@@ -35,8 +35,7 @@ PlaceMenuItemBallName:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceMenuItemBallQuantity:
 	push de
@@ -105,8 +104,7 @@ PlaceMenuKeyItemName:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceMenuKeyItemQuantity:
 	push de

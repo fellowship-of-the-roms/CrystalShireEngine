@@ -145,8 +145,7 @@ HandleStepType:
 	ret z
 .ok3
 	ld hl, StepTypesJumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 HandleObjectAction:
 	ld hl, OBJECT_FLAGS1
@@ -492,8 +491,7 @@ ObjectMovement_AnonJumptable:
 	add hl, bc
 	ld a, [hl]
 	pop hl
-	call JumpTable
-	ret
+	jmp JumpTable
 
 ObjectStep_ZeroAnonJumptableIndex:
 	ld hl, OBJECT_STEP_INDEX
@@ -512,8 +510,7 @@ ObjectStep_AnonJumptable:
 	add hl, bc
 	ld a, [hl]
 	pop hl
-	call JumpTable
-	ret
+	jmp JumpTable
 
 ObjectStep_GetAnonJumptableIndex: ; unreferenced
 	ld hl, OBJECT_STEP_INDEX
@@ -552,8 +549,7 @@ StepFunction_FromMovement:
 	call GetSpriteMovementFunction
 	ld a, [hl]
 	ld hl, .Pointers
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Pointers:
 ; entries correspond to SPRITEMOVEFN_* constants (see constants/map_object_constants.asm)
@@ -1961,8 +1957,7 @@ DoMovementFunction:
 	call ApplyMovementToFollower
 	pop af
 	ld hl, MovementPointers
-	call JumpTable
-	ret
+	jmp JumpTable
 
 INCLUDE "engine/overworld/movement.asm"
 

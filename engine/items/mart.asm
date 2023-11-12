@@ -13,8 +13,7 @@ OpenMartDialog::
 	call LoadMartPointer
 	ld a, [wMartType]
 	ld hl, .dialogs
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .dialogs
 	dw MartDialog
@@ -784,8 +783,7 @@ SellMenu:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
 	ld hl, .dw
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .dw
 	dw .try_sell

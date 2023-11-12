@@ -209,8 +209,7 @@ Function118180:
 .reset_banks
 	pop af
 	ldh [rSVBK], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 .return_d3
 	ld a, $d3
@@ -864,8 +863,7 @@ Function11878d:
 .asm_1187a7
 	jmp BattleTowerRoomMenu_IncrementJumptable
 .asm_1187aa
-	call Function118821
-	ret
+	jr Function118821
 .asm_1187af
 	ld a, MOBILEAPI_00
 	call MobileAPI

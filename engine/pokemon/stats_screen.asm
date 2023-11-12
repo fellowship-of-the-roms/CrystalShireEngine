@@ -557,8 +557,7 @@ StatsScreen_LoadGFX:
 	maskbits NUM_STAT_PAGES
 	dec a
 	ld hl, .Jumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Jumptable:
 ; entries correspond to *_PAGE constants
@@ -902,8 +901,7 @@ StatsScreen_PlaceFrontpic:
 StatsScreen_GetAnimationParam:
 	ld a, [wMonType]
 	ld hl, .Jumptable
-	call JumpTable
-	ret
+	jmp JumpTable
 
 .Jumptable:
 	dw .PartyMon
