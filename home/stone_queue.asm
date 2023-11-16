@@ -74,9 +74,9 @@ HandleStoneQueue::
 	ld a, WARP_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .no_carry
-	inc h
-.no_carry
+	adc h
+	sub l
+	ld h, a
 
 	pop af
 	dec a
