@@ -155,7 +155,7 @@ PlaceMapNameCenterAlign:
 	ld a, [hli]
 	cp "@"
 	jr z, .stop
-	cp "%"
+	cp "<WBR>"
 	jr z, .loop
 	inc c
 	jr .loop
