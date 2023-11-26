@@ -97,6 +97,11 @@ patterns = {
 	# Good: inc|dec a (unless you need to set the carry flag)
 	(lambda line1, prev: re.match(r'(?:add|sub) (?:a, )?[%\$&]?0*1$', line1.code)),
 ],
+'a *= 2': [
+	# Bad: sla a
+	# Good: add a
+	(lambda line1, prev: line1.code == 'sla a'),
+],
 'a = ~a': [
 	# Bad: xor $ff
 	# Good: cpl
@@ -337,9 +342,9 @@ patterns = {
 	(lambda line2, prev: line2.code in {'inc hl', 'dec hl'}),
 ],
 '*hl++|*hl-- = b|c|d|e': [
-	# Bad: ld [hl], b|c|d|e / inc|dec hl (unless you can't use a)
-	# Good: ld [hli|hld], a / ld b|c|d|e, a
-	(lambda line1, prev: re.match(r'ld \[hl\], [bcde]', line1.code)),
+	# Bad: ld [hl], b|c|d|e|h|l / inc|dec hl (unless you can't use a)
+	# Good: ld a, b|c|d|e|h|l / ld [hli|hld], a
+	(lambda line1, prev: re.match(r'ld \[hl\], [bcdehl]', line1.code)),
 	(lambda line2, prev: line2.code in {'inc hl', 'dec hl'}),
 ],
 'b|c|d|e = *hl++|*hl--': [

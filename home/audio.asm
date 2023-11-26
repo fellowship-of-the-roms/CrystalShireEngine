@@ -131,10 +131,10 @@ rept MON_CRY_LENGTH
 	add hl, de
 endr
 
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 	ld a, [hli]
 	ld [wCryPitch], a
@@ -334,9 +334,7 @@ PlayMapMusicBike::
 	ld de, MUSIC_BICYCLE
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
-	jr z, .play
-	call GetMapMusic_MaybeSpecial
-.play
+	call nz, GetMapMusic_MaybeSpecial
 	push de
 	ld de, MUSIC_NONE
 	call PlayMusic

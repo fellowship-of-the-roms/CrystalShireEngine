@@ -16,8 +16,7 @@ ResetFlashIfOutOfCave::
 	cp ROUTE
 	jr z, .outdoors
 	cp TOWN
-	jr z, .outdoors
-	ret
+	ret nz
 
 .outdoors
 	ld hl, wStatusFlags
