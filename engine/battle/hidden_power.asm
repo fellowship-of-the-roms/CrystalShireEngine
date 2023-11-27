@@ -1,11 +1,11 @@
 HiddenPowerDamage:
 ; Override Hidden Power's type and power based on the user's DVs.
-
-	ld hl, wBattleMonDVs
+; TODO: Fix hidden power for IVs
+	ld hl, wBattleMonIVs
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_dvs
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonIVs
 .got_dvs
 
 ; Power:

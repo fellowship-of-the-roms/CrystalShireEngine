@@ -40,11 +40,15 @@ NewPokedexEntry:
 	call LoadStandardFont
 	farcall Pokedex_PlaceFrontpicTopLeftCorner
 	call WaitBGMap2
-	farcall GetEnemyMonDVs
+	farcall GetEnemyMonIVs
 	ld a, [hli]
-	ld [wTempMonDVs], a
-	ld a, [hl]
-	ld [wTempMonDVs + 1], a
+	ld [wTempMonIVs], a
+	ld a, [hli]
+	ld [wTempMonIVs + 1], a
+	ld a, [hli]
+	ld [wTempMonIVs + 2], a
+	ld a, [hli]
+	ld [wTempMonIVs + 3], a
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	jmp SetPalettes

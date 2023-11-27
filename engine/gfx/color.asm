@@ -514,7 +514,7 @@ SetFirstOBJPalette::
 
 GetBattlemonBackpicPalettePointer:
 	push de
-	farcall GetPartyMonDVs
+	farcall GetPartyMonShiny
 	ld c, l
 	ld b, h
 	ld a, [wTempBattleMonSpecies]
@@ -524,7 +524,7 @@ GetBattlemonBackpicPalettePointer:
 
 GetEnemyFrontpicPalettePointer:
 	push de
-	farcall GetEnemyMonDVs
+	farcall GetEnemyMonIVs
 	ld c, l
 	ld b, h
 	ld a, [wTempEnemyMonSpecies]

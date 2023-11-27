@@ -203,11 +203,11 @@ RunTradeAnimScript:
 	call EnableLCD
 	call LoadTradeBallAndCableGFX
 	ld a, [wPlayerTrademonSpecies]
-	ld hl, wPlayerTrademonDVs
+	ld hl, wPlayerTrademonForm
 	ld de, vTiles0
 	call TradeAnim_GetFrontpic
 	ld a, [wOTTrademonSpecies]
-	ld hl, wOTTrademonDVs
+	ld hl, wOTTrademonForm
 	ld de, vTiles0 tile $31
 	call TradeAnim_GetFrontpic
 	ld a, [wPlayerTrademonSpecies]
@@ -736,10 +736,14 @@ TradeAnim_ShowGivemonData:
 	call ShowPlayerTrademonStats
 	ld a, [wPlayerTrademonSpecies]
 	ld [wCurPartySpecies], a
-	ld a, [wPlayerTrademonDVs]
-	ld [wTempMonDVs], a
-	ld a, [wPlayerTrademonDVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wPlayerTrademonIVs]
+	ld [wTempMonIVs], a
+	ld a, [wPlayerTrademonIVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wPlayerTrademonIVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wPlayerTrademonIVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	ld a, %11100100 ; 3,2,1,0
@@ -760,10 +764,14 @@ TradeAnim_ShowGetmonData:
 	call ShowOTTrademonStats
 	ld a, [wOTTrademonSpecies]
 	ld [wCurPartySpecies], a
-	ld a, [wOTTrademonDVs]
-	ld [wTempMonDVs], a
-	ld a, [wOTTrademonDVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wOTTrademonIVs]
+	ld [wTempMonIVs], a
+	ld a, [wOTTrademonIVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wOTTrademonIVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wOTTrademonIVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	ld a, %11100100 ; 3,2,1,0

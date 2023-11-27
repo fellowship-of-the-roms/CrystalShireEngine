@@ -167,7 +167,7 @@ endr
 
 	; Initialize stat experience.
 	xor a
-	ld b, MON_DVS - MON_EVS
+	ld b, MON_IVS - MON_EVS
 .loop
 	ld [de], a
 	inc de
@@ -183,7 +183,7 @@ endr
 	push hl
 	farcall GetTrainerDVs
 	pop hl
-	jr .initializeDVs
+	jr .initializeIVs
 
 .registerpokedex
 	ld a, [wCurPartySpecies]
@@ -198,18 +198,42 @@ endr
 	push hl
 	ld a, [wBattleMode]
 	and a
-	jr nz, .copywildmonDVs
+	jr nz, .copywildmonIVs
 
+	ld bc, wTempMonIVs + 3
 	call Random
-	ld b, a
+	ld [bc], a
+	dec bc
 	call Random
-	ld c, a
-.initializeDVs
-	ld a, b
+	ld [bc], a
+	dec bc
+	call Random
+	ld [bc], a
+	dec bc
+	call Random
+	ld [bc], a
+.initializeIVs
+	ld a, [bc]
+	ld [de], a
+	inc bc
+	inc de
+	ld a, [bc]
+	ld [de], a
+	inc bc
+	inc de
+	ld a, [bc]
+	ld [de], a
+	inc bc
+	inc de
+	ld a, [bc]
 	ld [de], a
 	inc de
-	ld a, c
-	ld [de], a
+
+	; Initial Personality
+	inc de
+	inc de
+
+	; Skip extra byte
 	inc de
 
 	; Initialize PP.
@@ -268,12 +292,25 @@ endr
 	inc de
 	jr .initstats
 
-.copywildmonDVs
-	ld a, [wEnemyMonDVs]
+.copywildmonIVs
+	ld a, [wEnemyMonIVs]
 	ld [de], a
 	inc de
-	ld a, [wEnemyMonDVs + 1]
+	ld a, [wEnemyMonIVs + 1]
 	ld [de], a
+	inc de
+	ld a, [wEnemyMonIVs + 2]
+	ld [de], a
+	inc de
+	ld a, [wEnemyMonIVs + 3]
+	ld [de], a
+	inc de
+
+	; skip Personality
+	inc de
+	inc de
+
+	; Skip extra byte
 	inc de
 
 	push hl
@@ -362,7 +399,7 @@ endr
 		endc
 	endc
 	jr nz, .done
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Form
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -478,7 +515,7 @@ AddTempmonToParty:
 		endc
 	endc
 	jr nz, .done
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Form
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -740,8 +777,8 @@ SendMonIntoBox:
 	dec b
 	jr nz, .loop2
 
-	ld hl, wEnemyMonDVs
-	ld b, 2 + NUM_MOVES ; DVs and PP ; wEnemyMonHappiness - wEnemyMonDVs
+	ld hl, wEnemyMonIVs
+	ld b, 4 + NUM_MOVES ; IVs and PP ; wEnemyMonHappiness - wEnemyMonIVs
 .loop3
 	ld a, [hli]
 	ld [de], a
@@ -777,7 +814,7 @@ SendMonIntoBox:
 		cp HIGH(UNOWN)
 	endc
 	jr nz, .not_unown
-	ld hl, wBufferMonDVs
+	ld hl, wBufferMonForm
 	predef GetUnownLetter
 	farcall UpdateUnownDex
 
@@ -1060,8 +1097,7 @@ CalcMonStatC:
 	ld a, b
 	ld d, a
 	push hl
-	ld hl, wBaseStats
-	dec hl ; has to be decreased, because 'c' begins with 1
+	ld hl, wBaseStats - 1 ; has to be decreased, because 'c' begins with 1
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
@@ -1074,11 +1110,11 @@ CalcMonStatC:
 	add hl, bc
 	ld a, [hl]
 	ld b, a
-
+; TODO: Fix DV to IVs here for stats
 .no_stat_exp
 	pop hl
 	push bc
-	ld bc, MON_DVS - MON_HP_EV + 1
+	ld bc, MON_IVS - (MON_HP_EV - 1)
 	add hl, bc
 	pop bc
 	ld a, c
@@ -1089,60 +1125,50 @@ CalcMonStatC:
 	cp STAT_SPD
 	jr z, .Speed
 	cp STAT_SATK
-	jr z, .Special
+	jr z, .Special_Atk
 	cp STAT_SDEF
-	jr z, .Special
-; DV_HP = (DV_ATK & 1) << 3 | (DV_DEF & 1) << 2 | (DV_SPD & 1) << 1 | (DV_SPC & 1)
-	push bc
+	jr z, .Special_Def
+.HP
 	ld a, [hl]
 	swap a
-	and 1
-	add a
-	add a
-	add a
-	ld b, a
-	ld a, [hli]
-	and 1
-	add a
-	add a
-	add b
-	ld b, a
-	ld a, [hl]
-	swap a
-	and 1
-	add a
-	add b
-	ld b, a
-	ld a, [hl]
-	and 1
-	add b
-	pop bc
-	jr .GotDV
+	and $f
+	jr .GotIV
 
 .Attack:
 	ld a, [hl]
-	swap a
 	and $f
-	jr .GotDV
+	jr .GotIV
 
 .Defense:
-	ld a, [hl]
+	inc hl
+	ld a, [hld]
+	swap a
 	and $f
-	jr .GotDV
+	jr .GotIV
 
 .Speed:
 	inc hl
-	ld a, [hl]
+	ld a, [hld]
+	and $f
+	jr .GotIV
+
+.Special_Atk:
+	inc hl
+	inc hl
+	ld a, [hld]
+	dec hl
 	swap a
 	and $f
-	jr .GotDV
+	jr .GotIV
 
-.Special:
+.Special_Def:
 	inc hl
-	ld a, [hl]
+	inc hl
+	ld a, [hld]
+	dec hl
 	and $f
 
-.GotDV:
+.GotIV:
 	ld d, 0
 	add e
 	ld e, a

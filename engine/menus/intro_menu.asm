@@ -74,11 +74,6 @@ NewGame:
 PlayerProfileSetup:
 	farjp InitGender
 
-if DEF(_DEBUG)
-DebugRoom: ; unreferenced
-	farjp _DebugRoom
-endc
-
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
@@ -599,9 +594,10 @@ if !DEF(_DEBUG)
 	call PrepMonFrontpic
 
 	xor a
-	ld [wTempMonDVs], a
-	ld [wTempMonDVs + 1], a
-	ld [wTempMonDVs + 2], a
+	ld [wTempMonIVs], a
+	ld [wTempMonIVs + 1], a
+	ld [wTempMonIVs + 2], a
+	ld [wTempMonIVs + 3], a
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout

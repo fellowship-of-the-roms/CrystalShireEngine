@@ -541,10 +541,14 @@ DayCare_InitBreeding:
 	ld hl, wEggMonOT
 	ld bc, NAME_LENGTH
 	rst ByteFill
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon1IVs]
+	ld [wTempMonIVs], a
+	ld a, [wBreedMon1IVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wBreedMon1IVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wBreedMon1IVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld a, TEMPMON
@@ -612,69 +616,77 @@ DayCare_InitBreeding:
 	ld [hli], a
 	ldh a, [hMultiplicand + 2]
 	ld [hl], a
+
+	; Zero EVs
 	xor a
-	ld b, wEggMonDVs - wEggMonEVs
+	ld b, wEggMonIVs - wEggMonEVs
 	ld hl, wEggMonEVs
 .loop2
 	ld [hli], a
 	dec b
 	jr nz, .loop2
-	ld hl, DITTO
-	call GetPokemonIDFromIndex
-	ld b, a
-	ld hl, wEggMonDVs
+
+	; Set random IVs
+	ld hl, wEggMonIVs
 	call Random
 	ld [hli], a
-	ld [wTempMonDVs], a
 	call Random
-	ld [hld], a
-	ld [wTempMonDVs + 1], a
-	ld de, wBreedMon1DVs
-	ld a, [wBreedMon1Species]
-	cp b
-	jr z, .GotDVs
-	ld de, wBreedMon2DVs
-	ld a, [wBreedMon2Species]
-	cp b
-	jr z, .GotDVs
-	ld a, TEMPMON
-	ld [wMonType], a
-	push hl
-	farcall GetGender
-	pop hl
-	ld de, wBreedMon1DVs
-	ld bc, wBreedMon2DVs
-	jr c, .SkipDVs
-	jr z, .ParentCheck2
-	ld a, [wBreedMotherOrNonDitto]
-	and a
-	jr z, .GotDVs
-	ld d, b
-	ld e, c
-	jr .GotDVs
-
-.ParentCheck2:
-	ld a, [wBreedMotherOrNonDitto]
-	and a
-	jr nz, .GotDVs
-	ld d, b
-	ld e, c
-
-.GotDVs:
-	ld a, [de]
-	inc de
-	and $f
-	ld b, a
-	ld a, [hl]
-	and $f0
-	add b
 	ld [hli], a
-	ld a, [de]
-	and $7
+	call Random
+	ld [hli], a
+	call Random
+	ld [hl], a
+
+	; Normal DV inheritance is 3 random IVs from the parents
+	; at random.
+	ld a, 3
 	ld b, a
-	ld a, [hl]
-	and $f8
-	add b
+	ld c, %000000 ; Already inherited
+
+	; Do the rest of the IVs
+.iv_inherit_loop
+	ld a, 12
+	call RandomRange
+	srl a
+	push af
+	ld a, 2
+	ld hl, wBreedMon1IVs
+	call c, GetParentAddr
+	pop af
+	ld e, a
+	call InheritIV
+	jr z, .iv_inherit_loop
+
+	; Zero the personality data
+	xor a
+	ld [wEggMonPersonality], a
+	ld [wEggMonPersonality + 1], a
+
+	call Random
+	and a
+	jr nz, .not_shiny ; 255/256 not shiny
+
+	; Shiny. Shiny rate after the above pass is:
+	; 1/16 - Usual
+	ld a, 16
+	call RandomRange
+	ld b, a
+	ld c, 1
+	ld a, b
+	cp c
+	jr nc, .not_shiny
+	ld a, SHINY_MASK
+	ld hl, wEggMonShiny
+	or [hl]
+	ld [hl], a
+.not_shiny
+
+	; Gender
+	ld hl, wEggMonGender
+	call Random
+	and 1
+	rrc a
+	or [hl]
 	ld [hl], a
 
 .SkipDVs:
@@ -736,3 +748,94 @@ Daycare_CheckAlternateOffspring:
 .alternate_offspring_table
 	dw NIDORAN_F, NIDORAN_M
 	dw -1
+
+GetParentAddr:
+; if a = 2, get parent 2 instead of 1 (assumed on hl). Best used in
+; conjuction with CheckParentItem.
+	cp 2
+	ret nz
+	push bc
+	ld bc, wBreedMon2 - wBreedMon1
+	add hl, bc
+	pop bc
+	ret
+
+InheritIV: ; TODO actually adapt this for IVs
+; Inherit IV e (0=HP, 1=Atk, 2=Def, 3=Speed, 4=Sp.Atk, 5=Sp.Def)
+; from parent IVs in hl. Returns nz if we can't inherit anything else.
+; b: inheritance counts left, c: already inherited bitfield
+; Preserves de+hl
+	; Figure out if we can inherit the IV
+	; Have we inherited as much as we can?
+	ld a, b
+	and a
+	jr z, .cant_inherit_any_more
+
+	; Have we inherited every stat?
+	ld a, c
+	cp %111111
+	jr z, .cant_inherit_any_more
+
+	; Have we already inherited the given stat?
+	push de
+	ld d, %000001
+	inc e
+.iv_check_loop
+	dec e
+	jr z, .got_iv_bit
+	sla d
+	jr .iv_check_loop
+.got_iv_bit
+	ld a, d
+	and c
+	ld a, d
+	pop de
+	jr nz, .cant_inherit_this_stat
+
+	; Mark the stat as inherited and decrease inherit counter
+	or c
+	ld c, a
+	dec b
+
+	; Inherit the stat
+	; inc/dec doesn't alter carry flag
+	; DV is stored as %xxxxyyyy, %zzzzaaaa, %bbbbcccc
+	; x=HP, y=Atk, z=Def, a=Speed, b=SpAtk, c=SpDef
+	; To inherit the correct nibble, copy high from HL, low from DE
+	; a=0, 2 or 4 :: HL is Parent, DE is Egg
+	; a=1, 3 or 5 :: HL is Egg, DE is Parent
+	ld a, e
+	push de
+	push hl
+	ld de, wEggMonIVs
+	; halve A; 0-1: first byte, 2-3: second, 4-5: third
+	srl a ; sets carry if a is odd, maintained thorough the loop
+	inc a
+.find_iv_loop
+	dec a
+	jr z, .found_iv
+	inc de
+	inc hl
+	jr .find_iv_loop
+.found_iv
+	push de ; Egg IVs inherited to
+	; current HL is Parent, DE is Egg, if a is odd, swap
+	call c, SwapHLDE
+	; inherit x from HL, y from DE in %xxxxyyyy
+	; This means that half is "inherited" from Egg, half from Parent
+	ld a, [hl]
+	and $f0
+	ld h, a
+	ld a, [de]
+	and $f
+	or h
+	pop de
+	ld [de], a
+	pop hl
+	pop de
+.cant_inherit_this_stat
+	xor a
+	ret
+.cant_inherit_any_more
+	or 1
+	ret

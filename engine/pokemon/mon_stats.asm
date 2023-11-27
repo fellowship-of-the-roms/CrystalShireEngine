@@ -136,18 +136,18 @@ GetGender:
 ; Figure out what type of monster struct we're looking at.
 
 ; 0: PartyMon
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Gender
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMonType]
 	and a
 	jr z, .PartyMon
 
-	ld hl, wBufferMonDVs
+	ld hl, wBufferMonGender
 	cp BUFFERMON
-	jr z, .DVs
+	jr z, .Gender
 
 ; 1: OTPartyMon
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1Gender
 	dec a
 	jr z, .PartyMon
 
@@ -156,13 +156,13 @@ GetGender:
 	jr z, .sBoxMon
 
 ; 3: Unknown
-	ld hl, wTempMonDVs
+	ld hl, wTempMonGender
 	dec a
-	jr z, .DVs
+	jr z, .Gender
 
 ; else: WildMon
-	ld hl, wEnemyMonDVs
-	jr .DVs
+	ld hl, wEnemyMonGender
+	jr .Gender
 
 ; Get our place in the party/box.
 
@@ -175,18 +175,11 @@ GetGender:
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 
-.DVs:
-; Attack DV
-	ld a, [hli]
-	and $f0
-	ld b, a
-; Speed DV
+.Gender:
+; Gender and form as stored in the same byte.
 	ld a, [hl]
-	and $f0
-	swap a
-
-; Put our DVs together.
-	or b
+	and GENDER_MASK
+	rlc a
 	ld b, a
 
 ; We need the gender ratio to do anything with this.
@@ -204,21 +197,21 @@ GetGender:
 	jr z, .Genderless
 
 	call GetFarByte
+	ld c, a
 
-; The higher the ratio, the more likely the monster is to be female.
-
+; Fixed values ignore the Personality gender value.
+	ld a, c
 	cp GENDER_UNKNOWN
 	jr z, .Genderless
-
-	and a ; GENDER_F0?
+	and a ; cp GENDER_F0
 	jr z, .Male
-
 	cp GENDER_F100
 	jr z, .Female
 
-; Values below the ratio are male, and vice versa.
-	cp b
-	jr c, .Male
+; Otherwise, use the Personality gender value directly.
+	ld a, b
+	and a ; cp MALE
+	jr z, .Male
 
 .Female:
 	xor a

@@ -87,12 +87,18 @@ NamingScreen:
 	; Is it a PartyMon or a BoxMon?
 	ld a, [wMonType]
 	and a
-	ld hl, wBufferMonDVs
+	ld hl, wBufferMonIVs
 	jr nz, .start
-	ld a, MON_DVS
+	ld a, MON_IVS
 	call GetPartyParamLocation
 .start
-	ld de, wTempMonDVs
+	ld de, wTempMonIVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de

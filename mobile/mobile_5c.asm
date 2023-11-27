@@ -13,11 +13,15 @@ Function170000:
 	rst CopyBytes
 	ld a, "@"
 	ld [de], a
-	ld hl, wOfferMonDVs
+	ld hl, wOfferMonIVs
 	ld a, [hli]
-	ld [wPlayerTrademonDVs], a
+	ld [wPlayerTrademonIVs], a
+	ld a, [hli]
+	ld [wPlayerTrademonIVs + 1], a
+	ld a, [hli]
+	ld [wPlayerTrademonIVs + 2], a
 	ld a, [hl]
-	ld [wPlayerTrademonDVs + 1], a
+	ld [wPlayerTrademonIVs + 3], a
 	ld hl, wOfferMonID
 	ld a, [hli]
 	ld [wPlayerTrademonID], a

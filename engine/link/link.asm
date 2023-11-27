@@ -2216,13 +2216,17 @@ LinkTrade:
 	ld a, [hl]
 	ld [wPlayerTrademonID + 1], a
 ; DVs
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1IVs
 	ld a, [wCurTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
-	ld [wPlayerTrademonDVs], a
+	ld [wPlayerTrademonIVs], a
+	ld a, [hli]
+	ld [wPlayerTrademonIVs + 1], a
+	ld a, [hli]
+	ld [wPlayerTrademonIVs + 2], a
 	ld a, [hl]
-	ld [wPlayerTrademonDVs + 1], a
+	ld [wPlayerTrademonIVs + 3] , a
 ; caught data
 	ld a, [wCurTradePartyMon]
 	ld hl, wPartyMon1Species
@@ -2262,14 +2266,18 @@ LinkTrade:
 	ld [wOTTrademonID], a
 	ld a, [hl]
 	ld [wOTTrademonID + 1], a
-; DVs
-	ld hl, wOTPartyMon1DVs
+; IVs
+	ld hl, wOTPartyMon1IVs
 	ld a, [wCurOTTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
-	ld [wOTTrademonDVs], a
+	ld [wOTTrademonIVs], a
+	ld a, [hli]
+	ld [wOTTrademonIVs + 1], a
+	ld a, [hli]
+	ld [wOTTrademonIVs + 2], a
 	ld a, [hl]
-	ld [wOTTrademonDVs + 1], a
+	ld [wOTTrademonIVs + 3], a
 ; caught data
 	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartyMon1Species

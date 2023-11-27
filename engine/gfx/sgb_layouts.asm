@@ -181,7 +181,7 @@ SGBLayoutJumptable:
 	ld a, [hl]
 	ld [wSGBPals + 6], a
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	ld a, [hli]
 	ld [wSGBPals + 9], a
@@ -241,7 +241,7 @@ SGBLayoutJumptable:
 	inc hl
 	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	ld a, [hli]
 	ld [wSGBPals + 9], a
@@ -379,7 +379,7 @@ endr
 	jr .done
 
 .partymon
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Shiny
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
@@ -484,7 +484,7 @@ endr
 	ld bc, PALPACKET_LENGTH
 	rst CopyBytes
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	ld a, [hli]
 	ld [wSGBPals + 3], a
@@ -509,7 +509,7 @@ endr
 	ld bc, PALPACKET_LENGTH
 	rst CopyBytes
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetFrontpicPalettePointer
 	ld a, [hli]
 	ld [wSGBPals + 3], a

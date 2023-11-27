@@ -490,8 +490,8 @@ wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3
 
 wSafariMonEating:: db
-	ds 1
-wEnemyBackupDVs:: dw ; used when enemy is transformed
+
+wEnemyBackupIVsAndPersonality:: ds 6 ; used when enemy is transformed
 wAlreadyDisobeyed:: db
 
 wDisabledMove:: db

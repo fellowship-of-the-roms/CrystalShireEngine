@@ -262,7 +262,7 @@ _CGB_StatsScreenHPPals:
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black ; hp palette
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black ; mon palette
 	ld hl, ExpBarPalette
@@ -412,7 +412,7 @@ BillsPC_PreviewTheme:
 	farjp BillsPC_SetPals
 
 .GetMonPalette:
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 .GotPalette:
@@ -622,7 +622,7 @@ _CGB_Evolution:
 	jr .got_palette
 
 .pokemon
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Shiny
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
@@ -1064,7 +1064,7 @@ INCLUDE "gfx/splash/ditto.pal"
 _CGB_PlayerOrMonFrontpicPals:
 	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
@@ -1096,7 +1096,7 @@ _CGB_TradeTube:
 _CGB_TrainerOrMonFrontpicPals:
 	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	call GetFrontpicPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap

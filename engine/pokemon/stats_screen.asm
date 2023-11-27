@@ -509,7 +509,7 @@ StatsScreen_PlacePageSwitchArrows:
 	ret
 
 StatsScreen_PlaceShinyIcon:
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	farcall CheckShininess
 	ret nc
 	hlcoord 19, 0
@@ -813,7 +813,7 @@ OTString:
 	db "OT/@"
 
 StatsScreen_PlaceFrontpic:
-	ld hl, wTempMonDVs
+	ld hl, wTempMonForm
 	predef GetUnownLetter
 	call StatsScreen_GetAnimationParam
 	jr c, .egg

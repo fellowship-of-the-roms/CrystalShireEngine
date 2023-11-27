@@ -86,8 +86,16 @@ DEF MON_DEF_EV             rb
 DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
-                           rb_skip 5
-DEF MON_DVS                rw
+DEF MON_IVS                rb 4
+DEF MON_PERSONALITY        rw
+DEF MON_SHINY      EQU MON_PERSONALITY
+DEF MON_ABILITY    EQU MON_PERSONALITY
+DEF MON_NATURE     EQU MON_PERSONALITY
+DEF MON_GENDER     EQU MON_PERSONALITY + 1
+DEF MON_IS_EGG     EQU MON_PERSONALITY + 1
+DEF MON_UNUSED_BIT EQU MON_PERSONALITY + 1
+DEF MON_FORM       EQU MON_PERSONALITY + 1
+                           rb_skip
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
 DEF MON_POKERUS            rb
@@ -120,10 +128,6 @@ DEF SAVEMON_ITEM_LOW           rb
 DEF SAVEMON_MOVES_LOW          rb NUM_MOVES
 DEF SAVEMON_ID                 rw
 DEF SAVEMON_EXP                rb 3
-rsset SAVEMON_EXP
-DEF SAVEMON_IS_EGG             rb ; EGG is stored in the most significant EXP bit.
-                               rb_skip
-                               rb_skip
 DEF SAVEMON_EVS                rb NUM_STATS
 rsset SAVEMON_EVS
 DEF SAVEMON_HP_EV              rb
@@ -132,8 +136,16 @@ DEF SAVEMON_DEF_EV             rb
 DEF SAVEMON_SPD_EV             rb
 DEF SAVEMON_SAT_EV             rb
 DEF SAVEMON_SDF_EV             rb
-                               rb_skip 5
-DEF SAVEMON_DVS                rw
+DEF SAVEMON_IVS                rb 4
+DEF SAVEMON_PERSONALITY        rw
+DEF SAVEMON_SHINY      EQU SAVEMON_PERSONALITY
+DEF SAVEMON_ABILITY    EQU SAVEMON_PERSONALITY
+DEF SAVEMON_NATURE     EQU SAVEMON_PERSONALITY
+DEF SAVEMON_GENDER     EQU SAVEMON_PERSONALITY + 1
+DEF SAVEMON_IS_EGG     EQU SAVEMON_PERSONALITY + 1
+DEF SAVEMON_UNUSED_BIT EQU SAVEMON_PERSONALITY + 1
+DEF SAVEMON_FORM       EQU SAVEMON_PERSONALITY + 1
+                               rb_skip
 ; savemon_struct is identical to party_struct before this point
 DEF SAVEMON_MOVES_HIGH         rb NUM_MOVES
 rsset SAVEMON_MOVES_HIGH
@@ -159,11 +171,20 @@ DEF SAVEMON_STRUCT_LENGTH EQU _RS
 DEF NICKNAMED_MON_STRUCT_LENGTH EQU PARTYMON_STRUCT_LENGTH + MON_NAME_LENGTH
 DEF REDMON_STRUCT_LENGTH EQU 44
 
-; savemon Exp masks
-DEF IS_EGG_MASK EQU %10000000
-DEF EXP_MASK    EQU %01111111
+; personality
 
-DEF IS_EGG_F EQU 7
+DEF SHINY_MASK       EQU %10000000
+DEF ABILITY_MASK     EQU %01100000
+DEF NATURE_MASK      EQU %00011111
+
+DEF MON_SHINY_F      EQU 7
+
+DEF GENDER_MASK      EQU %10000000
+DEF IS_EGG_MASK      EQU %01000000
+DEF UNUSED_BIT_MASK  EQU %00100000
+DEF FORM_MASK        EQU %00011111
+
+DEF IS_EGG_F EQU 6
 
 ; savemon Move High Mask
 DEF MOVES_HIGH_MASK EQU %00111111

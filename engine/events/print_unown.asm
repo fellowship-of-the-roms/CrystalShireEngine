@@ -60,8 +60,10 @@ _UnownPrinter:
 	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
 	xor a
-	ld [wTempMonDVs], a
-	ld [wTempMonDVs + 1], a
+	ld [wTempMonIVs], a
+	ld [wTempMonIVs + 1], a
+	ld [wTempMonIVs + 2], a
+	ld [wTempMonIVs + 3], a
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout

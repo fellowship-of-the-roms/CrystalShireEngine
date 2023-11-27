@@ -3457,7 +3457,7 @@ LoadEnemyMonToSwitchTo:
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .skip_unown
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonForm
 	predef GetUnownLetter
 	ld a, [wUnownLetter]
 	ld [wFirstUnownSeen], a
@@ -3882,10 +3882,10 @@ InitBattleMon:
 	ld de, wBattleMonSpecies
 	ld bc, MON_ID
 	rst CopyBytes
-	ld bc, MON_DVS - MON_ID
+	ld bc, MON_IVS - MON_ID
 	add hl, bc
-	ld de, wBattleMonDVs
-	ld bc, MON_POKERUS - MON_DVS
+	ld de, wBattleMonIVs
+	ld bc, MON_POKERUS - MON_IVS
 	rst CopyBytes
 	inc hl
 	inc hl
@@ -3916,36 +3916,36 @@ InitBattleMon:
 	jmp BadgeStatBoosts
 
 BattleCheckPlayerShininess:
-	call GetPartyMonDVs
+	call GetPartyMonShiny
 	jr BattleCheckShininess
 
 BattleCheckEnemyShininess:
-	call GetEnemyMonDVs
+	call GetEnemyMonIVs
 
 BattleCheckShininess:
 	ld b, h
 	ld c, l
 	farjp CheckShininess
 
-GetPartyMonDVs:
-	ld hl, wBattleMonDVs
+GetPartyMonShiny:
+	ld hl, wBattleMonShiny
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	ret z
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Shiny
 	ld a, [wCurBattleMon]
 	jmp GetPartyLocation
 
-GetEnemyMonDVs:
-	ld hl, wEnemyMonDVs
+GetEnemyMonIVs:
+	ld hl, wEnemyMonIVs
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	ret z
-	ld hl, wEnemyBackupDVs
+	ld hl, wEnemyBackupIVsAndPersonality
 	ld a, [wBattleMode]
 	dec a
 	ret z
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1IVs
 	ld a, [wCurOTMon]
 	jmp GetPartyLocation
 
@@ -3966,10 +3966,10 @@ InitEnemyMon:
 	ld de, wEnemyMonSpecies
 	ld bc, MON_ID
 	rst CopyBytes
-	ld bc, MON_DVS - MON_ID
+	ld bc, MON_IVS - MON_ID
 	add hl, bc
-	ld de, wEnemyMonDVs
-	ld bc, MON_POKERUS - MON_DVS
+	ld de, wEnemyMonIVs
+	ld bc, MON_POKERUS - MON_IVS
 	rst CopyBytes
 	inc hl
 	inc hl
@@ -4033,7 +4033,7 @@ SwitchPlayerMon:
 	ret
 
 SendOutPlayerMon:
-	ld hl, wBattleMonDVs
+	ld hl, wBattleMonForm
 	predef GetUnownLetter
 	hlcoord 1, 5
 	ld b, 7
@@ -4664,9 +4664,15 @@ PrintPlayerHUD:
 	push bc
 
 	ld a, [wCurBattleMon]
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1IVs
 	call GetPartyLocation
-	ld de, wTempMonDVs
+	ld de, wTempMonIVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -4747,13 +4753,25 @@ DrawEnemyHUD:
 	ld l, c
 	dec hl
 
-	ld hl, wEnemyMonDVs
-	ld de, wTempMonDVs
+	ld hl, wEnemyMonIVs
+	ld de, wTempMonIVs
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	jr z, .ok
-	ld hl, wEnemyBackupDVs
+	ld hl, wEnemyBackupIVsAndPersonality
 .ok
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -6054,8 +6072,20 @@ LoadEnemyMon:
 	jr z, .InitDVs
 
 ; Unknown
-	ld hl, wEnemyBackupDVs
-	ld de, wEnemyMonDVs
+	ld hl, wEnemyBackupIVsAndPersonality
+	ld de, wEnemyMonIVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -6137,7 +6167,8 @@ LoadEnemyMon:
 
 .UpdateDVs:
 ; Input DVs in register bc
-	ld hl, wEnemyMonDVs
+; TODO: fix DVs to IVs here.
+	ld hl, wEnemyMonIVs
 	ld a, b
 	ld [hli], a
 	ld [hl], c
@@ -6168,7 +6199,7 @@ LoadEnemyMon:
 	jr nz, .Magikarp
 
 ; Get letter based on DVs
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonForm
 	predef GetUnownLetter
 ; Can't use any letters that haven't been unlocked
 ; If combined with forced shiny battletype, causes an infinite loop
@@ -6201,7 +6232,7 @@ LoadEnemyMon:
 	jr nz, .Happiness
 
 ; Get Magikarp's length
-	ld de, wEnemyMonDVs
+	ld de, wEnemyMonIVs
 	ld bc, wPlayerID
 	farcall CalcMagikarpLength
 
@@ -6256,7 +6287,7 @@ LoadEnemyMon:
 ; Fill stats
 	ld de, wEnemyMonMaxHP
 	ld b, FALSE
-	ld hl, wEnemyMonDVs - (MON_DVS - MON_EVS + 1)
+	ld hl, wEnemyMonIVs - (MON_IVS - MON_EVS + 1)
 	predef CalcMonStats
 
 ; If we're in a trainer battle,
@@ -7980,7 +8011,7 @@ DropPlayerSub:
 	push af
 	ld a, [wBattleMonSpecies]
 	ld [wCurPartySpecies], a
-	ld hl, wBattleMonDVs
+	ld hl, wBattleMonForm
 	predef GetUnownLetter
 	ld de, vTiles2 tile $31
 	predef GetMonBackpic
@@ -8017,7 +8048,7 @@ DropEnemySub:
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonForm
 	predef GetUnownLetter
 	ld de, vTiles2
 	predef GetAnimatedFrontpic
@@ -8201,7 +8232,7 @@ InitEnemyWildmon:
 	ld de, wWildMonPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonForm
 	predef GetUnownLetter
 	ld a, [wCurPartySpecies]
 	call GetPokemonIndexFromID

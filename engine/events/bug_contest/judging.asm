@@ -288,6 +288,7 @@ ComputeAIContestantScores:
 
 ContestScore:
 ; Determine the player's score in the Bug Catching Contest.
+; TODO: Fix DVs to IVs ContestScore
 
 	xor a
 	ldh [hProduct], a
@@ -322,7 +323,7 @@ ContestScore:
 	call .AddContestStat
 
 	; DVs
-	ld a, [wContestMonDVs + 0]
+	ld a, [wContestMonIVs + 0]
 	ld b, a
 	and %0010
 	add a
@@ -336,7 +337,7 @@ ContestScore:
 	add c
 	ld d, a
 
-	ld a, [wContestMonDVs + 1]
+	ld a, [wContestMonIVs + 1]
 	ld b, a
 	and %0010
 	ld c, a

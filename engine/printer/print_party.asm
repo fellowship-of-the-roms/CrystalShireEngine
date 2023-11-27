@@ -208,7 +208,7 @@ PrintPartyMonPage1:
 	ld a, [wTempMonMoves + 0]
 	call PlaceMoveNameString
 	call PlaceGenderAndShininess
-	ld hl, wTempMonDVs
+	ld hl, wTempMonForm
 	predef GetUnownLetter
 	ld hl, wBoxAlignment
 	xor a
@@ -329,7 +329,7 @@ PlaceGenderAndShininess:
 .got_gender
 	hlcoord 17, 2
 	ld [hl], a
-	ld bc, wTempMonDVs
+	ld bc, wTempMonShiny
 	farcall CheckShininess
 	ret nc
 	hlcoord 18, 2

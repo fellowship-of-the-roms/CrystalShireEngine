@@ -4,10 +4,14 @@ CheckBreedmonCompatibility:
 	jmp nc, .done
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon1IVs]
+	ld [wTempMonIVs], a
+	ld a, [wBreedMon1IVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wBreedMon1IVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wBreedMon1IVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -20,10 +24,14 @@ CheckBreedmonCompatibility:
 	push bc
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon2DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon2IVs]
+	ld [wTempMonIVs], a
+	ld a, [wBreedMon2IVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wBreedMon2IVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wBreedMon2IVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -90,17 +98,18 @@ CheckBreedmonCompatibility:
 .CheckDVs:
 ; If Defense DVs match and the lower 3 bits of the Special DVs match,
 ; avoid breeding
-	ld a, [wBreedMon1DVs]
+; TODO: fix DVs to IVs
+	ld a, [wBreedMon1IVs]
 	and %1111
 	ld b, a
-	ld a, [wBreedMon2DVs]
+	ld a, [wBreedMon2IVs]
 	and %1111
 	cp b
 	ret nz
-	ld a, [wBreedMon1DVs + 1]
+	ld a, [wBreedMon1IVs + 1]
 	and %111
 	ld b, a
-	ld a, [wBreedMon2DVs + 1]
+	ld a, [wBreedMon2IVs + 1]
 	and %111
 	cp b
 	ret
@@ -603,10 +612,14 @@ GetHeritableMoves:
 	push af
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon2DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon2IVs]
+	ld [wTempMonIVs], a
+	ld a, [wBreedMon2IVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wBreedMon2IVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wBreedMon2IVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -619,10 +632,14 @@ GetHeritableMoves:
 	push af
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon1IVs]
+	ld [wTempMonIVs], a
+	ld a, [wBreedMon1IVs + 1]
+	ld [wTempMonIVs + 1], a
+	ld a, [wBreedMon1IVs + 2]
+	ld [wTempMonIVs + 2], a
+	ld a, [wBreedMon1IVs + 3]
+	ld [wTempMonIVs + 3], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -665,7 +682,7 @@ GetEggFrontpic:
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetBaseData
-	ld a, MON_DVS
+	ld a, MON_FORM
 	call GetPartyParamLocation
 	predef GetUnownLetter
 	pop de
@@ -676,7 +693,7 @@ GetHatchlingFrontpic:
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetBaseData
-	ld a, MON_DVS
+	ld a, MON_FORM
 	call GetPartyParamLocation
 	predef GetUnownLetter
 	pop de

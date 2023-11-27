@@ -344,7 +344,7 @@ Function17d1f1:
 	endc
 	ret nz
 
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Form
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1945,7 +1945,7 @@ Function17ded9:
 	push hl
 	ld a, [wPartyCount]
 	dec a
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1IVs
 	call GetPartyLocation
 	ld d, h
 	ld e, l

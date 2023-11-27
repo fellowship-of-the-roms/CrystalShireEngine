@@ -47,10 +47,18 @@ BattleCommand_Transform:
 	and a
 	jr z, .mimic_enemy_backup
 	ld a, [de]
-	ld [wEnemyBackupDVs], a
+	ld [wEnemyBackupIVsAndPersonality], a
 	inc de
 	ld a, [de]
-	ld [wEnemyBackupDVs + 1], a
+	ld [wEnemyBackupIVsAndPersonality + 1], a
+	inc de
+	ld a, [de]
+	ld [wEnemyBackupIVsAndPersonality + 2], a
+	inc de
+	ld a, [de]
+	ld [wEnemyBackupIVsAndPersonality + 3], a
+	dec de
+	dec de
 	dec de
 .mimic_enemy_backup
 ; copy DVs

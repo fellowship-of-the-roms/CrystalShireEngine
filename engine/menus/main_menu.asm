@@ -12,7 +12,6 @@
 	const MAINMENUITEM_NEW_GAME       ; 1
 	const MAINMENUITEM_OPTION         ; 2
 	const MAINMENUITEM_MYSTERY_GIFT   ; 3
-	const MAINMENUITEM_DEBUG_ROOM     ; 4
 
 MainMenu:
 .loop
@@ -60,9 +59,6 @@ MainMenu:
 	db "NEW GAME@"
 	db "OPTION@"
 	db "MYSTERY GIFT@"
-if DEF(_DEBUG)
-	db "DEBUG ROOM@"
-endc
 
 .Jumptable:
 ; entries correspond to MAINMENUITEM_* constants
@@ -70,9 +66,6 @@ endc
 	dw MainMenu_NewGame
 	dw MainMenu_Option
 	dw MainMenu_MysteryGift
-if DEF(_DEBUG)
-	dw MainMenu_DebugRoom
-endc
 
 MainMenuItems:
 ; entries correspond to MAINMENU_* constants
@@ -84,45 +77,33 @@ MainMenuItems:
 	db -1
 
 	; MAINMENU_CONTINUE
-	db 3 + DEF(_DEBUG)
+	db 3
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-if DEF(_DEBUG)
-	db MAINMENUITEM_DEBUG_ROOM
-endc
 	db -1
 
 	; MAINMENU_MYSTERY
-	db 4 + DEF(_DEBUG)
+	db 4
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_MYSTERY_GIFT
-if DEF(_DEBUG)
-	db MAINMENUITEM_DEBUG_ROOM
-endc
 	db -1
 
 	; MAINMENU_MYSTERY_STUDIUM
-	db 5 + DEF(_DEBUG)
+	db 5
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_MYSTERY_GIFT
-if DEF(_DEBUG)
-	db MAINMENUITEM_DEBUG_ROOM
-endc
 	db -1
 
 	; MAINMENU_STUDIUM
-	db 4 + DEF(_DEBUG)
+	db 4 
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-if DEF(_DEBUG)
-	db MAINMENUITEM_DEBUG_ROOM
-endc
 	db -1
 
 MainMenu_GetWhichMenu:
@@ -291,8 +272,3 @@ MainMenu_Continue:
 
 MainMenu_MysteryGift:
 	farjp MysteryGift
-
-if DEF(_DEBUG)
-MainMenu_DebugRoom:
-	farjp _DebugRoom
-endc

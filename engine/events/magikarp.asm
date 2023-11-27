@@ -24,13 +24,14 @@ CheckMagikarpLength:
 	endc
 	jr nz, .not_magikarp
 
-	; Now let's compute its length based on its DVs and ID.
+	; Now let's compute its length based on its IVs and ID.
+	; TODO: Check magikarp length change from DVs to IVs
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Species
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	push hl
-	ld bc, MON_DVS
+	ld bc, MON_IVS
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -103,11 +104,11 @@ PrintMagikarpLength:
 	ld [hl], "@"
 	ret
 
-CalcMagikarpLength:
+CalcMagikarpLength: ; TODO: FIX DVs to IVs CalcMagikarpLength
 ; Return Magikarp's length (in feet and inches) at wMagikarpLength (big endian).
 ;
 ; input:
-;   de: wEnemyMonDVs
+;   de: wEnemyMonIVs
 ;   bc: wPlayerID
 
 ; This function is poorly commented.
