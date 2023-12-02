@@ -68,10 +68,10 @@ SafeHDMATransfer::
 	di
 .loop
 	ld a, c
-	cp 3
+	cp 4
 	ld d, c
 	jr c, .got_tilecopy
-	ld d, 2
+	ld d, 3
 .got_tilecopy
 	push bc
 	lb bc, %11, LOW(rSTAT)
@@ -88,7 +88,7 @@ SafeHDMATransfer::
 	ldh [rHDMA5], a
 	pop bc
 	ld a, c
-	sub 3
+	sub 4
 	ld c, a
 	jr nc, .loop
 	xor a
