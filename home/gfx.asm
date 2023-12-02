@@ -91,6 +91,8 @@ SafeHDMATransfer::
 	sub 3
 	ld c, a
 	jr nc, .loop
+	xor a
+	ldh [rIF], a
 	ei
 	pop de
 .done
