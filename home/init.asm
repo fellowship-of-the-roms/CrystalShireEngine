@@ -133,6 +133,10 @@ Init::
 	ldh [hWX], a
 	ldh [rWX], a
 
+	farcall InitCGBPals
+
+	predef InitSGBBorder
+
 	ld a, LCDC_DEFAULT ; %11100011
 	; LCD on
 	; Win tilemap 1
@@ -146,8 +150,6 @@ Init::
 
 	ld a, CONNECTION_NOT_ESTABLISHED
 	ldh [hSerialConnectionStatus], a
-
-	farcall InitCGBPals
 
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
@@ -167,8 +169,6 @@ Init::
 	ei
 
 	call DelayFrame
-
-	predef InitSGBBorder
 
 	call InitSound
 	xor a
