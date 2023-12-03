@@ -512,9 +512,6 @@ endc
 	push af
 	xor a
 	ldh [rIF], a
-	ldh a, [rIE]
-	set LCD_STAT, a
-	ldh [rIE], a
 	pop af
 	ldh [rIF], a
 

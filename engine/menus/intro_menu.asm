@@ -925,8 +925,8 @@ StartTitleScreen:
 	res rLCDC_SPRITE_SIZE, [hl] ; 8x8
 	call ClearScreen
 	call WaitBGMap2
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hSCX], a
@@ -1029,8 +1029,8 @@ TitleScreenEntrance:
 ; Next scene
 	ld hl, wJumptableIndex
 	inc [hl]
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 

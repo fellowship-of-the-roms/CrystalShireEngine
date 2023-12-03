@@ -168,14 +168,11 @@ VBlank1::
 	; discard requested ints
 	xor a
 	ldh [rIF], a
-	; enable lcd stat
-	ld a, 1 << LCD_STAT
 	ldh [rIE], a
 	; rerequest serial int if applicable (still disabled)
 	; request lcd stat
 	ld a, b
 	and 1 << SERIAL
-	or 1 << LCD_STAT
 	ldh [rIF], a
 
 	ei
@@ -242,9 +239,7 @@ VBlank3::
 	push af
 	xor a
 	ldh [rIF], a
-	ld a, 1 << LCD_STAT
 	ldh [rIE], a
-	ldh [rIF], a
 
 	ei
 	call VBlank2
@@ -307,10 +302,7 @@ VBlank5::
 
 	xor a
 	ldh [rIF], a
-	ld a, 1 << LCD_STAT
 	ldh [rIE], a
-	; request lcd stat
-	ldh [rIF], a
 
 	ei
 	call VBlank2

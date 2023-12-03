@@ -104,7 +104,7 @@ Init::
 	call ClearsScratch
 
 	; Set up LCD interrupt handler
-	ld a, RETI_INSTRUCTION
+	ld a, JP_INSTRUCTION
 	ldh [hFunctionInstruction], a
 	ld a, LOW(LCDGeneric)
 	ldh [hFunctionTargetLo], a
