@@ -291,7 +291,7 @@ MACRO roam_struct
 \1MapGroup::  db
 \1MapNumber:: db
 \1HP::        db
-\1DVs::       dw
+\1IVs::       ds 4
 ENDM
 
 MACRO bugcontestwinner

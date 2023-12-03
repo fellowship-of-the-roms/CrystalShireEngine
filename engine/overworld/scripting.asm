@@ -1891,6 +1891,8 @@ Script_givepoke:
 	call LoadScriptPokemonID
 	ld [wCurPartySpecies], a
 	call GetScriptByte
+	ld [wCurPartyForm], a
+	call GetScriptByte
 	ld [wCurPartyLevel], a
 	call GetScriptByte
 	ld l, a

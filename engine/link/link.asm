@@ -2212,7 +2212,7 @@ LinkTrade:
 	ld [wPlayerTrademonID], a
 	ld a, [hl]
 	ld [wPlayerTrademonID + 1], a
-; DVs
+; IVs
 	ld hl, wPartyMon1IVs
 	ld a, [wCurTradePartyMon]
 	call GetPartyLocation

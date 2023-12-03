@@ -61,7 +61,13 @@ BattleCommand_Transform:
 	dec de
 	dec de
 .mimic_enemy_backup
-; copy DVs
+; copy IVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de

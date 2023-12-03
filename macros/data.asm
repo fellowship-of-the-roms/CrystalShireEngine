@@ -117,3 +117,11 @@ MACRO sine_table
 		dw sin(x * 0.5 / (\1))
 	endr
 ENDM
+
+MACRO ivstat
+; attack, defense, speed, special attack, special defense, hp
+	db (\1 << 1) | (\2 & %10000)
+	db ((\2 & %01111) << 4) | ((\3 & %11110) >> 1)
+	db ((\3 & %10000) << 3) | (\4 << 2) | ((\5 & %11000) >> 3)
+	db ((\5 & %00111) << 5) | \6
+ENDM

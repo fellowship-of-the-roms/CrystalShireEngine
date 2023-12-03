@@ -181,7 +181,7 @@ endr
 	jr z, .registerpokedex
 
 	push hl
-	farcall GetTrainerDVs
+	farcall GetTrainerIVs
 	pop hl
 	jr .initializeIVs
 
@@ -306,8 +306,12 @@ endr
 	ld [de], a
 	inc de
 
-	; skip Personality
+	; Copy personality
+	ld a, [wEnemyMonPersonality]
+	ld [de], a
 	inc de
+	ld a, [wEnemyMonPersonality + 1]
+	ld [de], a
 	inc de
 
 	; Skip extra byte
@@ -768,9 +772,9 @@ SendMonIntoBox:
 	ld [de], a
 	inc de
 
-	; Set all 5 Experience Values to 0
+	; Set all 6 Experience Values to 0
 	xor a
-	ld b, 2 * NUM_EXP_STATS
+	ld b, NUM_STATS
 .loop2
 	ld [de], a
 	inc de
@@ -778,7 +782,7 @@ SendMonIntoBox:
 	jr nz, .loop2
 
 	ld hl, wEnemyMonIVs
-	ld b, 4 + NUM_MOVES ; IVs and PP ; wEnemyMonHappiness - wEnemyMonIVs
+	ld b, MON_HAPPINESS - MON_IVS ; IVs, Personality, extra byte, and PP ; wEnemyMonHappiness - wEnemyMonIVs
 .loop3
 	ld a, [hli]
 	ld [de], a
@@ -1114,7 +1118,7 @@ CalcMonStatC:
 .no_stat_exp
 	pop hl
 	push bc
-	ld bc, MON_IVS - (MON_HP_EV - 1)
+	ld bc, MON_IVS - MON_HP_EV + 1
 	add hl, bc
 	pop bc
 	ld a, c
@@ -1128,64 +1132,93 @@ CalcMonStatC:
 	jr z, .Special_Atk
 	cp STAT_SDEF
 	jr z, .Special_Def
-.HP
-	ld a, [hl]
-	swap a
-	and $f
+
+; HP
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hld]
+	and IV_HP_MASK
+	dec hl
+	dec hl
 	jr .GotIV
 
 .Attack:
 	ld a, [hl]
-	and $f
+	and IV_ATK_MASK
+	rra
 	jr .GotIV
 
 .Defense:
-	inc hl
+	ld a, [hli]
+	and IV_DEF_HIGH_MASK
+	rla
+	rla
+	rla
+	rla
+	push bc
+	ld b, a
 	ld a, [hld]
+	and IV_DEF_LOW_MASK
 	swap a
-	and $f
+	or b
+	pop bc
 	jr .GotIV
 
 .Speed:
 	inc hl
+	ld a, [hli]
+	and IV_SPD_HIGH_MASK
+	rla
+	push bc
+	ld b, a
 	ld a, [hld]
-	and $f
+	and IV_SPD_LOW_MASK
+	rla
+	rla
+	or b
+	pop bc
+	dec hl
 	jr .GotIV
 
 .Special_Atk:
 	inc hl
 	inc hl
 	ld a, [hld]
+	and IV_SP_ATK_MASK
+	rra
+	rra
 	dec hl
-	swap a
-	and $f
 	jr .GotIV
 
 .Special_Def:
 	inc hl
 	inc hl
+	ld a, [hli]
+	and IV_SP_DEF_HIGH_MASK
+	swap a
+	rra
+	push bc
+	ld b, a
 	ld a, [hld]
+	and IV_SP_DEF_LOW_MASK
+	swap a
+	rra
+	or b
+	pop bc
 	dec hl
-	and $f
-
+	dec hl
+; fallthrough
 .GotIV:
 	ld d, 0
-	add e
-	ld e, a
-	jr nc, .no_overflow_1
-	inc d
-
-.no_overflow_1
 	sla e
 	rl d
-	srl b
-	srl b
-	ld a, b
 	add e
-	jr nc, .no_overflow_2
-	inc d
-
-.no_overflow_2
+	ld e, a
+	adc d
+	sub e
+	ld d, a
+	ld a, e
 	ldh [hMultiplicand + 2], a
 	ld a, d
 	ldh [hMultiplicand + 1], a
@@ -1271,6 +1304,12 @@ GivePoke::
 	push bc
 	push de
 	push af
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurPartyForm]
+	ld [hl], a
 	ld a, [wCurItem]
 	and a
 	jr z, .done
@@ -1299,6 +1338,8 @@ GivePoke::
 	push bc
 	push de
 	push af
+	ld a, [wCurPartyForm]
+	ld [wBufferMonForm], a
 	ld a, [wCurItem]
 	and a
 	jr z, .done

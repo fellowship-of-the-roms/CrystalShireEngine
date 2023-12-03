@@ -3920,7 +3920,7 @@ BattleCheckPlayerShininess:
 	jr BattleCheckShininess
 
 BattleCheckEnemyShininess:
-	call GetEnemyMonIVs
+	call GetEnemyMonShiny
 
 BattleCheckShininess:
 	ld b, h
@@ -3935,6 +3935,15 @@ GetPartyMonShiny:
 	ld hl, wPartyMon1Shiny
 	ld a, [wCurBattleMon]
 	jmp GetPartyLocation
+
+GetEnemyMonShiny:
+	ld hl, wEnemyMonShiny
+	ld a, [wBattleMode]
+	dec a
+	ret z
+	ld hl, wOTPartyMon1Shiny
+	ld a, [wCurOTMon]
+	jp GetPartyLocation
 
 GetEnemyMonIVs:
 	ld hl, wEnemyMonIVs
@@ -6060,16 +6069,16 @@ LoadEnemyMon:
 	ld a, b
 	ld [wEnemyMonItem], a
 
-; Initialize DVs
+; Initialize IVs
 
-; If we're in a trainer battle, DVs are predetermined
+; If we're in a trainer battle, IVs are predetermined
 	ld a, [wBattleMode]
 	and a
-	jr z, .InitDVs
+	jr z, .InitIVs
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr z, .InitDVs
+	jr z, .InitIVs
 
 ; Unknown
 	ld hl, wEnemyBackupIVsAndPersonality
@@ -6093,18 +6102,18 @@ LoadEnemyMon:
 	ld [de], a
 	jmp .Happiness
 
-.InitDVs:
-; Trainer DVs
+.InitIVs:
+; Trainer IVs
 
-; All trainers have preset DVs, determined by class
-; See GetTrainerDVs for more on that
-	farcall GetTrainerDVs
-; These are the DVs we'll use if we're actually in a trainer battle
+; All trainers have preset IVs, determined by class
+; See GetTrainerIVs for more on that
+	farcall GetTrainerIVs
+; These are the IVs we'll use if we're actually in a trainer battle
 	ld a, [wBattleMode]
 	dec a
-	jr nz, .UpdateDVs
+	jr nz, .UpdateIVs
 
-; Wild DVs
+; Wild IVs
 ; Here's where the fun starts
 
 ; Roaming monsters (Entei, Raikou) work differently
@@ -6121,57 +6130,100 @@ LoadEnemyMon:
 ; We'll do something with the result in a minute
 	push af
 
-; Grab DVs
-	call GetRoamMonDVs
+; Grab IVs
+	call GetRoamMonIVs
 	inc hl
+	inc hl
+	inc hl
+	ld bc, wTempIVs + 3
 	ld a, [hld]
-	ld c, a
-	ld b, [hl]
+	ld [bc], a
+	dec bc
+	ld a, [hld]
+	ld [bc], a
+	dec bc
+	ld a, [hld]
+	ld [bc], a
+	dec bc
+	ld a, [hl]
+	ld [bc], a
 
 ; Get back the result of our check
 	pop af
 ; If the RoamMon struct has already been initialized, we're done
-	jr nz, .UpdateDVs
+	jr nz, .UpdateIVs
 
-; If it hasn't, we need to initialize the DVs
+; If it hasn't, we need to initialize the IVs
 ; (HP is initialized at the end of the battle)
-	call GetRoamMonDVs
+	call GetRoamMonIVs
 	inc hl
+	inc hl
+	inc hl
+	ld bc, wTempIVs + 3
 	call BattleRandom
 	ld [hld], a
-	ld c, a
+	ld [bc], a
+	dec bc
+	call BattleRandom
+	ld [hld], a
+	ld [bc], a
+	dec bc
+	call BattleRandom
+	ld [hld], a
+	ld [bc], a
+	dec bc
 	call BattleRandom
 	ld [hl], a
-	ld b, a
-; We're done with DVs
-	jr .UpdateDVs
+	ld [bc], a
+; We're done with IVs
+	jr .UpdateIVs
 
 .NotRoaming:
 ; Register a contains wBattleType
 
 ; Forced shiny battle type
 ; Used by Red Gyarados at Lake of Rage
+	push af
+	ld hl, wEnemyMonShiny
+	farcall GenerateShininess
+	jr nc, .not_shiny
+	ld hl, wEnemyMonShiny
+	set MON_SHINY_F, [hl]
+.not_shiny
+	pop af
 	cp BATTLETYPE_FORCESHINY
-	jr nz, .GenerateDVs
+	jr nz, .GenerateIVs
+	ld hl, wEnemyMonShiny
+	set MON_SHINY_F, [hl]
 
-	ld b, ATKDEFDV_SHINY ; $ea
-	ld c, SPDSPCDV_SHINY ; $aa
-	jr .UpdateDVs
-
-.GenerateDVs:
-; Generate new random DVs
+.GenerateIVs:
+; Generate new random IVs
+	ld hl, wTempIVs + 3
 	call BattleRandom
-	ld b, a
+	ld [hld], a
 	call BattleRandom
-	ld c, a
+	ld [hld], a
+	call BattleRandom
+	ld [hld], a
+	call BattleRandom
+	ld [hl], a
+	ld b, h
+	ld c, l
 
-.UpdateDVs:
-; Input DVs in register bc
-; TODO: fix DVs to IVs here.
+.UpdateIVs:
+; Input bc pointer to IVs
 	ld hl, wEnemyMonIVs
-	ld a, b
+	ld a, [bc]
 	ld [hli], a
-	ld [hl], c
+	inc bc
+	ld a, [bc]
+	ld [hli], a
+	inc bc
+	ld a, [bc]
+	ld [hli], a
+	inc bc
+	ld a, [bc]
+	ld [hl], a
 
 ; We've still got more to do if we're dealing with a wild monster
 	ld a, [wBattleMode]
@@ -6198,13 +6250,18 @@ LoadEnemyMon:
 	endc
 	jr nz, .Magikarp
 
-; Get letter based on DVs
+; Get random letter
+.GenerateUnownLetter
+	ld a, NUM_UNOWN
 	ld hl, wEnemyMonForm
-	predef GetUnownLetter
+	call BattleRandomRange
+	and FORM_MASK
+	ld [hl], a
+	;predef GetUnownLetter
 ; Can't use any letters that haven't been unlocked
 ; If combined with forced shiny battletype, causes an infinite loop
 	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
+	jr nc, .GenerateUnownLetter ; try again
 	jr .Happiness ; skip the Magikarp check
 
 .Magikarp:
@@ -6248,7 +6305,7 @@ LoadEnemyMon:
 ; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 4
-	jr nc, .GenerateDVs
+	jr nc, .GenerateIVs
 
 ; 20% chance of skipping this check
 	call Random
@@ -6257,7 +6314,7 @@ LoadEnemyMon:
 ; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 3
-	jr nc, .GenerateDVs
+	jr nc, .GenerateIVs
 
 .CheckMagikarpArea:
 	ld a, [wMapGroup]
@@ -6273,9 +6330,9 @@ LoadEnemyMon:
 ; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
 	ld a, [wMagikarpLength]
 	cp 3
-	jr c, .GenerateDVs ; try again
+	jmp c, .GenerateIVs ; try again
 
-; Finally done with DVs
+; Finally done with IVs
 
 .Happiness:
 ; Set happiness
@@ -6507,14 +6564,13 @@ CheckSleepingTreeMon:
 INCLUDE "data/wild/treemons_asleep.asm"
 
 CheckUnownLetter:
-; Return carry if the Unown letter hasn't been unlocked yet
-
+; Return carry if the Unown letter in a has been unlocked.
+	ld b, a
 	ld a, [wUnlockedUnowns]
 	ld c, a
 	ld de, 0
 
 .loop
-
 ; Don't check this set unless it's been unlocked
 	srl c
 	jr nc, .next
@@ -6527,14 +6583,13 @@ CheckUnownLetter:
 	ld l, a
 
 	push de
-	ld a, [wUnownLetter]
-	ld de, 1
 	push bc
-	call IsInArray
+	ld a, b
+	call IsInByteArray
 	pop bc
 	pop de
 
-	jr c, .match
+	ret c ; unlocked letter, returns carry
 
 .next
 ; Make sure we haven't gone past the end of the table
@@ -6544,14 +6599,7 @@ CheckUnownLetter:
 	cp NUM_UNLOCKED_UNOWN_SETS * 2
 	jr c, .loop
 
-; Hasn't been unlocked, or the letter is invalid
-	scf
-	ret
-
-.match
-; Valid letter
-	and a
-	ret
+	ret ; not unlocked or invalid letter, returns not carry
 
 INCLUDE "data/wild/unlocked_unowns.asm"
 
@@ -8668,19 +8716,19 @@ GetRoamMonHP:
 	ld hl, wRoamMon3HP
 	ret
 
-GetRoamMonDVs:
-; output: hl = wRoamMonDVs
+GetRoamMonIVs:
+; output: hl = wRoamMonIVs
 	ld a, [wTempEnemyMonSpecies]
 	ld b, a
 	ld a, [wRoamMon1Species]
 	cp b
-	ld hl, wRoamMon1DVs
+	ld hl, wRoamMon1IVs
 	ret z
 	ld a, [wRoamMon2Species]
 	cp b
-	ld hl, wRoamMon2DVs
+	ld hl, wRoamMon2IVs
 	ret z
-	ld hl, wRoamMon3DVs
+	ld hl, wRoamMon3IVs
 	ret
 
 GetRoamMonSpecies:

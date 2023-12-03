@@ -689,7 +689,6 @@ DayCare_InitBreeding:
 	or [hl]
 	ld [hl], a
 
-.SkipDVs:
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, NAME_LENGTH

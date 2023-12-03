@@ -2,16 +2,12 @@ BadEgg:
 ; Failsafe if there is a checksum error
 	db BULBASAUR
 	db NO_ITEM
-	db POUND, NO_MOVE, NO_MOVE, NO_MOVE
+	db 0, 0, 0, 0
 	dw 0 ; OT ID
 	db 0, 0, 0 ; Exp
-	; Stat exp
-	bigdw 0
-	bigdw 0
-	bigdw 0
-	bigdw 0
-	bigdw 0
-	dn 0, 0, 0, 0 ; DVs
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	ivstat  0, 0, 0, 0, 0, 0 ; IVs
+	db 0, 0, 0 ; padding
 	db 0, 0, 0, 0 ; PP
 	db 255 ; Step cycles to hatch
 	db 0, 0, 0 ; Pokérus, Caught data

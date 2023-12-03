@@ -526,14 +526,14 @@ wEnemyScreens::
 wPlayerSafeguardCount:: db
 wPlayerLightScreenCount:: db
 wPlayerReflectCount:: db
-	ds 1
+
 
 wEnemySafeguardCount:: db
 wEnemyLightScreenCount:: db
 wEnemyReflectCount:: db
-	ds 1
 
-	ds 1
+
+wTempIVs:: ds 4
 
 wBattleWeather::
 ; 00 normal
@@ -2395,6 +2395,7 @@ wMartItemID::
 	db
 
 wCurPartySpecies:: db
+wCurPartyForm:: db
 
 wCurPartyMon::
 ; index of mon's party location (0-5)

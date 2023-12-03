@@ -126,10 +126,10 @@ if DEF(_DEBUG)
 	; post-e4
 	setflag ENGINE_CREDITS_SKIP
 	; good party
-	givepoke MEWTWO, 100, BRIGHTPOWDER
+	givepoke MEWTWO, PLAIN_FORM, 100, BRIGHTPOWDER
 	; hm slaves
-	givepoke MEW, 100, LEFTOVERS
-	givepoke MEW, 100, LEFTOVERS
+	givepoke MEW, PLAIN_FORM, 100, LEFTOVERS
+	givepoke MEW, PLAIN_FORM, 100, LEFTOVERS
 	givepokemove FLY,        wPartyMon2, 0
 	givepokemove SURF,       wPartyMon2, 1
 	givepokemove STRENGTH,   wPartyMon2, 2
