@@ -68,8 +68,8 @@ Credits::
 	xor a
 	rst ByteFill
 
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	set LCD_STAT, [hl]
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 
@@ -100,8 +100,8 @@ Credits::
 
 .exit_credits
 	call ClearBGPalettes
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hBGMapAddress], a

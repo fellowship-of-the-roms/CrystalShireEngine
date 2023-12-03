@@ -4,13 +4,13 @@ BattleIntroSlidingPics:
 	ld a, BANK(wLYOverrides)
 	ldh [rSVBK], a
 	call .subfunction1
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	set LCD_STAT, [hl]
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	call .subfunction2
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	pop af

@@ -30,6 +30,23 @@ DoPlayerMovement::
 	ret
 
 .TranslateIntoMovement:
+	if DEF(_DEBUG)
+	ld a, [wCurInput]
+	or ~(A_BUTTON | B_BUTTON)
+	inc a
+	jr nz, .regular_move
+	call .GetAction
+	ld a, [wWalkingTile]
+	cp -1
+	ld a, STEP_BACK_LEDGE
+	jr z, .hopback
+	ld a, STEP_RUN
+.hopback
+	call .DoStep
+	scf
+	ret
+.regular_move
+endc
 	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
 	jr z, .Normal
@@ -614,19 +631,7 @@ DoPlayerMovement::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-if DEF(_DEBUG)
-	ldh a, [hJoyDown]
-	or ~(A_BUTTON | B_BUTTON)
-	inc a
 	ld a, [hl]
-	jr nz, .no_wtw
-	cp COLL_01
-	jr z, .no_wtw
-	ld a, COLL_LADDER
-.no_wtw
-else
-	ld a, [hl]
-endc
 	ld [wWalkingTile], a
 	ret
 

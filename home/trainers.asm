@@ -90,6 +90,12 @@ _CheckTrainerBattle::
 	ret
 
 .startbattle
+if DEF(_DEBUG)
+	ldh a, [hJoypadDown]
+	and B_BUTTON
+	cp B_BUTTON
+	jr z, .next ; ignore trainers
+endc
 	pop de
 	pop af
 	ldh [hLastTalked], a

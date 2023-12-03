@@ -50,8 +50,8 @@ InitMapNameSign::
 	ld a, $90
 	ldh [rWY], a
 	ldh [hWY], a
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ret
@@ -119,8 +119,8 @@ PlaceMapNameSign::
 	ld a, $90
 	ldh [rWY], a
 	ldh [hWY], a
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ret

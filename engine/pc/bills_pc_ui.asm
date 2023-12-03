@@ -55,8 +55,6 @@ _BillsPC:
 	; overlap.
 	ld hl, rIE
 	res LCD_STAT, [hl]
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
 	ld a, LOW(LCDGeneric)
 	ldh [hFunctionTargetLo], a
 	ld a, HIGH(LCDGeneric)

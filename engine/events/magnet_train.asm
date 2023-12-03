@@ -60,8 +60,8 @@ MagnetTrain:
 	pop af
 	ldh [hVBlank], a
 	call ClearBGPalettes
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hLYOverrideStart], a
@@ -234,8 +234,8 @@ MagnetTrain_InitLYOverrides:
 	ld bc, wLYOverridesBackupEnd - wLYOverridesBackup
 	ld a, [wMagnetTrainInitPosition]
 	rst ByteFill
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ld hl, rIE
+	set LCD_STAT, [hl]
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	ret
