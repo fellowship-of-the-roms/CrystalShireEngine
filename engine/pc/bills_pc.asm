@@ -1052,7 +1052,7 @@ SetTempPartyMonData:
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld b, TRUE
-	ld hl, wBufferMonEVs
+	ld hl, wBufferMonEVs - 1
 	ld de, wBufferMonMaxHP
 	ld a, [wBufferMonLevel]
 	ld [wCurPartyLevel], a
