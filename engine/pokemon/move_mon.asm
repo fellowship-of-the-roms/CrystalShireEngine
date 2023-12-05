@@ -1218,6 +1218,14 @@ CalcMonStatC:
 	adc d
 	sub e
 	ld d, a
+	ld a, b
+	srl a
+	srl a
+	add e
+	ld e, a
+	adc d
+	sub e
+	ld d, a
 	ld a, e
 	ldh [hMultiplicand + 2], a
 	ld a, d
