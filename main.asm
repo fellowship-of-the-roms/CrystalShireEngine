@@ -239,6 +239,7 @@ INCLUDE "engine/pokemon/switchpartymons.asm"
 INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
+INCLUDE "engine/pokemon/natures.asm"
 
 
 SECTION "Crystal Phone Text", ROMX

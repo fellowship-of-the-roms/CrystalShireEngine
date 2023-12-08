@@ -230,6 +230,10 @@ endr
 	inc de
 
 	; Initial Personality
+	ld a, NUM_NATURES
+	call RandomRange
+	and NATURE_MASK
+	ld [de], a
 	inc de
 	inc de
 
@@ -1290,7 +1294,77 @@ CalcMonStatC:
 	ldh [hMultiplicand + 2], a
 
 .stat_value_okay
+	; do natures here
+	xor a
+	ldh [hMultiplicand + 0], a
+	push hl
+	push bc
+	ld bc, MON_NATURE - MON_IVS
+	add hl, bc ; hl points to Nature
+	ld a, [hl]
+	and NATURE_MASK
+	pop bc
+	push bc
+	call GetNatureStatMultiplier
+	pop bc
+	pop hl
+	ldh [hMultiplier], a
+	call Multiply
+	ldh a, [hProduct + 1]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 1], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 2], a
+	ld a, 10
+	ldh [hDivisor], a
+	ld a, 3
+	ld b, a
+	call Divide
 	jmp PopBCDEHL
+
+GetNatureStatMultiplier::
+; a points to Nature
+; c is 1-6 according to the stat (STAT_HP to STAT_SDEF)
+; returns (sets a to) 9 if c is lowered, 11 if raised, 10 if neutral
+; (to be used in calculations in CalcPkmnStatC)
+	push de
+	ld d, a
+	ld a, c
+	cp STAT_HP
+	jr z, .neutral
+	ld a, d
+	and NATURE_MASK
+	cp NO_NATURE
+	jr z, .neutral
+	ld d, STAT_HP
+.loop
+	inc d
+	sub 5
+	jr nc, .loop
+	add 7 ; Atk-SDf is 2-6, not 0-4
+	cp c
+	jr z, .penalty
+	ld a, d
+	cp c
+	jr z, .bonus
+.neutral
+	ld a, 10
+	pop de
+	ret
+.bonus
+	ld a, 11
+	pop de
+	ret
+.penalty
+	; Neutral natures (divisible by 6) raise and lower the same stat,
+	; but +10% -10% isn't neutral (the result is 99%), so we need to
+	; avoid messing with it altogether.
+	cp d
+	jr z, .neutral
+	ld a, 9
+	pop de
+	ret
 
 GivePoke::
 	push de

@@ -681,6 +681,14 @@ DayCare_InitBreeding:
 	ld [hl], a
 .not_shiny
 
+	; Nature
+	ld hl , wEggMonNature
+	ld a, NUM_NATURES
+	call RandomRange
+	and NATURE_MASK
+	or [hl]
+	ld [hl], a
+
 	; Gender
 	ld hl, wEggMonGender
 	call Random

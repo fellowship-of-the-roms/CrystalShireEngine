@@ -6225,6 +6225,14 @@ LoadEnemyMon:
 	ld a, [bc]
 	ld [hl], a
 
+; generate nature
+	ld a, NUM_NATURES
+	ld hl, wEnemyMonNature
+	call BattleRandomRange
+	and NATURE_MASK
+	or [hl]
+	ld [hl], a
+
 ; We've still got more to do if we're dealing with a wild monster
 	ld a, [wBattleMode]
 	dec a
@@ -6314,7 +6322,7 @@ LoadEnemyMon:
 ; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 3
-	jr nc, .GenerateIVs
+	jmp nc, .GenerateIVs
 
 .CheckMagikarpArea:
 	ld a, [wMapGroup]
