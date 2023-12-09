@@ -515,7 +515,7 @@ StartMenu_Pokemon:
 	call PokemonActionSubmenu
 	cp 3
 	jr z, .menu
-	cp 0
+	and a
 	jr z, .choosemenu
 	cp 1
 	jr z, .menunoreload
