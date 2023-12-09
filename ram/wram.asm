@@ -2968,7 +2968,7 @@ wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
 wUsedObjectPals:: db
 for n, 8
-wLoadedObjPal{d:n}:: db 
+wLoadedObjPal{d:n}:: db
 endr
 wNeededPalIndex:: db
 

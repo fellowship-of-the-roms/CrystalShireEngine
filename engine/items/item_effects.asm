@@ -1224,7 +1224,7 @@ VitaminEffect:
 	add c
 	ld c, a
 	adc b
-	sub c 
+	sub c
 	ld b, a
 	ld e, d
 .decrease_evs_gained
@@ -1234,8 +1234,8 @@ VitaminEffect:
 	dec bc
 	jr .decrease_evs_gained
 .check_ev_overflow
-	pop hl 
-	pop bc 
+	pop hl
+	pop bc
 
 	ld a, e
 	and a
