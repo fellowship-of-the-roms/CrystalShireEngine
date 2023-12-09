@@ -59,7 +59,6 @@ MainMenu:
 	db "NEW GAME@"
 	db "OPTION@"
 	db "MYSTERY GIFT@"
-
 .Jumptable:
 ; entries correspond to MAINMENUITEM_* constants
 	dw MainMenu_Continue
@@ -100,7 +99,7 @@ MainMenuItems:
 	db -1
 
 	; MAINMENU_STUDIUM
-	db 4 
+	db 4
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION

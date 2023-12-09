@@ -4,7 +4,7 @@ ClearSavedObjPals::
 	ld hl, wUsedObjectPals
 	ld bc, wNeededPalIndex - wUsedObjectPals
 	ld a, -1
-	jp ByteFill
+	jmp ByteFill
 
 DisableDynPalUpdates::
 	ld hl, wPalFlags
