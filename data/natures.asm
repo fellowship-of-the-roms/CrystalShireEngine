@@ -111,4 +111,3 @@ NatureIndicators:
 .BashfulInd:
 .QuirkyInd:
 .NoNatureInd: db "@"
-print NUM_NATURES
