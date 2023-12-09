@@ -2248,10 +2248,10 @@ Function1195c4:
 	rst CopyBytes
 	xor a
 	ld [de], a
-	ld a, [wc608]
+	ld hl, wc608
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wc608 + 1]
-	ld h, a
 	ld de, wcd69
 	ld bc, $10
 	jmp CopyBytes
@@ -2801,10 +2801,10 @@ Function1199e2:
 	ld [w3_d090 + 2], a
 
 Function119ac9:
-	ld a, [w3_d000]
+	ld hl, w3_d000
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [w3_d000 + 1]
-	ld h, a
 	dec hl
 	ld a, l
 	ld [w3_d000], a
@@ -2848,20 +2848,20 @@ Function119b0d:
 .asm_119b23
 	ld a, $10
 	ld [wcd89], a
-	ld a, [w3_d090 + 1]
+	ld hl, w3_d090 + 1
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [w3_d090 + 2]
-	ld h, a
 	ld de, w3_d100
 	ld bc, $0700
 	ld a, MOBILEAPI_12
 	jmp Function119e2b
 
 Function119b3b:
-	ld a, [w3_d090 + 1]
+	ld hl, w3_d090 + 1
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [w3_d090 + 2]
-	ld h, a
 	jr asm_119b4d
 
 Function119b45:
@@ -5890,10 +5890,10 @@ AddMobileMonToParty:
 	ld e, a
 	inc [hl]
 
-	ld a, [wMobileMonSpeciesPointer]
+	ld hl, wMobileMonSpeciesPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileMonSpeciesPointer + 1]
-	ld h, a
 	inc hl
 	ld bc, wPartySpecies
 	ld d, e
@@ -5920,10 +5920,10 @@ AddMobileMonToParty:
 	jr nz, .loop2
 	ld e, l
 	ld d, h
-	ld a, [wMobileMonStructPointer]
+	ld hl, wMobileMonStructPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileMonStructPointer + 1]
-	ld h, a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst CopyBytes
 
@@ -5937,10 +5937,10 @@ AddMobileMonToParty:
 	jr nz, .loop3
 	ld e, l
 	ld d, h
-	ld a, [wMobileMonOTPointer]
+	ld hl, wMobileMonOTPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileMonOTPointer + 1]
-	ld h, a
 	ld bc, MON_NAME_LENGTH - 1
 	rst CopyBytes
 	ld a, "@"
@@ -5956,10 +5956,10 @@ AddMobileMonToParty:
 	jr nz, .loop4
 	ld e, l
 	ld d, h
-	ld a, [wMobileMonNicknamePointer]
+	ld hl, wMobileMonNicknamePointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileMonNicknamePointer + 1]
-	ld h, a
 	ld bc, MON_NAME_LENGTH - 1
 	rst CopyBytes
 	ld a, "@"
@@ -5977,10 +5977,10 @@ AddMobileMonToParty:
 	call OpenSRAM
 	ld e, l
 	ld d, h
-	ld a, [wMobileMonMailPointer]
+	ld hl, wMobileMonMailPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileMonMailPointer + 1]
-	ld h, a
 	ld bc, MAIL_STRUCT_LENGTH
 	rst CopyBytes
 

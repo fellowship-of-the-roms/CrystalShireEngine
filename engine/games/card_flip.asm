@@ -111,10 +111,10 @@ _CardFlip:
 	text_end
 
 .DeductCoins:
-	ld a, [wCoins]
+	ld hl, wCoins
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wCoins + 1]
-	ld l, a
 	ld a, h
 	and a
 	jr nz, .deduct ; You have at least 256 coins.
@@ -1094,10 +1094,10 @@ CardFlip_CheckWinCondition:
 	text_end
 
 .AddCoinPlaySFX:
-	ld a, [wCoins]
+	ld hl, wCoins
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wCoins + 1]
-	ld l, a
 	inc hl
 	ld a, h
 	ld [wCoins], a

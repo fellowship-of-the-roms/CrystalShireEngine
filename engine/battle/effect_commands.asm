@@ -69,10 +69,10 @@ DoMove:
 
 .ReadMoveEffectCommand:
 ; ld a, [wBattleScriptBufferAddress++]
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
 
 	ld a, [hli]
 
@@ -2527,10 +2527,10 @@ BattleCommand_RageDamage:
 	ret
 
 EndMoveEffect:
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
 	ld a, endmove_command
 	ld [hli], a
 	ld [hli], a
@@ -5417,9 +5417,9 @@ BattleCommand_EndLoop:
 	ret
 
 .loop_back_to_critical
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
 .not_critical
 	ld a, [hld]
@@ -6836,9 +6836,9 @@ BattleCommand_ClearText:
 
 SkipToBattleCommand:
 ; Skip over commands until reaching command b.
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
 .loop
 	ld a, [hli]

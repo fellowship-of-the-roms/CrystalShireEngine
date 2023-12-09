@@ -893,10 +893,10 @@ Function17d6fd:
 	ld a, [wcd77]
 	bit 7, a
 	jr nz, asm_17d721
-	ld a, [wMobileCrashCheckPointer]
+	ld hl, wMobileCrashCheckPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileCrashCheckPointer + 1]
-	ld h, a
 	ld a, [hl]
 	cp $ff
 	jr z, asm_17d721
@@ -1474,17 +1474,17 @@ Function17dc1f:
 	ld a, [wMenuCursorY]
 	cp $1
 	jr nz, .asm_17dc85
-	ld a, [wc68a]
+	ld hl, wc68a
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wc68a + 1]
-	ld h, a
 	jr .asm_17dc8d
 
 .asm_17dc85
-	ld a, [wc68a + 2]
+	ld hl, wc68a + 2
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wc68a + 3]
-	ld h, a
 
 .asm_17dc8d
 	push hl
@@ -1541,10 +1541,10 @@ Function17dccf:
 	call Function17e43d
 	call HlToCrashCheckPointer
 .asm_17dced
-	ld a, [wMobileCrashCheckPointer]
+	ld hl, wMobileCrashCheckPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileCrashCheckPointer + 1]
-	ld h, a
 	ld a, [hl]
 	cp $ff
 	jr z, .asm_17dd0d
@@ -2230,10 +2230,10 @@ Function17e1a1:
 	jr .asm_17e250
 
 .asm_17e248
-	ld a, [wc712 + 1]
+	ld hl, wc712 + 1
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wc712 + 2]
-	ld h, a
 
 .asm_17e250
 	jmp Function17e40f
@@ -2398,10 +2398,10 @@ Function17e40f:
 	jr HlToCrashCheckPointer
 
 IncCrashCheckPointer:
-	ld a, [wMobileCrashCheckPointer]
+	ld hl, wMobileCrashCheckPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wMobileCrashCheckPointer + 1]
-	ld h, a
 	inc hl
 
 HlToCrashCheckPointer:

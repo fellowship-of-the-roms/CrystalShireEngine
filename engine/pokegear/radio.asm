@@ -717,10 +717,10 @@ PokedexShow8:
 	jmp PrintRadioLine
 
 CopyDexEntry:
-	ld a, [wPokedexShowPointerAddr]
+	ld hl, wPokedexShowPointerAddr
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wPokedexShowPointerAddr + 1]
-	ld h, a
 	ld a, [wPokedexShowPointerBank]
 	push af
 	push hl

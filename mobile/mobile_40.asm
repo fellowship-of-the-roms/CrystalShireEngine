@@ -2021,10 +2021,10 @@ Function100f3d:
 	; what was once in de gets copied to hl,
 	; modified by Function100f8d, and put back
 	; into this backup
-	ld a, [wStringBuffer2 + 1]
+	ld hl, wStringBuffer2 + 1
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wStringBuffer2 + 2]
-	ld h, a
 	call Function100f8d
 	ld a, l
 	ld [wStringBuffer2 + 1], a
@@ -2037,10 +2037,10 @@ Function100f3d:
 	; do the same as in .three
 	ld d, h
 	ld e, l
-	ld a, [wStringBuffer2 + 1]
+	ld hl, wStringBuffer2 + 1
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wStringBuffer2 + 2]
-	ld h, a
 	call Function100f8d
 	ld a, l
 	ld [wStringBuffer2 + 1], a
@@ -2068,10 +2068,10 @@ Function100f3d:
 
 Function100f8d:
 	push hl
-	ld a, [wStringBuffer2 + 4]
+	ld hl, wStringBuffer2 + 4
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wStringBuffer2 + 5]
-	ld h, a
 	add hl, bc
 	ld a, l
 	ld [wStringBuffer2 + 4], a
@@ -2330,10 +2330,10 @@ LoadSelectedPartiesForColosseum:
 	jmp CopyBytes
 
 .GetDestinationAddress:
-	ld a, [wStringBuffer2 + 4]
+	ld hl, wStringBuffer2 + 4
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wStringBuffer2 + 5]
-	ld h, a
 	ret
 
 .GetCopySize:

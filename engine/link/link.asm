@@ -2817,10 +2817,10 @@ Link_CheckCommunicationError:
 	xor a
 	ldh [hSerialReceivedNewData], a
 	vc_hook Wireless_prompt
-	ld a, [wLinkTimeoutFrames]
+	ld hl, wLinkTimeoutFrames
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wLinkTimeoutFrames + 1]
-	ld l, a
 	push hl
 	call .CheckConnected
 	pop hl
