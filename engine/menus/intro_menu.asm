@@ -74,11 +74,6 @@ NewGame:
 PlayerProfileSetup:
 	farjp InitGender
 
-if DEF(_DEBUG)
-DebugRoom: ; unreferenced
-	farjp _DebugRoom
-endc
-
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
