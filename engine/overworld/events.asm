@@ -10,7 +10,6 @@ OverworldLoop::
 	ld a, [wMapStatus]
 	cp MAPSTATUS_DONE
 	jr nz, .loop
-.done
 	ret
 
 .Jumptable:
@@ -18,7 +17,7 @@ OverworldLoop::
 	dw StartMap
 	dw EnterMap
 	dw HandleMap
-	dw .done
+	dw DoNothing ; .done
 
 DisableEvents:
 	xor a
@@ -349,16 +348,6 @@ CheckWildEncounterCooldown::
 
 SetUpFiveStepWildEncounterCooldown:
 	ld a, 5
-	ld [wWildEncounterCooldown], a
-	ret
-
-SetMinTwoStepWildEncounterCooldown:
-; dummied out
-	ret
-	ld a, [wWildEncounterCooldown]
-	cp 2
-	ret nc
-	ld a, 2
 	ld [wWildEncounterCooldown], a
 	ret
 
@@ -771,7 +760,6 @@ PlayerMovementPointers:
 	ret
 
 .jump:
-	call SetMinTwoStepWildEncounterCooldown
 	xor a
 	ld c, a
 	ret

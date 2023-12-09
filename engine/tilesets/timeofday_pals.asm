@@ -1,7 +1,3 @@
-DummyPredef35:
-DummyPredef36:
-	ret
-
 UpdateTimeOfDayPal::
 	call UpdateTime
 	ld a, [wTimeOfDay]

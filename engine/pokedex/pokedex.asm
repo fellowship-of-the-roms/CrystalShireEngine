@@ -895,16 +895,13 @@ Pokedex_UpdateUnownMode:
 	call Pokedex_CheckSGB
 	jr nz, .decompress
 	farcall LoadSGBPokedexGFX2
-	jr .done
+	ret
 
 .decompress
 	ld hl, PokedexLZ
 	ld de, vTiles2 tile $31
 	lb bc, BANK(PokedexLZ), 58
-	call DecompressRequest2bpp
-
-.done
-	ret
+	jmp DecompressRequest2bpp
 
 Pokedex_UnownModeHandleDPadInput:
 	ld hl, hJoyLast
@@ -1401,14 +1398,13 @@ Pokedex_PlaceSearchResultsTypeStrings:
 	ld b, a
 	ld a, [wDexSearchMonType2]
 	and a
-	jr z, .done
+	ret z
 	cp b
-	jr z, .done
+	ret z
 	hlcoord 2, 15
 	call Pokedex_PlaceTypeString
 	hlcoord 1, 15
 	ld [hl], "/"
-.done
 	ret
 
 Pokedex_DrawUnownModeBG:

@@ -33,9 +33,6 @@ BattleTowerBattle:
 	ld l, LOCKED_ITEM_ID_BATTLE_TOWER_3
 	jmp LockItemID
 
-UnusedBattleTowerDummySpecial1:
-	ret
-
 InitBattleTowerChallengeRAM:
 	xor a
 	ld [wBattleTowerBattleEnded], a
@@ -58,7 +55,7 @@ _BattleTowerBattle:
 
 .dw
 	dw RunBattleTowerTrainer
-	dw SkipBattleTowerTrainer
+	dw DoNothing ; SkipBattleTowerTrainer
 
 RunBattleTowerTrainer:
 	ld a, [wOptions]
@@ -312,9 +309,7 @@ CopyBTTrainer_FromBT_OT_TowBT_OTTemp:
 	ld [sBattleTowerChallengeState], a
 	ld hl, sNrOfBeatenBattleTowerTrainers
 	inc [hl]
-	call CloseSRAM
-SkipBattleTowerTrainer:
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction:
 	jumptable .dw, wScriptVar
@@ -680,9 +675,6 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	farjp CopySpritePal
 
 INCLUDE "data/trainers/sprites.asm"
-
-UnusedBattleTowerDummySpecial2:
-	ret
 
 CheckForBattleTowerRules:
 	farcall _CheckForBattleTowerRules

@@ -122,16 +122,13 @@ OWCutAnimation:
 .loop
 	ld a, [wJumptableIndex]
 	bit 7, a
-	jr nz, .finish
+	ret nz
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
 	farcall DoNextFrameForAllSprites
 	call OWCutJumptable
 	call DelayFrame
 	jr .loop
-
-.finish
-	ret
 
 .LoadCutGFX:
 	farcall ClearSpriteAnims ; pointless to farcall

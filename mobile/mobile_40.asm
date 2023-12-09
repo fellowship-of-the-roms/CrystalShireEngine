@@ -1249,14 +1249,10 @@ _LinkBattleSendReceiveAction:
 
 	call .MobileBattle_SendReceiveAction
 	call Function100da5
-	farcall FinishBattleAnim
-	jr .done
+	farjp FinishBattleAnim
 
 .not_mobile
-	call .LinkBattle_SendReceiveAction
-
-.done
-	ret
+	jmp .LinkBattle_SendReceiveAction
 
 .StageForSend:
 	ld a, [wBattlePlayerAction]
@@ -1365,13 +1361,11 @@ endc
 	ld a, [wcd27]
 	bit 7, a
 	jr z, .asm_100a92
-	call Function100ae7
-	jr .asm_100ace
+	jmp Function100ae7
 
 .asm_100ac7
 	ld a, $0f
 	ld [wd430], a
-.asm_100ace
 	ret
 
 Function100acf:
@@ -1899,7 +1893,7 @@ Jumptable_100e8c:
 	dw Function100eae
 	dw Function100eb4
 	dw Function100eae
-	dw Function100ec4
+	dw DoNothing
 
 Function100ea2:
 	call Function100dc0
@@ -1925,9 +1919,6 @@ asm_100eb8:
 	ret c
 	ld [hl], 0
 	jr Function100ec5
-
-Function100ec4:
-	ret
 
 Function100ec5:
 	ld hl, wcd67
@@ -2358,12 +2349,6 @@ Function10126c:
 	ld hl, ClosingLinkText
 	jmp Function1021e0
 
-Function10127c:
-	ret
-
-Function10127d:
-	ret
-
 Function1013aa:
 	call ClearBGPalettes
 	call ExitMenu
@@ -2374,7 +2359,6 @@ Function1013aa:
 
 Function1013c0:
 	farcall BlankScreen
-	farcall Stubbed_Function106462
 	farcall Function106464
 	jmp FinishExitMenu
 
@@ -3620,17 +3604,15 @@ Function10204c:
 	ld a, [de]
 	inc de
 	and a
-	jr z, .asm_102067
+	ret z
 	sub $30
-	jr c, .asm_102067
+	ret c
 	cp $0a
-	jr nc, .asm_102067
+	ret nc
 	add $f6
 	ld [hli], a
 	dec c
 	jr nz, .asm_102054
-
-.asm_102067
 	ret
 
 Function102068:
@@ -3639,16 +3621,14 @@ Function102068:
 .asm_10206d
 	ld a, [de]
 	call Function102080
-	jr c, .asm_10207f
+	ret c
 	ld a, [de]
 	swap a
 	call Function102080
-	jr c, .asm_10207f
+	ret c
 	inc de
 	dec c
 	jr nz, .asm_10206d
-
-.asm_10207f
 	ret
 
 Function102080:

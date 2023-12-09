@@ -320,8 +320,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Minimize
 	dw BattleAnimCmd_SetBgPal
 	dw BattleAnimCmd_SetObjPal
-	dw BattleAnimCmd_EC ; dummy
-	dw BattleAnimCmd_ED ; dummy
+	dw DoNothing ; BattleAnimCmd_EC ; dummy
+	dw DoNothing ; BattleAnimCmd_ED ; dummy
 	dw BattleAnimCmd_IfParamAnd
 	dw BattleAnimCmd_JumpUntil
 	dw BattleAnimCmd_BGEffect
@@ -330,8 +330,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_OBP1
 	dw BattleAnimCmd_KeepSprites
 	dw BattleAnimCmd_KeepSpritesAndOAM
-	dw BattleAnimCmd_F6
-	dw BattleAnimCmd_F7
+	dw DoNothing ; BattleAnimCmd_F6
+	dw DoNothing ; BattleAnimCmd_F7
 	dw BattleAnimCmd_IfParamEqual
 	dw BattleAnimCmd_SetVar
 	dw BattleAnimCmd_IncVar
@@ -341,12 +341,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
 	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
-
-BattleAnimCmd_EA:
-BattleAnimCmd_EB:
-BattleAnimCmd_EC:
-BattleAnimCmd_ED:
-	ret
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -852,9 +846,6 @@ BattleAnimCmd_CheckPokeball:
 	ld [wBattleAnimVar], a
 	ret
 
-BattleAnimCmd_E7:
-	ret
-
 BattleAnimCmd_Transform:
 	ldh a, [rSVBK]
 	push af
@@ -1234,12 +1225,6 @@ BattleAnimCmd_KeepSpritesAndOAM:
 	set BATTLEANIM_KEEPOAM_F, [hl]
 	ret
 
-BattleAnimCmd_F6:
-	ret
-
-BattleAnimCmd_F7:
-	ret
-
 BattleAnimCmd_Sound:
 	call GetBattleAnimByte
 	ld e, a
@@ -1516,7 +1501,7 @@ BattleAnim_UpdateOAM_All:
 	call BattleAnimOAMUpdate
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, BATTLEANIMSTRUCT_LENGTH
@@ -1529,10 +1514,7 @@ BattleAnim_UpdateOAM_All:
 .loop2
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret

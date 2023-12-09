@@ -127,8 +127,8 @@ HandleQueuedCommand:
 	jmp FarCall_hl
 
 .Jumptable:
-	dba CmdQueue_Null
-	dba CmdQueue_Type1
+	dba DoNothing ; CmdQueue_Null
+	dba DoNothing ; CmdQueue_Type1
 	dba CmdQueue_StoneTable
 	dba CmdQueue_Type3
 	dba CmdQueue_Type4
@@ -150,12 +150,6 @@ CmdQueues_DecAnonJumptableIndex:
 	ld hl, CMDQUEUE_JUMPTABLE_INDEX
 	add hl, bc
 	dec [hl]
-	ret
-
-CmdQueue_Null:
-	ret
-
-CmdQueue_Type1:
 	ret
 
 CmdQueue_Type4:

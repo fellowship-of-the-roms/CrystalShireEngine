@@ -31,10 +31,6 @@ DEF NUM_PC_MODES EQU const_value
 	const BOXMENU_BAGITEM
 	const BOXMENU_GIVEITEM
 
-; Stubbed functions
-_ManagePokemonMoves:
-	ret
-
 _BillsPC:
 	call .CheckCanUsePC
 	ret c
@@ -2129,7 +2125,6 @@ BillsPC_Moves:
 	ld hl, .CantCheckEggMoves
 	jmp z, BillsPC_PrintText
 	call BillsPC_PrepareTransistion
-	farcall _ManagePokemonMoves
 	jr BillsPC_ReturnFromTransistion
 
 .CantCheckEggMoves:

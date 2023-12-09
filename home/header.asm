@@ -15,7 +15,7 @@ PopBCDEHL::
 	pop de
 	pop hl
 DoNothing::
-	ret
+	ret ; no-optimize Stub Function (global do nothing)
 
 SECTION "rst10", ROM0[$0010]
 Bankswitch::

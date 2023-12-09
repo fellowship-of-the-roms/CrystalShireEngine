@@ -957,10 +957,9 @@ MoonBallMultiplier:
 	sla b
 	jr c, .max
 	sla b
-	jr nc, .done
+	ret nc
 .max
 	ld b, $ff
-.done
 	ret
 
 LoveBallMultiplier:
@@ -1925,11 +1924,9 @@ RestoreHealth:
 	dec hl
 	ld a, [de]
 	sbc [hl]
-	jr c, .finish
+	ret c
 .full_hp
-	call ReviveFullHP
-.finish
-	ret
+	jmp ReviveFullHP
 
 RemoveHP:
 	ld a, MON_HP + 1
@@ -2501,7 +2498,7 @@ BattleRestorePP:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	cp [hl]
 	jr nz, .next
 	push hl
@@ -2523,8 +2520,6 @@ endr
 	inc de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 Not_PP_Up:

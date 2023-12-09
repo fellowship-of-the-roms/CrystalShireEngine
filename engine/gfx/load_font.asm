@@ -24,9 +24,6 @@ _LoadStandardFont::
 _LoadFontsExtra1::
 	jr LoadFrame
 
-_LoadFontsExtra2::
-	ret
-
 _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
 	ld hl, vTiles2 tile $60

@@ -95,12 +95,10 @@ StatsScreenMobile:
 	call JumpTable
 	call StatsScreen_WaitAnim
 	farcall MobileComms_CheckInactivityTimer
-	jr c, .exit
+	ret c
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr z, .loop
-
-.exit
 	ret
 
 StatsScreenPointerTable:
@@ -307,14 +305,14 @@ StatsScreen_JoypadAction:
 	jr nz, .d_up
 	bit D_DOWN_F, a
 	jr nz, .d_down
-	jr .done
+	ret
 
 .d_down
 	ld a, [wMonType]
 	cp BUFFERMON
 	jr z, .next_storage
 	cp BOXMON
-	jr nc, .done
+	ret nc
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
@@ -324,7 +322,7 @@ StatsScreen_JoypadAction:
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, .done
+	ret z
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -341,7 +339,7 @@ StatsScreen_JoypadAction:
 	jr z, .prev_storage
 	ld a, [wCurPartyMon]
 	and a
-	jr z, .done
+	ret z
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -374,7 +372,6 @@ StatsScreen_JoypadAction:
 .prev_storage
 	farcall PrevStorageBoxMon
 	jr nz, .load_storage_mon
-.done
 	ret
 
 .set_page
@@ -387,7 +384,7 @@ StatsScreen_JoypadAction:
 
 .next_storage
 	farcall NextStorageBoxMon
-	jr z, .done
+	ret z
 .load_storage_mon
 	ld a, [wBufferMonAltSpecies]
 	ld [wCurPartySpecies], a
@@ -785,9 +782,9 @@ LoadBluePage:
 	rst PlaceString
 	ld a, [wTempMonCaughtGender]
 	and a
-	jr z, .done
+	ret z
 	cp $7f
-	jr z, .done
+	ret z
 	and CAUGHT_GENDER_MASK
 	ld a, "♂"
 	jr z, .got_gender
@@ -795,7 +792,6 @@ LoadBluePage:
 .got_gender
 	hlcoord 9, 13
 	ld [hl], a
-.done
 	ret
 
 .OTNamePointers:

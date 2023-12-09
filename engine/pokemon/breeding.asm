@@ -219,7 +219,7 @@ HatchEggs:
 	ld a, [de]
 	inc de
 	cp -1
-	jmp z, .done
+	ret z
 	push de
 	push hl
 	cp EGG
@@ -369,9 +369,6 @@ HatchEggs:
 	pop de
 	jmp .loop
 
-.done
-	ret
-
 .Text_HatchEgg:
 	; Huh? @ @
 	text_far Text_BreedHuh
@@ -414,7 +411,7 @@ InitEggMoves:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	ld hl, wEggMonMoves
 	ld c, NUM_MOVES
 .next
@@ -432,8 +429,6 @@ InitEggMoves:
 	inc de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 GetEggMove:
@@ -947,19 +942,17 @@ DayCareMonCompatibilityText:
 	ld a, [wBreedingCompatibility]
 	ld hl, .BreedBrimmingWithEnergyText
 	cp -1
-	jr z, .done
+	ret z
 	ld hl, .BreedNoInterestText
 	and a
-	jr z, .done
+	ret z
 	ld hl, .BreedAppearsToCareForText
 	cp 230
-	jr nc, .done
+	ret nc
 	cp 70
 	ld hl, .BreedFriendlyText
-	jr nc, .done
+	ret nc
 	ld hl, .BreedShowsInterestText
-
-.done
 	ret
 
 .BreedBrimmingWithEnergyText:

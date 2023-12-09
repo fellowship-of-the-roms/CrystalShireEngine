@@ -268,7 +268,7 @@ InitializeVisibleSprites:
 	push bc
 	call CopyObjectStruct
 	pop bc
-	jr c, .ret
+	ret c
 
 .next
 	ld hl, MAPOBJECT_LENGTH
@@ -279,9 +279,6 @@ InitializeVisibleSprites:
 	inc a
 	cp NUM_OBJECTS
 	jr nz, .loop
-	ret
-
-.ret
 	ret
 
 CheckObjectEnteringVisibleRange::

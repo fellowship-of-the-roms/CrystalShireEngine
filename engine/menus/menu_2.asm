@@ -14,17 +14,14 @@ PlaceMenuItemQuantity:
 	ld a, [wItemAttributeValue]
 	pop hl
 	and a
-	jr nz, .done
+	ret nz
 	ld de, $15
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jmp PrintNum
 
 PlaceMenuItemBallName:
 	push de
@@ -48,17 +45,14 @@ PlaceMenuItemBallQuantity:
 	ld a, [wItemAttributeValue]
 	pop hl
 	and a
-	jr nz, .done
+	ret nz
 	ld de, $15
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jmp PrintNum
 
 PlaceMenuKeyItemName:
 	push de
@@ -82,17 +76,14 @@ PlaceMenuKeyItemQuantity:
 	ld a, [wItemAttributeValue]
 	pop hl
 	and a
-	jr nz, .done
+	ret nz
 	ld de, $15
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jmp PrintNum
 
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader

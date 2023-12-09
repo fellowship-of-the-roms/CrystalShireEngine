@@ -1654,13 +1654,11 @@ BattleCommand_CheckHit:
 .skip_brightpowder
 	ld a, b
 	cp -1
-	jr z, .Hit
+	ret z ; Hit
 
 	call BattleRandom
 	cp b
 	jr nc, .Miss
-
-.Hit:
 	ret
 
 .Miss:
@@ -5708,10 +5706,6 @@ BattleCommand_Charge:
 	text_far _BattleDugText
 	text_end
 
-BattleCommand_Unused3C:
-; effect0x3c
-	ret
-
 BattleCommand_TrapTarget:
 	ld a, [wAttackMissed]
 	and a
@@ -6088,12 +6082,11 @@ DoubleDamage:
 	sla [hl]
 	dec hl
 	rl [hl]
-	jr nc, .quit
+	ret nc
 
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
-.quit
 	ret
 
 INCLUDE "engine/battle/move_effects/mimic.asm"
@@ -6462,10 +6455,6 @@ INCLUDE "engine/battle/move_effects/perish_song.asm"
 INCLUDE "engine/battle/move_effects/sandstorm.asm"
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
-
-BattleCommand_Unused5D:
-; effect0x5d
-	ret
 
 INCLUDE "engine/battle/move_effects/fury_cutter.asm"
 

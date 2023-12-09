@@ -190,7 +190,6 @@ SlotsLoop:
 	ld [wCurSpriteOAMAddr], a
 	farcall DoNextFrameForFirst16Sprites
 	call .PrintCoinsAndPayout
-	call .Stubbed_AlternateMatchingSevensPalette
 	call DelayFrame
 	and a
 	ret
@@ -198,21 +197,6 @@ SlotsLoop:
 .stop
 	scf
 	ret
-
-.Stubbed_AlternateMatchingSevensPalette:
-; dummied out
-	ret
-	ld a, [wReel1ReelAction]
-	and a
-	ret nz
-	ld a, [wReel2ReelAction]
-	and a
-	ret nz
-	ld a, [wFirstTwoReelsMatchingSevens]
-	and a
-	jr nz, .matching_sevens
-	ld a, %11100100
-	jmp DmgToCgbBGPals
 
 .matching_sevens
 	ld a, [wTextDelayFrames]
@@ -811,7 +795,7 @@ ReelActionJumptable:
 	jp hl
 
 .Jumptable:
-	dw ReelAction_DoNothing                   ; 00
+	dw DoNothing                              ; 00
 	dw ReelAction_StopReelIgnoreJoypad        ; 01
 	dw ReelAction_QuadrupleRate               ; 02
 	dw ReelAction_DoubleRate                  ; 03
@@ -836,9 +820,6 @@ ReelActionJumptable:
 	dw ReelAction_WaitChansey                 ; 16
 	dw ReelAction_WaitEgg                     ; 17
 	dw ReelAction_DropReel                    ; 18
-
-ReelAction_DoNothing:
-	ret
 
 ReelAction_QuadrupleRate:
 	ld hl, REEL_SPIN_RATE
@@ -1317,7 +1298,7 @@ Slots_CheckMatchedFirstTwoReels:
 	ret
 
 .Jumptable:
-	dw .zero
+	dw DoNothing ; zero
 	dw .one
 	dw .two
 	dw .three
@@ -1331,10 +1312,7 @@ Slots_CheckMatchedFirstTwoReels:
 	call .CheckTopRow
 
 .one
-	call .CheckMiddleRow
-
-.zero
-	ret
+	jmp .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped
@@ -1414,7 +1392,7 @@ Slots_CheckMatchedAllThreeReels:
 	ret
 
 .Jumptable:
-	dw .zero
+	dw DoNothing ; zero
 	dw .one
 	dw .two
 	dw .three
@@ -1428,10 +1406,7 @@ Slots_CheckMatchedAllThreeReels:
 	call .CheckTopRow
 
 .one
-	call .CheckMiddleRow
-
-.zero
-	ret
+	jmp .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped

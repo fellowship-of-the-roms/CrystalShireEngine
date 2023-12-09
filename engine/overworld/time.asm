@@ -235,12 +235,10 @@ RestartLuckyNumberCountdown:
 	ld a, FRIDAY
 	sub c
 	jr z, .friday_saturday
-	jr nc, .earlier ; could have done "ret nc"
+	ret nc
 
 .friday_saturday
 	add 7
-
-.earlier
 	ret
 
 _CheckLuckyNumberShowFlag:

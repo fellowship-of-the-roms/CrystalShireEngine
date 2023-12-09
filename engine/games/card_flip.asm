@@ -5,11 +5,7 @@ DEF CARDFLIP_DECK_SIZE EQUS "(wDeckEnd - wDeck)"
 	assert wDiscardPileEnd - wDiscardPile == wDeckEnd - wDeck
 
 MemoryGameGFX:
-; Graphics for an unused Game Corner
-; game were meant to be here.
-
-UnusedCursor_InterpretJoypad_AnimateCursor:
-	ret
+	ret ; no-optimize Stub function (This was originally a graphic, may be restored)
 
 _CardFlip:
 	ld hl, wOptions
@@ -363,13 +359,11 @@ GetCoordsOfChosenCard:
 	jr nz, .BottomCard
 	hlcoord 2, 0
 	bcpixel 2, 3
-	jr .done
+	ret
 
 .BottomCard:
 	hlcoord 2, 6
 	bcpixel 8, 3
-
-.done
 	ret
 
 PlaceCardFaceDown:

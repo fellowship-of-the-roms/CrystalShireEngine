@@ -3819,7 +3819,7 @@ _Timer::
 	ld hl, wc807
 	ld a, $6
 	cp [hl]
-	jmp z, Function111b3b
+	ret z
 	ld [hl], a
 	ld a, $10
 	ld [wc80f], a
@@ -3834,7 +3834,8 @@ _Timer::
 	ld [hl], a
 	ld a, $10
 	ld [wc80f], a
-	jmp Function111b3b
+	ret
+
 .asm_111927
 	ld a, [wc800]
 	cp $1
@@ -3843,13 +3844,13 @@ _Timer::
 	jmp z, Function111a2a
 	ld a, [wc807]
 	cp $1
-	jmp c, Function111b3b
+	ret c
 	ld hl, wc815
 	dec [hl]
-	jmp nz, Function111b3b
+	ret nz
 	inc hl
 	dec [hl]
-	jmp nz, Function111b3b
+	ret nz
 	ld hl, wc807
 	ld a, [wc822]
 	bit 3, a
@@ -3872,30 +3873,31 @@ _Timer::
 	cp $4
 	jr nc, .asm_11199c
 .asm_111977
-	call Function111f97
-	jmp Function111b3b
+	jmp Function111f97
+
 .asm_11197d
 	ld a, [wc805]
 	ld [hl], a
-	jmp Function111b3b
+	ret
+
 .asm_111984
 	xor a
 	ld [hl], a
 	ld hl, wc821
 	res 0, [hl]
-	call Function111686
-	jmp Function111b3b
+	jmp Function111686
+
 .asm_111991
 	xor a
 	ld [hl], a
 	ld [wc821], a
-	call Function111686
-	jmp Function111b3b
+	jmp Function111686
+
 .asm_11199c
 	ld b, a
 	ld [hl], a
 	or a
-	jmp z, Function111b3b
+	ret z
 	ld a, [wc822]
 	bit 7, a
 	jr nz, .asm_1119be
@@ -3906,8 +3908,8 @@ _Timer::
 	ld de, MobilePacket_TransferData.End - MobilePacket_TransferData
 	ld hl, MobilePacket_TransferData
 	ld a, $95
-	call Function111f02
-	jmp Function111b3b
+	jmp Function111f02
+
 .asm_1119be
 	ld a, [wc821]
 	bit 3, a
@@ -3920,8 +3922,8 @@ _Timer::
 	ld [wMobileSDK_SendCommandID], a
 	ld hl, wMobileSDK_PacketBuffer
 	ld b, $5
-	call PacketSendBytes
-	jmp Function111b3b
+	jmp PacketSendBytes
+
 .asm_1119dd
 	ld hl, wc821
 	set 1, [hl]
@@ -3942,12 +3944,12 @@ Function1119f0_BeginSession:
 	call PacketSendBytes
 	ld a, $1
 	ld [wc806], a
-	jmp Function111b3b
+	ret
 
 Function111a0b:
 	ld a, [hl]
 	cp $6
-	jmp z, Function111b3b
+	ret z
 	ld hl, wc822
 	res 3, [hl]
 	res 0, [hl]
@@ -3960,8 +3962,7 @@ Function111a0b:
 	ld h, [hl]
 	ld l, a
 	ld b, $5
-	call PacketSendBytes
-	jmp Function111b3b
+	jmp PacketSendBytes
 
 Function111a2a:
 	ld hl, wc80b
@@ -4040,7 +4041,7 @@ asm_111a47:
 	res 5, [hl]
 	res 0, [hl]
 	ei
-	jmp Function111b3b
+	ret
 
 Function111ab9:
 	ld a, $80
@@ -4120,8 +4121,6 @@ Function111b2e:
 	ldh [rSC], a
 	ld a, (1 << rSC_ON) | (1 << rSC_CGB) | (1 << rSC_CLOCK)
 	ldh [rSC], a
-
-Function111b3b:
 	ret
 
 Function111b3c:

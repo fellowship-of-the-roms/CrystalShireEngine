@@ -76,7 +76,6 @@ _MemoryGame:
 	ret
 
 .ResetBoard:
-	call UnusedCursor_InterpretJoypad_AnimateCursor
 	jr nc, .proceed
 	ld hl, wJumptableIndex
 	set 7, [hl]
@@ -230,7 +229,7 @@ endr
 	ld hl, wJumptableIndex
 	inc [hl]
 .AskPlayAgain:
-	call UnusedCursor_InterpretJoypad_AnimateCursor
+
 	jr nc, .restart
 	ld hl, wJumptableIndex
 	set 7, [hl]

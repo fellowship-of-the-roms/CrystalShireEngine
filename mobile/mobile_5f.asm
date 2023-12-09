@@ -922,7 +922,7 @@ asm_17d721:
 	ret
 
 Jumptable17d72a:
-	dw Function17d78c
+	dw DoNothing
 	dw Function17d7b4
 	dw Function17d7c2
 	dw Function17d7d3
@@ -950,7 +950,7 @@ Jumptable17d72a:
 	dw Function17de91
 	dw Function17ded9
 	dw Function17e0fd
-	dw Function17e133
+	dw DoNothing
 	dw Function17e165
 	dw Function17e1a1
 	dw Function17e254
@@ -966,9 +966,6 @@ Jumptable17d72a:
 	dw Function17e3e0
 	dw Function17e3f0
 	dw Function17e409
-
-Function17d78c:
-	ret
 
 Function17d7b4:
 	call IncCrashCheckPointer
@@ -1147,13 +1144,10 @@ Function17d9e3:
 	jr c, .asm_17da2d
 	ld a, $4
 	ldh [rSVBK], a
-	jr .asm_17da30
+	ret
 
 .asm_17da2d
-	call CloseSRAM
-
-.asm_17da30
-	ret
+	jmp CloseSRAM
 
 Function17da31:
 	call IncCrashCheckPointer
@@ -1207,13 +1201,10 @@ Function17da31:
 	jr c, .asm_17da88
 	ld a, $4
 	ldh [rSVBK], a
-	jr .asm_17da8b
+	ret
 
 .asm_17da88
-	call CloseSRAM
-
-.asm_17da8b
-	ret
+	jmp CloseSRAM
 
 Unknown_17da8c:
 for x, 8
@@ -1861,7 +1852,7 @@ Function17ded9:
 	ld b, a
 	ld a, [wPartyCount]
 	cp $6
-	jmp nc, Function17e026
+	ret nc
 	xor a
 	ld [wMonType], a
 	push hl
@@ -2047,9 +2038,6 @@ Function17ded9:
 	add hl, de
 	jr asm_17e0ee
 
-Function17e026:
-	ret
-
 asm_17e0ee:
 	ld a, [hli]
 	ld h, [hl]
@@ -2092,9 +2080,6 @@ Function17e0fd:
 	pop af
 	ldh [rSVBK], a
 	jmp Function17e40f
-
-Function17e133:
-	ret
 
 Function17e165:
 	call IncCrashCheckPointer

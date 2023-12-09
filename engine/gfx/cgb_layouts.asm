@@ -26,7 +26,7 @@ LoadSGBLayoutCGB:
 	push de
 	jp hl
 .done:
-	ret
+	ret ; no-optimize Stub function (used to push ret to stack for return)
 
 CGBLayoutJumptable:
 	table_width 2, CGBLayoutJumptable

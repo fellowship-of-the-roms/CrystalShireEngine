@@ -63,7 +63,7 @@ String_114163:
 	db ".", 0
 
 Jumptable_114165:
-	dw Stubbed_Function114268
+	dw DoNothing
 	dw Function114269
 	dw Function11433c
 	dw Function1143b7
@@ -152,9 +152,6 @@ Function11425c:
 	ldh [hSRAMBank], a
 	ldh [hSRAMBank], a
 	ld [MBC3SRamBank], a
-	ret
-
-Stubbed_Function114268:
 	ret
 
 Function114269:
@@ -2522,7 +2519,7 @@ Function114f39:
 	inc hl
 	ld a, [de]
 	and a
-	jr z, .asm_114f58
+	ret z
 	ld [hli], a
 	inc de
 	ld a, [de]
@@ -2539,9 +2536,6 @@ Function114f39:
 	inc hl
 	ld [hl], d
 	ld a, $1
-	ret
-
-.asm_114f58
 	ret
 
 Function114f59:
@@ -2745,7 +2739,7 @@ Function115062:
 	cp $2
 	jr z, .asm_115098
 	cp $3
-	jr nz, .asm_1150b2
+	ret nz
 	ld a, $2c
 	ld [hli], a
 	ld a, $d
@@ -2773,8 +2767,6 @@ Function115062:
 .asm_1150ae
 	ld [wTimerEventStartDay], a
 	xor a
-
-.asm_1150b2
 	ret
 
 Function1150b3:

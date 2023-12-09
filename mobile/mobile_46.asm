@@ -41,9 +41,7 @@ asm_11800b:
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
-	call ReturnToMapFromSubmenu
-BattleTowerRoomMenu_DoNothing:
-	ret
+	jmp ReturnToMapFromSubmenu
 
 Function11805f:
 	ld a, $1
@@ -462,7 +460,6 @@ BattleTowerRoomMenu_InitRAM:
 	ldh [hMobileReceive], a
 	ldh [hMobile], a
 	ei
-	farcall Stubbed_Function106462
 	farcall Function106464
 	farcall Function115d99
 	farcall Function11615a
@@ -539,7 +536,7 @@ Function1184a5:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -580,7 +577,7 @@ Function1184ec:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function119b45
@@ -595,7 +592,7 @@ BattleTowerRoomMenu_Jumptable:
 	dw BattleTowerRoomMenu_PickLevelMessage
 	dw BattleTowerRoomMenu_PlacePickLevelMenu
 	dw BattleTowerRoomMenu_UpdatePickLevelMenu
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw BattleTowerRoomMenu_PartyMonTopsThisLevelMessage
 	dw BattleTowerRoomMenu_WaitForMessage
 	dw BattleTowerRoomMenu_DelayRestartMenu
@@ -636,7 +633,7 @@ Function11857c:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -675,7 +672,7 @@ Function1185c3:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw BattleTowerRoomMenu_QuitMessage
@@ -712,7 +709,7 @@ Function118624:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -741,7 +738,7 @@ Function118671:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -772,7 +769,7 @@ Function1186b2:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -806,7 +803,7 @@ Function1186f5:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function11967d
 	dw Function119685
 	dw Function119665
@@ -842,7 +839,7 @@ Function118746:
 	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
+	dw DoNothing
 	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
@@ -1187,26 +1184,25 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld a, [hl]
 	and D_UP
 	jr nz, .d_up
-.asm_1189e5
 	ret
 
 .d_down
 	ld hl, wcd4f
 	dec [hl]
-	jr nz, .asm_1189e5
+	ret nz
 	ld a, [wcd4a]
 	ld [hl], a
-	jr .asm_1189e5
+	ret
 
 .d_up
 	ld a, [wcd4a]
 	ld hl, wcd4f
 	inc [hl]
 	cp [hl]
-	jr nc, .asm_1189e5
+	ret nc
 	ld a, $1
 	ld [hl], a
-	jr .asm_1189e5
+	ret
 
 .a_button
 	call PlayClickSFX
@@ -1898,7 +1894,7 @@ Function119300:
 	pop de
 	ld a, [de]
 	cp $50
-	jr z, .asm_11937f
+	ret z
 	ld a, [wcd4b]
 	ld c, a
 	ld a, [wcd4c]
@@ -1907,9 +1903,6 @@ Function119300:
 	ld [hli], a
 	inc bc
 	jr .asm_11931a
-
-.asm_11937f
-	ret
 
 Function119380:
 	ld a, $80
@@ -2618,7 +2611,7 @@ Function119940:
 	inc de
 	ld [hli], a
 	dec c
-	jr z, .asm_119953
+	ret z
 	and a
 	jr nz, .asm_119945
 	xor a
@@ -2626,8 +2619,6 @@ Function119940:
 	ld [hli], a
 	dec c
 	jr nz, .asm_11994f
-
-.asm_119953
 	ret
 
 Function119973:
@@ -3345,7 +3336,6 @@ Function11a0ca:
 	call PushWindow
 	farcall Function11765d
 	farcall Function17d3f6
-	farcall Stubbed_Function106462
 	farcall Function106464
 	call ExitMenu
 	farcall ReloadMapPart
@@ -4230,7 +4220,7 @@ BattleTowerRoomMenu_WriteMessage:
 	jumptable .Jumptable, wc31a
 
 .Jumptable:
-	dw BattleTowerRoomMenu_WriteMessage_DoNothing
+	dw DoNothing
 	dw Function11a90f
 	dw Function11a971
 
@@ -4292,9 +4282,6 @@ Function11a90f:
 	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 
-BattleTowerRoomMenu_WriteMessage_DoNothing:
-	ret
-
 Function11a971:
 	ld hl, wc31f
 	ldh a, [hJoyDown]
@@ -4336,11 +4323,9 @@ Function11a971:
 	ld [wc31e], a
 	ld a, [wcd8d]
 	cp $50
-	jr nz, .asm_11a9bf
+	ret nz
 	xor a
 	ld [wc31a], a
-
-.asm_11a9bf
 	ret
 
 BattleTowerRoomMenu_SetMessage:
@@ -4356,7 +4341,6 @@ Function11a9ce:
 	call ClearBGPalettes
 	call ReloadTilesetAndPalettes
 	call ExitMenu
-	farcall Stubbed_Function106462
 	farcall Function106464
 	farcall FinishExitMenu
 	jmp UpdateSprites
@@ -5434,13 +5418,11 @@ Function11b279:
 	call GetBaseData
 	ld a, [wBaseGender]
 	ld [wcf65], a
-	jr .asm_11b294
+	ret
 
 .asm_11b28f
 	ld a, $ff
 	ld [wcf65], a
-
-.asm_11b294
 	ret
 
 Function11b295:

@@ -42,7 +42,7 @@ DoNextFrameForAllSprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -57,13 +57,10 @@ DoNextFrameForAllSprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> wShadowOAMEnd)
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
 
 DoNextFrameForFirst16Sprites:
 	ld hl, wSpriteAnimationStructs
@@ -81,7 +78,7 @@ DoNextFrameForFirst16Sprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -96,13 +93,10 @@ DoNextFrameForFirst16Sprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> Sprites + $40)
 	ld a, l
 	cp LOW(wShadowOAMSprite16)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
 
 _InitSpriteAnimStruct::
 ; Initialize animation a at pixel x=e, y=d

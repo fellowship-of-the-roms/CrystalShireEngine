@@ -29,7 +29,7 @@ PokeSeer:
 	jr z, .egg
 
 	call IsAPokemon
-	jr c, .no_mon
+	ret c
 
 	call ReadCaughtData
 	jr SeerAction
@@ -37,9 +37,6 @@ PokeSeer:
 .cancel
 	ld a, SEER_CANCEL
 	jmp PrintSeerText
-
-.no_mon
-	ret
 
 .egg
 	ld a, SEER_EGG

@@ -265,7 +265,7 @@ ListMovePP:
 .loop
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	push bc
 	push hl
 	push de
@@ -310,8 +310,6 @@ ListMovePP:
 	ld a, b
 	cp NUM_MOVES
 	jr nz, .loop
-
-.done
 	ret
 
 .load_loop
@@ -349,7 +347,7 @@ Unused_PlaceEnemyHPLevel:
 	pop hl
 	ld a, [wCurPartySpecies]
 	cp EGG
-	jr z, .egg
+	ret z
 	push hl
 	ld bc, -12
 	add hl, bc
@@ -361,8 +359,6 @@ Unused_PlaceEnemyHPLevel:
 	push de
 	call PrintLevel
 	pop de
-
-.egg
 	ret
 
 PlaceStatusString:
@@ -465,7 +461,7 @@ ListMoves:
 	pop de
 	ld a, b
 	cp NUM_MOVES
-	jr z, .done
+	ret z
 	jr .moves_loop
 
 .no_more_moves
@@ -481,6 +477,4 @@ ListMoves:
 	inc a
 	cp NUM_MOVES
 	jr nz, .nonmove_loop
-
-.done
 	ret

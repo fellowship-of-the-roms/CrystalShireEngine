@@ -19,7 +19,7 @@ GetCrystalCGBLayout:
 	push de
 	jp hl
 .done:
-	ret
+	ret ; no-optimize Stub Function (Used to push return to stack)
 
 .Jumptable:
 	dw _CrystalCGB_MobileLayout0

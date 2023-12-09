@@ -308,19 +308,17 @@ MenuJoypadLoop:
 	call Move2DMenuCursor
 	call .BGMap_OAM
 	call Do2DMenuRTCJoypad
-	jr nc, .done
+	ret nc
 	call _2DMenuInterpretJoypad
-	jr c, .done
+	ret c
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	jr nz, .done
+	ret nz
 	call GetMenuJoypad
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
-
-.done
 	ret
 
 .BGMap_OAM:
@@ -601,7 +599,6 @@ _PushWindow::
 
 .done
 	pop hl
-	call .ret ; empty function
 	ld a, h
 	ld [de], a
 	dec de
@@ -623,7 +620,6 @@ _PushWindow::
 	call GetMenuBoxDims
 	inc b
 	inc c
-	call .ret ; empty function
 
 .row
 	push bc
@@ -642,10 +638,6 @@ _PushWindow::
 	pop bc
 	dec b
 	jr nz, .row
-
-	ret
-
-.ret
 	ret
 
 _ExitMenu::

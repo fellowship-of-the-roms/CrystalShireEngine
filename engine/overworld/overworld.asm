@@ -359,7 +359,7 @@ GetUsedSprites:
 
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	ldh [hUsedSpriteIndex], a
 
 	ld a, [hli]
@@ -380,8 +380,6 @@ GetUsedSprites:
 	pop bc
 	dec c
 	jr nz, .loop
-
-.done
 	ret
 
 GetUsedSprite::
@@ -412,21 +410,18 @@ endr
 
 	ld a, [wSpriteFlags]
 	bit 5, a
-	jr nz, .done
+	ret nz
 	bit 6, a
-	jr nz, .done
+	ret nz
 
 	ldh a, [hUsedSpriteIndex]
 	call _DoesSpriteHaveFacings
-	jr c, .done
+	ret c
 
 	ld a, h
 	add HIGH(vTiles1 - vTiles0)
 	ld h, a
-	call .CopyToVram
-
-.done
-	ret
+	jmp .CopyToVram
 
 .GetTileAddr:
 ; Return the address of tile (a) in (hl).

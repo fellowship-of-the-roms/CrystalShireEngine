@@ -144,4 +144,4 @@ Function3f88::
 Function3f9f::
 	; dummied out Mobile Code.
 	; TODO: item-newbox should find a way to restore this.
-	ret
+	ret ; no-optimize Stub Function (May readd these routines if needed)

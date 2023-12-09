@@ -14,7 +14,7 @@ DoSpriteAnimFrame:
 .Jumptable:
 ; entries correspond to SPRITE_ANIM_FUNC_* constants (see constants/sprite_anim_constants.asm)
 	table_width 2, DoSpriteAnimFrame.Jumptable
-	dw SpriteAnimFunc_Null
+	dw DoNothing ; SpriteAnimFunc_Null
 	dw SpriteAnimFunc_PartyMon
 	dw SpriteAnimFunc_PartyMonSwitch
 	dw SpriteAnimFunc_PartyMonSelected
@@ -27,7 +27,7 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_SlotsChansey
 	dw SpriteAnimFunc_SlotsChanseyEgg
 	dw SpriteAnimFunc_MailCursor
-	dw SpriteAnimFunc_UnusedCursor
+	dw DoNothing
 	dw SpriteAnimFunc_MemoryGameCursor
 	dw SpriteAnimFunc_PokegearArrow
 	dw SpriteAnimFunc_TradePokeBall
@@ -51,9 +51,6 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_PcMode
 	dw SpriteAnimFunc_PcPack
 	assert_table_length NUM_SPRITE_ANIM_FUNCS
-
-SpriteAnimFunc_Null:
-	ret
 
 SpriteAnimFunc_PartyMon:
 	ld a, [wMenuCursorY]
@@ -392,9 +389,6 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	add hl, bc
 	ld [hl], a
 	ret
-
-SpriteAnimFunc_UnusedCursor:
-	farjp UnusedCursor_InterpretJoypad_AnimateCursor
 
 SpriteAnimFunc_PokegearArrow:
 	farjp AnimatePokegearModeIndicatorArrow
@@ -751,7 +745,7 @@ SpriteAnimFunc_IntroPichuWooper:
 	add hl, bc
 	ld a, [hl]
 	cp 20
-	jr nc, .done
+	ret nc
 	add 2
 	ld [hl], a
 	cpl
@@ -762,7 +756,6 @@ SpriteAnimFunc_IntroPichuWooper:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-.done
 	ret
 
 SpriteAnimFunc_IntroUnown:

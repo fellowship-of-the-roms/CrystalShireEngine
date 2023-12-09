@@ -3,7 +3,7 @@
 
 ; Copies certain values at the time the player enters the Hall of Fame.
 StubbedTrainerRankings_HallOfFame2::
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingGameTimeHOF)
 	call OpenSRAM
 
@@ -33,7 +33,7 @@ StubbedTrainerRankings_HallOfFame2::
 	jmp CloseSRAM
 
 StubbedTrainerRankings_MagikarpLength:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingLongestMagikarp)
 	call OpenSRAM
 	ld de, wMagikarpLength
@@ -100,7 +100,7 @@ StubbedTrainerRankings_MagikarpLength:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_BugContestScore:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingBugContestScore)
 	call OpenSRAM
 	ldh a, [hProduct]
@@ -128,7 +128,7 @@ StubbedTrainerRankings_BugContestScore:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsWinStreak:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingCurrentSlotsStreak)
 	call OpenSRAM
 
@@ -167,7 +167,7 @@ StubbedTrainerRankings_AddToSlotsWinStreak:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_EndSlotsWinStreak:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingCurrentSlotsStreak)
 	call OpenSRAM
 	ld hl, sTrainerRankingCurrentSlotsStreak
@@ -178,7 +178,7 @@ StubbedTrainerRankings_EndSlotsWinStreak:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsPayouts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingTotalSlotsPayouts)
 	call OpenSRAM
 	ld hl, sTrainerRankingTotalSlotsPayouts + 3
@@ -205,7 +205,7 @@ StubbedTrainerRankings_AddToSlotsPayouts:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToBattlePayouts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingTotalBattlePayouts)
 	call OpenSRAM
 	ld hl, sTrainerRankingTotalBattlePayouts + 3
@@ -234,22 +234,22 @@ StubbedTrainerRankings_AddToBattlePayouts:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_StepCount:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingStepCount
 	jmp StubbedTrainerRankings_Increment4Byte
 
 StubbedTrainerRankings_BattleTowerWins: ; unreferenced
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingBattleTowerWins
 	jmp StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_TMsHMsTaught:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTMsHMsTaught
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Battles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
@@ -257,7 +257,7 @@ StubbedTrainerRankings_Battles:
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
@@ -265,102 +265,102 @@ StubbedTrainerRankings_WildBattles:
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_TrainerBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTrainerBattles
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Unused1: ; unreferenced
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingUnused1
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_HallOfFame::
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHOFEntries
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildMonsCaught:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWildMonsCaught
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_HookedEncounters:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHookedEncounters
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_EggsHatched:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingEggsHatched
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MonsEvolved:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingMonsEvolved
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_FruitPicked:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingFruitPicked
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Healings:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHealings
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MysteryGift:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingMysteryGift
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Trades:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTrades
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Fly:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingFly
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Surf:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingSurf
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Waterfall:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWaterfall
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WhiteOuts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWhiteOuts
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_LuckyNumberShow:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingLuckyNumberShow
 	jr StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_PhoneCalls:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingPhoneCalls
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Unused2: ; unreferenced
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingUnused2
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_LinkBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingLinkBattles
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Splash:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	; Only counts if it’s the player’s turn
 	ldh a, [hBattleTurn]
 	and a
@@ -369,33 +369,33 @@ StubbedTrainerRankings_Splash:
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_TreeEncounters:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTreeEncounters
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Unused3: ; unreferenced
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingUnused3
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumWins:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumWins
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumLosses:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumLosses
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumDraws:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumDraws
 	jr StubbedTrainerRankings_Increment3Byte
 
 ; Counts uses of both Selfdestruct and Explosion.
 StubbedTrainerRankings_Selfdestruct:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	; Only counts if it’s the player’s turn
 	ldh a, [hBattleTurn]
 	and a
@@ -460,7 +460,7 @@ StubbedTrainerRankings_Increment:
 
 ; Used when SRAM bank 5 isn’t already loaded — what’s the point of this?
 UpdateTrainerRankingsChecksum2:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankings)
 	call OpenSRAM
 	call UpdateTrainerRankingsChecksum
@@ -822,9 +822,6 @@ Function106453:
 	ld [wMobileCommsJumptableIndex], a
 	ld a, $4
 	ld [wcf64], a
-	ret
-
-Stubbed_Function106462:
 	ret
 
 Function106464::

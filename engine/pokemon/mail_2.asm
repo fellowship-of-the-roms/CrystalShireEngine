@@ -136,7 +136,7 @@ endc
 	push de
 	jp hl
 .done
-	ret
+	ret ; no-optimize Stub function (used to push ret to stack for return)
 
 MailGFXPointers:
 ; entries correspond to *MAIL_INDEX constants

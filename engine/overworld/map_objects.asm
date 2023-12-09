@@ -553,7 +553,7 @@ StepFunction_FromMovement:
 .Pointers:
 ; entries correspond to SPRITEMOVEFN_* constants (see constants/map_object_constants.asm)
 	table_width 2, StepFunction_FromMovement.Pointers
-	dw MovementFunction_Null                 ; 00
+	dw DoNothing                             ; 00 MovementFunction_Null
 	dw MovementFunction_RandomWalkY          ; 01
 	dw MovementFunction_RandomWalkX          ; 02
 	dw MovementFunction_RandomWalkXY         ; 03
@@ -582,9 +582,6 @@ StepFunction_FromMovement:
 	dw MovementFunction_BoulderDust          ; 1a
 	dw MovementFunction_ShakingGrass         ; 1b
 	assert_table_length NUM_SPRITEMOVEFN
-
-MovementFunction_Null:
-	ret
 
 MovementFunction_RandomWalkY:
 	call Random
@@ -1562,14 +1559,12 @@ StepFunction_Restore:
 	; fallthrough
 
 StepFunction_Standing:
-	call Stubbed_UpdateYOffset
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 StepFunction_NPCWalk:
-	call Stubbed_UpdateYOffset
 	call AddStepVector
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
@@ -1822,29 +1817,6 @@ StepFunction_SkyfallTop:
 	add hl, bc
 	ld [hl], STEP_TYPE_FROM_MOVEMENT
 	ret
-
-Stubbed_UpdateYOffset:
-; dummied out
-	ret
-	ld hl, OBJECT_1D
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	srl a
-	srl a
-	and %00000111
-	ld l, a
-	ld h, 0
-	ld de, .y_offsets
-	add hl, de
-	ld a, [hl]
-	ld hl, OBJECT_SPRITE_Y_OFFSET
-	add hl, bc
-	ld [hl], a
-	ret
-
-.y_offsets:
-	db 0, -1, -2, -3, -4, -3, -2, -1
 
 UpdateJumpPosition:
 	call GetStepVector
