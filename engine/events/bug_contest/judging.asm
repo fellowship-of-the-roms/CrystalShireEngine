@@ -177,7 +177,7 @@ DetermineContestWinners:
 	ld bc, BUG_CONTESTANT_SIZE
 	rst CopyBytes
 	ld hl, wBugContestFirstPlaceWinnerID
-	jmp CopyTempContestant
+	jr CopyTempContestant
 
 .not_first_place
 	ld de, wBugContestTempScore
@@ -190,7 +190,7 @@ DetermineContestWinners:
 	ld bc, BUG_CONTESTANT_SIZE
 	rst CopyBytes
 	ld hl, wBugContestSecondPlaceWinnerID
-	jmp CopyTempContestant
+	jr CopyTempContestant
 
 .not_second_place
 	ld de, wBugContestTempScore
@@ -199,7 +199,7 @@ DetermineContestWinners:
 	call CompareBytes
 	ret c
 	ld hl, wBugContestThirdPlaceWinnerID
-	jmp CopyTempContestant
+	jr CopyTempContestant
 
 CopyTempContestant:
 ; Could've just called CopyBytes.
@@ -358,7 +358,7 @@ ContestScore:
 	ret z
 
 	ld a, 1
-	jmp .AddContestStat
+	jr .AddContestStat
 
 .AddContestStat:
 	ld hl, hMultiplicand

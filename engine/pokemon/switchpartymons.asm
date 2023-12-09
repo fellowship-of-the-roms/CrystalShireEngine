@@ -12,7 +12,7 @@ _SwitchPartyMons:
 	ld a, [wSwitchMonFrom]
 	call .ClearSprite
 	ld a, [wSwitchMonTo]
-	jmp .ClearSprite
+	jr .ClearSprite
 
 .ClearSprite:
 	push af

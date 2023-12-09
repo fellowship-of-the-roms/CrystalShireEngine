@@ -148,7 +148,7 @@ UpdateOverworldMap:
 	cp 2 ; was 1
 	ret nz
 	ld [hl], 0
-	jmp .ScrollMapDataDown
+	jr .ScrollMapDataDown
 
 .ScrollMapDataDown:
 	ld hl, wOverworldMapAnchor
@@ -177,7 +177,7 @@ UpdateOverworldMap:
 	cp -1 ; was 0
 	ret nz
 	ld [hl], $1
-	jmp .ScrollMapDataUp
+	jr .ScrollMapDataUp
 
 .ScrollMapDataUp:
 	ld hl, wOverworldMapAnchor
@@ -207,7 +207,7 @@ UpdateOverworldMap:
 	cp -1
 	ret nz
 	ld [hl], 1
-	jmp .ScrollMapDataLeft
+	jr .ScrollMapDataLeft
 
 .ScrollMapDataLeft:
 	ld hl, wOverworldMapAnchor
@@ -234,7 +234,7 @@ UpdateOverworldMap:
 	cp 2
 	ret nz
 	ld [hl], 0
-	jmp .ScrollMapDataRight
+	jr .ScrollMapDataRight
 
 .ScrollMapDataRight:
 	ld hl, wOverworldMapAnchor

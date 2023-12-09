@@ -421,7 +421,7 @@ endr
 	ld a, h
 	add HIGH(vTiles1 - vTiles0)
 	ld h, a
-	jmp .CopyToVram
+	jr .CopyToVram
 
 .GetTileAddr:
 ; Return the address of tile (a) in (hl).

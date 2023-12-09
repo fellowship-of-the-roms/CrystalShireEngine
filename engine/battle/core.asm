@@ -225,7 +225,7 @@ BattleTurn:
 	ld a, [wBattleEnded]
 	and a
 	ret nz
-	jmp .loop
+	jr .loop
 
 HandleBetweenTurnEffects:
 	ldh a, [hSerialConnectionStatus]

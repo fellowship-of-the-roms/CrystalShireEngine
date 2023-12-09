@@ -1252,7 +1252,7 @@ _LinkBattleSendReceiveAction:
 	farjp FinishBattleAnim
 
 .not_mobile
-	jmp .LinkBattle_SendReceiveAction
+	jr .LinkBattle_SendReceiveAction
 
 .StageForSend:
 	ld a, [wBattlePlayerAction]
@@ -1361,7 +1361,7 @@ endc
 	ld a, [wcd27]
 	bit 7, a
 	jr z, .asm_100a92
-	jmp Function100ae7
+	jr Function100ae7
 
 .asm_100ac7
 	ld a, $0f

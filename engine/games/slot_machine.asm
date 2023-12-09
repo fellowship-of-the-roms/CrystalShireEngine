@@ -1312,7 +1312,7 @@ Slots_CheckMatchedFirstTwoReels:
 	call .CheckTopRow
 
 .one
-	jmp .CheckMiddleRow
+	jr .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped
@@ -1406,7 +1406,7 @@ Slots_CheckMatchedAllThreeReels:
 	call .CheckTopRow
 
 .one
-	jmp .CheckMiddleRow
+	jr .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped

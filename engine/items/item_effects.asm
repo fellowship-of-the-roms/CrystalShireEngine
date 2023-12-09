@@ -1926,7 +1926,7 @@ RestoreHealth:
 	sbc [hl]
 	ret c
 .full_hp
-	jmp ReviveFullHP
+	jr ReviveFullHP
 
 RemoveHP:
 	ld a, MON_HP + 1
