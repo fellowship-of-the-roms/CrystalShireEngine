@@ -923,8 +923,7 @@ Script_variablesprite:
 	add hl, de
 	call GetScriptByte
 	ld [hl], a
-	farcall ReloadSpriteIndex
-	ret
+	farjp ReloadSpriteIndex
 
 Script_appear:
 	call GetScriptByte

@@ -678,8 +678,7 @@ NamePlayer:
 	jr z, .NewName
 	call StorePlayerName
 	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
-	ret
+	farjp MovePlayerPicLeft
 
 .NewName:
 	ld b, NAME_PLAYER

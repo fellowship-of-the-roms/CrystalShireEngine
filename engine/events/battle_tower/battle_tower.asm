@@ -677,8 +677,7 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	call GetSpritePalette
 	ld [wNeededPalIndex], a
 	ld de, wOBPals1 palette 1
-	farcall CopySpritePal
-	ret
+	farjp CopySpritePal
 
 INCLUDE "data/trainers/sprites.asm"
 
