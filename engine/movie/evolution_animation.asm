@@ -315,7 +315,7 @@ EvolutionAnimation:
 	add hl, bc
 	ld a, [wJumptableIndex]
 	and %1110
-	sla a
+	add a
 	pop de
 	add e
 	ld [hl], a

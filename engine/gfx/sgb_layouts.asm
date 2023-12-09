@@ -456,8 +456,8 @@ endr
 	add hl, de
 	ld a, [wUnusedSGB1eColorOffset]
 	and 3
-	sla a
-	sla a
+	add a
+	add a
 	ld c, a
 	ld b, 0
 	add hl, bc

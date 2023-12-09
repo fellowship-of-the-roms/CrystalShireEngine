@@ -180,8 +180,8 @@ SpriteAnimFunc_GSTitleTrail:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
-	sla a
-	sla a
+	add a
+	add a
 
 	ld d, 2
 	ld hl, SPRITEANIMSTRUCT_VAR1

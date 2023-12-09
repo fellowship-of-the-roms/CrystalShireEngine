@@ -569,9 +569,9 @@ AnimateEndOfExpBar:
 	dec c
 	ld a, c
 ; multiply by 8
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	push af
 
 	push de

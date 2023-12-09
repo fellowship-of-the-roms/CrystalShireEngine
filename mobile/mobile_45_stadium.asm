@@ -204,8 +204,8 @@ Function117764_d_up:
 	ret nz
 	ld a, [wcd4c]
 	ld e, a
-	sla a
-	sla a
+	add a
+	add a
 	add e
 Function117764_d_vertical_load:
 	ld [wcd4c], a
