@@ -249,8 +249,7 @@ Pack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
-	ret
+	jr .ItemBallsKey_LoadSubmenu
 
 .BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader

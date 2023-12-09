@@ -3943,7 +3943,7 @@ GetEnemyMonShiny:
 	ret z
 	ld hl, wOTPartyMon1Shiny
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	jmp GetPartyLocation
 
 GetEnemyMonIVs:
 	ld hl, wEnemyMonIVs
