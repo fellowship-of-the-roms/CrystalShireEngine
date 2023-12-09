@@ -312,7 +312,7 @@ MagnetTrain_Jumptable:
 	jr z, .PrepareToHoldTrain
 	ld e, a
 	ld a, [wMagnetTrainDirection]
-	xor $ff
+	cpl
 	inc a
 	add e
 	ld [wMagnetTrainPosition], a
@@ -346,7 +346,7 @@ MagnetTrain_Jumptable:
 	jr z, .PrepareToFinishAnim
 	ld e, a
 	ld a, [wMagnetTrainDirection]
-	xor $ff
+	cpl
 	inc a
 	ld d, a
 	ld a, e

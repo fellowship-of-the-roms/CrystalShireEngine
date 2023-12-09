@@ -50,7 +50,7 @@ Function170c8b:
 	ld b, $5
 .asm_170c90
 	ld a, [hl]
-	xor $ff
+	cpl
 	ld [hli], a
 	dec b
 	jr nz, .asm_170c90

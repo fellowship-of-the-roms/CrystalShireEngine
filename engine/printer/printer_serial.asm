@@ -345,7 +345,7 @@ Printer_StageHeaderForSend:
 Printer_Convert2RowsTo2bpp:
 	; de = wPrinterTilemapBuffer + 2 * SCREEN_WIDTH * ([wPrinterQueueLength] - [wPrinterRowIndex])
 	ld a, [wPrinterRowIndex]
-	xor $ff
+	cpl
 	ld d, a
 	ld a, [wPrinterQueueLength]
 	inc a
