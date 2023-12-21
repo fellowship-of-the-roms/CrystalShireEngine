@@ -726,8 +726,7 @@ LoadGreenPage:
 	hlcoord 12, 11
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
-	predef ListMovePP
-	ret
+	predef_jump ListMovePP
 
 .GetItemName:
 	ld de, .ThreeDashes
@@ -759,8 +758,7 @@ LoadBluePage:
 	jr nz, .vertical_divider
 	hlcoord 11, 8
 	ld bc, 6
-	predef PrintTempMonStats
-	ret
+	predef_jump PrintTempMonStats
 
 .PlaceOTInfo:
 	ld de, IDNoString

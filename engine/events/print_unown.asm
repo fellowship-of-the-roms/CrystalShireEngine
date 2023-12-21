@@ -229,5 +229,4 @@ PlaceUnownPrinterFrontpic:
 	ld a, $31
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic

@@ -268,8 +268,7 @@ TrainerCard_PrintTopHalfOfCard:
 	lb bc, 5, 7
 	xor a
 	ldh [hGraphicStartTile], a
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 .Name_Money:
 	db   "NAME/"

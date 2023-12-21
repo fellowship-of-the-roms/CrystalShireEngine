@@ -2650,8 +2650,7 @@ Pokedex_LoadSelectedMonTiles:
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	ld de, vTiles2
-	predef GetMonFrontpic
-	ret
+	predef_jump GetMonFrontpic
 
 .QuestionMark:
 	ld a, BANK(sScratch)

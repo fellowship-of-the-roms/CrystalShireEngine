@@ -1599,8 +1599,7 @@ Mobile_MoveSelectionScreen:
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
 	hlcoord 2, 10
-	predef ListMoves
-	ret
+	predef_jump ListMoves
 
 Function100c98:
 	ld de, .data
