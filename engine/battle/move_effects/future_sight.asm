@@ -45,8 +45,7 @@ BattleCommand_FutureSight:
 	ld a, [hl]
 	and a
 	jr nz, .failed
-	ld a, 4
-	ld [hl], a
+	ld [hl], 4
 	call BattleCommand_LowerSub
 	call BattleCommand_MoveDelay
 	ld hl, ForesawAttackText

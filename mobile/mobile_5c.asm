@@ -479,8 +479,7 @@ Function171ccd:
 	ld hl, wOBPals1 palette 0 color 1
 	ld a, LOW(PALRGB_WHITE)
 	ld [hli], a
-	ld a, HIGH(PALRGB_WHITE)
-	ld [hl], a
+	ld [hl], HIGH(PALRGB_WHITE)
 	call SetPalettes
 	pop af
 	ldh [rSVBK], a

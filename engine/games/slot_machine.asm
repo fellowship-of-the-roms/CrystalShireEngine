@@ -873,8 +873,7 @@ ReelAction_StopReelIgnoreJoypad:
 .EndReel:
 	ld hl, REEL_ACTION
 	add hl, bc
-	ld a, REEL_ACTION_DO_NOTHING
-	ld [hl], a
+	ld [hl], REEL_ACTION_DO_NOTHING
 	ret
 
 ReelAction_StopReel1:

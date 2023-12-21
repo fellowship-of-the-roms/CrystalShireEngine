@@ -918,8 +918,7 @@ CheckTrainerRun:
 	ld a, [hl]
 	cp $40
 	jr nc, .next
-	ld a, $40
-	ld [hl], a
+	ld [hl], $40
 
 .next
 	pop de

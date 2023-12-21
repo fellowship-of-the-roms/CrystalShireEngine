@@ -447,8 +447,7 @@ DayCare_GiveEgg:
 	ld a, [wEggMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH

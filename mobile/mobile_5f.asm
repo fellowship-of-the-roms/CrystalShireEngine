@@ -1381,8 +1381,7 @@ Function17dbb1:
 	ld a, b
 	cp [hl]
 	jr nz, .asm_17dbe4
-	ld a, $1
-	ld [hl], a
+	ld [hl], $1
 	ld hl, wcd31
 
 .asm_17dbe4
@@ -1502,8 +1501,7 @@ Function17dcaf:
 	push hl
 	ld a, $ff
 	ld [hli], a
-	ld a, $7f
-	ld [hl], a
+	ld [hl], $7f
 	pop hl
 	add hl, de
 	dec c
@@ -2536,8 +2534,7 @@ Function17e4dd:
 	ld a, [wcd2f]
 	and a
 	jr z, .asm_17e4ff
-	ld a, $61
-	ld [hl], a
+	ld [hl], $61
 
 .asm_17e4ff
 	ld a, [wcd2a]
@@ -2552,8 +2549,7 @@ Function17e4dd:
 	cp c
 	ret z
 	ret nc
-	ld a, $ee
-	ld [hl], a
+	ld [hl], $ee
 	ret
 
 Function17e51b:

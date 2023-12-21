@@ -145,8 +145,7 @@ endc
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .loop
@@ -321,8 +320,7 @@ endc
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .loop1

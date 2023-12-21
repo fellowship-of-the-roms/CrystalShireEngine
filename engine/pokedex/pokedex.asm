@@ -1524,8 +1524,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $34
 	call .FillRow
-	ld a, $35
-	ld [hl], a
+	ld [hl], $35
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
@@ -1535,8 +1534,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $7f
 	call .FillRow
-	ld a, $37
-	ld [hl], a
+	ld [hl], $37
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
@@ -1546,8 +1544,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $39
 	call .FillRow
-	ld a, $3a
-	ld [hl], a
+	ld [hl], $3a
 	ret
 
 .FillRow:

@@ -593,8 +593,7 @@ Function1143f3:
 	jmp nz, .asm_11442b
 
 .asm_1144c2
-	ld a, $0
-	ld [hl], a
+	ld [hl], $0
 	ld a, $1
 	ret
 
@@ -4431,8 +4430,7 @@ endr
 	pop hl
 
 .asm_1159d8
-	ld a, $0
-	ld [hl], a
+	ld [hl], $0
 	ret
 
 Function1159dc:

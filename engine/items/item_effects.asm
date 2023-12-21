@@ -596,8 +596,7 @@ PokeBallEffect:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 
-	ld a, FRIEND_BALL_HAPPINESS
-	ld [hl], a
+	ld [hl], FRIEND_BALL_HAPPINESS
 
 .SkipPartyMonFriendBall:
 	ld hl, AskGiveNicknameText

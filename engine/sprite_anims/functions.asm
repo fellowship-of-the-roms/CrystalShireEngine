@@ -102,13 +102,11 @@ SpriteAnimFunc_PartyMonSwitch:
 	ret
 
 .load_minus_one
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 	ret
 
 .load_minus_two
-	ld a, -2
-	ld [hl], a
+	ld [hl], -2
 	ret
 
 SpriteAnimFunc_PartyMonSelected:

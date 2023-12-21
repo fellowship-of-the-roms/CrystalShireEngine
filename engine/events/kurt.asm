@@ -253,8 +253,7 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 	ld a, [wCurItemQuantity]
 	dec a
 	ld [hli], a
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 	pop hl
 	jr .loop1
 

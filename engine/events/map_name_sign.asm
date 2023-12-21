@@ -220,8 +220,7 @@ PlaceMapNameFrame:
 	ld a, MAP_NAME_SIGN_START + 8
 	call .FillTopBottom
 	; bottom right
-	ld a, MAP_NAME_SIGN_START + 10
-	ld [hl], a
+	ld [hl], MAP_NAME_SIGN_START + 10
 	ret
 
 .FillMiddle:

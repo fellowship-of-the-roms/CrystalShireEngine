@@ -427,8 +427,7 @@ BlinkCursor::
 	dec a
 	ldh [hObjectStructIndex], a
 	ret nz
-	ld a, "─"
-	ld [hl], a
+	ld [hl], "─"
 	ld a, -1
 	ldh [hMapObjectIndex], a
 	ld a, 6
@@ -450,6 +449,5 @@ BlinkCursor::
 	ret nz
 	ld a, 6
 	ldh [hObjectStructIndex], a
-	ld a, "▼"
-	ld [hl], a
+	ld [hl], "▼"
 	ret

@@ -683,8 +683,7 @@ _CGB_UnownPuzzle:
 	ld hl, wOBPals1
 	ld a, LOW(palred 31 + palgreen 0 + palblue 0)
 	ld [hli], a
-	ld a, HIGH(palred 31 + palgreen 0 + palblue 0)
-	ld [hl], a
+	ld [hl], HIGH(palred 31 + palgreen 0 + palblue 0)
 	pop af
 	ldh [rSVBK], a
 	call WipeAttrmap

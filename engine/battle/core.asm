@@ -4154,7 +4154,7 @@ PursuitSwitch:
 	call GetMoveEffect
 	ld a, b
 	cp EFFECT_PURSUIT
-	jmp nz, .done
+	jr nz, .done
 
 	ld a, [wCurBattleMon]
 	push af
@@ -4172,8 +4172,7 @@ PursuitSwitch:
 
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
-	ld a, $ff
-	ld [hl], a
+	ld [hl], $ff
 
 	pop af
 	ld [wCurBattleMon], a

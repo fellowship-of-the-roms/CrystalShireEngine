@@ -481,8 +481,7 @@ StatsScreen_PlaceVerticalDivider: ; unreferenced
 	ld bc, SCREEN_WIDTH
 	ld d, SCREEN_HEIGHT
 .loop
-	ld a, $31 ; vertical divider
-	ld [hl], a
+	ld [hl], $31 ; vertical divider
 	add hl, bc
 	dec d
 	jr nz, .loop

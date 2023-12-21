@@ -6,7 +6,7 @@ CorrectPartyErrors: ; unreferenced
 
 	cp PARTY_LENGTH + 1
 	jr c, .party_length_okay
-	ld a, PARTY_LENGTH
+	ld a, PARTY_LENGTH ; no-optimize *hl = N
 	ld [hl], a
 .party_length_okay
 	inc hl

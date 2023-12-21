@@ -21,8 +21,7 @@ CelebiShrineEvent:
 	ld [hl], SPRITE_ANIM_FUNC_CELEBI
 	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
-	ld a, $80
-	ld [hl], a
+	ld [hl], $80
 	ld a, 160 ; frame count
 	ld [wFrameCounter], a
 	ld d, $0
