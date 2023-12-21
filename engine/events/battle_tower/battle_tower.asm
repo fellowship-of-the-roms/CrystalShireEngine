@@ -351,10 +351,7 @@ ResetBattleTowerTrainersSRAM:
 
 	xor a
 	ld [sNrOfBeatenBattleTowerTrainers], a
-
-	call CloseSRAM
-
-	ret
+	jmp CloseSRAM
 
 BattleTower_GiveReward:
 	ld a, BANK(sBattleTowerReward)
