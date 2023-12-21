@@ -561,7 +561,7 @@ rept 4
 endr
 	ld a, "@"
 	ld [hli], a
-	ld [hli], a
+	ld [hl], a
 	ld hl, EGG_TICKET
 	call GetItemIDFromIndex
 	pop hl

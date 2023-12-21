@@ -17,7 +17,7 @@ Load2DMenuData::
 	xor a
 	ld [hli], a ; wCursorOffCharacter
 	ld [hli], a ; wCursorCurrentTile
-	ld [hli], a
+	ld [hl], a
 	pop bc
 	pop hl
 	ret

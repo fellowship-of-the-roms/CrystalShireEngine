@@ -3527,7 +3527,7 @@ _MobileReceive::
 	ld hl, wc80a
 	ld [hli], a
 	ld [hli], a
-	ld [hli], a
+	ld [hl], a
 	ld hl, wc81f
 	ld a, [hli]
 	ld b, a
@@ -5677,7 +5677,7 @@ Function1125c7:
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld [hli], a
+	ld [hl], a
 	ld de, wMobileSDK_PacketBuffer
 	ld hl, MobilePacket_TransferData
 	ld b, $6

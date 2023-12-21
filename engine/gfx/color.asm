@@ -262,7 +262,7 @@ LoadMailPalettes:
 	ld [wSGBPals + 4], a
 	ld a, [hli]
 	ld [wSGBPals + 5], a
-	ld a, [hli]
+	ld a, [hl]
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
 	call PushSGBPals

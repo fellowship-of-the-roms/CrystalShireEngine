@@ -238,7 +238,7 @@ AnimateHOFMonEntrance:
 	inc hl
 	ld a, [hli]
 	ld [wTempMonDVs], a
-	ld a, [hli]
+	ld a, [hl]
 	ld [wTempMonDVs + 1], a
 	ld hl, wTempMonDVs
 	predef GetUnownLetter

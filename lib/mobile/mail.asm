@@ -2098,8 +2098,7 @@ endr
 	ld [MBC3SRamBank], a
 	ld a, [hli]
 	ld e, a
-	ld a, [hli]
-	ld d, a
+	ld d, [hl]
 	ld hl, wPartyMon5Defense
 	call Function115d6a
 	xor a
@@ -2527,7 +2526,7 @@ Function114f39:
 	ld [hli], a
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hl], a
 	inc de
 	ld hl, $dc0d
 	ld [hl], e
@@ -2675,8 +2674,7 @@ Function115020:
 	ld d, a
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld b, [hl]
 	pop hl
 .asm_115036
 	ld a, [hli]
@@ -2881,8 +2879,7 @@ Function115136:
 	ld d, a
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld b, [hl]
 	ld hl, wPartyMon5Defense
 .asm_11514d
 	ld a, [hli]
@@ -2934,8 +2931,7 @@ Function115179:
 	ld d, a
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld b, [hl]
 	ld hl, $013f
 	ld a, [hli]
 	ld [de], a
@@ -3052,8 +3048,7 @@ Function115217:
 	ld d, a
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld b, [hl]
 	pop hl
 .asm_11522d
 	ld a, [hli]
@@ -3141,8 +3136,7 @@ Function11528f:
 	ld [MBC3SRamBank], a
 	ld a, [hli]
 	ld e, a
-	ld a, [hli]
-	ld d, a
+	ld d, [hl]
 	ld hl, $dc24
 .asm_1152a4
 	ld a, [de]
@@ -3307,7 +3301,7 @@ Function11537d:
 	ld a, [de]
 	ld [hld], a
 	ld a, b
-	ld [hli], a
+	ld [hl], a
 	inc de
 	ld hl, wDecoRightOrnament
 	ld a, [de]
@@ -3323,7 +3317,7 @@ Function11537d:
 	ld [hli], a
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hl], a
 	inc de
 	ld hl, $dc0d
 	ld [hl], e

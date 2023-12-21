@@ -444,7 +444,7 @@ endr
 	ldh [rWave_d], a
 	ld a, [hli]
 	ldh [rWave_e], a
-	ld a, [hli]
+	ld a, [hl]
 	ldh [rWave_f], a
 	pop hl
 	ld a, [wCurTrackVolumeEnvelope]

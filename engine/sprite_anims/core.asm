@@ -161,7 +161,7 @@ _InitSpriteAnimStruct::
 ; Take the mapped value and load it in.
 	ld a, [de]
 	call GetSpriteAnimVTile
-	ld [hli], a ; SPRITEANIMSTRUCT_TILE_ID
+	ld [hl], a ; SPRITEANIMSTRUCT_TILE_ID
 	pop de
 ; Set hl to field 4 (X coordinate).  Kinda pointless, because we're presumably already here.
 	ld hl, SPRITEANIMSTRUCT_XCOORD
