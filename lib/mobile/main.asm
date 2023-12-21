@@ -2550,8 +2550,7 @@ Function111044:
 	ld [wc86a], a
 	xor a
 	ld [wc86d], a
-	ei
-	ret
+	reti
 
 Function11115f:
 	ld e, a
@@ -3036,8 +3035,7 @@ Function1113fe:
 	ld a, $23
 	ld [wc80f], a
 	ld a, $ff
-	ei
-	ret
+	reti
 
 .asm_111436
 	xor a
@@ -3081,8 +3079,7 @@ Function1113fe:
 	ld hl, wc821
 	set 0, [hl]
 	ld a, $0
-	ei
-	ret
+	reti
 
 .asm_11147b
 	ei
@@ -3302,8 +3299,7 @@ Function111596:
 	call Function11164f
 	ld hl, wc821
 	set 0, [hl]
-	ei
-	ret
+	reti
 
 .asm_1115dd
 	ld a, $2a
@@ -4032,8 +4028,7 @@ asm_111a47:
 	ld hl, wc822
 	res 5, [hl]
 	res 0, [hl]
-	ei
-	ret
+	reti
 
 Function111ab9:
 	ld a, $80
@@ -4748,8 +4743,7 @@ PacketSendBytes:
 	ld [wc800], a
 	ld hl, wc822
 	set 5, [hl]
-	ei
-	ret
+	reti
 
 Function111f63:
 	push de

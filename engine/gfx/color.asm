@@ -671,8 +671,7 @@ InitSGBBorder:
 .skip
 	pop af
 	ld [wJoypadDisable], a
-	ei
-	ret
+	reti
 
 InitCGBPals::
 	call CheckCGB
