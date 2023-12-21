@@ -1151,7 +1151,7 @@ ComposeMail_AnimateCursor:
 	ld [hl], e
 	cp $5
 	ld de, .LetterEntries
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .got_pointer
 	ld de, .CaseDelEnd
 	ld a, 1

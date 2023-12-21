@@ -411,7 +411,7 @@ PokeBallEffect:
 	call Random
 
 	cp b
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .catch_without_fail
 	jr nc, .fail_to_catch
 
@@ -1459,9 +1459,8 @@ HealPowderEffect:
 	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
 	call LooksBitterMessage
-
-	ld a, $0
-
+	xor a
+; fallthrough
 .not_used
 	jmp StatusHealer_Jumptable
 
@@ -1497,7 +1496,7 @@ UseStatusHealer:
 	call Play_SFX_FULL_HEAL
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, FALSE
+	xor a ; FALSE
 	ret
 
 IsItemUsedOnConfusedMon:
@@ -1599,9 +1598,8 @@ RevivalHerbEffect:
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
-
-	ld a, $0
-
+	xor a
+; fallthrough
 .not_used
 	jr StatusHealer_Jumptable
 
@@ -1659,7 +1657,7 @@ RevivePokemon:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, FALSE
+	xor a ; FALSE
 	ret
 
 FullRestoreEffect:
@@ -1695,7 +1693,7 @@ FullRestoreEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 BitterBerryEffect:
@@ -1711,9 +1709,8 @@ BitterBerryEffect:
 
 	ld hl, ConfusedNoMoreText
 	call StdBattleTextbox
-
-	ld a, 0
-
+	xor a
+; fallthrough
 .done
 	jmp StatusHealer_Jumptable
 
@@ -1737,8 +1734,8 @@ EnergypowderEnergyRootCommon:
 
 	farcall ChangeHappiness
 	call LooksBitterMessage
-	ld a, 0
-
+	xor a
+; fallthrough
 .skip_happiness
 	jmp StatusHealer_Jumptable
 
@@ -1766,7 +1763,7 @@ ItemRestoreHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 HealHP_SFX_GFX:

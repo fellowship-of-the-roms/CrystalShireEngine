@@ -456,7 +456,7 @@ GetCurrentPuzzlePieceVTileCorner:
 	ld hl, .Corners
 	add l
 	ld l, a
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	adc h
 	ld h, a
 	ld a, [hl]
@@ -709,7 +709,7 @@ ConvertLoadedPuzzlePieces:
 	ld hl, .EnlargedTiles
 	add l
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 	ld a, [hl]

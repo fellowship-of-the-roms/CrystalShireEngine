@@ -1494,7 +1494,7 @@ FishFunction:
 	ret
 
 .FishNoFish:
-	ld a, $0
+	xor a
 	ld [wFishingResult], a
 	ld hl, Script_NotEvenANibble2
 	call QueueScript
@@ -1651,7 +1651,7 @@ BikeFunction:
 	jr .done
 
 .CannotUseBike:
-	ld a, $0
+	xor a
 	ret
 
 .done

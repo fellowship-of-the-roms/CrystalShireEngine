@@ -120,7 +120,7 @@ PokemonActionSubmenu:
 	jp hl
 
 .nothing
-	ld a, 0
+	xor a
 	ret
 
 .Actions:
@@ -221,7 +221,7 @@ GiveTakePartyMonItem:
 	call ClearPalettes
 	call LoadFontsBattleExtra
 	call ExitMenu
-	ld a, 0
+	xor a
 	ret
 
 .take
@@ -647,7 +647,7 @@ _OpenPartyStats:
 	ld [wLastVolume], a
 	call MaxVolume
 	call ExitMenu
-	ld a, 0
+	xor a
 	ret
 
 MonMenu_Cut:
@@ -680,7 +680,7 @@ MonMenu_Fly:
 	ret
 
 .Error:
-	ld a, $0
+	xor a
 	ret
 
 .NoReload: ; unreferenced
@@ -926,7 +926,7 @@ ManagePokemonMoves:
 	call ClearBGPalettes
 
 .egg
-	ld a, $0
+	xor a
 	ret
 
 MoveScreenLoop:

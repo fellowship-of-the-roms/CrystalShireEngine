@@ -1,5 +1,5 @@
 _SacredAsh:
-	ld a, $0
+	xor a
 	ld [wItemEffectSucceeded], a
 	call CheckAnyFaintedMon
 	ret nc

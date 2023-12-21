@@ -268,7 +268,7 @@ Serial_ExchangeSyncBytes::
 	inc hl
 	ldh a, [hSerialIgnoringInitialData]
 	and a
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	ldh [hSerialIgnoringInitialData], a
 	jr nz, .exchange
 	ld a, b

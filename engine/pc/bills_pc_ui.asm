@@ -1034,7 +1034,7 @@ _GetCursorMon:
 	and VRAM_BANK_1
 	pop hl
 	push af
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .dont_switch_vbk
 	ld a, 1
 	ldh [rVBK], a
@@ -2190,7 +2190,7 @@ GetMonItemUnlessCursor:
 	call .do_it
 	pop bc
 	pop de
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	ret z
 	ld a, [wBufferMonItem]
 	and a

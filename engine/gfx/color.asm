@@ -462,7 +462,7 @@ ApplyAttrmap:
 	ld e, a
 	dec b
 	jr nz, .row
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ret
 

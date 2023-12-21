@@ -376,7 +376,7 @@ Script_promptbutton:
 
 Script_yesorno:
 	call YesNoBox
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	jr c, .no
 	ld a, TRUE
 .no

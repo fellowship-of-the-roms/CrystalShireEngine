@@ -23,7 +23,7 @@ _ScrollingMenu::
 .exit
 	call MenuClickSound
 	ld [wMenuJoypad], a
-	ld a, 0
+	xor a
 	ldh [hInMenu], a
 	ret
 

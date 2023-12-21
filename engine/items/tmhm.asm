@@ -2,7 +2,7 @@ TMHMPocket:
 	ld a, $1
 	ldh [hInMenu], a
 	call TMHM_PocketLoop
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	ldh [hInMenu], a
 	ret nc
 	call PlaceHollowCursor

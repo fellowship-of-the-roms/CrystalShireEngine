@@ -1481,7 +1481,7 @@ BattleAnim_SetOBPals:
 	ret
 
 BattleAnim_UpdateOAM_All:
-	ld a, 0
+	xor a
 	ld [wBattleAnimOAMPointerLo], a
 	ld hl, wActiveAnimObjects
 	ld e, NUM_BATTLE_ANIM_STRUCTS

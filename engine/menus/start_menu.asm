@@ -414,7 +414,7 @@ StartMenu_Quit:
 	ret
 
 .DontEndContest:
-	ld a, 0
+	xor a
 	ret
 
 .StartMenuContestEndText:
@@ -427,7 +427,7 @@ StartMenu_Save:
 	call BufferScreen
 	farcall SaveMenu
 	jr nc, .saved
-	ld a, 0
+	xor a
 	ret
 
 .saved
@@ -448,7 +448,7 @@ StartMenu_Status:
 	call FadeToMenu
 	farcall TrainerCard
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pokedex:
@@ -461,14 +461,14 @@ StartMenu_Pokedex:
 	call CloseSubmenu
 
 .empty
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pokegear:
 	call FadeToMenu
 	farcall PokeGear
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pack:
@@ -478,7 +478,7 @@ StartMenu_Pack:
 	and a
 	jr nz, .used_item
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 .used_item
@@ -524,7 +524,7 @@ StartMenu_Pokemon:
 
 .return
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 .quit

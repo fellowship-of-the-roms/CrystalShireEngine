@@ -1,6 +1,6 @@
 AskRememberPassword:
 	call .DoMenu
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr c, .okay
 	ld a, $1
 

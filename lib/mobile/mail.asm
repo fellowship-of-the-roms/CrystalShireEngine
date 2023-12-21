@@ -454,7 +454,7 @@ Function1143f3:
 	ret
 
 .asm_114402
-	ld a, $0
+	xor a
 	cp c
 	jr nc, .asm_114400
 

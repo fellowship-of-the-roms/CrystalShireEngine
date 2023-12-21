@@ -2341,7 +2341,7 @@ HandleEnemySwitch:
 	ld hl, wBattleMonHP
 	ld a, [hli]
 	or [hl]
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr nz, EnemyPartyMonEntrance
 	inc a
 	ret
@@ -2434,7 +2434,7 @@ WinTrainerBattle:
 	call nz, .DoubleReward
 	call .CheckMaxedOutMomMoney
 	push af
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	jr nc, .okay
 	ld a, [wMomSavingMoney]
 	and MOM_SAVING_MONEY_MASK
@@ -4483,7 +4483,7 @@ HandleStatBoostingHeldItems:
 ; fallthrough
 .DoPlayer:
 	call GetPartymonItem
-	ld a, $0
+	xor a
 	jr .HandleItem
 
 .DoEnemy:
@@ -5276,7 +5276,7 @@ BattleMenu_Run:
 	ld hl, wBattleMonSpeed
 	ld de, wEnemyMonSpeed
 	call TryToRunAwayFromBattle
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	ld [wFailedToFlee], a
 	ret c
 	ld a, [wBattlePlayerAction]
@@ -7095,7 +7095,7 @@ GiveExperiencePoints:
 	inc hl
 	ld a, [wPlayerID + 1]
 	cp [hl]
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .no_boost
 
 .boosted

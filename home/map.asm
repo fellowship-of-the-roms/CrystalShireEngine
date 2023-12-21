@@ -533,7 +533,7 @@ endr
 LoadBlockData::
 	ld hl, wOverworldMapBlocks
 	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
-	ld a, 0
+	xor a
 	rst ByteFill
 	call ChangeMap
 	call FillMapConnections
@@ -1355,7 +1355,7 @@ GetMovementPermissions::
 	ld hl, .MovementPermissionsData
 	add l
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 	ld a, [hl]

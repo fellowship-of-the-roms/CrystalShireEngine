@@ -268,7 +268,7 @@ SetMagnetTrainPals:
 	ld a, PAL_BG_YELLOW
 	rst ByteFill
 
-	ld a, 0
+	xor a
 	ldh [rVBK], a
 	ret
 

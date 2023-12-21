@@ -458,7 +458,7 @@ AnimateWaterTile:
 	add a
 	add LOW(.WaterTileFrames)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(.WaterTileFrames)
 	ld h, a
 
@@ -496,7 +496,7 @@ ForestTreeLeftAnimation:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(ForestTreeLeftFrames)
 	ld h, a
 
@@ -539,7 +539,7 @@ ForestTreeRightAnimation:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(ForestTreeLeftFrames)
 	ld h, a
 	push bc
@@ -581,7 +581,7 @@ ForestTreeLeftAnimation2:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(ForestTreeLeftFrames)
 	ld h, a
 
@@ -619,7 +619,7 @@ ForestTreeRightAnimation2:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(ForestTreeLeftFrames)
 	ld h, a
 	push bc
@@ -748,7 +748,7 @@ AnimateTowerPillarTile:
 	ld hl, .TowerPillarTileFrameOffsets
 	add l
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 	ld a, [hl]
@@ -766,7 +766,7 @@ AnimateTowerPillarTile:
 	inc hl
 	ld h, [hl]
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 
@@ -818,7 +818,7 @@ AnimateWhirlpoolTile:
 	inc hl
 	ld h, [hl]
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 

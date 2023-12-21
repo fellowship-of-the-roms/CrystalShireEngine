@@ -514,7 +514,7 @@ TrainerCard_Page2_3_OAMUpdate:
 	ld a, [wTrainerCardBadgeFrameCounter]
 	add l
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc h
 	ld h, a
 	ld a, [hl]

@@ -99,7 +99,7 @@ GeneratePartyMonStats:
 	; Copy the item if it's a wild mon
 	ld a, [wBattleMode]
 	and a
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .skipitem
 	ld a, [wEnemyMonItem]
 .skipitem

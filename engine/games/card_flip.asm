@@ -589,7 +589,7 @@ CardFlip_BlankDiscardedCardSlot:
 	srl a
 	add LOW(.Jumptable)
 	ld l, a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	adc HIGH(.Jumptable)
 	ld h, a
 	ld a, [hli]

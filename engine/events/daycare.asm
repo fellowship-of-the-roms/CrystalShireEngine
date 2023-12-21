@@ -557,10 +557,10 @@ DayCare_InitBreeding:
 	jr z, .LoadWhichBreedmonIsTheMother
 	ld a, [wBreedMon2Species]
 	cp c
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .LoadWhichBreedmonIsTheMother
 	farcall GetGender
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .LoadWhichBreedmonIsTheMother
 	inc a
 

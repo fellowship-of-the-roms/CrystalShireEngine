@@ -12,7 +12,7 @@ GBCOnlyScreen:
 	ld de, wGBCOnlyDecompressBuffer
 	ldh a, [rSVBK]
 	push af
-	ld a, 0 ; this has the same effect as selecting bank 1
+	xor a
 	ldh [rSVBK], a
 	call Decompress
 	pop af

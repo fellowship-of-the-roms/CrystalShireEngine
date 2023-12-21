@@ -552,14 +552,14 @@ Printer_SendwPrinterChecksumHi:
 
 Printer_Send0x00_2:
 ; identical to Printer_Send0x00, but referenced less
-	ld a, $0
+	xor a
 	call Printer_SerialSend
 	jr Printer_NextInstruction
 
 Printer_ReceiveTwoPrinterHandshakeAndSend0x00:
 	ldh a, [rSB]
 	ld [wPrinterHandshake], a
-	ld a, $0
+	xor a
 	call Printer_SerialSend
 	jr Printer_NextInstruction
 
@@ -576,7 +576,7 @@ Printer_Send0x0f:
 	jmp Printer_NextInstruction
 
 Printer_Send0x00:
-	ld a, $0
+	xor a
 	call Printer_SerialSend
 	jmp Printer_NextInstruction
 

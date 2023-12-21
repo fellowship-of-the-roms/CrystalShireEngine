@@ -648,7 +648,7 @@ Jumptable_100581:
 Function100585:
 	ld hl, MenuHeader_1005b2
 	call LoadMenuHeader
-	ld a, 0
+	xor a
 	ld [wcd28], a
 	ld a, [wcd26]
 	inc a
@@ -695,7 +695,7 @@ Jumptable_1005cb:
 Function1005cf:
 	ld hl, MenuHeader_1005fc
 	call LoadMenuHeader
-	ld a, 0
+	xor a
 	ld [wcd28], a
 	ld a, [wcd26]
 	inc a
@@ -1047,7 +1047,7 @@ Function100846:
 	jr nz, .asm_10087c
 	ld a, [wcd6e]
 	ld c, a
-	ld a, 0
+	xor a
 	sub c
 	jr nc, .asm_100858
 	add $3c
@@ -1335,7 +1335,7 @@ endc
 .MobileBattle_SendReceiveAction:
 	call Function100acf
 	call StartMobileInactivityTimer
-	ld a, 0
+	xor a
 	ld [wcd27], a
 .asm_100a92
 	call DelayFrame
@@ -2424,7 +2424,7 @@ Function101438:
 	ld a, [wcd26]
 	bit 7, a
 	ret z
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -2460,7 +2460,7 @@ Function101475:
 	ld a, [wcd26]
 	bit 7, a
 	ret z
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -2507,7 +2507,7 @@ Function1014b7:
 Function1014e2:
 	ld hl, wcd29
 	set 6, [hl]
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -2609,7 +2609,7 @@ MobileCopyTransferData2:
 	jmp FarCopyWRAM
 
 Function10167d:
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -2637,7 +2637,7 @@ Function10168e:
 	ld a, [wcd26]
 	bit 7, a
 	ret z
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -2678,7 +2678,7 @@ Function1016de:
 	ret
 
 Function1016f8:
-	ld a, 0
+	xor a
 	ld [wcd27], a
 	ld a, [wcd26]
 	inc a
@@ -2706,7 +2706,7 @@ Function101724:
 	ld a, [wcd39]
 	cp $ff
 	jr z, .asm_101731
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -2825,7 +2825,7 @@ Function1017c7:
 	ret
 
 Function1017e4:
-	ld a, 0
+	xor a
 	ld [wcd27], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -3106,7 +3106,7 @@ Function101b0f:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3118,7 +3118,7 @@ Function101b2b:
 	bit 7, a
 	ret z
 	call Function1013dd
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMenuCursorY]
 	cp $01
@@ -3156,7 +3156,7 @@ Function101b70:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3168,7 +3168,7 @@ Function101b8f:
 	bit 7, a
 	ret z
 	call Function1013dd
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMenuCursorY]
 	cp $01
@@ -3195,7 +3195,7 @@ Function101bc8:
 	call Function101ee4
 	call Function102048
 	call Function1013dd
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -3210,7 +3210,7 @@ Function101be5:
 	bit 7, a
 	ret z
 	call Function1013dd
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMenuCursorY]
 	cp $01
@@ -3284,7 +3284,7 @@ Function101c62:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3305,7 +3305,7 @@ Function101ca0:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3380,7 +3380,7 @@ Function101d2a:
 	ld a, [wcd26]
 	bit 7, a
 	ret z
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -3427,7 +3427,7 @@ Function101d95:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3456,7 +3456,7 @@ Function101e4f:
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
 	ld [wMobileCommsJumptableIndex], a
-	ld a, 0
+	xor a
 	ld [wcd26], a
 	ret
 
@@ -3870,7 +3870,7 @@ Function102423:
 	farcall BackupGSBallFlag
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, [wcd49]
 	inc a
@@ -3883,9 +3883,8 @@ Function10244b:
 	set 1, [hl]
 	ld a, $19
 	ld [wcd4e], a
-	ld a, 0
+	xor a
 	ld [wcd4f], a
-	ld a, 0
 	ld [wcd4a], a
 	ld a, [wcd49]
 	inc a
@@ -3951,7 +3950,7 @@ Function1024de:
 	ret z
 
 .asm_1024e9
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, [wcd49]
 	inc a
@@ -4002,7 +4001,7 @@ Function10250c:
 	call Function103021
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, $1e
 	ld [wcd4e], a
@@ -4025,7 +4024,7 @@ Function10250c:
 .asm_102577
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, $1e
 	ld [wcd4e], a
@@ -4039,7 +4038,7 @@ Function102591:
 	call Function102ee7
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, $1e
 	ld [wcd4e], a
@@ -4200,7 +4199,7 @@ Function1026b7:
 	ld a, [wcd49]
 	inc a
 	ld [wcd49], a
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 
 Function1026c8:
@@ -4275,7 +4274,7 @@ Function102738:
 	ld a, [wcd49]
 	inc a
 	ld [wcd49], a
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 
 Function102754:
@@ -4393,7 +4392,7 @@ Function102814:
 	ld a, [wcd49]
 	inc a
 	ld [wcd49], a
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld hl, wcd4b
 	set 1, [hl]
@@ -4447,7 +4446,7 @@ Function10286f:
 	ld [wcd4e], a
 	ld a, $3c
 	ld [wcd4f], a
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ld a, [wcd49]
 	inc a
@@ -4500,7 +4499,7 @@ Function1028e8:
 	res 6, [hl]
 	ld [wcd50], a
 	farcall StartMobileInactivityTimer
-	ld a, 0
+	xor a
 	ld [wcd4a], a
 	ret
 
@@ -4516,7 +4515,7 @@ Function1028fc:
 	ld hl, Jumptable_102917
 	call JumpTable
 	ret nc
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	ld [wcd4a], a
 	ret
 
@@ -4532,7 +4531,7 @@ Function102921:
 	ld hl, Jumptable_10292f
 	call JumpTable
 	ret nc
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	ld [wcd4a], a
 	ret
 
@@ -4566,7 +4565,7 @@ Function10294f:
 
 Function10295d:
 	call Function10299e
-	ld a, 0
+	xor a
 	ld [wcd27], a
 	ld a, [wcd4a]
 	inc a
@@ -5390,7 +5389,7 @@ Function1030cd:
 	ld hl, wcd4b
 	bit 7, [hl]
 	pop hl
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .asm_1030eb
 	ld a, $05
 .asm_1030eb

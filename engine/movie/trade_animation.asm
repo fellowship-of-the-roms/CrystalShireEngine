@@ -171,7 +171,7 @@ RunTradeAnimScript:
 	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	rst ByteFill
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 
 .NotCGB:
