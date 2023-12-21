@@ -191,8 +191,7 @@ RestartClock:
 
 .PrintTime:
 	hlcoord 0, 5
-	ld b, 5
-	ld c, 18
+	lb bc, 5, 18
 	call Textbox
 	decoord 1, 8
 	ld a, [wRestartClockDay]

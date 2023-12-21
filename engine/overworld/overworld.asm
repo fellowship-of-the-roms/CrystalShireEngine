@@ -222,8 +222,7 @@ GetMonSprite:
 
 	farcall LoadOverworldMonIcon
 
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	scf
 	ret
 
@@ -239,8 +238,7 @@ GetMonSprite:
 
 .NoBreedmon:
 	ld a, WALKING_SPRITE
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	and a
 	ret
 

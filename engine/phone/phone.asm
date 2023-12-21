@@ -550,8 +550,7 @@ Phone_TextboxWithName:
 
 Phone_CallerTextbox:
 	hlcoord 0, 0
-	ld b, 2
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 2, SCREEN_WIDTH - 2
 	jmp Textbox
 
 GetCallerClassAndName:

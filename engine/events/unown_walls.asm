@@ -118,8 +118,7 @@ DisplayUnownWords:
 	and a
 	jr z, .load
 
-	ld d, $0
-	ld e, $5
+	lb de, $0, $5
 .loop
 	add hl, de
 	dec a
@@ -134,8 +133,7 @@ DisplayUnownWords:
 	call ApplyTilemap
 	call MenuBoxCoord2Tile
 	inc hl
-	ld d, 0
-	ld e, SCREEN_WIDTH
+	lb de, 0, SCREEN_WIDTH
 	add hl, de
 	add hl, de
 	ld a, [wScriptVar]
@@ -182,8 +180,7 @@ _DisplayUnownWords_FillAttr:
 	push hl
 	ld [hli], a
 	ld [hld], a
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	ld [hli], a
 	ld [hl], a
@@ -222,8 +219,7 @@ _DisplayUnownWords_CopyWord:
 	inc a
 	ld [hld], a
 	dec a
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	ld c, $10
 	add c

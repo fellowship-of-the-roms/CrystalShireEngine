@@ -3558,12 +3558,10 @@ Function17f5e4:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	rst ByteFill
 	hlcoord 2, 1
-	ld b, $1
-	ld c, $e
+	lb bc, $1, $e
 	call Function3eea
 	hlcoord 1, 4
-	ld b, $c
-	ld c, $10
+	lb bc, $c, $10
 	call Function3eea
 	hlcoord 3, 2
 	ld de, MobileCommunicationErrorText

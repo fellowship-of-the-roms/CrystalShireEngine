@@ -372,8 +372,7 @@ endr
 	lb bc, 5, 10
 	call ClearBox
 	hlcoord 0, 13
-	ld b, 3
-	ld c, 8
+	lb bc, 3, 8
 	jmp TextboxPalette
 
 .IsMenuAccountOn:

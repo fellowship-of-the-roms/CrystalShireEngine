@@ -212,8 +212,7 @@ CorrectPartyErrors: ; unreferenced
 
 .GetLengthOfStringWith6CharCap:
 	push de
-	ld c, 1
-	ld b, NAME_LENGTH_JAPANESE
+	lb bc, NAME_LENGTH_JAPANESE, 1
 .search_loop
 	ld a, [de]
 	cp "@"

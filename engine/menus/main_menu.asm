@@ -187,8 +187,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	and %10000000 ; Day count exceeded 16383
 	jr nz, .TimeFail
 	hlcoord 0, 14
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	jmp Textbox
 
 .TimeFail:

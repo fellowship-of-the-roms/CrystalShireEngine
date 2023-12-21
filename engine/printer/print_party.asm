@@ -155,8 +155,7 @@ PrintPartyMonPage1:
 	ld [wMonType], a
 	farcall CopyMonToTempMon
 	hlcoord 0, 7
-	ld b, 9
-	ld c, 18
+	lb bc, 9, 18
 	call Textbox
 	hlcoord 8, 2
 	ld a, [wTempMonLevel]
@@ -253,8 +252,7 @@ PrintPartyMonPage2:
 	ld [wMonType], a
 	farcall CopyMonToTempMon
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call Textbox
 	ld bc, SCREEN_WIDTH
 	decoord 0, 0

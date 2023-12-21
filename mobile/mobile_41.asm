@@ -827,8 +827,7 @@ Function106453:
 Function106464::
 	ld de, MobileDialingFrameGFX
 	ld hl, vTiles2 tile $62
-	ld c, 9
-	ld b, BANK(MobileDialingFrameGFX)
+	lb bc, BANK(MobileDialingFrameGFX), 9
 	call Get2bpp
 ;	ld de, $40b0
 ;	ld hl, vTiles2 tile $6b
@@ -845,13 +844,11 @@ Function10649b: ; unreferenced
 	ld d, h
 	ld e, l
 	ld hl, vTiles2 tile "┌" ; $79
-	ld c, TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	ld b, BANK(Frames)
+	lb bc, BANK(Frames), TEXTBOX_FRAME_TILES ; "┌" to "┘"
 	call Function1064c3
 	ld hl, vTiles2 tile " " ; $7f
 	ld de, TextboxSpaceGFX
-	ld c, 1
-	ld b, BANK(TextboxSpaceGFX)
+	lb bc, BANK(TextboxSpaceGFX), 1
 ; fallthrough
 Function1064c3:
 	ldh a, [rSVBK]

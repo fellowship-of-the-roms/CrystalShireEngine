@@ -466,8 +466,7 @@ PlacePartyMonMobileBattleSelection:
 	ld h, a
 	ld de, .String_Kettei_Yameru
 	rst PlaceString
-	ld b, $3
-	ld c, $0
+	lb bc, $3, $0
 	ld hl, wd002
 	ld a, [hl]
 .loop2

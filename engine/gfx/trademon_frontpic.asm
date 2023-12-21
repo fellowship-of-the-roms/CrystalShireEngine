@@ -31,6 +31,5 @@ AnimateTrademonFrontpic:
 	ld a, [wOTTrademonSpecies]
 	ld [wCurPartySpecies], a
 	hlcoord 7, 2
-	ld d, $0
-	ld e, ANIM_MON_TRADE
+	lb de, $0, ANIM_MON_TRADE
 	predef_jump AnimateFrontpic

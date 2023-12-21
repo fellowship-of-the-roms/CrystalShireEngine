@@ -90,8 +90,7 @@ _UnownPuzzle:
 	ret
 
 InitUnownPuzzlePiecePositions:
-	ld c, 1
-	ld b, 16
+	lb bc, 16, 1
 .load_loop
 	call Random
 	and $f

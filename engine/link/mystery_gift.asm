@@ -335,8 +335,7 @@ endc
 .continue
 	push bc
 	call MysteryGift_UpdateJoypad
-	ld b, 1 << rRP_RECEIVING
-	ld c, LOW(rRP)
+	lb bc, 1 << rRP_RECEIVING, LOW(rRP)
 .in_vblank
 	ldh a, [c]
 	and b
@@ -859,8 +858,7 @@ InitializeIRCommunicationRoles:
 	ldh [hMGRole], a
 .loop
 	call MysteryGift_UpdateJoypad
-	ld b, 1 << rRP_RECEIVING
-	ld c, LOW(rRP)
+	lb bc, 1 << rRP_RECEIVING, LOW(rRP)
 	; Check if we've pressed the B button to cancel
 	ldh a, [hMGJoypadReleased]
 	bit B_BUTTON_F, a

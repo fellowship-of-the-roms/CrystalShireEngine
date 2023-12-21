@@ -459,24 +459,21 @@ PokegearClock_Joypad:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
 	jr z, .no_map_card
-	ld c, POKEGEARSTATE_MAPCHECKREGION
-	ld b, POKEGEARCARD_MAP
+	lb bc, POKEGEARCARD_MAP, POKEGEARSTATE_MAPCHECKREGION
 	jr .done
 
 .no_map_card
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_PHONE_CARD_F, a
 	jr z, .no_phone_card
-	ld c, POKEGEARSTATE_PHONEINIT
-	ld b, POKEGEARCARD_PHONE
+	lb bc, POKEGEARCARD_PHONE, POKEGEARSTATE_PHONEINIT
 	jr .done
 
 .no_phone_card
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_RADIO_CARD_F, a
 	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
+	lb bc, POKEGEARCARD_RADIO, POKEGEARSTATE_RADIOINIT
 .done
 	jmp Pokegear_SwitchPage
 
@@ -550,8 +547,7 @@ PokegearMap_KantoMap:
 	jr PokegearMap_ContinueMap
 
 PokegearMap_JohtoMap:
-	ld d, LANDMARK_SILVER_CAVE
-	ld e, LANDMARK_NEW_BARK_TOWN
+	lb de, LANDMARK_SILVER_CAVE, LANDMARK_NEW_BARK_TOWN
 PokegearMap_ContinueMap:
 	ld hl, hJoyLast
 	ld a, [hl]
@@ -569,21 +565,18 @@ PokegearMap_ContinueMap:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_PHONE_CARD_F, a
 	jr z, .no_phone
-	ld c, POKEGEARSTATE_PHONEINIT
-	ld b, POKEGEARCARD_PHONE
+	lb bc, POKEGEARCARD_PHONE, POKEGEARSTATE_PHONEINIT
 	jr .done
 
 .no_phone
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_RADIO_CARD_F, a
 	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
+	lb bc, POKEGEARCARD_RADIO, POKEGEARSTATE_RADIOINIT
 	jr .done
 
 .left
-	ld c, POKEGEARSTATE_CLOCKINIT
-	ld b, POKEGEARCARD_CLOCK
+	lb bc, POKEGEARCARD_CLOCK, POKEGEARSTATE_CLOCKINIT
 .done
 	jmp Pokegear_SwitchPage
 
@@ -710,13 +703,11 @@ TownMap_GetKantoLandmarkLimits:
 	ld a, [wStatusFlags]
 	bit STATUSFLAGS_HALL_OF_FAME_F, a
 	jr z, .not_hof
-	ld d, LANDMARK_ROUTE_28
-	ld e, LANDMARK_PALLET_TOWN
+	lb de, LANDMARK_ROUTE_28, LANDMARK_PALLET_TOWN
 	ret
 
 .not_hof
-	ld d, LANDMARK_ROUTE_28
-	ld e, LANDMARK_VICTORY_ROAD
+	lb de, LANDMARK_ROUTE_28, LANDMARK_VICTORY_ROAD
 	ret
 
 PokegearRadio_Init:
@@ -753,21 +744,18 @@ PokegearRadio_Joypad:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_PHONE_CARD_F, a
 	jr z, .no_phone
-	ld c, POKEGEARSTATE_PHONEINIT
-	ld b, POKEGEARCARD_PHONE
+	lb bc, POKEGEARCARD_PHONE, POKEGEARSTATE_PHONEINIT
 	jr .switch_page
 
 .no_phone
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
 	jr z, .no_map
-	ld c, POKEGEARSTATE_MAPCHECKREGION
-	ld b, POKEGEARCARD_MAP
+	lb bc, POKEGEARCARD_MAP, POKEGEARSTATE_MAPCHECKREGION
 	jr .switch_page
 
 .no_map
-	ld c, POKEGEARSTATE_CLOCKINIT
-	ld b, POKEGEARCARD_CLOCK
+	lb bc, POKEGEARCARD_CLOCK, POKEGEARSTATE_CLOCKINIT
 .switch_page
 	jmp Pokegear_SwitchPage
 
@@ -809,21 +797,18 @@ PokegearPhone_Joypad:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
 	jr z, .no_map
-	ld c, POKEGEARSTATE_MAPCHECKREGION
-	ld b, POKEGEARCARD_MAP
+	lb bc, POKEGEARCARD_MAP, POKEGEARSTATE_MAPCHECKREGION
 	jr .switch_page
 
 .no_map
-	ld c, POKEGEARSTATE_CLOCKINIT
-	ld b, POKEGEARCARD_CLOCK
+	lb bc, POKEGEARCARD_CLOCK, POKEGEARSTATE_CLOCKINIT
 	jr .switch_page
 
 .right
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_RADIO_CARD_F, a
 	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
+	lb bc, POKEGEARCARD_RADIO, POKEGEARSTATE_RADIOINIT
 .switch_page
 	jmp Pokegear_SwitchPage
 
@@ -1771,8 +1756,7 @@ _TownMap:
 	ld a, [wTownMapPlayerIconLandmark]
 	cp KANTO_LANDMARK
 	jr nc, .kanto
-	ld d, KANTO_LANDMARK - 1
-	ld e, 1
+	lb de, KANTO_LANDMARK - 1, 1
 	call .loop
 	jr .resume
 

@@ -847,8 +847,7 @@ Function1145c5:
 
 .asm_114620
 	ld de, $ddc8
-	ld b, $0
-	ld c, $40
+	lb bc, $0, $40
 .asm_114627
 	ld a, [hli]
 	cp $22
@@ -1728,8 +1727,7 @@ Function114acf:
 	jr .asm_114acf
 
 .asm_114b19
-	ld b, $0
-	ld c, $40
+	lb bc, $0, $40
 	ld a, [de]
 	cp $22
 	jr nz, .asm_114b26
@@ -5128,6 +5126,5 @@ Function115d80:
 	ldh [hSRAMBank], a
 	ld [MBC3SRamBank], a
 	ld a, e
-	ld d, $a0
-	ld e, $0
+	lb de, $a0, $0
 	ret

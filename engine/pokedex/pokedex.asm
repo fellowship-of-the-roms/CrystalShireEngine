@@ -1421,8 +1421,7 @@ Pokedex_DrawUnownModeBG:
 	hlcoord 6, 5
 	call PlaceFrontpicAtHL
 	ld de, 0
-	ld b, 0
-	ld c, NUM_UNOWN
+	lb bc, 0, NUM_UNOWN
 .loop
 	ld hl, wUnownDex
 	add hl, de

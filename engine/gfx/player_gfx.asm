@@ -131,8 +131,7 @@ HOF_LoadTrainerFrontpic:
 	ld de, KrisPic
 .got_pic
 	ld hl, vTiles2
-	ld b, BANK(ChrisPic) ; aka BANK(KrisPic)
-	ld c, 7 * 7
+	lb bc, BANK(ChrisPic), 7 * 7  ; aka BANK(KrisPic) / dimensions
 	call Get2bpp
 
 	call WaitBGMap
@@ -161,8 +160,7 @@ DrawIntroPlayerPic:
 	ld de, KrisPic
 .got_pic
 	ld hl, vTiles2
-	ld b, BANK(ChrisPic) ; aka BANK(KrisPic)
-	ld c, 7 * 7 ; dimensions
+	lb bc, BANK(ChrisPic), 7 * 7  ; aka BANK(KrisPic) / dimensions
 	call Get2bpp
 
 ; Draw

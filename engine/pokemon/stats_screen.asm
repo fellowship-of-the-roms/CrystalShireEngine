@@ -883,8 +883,7 @@ StatsScreen_PlaceFrontpic:
 	ld de, vTiles2 tile $00
 	predef GetAnimatedFrontpic
 	hlcoord 0, 0
-	ld d, $0
-	ld e, ANIM_MON_MENU
+	lb de, $0, ANIM_MON_MENU
 	predef LoadMonAnimation
 	ld hl, wStatsScreenFlags
 	set 6, [hl]

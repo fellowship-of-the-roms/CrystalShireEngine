@@ -107,15 +107,13 @@ _TitleScreen:
 ; Draw Pokemon logo
 	hlcoord 0, 3
 	lb bc, 7, 20
-	ld d, $80
-	ld e, 20
+	lb de, $80, 20
 	call DrawTitleGraphic
 
 ; Draw copyright text
 	hlbgcoord 3, 0, vBGMap1
 	lb bc, 1, 13
-	ld d, $c
-	ld e, 16
+	lb de, $c, 16
 	call DrawTitleGraphic
 
 ; Initialize running Suicune?
@@ -303,8 +301,7 @@ DrawTitleGraphic:
 
 InitializeBackground:
 	ld hl, wShadowOAMSprite00
-	ld d, -$22
-	ld e, $0
+	lb de, -$22, $0
 	ld c, 5
 .loop
 	push bc
@@ -318,8 +315,7 @@ InitializeBackground:
 	ret
 
 .InitColumn:
-	ld c, $6
-	ld b, $40
+	lb bc, $40, $6
 .loop2
 	ld a, d
 	ld [hli], a ; y

@@ -42,15 +42,13 @@ DrawGBCOnlyScreen:
 
 	; Pokemon
 	hlcoord 3, 2
-	ld b, 14
-	ld c, 4
+	lb bc, 14, 4
 	ld a, $8
 	call DrawGBCOnlyGraphic
 
 	; Crystal
 	hlcoord 5, 6
-	ld b, 10
-	ld c, 2
+	lb bc, 10, 2
 	ld a, $40
 	call DrawGBCOnlyGraphic
 

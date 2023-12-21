@@ -10,13 +10,11 @@ DisplayCaughtContestMonStats:
 	set NO_TEXT_SCROLL, [hl]
 
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 13
+	lb bc, 4, 13
 	call Textbox
 
 	hlcoord 0, 6
-	ld b, 4
-	ld c, 13
+	lb bc, 4, 13
 	call Textbox
 
 	hlcoord 2, 0

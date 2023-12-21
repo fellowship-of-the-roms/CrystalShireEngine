@@ -731,8 +731,7 @@ MenuData_100604:
 
 Mobile_CommunicationStandby:
 	hlcoord 3, 10
-	ld b, 1
-	ld c, 11
+	lb bc, 1, 11
 	call Function3eea
 	ld de, .String
 	hlcoord 4, 11
@@ -1107,8 +1106,7 @@ Function1008e0:
 
 Function100902:
 	hlcoord 3, 10
-	ld b, $01
-	ld c, $0b
+	lb bc, $01, $0b
 	call Textbox
 	ld a, [wcd6d]
 	ld c, a
@@ -1176,8 +1174,7 @@ Function1009ae:
 
 ;	ld hl, w3_d800
 	decoord 0, 0, wAttrmap
-	ld c, SCREEN_WIDTH
-	ld b, SCREEN_HEIGHT
+	lb bc, SCREEN_HEIGHT, SCREEN_WIDTH
 .loop_row
 	push bc
 .loop_col
@@ -1341,8 +1338,7 @@ endc
 	call DelayFrame
 	call GetJoypad
 	farcall Function100382
-	ld c, $01
-	ld b, $03
+	lb bc, $03, $01
 	push bc
 	call AdvanceMobileInactivityTimerAndCheckExpired
 	pop bc
@@ -1586,8 +1582,7 @@ Mobile_MoveSelectionScreen:
 
 .ListMoves:
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 	call Textbox
 	ld hl, wBattleMonMoves
 	ld de, wListMoves_MoveIndicesBuffer
@@ -1776,12 +1771,10 @@ Mobile_SetOverworldDelay:
 	ret
 
 Function100dd8:
-	ld c, $01
-	ld b, $03
+	lb bc, $03, $01
 	farcall AdvanceMobileInactivityTimerAndCheckExpired
 	jr c, .asm_100dfb
-	ld c, $3c
-	ld b, $01
+	lb bc, $01, $3c
 	call Function10079c
 	jr c, .asm_100dfb
 	farcall Function10032e
@@ -2621,12 +2614,10 @@ Function10168a:
 	ret c
 
 Function10168e:
-	ld b, 0
-	ld c, $01
+	lb bc, 0, $01
 	farcall Function10079c
 	ret c
-	ld c, $01
-	ld b, $03
+	lb bc, $03, $01
 	farcall AdvanceMobileInactivityTimerAndCheckExpired
 	ret c
 	ld a, [wcd26]
@@ -2837,12 +2828,10 @@ Function1017f1:
 	ret c
 
 Function1017f5:
-	ld b, 0
-	ld c, $01
+	lb bc, 0, $01
 	farcall Function10079c
 	ret c
-	ld c, $01
-	ld b, $03
+	lb bc, $03, $01
 	farcall AdvanceMobileInactivityTimerAndCheckExpired
 	ret c
 	farcall Function100382
@@ -4367,8 +4356,7 @@ asm_1027e2:
 
 Function1027eb:
 	hlcoord 0, 14
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	ld d, h
 	ld e, l
 	farcall _LinkTextbox
@@ -4635,8 +4623,7 @@ Jumptable_1029cb:
 Function1029cf:
 	call LoadStandardMenuHeader
 	hlcoord 10, 7
-	ld b, 3
-	ld c, 8
+	lb bc, 3, 8
 	ld d, h
 	ld e, l
 	farcall _LinkTextbox
@@ -5050,8 +5037,7 @@ Function102db7:
 
 Function102dc3:
 	hlcoord 0, 12
-	ld b,  4
-	ld c, 18
+	lb bc,  4, 18
 	ld d, h
 	ld e, l
 	farjp _LinkTextbox
@@ -5077,8 +5063,7 @@ Function102dec:
 
 Function102e07:
 	hlcoord 3, 10
-	ld b,  1
-	ld c, 11
+	lb bc,  1, 11
 	ld a, [wBattleMode]
 	and a
 	jr z, .link_battle
@@ -5088,8 +5073,7 @@ Function102e07:
 .link_battle
 ; the next three operations are pointless
 	hlcoord 3, 10
-	ld b,  1
-	ld c, 11
+	lb bc,  1, 11
 	ld d, h
 	ld e, l
 	farcall _LinkTextbox
@@ -5382,8 +5366,7 @@ Function1030cd:
 	add hl, hl
 	ld bc, Unknown_103112
 	add hl, bc
-	ld b, $30
-	ld c, $08
+	lb bc, $30, $08
 .asm_1030de
 	push hl
 	ld hl, wcd4b
@@ -5596,16 +5579,14 @@ Function10343c:
 	jr nz, .asm_103452
 	ld bc, 1
 	call Function1034f7
-	ld c, $12
-	ld b, $01
+	lb bc, $01, $12
 	call Function1034e0
 	jr .asm_10345f
 
 .asm_103452
 	ld bc, $ffed
 	call Function1034f7
-	ld c, $12
-	ld b, $02
+	lb bc, $02, $12
 	call Function1034e0
 
 .asm_10345f
@@ -5633,8 +5614,7 @@ Function103487:
 
 Function103490:
 	hlcoord 0, 15
-	ld c, $14
-	ld b, $03
+	lb bc, $03, $14
 	call Function1034e0
 	ld bc, 6
 	call Function10350f

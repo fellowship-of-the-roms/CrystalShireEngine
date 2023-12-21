@@ -835,8 +835,7 @@ BattleCommand_CheckObedience:
 
 	ld hl, wBattleMonPP
 	ld de, wBattleMonMoves
-	ld b, 0
-	ld c, NUM_MOVES
+	lb bc, 0, NUM_MOVES
 
 .GetTotalPP:
 	ld a, [hli]

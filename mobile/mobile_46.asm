@@ -2096,8 +2096,7 @@ Function119471:
 	ld a, h
 	ld [wc608 + 1], a
 	ld de, wcd69
-	ld c, $10
-	ld b, $0
+	lb bc, $0, $10
 .asm_119521
 	ld a, [de]
 	inc de
@@ -3965,11 +3964,9 @@ Function11a5b9:
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
 	hlcoord 0, 0, wAttrmap
-	ld b, $6
-	ld c, $14
+	lb bc, $6, $14
 	hlcoord 0, 0
-	ld b, $4
-	ld c, $12
+	lb bc, $4, $12
 	call Function3eea
 	farcall ReloadMapPart
 	call UpdateSprites
@@ -3990,11 +3987,9 @@ Function11a5f5:
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
 	hlcoord 14, 6, wAttrmap
-	ld b, $5
-	ld c, $6
+	lb bc, $5, $6
 	hlcoord 14, 6
-	ld b, $3
-	ld c, $4
+	lb bc, $3, $4
 	call Function3eea
 	hlcoord 16, 7
 	ld de, String_11a2cf
@@ -5003,8 +4998,7 @@ Function11b03d:
 .done
 	dec hl
 	push hl
-	ld e, 4
-	ld d, 0
+	lb de, 0, 4
 	add hl, de
 	ld e, l
 	ld d, h

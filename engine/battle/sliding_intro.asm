@@ -27,8 +27,7 @@ BattleIntroSlidingPics:
 	jmp DmgToCgbObjPals
 
 .subfunction2
-	ld d, $90
-	ld e, $72
+	lb de, $90, $72
 	ld a, $48
 	inc a
 .loop1
