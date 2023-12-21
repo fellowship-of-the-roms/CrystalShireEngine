@@ -150,7 +150,6 @@ Function11425c:
 	ld [$dc02], a
 	pop af
 	ldh [hSRAMBank], a
-	ldh [hSRAMBank], a
 	ld [MBC3SRamBank], a
 	ret
 

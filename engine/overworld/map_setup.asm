@@ -171,9 +171,7 @@ ApplyMapPalettes:
 
 FadeMapMusicAndPalettes:
 	ld e, LOW(MUSIC_NONE)
-	ld a, [wMusicFadeID]
 	ld d, HIGH(MUSIC_NONE)
-	ld a, [wMusicFadeID + 1]
 	ld a, $4
 	ld [wMusicFade], a
 	farjp FadeOutPalettes

@@ -664,7 +664,6 @@ LoadPinkPage:
 	ld d, a
 	farcall CalcExpAtLevel
 	ld hl, wTempMonExp + 2
-	ld hl, wTempMonExp + 2
 	ldh a, [hQuotient + 3]
 	sub [hl]
 	dec hl

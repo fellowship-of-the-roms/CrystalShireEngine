@@ -109,7 +109,6 @@ PlaceMapNameSign::
 	call PlaceMapNameCenterAlign
 	farcall HDMATransfer_OnlyTopFourRows
 .already_initialized
-	ld a, $80
 	ld a, $70
 	ldh [rWY], a
 	ldh [hWY], a
