@@ -304,8 +304,7 @@ CheckTileEvent:
 
 	call RandomEncounter
 	ret c
-	jr .ok ; pointless
-
+; fallthrough
 .ok
 	xor a
 	ret

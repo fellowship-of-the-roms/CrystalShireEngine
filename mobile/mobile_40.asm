@@ -1917,8 +1917,7 @@ asm_100eb8:
 	cp $02
 	ret c
 	ld [hl], 0
-	jr Function100ec5
-
+; fallthrough
 Function100ec5:
 	ld hl, wcd67
 	inc [hl]
@@ -1946,8 +1945,7 @@ Function100ee6:
 Function100eed:
 	ld hl, Unknown_100feb
 	ld c, 1
-	jr Function100f02
-
+; fallthrough
 Function100f02:
 	ld a, c
 	ld [wStringBuffer2], a
@@ -4926,8 +4924,7 @@ Function102c3b:
 	ld hl, wPartyMon1
 	ld de, wOTPartyMon1
 	ld bc, $30
-	jr Function102c71
-
+; fallthrough
 Function102c71:
 	ld a, [wcd4c]
 	dec a

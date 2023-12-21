@@ -1,5 +1,5 @@
 AddPhoneNumber::
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .cant_add
 	call Phone_FindOpenSlot
 	jr nc, .cant_add
@@ -12,7 +12,7 @@ AddPhoneNumber::
 	ret
 
 DelCellNum::
-	call _CheckCellNum
+	call CheckCellNum
 	jr nc, .not_in_list
 	xor a
 	ld [hl], a
@@ -23,9 +23,6 @@ DelCellNum::
 	ret
 
 CheckCellNum::
-	jr _CheckCellNum ; useless
-
-_CheckCellNum:
 	ld hl, wPhoneList
 	ld b, CONTACT_LIST_SIZE
 .loop
@@ -74,7 +71,7 @@ GetRemainingSpaceInPhoneList:
 	push bc
 	push hl
 	ld c, a
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .permanent
 	ld hl, wRegisteredPhoneNumbers
 	inc [hl]

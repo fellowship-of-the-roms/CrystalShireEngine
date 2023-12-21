@@ -148,9 +148,6 @@ UpdateOverworldMap:
 	cp 2 ; was 1
 	ret nz
 	ld [hl], 0
-	jr .ScrollMapDataDown
-
-.ScrollMapDataDown:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
 	add 3 * 2 ; surrounding tiles
@@ -177,9 +174,6 @@ UpdateOverworldMap:
 	cp -1 ; was 0
 	ret nz
 	ld [hl], $1
-	jr .ScrollMapDataUp
-
-.ScrollMapDataUp:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
 	add 3 * 2 ; surrounding tiles
@@ -207,9 +201,6 @@ UpdateOverworldMap:
 	cp -1
 	ret nz
 	ld [hl], 1
-	jr .ScrollMapDataLeft
-
-.ScrollMapDataLeft:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
 	sub 1
@@ -234,9 +225,6 @@ UpdateOverworldMap:
 	cp 2
 	ret nz
 	ld [hl], 0
-	jr .ScrollMapDataRight
-
-.ScrollMapDataRight:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
 	add 1

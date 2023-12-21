@@ -523,8 +523,7 @@ RetrieveMonFromDayCareLady:
 	ld [wCurPartyLevel], a
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
-	jr RetrieveBreedmon ; pointless
-
+; fallthrough
 RetrieveBreedmon:
 	ld hl, wPartyCount
 	ld a, [hl]

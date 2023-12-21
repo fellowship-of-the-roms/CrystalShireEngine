@@ -12,8 +12,7 @@ _SwitchPartyMons:
 	ld a, [wSwitchMonFrom]
 	call .ClearSprite
 	ld a, [wSwitchMonTo]
-	jr .ClearSprite
-
+; fallthrough
 .ClearSprite:
 	push af
 	hlcoord 0, 1

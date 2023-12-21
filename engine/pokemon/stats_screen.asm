@@ -920,8 +920,7 @@ StatsScreen_GetAnimationParam:
 .Buffermon
 .Tempmon:
 	ld bc, wTempMonSpecies
-	jr .CheckEggFaintedFrzSlp ; utterly pointless
-
+; fallthrough
 .CheckEggFaintedFrzSlp:
 	ld a, [wCurPartySpecies]
 	cp EGG

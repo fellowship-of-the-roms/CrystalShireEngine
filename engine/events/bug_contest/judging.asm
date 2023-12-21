@@ -199,8 +199,7 @@ DetermineContestWinners:
 	call CompareBytes
 	ret c
 	ld hl, wBugContestThirdPlaceWinnerID
-	jr CopyTempContestant
-
+; fallthrough
 CopyTempContestant:
 ; Could've just called CopyBytes.
 	ld de, wBugContestTempWinnerID
@@ -356,10 +355,8 @@ ContestScore:
 	ld a, [wContestMonItem]
 	and a
 	ret z
-
 	ld a, 1
-	jr .AddContestStat
-
+; fallthrough
 .AddContestStat:
 	ld hl, hMultiplicand
 	add [hl]

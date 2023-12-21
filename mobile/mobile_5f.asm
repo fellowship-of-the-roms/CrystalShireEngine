@@ -2034,8 +2034,7 @@ Function17ded9:
 .asm_17e01f
 	ld de, $4
 	add hl, de
-	jr asm_17e0ee
-
+; fallthrough
 asm_17e0ee:
 	ld a, [hli]
 	ld h, [hl]
