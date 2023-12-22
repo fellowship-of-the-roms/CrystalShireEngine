@@ -108,18 +108,14 @@ _DoFadePalettes::
 	sla l
 	swap l
 	ld a, l
+	xor e
 	and %11100000
-	ld h, a
-	ld a, e
-	and %00011111
-	or h
+	xor e
 	ld e, a
 	ld a, l
+	xor d
 	and %00000011
-	ld l, a
-	ld a, d
-	and %01111100
-	or l
+	xor d
 	ld d, a
 
 	; Blue
