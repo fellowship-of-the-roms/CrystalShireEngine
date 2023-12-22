@@ -478,10 +478,8 @@ endc
 	jr nz, .ready_to_trade
 	ld a, [wLinkOtherPlayerGender]
 	dec a
-	jr z, .is_female
 	ld a, CAL
-	jr .done
-.is_female
+	jr nz, .done
 	ld a, LINK_KRIS
 .done
 	ld [wOtherTrainerClass], a

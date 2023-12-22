@@ -887,12 +887,11 @@ Function11878d:
 	add a
 	jr c, .asm_1187fd
 	add a
-	jr c, .asm_1187f5
 	ld a, MOBILEAPI_12
-	jr .asm_1187ff
-.asm_1187f5
+	jr nc, .asm_1187ff
 	ld a, MOBILEAPI_14
 	jr .asm_1187ff
+
 .asm_1187f9
 	ld a, MOBILEAPI_15
 	jr .asm_1187ff
@@ -3547,13 +3546,9 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	farcall ReloadMapPart
 	ld a, [wMobileInactivityTimerFrames]
 	cp $0
-	jr z, .asm_11a2b4
 	ld a, [wcd47]
-	jr .exit_carry
-
-.asm_11a2b4
+	jr nz, .exit_carry
 	ld a, [wcd33]
-
 .exit_carry
 	ld [wcf66], a
 	ld a, $a
@@ -5134,19 +5129,9 @@ Function11b0ff:
 .asm_11b131
 	call Function11b20b
 	call CheckSeenMemMon
-	jr z, .asm_11b13d
 	ld a, $1
-	jr .asm_11b148
-
-.asm_11b13d
+	jr nz, .asm_11b148
 	ld a, $2
-	jr .asm_11b148
-
-.asm_11b141
-	ld hl, wJumptableIndex
-	ld [hl], $7
-	ret
-
 .asm_11b148
 	call PlayClickSFX
 	ld [wcd4b], a
@@ -5160,6 +5145,11 @@ Function11b0ff:
 	cp $ff
 	jr z, .asm_11b16b
 	jmp MobileIncJumptableIndex
+
+.asm_11b141
+	ld hl, wJumptableIndex
+	ld [hl], $7
+	ret
 
 .asm_11b163
 	ld a, $1

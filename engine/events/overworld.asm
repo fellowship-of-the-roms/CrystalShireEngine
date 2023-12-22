@@ -1399,11 +1399,8 @@ AskRockSmashText:
 HasRockSmash:
 	ld hl, ROCK_SMASH
 	call CheckPartyMoveIndex
-	jr nc, .yes
-; no
 	ld a, 1
-	jr .done
-.yes
+	jr c, .done
 	xor a
 .done
 	ld [wScriptVar], a

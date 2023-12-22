@@ -1978,12 +1978,8 @@ Music_TempoRelative:
 	ld e, a
 	; check sign
 	cp $80
-	jr nc, .negative
-;positive
 	ld d, 0
-	jr .ok
-
-.negative
+	jr c, .ok
 	ld d, -1
 .ok
 	ld hl, CHANNEL_TEMPO

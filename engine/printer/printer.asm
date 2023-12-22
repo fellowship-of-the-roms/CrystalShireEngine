@@ -434,12 +434,9 @@ CheckPrinterStatus:
 	bit 7, a
 	jr nz, .error_1
 	bit 6, a
-	jr nz, .error_4
 	; paper error
 	ld a, PRINTER_ERROR_3
-	jr .load_text_index
-
-.error_4
+	jr z, .load_text_index
 	; temperature error
 	ld a, PRINTER_ERROR_4
 	jr .load_text_index

@@ -297,11 +297,8 @@ HPBarAnim_BGMapUpdate:
 	jr z, .load_1
 	ld a, [wCurPartyMon]
 	cp $3
-	jr nc, .bottom_half_of_screen
 	ld c, $0
-	jr .got_third
-
-.bottom_half_of_screen
+	jr c, .got_third
 	ld c, $1
 .got_third
 	push af

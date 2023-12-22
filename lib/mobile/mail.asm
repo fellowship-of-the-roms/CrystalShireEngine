@@ -1354,13 +1354,9 @@ Function1148c2:
 	ld b, [hl]
 	ld a, [$dc0e]
 	cp $3
-	jr z, .asm_114932
 	ld d, $6
-	jr .asm_114934
-
-.asm_114932
+	jr nz, .asm_114934
 	ld d, $a
-
 .asm_114934
 	dec bc
 	ld a, b
@@ -1444,13 +1440,9 @@ Function11494d:
 	ld b, [hl]
 	ld a, [$dc0e]
 	cp $3
-	jr z, .asm_1149b1
 	ld d, $4
-	jr .asm_1149b3
-
-.asm_1149b1
+	jr nz, .asm_1149b3
 	ld d, $8
-
 .asm_1149b3
 	dec bc
 	ld a, b

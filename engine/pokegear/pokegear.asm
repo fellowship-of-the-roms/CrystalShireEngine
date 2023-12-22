@@ -1836,11 +1836,8 @@ _TownMap:
 .InitTilemap:
 	ld a, [wTownMapPlayerIconLandmark]
 	cp KANTO_LANDMARK
-	jr nc, .kanto2
 	ld e, JOHTO_REGION
-	jr .okay_tilemap
-
-.kanto2
+	jr c, .okay_tilemap
 	ld e, KANTO_REGION
 .okay_tilemap
 	farcall PokegearMap

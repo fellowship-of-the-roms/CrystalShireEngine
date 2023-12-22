@@ -546,11 +546,8 @@ BattleBGEffect_RemoveMon:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .user
 	ld a, $9
-	jr .okay
-
-.user
+	jr nz, .okay
 	ld a, $8
 .okay
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1401,11 +1398,8 @@ BattleBGEffect_Tackle:
 	add hl, bc
 	ld [hl], 0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_side
 	ld a, 2
-	jr .okay
-
-.player_side
+	jr z, .okay
 	ld a, -2
 .okay
 	ld [hl], a
@@ -1439,11 +1433,8 @@ BattleBGEffect_BodySlam:
 	add hl, bc
 	ld [hl], 0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_side
 	ld a, 2
-	jr .okay
-
-.player_side
+	jr z, .okay
 	ld a, -2
 .okay
 	ld [hl], a
@@ -1580,11 +1571,8 @@ VitalThrow_MoveBackwards:
 	add hl, bc
 	ld [hl], $0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_turn
 	ld a, -2
-	jr .okay
-
-.player_turn
+	jr z, .okay
 	ld a, 2
 .okay
 	ld [hl], a
