@@ -491,8 +491,6 @@ TryObjectEvent:
 	add hl, bc
 	ld a, [hl]
 	ldh [hLastTalked], a
-
-	ldh a, [hLastTalked]
 	call GetMapObject
 	ld hl, MAPOBJECT_TYPE
 	add hl, bc

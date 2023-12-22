@@ -13,7 +13,6 @@ InitCrystalData:
 	ld a, [wd479]
 	res 0, a ; ???
 	ld [wd479], a
-	ld a, [wd479]
 	res 1, a ; ???
 	ld [wd479], a
 	ret

@@ -111,7 +111,6 @@ _CardFlip:
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
-	ld a, h
 	and a
 	jr nz, .deduct ; You have at least 256 coins.
 	ld a, l

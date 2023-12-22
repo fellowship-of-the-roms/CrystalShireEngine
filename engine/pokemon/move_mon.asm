@@ -17,7 +17,6 @@ TryAddMonToParty:
 	ret nc
 	; Increase the party count
 	ld [de], a
-	ld a, [de] ; Why are we doing this?
 	ldh [hMoveMon], a ; HRAM backup
 	add e
 	ld e, a

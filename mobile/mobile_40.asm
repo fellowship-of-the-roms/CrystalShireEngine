@@ -2727,7 +2727,6 @@ Function10177b:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, l
 	sub e
 	ld l, a
 	ld a, h

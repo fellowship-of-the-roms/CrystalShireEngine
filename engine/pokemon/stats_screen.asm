@@ -63,7 +63,6 @@ StatsScreenMain:
 	ld [wJumptableIndex], a
 ; ???
 	ld [wStatsScreenFlags], a
-	ld a, [wStatsScreenFlags]
 	and ~STAT_PAGE_MASK
 	or PINK_PAGE ; first_page
 	ld [wStatsScreenFlags], a
@@ -83,7 +82,6 @@ StatsScreenMobile:
 	ld [wJumptableIndex], a
 ; ???
 	ld [wStatsScreenFlags], a
-	ld a, [wStatsScreenFlags]
 	and ~STAT_PAGE_MASK
 	or PINK_PAGE ; first_page
 	ld [wStatsScreenFlags], a
