@@ -7878,9 +7878,8 @@ CalcExpBar:
 	ld b, 4
 	call Divide
 	ldh a, [hQuotient + 3]
-	ld b, a
-	ld a, $40
-	sub b
+	cpl
+	add $40 + 1
 	ld b, a
 	ret
 

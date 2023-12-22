@@ -234,9 +234,8 @@ RestartLuckyNumberCountdown:
 
 .GetDaysUntilNextFriday:
 	call GetWeekday
-	ld c, a
-	ld a, FRIDAY
-	sub c
+	cpl
+	add FRIDAY + 1
 	jr z, .friday_saturday
 	ret nc
 

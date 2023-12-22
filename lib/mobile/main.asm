@@ -5078,9 +5078,8 @@ Function1121f6:
 	dec a
 .asm_11222b
 
-	ld b, a
-	ld a, $4
-	sub b
+	cpl
+	add $4 + 1
 	ld d, a
 	rlca
 	add d

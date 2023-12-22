@@ -1205,9 +1205,8 @@ CrystalIntro_UnownFade:
 	cp %011111
 	jr z, .okay
 	jr c, .okay
-	ld c, a
-	ld a, %111111
-	sub c
+	cpl
+	add %111111 + 1
 .okay
 
 	ld c, a

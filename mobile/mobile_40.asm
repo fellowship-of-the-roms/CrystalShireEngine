@@ -1109,9 +1109,8 @@ Function100902:
 	lb bc, $01, $0b
 	call Textbox
 	ld a, [wcd6d]
-	ld c, a
-	ld a, $0a
-	sub c
+	cpl
+	add $0a + 1
 	ld [wStringBuffer2], a
 	jr z, .asm_10093f
 	ld de, .string_100966
@@ -1790,9 +1789,8 @@ Function100dd8:
 
 MobileComms_CheckInactivityTimer:
 	ld a, [wOverworldDelay]
-	ld c, a
-	ld a, 30
-	sub c
+	cpl
+	add 30 + 1
 	ld c, a
 	ld b, 3
 	push bc
@@ -1817,9 +1815,8 @@ MobileComms_CheckInactivityTimer:
 
 Function100e2d:
 	ld a, [wOverworldDelay]
-	ld c, a
-	ld a, 30
-	sub c
+	cpl
+	add 30 + 1
 	ld c, a
 	ld b, 3
 	push bc
@@ -3772,9 +3769,8 @@ Function1022d0:
 	jr nz, .asm_1022f3
 	call Function102298
 	ld a, [wOverworldDelay]
-	ld c, a
-	ld a, 30
-	sub c
+	cpl
+	add 30 + 1
 	ld c, a
 	ld b, 03
 	farcall AdvanceMobileInactivityTimerAndCheckExpired
@@ -4929,9 +4925,8 @@ Function102cee:
 	ld bc, $2f
 	rst CopyBytes
 	ld a, [wJumptableIndex]
-	ld c, a
-	ld a, $06
-	sub c
+	cpl
+	add $06 + 1
 	ret z
 	ld bc, $2f
 	ld hl, 0
