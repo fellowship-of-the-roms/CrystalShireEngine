@@ -982,8 +982,8 @@ ComputeROMXChecksum::
 	ld a, [hli]
 	add e
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	ld a, h
 	cp $80 ; HIGH(ROMX end)

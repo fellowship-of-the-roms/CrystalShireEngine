@@ -435,8 +435,8 @@ Function10043a:
 	ld a, [hli]
 	add e
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	dec bc
 	ld a, b
@@ -2155,8 +2155,8 @@ Function1010de:
 	ld a, [hli]
 	add e
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	dec bc
 	ld a, b
@@ -2228,8 +2228,8 @@ LoadSelectedPartiesForColosseum:
 	push hl
 	add l
 	ld l, a
-	ld a, h
-	adc 0
+	adc h
+	sub l
 	ld h, a
 	ld a, [hl]
 	pop hl
@@ -2238,8 +2238,8 @@ LoadSelectedPartiesForColosseum:
 	inc de
 	add e
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	ld a, [de]
 	pop de
@@ -5380,9 +5380,10 @@ Function1030cd:
 	add a
 
 	add LOW(Unknown_10327a)
+
 	ld l, a
-	ld a, HIGH(Unknown_10327a)
-	adc 0
+	adc HIGH(Unknown_10327a)
+	sub l
 	ld h, a
 
 	ld a, b

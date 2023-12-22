@@ -632,9 +632,8 @@ PokeAnim_ConvertAndApplyBitmask:
 	ld a, l
 	sub e
 	ld l, a
-	ld a, h
-	sbc 0
-	ld h, a
+	ret nc
+	dec h
 	ret
 
 .GetTilemap:

@@ -73,8 +73,8 @@ MobileSDK_CopyStringLen:
 	pop bc
 	add c
 	ld c, a
-	ld a, b
-	adc 0
+	adc b
+	sub c
 	ld b, a
 	ret
 
@@ -1674,8 +1674,8 @@ Function110af4:
 	ld a, c
 	sub e
 	ld c, a
-	ld a, b
-	sbc $0
+	sbc c
+	add b
 	ld b, a
 	ld a, c
 	ld [hli], a
@@ -1801,8 +1801,8 @@ Function110af4:
 	ld a, c
 	sub e
 	ld c, a
-	ld a, b
-	sbc $0
+	sbc c
+	add b
 	ld b, a
 	ld a, [wc994]
 	ld e, a
@@ -2401,7 +2401,7 @@ Function111044:
 	call nz, Function11115f
 	xor a
 	cp e
-	jmp z, .asm_1110eb
+	jr z, .asm_1110eb
 	xor a
 	cp b
 	jr nz, .asm_1110ac
@@ -2452,8 +2452,8 @@ Function111044:
 	ld a, c
 	sub e
 	ld c, a
-	ld a, b
-	sbc $0
+	sbc c
+	add b
 	ld b, a
 	ld a, c
 	ld [hli], a
@@ -2588,8 +2588,8 @@ Function11115f:
 	ld a, c
 	sub e
 	ld c, a
-	ld a, b
-	sbc $0
+	sbc c
+	add b
 	ld b, a
 	ld a, [wc992]
 	ld [wc82b], a
@@ -4336,8 +4336,8 @@ Function111cc2:
 	ld a, e
 	sub c
 	ld e, a
-	ld a, d
-	sbc $0
+	sbc e
+	add d
 	ld d, a
 .asm_111ce1
 	ld a, d
@@ -6648,8 +6648,8 @@ Function112bec:
 	ld h, [hl]
 	sub b
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr nc, .asm_112c56
 	cp $ff
@@ -6684,8 +6684,8 @@ Function112bec:
 	ld a, l
 	sub c
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr nc, .asm_112c9f
 	cp $ff

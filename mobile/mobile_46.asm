@@ -5648,8 +5648,8 @@ Function11b3d9:
 	ld a, e
 	sub c
 	ld e, a
-	ld a, d
-	sbc $0
+	sbc e
+	add d
 	ld d, a
 	jr c, .load_sprites
 	inc b

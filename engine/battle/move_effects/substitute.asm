@@ -27,8 +27,8 @@ BattleCommand_Substitute:
 	ld a, [hld]
 	sub b
 	ld e, a
-	ld a, [hl]
-	sbc 0
+	sbc e
+	add [hl]
 	ld d, a
 	jr c, .too_weak_to_sub
 	ld a, d

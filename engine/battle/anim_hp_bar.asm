@@ -369,8 +369,8 @@ ShortHPBar_CalcPixelFrame:
 	ld a, l
 	sub HP_BAR_LENGTH_PX
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr z, .done
 	jr c, .done
@@ -385,8 +385,8 @@ ShortHPBar_CalcPixelFrame:
 	ld a, l
 	sub HP_BAR_LENGTH_PX
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr c, .no_carry
 	inc b

@@ -461,8 +461,8 @@ PlacePartyMonMobileBattleSelection:
 	ld e, MON_NAME_LENGTH
 	sub e
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	ld de, .String_Kettei_Yameru
 	rst PlaceString
@@ -518,8 +518,8 @@ PartyMenuCheckEgg:
 	ld a, LOW(wPartySpecies)
 	add b
 	ld e, a
-	ld a, HIGH(wPartySpecies)
-	adc 0
+	adc HIGH(wPartySpecies)
+	sub e
 	ld d, a
 	ld a, [de]
 	cp EGG
