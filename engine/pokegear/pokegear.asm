@@ -1008,7 +1008,7 @@ PokegearPhone_UpdateDisplayList:
 	ld b, a
 	call GetCallerClassAndName
 	pop hl
-	ld a, [wPokegearPhoneDisplayPosition]
+	ld a, [wPokegearPhoneDisplayPosition] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wPokegearPhoneDisplayPosition], a
 	cp PHONE_DISPLAY_HEIGHT

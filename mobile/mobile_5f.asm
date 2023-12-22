@@ -1258,9 +1258,8 @@ Function17dadc:
 	cp [hl]
 	jr z, .asm_17db11
 	call Function17e566
-	ld a, [wcd31]
-	inc a
-	ld [wcd31], a
+	ld hl, wcd31
+	inc [hl]
 	ld hl, wcd24
 	ld a, [wcd2e]
 	add [hl]
@@ -1296,9 +1295,8 @@ Function17db2d:
 	jr z, .asm_17db53
 	ld [wcd2e], a
 	call Function17e566
-	ld a, [wcd30]
-	inc a
-	ld [wcd30], a
+	ld hl, wcd30
+	inc [hl]
 	call Function17e55b
 	call Function17e5af
 
@@ -1310,12 +1308,10 @@ Function17db56:
 	cp $1
 	jr z, .asm_17db74
 	call Function17e566
-	ld a, [wcd30]
-	dec a
-	ld [wcd30], a
-	ld a, [wcd2e]
-	dec a
-	ld [wcd2e], a
+	ld hl, wcd30
+	dec [hl]
+	ld hl, wcd2e
+	dec [hl]
 	call Function17e55b
 	call Function17e5af
 
@@ -2483,7 +2479,7 @@ Function17e451:
 	ld e, a
 	ld d, 0
 	add hl, de
-	ld a, [wcd2e]
+	ld a, [wcd2e] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wcd2e], a
 	ld e, a

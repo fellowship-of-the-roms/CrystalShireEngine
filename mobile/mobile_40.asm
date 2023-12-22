@@ -467,9 +467,8 @@ Function10046a:
 	inc [hl]
 	call Function1003d8
 	call Function1003ba
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 Function10047c:
@@ -499,9 +498,8 @@ asm_100497:
 	call Function100337
 	ret c
 	ret z
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 Function1004a4:
@@ -522,9 +520,8 @@ Function1004ba:
 	call Function10038a
 	and a
 	jr nz, .asm_1004c8
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 .asm_1004c8
@@ -538,32 +535,28 @@ Function1004ce:
 	ret z
 	cp $02
 	ret nz
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 Function1004de:
 	call Function100393
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 Function1004e9:
 	call Function10038a
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	ret
 
 Function1004f4:
 	call Function100337
 	ret c
 	ret z
-	ld a, [wcd27]
-	inc a
-	ld [wcd27], a
+	ld hl, wcd27
+	inc [hl]
 	jmp Function10039c
 
 Function100504:
@@ -598,15 +591,13 @@ Function100534:
 	call Function100513
 	call UpdateSprites
 	call ApplyTilemap
-	ld a, [wcd28]
-	inc a
-	ld [wcd28], a
+	ld hl, wcd28
+	inc [hl]
 	ret
 
 Function100545:
-	ld a, [wcd28]
-	inc a
-	ld [wcd28], a
+	ld hl, wcd28
+	inc [hl]
 	ret
 
 Function10054d:
@@ -650,9 +641,8 @@ Function100585:
 	call LoadMenuHeader
 	xor a
 	ld [wcd28], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function100597:
 	call Function100522
@@ -697,9 +687,8 @@ Function1005cf:
 	call LoadMenuHeader
 	xor a
 	ld [wcd28], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function1005e1:
 	call Function100522
@@ -2416,9 +2405,8 @@ Function101438:
 	ret z
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Jumptable_101457:
@@ -2428,9 +2416,8 @@ Jumptable_101457:
 Function10145b:
 	ld a, $3c
 	ld [wcd42], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function101467:
 	ld hl, wcd42
@@ -2452,9 +2439,8 @@ Function101475:
 	ret z
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Jumptable_101494:
@@ -2465,9 +2451,8 @@ Jumptable_101494:
 Function10149a:
 	ld a, $28
 	ld [wcd42], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function1014a6:
 	ld hl, wcd42
@@ -2475,9 +2460,8 @@ Function1014a6:
 	ret nz
 	ld a, $50
 	ld [wcd42], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function1014b7:
 	call GetJoypad
@@ -2499,18 +2483,16 @@ Function1014e2:
 	set 6, [hl]
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1014f4:
 	farcall EnableMobile
 	ld hl, wcd29
 	set 6, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101507:
@@ -2519,34 +2501,30 @@ Function101507:
 	ld bc, $40
 	ld a, MOBILEAPI_01
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function10152a:
 	ld a, MOBILEAPI_1B
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101537:
 	ld a, MOBILEAPI_05
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101544:
 	farcall StartMobileInactivityTimer
 	ld a, MOBILEAPI_09
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101557:
@@ -2554,9 +2532,8 @@ Function101557:
 	ld hl, wcd53
 	ld a, MOBILEAPI_04
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function10156d:
@@ -2574,9 +2551,8 @@ Function101571:
 	ret
 
 .asm_101582
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function10158a:
@@ -2601,9 +2577,8 @@ MobileCopyTransferData2:
 Function10167d:
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function10168a:
@@ -2627,9 +2602,8 @@ Function10168e:
 	ret z
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Jumptable_1016c3:
@@ -2644,33 +2618,29 @@ Function1016cf:
 	ld hl, wcd3a
 	inc [hl]
 	call Function10176f
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 Function1016de:
 	call Function10177b
 	jr nc, .asm_1016eb
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 .asm_1016eb
 	ld a, $ff
 	ld [wcd39], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 Function1016f8:
 	xor a
 	ld [wcd27], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 Function101705:
@@ -2678,16 +2648,14 @@ Function101705:
 	ld a, [wcd27]
 	bit 7, a
 	ret z
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 Function101719:
 	call Function1017c7
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 	ret
 
 Function101724:
@@ -2815,9 +2783,8 @@ Function1017c7:
 Function1017e4:
 	xor a
 	ld [wcd27], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1017f1:
@@ -2840,9 +2807,8 @@ Function1017f5:
 	ret
 
 .next
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 pushc
@@ -2879,9 +2845,8 @@ Function1018a8:
 	ld a, $06
 	call Function101406
 	jr c, .asm_1018ca
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 .asm_1018ca
@@ -2896,16 +2861,14 @@ Function1018a8:
 
 Function1018d6:
 	call Function1018ec
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1018e1:
 	call Function1018fb
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1018ec:
@@ -2987,9 +2950,8 @@ _SelectMonsForMobileBattle:
 	ld [wccb9], a
 	ld a, [hl]
 	ld [wccba], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 StartMobileBattle:
@@ -3022,9 +2984,8 @@ Function101a4f:
 	farcall CleanUpBattleRAM
 	farcall LoadPokemonData
 	call Function1013c0
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101a97:
@@ -3035,9 +2996,8 @@ Function101a97:
 	call Function10142c
 	ld hl, wcd29
 	set 6, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101ab4:
@@ -3045,9 +3005,8 @@ Function101ab4:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101ac6:
@@ -3062,9 +3021,8 @@ Function101ac6:
 	ld [wcd2f], a
 	ld de, wdc42
 	call Function102068
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101aed:
@@ -3077,9 +3035,8 @@ Function101aed:
 	set 6, [hl]
 	ld a, $01
 	ld [wcd2f], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101b0f:
@@ -3089,9 +3046,8 @@ Function101b0f:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
@@ -3114,9 +3070,8 @@ Function101b2b:
 	ret
 
 .asm_101b51
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101b59:
@@ -3126,9 +3081,8 @@ Function101b59:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101b70:
@@ -3139,9 +3093,8 @@ Function101b70:
 	ld hl, wcd29
 	set 5, [hl]
 	call UpdateSprites
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
@@ -3161,17 +3114,15 @@ Function101b8f:
 	jr z, .asm_101bbc
 	ld a, $01
 	ld [wcd2f], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 .asm_101bbc
 	xor a
 	ld [wcd2f], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101bc8:
@@ -3183,9 +3134,8 @@ Function101bc8:
 	call Function1013dd
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101be5:
@@ -3218,9 +3168,8 @@ Function101c11:
 	call Function102048
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101c2b:
@@ -3230,9 +3179,8 @@ Function101c2b:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101c42:
@@ -3248,9 +3196,8 @@ Function101c50:
 	call Function101ee4
 	ld hl, wcd29
 	set 2, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101c62:
@@ -3267,18 +3214,16 @@ Function101c62:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
 
 Function101c92:
 	farcall Function100675
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101ca0:
@@ -3288,9 +3233,8 @@ Function101ca0:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
@@ -3307,9 +3251,8 @@ Function101cc8:
 	ld [wc30d], a
 	ld hl, wcd29
 	set 4, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101cdf:
@@ -3319,41 +3262,36 @@ Function101cdf:
 	ld [wc30d], a
 	ld hl, wcd29
 	set 4, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101cf6:
 	ld a, $0b
 	ld [wc314 + 1], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101d03:
 	ld a, $0e
 	ld [wc314 + 1], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function101d10:
 	ld c, $01
 	call Function10142c
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	jr Function101d2a
 
 Function101d1e:
 	ld c, $03
 	call Function10142c
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 
 Function101d2a:
 	call Function101418
@@ -3368,9 +3306,8 @@ Function101d2a:
 	ret z
 	xor a
 	ld [wcd26], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Jumptable_101d4d:
@@ -3380,9 +3317,8 @@ Jumptable_101d4d:
 Function101d51:
 	ld a, $3c
 	ld [wcd42], a
-	ld a, [wcd26]
-	inc a
-	ld [wcd26], a
+	ld hl, wcd26
+	inc [hl]
 
 Function101d5d:
 	ld hl, wcd42
@@ -3410,9 +3346,8 @@ Function101d95:
 	call Function101ee4
 	ld hl, wcd29
 	set 5, [hl]
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
@@ -3439,9 +3374,8 @@ Function101e4f:
 	ld e, $06
 	call Function101ee4
 	call Function1013d6
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	xor a
 	ld [wcd26], a
 	ret
@@ -3788,17 +3722,15 @@ Function10234b:
 	call Function102dec
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function102361:
 	ld a, $cc
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10236e:
@@ -3812,9 +3744,8 @@ Function10236e:
 	ret
 
 .asm_10237f
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function102387:
@@ -3842,9 +3773,8 @@ Function1023a1:
 Function102416:
 	ld a, $aa
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function102423:
@@ -3857,9 +3787,8 @@ Function102423:
 	set 1, [hl]
 	xor a
 	ld [wcd4a], a
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10244b:
@@ -3871,9 +3800,8 @@ Function10244b:
 	xor a
 	ld [wcd4f], a
 	ld [wcd4a], a
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10246a:
@@ -3911,9 +3839,8 @@ Jumptable_1024ba:
 Function1024c0:
 	ld hl, wcd4e
 	inc [hl]
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 
 Function1024cb:
 	ld hl, wcd4e
@@ -3922,9 +3849,8 @@ Function1024cb:
 	ld a, [wcd4f]
 	inc a
 	ld [wcd4e], a
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 
 Function1024de:
 	ld hl, wcd4e
@@ -3937,9 +3863,8 @@ Function1024de:
 .asm_1024e9
 	xor a
 	ld [wcd4a], a
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1024f6:
@@ -3948,9 +3873,8 @@ Function1024f6:
 	set 1, [hl]
 	ld a, [wcd4c]
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10250c:
@@ -4029,17 +3953,15 @@ Function102591:
 	ld [wcd4e], a
 	ld a, $3c
 	ld [wcd4f], a
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1025b0:
 	ld a, $09
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1025bd:
@@ -4055,9 +3977,8 @@ Function1025c7:
 	set 1, [hl]
 	ld a, $0f
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1025dc:
@@ -4074,9 +3995,8 @@ Function1025e9:
 	call Function102b4e
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1025ff:
@@ -4130,9 +4050,8 @@ Function102652:
 	call Function102b7b
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10266b:
@@ -4181,9 +4100,8 @@ Function10266b:
 Function1026b7:
 	ld hl, wcd4b
 	set 6, [hl]
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	xor a
 	ld [wcd4a], a
 
@@ -4203,9 +4121,8 @@ Function1026de:
 	call HideCursor
 	hlcoord 9, 17
 	ld [hl], $ed
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	ld hl, wcd4b
 	set 1, [hl]
 	ret
@@ -4256,9 +4173,8 @@ Function102738:
 	call Function1027eb
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	xor a
 	ld [wcd4a], a
 
@@ -4288,9 +4204,8 @@ Function102775:
 	ld [hl], " "
 	ld hl, wcd4b
 	set 2, [hl]
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	ret
 
 Function10278c:
@@ -4313,9 +4228,8 @@ Function1027a0:
 	ld [hl], "▶"
 	ld hl, wcd4b
 	set 2, [hl]
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	ret
 
 Function1027b7:
@@ -4373,9 +4287,8 @@ Function102814:
 	dec a
 	ld [wd003], a
 	call Function102ea8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	xor a
 	ld [wcd4a], a
 	ld hl, wcd4b
@@ -4405,9 +4318,8 @@ Function10283c:
 Function102862:
 	ld a, $08
 	call Function1028e8
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function10286f:
@@ -4432,9 +4344,8 @@ Function10286f:
 	ld [wcd4f], a
 	xor a
 	ld [wcd4a], a
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 	ret
 
 Function1028a5:
@@ -4453,9 +4364,8 @@ Function1028ab:
 	ret
 
 Function1028bf:
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 
 Function1028c6:
 	xor a
@@ -4466,9 +4376,8 @@ Function1028c6:
 	ret
 
 Function1028d3:
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
+	ld hl, wcd49
+	inc [hl]
 
 Function1028da:
 	ld a, OTPARTYMON
@@ -4531,9 +4440,8 @@ Function102933:
 	ld [wTextDelayFrames], a
 	ld hl, wcd4b
 	set 1, [hl]
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	and a
 	ret
 
@@ -4541,9 +4449,8 @@ Function10294f:
 	ld a, [wTextDelayFrames]
 	and a
 	ret nz
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	and a
 	ret
 
@@ -4551,9 +4458,8 @@ Function10295d:
 	call Function10299e
 	xor a
 	ld [wcd27], a
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	and a
 	ret
 
@@ -4563,9 +4469,8 @@ Function10296e:
 	ld a, [wcd27]
 	bit 7, a
 	ret z
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
+	ld hl, wcd4a
+	inc [hl]
 	and a
 	ret
 
@@ -4630,10 +4535,8 @@ Function1029cf:
 	set 1, [hl]
 	ld de, MenuData3_102a33
 	call Load2DMenuData
-	ld a, [wcd4a]
-	inc a
-	ld [wcd4a], a
-	xor a
+	ld hl, wcd4a
+	inc [hl]
 	ret
 
 Function1029fe:
@@ -5321,9 +5224,8 @@ Function103094:
 	ld a, [wcf42]
 	bit 7, a
 	jr nz, .asm_1030b2
-	ld a, [wcf44]
-	inc a
-	ld [wcf44], a
+	ld hl, wcf44
+	inc [hl]
 	cp $2c
 	ret nz
 	ld hl, wcf42
@@ -5331,9 +5233,8 @@ Function103094:
 	ret
 
 .asm_1030b2
-	ld a, [wcf44]
-	dec a
-	ld [wcf44], a
+	ld hl, wcf44
+	dec [hl]
 	ret nz
 	ld hl, wcf42
 	res 7, [hl]
@@ -5508,9 +5409,8 @@ Function1033af:
 	ret
 
 .up
-	ld a, [wd1f0]
-	dec a
-	ld [wd1f0], a
+	ld hl, wd1f0
+	dec [hl]
 	cp 1
 	ret nc
 	ld a, [wd1ee]
@@ -5518,10 +5418,8 @@ Function1033af:
 	ret
 
 .down
-	ld a, [wd1f0]
-	inc a
-	ld [wd1f0], a
-	ld c, a
+	ld hl, wd1f0
+	inc [hl]
 	ld a, [wd1ee]
 	cp c
 	ret nc

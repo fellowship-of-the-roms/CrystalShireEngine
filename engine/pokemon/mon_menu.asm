@@ -1020,9 +1020,8 @@ MoveScreenLoop:
 	jmp MoveScreenLoop
 
 .cycle_right
-	ld a, [wCurPartyMon]
-	inc a
-	ld [wCurPartyMon], a
+	ld hl, wCurPartyMon
+	inc [hl]
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies
@@ -1039,9 +1038,8 @@ MoveScreenLoop:
 	and a
 	ret z
 .cycle_left_loop
-	ld a, [wCurPartyMon]
-	dec a
-	ld [wCurPartyMon], a
+	ld hl, wCurPartyMon
+	dec [hl]
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies

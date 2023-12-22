@@ -188,7 +188,7 @@ _UpdateSound::
 	add hl, bc
 	ld c, l
 	ld b, h
-	ld a, [wCurChannel]
+	ld a, [wCurChannel] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wCurChannel], a
 	cp NUM_CHANNELS ; are we done?

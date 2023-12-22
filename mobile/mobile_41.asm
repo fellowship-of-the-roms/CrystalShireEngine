@@ -775,35 +775,31 @@ endr
 Function1063cc:
 	ld a, $78
 	ld [wcd42], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 
 Function1063d8:
 	ld hl, wcd42
 	dec [hl]
 	ret nz
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1063e5:
 	ld a, [wcf64]
 	cp $3
 	ret nz
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function1063f3:
 	ld de, wcd31
 	ld a, MOBILEAPI_TELEPHONESTATUS
 	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 	ret
 
 Function106442:
@@ -812,9 +808,8 @@ Function106442:
 	xor a
 	ldh [hMobile], a
 	ldh [hMobileReceive], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
+	ld hl, wMobileCommsJumptableIndex
+	inc [hl]
 
 Function106453:
 	ld a, [wMobileCommsJumptableIndex]

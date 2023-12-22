@@ -161,7 +161,7 @@ CheckPokeMail::
 	jr nz, .close_sram_return
 	inc hl
 	inc de
-	ld a, [wTempByteValue]
+	ld a, [wTempByteValue] ; no-optimize Inefficient WRAM increment/decrement
 	dec a
 	ld [wTempByteValue], a
 	jr nz, .loop

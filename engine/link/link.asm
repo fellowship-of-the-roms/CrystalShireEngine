@@ -2681,13 +2681,11 @@ WaitForLinkedFriend:
 	vc_assert USING_INTERNAL_CLOCK == $02, \
 		"USING_INTERNAL_CLOCK is no longer equal to $02."
 	ldh [rSC], a
-	ld a, [wLinkTimeoutFrames]
-	dec a
-	ld [wLinkTimeoutFrames], a
+	ld hl, wLinkTimeoutFrames
+	dec [hl]
 	jr nz, .not_done
-	ld a, [wLinkTimeoutFrames + 1]
-	dec a
-	ld [wLinkTimeoutFrames + 1], a
+	ld hl, wLinkTimeoutFrames + 1
+	dec [hl]
 	jr z, .done
 
 .not_done

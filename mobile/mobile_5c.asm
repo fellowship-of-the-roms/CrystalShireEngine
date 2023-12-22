@@ -300,7 +300,7 @@ Function171aec:
 	ld a, [de]
 	and a
 	jr z, .asm_171b34
-	ld a, [wcd4b]
+	ld a, [wcd4b] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wcd4b], a
 	push hl

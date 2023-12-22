@@ -427,7 +427,7 @@ OaksPKMNTalk9:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wOaksPKMNTalkSegmentCounter]
+	ld a, [wOaksPKMNTalkSegmentCounter] ; no-optimize Inefficient WRAM increment/decrement
 	dec a
 	ld [wOaksPKMNTalkSegmentCounter], a
 	ld a, OAKS_POKEMON_TALK_4

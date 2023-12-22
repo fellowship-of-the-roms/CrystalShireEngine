@@ -143,15 +143,13 @@ CheckPlayerMoveTypeMatchups:
 .doubledown
 	call .DecreaseScore
 .DecreaseScore:
-	ld a, [wEnemyAISwitchScore]
-	dec a
-	ld [wEnemyAISwitchScore], a
+	ld hl, wEnemyAISwitchScore
+	dec [hl]
 	ret
 
 .IncreaseScore:
-	ld a, [wEnemyAISwitchScore]
-	inc a
-	ld [wEnemyAISwitchScore], a
+	ld hl, wEnemyAISwitchScore
+	inc [hl]
 	ret
 
 CheckAbleToSwitch:

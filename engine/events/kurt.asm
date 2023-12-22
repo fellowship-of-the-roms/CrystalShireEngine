@@ -229,7 +229,7 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 ; Search for [wCurItem] in the bag.
 .loop1
 ; Increase the total count.
-	ld a, [wCurItemQuantity]
+	ld a, [wCurItemQuantity] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wCurItemQuantity], a
 ; Get the index of the next item.

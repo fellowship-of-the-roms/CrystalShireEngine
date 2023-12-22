@@ -485,21 +485,18 @@ Function118473:
 	ld a, [wcd65]
 	and a
 	ret z
-	ld a, [wcd66]
-	inc a
-	ld [wcd66], a
+	ld hl, wcd66
+	inc [hl]
 	cp 60
 	ret nz
 	xor a
 	ld [wcd66], a
-	ld a, [wcd67]
-	inc a
-	ld [wcd67], a
+	ld hl, wcd67
+	inc [hl]
 	cp 60
 	ret nz
-	ld a, [wcd68]
-	inc a
-	ld [wcd68], a
+	ld hl, wcd68
+	inc [hl]
 	cp 99
 	jr z, .ninety_nine
 	xor a
@@ -3358,9 +3355,8 @@ Function11a131:
 	ld hl, wMobileInactivityTimerMinutes
 	dec [hl]
 	ret nz
-	ld a, [wBattleTowerRoomMenu2JumptableIndex]
-	inc a
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
+	ld hl, wBattleTowerRoomMenu2JumptableIndex
+	inc [hl]
 
 Function11a13d:
 	call Function11a63c
@@ -3947,9 +3943,8 @@ Function11a536:
 	ret
 
 BattleTowerRoomMenu2_IncrementJumptable:
-	ld a, [wBattleTowerRoomMenu2JumptableIndex]
-	inc a
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
+	ld hl, wBattleTowerRoomMenu2JumptableIndex
+	inc [hl]
 	scf
 	ret
 
@@ -4519,7 +4514,7 @@ Function11acb7:
 	decoord 0, 7
 	ld bc, 7
 	rst CopyBytes
-	ld a, [wcd49]
+	ld a, [wcd49] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wcd49], a
 	ld a, [hl]
@@ -4542,7 +4537,7 @@ Function11acb7:
 	decoord 3, 9
 	ld bc, 7
 	rst CopyBytes
-	ld a, [wcd4a]
+	ld a, [wcd4a] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wcd4a], a
 	inc hl

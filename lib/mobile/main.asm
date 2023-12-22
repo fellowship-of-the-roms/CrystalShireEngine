@@ -3652,9 +3652,8 @@ Function1117e7:
 	ld [hl], a
 	jmp Function1118bc
 .asm_111817
-	ld a, [wc9ae]
-	inc a
-	ld [wc9ae], a
+	ld hl, wc9ae
+	inc [hl]
 	cp $14
 	jr c, .asm_111812
 	ld a, $6

@@ -736,9 +736,8 @@ HandleEncore:
 	ld hl, wPlayerSubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	ret z
-	ld a, [wPlayerEncoreCount]
-	dec a
-	ld [wPlayerEncoreCount], a
+	ld hl, wPlayerEncoreCount
+	dec [hl]
 	jr z, .end_player_encore
 	ld hl, wBattleMonPP
 	ld a, [wCurMoveNum]
@@ -760,9 +759,8 @@ HandleEncore:
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	ret z
-	ld a, [wEnemyEncoreCount]
-	dec a
-	ld [wEnemyEncoreCount], a
+	ld hl, wEnemyEncoreCount
+	dec [hl]
 	jr z, .end_enemy_encore
 	ld hl, wEnemyMonPP
 	ld a, [wCurEnemyMoveNum]
@@ -3715,7 +3713,7 @@ TryToRunAwayFromBattle:
 	jmp .can_escape
 
 .no_flee_item
-	ld a, [wNumFleeAttempts]
+	ld a, [wNumFleeAttempts] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wNumFleeAttempts], a
 	ld a, [hli]
@@ -5413,9 +5411,8 @@ MoveSelectionScreen:
 
 	xor a
 	ld [wSwappingMove], a
-	ld a, [wMenuCursorY]
-	dec a
-	ld [wMenuCursorY], a
+	ld hl, wMenuCursorY
+	dec [hl]
 	ld b, a
 	ld a, [wMoveSelectionMenuType]
 	dec a

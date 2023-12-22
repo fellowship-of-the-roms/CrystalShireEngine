@@ -634,9 +634,8 @@ TossKeyItem:
 	ret
 
 .ok3
-	ld a, [wNumKeyItems]
-	dec a
-	ld [wNumKeyItems], a
+	ld hl, wNumKeyItems
+	dec [hl]
 	scf
 	ret
 

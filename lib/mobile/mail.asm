@@ -3545,9 +3545,8 @@ Function1154d4:
 	and a
 	jr nz, .asm_11552c
 	call Function1155d1
-	ld a, [wDecoRightOrnament]
-	dec a
-	ld [wDecoRightOrnament], a
+	ld hl, wDecoRightOrnament
+	dec [hl]
 	and a
 	jmp z, .asm_115577
 	cp $1
@@ -3659,9 +3658,8 @@ Function1154d4:
 	jmp Function11425c
 
 .asm_1155a0
-	ld a, [wDecoRightOrnament]
-	dec a
-	ld [wDecoRightOrnament], a
+	ld hl, wDecoRightOrnament
+	dec [hl]
 	and a
 	jr z, .asm_115560
 	call Function1155d1
@@ -4813,7 +4811,7 @@ Function115bc8:
 	ld a, b
 	or c
 	jr z, .asm_115c46
-	ld a, [wDecoCarpet]
+	ld a, [wDecoCarpet] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wDecoCarpet], a
 	dec bc

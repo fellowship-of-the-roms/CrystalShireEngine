@@ -281,9 +281,8 @@ _CardFlip:
 	jmp .Increment
 
 .Continue:
-	ld a, [wCardFlipNumCardsPlayed]
-	inc a
-	ld [wCardFlipNumCardsPlayed], a
+	ld hl, wCardFlipNumCardsPlayed
+	inc [hl]
 	cp 12
 	jr c, .KeepTheCurrentDeck
 	call CardFlip_InitTilemap

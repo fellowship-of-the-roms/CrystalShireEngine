@@ -14,7 +14,7 @@ HealParty:
 	pop hl
 
 .next
-	ld a, [wCurPartyMon]
+	ld a, [wCurPartyMon] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wCurPartyMon], a
 	jr .loop

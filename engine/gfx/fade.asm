@@ -142,9 +142,8 @@ _DoFadePalettes::
 	dec d
 	jr nz, .inner_loop
 	call .FadeDelay
-	ld a, [wPalFadeDelayFrames]
-	dec a
-	ld [wPalFadeDelayFrames], a
+	ld hl, wPalFadeDelayFrames
+	dec [hl]
 	jmp nz, .outer_loop
 .done
 	pop bc
