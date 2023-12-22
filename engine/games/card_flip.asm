@@ -887,8 +887,8 @@ CardFlip_CheckWinCondition:
 
 .Oddish:
 	ld a, [wCardFlipFaceUpCard]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr z, .WinTwelve
 	jmp .Lose
 

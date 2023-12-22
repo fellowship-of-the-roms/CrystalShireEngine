@@ -780,8 +780,8 @@ PushSGBBorderPalsAndWait:
 	call _PushSGBPals
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	ld a, $20
 	ldh [rJOYP], a
@@ -808,8 +808,8 @@ endr
 	call SGBDelayCycles
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	call .FinalPush
 	and a

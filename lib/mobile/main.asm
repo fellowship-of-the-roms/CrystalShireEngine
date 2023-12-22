@@ -8167,7 +8167,7 @@ Function1135eb:
 .asm_1135ed
 	ld a, [hl]
 	swap a
-	and $f
+	and $f ; no-optimize a & X == X
 	cp $f
 	jr z, .asm_11361c
 	or $30
@@ -8178,7 +8178,7 @@ Function1135eb:
 	ld [de], a
 	inc de
 	ld a, [hli]
-	and $f
+	and $f ; no-optimize a & X == X
 	cp $f
 	jr z, .asm_11361c
 	or $30
