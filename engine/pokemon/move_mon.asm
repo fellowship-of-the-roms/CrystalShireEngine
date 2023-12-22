@@ -1379,9 +1379,8 @@ GivePoke::
 .set_caught_data
 	farcall GiveANickname_YesNo
 	pop de
-	jr c, .skip_nickname
-	call InitNickname
-
+	call nc, InitNickname
+; fallthrough
 .skip_nickname
 	pop bc
 	pop de

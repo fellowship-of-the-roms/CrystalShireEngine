@@ -380,9 +380,8 @@ ReceiverExchangeMysteryGiftDataPayloads_GotPayload:
 	jmp nz, EndOrContinueMysteryGiftIRCommunication
 	; Switch roles
 	call BeginReceivingIRCommunication
-	jmp nz, EndOrContinueMysteryGiftIRCommunication
 	; Receive an empty block
-	call ReceiveEmptyIRDataBlock
+	call z, ReceiveEmptyIRDataBlock
 	jmp EndOrContinueMysteryGiftIRCommunication
 
 SenderExchangeMysteryGiftDataPayloads:
@@ -397,9 +396,8 @@ SenderExchangeMysteryGiftDataPayloads:
 	jmp nz, EndOrContinueMysteryGiftIRCommunication
 	; Switch roles
 	call BeginSendingIRCommunication
-	jmp nz, EndOrContinueMysteryGiftIRCommunication
 	; Send an empty block
-	call SendEmptyIRDataBlock
+	call z, SendEmptyIRDataBlock
 	jmp EndOrContinueMysteryGiftIRCommunication
 
 ReceiveMysteryGiftDataPayload:
@@ -578,9 +576,8 @@ ExchangeNameCardData:
 	jmp nz, EndNameCardIRCommunication
 	; Switch roles
 	call BeginReceivingIRCommunication
-	jmp nz, EndNameCardIRCommunication
 	; Receive an empty block
-	call ReceiveEmptyIRDataBlock
+	call z, ReceiveEmptyIRDataBlock
 	jmp EndNameCardIRCommunication
 
 .sender
@@ -595,9 +592,8 @@ ExchangeNameCardData:
 	jmp nz, EndNameCardIRCommunication
 	; Switch roles
 	call BeginSendingIRCommunication
-	jmp nz, EndNameCardIRCommunication
 	; Send an empty block
-	call SendEmptyIRDataBlock
+	call z, SendEmptyIRDataBlock
 	jmp EndNameCardIRCommunication
 
 ReceiveNameCardDataPayload:

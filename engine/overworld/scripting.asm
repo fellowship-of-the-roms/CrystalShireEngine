@@ -884,9 +884,7 @@ ApplyObjectFacing:
 	call SetSpriteDirection
 	ld hl, wVramState
 	bit 6, [hl]
-	jr nz, .text_state
-	call .DisableTextTiles
-.text_state
+	call z, .DisableTextTiles
 	jmp UpdateSprites
 
 .not_visible

@@ -474,9 +474,8 @@ Paragraph::
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
 	cp LINK_MOBILE
-	jr z, .linkbattle
-	call LoadBlinkingCursor
-
+	call nz, LoadBlinkingCursor
+; fallthrough
 .linkbattle
 	call Text_WaitBGMap
 	call PromptButton
@@ -493,10 +492,7 @@ Paragraph::
 _ContText::
 	ld a, [wLinkMode]
 	or a
-	jr nz, .communication
-	call LoadBlinkingCursor
-
-.communication
+	call z, LoadBlinkingCursor
 	call Text_WaitBGMap
 
 	push de
@@ -541,9 +537,8 @@ PromptText::
 	cp LINK_COLOSSEUM
 	jr z, .ok
 	cp LINK_MOBILE
-	jr z, .ok
-	call LoadBlinkingCursor
-
+	call nz, LoadBlinkingCursor
+; fallthrough
 .ok
 	call Text_WaitBGMap
 	call PromptButton
@@ -551,9 +546,8 @@ PromptText::
 	cp LINK_COLOSSEUM
 	jr z, DoneText
 	cp LINK_MOBILE
-	jr z, DoneText
-	call UnloadBlinkingCursor
-
+	call nz, UnloadBlinkingCursor
+; fallthrough
 DoneText::
 	pop hl
 	ld de, .stop

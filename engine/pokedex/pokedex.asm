@@ -2828,9 +2828,7 @@ Pokedex_SetBGMapMode4:
 Pokedex_SetBGMapMode_3ifDMG_4ifCGB:
 	ldh a, [hCGB]
 	and a
-	jr z, .DMG
-	call Pokedex_SetBGMapMode4
-.DMG:
+	call nz, Pokedex_SetBGMapMode4
 	jr Pokedex_SetBGMapMode3
 
 Pokedex_ResetBGMapMode:

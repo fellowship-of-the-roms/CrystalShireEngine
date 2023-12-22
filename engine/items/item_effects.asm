@@ -2474,9 +2474,8 @@ BattleRestorePP:
 	jr nz, .not_in_battle
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .not_in_battle
-	call .UpdateBattleMonPP
-
+	call z, .UpdateBattleMonPP
+; fallthrough
 .not_in_battle
 	call Play_SFX_FULL_HEAL
 	ld hl, PPRestoredText

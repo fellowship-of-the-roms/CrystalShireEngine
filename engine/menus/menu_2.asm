@@ -277,8 +277,7 @@ FindApricornsInBag:
 	pop hl
 	inc hl
 	inc hl
-	jr nc, .loop
-	call .addtobuffer
+	call c, .addtobuffer
 	jr .loop
 .done
 	pop hl

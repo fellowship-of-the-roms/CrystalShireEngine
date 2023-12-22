@@ -515,10 +515,7 @@ endr
 	; destination warp number
 	ld a, [hli]
 	cp -1
-	jr nz, .skip
-	call .backup
-
-.skip
+	call z, .backup
 	farjp GetMapScreenCoords
 
 .backup

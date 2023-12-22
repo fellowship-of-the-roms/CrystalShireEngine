@@ -132,9 +132,8 @@ GetMonSubmenuItems:
 	push hl
 	call IsFieldMove
 	pop hl
-	jr nc, .next
-	call AddMonMenuItem
-
+	call c,  AddMonMenuItem
+; fallthrough
 .next
 	pop de
 	inc de

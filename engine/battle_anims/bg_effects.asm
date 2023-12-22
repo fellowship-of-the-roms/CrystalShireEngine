@@ -716,9 +716,7 @@ BattleBGEffect_RunPicResizeScript:
 	cp -2
 	jr z, .clear
 	cp -3
-	jr z, .skip
-	call .PlaceGraphic
-.skip
+	call nz, .PlaceGraphic
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -1486,9 +1484,7 @@ Tackle_ReturnMove:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .move_back
-	call BattleBGEffects_IncAnonJumptableIndex
-.move_back
+	call z, BattleBGEffects_IncAnonJumptableIndex
 	call Rollout_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc

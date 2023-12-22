@@ -107,9 +107,8 @@ Function1180b8:
 	cp $10
 	jr c, .asm_1180f2
 	cp $16
-	jr nc, .asm_1180f2
-	call Function11884c
-
+	call c, Function11884c
+; fallthrough
 .asm_1180f2
 	call Function1184ec
 	call BattleTowerRoomMenu_WriteMessage

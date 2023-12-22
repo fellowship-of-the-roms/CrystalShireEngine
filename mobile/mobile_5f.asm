@@ -673,10 +673,7 @@ Function17d48d:
 	ld [wMobileInactivityTimerFrames], a
 	ld a, [hli]
 	and a
-	jr z, .asm_17d58a
-	call Function17d6a1
-
-.asm_17d58a
+	call nz, Function17d6a1
 	ld a, l
 	ld [wcd49], a
 	ld a, h
