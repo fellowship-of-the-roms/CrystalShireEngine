@@ -668,7 +668,7 @@ MonMenu_Fly:
 	ld a, [wFieldMoveSucceeded]
 	cp $2
 	jr z, .Fail
-	cp $0
+	and a
 	jr z, .Error
 	farcall StubbedTrainerRankings_Fly
 	ld b, $4

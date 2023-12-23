@@ -4376,15 +4376,15 @@ endr
 .asm_1159b1
 	ld [$dc22], a
 	ld a, [$dc19]
-	cp $0
+	and a
 	jmp nz, .asm_1158e5
 	ld a, [$dc1a]
-	cp $0
+	and a
 	jmp nz, .asm_1158e5
 
 .asm_1159c4
 	ld a, [wDailyFlags2]
-	cp $0
+	and a
 	jr z, .asm_1159d8
 	push hl
 	dec hl
@@ -4967,10 +4967,10 @@ endr
 	ld a, [bc]
 	ld [hli], a
 	ld a, [$dc19]
-	cp $0
+	and a
 	jmp nz, .asm_115c64
 	ld a, [$dc1a]
-	cp $0
+	and a
 	jmp nz, .asm_115c64
 	ret
 

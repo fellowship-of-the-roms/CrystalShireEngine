@@ -271,7 +271,7 @@ Function110115:
 	and $f
 	cp $1
 	jr z, .asm_11016a
-	cp $0
+	and a
 	jr z, .asm_11015d
 .asm_110158
 	ld hl, 0
@@ -4579,7 +4579,7 @@ GetErrorCode:
 
 .dial_telephone
 	ld a, [hl]
-	or $0
+	and a
 	jr z, .asm_111e9d
 	cp $2
 	ld a, $13
@@ -4665,7 +4665,7 @@ PacketSendBytes:
 	call Function1100b4
 	ret c
 	ld a, [wc800]
-	cp $0
+	and a
 	jr z, .asm_111f17
 	call Function110226
 	scf
@@ -4779,7 +4779,7 @@ Function111f97:
 	and $f
 	cp $1
 	jr z, .done
-	cp $0
+	and a
 	jr z, .done
 	cp $8
 	jr nz, .hang_up
@@ -6909,7 +6909,7 @@ Function112d33:
 	jr nz, .asm_112e21
 	ld hl, wc98b
 	ld a, [hli]
-	cp $0
+	and a
 	ret nz
 	ld a, $2
 	cp [hl]
@@ -7001,7 +7001,7 @@ Function112d33:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	cp $0
+	and a
 	jr nz, .asm_112ec1
 	ld a, $2
 	cp h
@@ -7041,7 +7041,7 @@ Function112d33:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	cp $0
+	and a
 	jmp nz, .asm_112e6c
 	ld a, $2
 	cp h
@@ -7961,7 +7961,7 @@ Function1134cb:
 
 .asm_1134d9
 	ld a, [wMobileSDK_ReceivePacketBuffer + 4]
-	cp $0
+	and a
 	jr z, .asm_1134f0
 	cp $ff
 	jr z, .asm_1134f0
@@ -9029,13 +9029,13 @@ Function113c8e:
 	call Function113d47
 	ld [hli], a
 	ld a, [wMobileSDK_PacketBuffer + 201]
-	cp $0
+	and a
 	jmp nz, .asm_113ca0
 	ld a, [wMobileSDK_PacketBuffer + 202]
-	cp $0
+	and a
 	jmp nz, .asm_113ca0
 	ld a, [wMobileSDK_PacketBuffer + 207]
-	cp $0
+	and a
 	jr z, .asm_113d43
 	push hl
 	dec hl

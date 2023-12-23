@@ -693,7 +693,7 @@ MovementFunction_Strength:
 	add hl, bc
 	ld a, [hl]
 	and %00000011
-	or 0
+	and a
 	call InitStep
 	call CanObjectMoveInDirection
 	jr c, .ok2
