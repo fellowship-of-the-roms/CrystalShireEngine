@@ -244,7 +244,7 @@ OlivineCitySailor2Text:
 	para "Sunsets on the sea"
 	line "are marvelous!"
 
-	para "Sing with me! "
+	para "Sing with me!"
 	line "Yo-ho! Blow the"
 	cont "man down!…"
 	done

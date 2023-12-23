@@ -28,7 +28,7 @@ CianwoodLugiaSpeechHouseTeacherText:
 	line "the four islands"
 	cont "along the way?"
 
-	para "I heard that a "
+	para "I heard that a"
 	line "mythical sea crea-"
 	cont "ture is hiding in"
 	cont "them."

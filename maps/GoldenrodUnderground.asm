@@ -598,7 +598,7 @@ GoldenrodUndergroundYoungerHaircutBrotherAllDoneText:
 	done
 
 GoldenrodUndergroundYoungerHaircutBrotherHowDisappointingText:
-	text "No? "
+	text "No?"
 	line "How disappointing!"
 	done
 

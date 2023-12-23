@@ -218,7 +218,7 @@ ChucksWifeFlySpeechText:
 	para "You will be able"
 	line "to FLY instantly"
 
-	para "to anywhere you "
+	para "to anywhere you"
 	line "have visited."
 	done
 

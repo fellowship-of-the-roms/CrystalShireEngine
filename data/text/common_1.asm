@@ -1214,7 +1214,7 @@ _NPCTradeWrongText1::
 	text "Huh? That's not"
 	line "@"
 	text_ram wStringBuffer1
-	text ". "
+	text "."
 	cont "What a letdown…"
 	done
 

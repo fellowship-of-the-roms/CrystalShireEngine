@@ -540,7 +540,7 @@ Route32CooltrainerMText_UnusedSproutTower:
 	line "SPROUT TOWER?"
 
 	para "If you ever visit"
-	line "VIOLET CITY, "
+	line "VIOLET CITY,"
 
 	para "they'll expect you"
 	line "to train there."

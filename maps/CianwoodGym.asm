@@ -283,7 +283,7 @@ BlackbeltNobBeatenText:
 	done
 
 BlackbeltNobAfterText:
-	text "I lost! "
+	text "I lost!"
 	line "I'm speechless!"
 	done
 
