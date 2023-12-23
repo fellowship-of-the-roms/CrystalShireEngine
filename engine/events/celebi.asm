@@ -167,9 +167,7 @@ UpdateCelebiPosition:
 .float_up
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld a, [hl]
-	add $1
-	ld [hl], a
+	inc [hl]
 .ReinitSpriteAnimFrame:
 	pop af
 	ld hl, SPRITEANIMSTRUCT_XCOORD

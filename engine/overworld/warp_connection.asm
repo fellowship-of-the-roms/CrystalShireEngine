@@ -413,10 +413,10 @@ GetMapScreenCoords::
 	jr nz, .odd_x
 ; even x
 	srl a
-	add 1
+	inc a
 	jr .got_block_x
 .odd_x
-	add 1
+	inc a
 	srl a
 .got_block_x
 	ld c, a
@@ -431,10 +431,10 @@ GetMapScreenCoords::
 	jr nz, .odd_y
 ; even y
 	srl a
-	add 1
+	inc a
 	jr .got_block_y
 .odd_y
-	add 1
+	inc a
 	srl a
 .got_block_y
 	rst AddNTimes

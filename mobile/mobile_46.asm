@@ -5660,7 +5660,7 @@ Function11b3d9:
 	add $3c
 	ld [hli], a
 	ld a, [wcd4c]
-	add $1
+	inc a
 	ld [hl], a
 	ret
 
