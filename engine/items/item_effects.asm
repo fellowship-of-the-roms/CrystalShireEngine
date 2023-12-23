@@ -1179,10 +1179,8 @@ EvoStoneEffect:
 
 	ld a, [wMonTriedToEvolve]
 	and a
-	jr z, .NoEffect
-
-	jmp UseDisposableItem
-
+	jmp nz, UseDisposableItem
+; fallthrough
 .NoEffect:
 	call WontHaveAnyEffectMessage
 
@@ -1668,11 +1666,7 @@ FullRestoreEffect:
 	jmp z, StatusHealer_NoEffect
 
 	call IsMonAtFullHealth
-	jr c, .NotAtFullHealth
-
-	jmp FullyHealStatus
-
-.NotAtFullHealth:
+	jmp nc, FullyHealStatus
 	call .FullRestore
 	jmp StatusHealer_Jumptable
 
@@ -2042,11 +2036,7 @@ GetHealingItemAmount:
 	inc hl ; hl at price
 
 	cp b
-	jr nz, .next_item
-
-	jr .done
-
-.next_item
+	jr z, .done
 	inc hl
 	inc hl
 	jr .check

@@ -216,10 +216,7 @@ Printer_TransmissionLoop:
 	jr nz, .enter_wait_loop
 	ld a, [wPrinterStatusFlags]
 	and $1
-	jr nz, .cycle_back
-	jmp _Printer_NextSection
-
-.cycle_back
+	jmp z, _Printer_NextSection
 	jmp Printer_PrevSection
 
 .enter_wait_loop

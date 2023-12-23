@@ -1714,15 +1714,9 @@ LinkTradePartymonMenuLoop:
 	farcall LinkTradeMenu
 	ld a, d
 	and a
-	jr nz, .check_joypad
-	jr LinkTradePartiesMenuMasterLoop
-
-.check_joypad
+	jr z, LinkTradePartiesMenuMasterLoop
 	bit A_BUTTON_F, a
-	jr z, .not_a_button
-	jr LinkTrade_TradeStatsMenu
-
-.not_a_button
+	jr nz, LinkTrade_TradeStatsMenu
 	bit D_DOWN_F, a
 	jr z, .not_d_down
 	ld a, [wMenuCursorY]

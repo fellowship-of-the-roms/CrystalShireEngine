@@ -519,9 +519,8 @@ IsNPCAtPlayerCoord: ; unreferenced
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr nz, .next
-	jr .yes
-
+	jr z, .yes
+; fallthrough
 .next
 	ld hl, OBJECT_LENGTH
 	add hl, bc

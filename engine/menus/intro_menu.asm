@@ -299,15 +299,9 @@ Continue:
 	ld c, 20
 	call DelayFrames
 	call ConfirmContinue
-	jr nc, .Check1Pass
-	jmp CloseWindow
-
-.Check1Pass:
+	jmp c, CloseWindow
 	call Continue_CheckRTC_RestartClock
-	jr nc, .Check2Pass
-	jmp CloseWindow
-
-.Check2Pass:
+	jmp c, CloseWindow
 	ld a, $8
 	ld [wMusicFade], a
 	ld a, LOW(MUSIC_NONE)
@@ -387,10 +381,7 @@ FinishContinueFunction:
 	farcall OverworldLoop
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
-	jr z, .AfterRed
-	jmp Reset
-
-.AfterRed:
+	jmp nz, Reset
 	call SpawnAfterRed
 	jr .loop
 

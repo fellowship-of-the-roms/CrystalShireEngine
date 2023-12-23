@@ -2142,14 +2142,11 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	call BreakAttraction
 	ld a, [wBattleMode]
 	dec a
-	jr z, .wild2
-	jr .trainer
-
-.wild2
+	jr nz, .trainer
 	call StopDangerSound
 	ld a, $1
 	ld [wBattleLowHealthAlarm], a
-
+; fallthrough
 .trainer
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -5043,9 +5040,8 @@ BattleMenuPKMN_Loop:
 .Stats:
 	call Battle_StatsScreen
 	call CheckMobileBattleError
-	jr c, .Cancel
-	jr BattleMenuPKMN_ReturnFromStats
-
+	jr nc, BattleMenuPKMN_ReturnFromStats
+; fallthrough
 .Cancel:
 	call ClearSprites
 	call ClearPalettes
@@ -5170,10 +5166,7 @@ PlayerSwitch:
 	cp BATTLEACTION_SWITCH1
 	jr c, .switch
 	cp BATTLEACTION_FORFEIT
-	jr nz, .dont_run
-	jmp WildFled_EnemyFled_LinkBattleCanceled
-
-.dont_run
+	jmp z, WildFled_EnemyFled_LinkBattleCanceled
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .player_1

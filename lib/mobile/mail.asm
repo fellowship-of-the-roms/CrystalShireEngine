@@ -1937,9 +1937,8 @@ Function114c0b:
 	cp $20
 	jr z, .asm_114c4e
 	cp $9
-	jr z, .asm_114c4e
-	jr .asm_114c24
-
+	jr nz, .asm_114c24
+; fallthrough
 .asm_114c4e
 	dec bc
 	ld a, b
@@ -2039,10 +2038,7 @@ Function114c5e:
 	ld [hli], a
 	inc de
 	and a
-	jr z, .asm_114cd7
-	jr .asm_114cce
-
-.asm_114cd7
+	jr nz, .asm_114cce
 	dec bc
 	ret
 
@@ -2288,9 +2284,8 @@ Function114df1:
 	cp $42
 	jr z, .asm_114e29
 	cp $4a
-	jr z, .asm_114e29
-	jr .asm_114e0b
-
+	jr nz, .asm_114e0b
+; fallthrough
 .asm_114e29
 	ld a, [hli]
 	ret
@@ -2565,9 +2560,8 @@ Function114f59:
 	jr c, .asm_115015
 	jr z, .asm_114fa5
 	cp $12
-	jr c, .asm_114fa5
-	jr .asm_114fe7
-
+	jr nc, .asm_114fe7
+; fallthrough
 .asm_114fa5
 	xor a
 	ret
@@ -2781,9 +2775,8 @@ Function1150b3:
 	cp $42
 	jr z, .asm_1150dc
 	cp $40
-	jr z, .asm_1150dc
-	jr .asm_1150bb
-
+	jr nz, .asm_1150bb
+; fallthrough
 .asm_1150dc
 	push hl
 .asm_1150dd
@@ -2802,9 +2795,8 @@ Function1150b3:
 	cp $42
 	jr z, .asm_1150f8
 	cp $4a
-	jr z, .asm_1150f8
-	jr .asm_1150dd
-
+	jr nz, .asm_1150dd
+; fallthrough
 .asm_1150f8
 	ld a, l
 	ld [wDecoConsole], a
@@ -3479,9 +3471,8 @@ Function1153d2:
 	ld a, c
 	cp l
 	jr c, .asm_11548c
-	jr z, .asm_11548c
-	jr .asm_11544b
-
+	jr nz, .asm_11544b
+; fallthrough
 .asm_11548c
 	ld hl, $dc18
 	ld a, c
@@ -4183,10 +4174,7 @@ Function11581e:
 	cp $3
 	jr z, .asm_1158b4
 	cp $4
-	jr z, .asm_1158ad
-	jr .asm_1158bc
-
-.asm_1158ad
+	jr nz, .asm_1158bc
 	ld a, $5
 	ld [wTimerEventStartDay], a
 	jr .asm_1158b9
@@ -4737,10 +4725,7 @@ Function115b00:
 	cp $3
 	jr z, .asm_115bc1
 	cp $4
-	jr z, .asm_115bba
-	jr .asm_115b3b
-
-.asm_115bba
+	jr nz, .asm_115b3b
 	ld a, $5
 	ld [wTimerEventStartDay], a
 	jr .asm_115bc6

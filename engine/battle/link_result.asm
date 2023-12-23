@@ -29,10 +29,7 @@ DetermineLinkBattleResult:
 	ld a, d
 	cp h
 	jr c, .victory
-	jr z, .compare_lo
-	jr .defeat
-
-.compare_lo
+	jr nz, .defeat
 	ld a, e
 	cp l
 	jr z, .drawn

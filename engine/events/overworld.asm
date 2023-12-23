@@ -559,10 +559,7 @@ FlyFunction:
 	jr c, .nostormbadge
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .outdoors
-	jr .indoors
-
-.outdoors
+	jr nz, .indoors
 	xor a
 	ldh [hMapAnims], a
 	call LoadStandardMenuHeader
@@ -889,10 +886,7 @@ TeleportFunction:
 .TryTeleport:
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .CheckIfSpawnPoint
-	jr .nope
-
-.CheckIfSpawnPoint:
+	jr nz, .nope
 	ld a, [wLastSpawnMapGroup]
 	ld d, a
 	ld a, [wLastSpawnMapNumber]
@@ -1671,9 +1665,8 @@ BikeFunction:
 	cp CAVE
 	jr z, .ok
 	cp GATE
-	jr z, .ok
-	jr .nope
-
+	jr nz, .nope
+; fallthrough
 .ok
 	call GetPlayerTile
 	and $f ; lo nybble only

@@ -147,10 +147,7 @@ BattleAnimFunc_MoveWaveToTarget:
 	add hl, bc
 	ld a, [hl]
 	cp $88
-	jr c, .move
-	jmp DeinitBattleAnimation
-
-.move
+	jmp nc, DeinitBattleAnimation
 	add $2
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_YCOORD
@@ -389,10 +386,7 @@ BattleAnimFunc_PokeBallBlocked:
 	add hl, bc
 	ld a, [hl]
 	cp $70
-	jr nc, .next
-	jmp BattleAnimFunc_ThrowFromUserToTarget
-
-.next
+	jmp c, BattleAnimFunc_ThrowFromUserToTarget
 	call BattleAnim_IncAnonJumptableIndex
 .two
 	ld hl, BATTLEANIMSTRUCT_YCOORD
@@ -515,10 +509,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	add hl, bc
 	ld a, [hl]
 	cp $80
-	jr nc, .next
-	jr .SetCoords
-
-.next
+	jr c, .SetCoords
 	call BattleAnim_IncAnonJumptableIndex
 .one
 	call BattleAnim_IncAnonJumptableIndex
@@ -583,10 +574,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	add hl, bc
 	ld a, [hl]
 	cp $b0
-	jr c, .retain
-	jmp DeinitBattleAnimation
-
-.retain
+	jmp nc, DeinitBattleAnimation
 ; fallthrough
 .SetCoords:
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -836,10 +824,7 @@ BattleAnimFunc_RazorLeaf:
 	add hl, bc
 	ld a, [hl]
 	cp $20
-	jr nz, .sine_cosine_2
-	jmp DeinitBattleAnimation
-
-.sine_cosine_2
+	jmp z, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -970,10 +955,7 @@ BattleAnimFunc_RockSmash:
 	add hl, bc
 	ld a, [hl]
 	cp $30
-	jr nc, .sine_cosine
-	jmp DeinitBattleAnimation
-
-.sine_cosine
+	jmp c, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
@@ -1195,10 +1177,7 @@ BattleAnimFunc_Sing:
 	add hl, bc
 	ld a, [hl]
 	cp $b8
-	jr c, .move
-	jmp DeinitBattleAnimation
-
-.move
+	jmp nc, DeinitBattleAnimation
 	ld a, $2
 	call BattleAnim_StepToTarget
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -1276,10 +1255,7 @@ BattleAnimFunc_Powder:
 	add hl, bc
 	ld a, [hl]
 	cp $38
-	jr c, .move
-	jmp DeinitBattleAnimation
-
-.move
+	jmp nc, DeinitBattleAnimation
 	ld a, [hl]
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
@@ -1337,10 +1313,7 @@ BattleAnimFunc_Recover:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .move
-	jmp DeinitBattleAnimation
-
-.move
+	jmp z, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -1634,9 +1607,8 @@ BattleAnimFunc_Gust:
 	add hl, bc
 	ld a, [hl]
 	cp $b8
-	jr c, .move
-	jmp DeinitBattleAnimation
-
+	jmp nc, DeinitBattleAnimation
+; fallthrough
 .move
 	call .GustWobble
 	; Move horizontally every frame
@@ -1733,10 +1705,7 @@ BattleAnimFunc_Absorb:
 	add hl, bc
 	ld a, [hl]
 	cp $30
-	jr nc, .move
-	jmp DeinitBattleAnimation
-
-.move
+	jmp c, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
@@ -1796,10 +1765,7 @@ BattleAnimFunc_LeechSeed:
 	add hl, bc
 	ld a, [hl]
 	cp $20
-	jr c, .sprout
-	jr BattleAnim_StepThrownToTarget
-
-.sprout
+	jr nc, BattleAnim_StepThrownToTarget
 	ld [hl], $40
 	ld a, BATTLE_ANIM_FRAMESET_LEECH_SEED_2
 	call ReinitBattleAnimFrameset
@@ -1888,10 +1854,7 @@ BattleAnimFunc_Spikes:
 	add hl, bc
 	ld a, [hl]
 	cp $20
-	jr c, .wait
-	jr BattleAnim_StepThrownToTarget
-
-.wait
+	jr nc, BattleAnim_StepThrownToTarget
 	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_RazorWind:
@@ -2203,9 +2166,8 @@ BattleAnimFunc_MoveUp:
 	and a
 	jr z, .move
 	cp $d8
-	jr nc, .move
-	jmp DeinitBattleAnimation
-
+	jmp c, DeinitBattleAnimation
+; fallthrough
 .move
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
@@ -2902,9 +2864,8 @@ BattleAnimFunc_Horn:
 	add hl, bc
 	ld a, [hl]
 	cp $20
-	jr c, .three
-	jmp DeinitBattleAnimation
-
+	jmp nc, DeinitBattleAnimation
+; fallthrough
 .three
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
@@ -2974,10 +2935,7 @@ BattleAnimFunc_Needle:
 	add hl, bc
 	ld a, [hl]
 	cp $84
-	jr c, .move_to_target
-	jmp DeinitBattleAnimation
-
-.move_to_target
+	jmp nc, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
@@ -3489,10 +3447,7 @@ BattleAnimFunc_MetronomeSparkleSketch:
 	add hl, bc
 	ld a, [hl]
 	cp $20
-	jr c, .do_move
-	jmp DeinitBattleAnimation
-
-.do_move
+	jmp nc, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]

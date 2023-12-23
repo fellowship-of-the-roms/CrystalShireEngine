@@ -1940,10 +1940,9 @@ Music_StereoPanning:
 	; stereo on?
 	ld a, [wOptions]
 	bit STEREO, a
-	jr nz, Music_ForceStereoPanning
 	; skip param
-	jr GetMusicByte
-
+	jr z, GetMusicByte
+; fallthrough
 Music_ForceStereoPanning:
 ; force panning
 ; params: 1

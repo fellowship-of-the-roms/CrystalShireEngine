@@ -13,9 +13,8 @@ BattleStatsScreenInit:
 
 	ld a, [wBattleMode]
 	and a
-	jr z, StatsScreenInit
-	jr _MobileStatsScreenInit
-
+	jr nz, _MobileStatsScreenInit
+; fallthrough
 StatsScreenInit:
 	ld hl, StatsScreenMain
 	jr StatsScreenInit_gotaddress
@@ -518,10 +517,7 @@ StatsScreen_LoadGFX:
 	call .LoadPals
 	ld hl, wStatsScreenFlags
 	bit 4, [hl]
-	jr nz, .place_frontpic
-	jmp SetPalettes
-
-.place_frontpic
+	jmp z, SetPalettes
 	jmp StatsScreen_PlaceFrontpic
 
 .ClearBox:

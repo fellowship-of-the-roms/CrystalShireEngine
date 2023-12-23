@@ -2444,10 +2444,7 @@ Function1196f2:
 	ldh a, [hRandomSub]
 	cp d
 	jr c, .asm_11974c
-	jr z, .asm_11973e
-	jr .asm_119745
-
-.asm_11973e
+	jr nz, .asm_119745
 	ldh a, [hRandomAdd]
 	cp e
 	jr c, .asm_11974c

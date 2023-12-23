@@ -147,9 +147,8 @@ GetDestinationWarpNumber::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .found_warp
-
+	jr z, .found_warp
+; fallthrough
 .next
 	pop hl
 	ld a, WARP_EVENT_SIZE
@@ -1202,9 +1201,8 @@ LoadTilesetGFX::
 	cp TILESET_JOHTO_MODERN
 	jr z, .load_roof
 	cp TILESET_BATTLE_TOWER_OUTSIDE
-	jr z, .load_roof
-	jr .skip_roof
-
+	jr nz, .skip_roof
+; fallthrough
 .load_roof
 	farcall LoadMapGroupRoof
 
@@ -1624,9 +1622,8 @@ CheckIfFacingTileCoordIsBGEvent::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .copysign
-
+	jr z, .copysign
+; fallthrough
 .next
 	pop hl
 	ld a, BG_EVENT_SIZE
@@ -1696,9 +1693,8 @@ CheckCurrentMapCoordEvents::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .copy_coord_event
-
+	jr z, .copy_coord_event
+; fallthough
 .next
 	pop hl
 	ld a, COORD_EVENT_SIZE

@@ -537,11 +537,10 @@ BillsPC_Get2bpp:
 	ld a, h
 	sub $80
 	cp $20
-	jr nc, .get2bpp ; copying to non-VRAM
-
 	; Valid case. Apply GDMA.
-	jmp SafeHDMATransfer
-
+	jmp c, SafeHDMATransfer
+; copying to non-VRAM
+; fallthrough
 .get2bpp
 	jmp Get2bpp
 

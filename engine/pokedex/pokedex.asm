@@ -884,10 +884,7 @@ Pokedex_UpdateUnownMode:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and A_BUTTON | B_BUTTON
-	jr nz, .a_b
-	jr Pokedex_UnownModeHandleDPadInput
-
-.a_b
+	jr z, Pokedex_UnownModeHandleDPadInput
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_OPTION_SCR
 	ld [wJumptableIndex], a
