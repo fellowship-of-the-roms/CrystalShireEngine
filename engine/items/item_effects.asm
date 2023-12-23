@@ -1590,14 +1590,12 @@ RevivalHerbEffect:
 
 	call RevivePokemon
 	cp FALSE
-	jr nz, .not_used
+	jr nz, StatusHealer_Jumptable
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
 	xor a
-; fallthrough
-.not_used
 	jr StatusHealer_Jumptable
 
 ReviveEffect:
@@ -1899,7 +1897,7 @@ RestoreHealth:
 	ld a, [hl]
 	adc d
 	ld [hl], a
-	jr c, .full_hp
+	jr c, ReviveFullHP
 	call LoadCurHPIntoBuffer3
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
@@ -1914,7 +1912,6 @@ RestoreHealth:
 	ld a, [de]
 	sbc [hl]
 	ret c
-.full_hp
 	jr ReviveFullHP
 
 RemoveHP:
@@ -1926,11 +1923,10 @@ RemoveHP:
 	ld a, [hl]
 	sbc d
 	ld [hl], a
-	jr nc, .okay
+	jr nc, LoadCurHPIntoBuffer3
 	xor a
 	ld [hld], a
 	ld [hl], a
-.okay
 	jr LoadCurHPIntoBuffer3
 
 IsMonFainted:
@@ -2650,9 +2646,6 @@ OpenBox:
 	text_far _SentTrophyHomeText
 	text_end
 
-NoEffect:
-	jr IsntTheTimeMessage
-
 Play_SFX_FULL_HEAL:
 	push de
 	ld de, SFX_FULL_HEAL
@@ -2718,6 +2711,7 @@ CantUseOnEggMessage:
 	ld hl, ItemCantUseOnEggText
 	jr CantUseItemMessage
 
+NoEffect:
 IsntTheTimeMessage:
 	ld hl, ItemOakWarningText
 	jr CantUseItemMessage

@@ -96,10 +96,10 @@ DoBattle:
 	call SpikesDamage
 	ld a, [wLinkMode]
 	and a
-	jr z, .not_linked_2
+	jr z, BattleTurn
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
-	jr nz, .not_linked_2
+	jr nz, BattleTurn
 	xor a
 	ld [wEnemySwitchMonIndex], a
 	call NewEnemyMonStatus
@@ -108,8 +108,6 @@ DoBattle:
 	call EnemySwitch
 	call SetEnemyTurn
 	call SpikesDamage
-
-.not_linked_2
 	jr BattleTurn
 
 .tutorial_debug
@@ -4931,7 +4929,7 @@ BattleMenu_Pack:
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr z, .didnt_use_item
-	jr .got_item
+	jr .UseItem
 
 .tutorial
 	farcall TutorialPack
@@ -4939,15 +4937,13 @@ BattleMenu_Pack:
 	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call DoItemEffect
-	jr .got_item
+	jr .UseItem
 
 .contest
 	ld hl, PARK_BALL
 	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call DoItemEffect
-
-.got_item
 	jr .UseItem
 
 .didnt_use_item

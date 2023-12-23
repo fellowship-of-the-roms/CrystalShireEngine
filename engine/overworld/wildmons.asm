@@ -724,14 +724,12 @@ JumpRoamMons:
 .SkipEntei:
 	ld a, [wRoamMon3MapGroup]
 	cp GROUP_N_A
-	jr z, .Finished
+	jr z, _BackUpMapIndices
 	call JumpRoamMon
 	ld a, b
 	ld [wRoamMon3MapGroup], a
 	ld a, c
 	ld [wRoamMon3MapNumber], a
-
-.Finished:
 	jr _BackUpMapIndices
 
 JumpRoamMon:

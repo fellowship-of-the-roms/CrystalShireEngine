@@ -615,7 +615,7 @@ PCItemsJoypad:
 	jr z, .a_1
 	cp SELECT
 	jr z, .select_1
-	jr .next
+	jr .loop
 
 .moving_stuff_around
 	ld a, [wMenuJoypad]
@@ -625,18 +625,17 @@ PCItemsJoypad:
 	jr z, .a_select_2
 	cp SELECT
 	jr z, .a_select_2
-	jr .next
+	jr .loop
 
 .b_2
 	xor a
 	ld [wSwitchItem], a
-	jr .next
+	jr .loop
 
 .a_select_2
 	call PC_PlaySwapItemsSound
 .select_1
 	farcall SwitchItemsInBag
-.next
 	jr .loop
 
 .a_1

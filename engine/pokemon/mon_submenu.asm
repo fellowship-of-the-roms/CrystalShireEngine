@@ -164,11 +164,9 @@ GetMonSubmenuItems:
 .skip2
 	ld a, [wMonSubmenuCount]
 	cp NUM_MONMENU_ITEMS
-	jr z, .ok2
+	jr z, TerminateMonSubmenu
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
-
-.ok2
 	jr TerminateMonSubmenu
 
 .egg

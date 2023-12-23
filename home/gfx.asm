@@ -112,7 +112,7 @@ LoadFontsBattleExtra::
 	farjp _LoadFontsBattleExtra
 
 LoadFontsExtra::
-	farjp _LoadFontsExtra1
+	farjp LoadFrame
 
 DecompressRequest2bpp::
 	push de

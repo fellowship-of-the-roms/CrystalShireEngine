@@ -710,7 +710,7 @@ Error_Cant_ExitMenu:
 	call PrintText
 	call WaitBGMap
 .infinite_loop
-	jr .infinite_loop
+	jr .infinite_loop ; no-optimize Stub jump infinite loop
 
 .WindowPoppingErrorText:
 	text_far _WindowPoppingErrorText

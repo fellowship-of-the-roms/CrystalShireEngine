@@ -49,7 +49,7 @@ StartMenu::
 .Select:
 	call .GetInput
 	jr c, .Exit
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
 	call PlayClickSFX
@@ -95,7 +95,7 @@ StartMenu::
 ; Return carry on exit, and no-carry on selection.
 	xor a
 	ldh [hBGMapMode], a
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	call SetUpMenu
 	ld a, $ff
 	ld [wMenuSelection], a
@@ -355,17 +355,14 @@ endr
 	inc c
 	ret
 
-.DrawMenuAccount:
-	jr ._DrawMenuAccount
-
 .PrintMenuAccount:
 	call .IsMenuAccountOn
 	ret z
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	decoord 0, 14
 	jmp .MenuDesc
 
-._DrawMenuAccount:
+.DrawMenuAccount:
 	call .IsMenuAccountOn
 	ret z
 	hlcoord 0, 13

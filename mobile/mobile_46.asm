@@ -847,7 +847,7 @@ Function11878d:
 	bit 2, a
 	jr nz, .asm_1187d1
 	bit 0, a
-	jr nz, .asm_1187aa
+	jr nz, Function118821
 	ld a, [wcd89]
 	and $1
 	jr z, .asm_1187a7
@@ -855,8 +855,6 @@ Function11878d:
 	ldh [rSVBK], a
 .asm_1187a7
 	jmp BattleTowerRoomMenu_IncrementJumptable
-.asm_1187aa
-	jr Function118821
 .asm_1187af
 	ld a, MOBILEAPI_00
 	call MobileAPI
@@ -5471,16 +5469,14 @@ Function11b31b:
 	jr z, .tilemap_1
 
 	ld bc, .Tilemap2
-	jr .load_sprites
+	jr Function11b397
 
 .tilemap_3
 	ld bc, .Tilemap3
-	jr .load_sprites
+	jr Function11b397
 
 .tilemap_1
 	ld bc, .Tilemap1
-
-.load_sprites
 	jr Function11b397
 
 .Coords:

@@ -42,7 +42,7 @@ PrinterJumptableIteration:
 	dw Printer_NextSectionWaitLoopBack ; 12
 	dw Printer_WaitLoopBack ; 13
 
-_Printer_NextSection:
+Printer_NextSection:
 	ld hl, wJumptableIndex
 	inc [hl]
 	ret
@@ -59,9 +59,6 @@ Printer_Quit:
 	set 7, [hl]
 	ret
 
-Printer_NextSection:
-	jr _Printer_NextSection
-
 Printer_SectionOne:
 	ld a, $1
 	ld [wJumptableIndex], a
@@ -76,7 +73,7 @@ Print_InitPrinterHandshake:
 	ld [wPrinterSendByteCounter + 1], a
 	ld a, [wPrinterQueueLength]
 	ld [wPrinterRowIndex], a
-	call _Printer_NextSection
+	call Printer_NextSection
 	call Printer_WaitHandshake
 	ld a, PRINTER_STATUS_CHECKING
 	ld [wPrinterStatus], a
@@ -100,7 +97,7 @@ Printer_StartTransmittingTilemap:
 	ld [wPrinterSendByteCounter + 1], a
 	; compute the checksum
 	call Printer_ComputeChecksum
-	call _Printer_NextSection
+	call Printer_NextSection
 	call Printer_WaitHandshake
 	ld a, PRINTER_STATUS_TRANSMITTING
 	ld [wPrinterStatus], a
@@ -117,7 +114,7 @@ Printer_EndTilemapTransmission:
 	xor a
 	ld [wPrinterSendByteCounter], a
 	ld [wPrinterSendByteCounter + 1], a
-	call _Printer_NextSection
+	call Printer_NextSection
 	jmp Printer_WaitHandshake
 
 Printer_SignalSendHeader:
@@ -132,7 +129,7 @@ Printer_SignalSendHeader:
 	ld [wPrinterSendByteCounter + 1], a
 	; compute the checksum
 	call Printer_ComputeChecksum
-	call _Printer_NextSection
+	call Printer_NextSection
 	call Printer_WaitHandshake
 	ld a, PRINTER_STATUS_PRINTING
 	ld [wPrinterStatus], a
@@ -149,7 +146,7 @@ Printer_SignalLoopBack:
 	ld [wPrinterSendByteCounter + 1], a
 	ld a, [wPrinterQueueLength]
 	ld [wPrinterRowIndex], a
-	call _Printer_NextSection
+	call Printer_NextSection
 	jmp Printer_WaitHandshake
 
 Printer_WaitSerial:
@@ -160,7 +157,7 @@ Printer_WaitSerial:
 	ret c
 	xor a
 	ld [hl], a
-	jmp _Printer_NextSection
+	jmp Printer_NextSection
 
 Printer_WaitSerialAndLoopBack2:
 	ld hl, wPrinterSerialFrameDelay
@@ -197,7 +194,7 @@ Printer_CheckConnectionStatus:
 	set 1, [hl]
 	ld a, $5
 	ld [wHandshakeFrameDelay], a
-	jmp _Printer_NextSection
+	jmp Printer_NextSection
 
 .printer_error
 	ld a, $ff
@@ -216,7 +213,7 @@ Printer_TransmissionLoop:
 	jr nz, .enter_wait_loop
 	ld a, [wPrinterStatusFlags]
 	and $1
-	jmp z, _Printer_NextSection
+	jmp z, Printer_NextSection
 	jmp Printer_PrevSection
 
 .enter_wait_loop
@@ -231,10 +228,10 @@ Printer_WaitUntilFinished:
 	ld a, [wPrinterStatusFlags]
 	and $f3
 	ret nz
-	jmp _Printer_NextSection
+	jmp Printer_NextSection
 
 Printer_NextSectionWaitLoopBack:
-	call _Printer_NextSection
+	call Printer_NextSection
 Printer_WaitLoopBack:
 	ld a, [wPrinterOpcode]
 	and a

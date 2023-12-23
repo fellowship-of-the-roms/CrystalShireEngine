@@ -882,16 +882,15 @@ ReelAction_StopReel1:
 
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	call .CheckForBias
 	ret nz
-.NoBias:
 	jr Slots_StopReel
 
 .CheckForBias:
@@ -919,21 +918,18 @@ ReelAction_StopReel2:
 	ld a, [wSlotBuildingMatch]
 	ld hl, wSlotBias
 	cp [hl]
-	jr z, .NoBias
+	jr z, Slots_StopReel
 .nope
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	ret
-
-.NoBias:
-	jr Slots_StopReel
 
 ReelAction_StopReel3:
 ; Manipulate the reel up to wReel3ManipCounter (i.e. 4) slots,
@@ -1295,7 +1291,7 @@ Slots_CheckMatchedFirstTwoReels:
 
 .Jumptable:
 	dw DoNothing ; zero
-	dw .one
+	dw .CheckMiddleRow
 	dw .two
 	dw .three
 
@@ -1306,8 +1302,6 @@ Slots_CheckMatchedFirstTwoReels:
 .two
 	call .CheckBottomRow
 	call .CheckTopRow
-
-.one
 	jr .CheckMiddleRow
 
 .CheckBottomRow:
@@ -1389,7 +1383,7 @@ Slots_CheckMatchedAllThreeReels:
 
 .Jumptable:
 	dw DoNothing ; zero
-	dw .one
+	dw .CheckMiddleRow
 	dw .two
 	dw .three
 
@@ -1400,8 +1394,6 @@ Slots_CheckMatchedAllThreeReels:
 .two
 	call .CheckBottomRow
 	call .CheckTopRow
-
-.one
 	jr .CheckMiddleRow
 
 .CheckBottomRow:

@@ -5345,16 +5345,13 @@ Function1123e1:
 .asm_1123f2
 	ld a, [wMobileSDK_ReceivePacketBuffer]
 	cp $9f
-	jr z, .asm_112408
+	jr z, Function112430
 	call Function1127e1
-	jr z, .asm_112408
+	jr z, Function112430
 	ld hl, wc86b
 	dec [hl]
 	ld hl, wMobileSDK_PacketBuffer + 32
 	jmp Function1127c5
-
-.asm_112408
-	jr Function112430
 
 .asm_11240a
 	xor a

@@ -2441,7 +2441,7 @@ BattleCommand_CheckFaint:
 	call LoadAnim
 	call BattleCommand_SwitchTurn
 
-	jr .finish
+	jr EndMoveEffect
 
 .no_dbond
 	ld a, BATTLE_VARS_MOVE_EFFECT
@@ -2455,12 +2455,10 @@ BattleCommand_CheckFaint:
 	cp EFFECT_TRIPLE_KICK
 	jr z, .multiple_hit_raise_sub
 	cp EFFECT_BEAT_UP
-	jr nz, .finish
+	jr nz, EndMoveEffect
 
 .multiple_hit_raise_sub
 	call BattleCommand_RaiseSub
-
-.finish
 	jr EndMoveEffect
 
 BattleCommand_BuildOpponentRage:
@@ -5146,7 +5144,7 @@ BattleCommand_ForceSwitch:
 .force_player_switch
 	ld a, [wAttackMissed]
 	and a
-	jr nz, .player_miss
+	jmp nz, .fail
 
 	ld a, [wBattleMode]
 	dec a
@@ -5170,8 +5168,6 @@ BattleCommand_ForceSwitch:
 	srl b
 	cp b
 	jr nc, .wild_succeed_playeristarget
-
-.player_miss
 	jr .fail
 
 .wild_succeed_playeristarget

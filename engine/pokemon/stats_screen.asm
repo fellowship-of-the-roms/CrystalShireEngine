@@ -176,7 +176,7 @@ endc
 if DEF(_DEBUG)
 	jmp StatsScreen_JoypadAction
 else
-	jr StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction ; no-optimize Stub jump
 endc
 
 .quit
@@ -235,7 +235,7 @@ MonStatsJoypad:
 if DEF(_DEBUG)
 	jmp StatsScreen_SetJumptableIndex
 else
-	jr StatsScreen_SetJumptableIndex
+	jr StatsScreen_SetJumptableIndex ; no-optimize Stub jump
 endc
 
 .next

@@ -449,7 +449,7 @@ Function10043a:
 Jumptable_10044e:
 	dw Function10046a
 	dw Function10047c
-	dw Function100493
+	dw asm_100497
 	dw Function1004ba
 	dw Function1004f4
 	dw Function1004ce
@@ -485,9 +485,6 @@ Function10047c:
 	ld a, $02
 	ld [wcd27], a
 	ret
-
-Function100493:
-	jr asm_100497
 
 Function100495:
 ; fallthrough
@@ -1224,14 +1221,11 @@ _LinkBattleSendReceiveAction:
 	farcall PlaceWaitingText
 	ld a, [wLinkMode]
 	cp LINK_MOBILE
-	jr nz, .not_mobile
+	jr nz, .LinkBattle_SendReceiveAction
 
 	call .MobileBattle_SendReceiveAction
 	call Function100da5
 	farjp FinishBattleAnim
-
-.not_mobile
-	jr .LinkBattle_SendReceiveAction
 
 .StageForSend:
 	ld a, [wBattlePlayerAction]

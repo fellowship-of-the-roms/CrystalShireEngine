@@ -1580,9 +1580,9 @@ BattleAnimFunc_Gust:
 	call BattleAnim_AnonJumptable
 .anon_dw
 	dw .zero
-	dw .one
+	dw .GustWobble
 	dw .two
-	dw .three
+	dw .GustWobble
 	dw .four
 
 .zero
@@ -1590,8 +1590,6 @@ BattleAnimFunc_Gust:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld [hl], 0
-.one
-.three
 	jr .GustWobble
 
 .two
@@ -3172,7 +3170,7 @@ BattleAnimFunc_SkyAttack:
 	call BattleAnim_AnonJumptable
 .anon_dw
 	dw .zero
-	dw .one
+	dw .SkyAttack_CyclePalette
 	dw .two
 	dw .three
 
@@ -3188,9 +3186,6 @@ BattleAnimFunc_SkyAttack:
 	add hl, bc
 	ld [hl], a
 	ret
-
-.one
-	jr .SkyAttack_CyclePalette
 
 .two
 ; Moves towards target and stops at x coord $84
