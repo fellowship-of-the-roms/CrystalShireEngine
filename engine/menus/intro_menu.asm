@@ -1049,8 +1049,8 @@ TitleScreenMain:
 	call GetJoypad
 	ld hl, hJoyDown
 	ld a, [hl]
-	and D_UP + B_BUTTON + SELECT
-	cp  D_UP + B_BUTTON + SELECT
+	or ~(D_UP + B_BUTTON + SELECT)
+	inc a
 	jr z, .delete_save_data
 
 ; To bring up the clock reset dialog:
@@ -1061,8 +1061,8 @@ TitleScreenMain:
 	jr z, .check_clock_reset
 
 	ld a, [hl]
-	and D_DOWN + B_BUTTON + SELECT
-	cp  D_DOWN + B_BUTTON + SELECT
+	or ~(D_DOWN + B_BUTTON + SELECT)
+	inc a
 	jr nz, .check_start
 
 	ld a, $34
@@ -1079,8 +1079,8 @@ TitleScreenMain:
 	ldh [hClockResetTrigger], a
 
 	ld a, [hl]
-	and D_LEFT + D_UP
-	cp  D_LEFT + D_UP
+	or ~(D_LEFT + D_UP)
+	inc a
 	jr z, .reset_clock
 
 ; Press Start or A to start the game.
