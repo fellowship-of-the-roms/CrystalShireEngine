@@ -25,11 +25,11 @@ GetSpriteVTile::
 	set 5, [hl]
 	sub FIRST_VRAM1_OBJECT_STRUCT
 .continue
-	add a, a
-	add a, a
+	add a
+	add a
 	ld b, a
-	add a, b
-	add a, b
+	add b
+	add b
 	ld [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite

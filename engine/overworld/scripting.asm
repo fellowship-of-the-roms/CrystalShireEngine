@@ -2360,7 +2360,7 @@ Script_loaditemindex:
 	cp NUM_MAP_LOCKED_ITEM_IDS
 	ret nc
 	if LOCKED_ITEM_ID_MAP_1 > 1
-		add a, LOCKED_ITEM_TD_MAP_1
+		add LOCKED_ITEM_TD_MAP_1
 	elif LOCKED_ITEM_ID_MAP_1 == 1
 		inc a
 	endc

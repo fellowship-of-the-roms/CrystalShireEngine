@@ -1,10 +1,10 @@
 _HandlePlayerStep::
 	ld a, [wPlayerStepFlags]
-	add a, a
+	add a
 	jr c, .update_overworld_map ; starting step
-	add a, a
+	add a
 	jr c, .update_player_coords ; finishing step
-	add a, a
+	add a
 	jr c, .finish ; ongoing step
 	ret
 
