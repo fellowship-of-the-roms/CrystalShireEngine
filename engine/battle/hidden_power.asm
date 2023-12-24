@@ -37,9 +37,10 @@ HiddenPowerDamage:
 	ld b, a
 	ld a, [hl]
 	and %1000
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	or b
 
 ; Multiply by 5

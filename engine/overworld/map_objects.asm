@@ -2320,9 +2320,10 @@ CheckObjectCoveredByTextbox:
 .ok2
 ; Convert pixels to tiles.
 	ld a, [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	cp SCREEN_WIDTH
 	jr c, .ok3
 	sub BG_MAP_WIDTH
@@ -2353,9 +2354,10 @@ CheckObjectCoveredByTextbox:
 .ok5
 ; Convert pixels to tiles.
 	ld a, [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	cp SCREEN_HEIGHT
 	jr c, .ok6
 	sub BG_MAP_HEIGHT
