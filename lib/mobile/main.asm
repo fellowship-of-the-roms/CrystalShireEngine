@@ -5554,7 +5554,6 @@ Function112566:
 	call Function1125c7
 	ld a, [wMobileSDK_PacketBuffer + 19]
 	and $1
-	or a
 	jr nz, .asm_11257d
 	ld a, [wc98a]
 	cp $2
