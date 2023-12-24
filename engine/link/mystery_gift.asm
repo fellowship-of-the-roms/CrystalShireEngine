@@ -975,8 +975,8 @@ SendIRDataBlock:
 	ld hl, hMGExchangedWord
 	ld a, MESSAGE_PREFIX
 	ld [hli], a
-	ld [hl], b
-	dec hl
+	ld a, b
+	ld [hld], a
 	ld b, 2
 	call SendIRDataMessage
 	pop bc

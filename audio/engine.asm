@@ -838,8 +838,8 @@ HandleTrackVibrato:
 	ld e, l
 	ld d, h
 	ld hl, wCurTrackFrequency
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 .vibrato
 	; is vibrato on?
@@ -1018,8 +1018,8 @@ ApplyPitchSlide:
 .continue_pitch_slide
 	ld hl, CHANNEL_FREQUENCY
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, CHANNEL_NOTE_FLAGS
 	add hl, bc
@@ -1091,8 +1091,8 @@ ReadNoiseSample:
 	ld [wCurTrackFrequency + 1], a
 
 	ld hl, wNoiseSampleAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 	ld hl, CHANNEL_NOTE_FLAGS
@@ -1146,8 +1146,8 @@ ParseMusic:
 	call GetFrequency
 	ld hl, CHANNEL_FREQUENCY
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	; ????
 	ld hl, CHANNEL_NOTE_FLAGS
@@ -1398,8 +1398,8 @@ Music_Ret:
 	ld d, [hl]
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -1420,15 +1420,15 @@ Music_Call:
 	ld d, [hl]
 	ld hl, CHANNEL_LAST_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	; load pointer into MusicAddress
 	pop de
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	; set subroutine flag
 	ld hl, CHANNEL_FLAGS1
@@ -1446,8 +1446,8 @@ Music_Jump:
 	ld d, a
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -1489,8 +1489,8 @@ Music_Loop:
 	; load new pointer into MusicAddress
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -1507,8 +1507,8 @@ Music_Loop:
 	ld d, [hl]
 	inc de ; skip
 	inc de ; pointer
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -1551,8 +1551,8 @@ Music_JumpIf:
 	inc de
 	inc de
 	; update address
-	ld [hl], d
-	dec hl
+	ld d, a
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -1566,8 +1566,8 @@ Music_JumpIf:
 	; update pointer in MusicAddress
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -1602,8 +1602,8 @@ MusicEE:
 	inc de
 	inc de
 	; update address
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -1618,8 +1618,8 @@ MusicEE:
 	; update address
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -2221,8 +2221,8 @@ Tempo:
 	; update Tempo
 	ld hl, CHANNEL_TEMPO
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	; clear ????
 	xor a
@@ -2261,8 +2261,8 @@ _PlayMusic::
 ; load music
 	call MusicOff
 	ld hl, wMusicID
-	ld [hl], e ; song number
-	inc hl
+	ld a, e
+	ld [hli], a ; song number
 	ld [hl], d ; (always 0)
 	ld hl, Music
 	add hl, de ; three
@@ -2307,8 +2307,8 @@ _PlayCry::
 
 ; Overload the music id with the cry id
 	ld hl, wMusicID
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 ; 3-byte pointers (bank, address)
@@ -2472,8 +2472,8 @@ _PlaySFX::
 .chscleared
 ; start reading sfx header for # chs
 	ld hl, wMusicID
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, SFX
 	add hl, de ; three
@@ -2519,8 +2519,8 @@ PlayStereoSFX::
 
 ; else, let's go ahead with this
 	ld hl, wMusicID
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 ; get sfx ptr

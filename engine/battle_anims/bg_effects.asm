@@ -1174,9 +1174,9 @@ BattleBGEffect_DoubleTeam:
 	srl a
 	push af
 .loop
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
 	dec a
 	jr nz, .loop
@@ -1841,7 +1841,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	srl a
 	ld h, HIGH(wLYOverridesBackup)
 .loop2
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is loop counter)
 	inc hl
 	inc hl
 	dec a
@@ -1982,13 +1982,13 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 .DMG_LYOverrideLoads:
 	ld hl, wLYOverridesBackup
 .loop1
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	dec b
 	jr nz, .loop1
 .loop2
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	dec c
 	jr nz, .loop2
 	ret
@@ -2734,8 +2734,8 @@ DeformWater:
 	ldh a, [hLYOverrideStart]
 	cp l
 	jr nc, .skip2
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 .skip2
 	ld a, [wBattleSineWaveTempOffset]
 	add $4

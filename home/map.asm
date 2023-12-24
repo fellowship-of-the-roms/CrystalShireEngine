@@ -915,7 +915,7 @@ GetScriptByte::
 	ld a, [bc]
 
 	inc bc
-	ld [hl], b
+	ld [hl], b ; no-optimize *hl++|*hl-- = b|c|d|e (a is not available)
 	dec hl
 	ld [hl], c
 

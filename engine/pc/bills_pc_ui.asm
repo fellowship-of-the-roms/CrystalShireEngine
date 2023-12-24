@@ -403,12 +403,12 @@ UseBillsPC:
 	inc a
 	ld bc, -SCREEN_WIDTH + (wAttrmap - wTilemap)
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a == d)
 	inc hl
 	ld [hl], e
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a == d)
 	inc hl
 	ld [hl], e
 	inc e

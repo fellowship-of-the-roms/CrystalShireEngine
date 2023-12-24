@@ -470,8 +470,8 @@ UpdateTrainerRankingsChecksum:
 	push de
 	call CalculateTrainerRankingsChecksum
 	ld hl, sTrainerRankingsChecksum
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld [hl], e
 	pop de
 	ret

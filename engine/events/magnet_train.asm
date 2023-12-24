@@ -200,9 +200,9 @@ DrawMagnetTrain:
 	ret
 
 .FillAlt:
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is used)
 	inc hl
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e (a is used)
 	inc hl
 	dec b
 	jr nz, .FillAlt

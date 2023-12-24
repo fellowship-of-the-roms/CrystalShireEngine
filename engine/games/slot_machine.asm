@@ -412,8 +412,8 @@ SlotsAction_PayoutAnim:
 	jr z, .done
 	ld e, [hl]
 	dec de
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ld hl, wCoins
 	ld d, [hl]
@@ -423,8 +423,8 @@ SlotsAction_PayoutAnim:
 	jr c, .okay
 	inc de
 .okay
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ld a, [wSlotsDelay]
 	and $7
@@ -605,14 +605,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite16
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel1Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc
@@ -623,14 +623,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite24
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel2Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc
@@ -641,14 +641,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite32
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel3Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc

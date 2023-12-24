@@ -938,8 +938,8 @@ DecodeBufferMon:
 .replace_a
 	ld c, a
 .replace
-	ld [hl], c
-	inc hl
+	ld a, c
+	ld [hli], a
 	dec b
 	jr nz, .charmap_loop
 

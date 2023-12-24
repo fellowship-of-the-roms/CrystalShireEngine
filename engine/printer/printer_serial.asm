@@ -397,8 +397,8 @@ Printer_ByteFill:
 	push de
 	ld e, a
 .loop
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	dec bc
 	ld a, c
 	or b
@@ -514,8 +514,8 @@ Printer_SendNextByte:
 	or d
 	jr z, .done
 	dec de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 
 	ld a, [wPrinterSendByteOffset]

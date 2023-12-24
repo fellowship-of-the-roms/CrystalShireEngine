@@ -245,17 +245,15 @@ CopyPals::
 	ld l, a
 	ld h, 0
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
 
 ; dest
 	pop hl
 ; write color
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
+	ld [hli], a
+	ld a, d
+	ld [hli], a
 ; next pal color
 rept PAL_COLOR_SIZE
 	srl b
