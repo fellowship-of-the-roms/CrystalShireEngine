@@ -714,10 +714,7 @@ SpriteAnimFunc_FlyTo:
 SpriteAnimFunc_IntroSuicune:
 	ld a, [wIntroSceneTimer]
 	and a
-	jr nz, .continue
-	ret
-
-.continue
+	ret z
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], $0

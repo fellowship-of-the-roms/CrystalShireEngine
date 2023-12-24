@@ -6767,9 +6767,8 @@ BadgeStatBoosts:
 	dec c
 	jr nz, .CheckBadge
 	srl a
-	jr c, BoostStat
-	ret
-
+	ret nc
+; fallthrough
 BoostStat:
 ; Raise stat at hl by 1/8.
 

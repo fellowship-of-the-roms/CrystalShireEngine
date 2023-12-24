@@ -1336,9 +1336,8 @@ Slots_CheckMatchedFirstTwoReels:
 	ld hl, wCurReelStopped + 2
 	ld a, [wReel1Stopped + 2]
 	cp [hl]
-	jr z, .StoreResult
-	ret
-
+	ret nz
+; fallthrough
 .StoreResult:
 	ld [wSlotBuildingMatch], a
 	and a
@@ -1443,9 +1442,8 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 2
 	cp [hl]
-	jr z, .StoreResult
-	ret
-
+	ret nz
+; fallthrough
 .StoreResult:
 	ld [wSlotMatched], a
 	ret

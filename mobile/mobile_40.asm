@@ -1969,10 +1969,7 @@ Function100f3d:
 	cp $01
 	jr z, .one
 	cp $03
-	jr z, .three
-	ret
-
-.three
+	ret nz
 	; what was once in de gets copied to hl,
 	; modified by Function100f8d, and put back
 	; into this backup
@@ -4121,10 +4118,7 @@ Function1026f3:
 	bit D_UP_F, a
 	jr nz, .asm_102712
 	bit D_DOWN_F, a
-	jr nz, .asm_102702
-	ret
-
-.asm_102702
+	ret z
 	hlcoord 9, 17
 	ld [hl], " "
 	ld a, $01
@@ -4202,10 +4196,7 @@ Function10278c:
 	bit B_BUTTON_F, a
 	jr nz, asm_1027e2
 	bit D_RIGHT_F, a
-	jr nz, .asm_10279b
-	ret
-
-.asm_10279b
+	ret z
 	ld a, $03
 	ld [wcd4a], a
 Function1027a0:

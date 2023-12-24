@@ -321,9 +321,8 @@ HPBarAnim_BGMapUpdate:
 	cp $2
 	jr z, .two_frames
 	cp $5
-	jr z, .two_frames
-	ret
-
+	ret nz
+; fallthrough
 .two_frames
 	inc c
 	ld a, $2

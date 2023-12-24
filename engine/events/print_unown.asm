@@ -110,10 +110,7 @@ endc
 	jr nz, .press_right
 	ldh a, [hJoyLast]
 	and D_LEFT
-	jr nz, .press_left
-	ret
-
-.press_left
+	ret z
 	ld hl, wJumptableIndex
 	ld a, [hl]
 	and a

@@ -5830,10 +5830,7 @@ Function11273a:
 	dec a
 	jr z, .asm_11278f
 	dec a
-	jr z, .asm_112744
-	ret
-
-.asm_112744
+	ret nz
 	xor a
 	ld [wc86d], a
 	ld a, $30
@@ -5991,10 +5988,7 @@ Function112807:
 
 Function112840:
 	dec a
-	jr z, .asm_112844
-	ret
-
-.asm_112844
+	ret nz
 	call Function1127e1
 	jr nz, .asm_1128ab
 	ld hl, wc880
@@ -6306,10 +6300,7 @@ Function112a42:
 
 Function112a56:
 	dec a
-	jr z, .asm_112a5a
-	ret
-
-.asm_112a5a
+	ret nz
 	call Function1127e1
 	jr nz, .asm_112a95
 	ld hl, wc880
@@ -6496,10 +6487,7 @@ Function112b11:
 
 Function112b71:
 	dec a
-	jr z, .asm_112b75
-	ret
-
-.asm_112b75
+	ret nz
 	call Function1127e1
 	jr nz, .asm_112ba3
 	ld hl, wc880
@@ -6544,10 +6532,7 @@ Function112b71:
 
 Function112bbb:
 	dec a
-	jr z, .asm_112bbf
-	ret
-
-.asm_112bbf
+	ret nz
 	call Function1127e1
 	jr nz, .asm_112bd4
 	ld hl, wc880
