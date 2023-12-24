@@ -36,7 +36,7 @@ CheckObjectStillVisible:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res OBJ_FLAGS2_6, [hl]
-	ld a, [hMapObjectIndex]
+	ldh a, [hMapObjectIndex]
 	and a
 	jr nz, .notPlayer
 ; hardcode for crossing over connections

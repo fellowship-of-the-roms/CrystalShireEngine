@@ -3,7 +3,7 @@ MACRO loadmapblock
 	inc de
 	and a
 	jr nz, .notMapBorderBlock\@
-	ld a, [hMapBorderBlock]
+	ldh a, [hMapBorderBlock]
 .notMapBorderBlock\@
 ENDM
 
@@ -14,7 +14,7 @@ MACRO nocarry
 ENDM
 
 MACRO addmapwidthoffset
-	ld a, [hMapWidthPlus6]
+	ldh a, [hMapWidthPlus6]
 	add e
 	ld e, a
 	jr nc, .noCarry\@
@@ -23,7 +23,7 @@ MACRO addmapwidthoffset
 ENDM
 
 _LoadMapPart::
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, [wOverworldMapAnchor]
 	ld e, a
@@ -320,7 +320,7 @@ MACRO function_macro
 	ld a, [de]
 	ld [hl], a
 	pop de
-	ld a, [hMapWidthPlus6]
+	ldh a, [hMapWidthPlus6]
 	add e
 	ld e, a
 	ret nc
@@ -687,7 +687,7 @@ MACRO function_macro
 	ld a, [de]
 	ld [hl], a
 	pop de
-	ld a, [hMapWidthPlus6]
+	ldh a, [hMapWidthPlus6]
 	add e
 	ld e, a
 	ret nc
@@ -905,7 +905,7 @@ MACRO function_macro
 	ld a, [de]
 	and a
 	jr nz, .notMapBorderBlock3\@
-	ld a, [hMapBorderBlock]
+	ldh a, [hMapBorderBlock]
 .notMapBorderBlock3\@
 	swap a
 	ld d, a

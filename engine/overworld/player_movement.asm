@@ -948,7 +948,7 @@ AnyFacingPlayerDistance_bc::
 	add hl, bc
 	ld e, [hl]
 
-	ld a, [hJoypadDown]
+	ldh a, [hJoypadDown]
 	bit 7, a
 	jr nz, .down
 	bit 6, a

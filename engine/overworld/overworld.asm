@@ -95,7 +95,7 @@ ReloadSpriteIndex::
 	ld hl, wObjectStructs
 	ld de, OBJECT_LENGTH
 	push bc
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	ld b, a
 	xor a
 .loop
@@ -118,7 +118,7 @@ ReloadSpriteIndex::
 	pop hl
 .done
 	add hl, de
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop

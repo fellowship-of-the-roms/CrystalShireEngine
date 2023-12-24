@@ -127,7 +127,7 @@ LoadBattleAnimGFX:
 
 .LoadBallPalette:
 	; save the current WRAM bank
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	; switch to the WRAM bank of wCurItem so we can read it
 	ld a, BANK(wCurItem)

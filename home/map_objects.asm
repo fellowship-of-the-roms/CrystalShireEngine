@@ -19,7 +19,7 @@ GetSpriteVTile::
 	farcall GetSprite
 	ld hl, wSpriteFlags
 	res 5, [hl]
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	cp FIRST_VRAM1_OBJECT_STRUCT
 	jr c, .continue
 	set 5, [hl]

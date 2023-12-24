@@ -198,7 +198,7 @@ DecompressMetatiles:
 	ld h, [hl]
 	ld l, a
 	ld de, wDecompressedMetatiles
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, c
 	ld [rSVBK], a
