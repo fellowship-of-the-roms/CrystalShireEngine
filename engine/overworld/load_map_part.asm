@@ -30,10 +30,10 @@ _LoadMapPart::
 	ld a, [wOverworldMapAnchor + 1]
 	ld d, a
 	ld a, [wMapBorderBlock]
-	ld [hMapBorderBlock], a
+	ldh [hMapBorderBlock], a
 	ld a, [wMapWidth]
 	inc a
-	ld [hMapWidthPlus6], a
+	ldh [hMapWidthPlus6], a
 	ld c, a
 	ld a, [wPlayerMetatileY]
 	add a
@@ -42,19 +42,19 @@ _LoadMapPart::
 	or b
 	ld b, a
 	ld a, BANK(wDecompressedMetatiles)
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	push de
 	push bc
 	call .Function1
 	pop bc
 	pop de
 	ld a, c
-	ld [hMapWidthPlus6], a
+	ldh [hMapWidthPlus6], a
 	ld a, BANK(wDecompressedAttributes)
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	call .Function2
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 MACRO function_macro

@@ -201,10 +201,10 @@ DecompressMetatiles:
 	ldh a, [rSVBK]
 	push af
 	ld a, c
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, b
 	ld bc, $1000
 	call FarDecompress
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret

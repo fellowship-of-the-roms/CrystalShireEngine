@@ -15,7 +15,7 @@ GetSpriteVTile::
 	push hl
 	push de
 	push bc
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	farcall GetSprite
 	ld hl, wSpriteFlags
 	res 5, [hl]
@@ -30,7 +30,7 @@ GetSpriteVTile::
 	ld b, a
 	add b
 	add b
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite
 	pop af

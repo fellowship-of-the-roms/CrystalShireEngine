@@ -909,7 +909,7 @@ Script_variablesprite:
 	call GetScriptByte
 	ld e, a
 	ld d, 0
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	ld hl, wVariableSprites
 	add hl, de
 	call GetScriptByte

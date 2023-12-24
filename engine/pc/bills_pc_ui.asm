@@ -313,7 +313,7 @@ UseBillsPC:
 	ld a, HIGH(wLCDBillsPC1)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	set LCD_STAT, [hl]
 
 	; Display data about current Pokémon pointed to by cursor
@@ -3516,7 +3516,7 @@ endr
 	ld a, HIGH(wLCDBillsPC2)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop bc
 	pop hl
 .donepc
@@ -3595,7 +3595,7 @@ endr
 	ld a, HIGH(wLCDBillsPC3)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl
@@ -3638,7 +3638,7 @@ endr
 	ld a, HIGH(wLCDBillsPC1)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl

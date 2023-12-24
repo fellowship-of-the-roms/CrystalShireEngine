@@ -656,7 +656,7 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	ld a, [wScriptVar]
 	ld e, a
 	ld d, 0
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	ld hl, wVariableSprites
 	add hl, de
 	ld de, -SPRITE_VARS

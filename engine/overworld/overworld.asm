@@ -81,7 +81,7 @@ RefreshSprites::
 	push bc
 	call GetPlayerSprite
 	xor a
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
 	call LoadMiscTiles
 	pop bc
@@ -99,7 +99,7 @@ ReloadSpriteIndex::
 	ld b, a
 	xor a
 .loop
-	ld [hObjectStructIndex], a
+	ldh [hObjectStructIndex], a
 	ld a, [hl]
 	and a
 	jr z, .done
