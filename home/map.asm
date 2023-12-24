@@ -434,19 +434,18 @@ ReadObjectEvents::
 
 ; get NUM_OBJECTS - [wCurMapObjectEventCount] - 1
 	ld a, [wCurMapObjectEventCount]
+	cp NUM_OBJECTS - 1
+	jr nc, .skip
+	; a = NUM_OBJECTS - 1 - a
 	cpl
 	add NUM_OBJECTS - 1 + 1
-	jr z, .skip
-	jr c, .skip
-
-	; could have done "inc hl" instead
-	ld bc, 1
-	add hl, bc
+	inc hl
+; Fill the remaining sprite IDs and y coords with 0 and -1, respectively
 	ld bc, MAPOBJECT_LENGTH
 .loop
-	ld [hl],  0
+	ld [hl],  0 ; no-optimize *hl++|*hl-- = N
 	inc hl
-	ld [hl], -1
+	ld [hl], -1 ; no-optimize *hl++|*hl-- = N
 	dec hl
 	add hl, bc
 	dec a
