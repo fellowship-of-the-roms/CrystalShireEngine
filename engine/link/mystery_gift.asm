@@ -41,9 +41,9 @@ DoMysteryGift:
 if DEF(_CRYSTAL_VC)
 	farcall StagePartyDataForMysteryGift
 	call ClearMysteryGiftTrainer
-	nop ; no-optimize nop
-	nop ; no-optimize nop
-	nop ; no-optimize nop
+	nop ; no-optimize nops
+	nop ; no-optimize nops
+	nop ; no-optimize nops
 else
 	ld a, 2
 	ld [wMysteryGiftMessageCount], a
@@ -293,8 +293,8 @@ if DEF(_CRYSTAL_VC)
 else
 	di
 	farcall ClearChannels
-	nop
-	nop
+	nop ; no-optimize nops
+	nop ; no-optimize nops
 	call InitializeIRCommunicationInterrupts
 
 .restart

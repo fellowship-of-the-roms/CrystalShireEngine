@@ -5166,9 +5166,8 @@ BattleCommand_ForceSwitch:
 	srl b
 	srl b
 	cp b
-	jr nc, .wild_succeed_playeristarget
-	jr .fail
-
+	jr c, .fail
+; fallthrough
 .wild_succeed_playeristarget
 	call UpdateBattleMonInParty
 	xor a

@@ -2689,8 +2689,6 @@ UpdateFaintedPlayerMon:
 	ld [wBattleResult], a
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	ret z
-	; code was probably dummied out here
 	ret
 
 AskUseNextPokemon:

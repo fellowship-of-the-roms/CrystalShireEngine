@@ -69,10 +69,7 @@ CheckBalance_MomItem2:
 	ld de, wMomsMoney
 	ld bc, hMoneyTemp
 	farcall CompareMoney
-	jr nc, .have_enough_money
-	jr .check_have_2300
-
-.have_enough_money
+	jr c, .check_have_2300
 	scf
 	ret
 
