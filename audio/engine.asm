@@ -953,13 +953,9 @@ ApplyPitchSlide:
 	add hl, bc
 	add [hl]
 	ld [hl], a
-	; could have done "jr nc, .no_rollover / inc de / .no_rollover"
-	ld a, 0 ; no-optimize a = 0
-	adc e
-	ld e, a
-	ld a, 0 ; no-optimize a = 0
-	adc d
-	ld d, a
+	jr nc, .no_increment
+	inc de
+.no_increment
 	; Compare the dw at [Channel*PitchSlideTarget] to de.
 	; If frequency is greater, we're finished.
 	; Otherwise, load the frequency and set two flags.

@@ -1112,8 +1112,8 @@ Intro_Scene24_ApplyPaletteFade:
 	ld hl, .FadePals
 	add l
 	ld l, a
-	ld a, $0 ; no-optimize a = 0
 	adc h
+	sub l
 	ld h, a
 
 	ldh a, [rSVBK]
@@ -1309,8 +1309,8 @@ Intro_Scene20_AppearUnown:
 	ld a, c
 	add e
 	ld e, a
-	ld a, $0 ; no-optimize a = 0
 	adc d
+	sub e
 	ld d, a
 
 	ld bc, 1 palettes
@@ -1321,8 +1321,8 @@ Intro_Scene20_AppearUnown:
 	ld a, c
 	add e
 	ld e, a
-	ld a, $0 ; no-optimize a = 0
 	adc d
+	sub e
 	ld d, a
 
 	ld bc, 1 palettes
@@ -1427,8 +1427,8 @@ Intro_LoadTilemap:
 	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
 	add l
 	ld l, a
-	ld a, 0 ; no-optimize a = 0
 	adc h
+	sub l
 	ld h, a
 	dec b
 	jr nz, .row
