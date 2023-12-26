@@ -1109,10 +1109,9 @@ IntroScene28:
 
 Intro_Scene24_ApplyPaletteFade:
 ; load the (a)th palette from .FadePals to all wBGPals2
-	ld hl, .FadePals
-	add l
+	add LOW(.FadePals)
 	ld l, a
-	adc h
+	adc HIGH(.FadePals)
 	sub l
 	ld h, a
 

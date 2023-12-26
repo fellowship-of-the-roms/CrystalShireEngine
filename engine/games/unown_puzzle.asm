@@ -452,10 +452,9 @@ UnownPuzzle_CheckCurrentTileOccupancy:
 
 GetCurrentPuzzlePieceVTileCorner:
 	ld a, [wUnownPuzzleHeldPiece]
-	ld hl, .Corners
-	add l
+	add LOW(.Corners)
 	ld l, a
-	adc h
+	adc HIGH(.Corners)
 	sub l
 	ld h, a
 	ld a, [hl]
@@ -705,10 +704,9 @@ ConvertLoadedPuzzlePieces:
 
 .GetEnlargedTile:
 	push hl
-	ld hl, .EnlargedTiles
-	add l
+	add LOW(.EnlargedTiles)
 	ld l, a
-	adc h
+	adc HIGH(.EnlargedTiles)
 	sub l
 	ld h, a
 	ld a, [hl]

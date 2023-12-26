@@ -754,10 +754,9 @@ AnimateTowerPillarTile:
 	and %111
 
 ; a = [.TowerPillarTileFrameOffsets + a]
-	ld hl, .TowerPillarTileFrameOffsets
-	add l
+	add LOW(.TowerPillarTileFrameOffsets)
 	ld l, a
-	adc h
+	adc HIGH(.TowerPillarTileFrameOffsets)
 	sub l
 	ld h, a
 	ld a, [hl]
