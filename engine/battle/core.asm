@@ -3738,9 +3738,9 @@ TryToRunAwayFromBattle:
 	ld b, a
 	ldh a, [hEnemyMonSpeed + 1]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	and a
 	jr z, .can_escape
 	ldh [hDivisor], a
@@ -4780,17 +4780,17 @@ DrawEnemyHUD:
 	jr z, .less_than_256_max
 	ldh a, [hMultiplier]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hDivisor], a
 	ldh a, [hProduct + 2]
 	ld b, a
 	srl b
 	ldh a, [hProduct + 3]
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hProduct + 3], a
 	ld a, b
 	ldh [hProduct + 2], a

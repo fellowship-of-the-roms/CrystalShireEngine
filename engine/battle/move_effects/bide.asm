@@ -36,7 +36,7 @@ BattleCommand_StoreEnergy:
 	ld b, a
 	ld [wCurDamage + 1], a
 	ld a, [hl]
-	rl a
+	rla
 	ld [wCurDamage], a
 	jr nc, .not_maxed
 	ld a, $ff
