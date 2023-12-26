@@ -195,7 +195,7 @@ if DEF(_DEBUG)
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Happiness
 	rst AddNTimes
-	ld a, 1
+	ld a, 1 ; no-optimize *hl = N
 	ld [hl], a
 	ld [wTempMonHappiness], a
 	ld a, 127
