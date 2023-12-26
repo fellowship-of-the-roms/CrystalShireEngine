@@ -349,8 +349,7 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 Kurt_GetAddressOfApricornQuantity:
 	push hl
 	push bc
-	ld hl, wNumItems
-	inc hl
+	ld hl, wNumItems + 1
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -365,11 +364,10 @@ Kurt_GetAddressOfApricornQuantity:
 Kurt_GetRidOfItem:
 	push bc
 	push de
-	ld hl, wNumItems
+	ld hl, wNumItems + 1
 	ld a, [wCurItemQuantity]
 	ld c, a
 	ld b, 0
-	inc hl
 	add hl, bc
 	add hl, bc
 	add hl, bc

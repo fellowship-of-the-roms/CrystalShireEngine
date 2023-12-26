@@ -15,8 +15,7 @@ CorrectNickErrors::
 	jr z, .end
 
 ; check if this char is a text command
-	ld hl, .textcommands
-	dec hl
+	ld hl, .textcommands - 1
 .loop
 ; next entry
 	inc hl
