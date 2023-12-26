@@ -485,39 +485,6 @@ PlacePrinterStatusString:
 	ld [wPrinterStatus], a
 	ret
 
-PlacePrinterStatusStringBorderless: ; unreferenced
-; Similar to PlacePrinterStatusString, but with different hlcoords
-; and ClearBox instead of TextBox.
-	ld a, [wPrinterStatus]
-	and a
-	ret z
-	push af
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 2, 4
-	lb bc, 13, 16
-	call ClearBox
-	pop af
-	ld e, a
-	ld d, 0
-	ld hl, PrinterStatusStringPointers
-	add hl, de
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	hlcoord 4, 7
-	ld a, BANK(GBPrinterStrings)
-	call PlaceFarString
-	hlcoord 4, 15
-	ld de, String_PressBToCancel
-	rst PlaceString
-	ld a, $1
-	ldh [hBGMapMode], a
-	xor a
-	ld [wPrinterStatus], a
-	ret
-
 String_PressBToCancel:
 	db "Press B to Cancel@"
 
