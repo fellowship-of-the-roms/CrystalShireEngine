@@ -848,10 +848,17 @@ Intro_PlacePlayerSprite:
 	ld b, PAL_OW_BLUE
 .male
 	ld a, b
-
+	ld [wNeededPalIndex], a
+	xor a
 	ld [hli], a ; attributes
 	dec c
 	jr nz, .loop
+	ld de, wOBPals1 palette 0
+	ld hl, wPalFlags
+	set USE_DAYTIME_PAL_F, [hl]
+	farcall CopySpritePal
+	ld hl, wPalFlags
+	res USE_DAYTIME_PAL_F, [hl]
 	ret
 
 .sprites
