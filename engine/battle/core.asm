@@ -2547,10 +2547,10 @@ AddBattleMoneyToAccount:
 	ld a, [hl]
 	sbc HIGH(MAX_MONEY >> 8)
 	ret c
-	ld [hl], HIGH(MAX_MONEY >> 8)
-	inc hl
-	ld [hl], HIGH(MAX_MONEY) ; mid
-	inc hl
+	ld a, HIGH(MAX_MONEY >> 8)
+	ld [hli], a
+	ld a, HIGH(MAX_MONEY) ; mid
+	ld [hli], a
 	ld [hl], LOW(MAX_MONEY)
 	ret
 
@@ -5646,11 +5646,6 @@ MoveInfoBox:
 
 .PrintPP:
 	hlcoord 5, 11
-	ld a, [wLinkMode] ; What's the point of this check?
-	cp LINK_MOBILE
-	jr c, .ok
-	hlcoord 5, 11
-.ok
 	push hl
 	ld de, wStringBuffer1
 	lb bc, 1, 2
@@ -5658,8 +5653,8 @@ MoveInfoBox:
 	pop hl
 	inc hl
 	inc hl
-	ld [hl], "/"
-	inc hl
+	ld a, "/"
+	ld [hli], a
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
 	jmp PrintNum

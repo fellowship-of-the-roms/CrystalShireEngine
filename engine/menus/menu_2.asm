@@ -1,34 +1,29 @@
 PlaceMenuItemName:
 	push de
 	ld a, [wMenuSelection]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	pop hl
-	jmp PlaceString
-
+	jr _PlaceSimpleMenuQuantity
+	
 PlaceMenuItemQuantity:
 	push de
 	ld a, [wMenuSelection]
-	ld [wCurItem], a
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	pop hl
-	and a
-	ret nz
-	ld de, $15
-	add hl, de
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
-	jmp PrintNum
+	jr _PlaceMenuQuantity
 
 PlaceMenuItemBallName:
 	push de
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_BALL_ITEM)
 	ld l, a
+	jr _PlaceSimpleMenuQuantity16bit
+
+PlaceMenuKeyItemName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_KEY_ITEM)
+	ld l, a
+; fallthrough
+_PlaceSimpleMenuQuantity16bit:
 	call GetItemIDFromIndex
+_PlaceSimpleMenuQuantity:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
@@ -39,38 +34,17 @@ PlaceMenuItemBallQuantity:
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_BALL_ITEM)
 	ld l, a
-	call GetItemIDFromIndex
-	ld [wCurItem], a
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	pop hl
-	and a
-	ret nz
-	ld de, $15
-	add hl, de
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
-	jmp PrintNum
-
-PlaceMenuKeyItemName:
-	push de
-	ld a, [wMenuSelection]
-	ld h, HIGH(FIRST_KEY_ITEM)
-	ld l, a
-	call GetItemIDFromIndex
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	pop hl
-	jmp PlaceString
+	jr _PlaceMenuQuantity16bit
 
 PlaceMenuKeyItemQuantity:
 	push de
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_KEY_ITEM)
 	ld l, a
+; fallthrough
+_PlaceMenuQuantity16bit:
 	call GetItemIDFromIndex
+_PlaceMenuQuantity:
 	ld [wCurItem], a
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
@@ -79,8 +53,8 @@ PlaceMenuKeyItemQuantity:
 	ret nz
 	ld de, $15
 	add hl, de
-	ld [hl], "×"
-	inc hl
+	ld a, "x"
+	ld [hli], a
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
 	jmp PrintNum

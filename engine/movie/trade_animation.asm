@@ -523,8 +523,8 @@ TradeAnim_TubeAnimJumptable:
 .Three:
 	call TradeAnim_BlankTilemap
 	hlcoord 9, 3
-	ld [hl], $5b
-	inc hl
+	ld a, $5b
+	ld [hli], a
 	ld bc, 10
 	ld a, $60
 	rst ByteFill

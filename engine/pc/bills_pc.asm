@@ -1172,7 +1172,7 @@ InitializeBoxes:
 	sub e
 	sub 10
 	jr c, .next
-	ld [hl], "1"
+	ld [hl], "1" ; no-optimize *hl++|*hl-- = N (a is used.)
 	inc hl
 	sub 10
 .next

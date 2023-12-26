@@ -2,8 +2,8 @@ ClearSpriteAnims:
 	ld hl, wSpriteAnimData
 	ld bc, wSpriteAnimDataEnd - wSpriteAnimData
 .loop
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	dec bc
 	ld a, c
 	or b
@@ -604,8 +604,8 @@ ClearSpriteAnims2:
 	ld hl, wSpriteAnimData
 	ld bc, wSpriteAnimDataEnd - wSpriteAnimData
 .loop
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	dec bc
 	ld a, c
 	or b

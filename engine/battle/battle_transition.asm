@@ -129,8 +129,8 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 	ld bc, $28 tiles
 
 .loop
-	ld [hl], -1
-	inc hl
+	ld a, -1
+	ld [hli],a
 	dec bc
 	ld a, c
 	or b

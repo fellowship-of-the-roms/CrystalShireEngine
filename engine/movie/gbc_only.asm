@@ -60,10 +60,10 @@ DrawGBCOnlyScreen:
 
 DrawGBCOnlyBorder:
 	hlcoord 0, 0
-	ld [hl], 0 ; top-left
+	xor a ; top-left
+	ld [hli], a
 
-	inc hl
-	ld a, 1 ; top
+	inc a ; top
 	call .FillRow
 
 	ld [hl], 2 ; top-right
@@ -77,9 +77,9 @@ DrawGBCOnlyBorder:
 	call .FillColumn
 
 	hlcoord 0, 17
-	ld [hl], 5 ; bottom-left
+	ld a, 5 ; bottom-left
+	ld [hli], a
 
-	inc hl
 	ld a, 6 ; bottom
 	call .FillRow
 

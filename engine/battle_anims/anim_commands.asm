@@ -608,11 +608,11 @@ BattleAnimCmd_ResetObp0:
 
 BattleAnimCmd_ClearObjs:
 	ld hl, wActiveAnimObjects
-	ld a, NUM_BATTLE_ANIM_STRUCTS * BATTLEANIMSTRUCT_LENGTH
+	ld e, NUM_BATTLE_ANIM_STRUCTS * BATTLEANIMSTRUCT_LENGTH
+	xor a
 .loop
-	ld [hl], 0
-	inc hl
-	dec a
+	ld [hli], a
+	dec e
 	jr nz, .loop
 	ret
 
