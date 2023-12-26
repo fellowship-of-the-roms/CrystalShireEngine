@@ -15,11 +15,7 @@ GetCrystalCGBLayout:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .done
-	push de
 	jp hl
-.done:
-	ret ; no-optimize Stub Function (Used to push return to stack)
 
 .Jumptable:
 	dw _CrystalCGB_MobileLayout0

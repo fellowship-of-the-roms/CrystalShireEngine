@@ -301,10 +301,7 @@ PokeBallEffect:
 	inc de
 	ld a, [de]
 	ld h, a
-	ld de, .skip_or_return_from_ball_fn
-	push de
-	jp hl
-
+	call _hl_
 .skip_or_return_from_ball_fn
 	ld a, [wCurItem]
 	call GetItemIndexFromID
