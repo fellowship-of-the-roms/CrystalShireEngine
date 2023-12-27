@@ -227,8 +227,8 @@ GetBattleAnimByte::
 
 	ld hl, wBattleAnimAddress
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	ld a, BANK(BattleAnimations)
 	rst Bankswitch

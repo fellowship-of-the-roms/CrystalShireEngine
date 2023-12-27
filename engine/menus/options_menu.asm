@@ -149,8 +149,8 @@ Options_TextSpeed:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	hlcoord 11, 3
 	rst PlaceString
 	and a
@@ -355,8 +355,8 @@ Options_Print:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	hlcoord 11, 11
 	rst PlaceString
 	and a

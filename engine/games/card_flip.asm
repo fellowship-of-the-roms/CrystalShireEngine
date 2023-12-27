@@ -394,8 +394,8 @@ CardFlip_DisplayCardFaceUp:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	; Place the level.
 	pop hl

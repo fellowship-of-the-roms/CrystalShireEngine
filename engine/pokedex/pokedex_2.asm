@@ -239,8 +239,8 @@ GetDexEntryPointer:
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 	ret
 

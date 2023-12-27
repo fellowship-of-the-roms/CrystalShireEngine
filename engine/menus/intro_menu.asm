@@ -1041,8 +1041,8 @@ TitleScreenMain:
 ; Run the timer down.
 	ld hl, wTitleScreenTimer
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	or d
 	jr z, .end
 

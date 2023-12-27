@@ -1785,8 +1785,8 @@ StartRadioStation:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	farjp RadioMusicRestartDE
 
 INCLUDE "data/radio/channel_music.asm"

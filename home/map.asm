@@ -908,8 +908,8 @@ GetScriptByte::
 
 	ld hl, wScriptPos
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 
 	ld a, [bc]
 
@@ -1844,8 +1844,8 @@ GetAnyMapField::
 	call GetAnyMapPointer
 	add hl, de
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 
 	; bankswitch back
 	pop af

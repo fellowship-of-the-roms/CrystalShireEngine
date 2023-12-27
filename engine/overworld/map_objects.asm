@@ -1691,8 +1691,8 @@ StepFunction_TrackingObject:
 	ld hl, OBJECT_1D
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, OBJECT_SPRITE
 	add hl, de
 	ld a, [hl]
@@ -2966,8 +2966,8 @@ InitSprites:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ret
 
 .Addresses:

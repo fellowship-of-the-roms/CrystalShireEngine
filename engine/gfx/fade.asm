@@ -60,8 +60,8 @@ _DoFadePalettes::
 .inner_loop
 	push de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld a, [wPalFadeMode]
 	bit PALFADE_FLASH_F, a
 	jr z, .no_flash

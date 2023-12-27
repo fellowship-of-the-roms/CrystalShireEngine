@@ -2040,8 +2040,8 @@ GetHealingItemAmount:
 	scf
 .done
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 	ret
 

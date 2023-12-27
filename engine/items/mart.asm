@@ -119,8 +119,8 @@ GetMart:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld b, BANK(Marts)
 	ret
 
@@ -624,8 +624,8 @@ RooftopSaleAskPurchaseQuantity:
 	add hl, de
 	inc hl
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ret
 
 MartHowManyText:

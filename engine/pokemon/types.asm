@@ -50,8 +50,8 @@ PrintType:
 	ld d, 0
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 
 	jmp PlaceString

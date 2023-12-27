@@ -666,8 +666,8 @@ DoTextUntilTerminator::
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop bc
 	pop hl
 
@@ -898,8 +898,8 @@ TextCommand_SOUND::
 .play
 	push de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	call PlaySFX
 	call WaitSFX
 	pop de

@@ -2099,8 +2099,8 @@ Pokedex_SearchForMons:
 	ld [wDexConvertedMonType], a
 	ld hl, wDexListingEnd
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ld hl, wPokedexOrder
 	ld d, h
 	ld e, l

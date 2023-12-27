@@ -479,8 +479,8 @@ GetSpriteAnimFrame:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, SPRITEANIMSTRUCT_FRAME
 	add hl, bc
 	ld l, [hl]

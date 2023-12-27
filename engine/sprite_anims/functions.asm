@@ -298,8 +298,8 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
@@ -576,8 +576,8 @@ SpriteAnimFunc_CutLeaves:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, $80
 	add hl, de
 	ld e, l
@@ -799,8 +799,8 @@ SpriteAnimFunc_Celebi:
 AnimSeqs_AnonJumptable:
 	ld hl, sp+0
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	inc de
 
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX

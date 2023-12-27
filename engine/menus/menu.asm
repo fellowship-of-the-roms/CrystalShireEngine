@@ -113,8 +113,8 @@ Get2DMenuNumberOfRows:
 Place2DMenuItemStrings:
 	ld hl, wMenuData_2DMenuItemStringsAddr
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	call GetMenuTextStartCoord
 	call Coord2Tile
 	call Get2DMenuNumberOfRows
@@ -553,8 +553,8 @@ _PushWindow::
 
 	ld hl, wWindowStackPointer
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	push de
 
 	ld b, wMenuHeaderEnd - wMenuHeader

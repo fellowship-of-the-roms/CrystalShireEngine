@@ -259,8 +259,8 @@ InitBattleAnimBuffer:
 	push bc
 	ld hl, wFXAnimID
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ld de, 2
 	ld hl, .extra_offset_moves
 	call IsInWordArray

@@ -285,8 +285,8 @@ AI_Smart:
 	jr nc, .nextmove
 
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	pop hl
 	push hl

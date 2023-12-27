@@ -8,8 +8,8 @@ _LoadOverworldMonIcon:
 	ld de, IconPointers
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	jmp GetIconBank
 
 SetMenuMonIconColor:
@@ -472,8 +472,8 @@ endr
 	add hl, de
 .is_egg
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 
 	call GetIconBank

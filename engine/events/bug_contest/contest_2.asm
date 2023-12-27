@@ -8,8 +8,8 @@ SelectRandomBugContestContestants:
 	push bc
 	push hl
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld b, RESET_FLAG
 	call EventFlagAction
 	pop hl
@@ -36,8 +36,8 @@ SelectRandomBugContestContestants:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	push de
 ; If we've already set it, it doesn't count.
 	ld b, CHECK_FLAG
@@ -64,8 +64,8 @@ CheckBugContestContestantFlag:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld b, CHECK_FLAG
 	jmp EventFlagAction
 

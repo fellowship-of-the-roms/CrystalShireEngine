@@ -667,8 +667,8 @@ Script_trainerflagaction:
 	ld [wScriptVar], a
 	ld hl, wTempTrainerEventFlag
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	call GetScriptByte
 	ld b, a
 	call EventFlagAction
@@ -944,8 +944,8 @@ ApplyEventActionAppearDisappear:
 	add hl, bc
 	pop bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld a, -1
 	cp e
 	jr nz, .okay
@@ -1180,8 +1180,8 @@ Script_memcall:
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	; fallthrough
 ScriptCall:
 	ld hl, wScriptStackSize
@@ -1890,8 +1890,8 @@ Script_givepoke:
 	jr z, .ok
 	ld hl, wScriptPos
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	call GetScriptByte
 	call GetScriptByte
 	call GetScriptByte

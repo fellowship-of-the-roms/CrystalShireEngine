@@ -3281,8 +3281,8 @@ Function17f3f0:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, wBGPals1
 	add hl, de
 	ld e, l

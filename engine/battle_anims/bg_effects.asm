@@ -775,8 +775,8 @@ BattleBGEffect_RunPicResizeScript:
 	ld b, a
 ; store pointer
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 ; get byte
 	pop hl
 	inc hl

@@ -228,8 +228,8 @@ ItemSwitch_GetItemFormatSize:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	pop hl
 	ret
 

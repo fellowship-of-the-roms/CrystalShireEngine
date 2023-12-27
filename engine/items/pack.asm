@@ -1160,8 +1160,8 @@ DrawPackGFX:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, vTiles2 tile $50
 	lb bc, BANK(PackGFX), 15
 	jmp Request2bpp
