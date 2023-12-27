@@ -154,10 +154,9 @@ GetDestinationWarpNumber::
 	ld a, WARP_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .okay
-	inc h
-
-.okay
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a
@@ -573,9 +572,9 @@ ChangeMap::
 	ldh a, [hConnectionStripLength]
 	add l
 	ld l, a
-	jr nc, .okay
-	inc h
-.okay
+	adc h
+	sub l
+	ld h, a
 	dec b
 	jr nz, .row
 
@@ -703,9 +702,9 @@ FillSouthConnectionStrip::
 	add 6
 	add e
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	dec c
 	jr nz, .y
 	ret
@@ -740,9 +739,9 @@ FillEastConnectionStrip::
 	ldh a, [hConnectedMapWidth]
 	add e
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	dec b
 	jr nz, .loop
 	ret
@@ -1092,10 +1091,9 @@ BackupBGMapColumn::
 	ld a, SCREEN_WIDTH - 1
 	add l
 	ld l, a
-	jr nc, .skip
-	inc h
-
-.skip
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	ret
@@ -1309,9 +1307,9 @@ SaveScreen_LoadConnection::
 	ld a, e
 	add 6
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	pop hl
 	ldh a, [hConnectionStripLength]
 	ld c, a
@@ -1627,10 +1625,9 @@ CheckIfFacingTileCoordIsBGEvent::
 	ld a, BG_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .nocarry
-	inc h
-
-.nocarry
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a
@@ -1698,10 +1695,9 @@ CheckCurrentMapCoordEvents::
 	ld a, COORD_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .nocarry
-	inc h
-
-.nocarry
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a

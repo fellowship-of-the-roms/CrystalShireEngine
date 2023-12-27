@@ -49,9 +49,9 @@ CountSetBits16::
 	pop bc
 	add c
 	ld c, a
-	jr nc, .handle_loop
-	inc b
-.handle_loop
+	adc b
+	sub c
+	ld b, a
 	dec d
 	jr nz, .loop
 	ret

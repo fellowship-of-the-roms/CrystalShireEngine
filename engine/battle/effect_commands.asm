@@ -4280,9 +4280,9 @@ RaiseStat:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .no_carry
-	inc d
-.no_carry
+	adc d
+	sub e
+	ld d, a
 	pop bc
 	ld a, [hld]
 	sub LOW(MAX_STAT_VALUE)
@@ -4622,9 +4622,9 @@ TryLowerStat:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .no_carry
-	inc d
-.no_carry
+	adc d
+	sub e
+	ld d, a
 	pop bc
 
 ; The lowest possible stat is 1.

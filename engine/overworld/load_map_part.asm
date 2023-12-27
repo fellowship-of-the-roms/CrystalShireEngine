@@ -17,9 +17,9 @@ MACRO addmapwidthoffset
 	ldh a, [hMapWidthPlus6]
 	add e
 	ld e, a
-	jr nc, .noCarry\@
-	inc d
-.noCarry\@
+	adc d
+	sub e
+	ld d, a
 ENDM
 
 _LoadMapPart::
@@ -930,9 +930,9 @@ MACRO function_macro
 	ld a, SCREEN_WIDTH - 1
 	add l
 	ld l, a
-	jr nc, .noCarry\@
-	inc h
-.noCarry\@
+	adc h
+	sub l
+	ld h, a
 	ld a, [de]
 	inc e
 	ld [hli], a
