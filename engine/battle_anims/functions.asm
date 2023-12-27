@@ -315,9 +315,8 @@ BattleAnimFunc_PokeBall:
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
+	dec [hl]
 	ld a, [hl]
-	dec a
-	ld [hl], a
 	and $1f
 	ret nz
 	ld [hl], a
@@ -359,9 +358,8 @@ BattleAnimFunc_PokeBall:
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
+	dec [hl]
 	ld a, [hl]
-	dec a
-	ld [hl], a
 	and $1f
 	jr z, .eleven
 	and $f

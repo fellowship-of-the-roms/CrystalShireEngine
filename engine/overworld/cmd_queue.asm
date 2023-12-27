@@ -167,9 +167,8 @@ CmdQueue_Type4:
 .one
 	ld hl, CMDQUEUE_ADDR
 	add hl, bc
+	dec [hl]
 	ld a, [hl]
-	dec a
-	ld [hl], a
 	jr z, .finish
 	and 1
 	jr z, .add

@@ -197,9 +197,8 @@ SpriteAnimFunc_GSTitleTrail:
 SpriteAnimFunc_GSIntroHoOhLugia:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
+	inc [hl]
 	ld a, [hl]
-	inc a
-	ld [hl], a
 	ld d, 2
 	farcall Sine
 
