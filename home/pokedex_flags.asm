@@ -9,9 +9,10 @@ CountSetBits::
 
 .count
 	srl e
-	ld a, 0 ; no-optimize a = 0
-	adc c
-	ld c, a
+	jr nc, .noCarry
+	inc c
+.noCarry
+
 	dec d
 	jr nz, .count
 
