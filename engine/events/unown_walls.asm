@@ -165,11 +165,11 @@ _DisplayUnownWords_FillAttr:
 	cp $ff
 	ret z
 	cp $60
-	ld a, VRAM_BANK_1 | PAL_BG_BROWN
-	jr c, .got_pal
-	ld a, PAL_BG_BROWN
-
-.got_pal
+	; a = carry ? (VRAM_BANK_1 | PAL_BG_BROWN) : PAL_BG_BROWN
+	assert (VRAM_BANK_1 | PAL_BG_BROWN) > PAL_BG_BROWN
+	sbc a
+	and (VRAM_BANK_1 | PAL_BG_BROWN) - PAL_BG_BROWN
+	add PAL_BG_BROWN
 	call .PlaceSquare
 	inc hl
 	inc hl

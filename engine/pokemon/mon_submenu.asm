@@ -154,11 +154,11 @@ GetMonSubmenuItems:
 	ld d, [hl]
 	farcall ItemIsMail
 	pop hl
-	ld a, MONMENUITEM_MAIL
-	jr c, .ok
-	ld a, MONMENUITEM_ITEM
-
-.ok
+	; a = carry ? MONMENUITEM_MAIL : MONMENUITEM_ITEM
+	assert MONMENUITEM_MAIL > MONMENUITEM_ITEM
+	sbc a
+	and MONMENUITEM_MAIL - MONMENUITEM_ITEM
+	add MONMENUITEM_ITEM
 	call AddMonMenuItem
 
 .skip2

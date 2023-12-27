@@ -1038,10 +1038,11 @@ PeoplePlaces3:
 	ld hl, PnP_Text3
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
-.ok
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 	jmp NextRadioLine
 
 PnP_Text1:
@@ -1117,9 +1118,11 @@ PeoplePlaces5:
 	jr c, .ok
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 .ok
 	jmp NextRadioLine
 
@@ -1253,9 +1256,11 @@ PeoplePlaces7:
 	jr c, .ok
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 .ok
 	jmp PrintRadioLine
 

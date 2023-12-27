@@ -376,10 +376,9 @@ Script_promptbutton:
 
 Script_yesorno:
 	call YesNoBox
-	ld a, FALSE ; no-optimize a = 0
-	jr c, .no
-	ld a, TRUE
-.no
+	; a = carry ? FALSE : TRUE
+	sbc a
+	inc a	
 	ld [wScriptVar], a
 	vc_hook Unknown_yesorno_ret
 	ret
@@ -484,10 +483,9 @@ Script_verbosegiveitemvar:
 	ld [wItemQuantityChange], a
 	ld hl, wNumItems
 	call ReceiveItem
-	ld a, TRUE
-	jr c, .ok2
-	xor a
-.ok2
+	; a = carry ? TRUE : FALSE
+	sbc a
+	and TRUE
 	ld [wScriptVar], a
 	call CurItemName
 	ld de, wStringBuffer1
