@@ -5687,7 +5687,7 @@ CheckPlayerHasUsableMoves:
 .loop
 	dec d
 	jr z, .done
-	ld c, [hl]
+	ld c, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
 	dec b
 	jr z, .loop
@@ -7690,8 +7690,8 @@ WithdrawMonText:
 	; compute enemy health lost as a percentage
 	ld hl, wEnemyMonHP + 1
 	ld de, wEnemyHPAtTimeOfPlayerSwitch + 1
-	ld b, [hl]
-	dec hl
+	ld a, [hld]
+	ld b, a
 	ld a, [de]
 	sub b
 	ldh [hMultiplicand + 2], a

@@ -1216,8 +1216,8 @@ PeoplePlaces6: ; Places
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	call GetWorldMapLocation
 	ld e, a
@@ -1784,8 +1784,8 @@ StartRadioStation:
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	farjp RadioMusicRestartDE
 

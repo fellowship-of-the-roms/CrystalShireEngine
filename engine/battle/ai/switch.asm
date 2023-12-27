@@ -284,8 +284,8 @@ FindAliveEnemyMons:
 	jr z, .next
 
 	push bc
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hld]
 	or b
 	pop bc
@@ -573,10 +573,10 @@ FindEnemyMonsWithAtLeastQuarterMaxHP:
 
 	push hl
 	push bc
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
 	inc hl
 ; hl = MaxHP + 1
 ; bc = [CurHP] * 4

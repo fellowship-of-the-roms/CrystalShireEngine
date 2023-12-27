@@ -23,10 +23,10 @@ _AnimateTileset::
 
 ; 2-byte parameter
 ; All functions take input de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 ; Function address
 	ld a, [hli]
@@ -345,8 +345,8 @@ endr
 ScrollTileUp:
 	ld h, d
 	ld l, e
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	ld bc, LEN_2BPP_TILE - 2
 	add hl, bc
@@ -374,8 +374,8 @@ ScrollTileDown:
 	ld de, LEN_2BPP_TILE - 2
 	push hl
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	pop hl
 	ld a, LEN_2BPP_TILE / 4
@@ -764,9 +764,9 @@ AnimateTowerPillarTile:
 ; de = the destination in VRAM
 	ld l, e
 	ld h, d
-	ld e, [hl]
+	ld e, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
-	ld d, [hl]
+	ld d, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
 
 ; hl = the source tile frames + offset a
@@ -811,10 +811,10 @@ AnimateWhirlpoolTile:
 ; de = the destination in VRAM
 	ld l, e
 	ld h, d
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 ; A cycle of 4 frames, updating every tick
 	ld a, [wTileAnimationTimer]

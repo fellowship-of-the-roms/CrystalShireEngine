@@ -416,8 +416,8 @@ BattleAnimCmd_Loop:
 	ld hl, wBattleAnimFlags
 	res BATTLEANIM_IN_LOOP_F, [hl]
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	inc de
 	inc de
@@ -445,8 +445,8 @@ BattleAnimCmd_JumpUntil:
 
 .dont_jump
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	inc de
 	inc de
@@ -472,8 +472,8 @@ BattleAnimCmd_IfVarEqual:
 	jr z, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	inc de
 	inc de
@@ -508,8 +508,8 @@ BattleAnimCmd_IfParamEqualContinue:
 	jr z, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	inc de
 	inc de
@@ -537,8 +537,8 @@ BattleAnimCmd_IfParamAnd:
 	jr nz, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	inc de
 	inc de
@@ -1395,8 +1395,8 @@ ClearBattleAnims::
 	rst ByteFill
 
 	ld hl, wFXAnimID
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld hl, BattleAnimations
 	add hl, de

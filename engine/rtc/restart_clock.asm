@@ -14,12 +14,12 @@ RestartClock_GetWraparoundTime:
 rept 4
 	add hl, de
 endr
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	pop hl
 	ret

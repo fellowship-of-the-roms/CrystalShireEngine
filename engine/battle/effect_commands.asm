@@ -1463,8 +1463,8 @@ CheckTypeMatchup:
 	push de
 	push bc
 	ld d, a
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	ld a, EFFECTIVE
 	ld [wTypeMatchup], a

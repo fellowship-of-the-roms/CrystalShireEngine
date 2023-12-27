@@ -4887,7 +4887,7 @@ asm_11afbd:
 	add hl, bc
 	add hl, bc
 	ld a, e
-	ld e, [hl]
+	ld e, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
 	ld d, [hl]
 	ld [de], a

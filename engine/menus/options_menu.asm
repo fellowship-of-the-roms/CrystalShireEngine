@@ -148,8 +148,8 @@ Options_TextSpeed:
 	ld hl, .Strings
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	hlcoord 11, 3
 	rst PlaceString
@@ -354,8 +354,8 @@ Options_Print:
 	ld hl, .Strings
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	hlcoord 11, 11
 	rst PlaceString

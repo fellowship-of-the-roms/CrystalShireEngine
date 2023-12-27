@@ -470,8 +470,8 @@ PlacePrinterStatusString:
 	ld hl, PrinterStatusStringPointers
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	hlcoord 1, 7
 	ld a, BANK(GBPrinterStrings)

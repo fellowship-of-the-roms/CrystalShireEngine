@@ -774,8 +774,8 @@ BattleBGEffect_RunPicResizeScript:
 	and $f
 	ld b, a
 ; store pointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 ; get byte
 	pop hl
@@ -1963,8 +1963,8 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 .player
 	ld hl, .DMG_PlayerData
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld a, [hl]
 	ld [wOBP1], a
 	ld e, a

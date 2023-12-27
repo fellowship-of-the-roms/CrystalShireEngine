@@ -226,8 +226,8 @@ GetBattleAnimByte::
 	push de
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 
 	ld a, BANK(BattleAnimations)

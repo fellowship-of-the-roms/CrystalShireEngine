@@ -48,10 +48,10 @@ _TimeOfDayPals::
 ; push palette
 	ld c, NUM_PAL_COLORS
 .push
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld e, a
 	push de
 	dec c
 	jr nz, .push

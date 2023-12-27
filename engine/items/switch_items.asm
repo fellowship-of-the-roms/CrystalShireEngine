@@ -227,8 +227,8 @@ ItemSwitch_GetItemFormatSize:
 	ld hl, .item_format_sizes
 	add hl, bc
 	add hl, bc
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld c, a
 	ld b, [hl]
 	pop hl
 	ret

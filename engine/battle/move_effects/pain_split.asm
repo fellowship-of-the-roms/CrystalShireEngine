@@ -64,12 +64,12 @@ BattleCommand_PainSplit:
 	inc de
 
 .EnemyShareHP:
-	ld c, [hl]
-	dec hl
+	ld a, [hld]
+	ld c, a
 	ld a, [wCurDamage + 1]
 	sub c
-	ld b, [hl]
-	dec hl
+	ld a, [hld]
+	ld b, a
 	ld a, [wCurDamage]
 	sbc b
 	jr nc, .skip

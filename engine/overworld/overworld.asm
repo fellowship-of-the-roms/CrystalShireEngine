@@ -457,18 +457,18 @@ LoadEmote::
 	ld hl, Emotes
 	rst AddNTimes
 ; Load the emote address into de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 ; load the length of the emote (in tiles) into c
-	inc hl
-	ld c, [hl]
+	ld a, [hli]
+	ld c, a
 	swap c
 ; load the emote pointer bank into b
-	inc hl
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
 ; load the VRAM destination into hl
-	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

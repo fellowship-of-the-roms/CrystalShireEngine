@@ -416,8 +416,8 @@ SlotsAction_PayoutAnim:
 	ld [hld], a
 	ld [hl], d
 	ld hl, wCoins
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	call Slots_CheckCoinCaseFull
 	jr c, .okay

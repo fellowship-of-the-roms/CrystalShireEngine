@@ -642,8 +642,8 @@ GetCallerLocation:
 	ld hl, PhoneContacts + PHONE_CONTACT_MAP_GROUP
 	ld bc, PHONE_CONTACT_SIZE
 	rst AddNTimes
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	push bc
 	call GetWorldMapLocation

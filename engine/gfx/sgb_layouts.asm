@@ -304,10 +304,10 @@ SGBLayoutJumptable:
 rept 4
 	add hl, bc
 endr
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

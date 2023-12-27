@@ -313,12 +313,12 @@ PokeBallEffect:
 	ldh [hMultiplicand + 2], a
 
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	sla c
 	rl b
@@ -1560,8 +1560,8 @@ GetItemHealingAction:
 .found_it
 	inc hl
 	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hl]
 	ld c, a
 	cp %11111111
@@ -2039,8 +2039,8 @@ GetHealingItemAmount:
 	inc hl
 	scf
 .done
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	pop hl
 	ret

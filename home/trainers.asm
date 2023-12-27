@@ -64,8 +64,8 @@ _CheckTrainerBattle::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld b, CHECK_FLAG
 	call EventFlagAction

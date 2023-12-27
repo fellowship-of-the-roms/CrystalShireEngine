@@ -956,8 +956,8 @@ MovementFunction_BoulderDust:
 	ld hl, .dust_coords
 	add hl, de
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	ld hl, OBJECT_SPRITE_X_OFFSET
 	add hl, bc
@@ -1690,8 +1690,8 @@ StepFunction_StrengthBoulder:
 StepFunction_TrackingObject:
 	ld hl, OBJECT_1D
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld hl, OBJECT_SPRITE
 	add hl, de
@@ -2924,8 +2924,8 @@ InitSprites:
 	inc hl
 	ld [bc], a ; x
 	inc c
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ldh a, [hCurSpriteTile]
 	bit ABSOLUTE_TILE_ID_F, e
 	jr z, .nope1
@@ -2965,8 +2965,8 @@ InitSprites:
 	ld hl, .Addresses
 	add hl, bc
 	add hl, bc
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld c, a
 	ld b, [hl]
 	ret
 

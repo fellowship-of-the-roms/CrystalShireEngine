@@ -7,8 +7,8 @@ SelectRandomBugContestContestants:
 .loop1
 	push bc
 	push hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld b, RESET_FLAG
 	call EventFlagAction
@@ -35,8 +35,8 @@ SelectRandomBugContestContestants:
 	ld hl, BugCatchingContestantEventFlagTable
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	push de
 ; If we've already set it, it doesn't count.
@@ -63,8 +63,8 @@ CheckBugContestContestantFlag:
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld b, CHECK_FLAG
 	jmp EventFlagAction

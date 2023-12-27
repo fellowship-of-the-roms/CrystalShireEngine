@@ -259,9 +259,9 @@ CheckOverworldTileArrays:
 	jr nc, .nope
 	; Load the replacement to b
 	inc hl
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
 	; Load the animation type parameter to c
-	inc hl
 	ld c, [hl]
 	scf
 	ret

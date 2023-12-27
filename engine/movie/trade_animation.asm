@@ -295,8 +295,8 @@ TradeAnim_IncrementJumptableIndex:
 
 TradeAnim_AdvanceScriptPointer:
 	ld hl, wTradeAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld a, [de]
 	ld [wJumptableIndex], a
