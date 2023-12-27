@@ -550,8 +550,7 @@ PromptText::
 ; fallthrough
 DoneText::
 	pop hl
-	ld de, .stop
-	dec de
+	ld de, .stop - 1
 	ret
 
 .stop:
