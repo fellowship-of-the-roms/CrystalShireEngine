@@ -37,18 +37,20 @@ with open('pokecrystal.sym', 'r', encoding='utf8') as sym_file:
 
 label_rx = re.compile(r'^\s*([a-z_][a-z0-9_#@]*):{1,2}(.*)', re.I)
 reference_rx = re.compile(r'\b([a-z_][a-z0-9_#@]*)\b', re.I)
+string_rx = re.compile(r'"(?:[^"\\]|\\.)*"')
 
 for filename in iglob('**/*.asm', recursive=True):
 	with open(filename, 'r', encoding='utf8') as asm_file:
 		scope = None
 		for index, line in enumerate(asm_file):
+			line = re.sub(string_rx, '""', line).split(';', 1)[0].rstrip()
 			if (m := label_rx.match(line)):
 				scope, line = m.groups()
 				if scope in labels:
 					labels[scope].filename = filename
 					labels[scope].line_no = index + 1
 			for label in re.findall(reference_rx, line):
-				if label in labels and label != scope:
+				if label in labels:
 					labels[label].references += 1
 
 for label in labels.values():
