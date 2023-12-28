@@ -14,7 +14,8 @@ ENDM
 Moves::
 ; entries correspond to constants/move_constants.asm
 	indirect_table MOVE_LENGTH - 1, 1
-	indirect_entries NUM_ATTACKS, Moves1
+	indirect_entries GEN1_MOVES, Moves1
+	indirect_entries GEN2_MOVES, Moves2
 	indirect_table_end
 
 Moves1:
@@ -183,6 +184,9 @@ Moves1:
 	move EFFECT_NORMAL_HIT,         70, NORMAL,        100, 20,   0      ;SLASH
 	move EFFECT_SUBSTITUTE,          0, NORMAL,        100, 10,   0      ;SUBSTITUTE
 	move EFFECT_RECOIL_HIT,         50, NORMAL,        100,  1,   0      ;STRUGGLE
+.IndirectEnd::
+
+Moves2:
 	move EFFECT_SKETCH,              0, NORMAL,        100,  1,   0      ;SKETCH
 	move EFFECT_TRIPLE_KICK,        10, FIGHTING,       90, 10,   0      ;TRIPLE_KICK
 	move EFFECT_THIEF,              40, DARK,          100, 10, 100      ;THIEF

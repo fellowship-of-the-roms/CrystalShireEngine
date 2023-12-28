@@ -411,14 +411,18 @@ BattleBGEffect_BattlerObj_1Row:
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
-	ld a, BATTLE_ANIM_OBJ_ENEMYFEET_1ROW
+	ld a, LOW(BATTLE_ANIM_OBJ_ENEMYFEET_1ROW)
 	ld [wBattleObjectTempID], a
+	ld a, HIGH(BATTLE_ANIM_OBJ_ENEMYFEET_1ROW)
+	ld [wBattleObjectTempID + 1], a
 	ld a, 16 * TILE_WIDTH + 4
 	jr .okay
 
 .player_side
-	ld a, BATTLE_ANIM_OBJ_PLAYERHEAD_1ROW
+	ld a, LOW(BATTLE_ANIM_OBJ_PLAYERHEAD_1ROW)
 	ld [wBattleObjectTempID], a
+	ld a, HIGH(BATTLE_ANIM_OBJ_ENEMYFEET_1ROW)
+	ld [wBattleObjectTempID + 1], a
 	ld a, 6 * TILE_WIDTH
 .okay
 	ld [wBattleObjectTempXCoord], a
@@ -476,14 +480,18 @@ BattleBGEffect_BattlerObj_2Row:
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
-	ld a, BATTLE_ANIM_OBJ_ENEMYFEET_2ROW
+	ld a, LOW(BATTLE_ANIM_OBJ_ENEMYFEET_2ROW)
 	ld [wBattleObjectTempID], a
+	ld a, HIGH(BATTLE_ANIM_OBJ_ENEMYFEET_2ROW)
+	ld [wBattleObjectTempID + 1], a
 	ld a, 16 * TILE_WIDTH + 4
 	jr .okay
 
 .player_side
-	ld a, BATTLE_ANIM_OBJ_PLAYERHEAD_2ROW
+	ld a, LOW(BATTLE_ANIM_OBJ_PLAYERHEAD_2ROW)
 	ld [wBattleObjectTempID], a
+	ld a, HIGH(BATTLE_ANIM_OBJ_PLAYERHEAD_2ROW)
+	ld [wBattleObjectTempID + 1], a
 	ld a, 6 * TILE_WIDTH
 .okay
 	ld [wBattleObjectTempXCoord], a

@@ -171,6 +171,7 @@
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
 	const STRUGGLE     ; a5
+DEF GEN1_MOVES EQU const_value - 1
 	const SKETCH       ; a6
 	const TRIPLE_KICK  ; a7
 	const THIEF        ; a8
@@ -257,6 +258,8 @@
 	const ROCK_SMASH   ; f9
 	const WHIRLPOOL    ; fa
 	const BEAT_UP      ; fb
+DEF GEN2_MOVES EQU const_value - 1
+
 DEF NUM_ATTACKS EQU const_value - 1
 
 	if NUM_ATTACKS > $3fff
