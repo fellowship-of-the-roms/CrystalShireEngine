@@ -215,10 +215,6 @@ ItemDescriptionsBerries:
 	dw GoldBerryDesc    ; 0310
 .IndirectEnd:
 
-TestBerryDesc:
-	db "This is a test"
-	next "berry.@"
-
 MasterBallDesc:
 	db   "The best BALL. It"
 	next "never misses.@"
