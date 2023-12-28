@@ -13,9 +13,7 @@ GenerateShininess:
 
 	call Random
 	cp SHINY_NUMERATOR
-	jr nc, .not_shiny
-	ret
-
+	ret c
 .not_shiny
 	xor a
 	ret

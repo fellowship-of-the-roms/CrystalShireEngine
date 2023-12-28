@@ -242,8 +242,7 @@ Pack:
 	ld [wBerryPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBerryPocketCursor], a
-	ld b, PACKSTATE_INITBALLSPOCKET ; left
-	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
+	lb bc, PACKSTATE_INITBALLSPOCKET, PACKSTATE_INITKEYITEMSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jr .ItemBallsKey_LoadSubmenu
@@ -760,8 +759,7 @@ BattlePack:
 	ld [wBerryPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBerryPocketCursor], a
-	ld b, PACKSTATE_INITBALLSPOCKET ; left
-	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
+	lb bc, PACKSTATE_INITBALLSPOCKET, PACKSTATE_INITKEYITEMSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jr ItemSubmenu

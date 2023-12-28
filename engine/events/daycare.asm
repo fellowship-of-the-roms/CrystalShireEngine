@@ -692,7 +692,7 @@ DayCare_InitBreeding:
 	ld hl, wEggMonGender
 	call Random
 	and 1
-	rrc a
+	rrca
 	or [hl]
 	ld [hl], a
 

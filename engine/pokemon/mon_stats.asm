@@ -179,7 +179,7 @@ GetGender:
 ; Gender and form as stored in the same byte.
 	ld a, [hl]
 	and GENDER_MASK
-	rlc a
+	rlca
 	ld b, a
 
 ; We need the gender ratio to do anything with this.
@@ -196,11 +196,8 @@ GetGender:
 	pop bc
 	jr z, .Genderless
 
-	call GetFarByte
-	ld c, a
-
 ; Fixed values ignore the Personality gender value.
-	ld a, c
+	call GetFarByte
 	cp GENDER_UNKNOWN
 	jr z, .Genderless
 	and a ; cp GENDER_F0
