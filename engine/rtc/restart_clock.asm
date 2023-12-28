@@ -14,12 +14,12 @@ RestartClock_GetWraparoundTime:
 rept 4
 	add hl, de
 endr
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	pop hl
 	ret
@@ -136,7 +136,7 @@ RestartClock:
 	jr .joy_loop
 
 .press_A
-	ld a, FALSE
+	xor a ; FALSE
 	scf
 	ret
 
@@ -153,7 +153,7 @@ RestartClock:
 	ld [de], a
 	cp b
 	jr c, .done_scroll
-	ld a, 0
+	xor a
 	ld [de], a
 	jr .done_scroll
 
@@ -191,8 +191,7 @@ RestartClock:
 
 .PrintTime:
 	hlcoord 0, 5
-	ld b, 5
-	ld c, 18
+	lb bc, 5, 18
 	call Textbox
 	decoord 1, 8
 	ld a, [wRestartClockDay]
@@ -214,11 +213,6 @@ RestartClock:
 	ld [wRestartClockPrevDivision], a
 	ret
 
-.UnusedPlaceCharsFragment: ; unreferenced
-	ld a, [wRestartClockUpArrowYCoord]
-	ld b, a
-	jmp Coord2Tile
-
 .PlaceChars:
 	push de
 	call RestartClock_GetWraparoundTime
@@ -232,9 +226,3 @@ RestartClock:
 	add hl, bc
 	ld [hl], e
 	ret
-
-JPHourString: ; unreferenced
-	db "じ@" ; HR
-
-JPMinuteString: ; unreferenced
-	db "ふん@" ; MIN

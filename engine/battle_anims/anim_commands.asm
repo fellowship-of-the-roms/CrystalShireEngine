@@ -320,8 +320,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Minimize
 	dw BattleAnimCmd_SetBgPal
 	dw BattleAnimCmd_SetObjPal
-	dw BattleAnimCmd_EC ; dummy
-	dw BattleAnimCmd_ED ; dummy
+	dw DoNothing ; BattleAnimCmd_EC ; dummy
+	dw DoNothing ; BattleAnimCmd_ED ; dummy
 	dw BattleAnimCmd_IfParamAnd
 	dw BattleAnimCmd_JumpUntil
 	dw BattleAnimCmd_BGEffect
@@ -330,8 +330,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_OBP1
 	dw BattleAnimCmd_KeepSprites
 	dw BattleAnimCmd_KeepSpritesAndOAM
-	dw BattleAnimCmd_F6
-	dw BattleAnimCmd_F7
+	dw DoNothing ; BattleAnimCmd_F6
+	dw DoNothing ; BattleAnimCmd_F7
 	dw BattleAnimCmd_IfParamEqual
 	dw BattleAnimCmd_SetVar
 	dw BattleAnimCmd_IncVar
@@ -342,22 +342,14 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Ret
 	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
 
-BattleAnimCmd_EA:
-BattleAnimCmd_EB:
-BattleAnimCmd_EC:
-BattleAnimCmd_ED:
-	ret
-
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
 	res BATTLEANIM_IN_SUBROUTINE_F, [hl]
 	ld hl, wBattleAnimParent
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld [hli], a
 	ld [hl], d
 	ld a, [wBattleAnimParentBank]
 	ld [wBattleAnimBank], a
@@ -372,20 +364,18 @@ BattleAnimCmd_Call:
 	ld d, a
 	push de
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
 	ld hl, wBattleAnimParent
-	ld [hl], e
-	inc hl
+	ld [hli], a
 	ld [hl], d
 	ld a, [wBattleAnimBank]
 	ld [wBattleAnimParentBank], a
 	pop de
 	pop af
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld [wBattleAnimBank], a
 	ld hl, wBattleAnimFlags
@@ -398,8 +388,8 @@ BattleAnimCmd_Jump:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -425,8 +415,8 @@ BattleAnimCmd_Loop:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -434,13 +424,13 @@ BattleAnimCmd_Loop:
 	ld hl, wBattleAnimFlags
 	res BATTLEANIM_IN_LOOP_F, [hl]
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -456,20 +446,20 @@ BattleAnimCmd_JumpUntil:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
 .dont_jump
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -490,13 +480,13 @@ BattleAnimCmd_IfVarEqual:
 	jr z, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -506,8 +496,8 @@ BattleAnimCmd_IfVarEqual:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -526,13 +516,13 @@ BattleAnimCmd_IfParamEqualContinue:
 	jr z, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -542,8 +532,8 @@ BattleAnimCmd_IfParamEqualContinue:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -555,13 +545,13 @@ BattleAnimCmd_IfParamAnd:
 	jr nz, .jump
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -571,8 +561,8 @@ BattleAnimCmd_IfParamAnd:
 	call GetBattleAnimByte
 	ld d, a
 	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
@@ -628,11 +618,11 @@ BattleAnimCmd_ResetObp0:
 
 BattleAnimCmd_ClearObjs:
 	ld hl, wActiveAnimObjects
-	ld a, NUM_BATTLE_ANIM_STRUCTS * BATTLEANIMSTRUCT_LENGTH
+	ld e, NUM_BATTLE_ANIM_STRUCTS * BATTLEANIMSTRUCT_LENGTH
+	xor a
 .loop
-	ld [hl], 0
-	inc hl
-	dec a
+	ld [hli], a
+	dec e
 	jr nz, .loop
 	ret
 
@@ -660,7 +650,7 @@ BattleAnimCmd_5GFX:
 	push hl
 	ld l, a
 	ld h, 0
-rept 4
+rept 4 ; no-optimize hl|bc|de = a * 16 (rept) [size > speed]
 	add hl, hl
 endr
 	ld de, vTiles0 tile BATTLEANIM_BASE_TILE
@@ -769,8 +759,7 @@ BattleAnimCmd_BattlerGFX_1Row:
 	ld [hli], a
 	ld a, BATTLE_ANIM_GFX_ENEMYFEET
 	ld [hli], a
-	ld a, ($80 - 6) - BATTLEANIM_BASE_TILE
-	ld [hl], a
+	ld [hl], ($80 - 6) - BATTLEANIM_BASE_TILE
 
 	ld hl, vTiles0 tile ($80 - 6 - 7)
 	ld de, vTiles2 tile $06 ; Enemy feet start tile
@@ -821,8 +810,7 @@ BattleAnimCmd_BattlerGFX_2Row:
 	ld [hli], a
 	ld a, BATTLE_ANIM_GFX_ENEMYFEET
 	ld [hli], a
-	ld a, ($80 - 6 * 2) - BATTLEANIM_BASE_TILE
-	ld [hl], a
+	ld [hl], ($80 - 6 * 2) - BATTLEANIM_BASE_TILE
 
 	ld hl, vTiles0 tile ($80 - 6 * 2 - 7 * 2)
 	ld de, vTiles2 tile $05 ; Enemy feet start tile
@@ -860,9 +848,6 @@ BattleAnimCmd_CheckPokeball:
 	farcall GetPokeBallWobble
 	ld a, c
 	ld [wBattleAnimVar], a
-	ret
-
-BattleAnimCmd_E7:
 	ret
 
 BattleAnimCmd_Transform:
@@ -909,14 +894,12 @@ BattleAnimCmd_UpdateActorPic:
 	jr z, .player
 
 	ld hl, vTiles2 tile $00
-	ld b, 0
-	ld c, 7 * 7
+	lb bc, 0, 7 * 7
 	jmp Request2bpp
 
 .player
 	ld hl, vTiles2 tile $31
-	ld b, 0
-	ld c, 6 * 6
+	lb bc, 0, 6 * 6
 	jmp Request2bpp
 
 BattleAnimCmd_RaiseSub:
@@ -1244,12 +1227,6 @@ BattleAnimCmd_KeepSpritesAndOAM:
 	set BATTLEANIM_KEEPOAM_F, [hl]
 	ret
 
-BattleAnimCmd_F6:
-	ret
-
-BattleAnimCmd_F7:
-	ret
-
 BattleAnimCmd_Sound:
 	call GetBattleAnimByte
 	ld e, a
@@ -1270,9 +1247,7 @@ BattleAnimCmd_Sound:
 	call GetBattleAnimByte
 	ld e, a
 	ld d, 0
-	farcall PlayStereoSFX
-
-	ret
+	farjp PlayStereoSFX
 
 .GetPanning:
 	db $f0, $0f, $f0, $0f
@@ -1343,8 +1318,8 @@ endr
 	pop hl
 
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ld hl, wCryLength
 	ld a, [hli]
 	ld h, [hl]
@@ -1507,7 +1482,7 @@ BattleAnim_SetOBPals:
 	ret
 
 BattleAnim_UpdateOAM_All:
-	ld a, 0
+	xor a
 	ld [wBattleAnimOAMPointerLo], a
 	ld hl, wActiveAnimObjects
 	ld e, NUM_BATTLE_ANIM_STRUCTS
@@ -1523,7 +1498,7 @@ BattleAnim_UpdateOAM_All:
 	call BattleAnimOAMUpdate
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, BATTLEANIMSTRUCT_LENGTH
@@ -1536,10 +1511,7 @@ BattleAnim_UpdateOAM_All:
 .loop2
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret

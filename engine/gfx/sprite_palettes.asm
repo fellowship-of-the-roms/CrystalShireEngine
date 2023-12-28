@@ -34,6 +34,9 @@ CopySpritePal::
 	ld a, [wStatusFlags]
 	bit 2, a ; Flash
 	jr nz, .not_darkness
+	ld a, [wPalFlags]
+	bit USE_DAYTIME_PAL_F, a
+	jr nz, .not_darkness
 	ld a, [wNeededPalIndex]
 	cp NUM_OW_TIME_OF_DAY_PALS
 	jr nc, .not_darkness
@@ -58,7 +61,7 @@ CopySpritePal::
 .check_daytimes
 	ld a, [wPalFlags]
 	bit USE_DAYTIME_PAL_F, a
-	ld a, DAY
+	ld a, 1
 	jr nz, .daytime
 	ld a, [wTimeOfDayPal]
 .daytime

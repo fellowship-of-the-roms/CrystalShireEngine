@@ -228,7 +228,7 @@ HatchEggs:
 	ld a, [de]
 	inc de
 	cp -1
-	jmp z, .done
+	ret z
 	push de
 	push hl
 	cp EGG
@@ -378,9 +378,6 @@ HatchEggs:
 	pop de
 	jmp .loop
 
-.done
-	ret
-
 .Text_HatchEgg:
 	; Huh? @ @
 	text_far Text_BreedHuh
@@ -423,7 +420,7 @@ InitEggMoves:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	ld hl, wEggMonMoves
 	ld c, NUM_MOVES
 .next
@@ -434,15 +431,12 @@ InitEggMoves:
 	dec c
 	jr nz, .next
 	call GetEggMove
-	jr nc, .skip
-	call LoadEggMove
-
+	call c, LoadEggMove
+; fallthrough
 .skip
 	inc de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 GetEggMove:
@@ -754,8 +748,7 @@ EggHatch_AnimationSequence:
 	call PlayMusic
 	call EnableLCD
 	hlcoord 7, 4
-	ld b, HIGH(vBGMap0)
-	ld c, $31 ; Egg tiles start here
+	lb bc, HIGH(vBGMap0), $31 ; Egg tiles start here
 	ld a, EGG
 	call Hatch_UpdateFrontpicBGMapCenter
 	ld c, 80
@@ -803,8 +796,7 @@ EggHatch_AnimationSequence:
 	call ClearSprites
 	call Hatch_InitShellFragments
 	hlcoord 6, 3
-	ld b, HIGH(vBGMap0)
-	ld c, $00 ; Hatchling tiles start here
+	lb bc, HIGH(vBGMap0), $00 ; Hatchling tiles start here
 	ld a, [wJumptableIndex]
 	call Hatch_UpdateFrontpicBGMapCenter
 	call Hatch_ShellFragmentLoop
@@ -812,8 +804,7 @@ EggHatch_AnimationSequence:
 	ld a, [wJumptableIndex]
 	ld [wCurPartySpecies], a
 	hlcoord 6, 3
-	ld d, $0
-	ld e, ANIM_MON_HATCH
+	lb de, $0, ANIM_MON_HATCH
 	predef AnimateFrontpic
 	pop af
 	ld [wCurSpecies], a
@@ -821,14 +812,13 @@ EggHatch_AnimationSequence:
 
 Hatch_LoadFrontpicPal:
 	ld [wPlayerHPPal], a
-	ld b, SCGB_EVOLUTION
-	ld c, $0
+	lb bc, SCGB_EVOLUTION, $0
 	jmp GetSGBLayout
 
 EggHatch_CrackShell:
 	ld a, [wFrameCounter]
 	dec a
-	and $7
+	and $7 ; no-optimize a & X == X
 	cp $7
 	ret z
 	srl a
@@ -964,19 +954,17 @@ DayCareMonCompatibilityText:
 	ld a, [wBreedingCompatibility]
 	ld hl, .BreedBrimmingWithEnergyText
 	cp -1
-	jr z, .done
+	ret z
 	ld hl, .BreedNoInterestText
 	and a
-	jr z, .done
+	ret z
 	ld hl, .BreedAppearsToCareForText
 	cp 230
-	jr nc, .done
+	ret nc
 	cp 70
 	ld hl, .BreedFriendlyText
-	jr nc, .done
+	ret nc
 	ld hl, .BreedShowsInterestText
-
-.done
 	ret
 
 .BreedBrimmingWithEnergyText:
@@ -998,10 +986,3 @@ DayCareMonCompatibilityText:
 .BreedShowsInterestText:
 	text_far _BreedShowsInterestText
 	text_end
-
-DayCareMonPrintEmptyString: ; unreferenced
-	ld hl, .string
-	ret
-
-.string
-	db "@"

@@ -23,7 +23,7 @@ _ScrollingMenu::
 .exit
 	call MenuClickSound
 	ld [wMenuJoypad], a
-	ld a, 0
+	xor a
 	ldh [hInMenu], a
 	ret
 
@@ -77,11 +77,6 @@ ScrollingMenuJoyAction:
 	bit D_DOWN_F, a
 	jmp nz, .d_down
 	jr .loop
-
-.no_zero_no_carry ; unreferenced
-	ld a, -1
-	and a
-	ret
 
 .a_button
 	call PlaceHollowCursor
@@ -246,15 +241,13 @@ InitScrollingMenuCursor:
 	inc a
 	cp b
 	jr c, .wrap
-	jr nc, .done
+	ret nc
 
 .wrap
 	xor a
 	ld [wMenuScrollPosition], a
 	ld a, $1
 	ld [wMenuCursorPosition], a
-
-.done
 	ret
 
 ScrollingMenu_InitFlags:
@@ -263,10 +256,9 @@ ScrollingMenu_InitFlags:
 	ld a, [wScrollingMenuListSize]
 	ld b, a
 	ld a, [wMenuBorderTopCoord]
-	add 1
+	inc a
 	ld [w2DMenuCursorInitY], a
 	ld a, [wMenuBorderLeftCoord]
-	add 0
 	ld [w2DMenuCursorInitX], a
 	ld a, [wMenuData_ScrollingMenuHeight]
 	cp b
@@ -333,14 +325,12 @@ ScrollingMenu_ValidateSwitchItem:
 	ld c, a
 	ld a, [wSwitchItem]
 	and a
-	jr z, .done
+	ret z
 	dec a
 	cp c
-	jr c, .done
+	ret c
 	xor a
 	ld [wSwitchItem], a
-
-.done
 	ret
 
 ScrollingMenu_UpdateDisplay:
@@ -387,15 +377,13 @@ ScrollingMenu_UpdateDisplay:
 	jr nz, .loop
 	ld a, [wMenuDataFlags]
 	bit 4, a ; place arrows
-	jr z, .done
+	ret z
 	ld a, [wMenuBorderBottomCoord]
 	ld b, a
 	ld a, [wMenuBorderRightCoord]
 	ld c, a
 	call Coord2Tile
 	ld [hl], "▼"
-
-.done
 	ret
 
 .cancel
@@ -423,47 +411,41 @@ ScrollingMenu_CallFunctions1and2:
 	pop hl
 	ld a, [wMenuData_ScrollingMenuWidth]
 	and a
-	jr z, .done
+	ret z
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld d, h
 	ld e, l
 	ld hl, wMenuData_ScrollingMenuFunction2
-	call CallPointerAt
-
-.done
-	ret
+	jmp CallPointerAt
 
 ScrollingMenu_PlaceCursor:
 	ld a, [wSwitchItem]
 	and a
-	jr z, .done
+	ret z
 	ld b, a
 	ld a, [wMenuScrollPosition]
 	cp b
-	jr nc, .done
+	ret nc
 	ld c, a
 	ld a, [wMenuData_ScrollingMenuHeight]
 	add c
 	cp b
-	jr c, .done
+	ret c
 	ld a, b
 	sub c
 	dec a
 	add a
-	add $1
+	inc a
 	ld c, a
 	ld a, [wMenuBorderTopCoord]
 	add c
 	ld b, a
 	ld a, [wMenuBorderLeftCoord]
-	add $0
 	ld c, a
 	call Coord2Tile
 	ld [hl], "▷"
-
-.done
 	ret
 
 ScrollingMenu_CheckCallFunction3:

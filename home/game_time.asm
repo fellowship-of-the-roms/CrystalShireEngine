@@ -85,10 +85,10 @@ GameTimer::
 	ld [hl], a
 
 ; +1 hour
-	ld a, [wGameTimeHours]
+	ld hl, wGameTimeHours
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wGameTimeHours + 1]
-	ld l, a
 	inc hl
 
 ; Cap the timer after 1000 hours.

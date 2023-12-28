@@ -13,7 +13,6 @@ _GiveOddEgg:
 	ld d, a
 
 	; Break on $ffff.
-	ld a, d
 	cp HIGH($ffff)
 	jr nz, .not_done
 	ld a, e
@@ -25,9 +24,7 @@ _GiveOddEgg:
 	ldh a, [hRandomSub]
 	cp d
 	jr c, .done
-	jr z, .ok
-	jr .next
-.ok
+	jr nz, .next
 	ldh a, [hRandomAdd]
 	cp e
 	jr c, .done

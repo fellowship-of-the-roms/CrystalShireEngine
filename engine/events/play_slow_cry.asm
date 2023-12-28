@@ -1,7 +1,7 @@
 PlaySlowCry:
 	ld a, [wScriptVar]
 	call LoadCry
-	jr c, .done
+	ret c
 
 	ld hl, wCryPitch
 	ld a, [hli]
@@ -24,7 +24,4 @@ PlaySlowCry:
 	ld a, h
 	ld [wCryLength + 1], a
 	farcall _PlayCry
-	call WaitSFX
-
-.done
-	ret
+	jmp WaitSFX

@@ -227,16 +227,6 @@ SetClock::
 ; cleanup
 	jmp CloseSRAM ; unlatch clock, disable clock r/w
 
-;ClearRTCStatus:: ; unreferenced
-; clear sRTCStatusFlags
-;	xor a
-;	push af
-;	ld a, BANK(sRTCStatusFlags)
-;	call OpenSRAM
-;	pop af
-;	ld [sRTCStatusFlags], a
-;	jmp CloseSRAM
-
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
 	ld hl, sRTCStatusFlags

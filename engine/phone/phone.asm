@@ -1,5 +1,5 @@
 AddPhoneNumber::
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .cant_add
 	call Phone_FindOpenSlot
 	jr nc, .cant_add
@@ -12,7 +12,7 @@ AddPhoneNumber::
 	ret
 
 DelCellNum::
-	call _CheckCellNum
+	call CheckCellNum
 	jr nc, .not_in_list
 	xor a
 	ld [hl], a
@@ -23,9 +23,6 @@ DelCellNum::
 	ret
 
 CheckCellNum::
-	jr _CheckCellNum ; useless
-
-_CheckCellNum:
 	ld hl, wPhoneList
 	ld b, CONTACT_LIST_SIZE
 .loop
@@ -69,20 +66,18 @@ GetRemainingSpaceInPhoneList:
 	cp -1
 	jr z, .done
 	cp c
-	jr z, .continue
+	jr z, .loop
 
 	push bc
 	push hl
 	ld c, a
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .permanent
 	ld hl, wRegisteredPhoneNumbers
 	inc [hl]
 .permanent
 	pop hl
 	pop bc
-
-.continue
 	jr .loop
 
 .done
@@ -418,15 +413,6 @@ Script_SpecialBillCall::
 	ld e, PHONE_BILL
 	jr LoadCallerScript
 
-Script_SpecialElmCall: ; unreferenced
-	callasm .LoadElmScript
-	pause 30
-	sjump Script_ReceivePhoneCall
-
-.LoadElmScript:
-	ld e, PHONE_ELM
-	jr LoadCallerScript
-
 RingTwice_StartCall:
 	call .Ring
 	call .Ring
@@ -467,8 +453,8 @@ PhoneCall::
 .CallerTextboxWithName:
 	call Phone_CallerTextbox
 	hlcoord 1, 2
-	ld [hl], "☎"
-	inc hl
+	ld a, "☎"
+	ld [hli], a
 	inc hl
 	ld a, [wPhoneCaller]
 	ld e, a
@@ -498,10 +484,6 @@ Phone_CallEnd:
 	call HangUp_Wait20Frames
 	call HangUp_BoopOff
 	jr HangUp_Wait20Frames
-
-HangUp_ShutDown: ; unreferenced
-	ld de, SFX_SHUT_DOWN_PC
-	jmp PlaySFX
 
 HangUp_Beep:
 	ld hl, PhoneClickText
@@ -543,8 +525,8 @@ Phone_TextboxWithName:
 	push bc
 	call Phone_CallerTextbox
 	hlcoord 1, 1
-	ld [hl], "☎"
-	inc hl
+	ld a, "☎"
+	ld [hli], a
 	inc hl
 	ld d, h
 	ld e, l
@@ -553,8 +535,7 @@ Phone_TextboxWithName:
 
 Phone_CallerTextbox:
 	hlcoord 0, 0
-	ld b, 2
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 2, SCREEN_WIDTH - 2
 	jmp Textbox
 
 GetCallerClassAndName:
@@ -615,8 +596,8 @@ GetCallerName:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 	jmp PlaceString
 
@@ -648,8 +629,8 @@ GetCallerLocation:
 	ld hl, PhoneContacts + PHONE_CONTACT_MAP_GROUP
 	ld bc, PHONE_CONTACT_SIZE
 	rst AddNTimes
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	push bc
 	call GetWorldMapLocation
@@ -677,12 +658,4 @@ PhoneScript_JustTalkToThem:
 
 PhoneJustTalkToThemText:
 	text_far _PhoneJustTalkToThemText
-	text_end
-
-PhoneThankYouTextScript: ; unreferenced
-	writetext PhoneThankYouText
-	end
-
-PhoneThankYouText:
-	text_far _PhoneThankYouText
 	text_end

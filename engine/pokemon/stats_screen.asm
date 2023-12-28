@@ -13,9 +13,8 @@ BattleStatsScreenInit:
 
 	ld a, [wBattleMode]
 	and a
-	jr z, StatsScreenInit
-	jr _MobileStatsScreenInit
-
+	jr nz, _MobileStatsScreenInit
+; fallthrough
 StatsScreenInit:
 	ld hl, StatsScreenMain
 	jr StatsScreenInit_gotaddress
@@ -63,7 +62,6 @@ StatsScreenMain:
 	ld [wJumptableIndex], a
 ; ???
 	ld [wStatsScreenFlags], a
-	ld a, [wStatsScreenFlags]
 	and ~STAT_PAGE_MASK
 	or PINK_PAGE ; first_page
 	ld [wStatsScreenFlags], a
@@ -83,7 +81,6 @@ StatsScreenMobile:
 	ld [wJumptableIndex], a
 ; ???
 	ld [wStatsScreenFlags], a
-	ld a, [wStatsScreenFlags]
 	and ~STAT_PAGE_MASK
 	or PINK_PAGE ; first_page
 	ld [wStatsScreenFlags], a
@@ -95,12 +92,10 @@ StatsScreenMobile:
 	call JumpTable
 	call StatsScreen_WaitAnim
 	farcall MobileComms_CheckInactivityTimer
-	jr c, .exit
+	ret c
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr z, .loop
-
-.exit
 	ret
 
 StatsScreenPointerTable:
@@ -165,9 +160,8 @@ MonStatsInit:
 
 EggStatsInit:
 	call EggStatsScreen
-	ld a, [wJumptableIndex]
-	inc a
-	ld [wJumptableIndex], a
+	ld hl, wJumptableIndex
+	inc [hl]
 	ret
 
 EggStatsJoypad:
@@ -182,7 +176,7 @@ endc
 if DEF(_DEBUG)
 	jmp StatsScreen_JoypadAction
 else
-	jr StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction ; no-optimize Stub jump
 endc
 
 .quit
@@ -201,8 +195,8 @@ if DEF(_DEBUG)
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Happiness
 	rst AddNTimes
-	ld [hl], 1
-	ld a, 1
+	ld a, 1 ; no-optimize *hl = N
+	ld [hl], a
 	ld [wTempMonHappiness], a
 	ld a, 127
 	ld [wStepCount], a
@@ -230,9 +224,8 @@ StatsScreen_LoadPage:
 	call StatsScreen_LoadGFX
 	ld hl, wStatsScreenFlags
 	res 4, [hl]
-	ld a, [wJumptableIndex]
-	inc a
-	ld [wJumptableIndex], a
+	ld hl, wJumptableIndex
+	inc [hl]
 	ret
 
 MonStatsJoypad:
@@ -242,7 +235,7 @@ MonStatsJoypad:
 if DEF(_DEBUG)
 	jmp StatsScreen_SetJumptableIndex
 else
-	jr StatsScreen_SetJumptableIndex
+	jr StatsScreen_SetJumptableIndex ; no-optimize Stub jump
 endc
 
 .next
@@ -252,9 +245,8 @@ endc
 StatsScreenWaitCry:
 	call IsSFXPlaying
 	ret nc
-	ld a, [wJumptableIndex]
-	inc a
-	ld [wJumptableIndex], a
+	ld hl, wJumptableIndex
+	inc [hl]
 	ret
 
 StatsScreen_CopyToTempMon:
@@ -306,15 +298,12 @@ StatsScreen_JoypadAction:
 	bit D_UP_F, a
 	jr nz, .d_up
 	bit D_DOWN_F, a
-	jr nz, .d_down
-	jr .done
-
-.d_down
+	ret z
 	ld a, [wMonType]
 	cp BUFFERMON
 	jr z, .next_storage
 	cp BOXMON
-	jr nc, .done
+	ret nc
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
@@ -324,7 +313,7 @@ StatsScreen_JoypadAction:
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, .done
+	ret z
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -341,7 +330,7 @@ StatsScreen_JoypadAction:
 	jr z, .prev_storage
 	ld a, [wCurPartyMon]
 	and a
-	jr z, .done
+	ret z
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -374,7 +363,6 @@ StatsScreen_JoypadAction:
 .prev_storage
 	farcall PrevStorageBoxMon
 	jr nz, .load_storage_mon
-.done
 	ret
 
 .set_page
@@ -387,7 +375,7 @@ StatsScreen_JoypadAction:
 
 .next_storage
 	farcall NextStorageBoxMon
-	jr z, .done
+	ret z
 .load_storage_mon
 	ld a, [wBufferMonAltSpecies]
 	ld [wCurPartySpecies], a
@@ -484,8 +472,7 @@ StatsScreen_PlaceVerticalDivider: ; unreferenced
 	ld bc, SCREEN_WIDTH
 	ld d, SCREEN_HEIGHT
 .loop
-	ld a, $31 ; vertical divider
-	ld [hl], a
+	ld [hl], $31 ; vertical divider
 	add hl, bc
 	dec d
 	jr nz, .loop
@@ -527,10 +514,7 @@ StatsScreen_LoadGFX:
 	call .LoadPals
 	ld hl, wStatsScreenFlags
 	bit 4, [hl]
-	jr nz, .place_frontpic
-	jmp SetPalettes
-
-.place_frontpic
+	jmp z, SetPalettes
 	jmp StatsScreen_PlaceFrontpic
 
 .ClearBox:
@@ -668,7 +652,6 @@ LoadPinkPage:
 	ld d, a
 	farcall CalcExpAtLevel
 	ld hl, wTempMonExp + 2
-	ld hl, wTempMonExp + 2
 	ldh a, [hQuotient + 3]
 	sub [hl]
 	dec hl
@@ -730,8 +713,7 @@ LoadGreenPage:
 	hlcoord 12, 11
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
-	predef ListMovePP
-	ret
+	predef_jump ListMovePP
 
 .GetItemName:
 	ld de, .ThreeDashes
@@ -763,8 +745,7 @@ LoadBluePage:
 	jr nz, .vertical_divider
 	hlcoord 11, 8
 	ld bc, 6
-	predef PrintTempMonStats
-	ret
+	predef_jump PrintTempMonStats
 
 .PlaceOTInfo:
 	ld de, IDNoString
@@ -785,9 +766,9 @@ LoadBluePage:
 	rst PlaceString
 	ld a, [wTempMonCaughtGender]
 	and a
-	jr z, .done
+	ret z
 	cp $7f
-	jr z, .done
+	ret z
 	and CAUGHT_GENDER_MASK
 	ld a, "♂"
 	jr z, .got_gender
@@ -795,7 +776,6 @@ LoadBluePage:
 .got_gender
 	hlcoord 9, 13
 	ld [hl], a
-.done
 	ret
 
 .OTNamePointers:
@@ -891,8 +871,7 @@ StatsScreen_PlaceFrontpic:
 	ld de, vTiles2 tile $00
 	predef GetAnimatedFrontpic
 	hlcoord 0, 0
-	ld d, $0
-	ld e, ANIM_MON_MENU
+	lb de, $0, ANIM_MON_MENU
 	predef LoadMonAnimation
 	ld hl, wStatsScreenFlags
 	set 6, [hl]
@@ -928,8 +907,7 @@ StatsScreen_GetAnimationParam:
 .Buffermon
 .Tempmon:
 	ld bc, wTempMonSpecies
-	jr .CheckEggFaintedFrzSlp ; utterly pointless
-
+; fallthrough
 .CheckEggFaintedFrzSlp:
 	ld a, [wCurPartySpecies]
 	cp EGG
@@ -967,9 +945,6 @@ StatsScreen_LoadTextboxSpaceGFX:
 	pop af
 	ldh [rVBK], a
 	jmp PopAFBCDEHL
-
-StatsScreenSpaceGFX: ; unreferenced
-INCBIN "gfx/font/space.2bpp"
 
 EggStatsScreen:
 	xor a
@@ -1070,9 +1045,7 @@ StatsScreen_AnimateEgg:
 	jr c, .animate
 	ld e, $8
 	cp 11
-	jr c, .animate
-	ret
-
+	ret nc
 .animate
 	push de
 	ld a, $1

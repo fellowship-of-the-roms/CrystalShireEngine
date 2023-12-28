@@ -42,7 +42,7 @@ PharmacistGiveSecretpotionText:
 	text "Your #MON ap-"
 	line "pear to be fine."
 
-	para "Is something wor- "
+	para "Is something wor-"
 	line "rying you?"
 
 	para "…"

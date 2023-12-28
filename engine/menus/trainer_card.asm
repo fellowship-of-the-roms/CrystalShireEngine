@@ -123,19 +123,8 @@ TrainerCard_Page1_Joypad:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_RIGHT | A_BUTTON
-	jr nz, .pressed_right_a
-	ret
-
-.pressed_right_a
-	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
-	ld [wJumptableIndex], a
-	ret
-
-.KantoBadgeCheck: ; unreferenced
-	ld a, [wKantoBadges]
-	and a
 	ret z
-	ld a, TRAINERCARDSTATE_PAGE3_LOADGFX
+	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
 	ld [wJumptableIndex], a
 	ret
 
@@ -159,7 +148,7 @@ TrainerCard_Page2_LoadGFX:
 	call Request2bpp
 	ld hl, TrainerCard_JohtoBadgesOAM
 	call TrainerCard_Page2_3_InitObjectsAndStrings
-	jmp TrainerCard_IncrementJumptable
+	jr TrainerCard_IncrementJumptable
 
 TrainerCard_Page2_Joypad:
 	ld hl, TrainerCard_JohtoBadgesOAM
@@ -268,8 +257,7 @@ TrainerCard_PrintTopHalfOfCard:
 	lb bc, 5, 7
 	xor a
 	ldh [hGraphicStartTile], a
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 .Name_Money:
 	db   "NAME/"
@@ -317,9 +305,6 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 .Dex_PlayTime:
 	db   "#DEX"
 	next "PLAY TIME@"
-
-.Unused: ; unreferenced
-	db "@"
 
 .Badges:
 	db "  BADGES▶@"
@@ -457,7 +442,7 @@ TrainerCard_Page2_3_PlaceLeadersFaces:
 	inc a
 	ld [hli], a
 	inc a
-	ld [hli], a
+	ld [hl], a
 	inc a
 	pop hl
 	pop de
@@ -515,8 +500,8 @@ TrainerCard_Page2_3_OAMUpdate:
 	ld a, [wTrainerCardBadgeFrameCounter]
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	ld a, [hl]
 	ld [wTrainerCardBadgeTileID], a

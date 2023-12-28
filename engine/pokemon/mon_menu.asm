@@ -123,7 +123,7 @@ PokemonActionSubmenu:
 	jp hl
 
 .nothing
-	ld a, 0
+	xor a
 	ret
 
 .Actions:
@@ -224,7 +224,7 @@ GiveTakePartyMonItem:
 	call ClearPalettes
 	call LoadFontsBattleExtra
 	call ExitMenu
-	ld a, 0
+	xor a
 	ret
 
 .take
@@ -244,8 +244,6 @@ GiveTakePartyMonItem:
 	call TryGiveItemToPartymon
 	ld hl, wItemFlags
 	res IN_BAG_F, [hl]
-	; fallthrough
-.quit
 	ret
 
 GetItemToGive:
@@ -359,7 +357,7 @@ TryGiveItemToPartymon:
 	call GetItemName
 	ld hl, PokemonAskSwapItemText
 	call StartMenuYesNo
-	jr c, .abort
+	ret c
 
 	call GiveItemToPokemon
 	ld a, [wNamedObjectIndex]
@@ -382,10 +380,7 @@ TryGiveItemToPartymon:
 	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	ld hl, ItemStorageFullText
-	call MenuTextboxBackup
-
-.abort
-	ret
+	jmp MenuTextboxBackup
 
 GivePartyItem:
 	call GetPartyItemLocation
@@ -393,11 +388,8 @@ GivePartyItem:
 	ld [hl], a
 	ld d, a
 	farcall ItemIsMail
-	jr nc, .done
-	call ComposeMailMessage
-
-.done
-	ret
+	ret nc
+	jmp ComposeMailMessage
 
 TakePartyItem:
 	call SpeechTextbox
@@ -417,20 +409,15 @@ TakePartyItem:
 	ld [hl], NO_ITEM
 	call GetItemName
 	ld hl, PokemonTookItemText
-	call MenuTextboxBackup
-	jr .done
+	jmp MenuTextboxBackup
 
 .not_holding_item
 	ld hl, PokemonNotHoldingText
-	call MenuTextboxBackup
-	jr .done
+	jmp MenuTextboxBackup
 
 .item_storage_full
 	ld hl, ItemStorageFullText
-	call MenuTextboxBackup
-
-.done
-	ret
+	jmp MenuTextboxBackup
 
 GiveTakeItemMenuData:
 	db MENU_SPRITE_ANIMS | MENU_BACKUP_TILES ; flags
@@ -663,7 +650,7 @@ _OpenPartyStats:
 	ld [wLastVolume], a
 	call MaxVolume
 	call ExitMenu
-	ld a, 0
+	xor a
 	ret
 
 MonMenu_Cut:
@@ -684,7 +671,7 @@ MonMenu_Fly:
 	ld a, [wFieldMoveSucceeded]
 	cp $2
 	jr z, .Fail
-	cp $0
+	and a
 	jr z, .Error
 	farcall StubbedTrainerRankings_Fly
 	ld b, $4
@@ -696,11 +683,7 @@ MonMenu_Fly:
 	ret
 
 .Error:
-	ld a, $0
-	ret
-
-.NoReload: ; unreferenced
-	ld a, $1
+	xor a
 	ret
 
 MonMenu_Flash:
@@ -942,7 +925,7 @@ ManagePokemonMoves:
 	call ClearBGPalettes
 
 .egg
-	ld a, $0
+	xor a
 	ret
 
 MoveScreenLoop:
@@ -1036,9 +1019,8 @@ MoveScreenLoop:
 	jmp MoveScreenLoop
 
 .cycle_right
-	ld a, [wCurPartyMon]
-	inc a
-	ld [wCurPartyMon], a
+	ld hl, wCurPartyMon
+	inc [hl]
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies
@@ -1055,9 +1037,8 @@ MoveScreenLoop:
 	and a
 	ret z
 .cycle_left_loop
-	ld a, [wCurPartyMon]
-	dec a
-	ld [wCurPartyMon], a
+	ld hl, wCurPartyMon
+	dec [hl]
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies
@@ -1178,12 +1159,10 @@ SetUpMoveScreenBG:
 	ld e, MONICON_MOVES
 	farcall LoadMenuMonIcon
 	hlcoord 0, 1
-	ld b, 9
-	ld c, 18
+	lb bc, 9, 18
 	call Textbox
 	hlcoord 0, 11
-	ld b, 5
-	ld c, 18
+	lb bc, 5, 18
 	call Textbox
 	hlcoord 2, 0
 	lb bc, 2, 3
@@ -1229,8 +1208,7 @@ SetUpMoveList:
 	inc a
 	ld [w2DMenuNumRows], a
 	hlcoord 0, 11
-	ld b, 5
-	ld c, 18
+	lb bc, 5, 18
 	jmp Textbox
 
 PrepareToPlaceMoveData:

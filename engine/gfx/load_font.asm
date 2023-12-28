@@ -21,19 +21,13 @@ _LoadStandardFont::
 	lb bc, BANK(Font), 32 ; "'" to "9"
 	jmp Get1bppViaHDMA
 
-_LoadFontsExtra1::
-	jr LoadFrame
-
-_LoadFontsExtra2::
-	ret
-
 _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
 	ld hl, vTiles2 tile $60
 	lb bc, BANK(FontBattleExtra), 25
 	call Get2bppViaHDMA
 ; fallthrough
-LoadFrame:
+LoadFrame::
 	ld a, [wTextboxFrame]
 	maskbits NUM_FRAMES
 	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE

@@ -66,8 +66,8 @@ PrintDiplomaPage2:
 	ld de, wGameTimeHours
 	lb bc, 2, 4
 	call PrintNum
-	ld [hl], $67 ; colon
-	inc hl
+	ld a, $67 ; colon
+	ld [hli], a
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum

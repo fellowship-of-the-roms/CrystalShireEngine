@@ -85,7 +85,7 @@ _TitleScreen:
 	rst ByteFill
 
 ; Back to VRAM bank 0
-	ld a, 0
+	xor a
 	ldh [rVBK], a
 
 ; Decompress logo
@@ -107,15 +107,13 @@ _TitleScreen:
 ; Draw Pokemon logo
 	hlcoord 0, 3
 	lb bc, 7, 20
-	ld d, $80
-	ld e, 20
+	lb de, $80, 20
 	call DrawTitleGraphic
 
 ; Draw copyright text
 	hlbgcoord 3, 0, vBGMap1
 	lb bc, 1, 13
-	ld d, $c
-	ld e, 16
+	lb de, $c, 16
 	call DrawTitleGraphic
 
 ; Initialize running Suicune?
@@ -146,31 +144,15 @@ _TitleScreen:
 
 ; LY/SCX trickery starts here
 
-	ldh a, [rSVBK]
+	; a = [rSVBK]
 	push af
 	ld a, BANK(wLYOverrides)
 	ldh [rSVBK], a
 
-; Make alternating lines come in from opposite sides
-
-; (This part is actually totally pointless, you can't
-;  see anything until these values are overwritten!)
-
-	ld b, 80 / 2 ; alternate for 80 lines
+; Make sure the LYOverrides buffer is empty
 	ld hl, wLYOverrides
-.loop
-; $00 is the middle position
-	ld [hl], +112 ; coming from the left
-	inc hl
-	ld [hl], -112 ; coming from the right
-	inc hl
-	dec b
-	jr nz, .loop
-
-; Make sure the rest of the buffer is empty
-	ld hl, wLYOverrides + 80
 	xor a
-	ld bc, wLYOverridesEnd - (wLYOverrides + 80)
+	ld bc, wLYOverridesEnd - wLYOverrides
 	rst ByteFill
 
 ; Let LCD Stat know we're messing around with SCX
@@ -212,9 +194,7 @@ _TitleScreen:
 ; Play starting sound effect
 	call SFXChannelsOff
 	ld de, SFX_TITLE_SCREEN_ENTRANCE
-	call PlaySFX
-
-	ret
+	jmp PlaySFX
 
 SuicuneFrameIterator:
 	ld hl, wSuicuneFrame
@@ -228,7 +208,7 @@ SuicuneFrameIterator:
 
 	ld a, c
 	and %11000
-	sla a
+	add a
 	swap a
 	ld e, a
 	ld d, 0
@@ -264,8 +244,8 @@ LoadSuicuneFrame:
 	ld a, SCREEN_WIDTH - 8
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	ld a, 8
 	add d
@@ -305,8 +285,7 @@ DrawTitleGraphic:
 
 InitializeBackground:
 	ld hl, wShadowOAMSprite00
-	ld d, -$22
-	ld e, $0
+	lb de, -$22, $0
 	ld c, 5
 .loop
 	push bc
@@ -320,8 +299,7 @@ InitializeBackground:
 	ret
 
 .InitColumn:
-	ld c, $6
-	ld b, $40
+	lb bc, $40, $6
 .loop2
 	ld a, d
 	ld [hli], a ; y

@@ -104,6 +104,10 @@ MACRO dab ; dwb address, bank
 	endr
 ENDM
 
+MACRO dr ; relative offset
+	db \1 - @
+ENDM
+
 MACRO bcd
 	rept _NARG
 		dn ((\1) % 100) / 10, (\1) % 10

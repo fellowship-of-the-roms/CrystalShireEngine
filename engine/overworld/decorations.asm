@@ -106,7 +106,7 @@ _PlayerDecorationMenu:
 	ld a, [hli]
 	ld d, a
 	or e
-	jr z, .done
+	ret z
 	push hl
 	call _de_
 	pop hl
@@ -118,8 +118,6 @@ _PlayerDecorationMenu:
 .next
 	inc hl
 	jr .loop
-.done
-	ret
 
 .owned_pointers:
 	table_width 3, _PlayerDecorationMenu.owned_pointers
@@ -146,7 +144,7 @@ CheckAllDecorationFlags:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
+	ret z
 	push hl
 	push af
 	ld b, CHECK_FLAG
@@ -158,9 +156,6 @@ CheckAllDecorationFlags:
 	call nz, AppendDecoIndex
 	pop hl
 	jr .loop
-
-.done
-	ret
 
 AppendDecoIndex:
 	ld hl, wNumOwnedDecoCategories
@@ -185,7 +180,7 @@ FindOwnedDecosInCategory:
 
 	ld a, c
 	call AppendDecoIndex
-	ld a, 0
+	xor a
 	call AppendDecoIndex
 	scf
 	ret
@@ -348,10 +343,7 @@ PopulateDecoCategoryMenu:
 	ld hl, .NonscrollingMenuHeader
 	call LoadMenuHeader
 	call DoNthMenu
-	jr c, .no_action_1
-	call DoDecorationAction2
-
-.no_action_1
+	call nc, DoDecorationAction2
 	jmp ExitMenu
 
 .beyond_eight
@@ -373,10 +365,7 @@ PopulateDecoCategoryMenu:
 	call ScrollingMenu
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
-	jr z, .no_action_2
-	call DoDecorationAction2
-
-.no_action_2
+	call nz, DoDecorationAction2
 	jmp ExitMenu
 
 .empty
@@ -503,7 +492,7 @@ GetDecoName:
 
 .NameFunctions:
 	table_width 2, GetDecoName.NameFunctions
-	dw .invalid
+	dw DoNothing ; .invalid
 	dw .plant
 	dw .bed
 	dw .carpet
@@ -511,9 +500,6 @@ GetDecoName:
 	dw .doll
 	dw .bigdoll
 	assert_table_length NUM_DECO_TYPES + 1
-
-.invalid:
-	ret
 
 .plant:
 	ld a, e
@@ -547,15 +533,7 @@ GetDecoName:
 	call .getdeconame
 	pop de
 	ld a, e
-	jr .getpokename
-
-.unused: ; unreferenced
-	push de
-	call .getdeconame
-	pop de
-	ld a, e
-	jr .getdeconame
-
+; fallthrough
 .getpokename:
 	push bc
 	ld c, a
@@ -945,21 +923,6 @@ GetDecorationID:
 	ld a, [hl]
 	pop de
 	pop hl
-	ret
-
-SetAllDecorationFlags: ; unreferenced
-	ld hl, DecorationIDs
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .done
-	push hl
-	ld b, SET_FLAG
-	call DecorationFlagAction
-	pop hl
-	jr .loop
-
-.done
 	ret
 
 INCLUDE "data/decorations/decorations.asm"

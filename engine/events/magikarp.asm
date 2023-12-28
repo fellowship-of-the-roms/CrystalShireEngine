@@ -94,13 +94,13 @@ PrintMagikarpLength:
 	ld de, wMagikarpLength
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld [hl], "′"
-	inc hl
+	ld a, "′"
+	ld [hli], a
 	ld de, wMagikarpLength + 1
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld [hl], "″"
-	inc hl
+	ld a, "″"
+	ld [hli], a
 	ld [hl], "@"
 	ret
 
@@ -230,7 +230,7 @@ CalcMagikarpLength: ; TODO: FIX DVs to IVs CalcMagikarpLength
 
 .next
 	inc hl ; align to next triplet
-	ld a, [wTempByteValue]
+	ld a, [wTempByteValue] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wTempByteValue], a
 	cp 16
@@ -275,8 +275,8 @@ CalcMagikarpLength: ; TODO: FIX DVs to IVs CalcMagikarpLength
 	ld e, a
 
 	ld hl, wMagikarpLength
-	ld [hl], d ; ft
-	inc hl
+	ld a, d
+	ld [hli], a ; ft
 	ld [hl], e ; in
 	ret
 

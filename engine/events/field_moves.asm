@@ -122,16 +122,13 @@ OWCutAnimation:
 .loop
 	ld a, [wJumptableIndex]
 	bit 7, a
-	jr nz, .finish
+	ret nz
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
 	farcall DoNextFrameForAllSprites
 	call OWCutJumptable
 	call DelayFrame
 	jr .loop
-
-.finish
-	ret
 
 .LoadCutGFX:
 	farcall ClearSpriteAnims ; pointless to farcall
@@ -248,9 +245,9 @@ Cut_GetLeafSpawnCoords:
 	ld hl, .Coords
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ret
 
 .Coords:
@@ -282,9 +279,9 @@ Cut_Headbutt_GetPixelFacing:
 	ld d, 0
 	ld hl, .Coords
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ret
 
 .Coords:
@@ -427,7 +424,7 @@ FlyFunction_FrameTimer:
 	ret nz
 	ld a, [hl]
 	and (6 * 8) >> 1
-	sla a
+	add a
 	add 8 * 8 ; gives a number in [$40, $50, $60, $70]
 	ld d, a
 	ld e, 0

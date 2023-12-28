@@ -99,8 +99,8 @@ LoadContestantName:
 	cp "@"
 	jr nz, .next
 	dec hl
-	ld [hl], " "
-	inc hl
+	ld a, " "
+	ld [hli], a
 	ld d, h
 	ld e, l
 ; Restore the Trainer Class ID and Trainer ID pointer.  Save de for later.
@@ -132,12 +132,10 @@ BugContest_GetPlayersResult:
 .loop
 	ld a, [hl]
 	cp BUG_CONTEST_PLAYER
-	jr z, .done
+	ret z
 	add hl, de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 BugContest_JudgeContestants:
@@ -179,8 +177,7 @@ DetermineContestWinners:
 	ld bc, BUG_CONTESTANT_SIZE
 	rst CopyBytes
 	ld hl, wBugContestFirstPlaceWinnerID
-	call CopyTempContestant
-	jr .done
+	jr CopyTempContestant
 
 .not_first_place
 	ld de, wBugContestTempScore
@@ -193,21 +190,16 @@ DetermineContestWinners:
 	ld bc, BUG_CONTESTANT_SIZE
 	rst CopyBytes
 	ld hl, wBugContestSecondPlaceWinnerID
-	call CopyTempContestant
-	jr .done
+	jr CopyTempContestant
 
 .not_second_place
 	ld de, wBugContestTempScore
 	ld hl, wBugContestThirdPlaceScore
 	ld c, 2
 	call CompareBytes
-	jr c, .done
+	ret c
 	ld hl, wBugContestThirdPlaceWinnerID
-	call CopyTempContestant
-
-.done
-	ret
-
+; fallthrough
 CopyTempContestant:
 ; Could've just called CopyBytes.
 	ld de, wBugContestTempWinnerID
@@ -246,7 +238,7 @@ ComputeAIContestantScores:
 .loop2
 	; 0, 1, or 2 for 1st, 2nd, or 3rd
 	call Random
-	and 3
+	and 3 ; no-optimize a & X == X
 	cp 3
 	jr z, .loop2
 	add a
@@ -296,7 +288,7 @@ ContestScore:
 
 	ld a, [wContestMonSpecies] ; Species
 	and a
-	jr z, .done
+	ret z
 
 	; Tally the following:
 
@@ -355,22 +347,18 @@ ContestScore:
 
 	; Remaining HP / 8
 	ld a, [wContestMonHP + 1]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	call .AddContestStat
 
 	; Whether it's holding an item
 	ld a, [wContestMonItem]
 	and a
-	jr z, .done
-
+	ret z
 	ld a, 1
-	call .AddContestStat
-
-.done
-	ret
-
+; fallthrough
 .AddContestStat:
 	ld hl, hMultiplicand
 	add [hl]

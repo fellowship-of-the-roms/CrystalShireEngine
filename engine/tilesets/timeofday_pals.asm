@@ -1,7 +1,3 @@
-DummyPredef35:
-DummyPredef36:
-	ret
-
 UpdateTimeOfDayPal::
 	call UpdateTime
 	ld a, [wTimeOfDay]
@@ -52,10 +48,10 @@ _TimeOfDayPals::
 ; push palette
 	ld c, NUM_PAL_COLORS
 .push
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld e, a
 	push de
 	dec c
 	jr nz, .push
@@ -82,10 +78,10 @@ _TimeOfDayPals::
 	ld e, NUM_PAL_COLORS
 .pop
 	pop bc
-	ld [hl], c
-	dec hl
-	ld [hl], b
-	dec hl
+	ld a, c
+	ld [hld], a
+	ld a, b
+	ld [hld], a
 	dec e
 	jr nz, .pop
 
@@ -155,9 +151,8 @@ FillWhiteBGColor:
 
 	ld hl, wBGPals1
 	ld a, [hli]
+	ld d, [hl]
 	ld e, a
-	ld a, [hli]
-	ld d, a
 	ld hl, wBGPals1 palette 1 color 0
 	ld c, 6
 .loop
@@ -183,8 +178,8 @@ ReplaceTimeOfDayPals:
 	maskbits NUM_MAP_PALETTES
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	ld a, [hl]
 	ld [wTimeOfDayPalset], a

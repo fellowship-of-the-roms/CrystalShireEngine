@@ -393,13 +393,6 @@ AcademyNotebookText3:
 	line "anymore…"
 	done
 
-AcademyStickerMachineText:
-	text "This super machine"
-	line "prints data out as"
-
-	para "stickers!"
-	done
-
 EarlsPokemonAcademy_MapEvents:
 	db 0, 0 ; filler
 

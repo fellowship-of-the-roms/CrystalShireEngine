@@ -121,8 +121,8 @@ TradeAnimationPlayer2:
 
 RunTradeAnimScript:
 	ld hl, wTradeAnimAddress
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ldh a, [hMapAnims]
 	push af
@@ -171,7 +171,7 @@ RunTradeAnimScript:
 	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	rst ByteFill
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 
 .NotCGB:
@@ -295,14 +295,14 @@ TradeAnim_IncrementJumptableIndex:
 
 TradeAnim_AdvanceScriptPointer:
 	ld hl, wTradeAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld a, [de]
 	ld [wJumptableIndex], a
 	inc de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 	ret
 
@@ -523,8 +523,8 @@ TradeAnim_TubeAnimJumptable:
 .Three:
 	call TradeAnim_BlankTilemap
 	hlcoord 9, 3
-	ld [hl], $5b
-	inc hl
+	ld a, $5b
+	ld [hli], a
 	ld bc, 10
 	ld a, $60
 	rst ByteFill
@@ -545,8 +545,7 @@ TradeAnim_TubeAnimJumptable:
 	ld a, $60
 	rst ByteFill
 	hlcoord 17, 3
-	ld a, $5d
-	ld [hl], a
+	ld [hl], $5d
 
 	ld a, $61
 	ld de, SCREEN_WIDTH
@@ -560,8 +559,7 @@ TradeAnim_TubeAnimJumptable:
 	add hl, de
 	ld a, $5f
 	ld [hld], a
-	ld a, $5b
-	ld [hl], a
+	ld [hl], $5b
 	hlcoord 10, 6
 ; fallthrough
 TradeAnim_CopyTradeGameBoyTilemap:
@@ -792,8 +790,7 @@ TradeAnim_GetFrontpic:
 	ld [wCurSpecies], a
 	call GetBaseData
 	pop de
-	predef GetMonFrontpic
-	ret
+	predef_jump GetMonFrontpic
 
 TradeAnim_GetNicknamename:
 	push de
@@ -897,8 +894,7 @@ TrademonStats_MonTemplate:
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
 	hlcoord 3, 0
-	ld b, $6
-	ld c, $d
+	lb bc, $6, $d
 	call Textbox
 	hlcoord 4, 0
 	ld de, .OTMonData
@@ -916,8 +912,7 @@ TrademonStats_Egg:
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
 	hlcoord 3, 0
-	ld b, 6
-	ld c, 13
+	lb bc, 6, 13
 	call Textbox
 	hlcoord 4, 2
 	ld de, .EggData

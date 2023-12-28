@@ -131,12 +131,6 @@ GameFreakGraphicArtistRefusedText:
 	cont "DIPLOMA printed."
 	done
 
-GameFreakGraphicArtistErrorText:
-	text "Something's wrong."
-	line "I'll have to can-"
-	cont "cel printing."
-	done
-
 GameFreakProgrammerText:
 	text "Who, me? I'm the"
 	line "PROGRAMMER."

@@ -29,8 +29,6 @@ CopyMonToTempMon:
 	ld de, wTempMon
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst CopyBytes
-
-.done
 	ret
 
 CalcBufferMonStats:

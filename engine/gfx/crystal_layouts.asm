@@ -15,11 +15,7 @@ GetCrystalCGBLayout:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .done
-	push de
 	jp hl
-.done:
-	ret
 
 .Jumptable:
 	dw _CrystalCGB_MobileLayout0
@@ -118,13 +114,6 @@ LoadOW_BGPal7::
 Palette_TextBG7:
 INCLUDE "gfx/font/bg_text.pal"
 
-Function49420::
-	ld hl, MansionPalette1 palette 8
-	ld de, wBGPals1 palette PAL_BG_ROOF
-	ld bc, 1 palettes
-	ld a, BANK(wBGPals1)
-	jmp FarCopyWRAM
-
 _CrystalCGB_MobileLayout1:
 	call MG_Mobile_Layout_LoadPals
 	ld de, wBGPals1 palette PAL_BG_TEXT
@@ -165,7 +154,7 @@ INCLUDE "gfx/mystery_gift/mobile_text.pal"
 	ld a, $7
 	call Crystal_FillBoxCGB
 	hlcoord 0, 2, wAttrmap
-	ld a, $4
+	ld a, $4 ; no-optimize *hl = N
 	ld [hl], a
 	hlcoord 19, 2, wAttrmap
 	ld [hl], a
@@ -177,7 +166,7 @@ INCLUDE "gfx/mystery_gift/mobile_text.pal"
 	ld a, $7
 	call Crystal_FillBoxCGB
 	hlcoord 0, 1, wAttrmap
-	ld a, $4
+	ld a, $4 ; no-optimize *hl = N
 	ld [hl], a
 	hlcoord 19, 1, wAttrmap
 	ld [hl], a
@@ -205,17 +194,6 @@ INCLUDE "gfx/mystery_gift/name_card_bg.pal"
 
 .OBPalette:
 INCLUDE "gfx/mystery_gift/name_card_ob.pal"
-
-Function49742:
-	ld hl, .MobileBorderPalettes
-	ld de, wBGPals1
-	ld bc, 8 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	farjp ApplyPals
-
-.MobileBorderPalettes:
-INCLUDE "gfx/trade/mobile_border.pal"
 
 _InitMG_Mobile_LinkTradePalMap:
 	hlcoord 0, 0, wAttrmap
@@ -260,8 +238,7 @@ _InitMG_Mobile_LinkTradePalMap:
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $2
-	ld [hl], a
+	ld [hl], $2
 	hlcoord 2, 17, wAttrmap
 	ld a, $3
 	ld bc, 6

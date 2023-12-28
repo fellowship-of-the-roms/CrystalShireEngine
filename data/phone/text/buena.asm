@@ -38,7 +38,7 @@ BuenaPhoneNiteAnswerText:
 	line "Oh! Hi, <PLAY_G>!"
 
 	para "I just got off"
-	line "work. "
+	line "work."
 
 	para "Let me tell you,"
 	line "I'm exhausted!"

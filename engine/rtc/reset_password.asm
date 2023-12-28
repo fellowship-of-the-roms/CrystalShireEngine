@@ -231,8 +231,8 @@ ClockResetPassword:
 	ld a, [hli]
 	add e
 	ld e, a
-	ld a, 0
 	adc d
+	sub e
 	ld d, a
 	dec c
 	jr nz, .ComponentFromNumber
@@ -244,8 +244,8 @@ ClockResetPassword:
 	ret z
 	add e
 	ld e, a
-	ld a, 0
 	adc d
+	sub e
 	ld d, a
 	dec c
 	jr nz, .ComponentFromString

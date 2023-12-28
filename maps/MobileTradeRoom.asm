@@ -17,11 +17,6 @@ MobileTradeRoomInitializeAndPreparePokecenter2FScript:
 	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_MOBILE_TRADE_ROOM
 	end
 
-MobileTradeRoom_EstablishingCommsText:
-	text "Establishing"
-	line "communications…"
-	done
-
 MobileTradeRoom_MapEvents:
 	db 0, 0 ; filler
 

@@ -23,7 +23,7 @@ _BasementKey:
 	ret
 
 .nope
-	ld a, FALSE
+	xor a ; FALSE
 	ld [wItemEffectSucceeded], a
 	ret
 

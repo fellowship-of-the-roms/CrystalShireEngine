@@ -106,26 +106,28 @@ CheckDailyResetTimer::
 	ld [hli], a ; wSwarmFlags
 	ld [hl], a  ; wSwarmFlags + 1
 	ld hl, wDailyRematchFlags
-rept 4
+rept 3
 	ld [hli], a
 endr
+	ld [hl], a
 	ld hl, wDailyPhoneItemFlags
-rept 4
+rept 3
 	ld [hli], a
 endr
+	ld [hl], a
 	ld hl, wDailyPhoneTimeOfDayFlags
-rept 4
+rept 3
 	ld [hli], a
 endr
+	ld [hl], a
 	ld hl, wKenjiBreakTimer
 	ld a, [hl]
 	and a
 	jr z, .RestartKenjiBreakCountdown
 	dec [hl]
-	jr nz, .DontRestartKenjiBreakCountdown
+	jr nz, RestartDailyResetTimer
 .RestartKenjiBreakCountdown:
 	call SampleKenjiBreakCountdown
-.DontRestartKenjiBreakCountdown:
 	jr RestartDailyResetTimer
 
 SampleKenjiBreakCountdown:
@@ -196,33 +198,12 @@ CheckPokerusTick::
 	xor a
 	ret
 
-SetUnusedTwoDayTimer: ; unreferenced
-	ld a, 2
-	ld hl, wUnusedTwoDayTimer
-	ld [hl], a
-	call UpdateTime
-	ld hl, wUnusedTwoDayTimerStartDate
-	jmp CopyDayToHL
-
 CheckUnusedTwoDayTimer:
 	ld hl, wUnusedTwoDayTimerStartDate
 	call CalcDaysSince
 	call GetDaysSince
 	ld hl, wUnusedTwoDayTimer
 	jr UpdateTimeRemaining
-
-UnusedSetSwarmFlag: ; unreferenced
-	ld hl, wDailyFlags1
-	set DAILYFLAGS1_FISH_SWARM_F, [hl]
-	ret
-
-UnusedCheckSwarmFlag: ; unreferenced
-	and a
-	ld hl, wDailyFlags1
-	bit DAILYFLAGS1_FISH_SWARM_F, [hl]
-	ret nz
-	scf
-	ret
 
 RestartLuckyNumberCountdown:
 	call .GetDaysUntilNextFriday
@@ -231,16 +212,13 @@ RestartLuckyNumberCountdown:
 
 .GetDaysUntilNextFriday:
 	call GetWeekday
-	ld c, a
-	ld a, FRIDAY
-	sub c
+	cpl
+	add FRIDAY + 1
 	jr z, .friday_saturday
-	jr nc, .earlier ; could have done "ret nc"
+	ret nc
 
 .friday_saturday
 	add 7
-
-.earlier
 	ret
 
 _CheckLuckyNumberShowFlag:
@@ -298,18 +276,6 @@ UpdateTimeRemaining:
 	scf
 	ret
 
-GetSecondsSinceIfLessThan60: ; unreferenced
-	ld a, [wDaysSince]
-	and a
-	jr nz, GetTimeElapsed_ExceedsUnitLimit
-	ld a, [wHoursSince]
-	and a
-	jr nz, GetTimeElapsed_ExceedsUnitLimit
-	ld a, [wMinutesSince]
-	jr nz, GetTimeElapsed_ExceedsUnitLimit
-	ld a, [wSecondsSince]
-	ret
-
 GetMinutesSinceIfLessThan60:
 	ld a, [wDaysSince]
 	and a
@@ -318,13 +284,6 @@ GetMinutesSinceIfLessThan60:
 	and a
 	jr nz, GetTimeElapsed_ExceedsUnitLimit
 	ld a, [wMinutesSince]
-	ret
-
-GetHoursSinceIfLessThan24: ; unreferenced
-	ld a, [wDaysSince]
-	and a
-	jr nz, GetTimeElapsed_ExceedsUnitLimit
-	ld a, [wHoursSince]
 	ret
 
 GetDaysSince:
@@ -338,11 +297,6 @@ GetTimeElapsed_ExceedsUnitLimit:
 CalcDaysSince:
 	xor a
 	jr _CalcDaysSince
-
-CalcHoursDaysSince: ; unreferenced
-	inc hl
-	xor a
-	jr _CalcHoursDaysSince
 
 CalcMinsHoursDaysSince:
 	inc hl
@@ -360,7 +314,7 @@ CalcSecsMinsHoursDaysSince:
 	jr nc, .skip
 	add 60
 .skip
-	ld [hl], c ; current seconds
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is used) current seconds
 	dec hl
 	ld [wSecondsSince], a ; seconds since
 
@@ -371,7 +325,7 @@ _CalcMinsHoursDaysSince:
 	jr nc, .skip
 	add 60
 .skip
-	ld [hl], c ; current minutes
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is used) current minutes
 	dec hl
 	ld [wMinutesSince], a ; minutes since
 
@@ -382,7 +336,7 @@ _CalcHoursDaysSince:
 	jr nc, .skip
 	add MAX_HOUR
 .skip
-	ld [hl], c ; current hours
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is used) current hours
 	dec hl
 	ld [wHoursSince], a ; hours since
 
@@ -411,13 +365,6 @@ CopyDayHourMinSecToHL:
 CopyDayToHL:
 	ld a, [wCurDay]
 	ld [hl], a
-	ret
-
-CopyDayHourToHL: ; unreferenced
-	ld a, [wCurDay]
-	ld [hli], a
-	ldh a, [hHours]
-	ld [hli], a
 	ret
 
 CopyDayHourMinToHL:

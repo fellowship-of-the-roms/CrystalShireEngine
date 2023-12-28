@@ -109,7 +109,6 @@ PlaceMapNameSign::
 	call PlaceMapNameCenterAlign
 	farcall HDMATransfer_OnlyTopFourRows
 .already_initialized
-	ld a, $80
 	ld a, $70
 	ldh [rWY], a
 	ldh [hWY], a
@@ -127,8 +126,7 @@ PlaceMapNameSign::
 
 InitMapNameFrame:
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call InitMapSignAttrmap
 	jr PlaceMapNameFrame
 
@@ -220,8 +218,7 @@ PlaceMapNameFrame:
 	ld a, MAP_NAME_SIGN_START + 8
 	call .FillTopBottom
 	; bottom right
-	ld a, MAP_NAME_SIGN_START + 10
-	ld [hl], a
+	ld [hl], MAP_NAME_SIGN_START + 10
 	ret
 
 .FillMiddle:

@@ -708,11 +708,6 @@ CooltrainerfKateAfterText:
 	line "startled us."
 	done
 
-Route34IlexForestSignText:
-	text "ILEX FOREST"
-	line "THROUGH THE GATE"
-	done
-
 Route34SignText:
 	text "ROUTE 34"
 

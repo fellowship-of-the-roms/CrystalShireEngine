@@ -33,7 +33,7 @@ _ReceiveItem::
 
 .Berry:
 	ld hl, wNumBerries
-	jp PutItemInPocketLow
+	jmp PutItemInPocketLow
 
 .TMHM:
 	ld h, d
@@ -68,7 +68,7 @@ _TossItem::
 
 .Berry:
 	ld hl, wNumBerries
-	jp RemoveItemFromPocketLow
+	jmp RemoveItemFromPocketLow
 
 .TMHM:
 	ld h, d
@@ -115,7 +115,7 @@ _CheckItem::
 
 .Berry:
 	ld hl, wNumBerries
-	jp CheckTheItemLow
+	jmp CheckTheItemLow
 
 .TMHM:
 	ld h, d
@@ -658,9 +658,8 @@ TossKeyItem:
 	ret
 
 .ok3
-	ld a, [wNumKeyItems]
-	dec a
-	ld [wNumKeyItems], a
+	ld hl, wNumKeyItems
+	dec [hl]
 	scf
 	ret
 

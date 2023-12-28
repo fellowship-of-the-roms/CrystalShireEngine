@@ -938,8 +938,8 @@ DecodeBufferMon:
 .replace_a
 	ld c, a
 .replace
-	ld [hl], c
-	inc hl
+	ld a, c
+	ld [hli], a
 	dec b
 	jr nz, .charmap_loop
 
@@ -1172,7 +1172,7 @@ InitializeBoxes:
 	sub e
 	sub 10
 	jr c, .next
-	ld [hl], "1"
+	ld [hl], "1" ; no-optimize *hl++|*hl-- = N (a is used.)
 	inc hl
 	sub 10
 .next

@@ -15,12 +15,7 @@ from sys import stderr
 import re
 
 # Paired registers are also useful
-PAIRS = {
-	'a': 'f', 'f': 'a',
-	'b': 'c', 'c': 'b',
-	'd': 'e', 'e': 'd',
-	'h': 'l', 'l': 'h',
-}
+PAIRS = dict(sum([[(x, y), (y, x)] for (x, y) in {'af', 'bc', 'de', 'hl'}], []))
 
 # Other useful utility functions for implementing conditions
 
@@ -70,10 +65,15 @@ patterns = {
 	(lambda line1, prev: line1.code != 'halt'),
 	(lambda line2, prev: line2.code == 'nop'),
 ],
-'no-ops': [
+'No-op ld': [
 	# Bad: ld b, b (or other identical registers)
 	# Good: omit (unless you need it for timing)
 	(lambda line1, prev: re.match(r'ld ([abcdehl]), \1$', line1.code)),
+],
+'No-op add|sub': [
+	# Bad: add|sub 0
+	# Good: omit (unless you need the flag effects)
+	(lambda line1, prev: re.match(r'(?:add|sub) (?:a, )?(?:[%\$&]?0+|FALSE)$', line1.code)),
 ],
 'Inefficient HRAM load': [
 	# Bad: ld a, [hFoo] (or [rFoo])
@@ -90,7 +90,7 @@ patterns = {
 'a = 0': [
 	# Bad: ld a, 0
 	# Good: xor a (unless you need to preserve flags)
-	(lambda line1, prev: re.match(r'ld a, [%\$&]?0+$', line1.code)),
+	(lambda line1, prev: re.match(r'ld a, (?:[%\$&]?0+|FALSE)$', line1.code)),
 ],
 'a++|a--': [
 	# Bad: add|sub 1
@@ -105,7 +105,7 @@ patterns = {
 'a = ~a': [
 	# Bad: xor $ff
 	# Good: cpl
-	(lambda line1, prev: re.match(r'xor (?:255|-1|\$[Ff][Ff]|%11111111|&377)$', line1.code)),
+	(lambda line1, prev: re.match(r'xor (?:255|-[$%&]?0*1|\$[Ff][Ff]|%11111111|&377)$', line1.code)),
 ],
 'a = N - a': [
 	# Bad: ld b, a / ld a, N / sub b (or other intermediate registers)
@@ -592,6 +592,17 @@ patterns = {
 	(lambda line3, prev: re.match(r'ld \[w.*?\], a', line3.code)
 		and line3.code.split(", ")[0].lstrip("ld ") == prev[0].code.split(", ")[-1]),
 ],
+'Trailing string space': [
+	# Bad: text "Hello! " (unless it's followed by a text command)
+	# Good: text "Hello!"
+	(lambda line1, prev: re.match(r'(?:' + '|'.join([
+		'text', 'next1?', 'line', 'page', 'para', 'cont', 'prompt'
+		]) + r')\s*"[^"]* "', line1.code)),
+	(lambda line2, prev: not re.match(r'(?:' + '|'.join([
+		'text_', 'sound_', 'start_asm', 'deciram', 'interpret_data', 'limited_interpret_data',
+		'link_wait_button', 'current_day', 'stop_compressing_text',
+		]) + r')', line2.code))
+],
 }
 
 def optimize(filename):
@@ -629,6 +640,8 @@ def optimize(filename):
 				cur_label = Line(i+1, code, comment, text, code)
 			# Remove indentation from code, if any
 			code = code.lstrip()
+			# Normalize whitespace
+			code = re.sub(r'\s+', ' ', code)
 			# Record the line's properties
 			context = cur_label.code if cur_label else ''
 			cur_line = Line(i+1, code, comment, text, context)

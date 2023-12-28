@@ -17,8 +17,7 @@ LinkCommunications:
 	farcall LinkComms_LoadPleaseWaitTextboxBorderGFX
 	call WaitBGMap2
 	hlcoord 3, 8
-	ld b, 2
-	ld c, 12
+	lb bc, 2, 12
 	ld d, h
 	ld e, l
 	farcall LinkTextbox2
@@ -145,8 +144,7 @@ endc
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .loop
@@ -321,8 +319,7 @@ endc
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .loop1
@@ -481,10 +478,8 @@ endc
 	jr nz, .ready_to_trade
 	ld a, [wLinkOtherPlayerGender]
 	dec a
-	jr z, .is_female
 	ld a, CAL
-	jr .done
-.is_female
+	jr nz, .done
 	ld a, LINK_KRIS
 .done
 	ld [wOtherTrainerClass], a
@@ -553,8 +548,7 @@ LinkTimeout:
 	ldh [hVBlank], a
 	push de
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	push de
 	ld d, h
 	ld e, l
@@ -851,7 +845,7 @@ Link_PrepPartyData_Gen1:
 	push hl
 	call GetMoveIndexFromID
 	ld a, h
-	sub 1
+	sub 1 ; no-optimize a++|a--
 	sbc a
 	and l
 	pop hl
@@ -892,8 +886,7 @@ Link_PrepPartyData_Gen1:
 
 	ld hl, MON_EVS - 1
 	add hl, bc
-	ld c, STAT_SATK
-	ld b, TRUE
+	lb bc, TRUE, STAT_SATK
 	predef CalcMonStatC
 
 	pop bc
@@ -1053,8 +1046,7 @@ Link_PrepPartyData_Gen2:
 ; Calculate the patch offsets for the mail metadata
 	ld hl, wLinkPlayerMailMetadata
 	ld de, wLinkPlayerMailPatchSet
-	ld b, (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-	ld c, 0
+	lb bc, (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH, 0
 .metadata_patch_loop
 	inc c
 	ld a, [hl]
@@ -1491,8 +1483,7 @@ Link_ConvertPartyStruct1to2:
 	ld e, l
 	ld hl, MON_EVS - 1
 	add hl, bc
-	ld c, STAT_SATK
-	ld b, TRUE
+	lb bc, TRUE, STAT_SATK
 	predef CalcMonStatC
 	pop bc
 	pop hl
@@ -1504,8 +1495,7 @@ Link_ConvertPartyStruct1to2:
 	push bc
 	ld hl, MON_EVS - 1
 	add hl, bc
-	ld c, STAT_SDEF
-	ld b, TRUE
+	lb bc, TRUE, STAT_SDEF
 	predef CalcMonStatC
 	pop bc
 	pop hl
@@ -1724,15 +1714,9 @@ LinkTradePartymonMenuLoop:
 	farcall LinkTradeMenu
 	ld a, d
 	and a
-	jr nz, .check_joypad
-	jr LinkTradePartiesMenuMasterLoop
-
-.check_joypad
+	jr z, LinkTradePartiesMenuMasterLoop
 	bit A_BUTTON_F, a
-	jr z, .not_a_button
-	jr LinkTrade_TradeStatsMenu
-
-.not_a_button
+	jr nz, LinkTrade_TradeStatsMenu
 	bit D_DOWN_F, a
 	jr z, .not_d_down
 	ld a, [wMenuCursorY]
@@ -1781,8 +1765,7 @@ LinkTrade_TradeStatsMenu:
 	ld a, [wMenuCursorY]
 	push af
 	hlcoord 0, 15
-	ld b, 1
-	ld c, 18
+	lb bc, 1, 18
 	call LinkTextboxAtHL
 	hlcoord 2, 16
 	ld de, .String_Stats_Trade
@@ -1890,8 +1873,7 @@ LinkTrade_TradeStatsMenu:
 	ld [wUnusedLinkAction], a
 	ld [wOtherPlayerLinkAction], a
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	farcall Link_WaitBGMap
 	ld hl, .LinkTradeCantBattleText
@@ -1912,8 +1894,7 @@ LinkTrade_TradeStatsMenu:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	farcall Link_WaitBGMap
 	ld hl, .LinkAbnormalMonText
@@ -1922,8 +1903,7 @@ LinkTrade_TradeStatsMenu:
 
 .cancel_trade
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
@@ -2047,8 +2027,7 @@ LinkTrade:
 	ld [wUnusedLinkAction], a
 	ld [wOtherPlayerLinkAction], a
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	farcall Link_WaitBGMap
 	ld a, [wCurTradePartyMon]
@@ -2076,8 +2055,7 @@ LinkTrade:
 	call PlaceHLTextAtBC
 	call LoadStandardMenuHeader
 	hlcoord 10, 7
-	ld b, 3
-	ld c, 7
+	lb bc, 3, 7
 	call LinkTextboxAtHL
 	ld de, String_TradeCancel
 	hlcoord 12, 8
@@ -2116,8 +2094,7 @@ LinkTrade:
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
@@ -2134,8 +2111,7 @@ LinkTrade:
 	jr nz, .do_trade
 ; If we're here, the other player canceled the trade
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
@@ -2406,8 +2382,7 @@ LinkTrade:
 	ld c, 40
 	call DelayFrames
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
 	ld de, String_TradeCompleted
@@ -2706,13 +2681,11 @@ WaitForLinkedFriend:
 	vc_assert USING_INTERNAL_CLOCK == $02, \
 		"USING_INTERNAL_CLOCK is no longer equal to $02."
 	ldh [rSC], a
-	ld a, [wLinkTimeoutFrames]
-	dec a
-	ld [wLinkTimeoutFrames], a
+	ld hl, wLinkTimeoutFrames
+	dec [hl]
 	jr nz, .not_done
-	ld a, [wLinkTimeoutFrames + 1]
-	dec a
-	ld [wLinkTimeoutFrames + 1], a
+	ld hl, wLinkTimeoutFrames + 1
+	dec [hl]
 	jr z, .done
 
 .not_done
@@ -2825,10 +2798,10 @@ Link_CheckCommunicationError:
 	xor a
 	ldh [hSerialReceivedNewData], a
 	vc_hook Wireless_prompt
-	ld a, [wLinkTimeoutFrames]
+	ld hl, wLinkTimeoutFrames
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wLinkTimeoutFrames + 1]
-	ld l, a
 	push hl
 	call .CheckConnected
 	pop hl

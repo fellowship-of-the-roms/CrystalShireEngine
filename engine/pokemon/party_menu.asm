@@ -171,8 +171,7 @@ PlacePartymonHPBar:
 	ld d, a
 	ld a, [hli]
 	ld e, a
-	predef ComputeHPBarPixels
-	ret
+	predef_jump ComputeHPBarPixels
 
 PlacePartyMenuHPDigits:
 	ld a, [wPartyCount]
@@ -462,13 +461,12 @@ PlacePartyMonMobileBattleSelection:
 	ld e, MON_NAME_LENGTH
 	sub e
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	ld de, .String_Kettei_Yameru
 	rst PlaceString
-	ld b, $3
-	ld c, $0
+	lb bc, $3, $0
 	ld hl, wd002
 	ld a, [hl]
 .loop2
@@ -520,8 +518,8 @@ PartyMenuCheckEgg:
 	ld a, LOW(wPartySpecies)
 	add b
 	ld e, a
-	ld a, HIGH(wPartySpecies)
-	adc 0
+	adc HIGH(wPartySpecies)
+	sub e
 	ld d, a
 	ld a, [de]
 	cp EGG
@@ -722,12 +720,6 @@ TeachWhichPKMNString:
 
 MoveToWhereString:
 	db "Move to where?@"
-
-ChooseAFemalePKMNString: ; unreferenced
-	db "Choose a ♀<PK><MN>.@"
-
-ChooseAMalePKMNString: ; unreferenced
-	db "Choose a ♂<PK><MN>.@"
 
 ToWhichPKMNString:
 	db "To which <PK><MN>?@"

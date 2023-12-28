@@ -5,11 +5,7 @@ DEF CARDFLIP_DECK_SIZE EQUS "(wDeckEnd - wDeck)"
 	assert wDiscardPileEnd - wDiscardPile == wDeckEnd - wDeck
 
 MemoryGameGFX:
-; Graphics for an unused Game Corner
-; game were meant to be here.
-
-UnusedCursor_InterpretJoypad_AnimateCursor:
-	ret
+	ret ; no-optimize Stub function (This was originally a graphic, may be restored)
 
 _CardFlip:
 	ld hl, wOptions
@@ -111,11 +107,10 @@ _CardFlip:
 	text_end
 
 .DeductCoins:
-	ld a, [wCoins]
+	ld hl, wCoins
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wCoins + 1]
-	ld l, a
-	ld a, h
 	and a
 	jr nz, .deduct ; You have at least 256 coins.
 	ld a, l
@@ -281,13 +276,9 @@ _CardFlip:
 	ld hl, .CardFlipPlayAgainText
 	call CardFlip_UpdateCoinBalanceDisplay
 	call YesNoBox
-	jr nc, .Continue
-	jmp .Increment
-
-.Continue:
-	ld a, [wCardFlipNumCardsPlayed]
-	inc a
-	ld [wCardFlipNumCardsPlayed], a
+	jmp c, .Increment
+	ld hl, wCardFlipNumCardsPlayed
+	inc [hl]
 	cp 12
 	jr c, .KeepTheCurrentDeck
 	call CardFlip_InitTilemap
@@ -363,13 +354,11 @@ GetCoordsOfChosenCard:
 	jr nz, .BottomCard
 	hlcoord 2, 0
 	bcpixel 2, 3
-	jr .done
+	ret
 
 .BottomCard:
 	hlcoord 2, 6
 	bcpixel 8, 3
-
-.done
 	ret
 
 PlaceCardFaceDown:
@@ -405,8 +394,8 @@ CardFlip_DisplayCardFaceUp:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	; Place the level.
 	pop hl
@@ -468,16 +457,14 @@ CardFlip_DisplayCardFaceUp:
 CardFlip_UpdateCoinBalanceDisplay:
 	push hl
 	hlcoord 0, 12
-	ld b, 4
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
 	pop hl
 	call PrintTextboxText
 ; fallthrough
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15
-	ld b, 1
-	ld c, 9
+	lb bc, 1, 9
 	call Textbox
 	hlcoord 10, 16
 	ld de, .CoinStr
@@ -595,8 +582,8 @@ CardFlip_BlankDiscardedCardSlot:
 	srl a
 	add LOW(.Jumptable)
 	ld l, a
-	ld a, 0
 	adc HIGH(.Jumptable)
+	sub l
 	ld h, a
 	ld a, [hli]
 	ld h, [hl]
@@ -840,9 +827,8 @@ CardFlip_CheckWinCondition:
 .PoliOddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
-	jr nz, .WinSix
-	jmp .Lose
-
+	jmp z, .Lose
+; fallthrough
 .WinSix:
 	ld c, $6
 	ld de, SFX_2ND_PLACE
@@ -865,9 +851,8 @@ CardFlip_CheckWinCondition:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $10
-	jr z, .WinNine
-	jmp .Lose
-
+	jmp nz, .Lose
+; fallthrough
 .WinNine:
 	ld c, $9
 	ld de, SFX_2ND_PLACE
@@ -895,11 +880,10 @@ CardFlip_CheckWinCondition:
 
 .Oddish:
 	ld a, [wCardFlipFaceUpCard]
-	and $3
-	cp $3
-	jr z, .WinTwelve
-	jmp .Lose
-
+	or ~$3
+	inc a
+	jmp nz, .Lose
+; fallthrough
 .WinTwelve:
 	ld c, $c
 	ld de, SFX_2ND_PLACE
@@ -943,9 +927,8 @@ CardFlip_CheckWinCondition:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $14
-	jr z, .WinEighteen
-	jr .Lose
-
+	jr nz, .Lose
+; fallthrough
 .WinEighteen:
 	ld c, $12
 	ld de, SFX_2ND_PLACE
@@ -1073,10 +1056,7 @@ CardFlip_CheckWinCondition:
 .loop
 	push bc
 	call .IsCoinCaseFull
-	jr c, .full
-	call .AddCoinPlaySFX
-
-.full
+	call nc, .AddCoinPlaySFX
 	call CardFlip_PrintCoinBalance
 	ld c, 2
 	call DelayFrames
@@ -1094,10 +1074,10 @@ CardFlip_CheckWinCondition:
 	text_end
 
 .AddCoinPlaySFX:
-	ld a, [wCoins]
+	ld hl, wCoins
+	ld a, [hli]
+	ld l, [hl]
 	ld h, a
-	ld a, [wCoins + 1]
-	ld l, a
 	inc hl
 	ld a, h
 	ld [wCoins], a
@@ -1110,10 +1090,7 @@ CardFlip_CheckWinCondition:
 	ld a, [wCoins]
 	cp HIGH(MAX_COINS)
 	jr c, .less
-	jr z, .check_low
-	jr .more
-
-.check_low
+	jr nz, .more
 	ld a, [wCoins + 1]
 	cp LOW(MAX_COINS)
 	jr c, .less

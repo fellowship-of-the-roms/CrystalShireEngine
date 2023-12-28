@@ -337,8 +337,7 @@ FixBackpicAlignment:
 
 .got_dims
 	ld a, [hl]
-	ld b, 0
-	ld c, 8
+	lb bc, 0, 8
 .loop
 	rra
 	rl b

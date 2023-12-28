@@ -24,8 +24,7 @@ DeleteMapObject::
 	ld [hl], -1
 .ok
 	pop bc
-	farcall CheckForUsedObjPals
-	ret
+	farjp CheckForUsedObjPals
 
 HandleObjectStep:
 	call CheckObjectStillVisible
@@ -37,7 +36,7 @@ CheckObjectStillVisible:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res OBJ_FLAGS2_6, [hl]
-	ld a, [hMapObjectIndex]
+	ldh a, [hMapObjectIndex]
 	and a
 	jr nz, .notPlayer
 ; hardcode for crossing over connections
@@ -67,9 +66,8 @@ CheckObjectStillVisible:
 	sub e
 	jr c, .ok
 	cp MAPOBJECT_SCREEN_HEIGHT
-	jr nc, .ok
-	jr .yes
-
+	jr c, .yes
+; fallthrough
 .ok
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
@@ -170,8 +168,7 @@ HandleFrozenObjectAction:
 _CallFrozenObjectAction:
 ; use second column (frozen)
 	ld de, ObjectActionPairPointers + 2
-	jr CallObjectAction ; pointless
-
+; fallthrough
 CallObjectAction:
 	ld hl, OBJECT_ACTION
 	add hl, bc
@@ -437,19 +434,6 @@ UpdatePlayerStep:
 	set PLAYERSTEP_CONTINUE_F, [hl]
 	ret
 
-GetMapObjectField: ; unreferenced
-	push bc
-	ld e, a
-	ld d, 0
-	ld hl, OBJECT_MAP_OBJECT_INDEX
-	add hl, bc
-	ld a, [hl]
-	call GetMapObject
-	add hl, de
-	ld a, [hl]
-	pop bc
-	ret
-
 RestoreDefaultMovement:
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
@@ -466,12 +450,6 @@ RestoreDefaultMovement:
 
 .ok
 	ld a, SPRITEMOVEDATA_STANDING_DOWN
-	ret
-
-ObjectMovement_ZeroAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], 0
 	ret
 
 ObjectMovement_IncAnonJumptableIndex:
@@ -512,18 +490,6 @@ ObjectStep_AnonJumptable:
 	pop hl
 	jmp JumpTable
 
-ObjectStep_GetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld a, [hl]
-	ret
-
-ObjectStep_SetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
-
 StepFunction_Reset:
 	ld hl, OBJECT_MAP_X
 	add hl, bc
@@ -554,7 +520,7 @@ StepFunction_FromMovement:
 .Pointers:
 ; entries correspond to SPRITEMOVEFN_* constants (see constants/map_object_constants.asm)
 	table_width 2, StepFunction_FromMovement.Pointers
-	dw MovementFunction_Null                 ; 00
+	dw DoNothing                             ; 00 MovementFunction_Null
 	dw MovementFunction_RandomWalkY          ; 01
 	dw MovementFunction_RandomWalkX          ; 02
 	dw MovementFunction_RandomWalkXY         ; 03
@@ -583,9 +549,6 @@ StepFunction_FromMovement:
 	dw MovementFunction_BoulderDust          ; 1a
 	dw MovementFunction_ShakingGrass         ; 1b
 	assert_table_length NUM_SPRITEMOVEFN
-
-MovementFunction_Null:
-	ret
 
 MovementFunction_RandomWalkY:
 	call Random
@@ -699,7 +662,6 @@ MovementFunction_Strength:
 	add hl, bc
 	ld a, [hl]
 	and %00000011
-	or 0
 	call InitStep
 	call CanObjectMoveInDirection
 	jr c, .ok2
@@ -750,11 +712,8 @@ MovementFunction_FollowNotExact:
 	ld a, [hl]
 	cp d
 	jr z, .equal
-	jr c, .less
 	ld a, 3
-	jr .done
-
-.less
+	jr nc, .done
 	ld a, 2
 	jr .done
 
@@ -765,7 +724,7 @@ MovementFunction_FollowNotExact:
 	cp e
 	jr z, .standing
 	jr c, .less2
-	ld a, 0
+	xor a
 	jr .done
 
 .less2
@@ -966,8 +925,8 @@ MovementFunction_BoulderDust:
 	ld hl, .dust_coords
 	add hl, de
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	ld hl, OBJECT_SPRITE_X_OFFSET
 	add hl, bc
@@ -1017,9 +976,9 @@ InitMovementField1dField1e:
 	pop bc
 	ld hl, OBJECT_1D
 	add hl, bc
-	ld [hl], e
-	inc hl ; OBJECT_1E
-	ld [hl], d
+	ld a, e
+	ld [hli], a
+	ld [hl], d ; OBJECT_1E
 	ret
 
 MovementFunction_ScreenShake:
@@ -1563,14 +1522,12 @@ StepFunction_Restore:
 	; fallthrough
 
 StepFunction_Standing:
-	call Stubbed_UpdateYOffset
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 StepFunction_NPCWalk:
-	call Stubbed_UpdateYOffset
 	call AddStepVector
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
@@ -1702,9 +1659,9 @@ StepFunction_StrengthBoulder:
 StepFunction_TrackingObject:
 	ld hl, OBJECT_1D
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, OBJECT_SPRITE
 	add hl, de
 	ld a, [hl]
@@ -1823,29 +1780,6 @@ StepFunction_SkyfallTop:
 	add hl, bc
 	ld [hl], STEP_TYPE_FROM_MOVEMENT
 	ret
-
-Stubbed_UpdateYOffset:
-; dummied out
-	ret
-	ld hl, OBJECT_1D
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	srl a
-	srl a
-	and %00000111
-	ld l, a
-	ld h, 0
-	ld de, .y_offsets
-	add hl, de
-	ld a, [hl]
-	ld hl, OBJECT_SPRITE_Y_OFFSET
-	add hl, bc
-	ld [hl], a
-	ret
-
-.y_offsets:
-	db 0, -1, -2, -3, -4, -3, -2, -1
 
 UpdateJumpPosition:
 	call GetStepVector
@@ -2155,10 +2089,9 @@ CopyTempObjectData:
 ; -1, -1, [de], [de + 1], [de + 2], [hMapObjectIndex], [NextMapX], [NextMapY], -1
 ; This spawns the object at the same place as whichever object is loaded into bc.
 	ld hl, wTempObjectCopyMapObjectIndex
-	ld [hl], -1
-	inc hl
-	ld [hl], -1
-	inc hl
+	ld a, -1
+	ld [hli], a
+	ld [hli], a
 	ld a, [de]
 	inc de
 	ld [hli], a
@@ -2177,10 +2110,10 @@ CopyTempObjectData:
 	add hl, bc
 	ld e, [hl]
 	pop hl
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
 	ld [hl], -1
 	ret
 
@@ -2193,9 +2126,7 @@ UpdateAllObjectsFrozen::
 .loop
 	ldh [hMapObjectIndex], a
 	call DoesObjectHaveASprite
-	jr z, .ok
-	call UpdateObjectFrozen
-.ok
+	call nz, UpdateObjectFrozen
 	ld hl, OBJECT_LENGTH
 	add hl, bc
 	ld b, h
@@ -2216,8 +2147,8 @@ RespawnPlayerAndOpponent:
 	jr z, .skip_opponent
 	ldh a, [hLastTalked]
 	and a
-	jr z, .skip_opponent
-	call RespawnObject
+	call nz, RespawnObject
+; fallthrough
 .skip_opponent
 	jmp _UpdateSprites
 
@@ -2357,9 +2288,10 @@ CheckObjectCoveredByTextbox:
 .ok2
 ; Convert pixels to tiles.
 	ld a, [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	cp SCREEN_WIDTH
 	jr c, .ok3
 	sub BG_MAP_WIDTH
@@ -2390,9 +2322,10 @@ CheckObjectCoveredByTextbox:
 .ok5
 ; Convert pixels to tiles.
 	ld a, [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	cp SCREEN_HEIGHT
 	jr c, .ok6
 	sub BG_MAP_HEIGHT
@@ -2476,7 +2409,7 @@ HandleNPCStep::
 	ld [wPlayerStepVectorY], a
 	ld a, [wPlayerStepFlags]
 	bit 6, a
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	ld [wPlayerStepFlags], a
 	ret nz
 	dec a
@@ -2960,8 +2893,8 @@ InitSprites:
 	inc hl
 	ld [bc], a ; x
 	inc c
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ldh a, [hCurSpriteTile]
 	bit ABSOLUTE_TILE_ID_F, e
 	jr z, .nope1
@@ -3001,9 +2934,9 @@ InitSprites:
 	ld hl, .Addresses
 	add hl, bc
 	add hl, bc
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ret
 
 .Addresses:

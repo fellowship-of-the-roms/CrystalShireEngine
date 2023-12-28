@@ -96,10 +96,10 @@ DoBattle:
 	call SpikesDamage
 	ld a, [wLinkMode]
 	and a
-	jr z, .not_linked_2
+	jr z, BattleTurn
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
-	jr nz, .not_linked_2
+	jr nz, BattleTurn
 	xor a
 	ld [wEnemySwitchMonIndex], a
 	call NewEnemyMonStatus
@@ -108,8 +108,6 @@ DoBattle:
 	call EnemySwitch
 	call SetEnemyTurn
 	call SpikesDamage
-
-.not_linked_2
 	jr BattleTurn
 
 .tutorial_debug
@@ -159,7 +157,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 BattleTurn:
 .loop
 	call CheckContestBattleOver
-	jmp c, .quit
+	ret c
 
 	xor a
 	ld [wPlayerIsSwitching], a
@@ -179,20 +177,20 @@ BattleTurn:
 	farcall Function100da5
 	farcall StartMobileInactivityTimer
 	farcall Function100dd8
-	jr c, .quit
+	ret c
 .not_disconnected
 
 	call CheckPlayerLockedIn
 	jr c, .skip_iteration
 .loop1
 	call BattleMenu
-	jr c, .quit
+	ret c
 	ld a, [wBattleEnded]
 	and a
-	jr nz, .quit
+	ret nz
 	ld a, [wForcedSwitch] ; roared/whirlwinded/teleported
 	and a
-	jr nz, .quit
+	ret nz
 .skip_iteration
 	call ParsePlayerAction
 	push af
@@ -201,7 +199,7 @@ BattleTurn:
 	jr nz, .loop1
 
 	call EnemyTriesToFlee
-	jr c, .quit
+	ret c
 
 	call DetermineMoveOrder
 	jr c, .false
@@ -211,24 +209,21 @@ BattleTurn:
 	call Battle_PlayerFirst
 .proceed
 	call CheckMobileBattleError
-	jr c, .quit
+	ret c
 
 	ld a, [wForcedSwitch]
 	and a
-	jr nz, .quit
+	ret nz
 
 	ld a, [wBattleEnded]
 	and a
-	jr nz, .quit
+	ret nz
 
 	call HandleBetweenTurnEffects
 	ld a, [wBattleEnded]
 	and a
-	jr nz, .quit
-	jmp .loop
-
-.quit
-	ret
+	ret nz
+	jr .loop
 
 HandleBetweenTurnEffects:
 	ldh a, [hSerialConnectionStatus]
@@ -739,9 +734,8 @@ HandleEncore:
 	ld hl, wPlayerSubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	ret z
-	ld a, [wPlayerEncoreCount]
-	dec a
-	ld [wPlayerEncoreCount], a
+	ld hl, wPlayerEncoreCount
+	dec [hl]
 	jr z, .end_player_encore
 	ld hl, wBattleMonPP
 	ld a, [wCurMoveNum]
@@ -763,9 +757,8 @@ HandleEncore:
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	ret z
-	ld a, [wEnemyEncoreCount]
-	dec a
-	ld [wEnemyEncoreCount], a
+	ld hl, wEnemyEncoreCount
+	dec [hl]
 	jr z, .end_enemy_encore
 	ld hl, wEnemyMonPP
 	ld a, [wCurEnemyMoveNum]
@@ -1381,7 +1374,7 @@ HandleMysteryberry:
 	farcall GetUserItem
 	ld a, b
 	cp HELD_RESTORE_PP
-	jr nz, .quit
+	ret nz
 	ld hl, wPartyMon1PP
 	ld a, [wCurBattleMon]
 	call GetPartyLocation
@@ -1412,7 +1405,7 @@ HandleMysteryberry:
 .loop
 	ld a, [hl]
 	and a
-	jr z, .quit
+	ret z
 	ld a, [de]
 	and PP_MASK
 	jr z, .restore
@@ -1422,8 +1415,6 @@ HandleMysteryberry:
 	ld a, c
 	cp NUM_MOVES
 	jr nz, .loop
-
-.quit
 	ret
 
 .restore
@@ -1884,9 +1875,8 @@ GetSixteenthMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .ok
+	ret nz
 	inc c
-.ok
 	ret
 
 GetEighthMaxHP:
@@ -1898,9 +1888,8 @@ GetEighthMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetQuarterMaxHP:
@@ -1917,9 +1906,8 @@ GetQuarterMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetHalfMaxHP:
@@ -1933,9 +1921,8 @@ GetHalfMaxHP:
 ; at least 1
 	ld a, c
 	or b
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetMaxHP:
@@ -2153,14 +2140,11 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	call BreakAttraction
 	ld a, [wBattleMode]
 	dec a
-	jr z, .wild2
-	jr .trainer
-
-.wild2
+	jr nz, .trainer
 	call StopDangerSound
 	ld a, $1
 	ld [wBattleLowHealthAlarm], a
-
+; fallthrough
 .trainer
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -2168,9 +2152,8 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	jr nz, .player_mon_did_not_faint
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	jr nz, .player_mon_did_not_faint
-	call UpdateFaintedPlayerMon
-
+	call z, UpdateFaintedPlayerMon
+; fallthrough
 .player_mon_did_not_faint
 	call CheckPlayerPartyForFitMon
 	ld a, d
@@ -2350,7 +2333,7 @@ HandleEnemySwitch:
 	ld hl, wBattleMonHP
 	ld a, [hli]
 	or [hl]
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr nz, EnemyPartyMonEntrance
 	inc a
 	ret
@@ -2414,10 +2397,7 @@ WinTrainerBattle:
 
 	ld a, [wDebugFlags]
 	bit DEBUG_BATTLE_F, a
-	jr nz, .skip_win_loss_text
-	call PrintWinLossText
-.skip_win_loss_text
-
+	call z, PrintWinLossText
 	jr .give_money
 
 .battle_tower
@@ -2443,7 +2423,7 @@ WinTrainerBattle:
 	call nz, .DoubleReward
 	call .CheckMaxedOutMomMoney
 	push af
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	jr nc, .okay
 	ld a, [wMomSavingMoney]
 	and MOM_SAVING_MONEY_MASK
@@ -2567,10 +2547,10 @@ AddBattleMoneyToAccount:
 	ld a, [hl]
 	sbc HIGH(MAX_MONEY >> 8)
 	ret c
-	ld [hl], HIGH(MAX_MONEY >> 8)
-	inc hl
-	ld [hl], HIGH(MAX_MONEY) ; mid
-	inc hl
+	ld a, HIGH(MAX_MONEY >> 8)
+	ld [hli], a
+	ld a, HIGH(MAX_MONEY) ; mid
+	ld [hli], a
 	ld [hl], LOW(MAX_MONEY)
 	ret
 
@@ -2709,8 +2689,6 @@ UpdateFaintedPlayerMon:
 	ld [wBattleResult], a
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	ret z
-	; code was probably dummied out here
 	ret
 
 AskUseNextPokemon:
@@ -2952,10 +2930,8 @@ LostBattle:
 
 	ld a, [wDebugFlags]
 	bit DEBUG_BATTLE_F, a
-	jr nz, .skip_win_loss_text
-	call PrintWinLossText
-.skip_win_loss_text
-	ret
+	ret nz
+	jmp PrintWinLossText
 
 .battle_tower
 ; Remove the enemy from the screen.
@@ -3132,9 +3108,7 @@ EnemySwitch:
 	; Shift Mode
 	call ResetEnemyBattleVars
 	call CheckWhetherSwitchmonIsPredetermined
-	jr c, .skip
-	call FindMonInOTPartyToSwitchIntoBattle
-.skip
+	call nc, FindMonInOTPartyToSwitchIntoBattle
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	call LoadEnemyMonToSwitchTo
 	call OfferSwitch
@@ -3157,9 +3131,7 @@ EnemySwitch:
 EnemySwitch_SetMode:
 	call ResetEnemyBattleVars
 	call CheckWhetherSwitchmonIsPredetermined
-	jr c, .skip
-	call FindMonInOTPartyToSwitchIntoBattle
-.skip
+	call nc, FindMonInOTPartyToSwitchIntoBattle
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	call LoadEnemyMonToSwitchTo
 	ld a, 1
@@ -3279,10 +3251,10 @@ LookUpTheEffectivenessOfEveryMove:
 	ld e, NUM_MOVES + 1
 .loop
 	dec e
-	jr z, .done
+	ret z
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	push hl
 	push de
 	push bc
@@ -3298,8 +3270,6 @@ LookUpTheEffectivenessOfEveryMove:
 	jr c, .loop
 	ld hl, wEnemyEffectivenessVsPlayerMons
 	set 0, [hl]
-	ret
-.done
 	ret
 
 IsThePlayerMonTypesEffectiveAgainstOTMon:
@@ -3382,7 +3352,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr nc, .loop3
-	jr .quit
+	ret
 
 .okay2
 	ld b, -1
@@ -3392,7 +3362,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr c, .loop4
-	jr .quit
+	ret
 
 .loop5
 	ld a, [wOTPartyCount]
@@ -3415,8 +3385,6 @@ ScoreMonTypeMatchups:
 	ld a, [hl]
 	or c
 	jr z, .loop5
-
-.quit
 	ret
 
 LoadEnemyMonToSwitchTo:
@@ -3591,8 +3559,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 	jr c, .cry_no_anim
 
 	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_SLOW
+	lb de, $0, ANIM_MON_SLOW
 	predef AnimateFrontpic
 	jr .skip_cry
 
@@ -3739,7 +3706,7 @@ TryToRunAwayFromBattle:
 	jmp .can_escape
 
 .no_flee_item
-	ld a, [wNumFleeAttempts]
+	ld a, [wNumFleeAttempts] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wNumFleeAttempts], a
 	ld a, [hli]
@@ -3771,9 +3738,9 @@ TryToRunAwayFromBattle:
 	ld b, a
 	ldh a, [hEnemyMonSpeed + 1]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	and a
 	jr z, .can_escape
 	ldh [hDivisor], a
@@ -3943,7 +3910,7 @@ GetEnemyMonShiny:
 	ret z
 	ld hl, wOTPartyMon1Shiny
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	jmp GetPartyLocation
 
 GetEnemyMonIVs:
 	ld hl, wEnemyMonIVs
@@ -4045,8 +4012,7 @@ SendOutPlayerMon:
 	ld hl, wBattleMonForm
 	predef GetUnownLetter
 	hlcoord 1, 5
-	ld b, 7
-	ld c, 8
+	lb bc, 7, 8
 	call ClearBox
 	call WaitBGMap
 	xor a
@@ -4178,7 +4144,7 @@ PursuitSwitch:
 	call GetMoveEffect
 	ld a, b
 	cp EFFECT_PURSUIT
-	jmp nz, .done
+	jr nz, .done
 
 	ld a, [wCurBattleMon]
 	push af
@@ -4196,8 +4162,7 @@ PursuitSwitch:
 
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
-	ld a, $ff
-	ld [hl], a
+	ld [hl], $ff
 
 	pop af
 	ld [wCurBattleMon], a
@@ -4314,7 +4279,6 @@ HandleHPHealingItem:
 	ld [wHPBuffer2 + 1], a
 	adc a
 	ld b, a
-	ld a, b
 	cp [hl]
 	ld a, c
 	pop bc
@@ -4508,7 +4472,7 @@ HandleStatBoostingHeldItems:
 ; fallthrough
 .DoPlayer:
 	call GetPartymonItem
-	ld a, $0
+	xor a
 	jr .HandleItem
 
 .DoEnemy:
@@ -4647,7 +4611,7 @@ CheckDanger:
 	jr z, .no_danger
 	ld a, [wBattleLowHealthAlarm]
 	and a
-	jr nz, .done
+	ret nz
 	ld a, [wPlayerHPPal]
 	cp HP_RED
 	jr z, .danger
@@ -4655,19 +4619,16 @@ CheckDanger:
 .no_danger
 	ld hl, wLowHealthAlarm
 	ld [hl], 0
-	jr .done
+	ret
 
 .danger
 	ld hl, wLowHealthAlarm
 	set DANGER_ON_F, [hl]
-
-.done
 	ret
 
 PrintPlayerHUD:
 	ld de, wBattleMonNickname
 	hlcoord 10, 7
-	call Battle_DummyFunction
 	rst PlaceString
 
 	push bc
@@ -4756,7 +4717,6 @@ DrawEnemyHUD:
 	call GetBaseData
 	ld de, wEnemyMonNickname
 	hlcoord 1, 0
-	call Battle_DummyFunction
 	rst PlaceString
 	ld h, b
 	ld l, c
@@ -4847,17 +4807,17 @@ DrawEnemyHUD:
 	jr z, .less_than_256_max
 	ldh a, [hMultiplier]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hDivisor], a
 	ldh a, [hProduct + 2]
 	ld b, a
 	srl b
 	ldh a, [hProduct + 3]
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hProduct + 3], a
 	ld a, b
 	ldh [hProduct + 2], a
@@ -4893,10 +4853,6 @@ UpdateHPPal:
 	cp b
 	ret z
 	jmp FinishBattleAnim
-
-Battle_DummyFunction:
-; called before placing either battler's nickname in the HUD
-	ret
 
 BattleMenu:
 	xor a
@@ -4998,7 +4954,7 @@ BattleMenu_Pack:
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr z, .didnt_use_item
-	jr .got_item
+	jr .UseItem
 
 .tutorial
 	farcall TutorialPack
@@ -5006,15 +4962,13 @@ BattleMenu_Pack:
 	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call DoItemEffect
-	jr .got_item
+	jr .UseItem
 
 .contest
 	ld hl, PARK_BALL
 	call GetItemIDFromIndex
 	ld [wCurItem], a
 	call DoItemEffect
-
-.got_item
 	jr .UseItem
 
 .didnt_use_item
@@ -5041,20 +4995,14 @@ BattleMenu_Pack:
 	farcall CheckItemPocket
 	ld a, [wItemAttributeValue]
 	cp BALL
-	jr z, .ball
-	call ClearBGPalettes
-
-.ball
+	call nz, ClearBGPalettes
 	xor a
 	ldh [hBGMapMode], a
 	call _LoadBattleFontsHPBar
 	call ClearSprites
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial2
-	call GetBattleMonBackpic
-
-.tutorial2
+	call nz, GetBattleMonBackpic
 	call GetEnemyMonFrontpic
 	ld a, $1
 	ld [wMenuCursorY], a
@@ -5113,9 +5061,8 @@ BattleMenuPKMN_Loop:
 .Stats:
 	call Battle_StatsScreen
 	call CheckMobileBattleError
-	jr c, .Cancel
-	jr BattleMenuPKMN_ReturnFromStats
-
+	jr nc, BattleMenuPKMN_ReturnFromStats
+; fallthrough
 .Cancel:
 	call ClearSprites
 	call ClearPalettes
@@ -5240,10 +5187,7 @@ PlayerSwitch:
 	cp BATTLEACTION_SWITCH1
 	jr c, .switch
 	cp BATTLEACTION_FORFEIT
-	jr nz, .dont_run
-	jmp WildFled_EnemyFled_LinkBattleCanceled
-
-.dont_run
+	jmp z, WildFled_EnemyFled_LinkBattleCanceled
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .player_1
@@ -5274,9 +5218,7 @@ BattleMonEntrance:
 
 	call SetEnemyTurn
 	call PursuitSwitch
-	jr c, .ok
-	call RecallPlayerMon
-.ok
+	call nc, RecallPlayerMon
 
 	hlcoord 9, 7
 	lb bc, 5, 11
@@ -5327,7 +5269,7 @@ BattleMenu_Run:
 	ld hl, wBattleMonSpeed
 	ld de, wEnemyMonSpeed
 	call TryToRunAwayFromBattle
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	ld [wFailedToFlee], a
 	ret c
 	ld a, [wBattlePlayerAction]
@@ -5375,14 +5317,12 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 
 	hlcoord 4, 17 - NUM_MOVES - 1
-	ld b, 4
-	ld c, 14
+	lb bc, 4, 14
 	ld a, [wMoveSelectionMenuType]
 	cp $2
 	jr nz, .got_dims
 	hlcoord 4, 17 - NUM_MOVES - 1 - 4
-	ld b, 4
-	ld c, 14
+	lb bc, 4, 14
 .got_dims
 	call Textbox
 
@@ -5484,9 +5424,8 @@ MoveSelectionScreen:
 
 	xor a
 	ld [wSwappingMove], a
-	ld a, [wMenuCursorY]
-	dec a
-	ld [wMenuCursorY], a
+	ld hl, wMenuCursorY
+	dec [hl]
 	ld b, a
 	ld a, [wMoveSelectionMenuType]
 	dec a
@@ -5665,8 +5604,7 @@ MoveInfoBox:
 	ldh [hBGMapMode], a
 
 	hlcoord 0, 8
-	ld b, 3
-	ld c, 9
+	lb bc, 3, 9
 	call Textbox
 	call MobileTextBorder
 
@@ -5684,7 +5622,7 @@ MoveInfoBox:
 	hlcoord 1, 10
 	ld de, .Disabled
 	rst PlaceString
-	jr .done
+	ret
 
 .not_disabled
 	ld hl, wMenuCursorY
@@ -5726,10 +5664,7 @@ MoveInfoBox:
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
 	hlcoord 2, 10
-	predef PrintMoveType
-
-.done
-	ret
+	predef_jump PrintMoveType
 
 .Disabled:
 	db "Disabled!@"
@@ -5738,11 +5673,6 @@ MoveInfoBox:
 
 .PrintPP:
 	hlcoord 5, 11
-	ld a, [wLinkMode] ; What's the point of this check?
-	cp LINK_MOBILE
-	jr c, .ok
-	hlcoord 5, 11
-.ok
 	push hl
 	ld de, wStringBuffer1
 	lb bc, 1, 2
@@ -5750,8 +5680,8 @@ MoveInfoBox:
 	pop hl
 	inc hl
 	inc hl
-	ld [hl], "/"
-	inc hl
+	ld a, "/"
+	ld [hli], a
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
 	jmp PrintNum
@@ -5784,7 +5714,7 @@ CheckPlayerHasUsableMoves:
 .loop
 	dec d
 	jr z, .done
-	ld c, [hl]
+	ld c, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
 	dec b
 	jr z, .loop
@@ -6225,6 +6155,14 @@ LoadEnemyMon:
 	ld a, [bc]
 	ld [hl], a
 
+; generate nature
+	ld a, NUM_NATURES
+	ld hl, wEnemyMonNature
+	call BattleRandomRange
+	and NATURE_MASK
+	or [hl]
+	ld [hl], a
+
 ; We've still got more to do if we're dealing with a wild monster
 	ld a, [wBattleMode]
 	dec a
@@ -6314,7 +6252,7 @@ LoadEnemyMon:
 ; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 3
-	jr nc, .GenerateIVs
+	jmp nc, .GenerateIVs
 
 .CheckMagikarpArea:
 	ld a, [wMapGroup]
@@ -6364,12 +6302,9 @@ LoadEnemyMon:
 .TreeMon:
 ; If we're headbutting trees, some monsters enter battle asleep
 	call CheckSleepingTreeMon
-	ld a, TREEMON_SLEEP_TURNS
-	jr c, .UpdateStatus
-; Otherwise, no status
-	xor a
-
-.UpdateStatus:
+	; a = carry ? TREEMON_SLEEP_TURNS : 0
+	sbc a
+	and TREEMON_SLEEP_TURNS
 	ld hl, wEnemyMonStatus
 	ld [hli], a
 
@@ -6786,9 +6721,9 @@ ApplyStatLevelMultiplier:
 .got_pointers
 	add c
 	ld c, a
-	jr nc, .okay
-	inc b
-.okay
+	adc b
+	sub c
+	ld b, a
 	ld a, [bc]
 	pop bc
 	ld b, a
@@ -6799,9 +6734,9 @@ ApplyStatLevelMultiplier:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .okay2
-	inc d
-.okay2
+	adc d
+	sub e
+	ld d, a
 	pop bc
 	push hl
 	ld hl, StatLevelMultipliers_Applied
@@ -6910,9 +6845,8 @@ BadgeStatBoosts:
 	dec c
 	jr nz, .CheckBadge
 	srl a
-	jr c, BoostStat
-	ret
-
+	ret nc
+; fallthrough
 BoostStat:
 ; Raise stat at hl by 1/8.
 
@@ -7139,9 +7073,9 @@ GiveExperiencePoints:
 	ld a, [hli]
 	add c
 	ld c, a
-	jr nc, .cont
-	inc b
-.cont
+	adc b
+	sub c
+	ld b, a
 	dec e
 	jr nz, .count_evs
 	ld a, d
@@ -7158,8 +7092,8 @@ GiveExperiencePoints:
 	dec bc
 	jr .decrease_evs_gained
 .check_ev_overflow
-	pop hl 
-	pop bc 
+	pop hl
+	pop bc
 	ld a, e
 	add [hl]
 	jr c, .ev_overflow
@@ -7201,7 +7135,7 @@ GiveExperiencePoints:
 	inc hl
 	ld a, [wPlayerID + 1]
 	cp [hl]
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .no_boost
 
 .boosted
@@ -7414,8 +7348,7 @@ GiveExperiencePoints:
 	ld [wMonType], a
 	predef CopyMonToTempMon
 	hlcoord 9, 0
-	ld b, 10
-	ld c, 9
+	lb bc, 10, 9
 	call Textbox
 	hlcoord 11, 1
 	ld bc, 4
@@ -7842,8 +7775,8 @@ WithdrawMonText:
 	; compute enemy health lost as a percentage
 	ld hl, wEnemyMonHP + 1
 	ld de, wEnemyHPAtTimeOfPlayerSwitch + 1
-	ld b, [hl]
-	dec hl
+	ld a, [hld]
+	ld b, a
 	ld a, [de]
 	sub b
 	ldh [hMultiplicand + 2], a
@@ -8007,9 +7940,8 @@ CalcExpBar:
 	ld b, 4
 	call Divide
 	ldh a, [hQuotient + 3]
-	ld b, a
-	ld a, $40
-	sub b
+	cpl
+	add $40 + 1
 	ld b, a
 	ret
 
@@ -8023,7 +7955,7 @@ PlaceExpBar:
 	ld a, $6a ; full bar
 	ld [hld], a
 	dec c
-	jr z, .finish
+	ret z
 	jr .loop1
 
 .next
@@ -8040,8 +7972,6 @@ PlaceExpBar:
 	ld a, $62 ; empty bar
 	dec c
 	jr nz, .loop2
-
-.finish
 	ret
 
 GetBattleMonBackpic:
@@ -8243,7 +8173,7 @@ InitEnemyTrainer:
 	ld [wBattleMode], a
 
 	call IsGymLeader
-	jr nc, .done
+	ret nc
 	xor a
 	ld [wCurPartyMon], a
 	ld a, [wPartyCount]
@@ -8260,12 +8190,10 @@ InitEnemyTrainer:
 .skipfaintedmon
 	pop bc
 	dec b
-	jr z, .done
+	ret z
 	ld hl, wCurPartyMon
 	inc [hl]
 	jr .partyloop
-.done
-	ret
 
 InitEnemyWildmon:
 	ld a, WILD_BATTLE
@@ -8311,8 +8239,7 @@ InitEnemyWildmon:
 	ldh [hGraphicStartTile], a
 	hlcoord 12, 0
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 ExitBattle:
 	call .HandleEndOfBattle
@@ -8598,7 +8525,7 @@ ReadAndPrintLinkBattleRecord:
 	hlcoord 6, 4
 	ld de, sLinkBattleWins
 	call .PrintZerosIfNoSaveFileExists
-	jr c, .quit
+	ret c
 
 	lb bc, 2, 4
 	call PrintNum
@@ -8615,10 +8542,7 @@ ReadAndPrintLinkBattleRecord:
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	call PrintNum
-
-.quit
-	ret
+	jmp PrintNum
 
 .PrintZerosIfNoSaveFileExists:
 	ld a, [wSavedAtLeastOnce]
@@ -8758,8 +8682,7 @@ AddLastLinkBattleToLinkRecord:
 	push hl
 	inc hl
 	inc hl
-	ld a, [hl]
-	dec hl
+	ld a, [hld]
 	dec hl
 	and a
 	jr z, .copy
@@ -8819,8 +8742,7 @@ AddLastLinkBattleToLinkRecord:
 
 .CheckOverflow:
 	dec hl
-	ld a, [hl]
-	inc hl
+	ld a, [hli]
 	cp HIGH(MAX_LINK_RECORD)
 	ret c
 	ld a, [hl]
@@ -8852,8 +8774,7 @@ AddLastLinkBattleToLinkRecord:
 	pop bc
 	dec b
 	jr nz, .loop3
-	ld b, $0
-	ld c, $1
+	lb bc, $0, $1
 .loop4
 	ld a, b
 	add b
@@ -8948,8 +8869,7 @@ AddLastLinkBattleToLinkRecord:
 InitBattleDisplay:
 	call .InitBackPic
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call Textbox
 	farcall MobileTextBorder
 	hlcoord 1, 5
@@ -9043,8 +8963,7 @@ GetTrainerBackpic:
 .Decompress:
 	ld de, vTiles2 tile $31
 	ld c, 7 * 7
-	predef DecompressGet2bpp
-	ret
+	predef_jump DecompressGet2bpp
 
 CopyBackpic:
 	ldh a, [rSVBK]
@@ -9064,8 +8983,7 @@ CopyBackpic:
 	ldh [hGraphicStartTile], a
 	hlcoord 2, 6
 	lb bc, 6, 6
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 .LoadTrainerBackpicAsOAM:
 	ld hl, wShadowOAMSprite00
@@ -9077,10 +8995,10 @@ CopyBackpic:
 	ld c, 3
 	ld d, 8 * TILE_WIDTH
 .inner_loop
-	ld [hl], d ; y
-	inc hl
-	ld [hl], e ; x
-	inc hl
+	ld a, d ; y
+	ld [hli], a
+	ld a, e ; x
+	ld [hli], a
 	ldh a, [hMapObjectIndex]
 	ld [hli], a ; tile id
 	inc a
@@ -9140,8 +9058,7 @@ BattleStartMessage:
 	jr c, .cry_no_anim
 
 	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_NORMAL
+	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
 	jr .skip_cry ; cry is played during the animation
 

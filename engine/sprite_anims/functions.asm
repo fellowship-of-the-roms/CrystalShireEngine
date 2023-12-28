@@ -14,7 +14,7 @@ DoSpriteAnimFrame:
 .Jumptable:
 ; entries correspond to SPRITE_ANIM_FUNC_* constants (see constants/sprite_anim_constants.asm)
 	table_width 2, DoSpriteAnimFrame.Jumptable
-	dw SpriteAnimFunc_Null
+	dw DoNothing ; SpriteAnimFunc_Null
 	dw SpriteAnimFunc_PartyMon
 	dw SpriteAnimFunc_PartyMonSwitch
 	dw SpriteAnimFunc_PartyMonSelected
@@ -27,7 +27,7 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_SlotsChansey
 	dw SpriteAnimFunc_SlotsChanseyEgg
 	dw SpriteAnimFunc_MailCursor
-	dw SpriteAnimFunc_UnusedCursor
+	dw DoNothing
 	dw SpriteAnimFunc_MemoryGameCursor
 	dw SpriteAnimFunc_PokegearArrow
 	dw SpriteAnimFunc_TradePokeBall
@@ -51,9 +51,6 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_PcMode
 	dw SpriteAnimFunc_PcPack
 	assert_table_length NUM_SPRITE_ANIM_FUNCS
-
-SpriteAnimFunc_Null:
-	ret
 
 SpriteAnimFunc_PartyMon:
 	ld a, [wMenuCursorY]
@@ -105,13 +102,11 @@ SpriteAnimFunc_PartyMonSwitch:
 	ret
 
 .load_minus_one
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 	ret
 
 .load_minus_two
-	ld a, -2
-	ld [hl], a
+	ld [hl], -2
 	ret
 
 SpriteAnimFunc_PartyMonSelected:
@@ -180,8 +175,8 @@ SpriteAnimFunc_GSTitleTrail:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
-	sla a
-	sla a
+	add a
+	add a
 
 	ld d, 2
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -202,9 +197,8 @@ SpriteAnimFunc_GSTitleTrail:
 SpriteAnimFunc_GSIntroHoOhLugia:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
+	inc [hl]
 	ld a, [hl]
-	inc a
-	ld [hl], a
 	ld d, 2
 	farcall Sine
 
@@ -303,9 +297,9 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
@@ -318,8 +312,8 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -334,8 +328,8 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
@@ -392,9 +386,6 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	add hl, bc
 	ld [hl], a
 	ret
-
-SpriteAnimFunc_UnusedCursor:
-	farjp UnusedCursor_InterpretJoypad_AnimateCursor
 
 SpriteAnimFunc_PokegearArrow:
 	farjp AnimatePokegearModeIndicatorArrow
@@ -584,9 +575,9 @@ SpriteAnimFunc_RadioTuningKnob:
 SpriteAnimFunc_CutLeaves:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, $80
 	add hl, de
 	ld e, l
@@ -594,8 +585,8 @@ SpriteAnimFunc_CutLeaves:
 
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -722,10 +713,7 @@ SpriteAnimFunc_FlyTo:
 SpriteAnimFunc_IntroSuicune:
 	ld a, [wIntroSceneTimer]
 	and a
-	jr nz, .continue
-	ret
-
-.continue
+	ret z
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], $0
@@ -735,7 +723,7 @@ SpriteAnimFunc_IntroSuicune:
 	ld a, [hl]
 	add 2
 	ld [hl], a
-	xor $ff
+	cpl
 	inc a
 	ld d, 32
 	farcall Sine
@@ -751,10 +739,10 @@ SpriteAnimFunc_IntroPichuWooper:
 	add hl, bc
 	ld a, [hl]
 	cp 20
-	jr nc, .done
+	ret nc
 	add 2
 	ld [hl], a
-	xor $ff
+	cpl
 	inc a
 	ld d, 32
 	farcall Sine
@@ -762,7 +750,6 @@ SpriteAnimFunc_IntroPichuWooper:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-.done
 	ret
 
 SpriteAnimFunc_IntroUnown:
@@ -811,9 +798,9 @@ SpriteAnimFunc_Celebi:
 
 AnimSeqs_AnonJumptable:
 	ld hl, sp+0
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	inc de
 
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX

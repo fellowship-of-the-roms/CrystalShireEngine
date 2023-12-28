@@ -86,7 +86,7 @@ GetFruitTreeItem:
 	push hl
 	push de
 	ld e, a
-	ld a, 0
+	xor a
 	sla e
 	adc 0
 	ld d, a

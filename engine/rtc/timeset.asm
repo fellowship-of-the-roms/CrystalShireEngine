@@ -8,7 +8,7 @@ InitClock:
 	ld a, $1
 	ldh [hInMenu], a
 
-	ld a, $0
+	xor a
 	ld [wSpriteUpdatesEnabled], a
 	ld a, $10
 	ld [wMusicFade], a
@@ -57,8 +57,7 @@ endc
 	ld hl, OakTimeWhatTimeIsItText
 	call PrintText
 	hlcoord 3, 7
-	ld b, 2
-	ld c, 15
+	lb bc, 2, 15
 	call Textbox
 	hlcoord 11, 7
 	ld [hl], $1
@@ -199,32 +198,6 @@ DisplayHourOClock:
 	pop hl
 	ret
 
-DisplayHoursMinutesWithMinString: ; unreferenced
-	ld h, d
-	ld l, e
-	push hl
-	call DisplayHourOClock
-	pop de
-	inc de
-	inc de
-	ld a, ":"
-	ld [de], a
-	inc de
-	push de
-	ld hl, 3
-	add hl, de
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	ld [hl], a
-	pop hl
-	call DisplayMinutesWithMinString
-	inc hl
-	inc hl
-	inc hl
-	ret
-
 SetMinutes:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
@@ -340,8 +313,8 @@ OakText_ResponseToSetTime:
 	ld a, [wInitHourBuffer]
 	ld c, a
 	call PrintHour
-	ld [hl], ":"
-	inc hl
+	ld a, ":"
+	ld [hli], a
 	ld de, wInitMinuteBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
@@ -406,8 +379,7 @@ SetDayOfWeek:
 	ld hl, .OakTimeWhatDayIsItText
 	call PrintText
 	hlcoord 9, 3
-	ld b, 2
-	ld c, 9
+	lb bc, 2, 9
 	call Textbox
 	hlcoord 14, 3
 	ld [hl], TIMESET_UP_ARROW
@@ -482,8 +454,7 @@ SetDayOfWeek:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 10, 4
-	ld b, 2
-	ld c, 9
+	lb bc, 2, 9
 	call ClearBox
 	hlcoord 10, 5
 	call .PlaceWeekdayString
@@ -590,83 +561,6 @@ InitialClearDSTFlag:
 .TimeAskOkayText:
 	text_far _TimeAskOkayText
 	text_end
-
-MrChrono: ; unreferenced
-	hlcoord 1, 14
-	lb bc, 3, SCREEN_WIDTH - 2
-	call ClearBox
-	ld hl, .Text
-	jmp PlaceHLTextAtBC
-
-.Text:
-	text_asm
-	call UpdateTime
-
-	hlcoord 1, 14
-	ld [hl], "R"
-	inc hl
-	ld [hl], "T"
-	inc hl
-	ld [hl], " "
-	inc hl
-
-	ld de, hRTCDayLo
-	call .PrintTime
-
-	hlcoord 1, 16
-	ld [hl], "D"
-	inc hl
-	ld [hl], "F"
-	inc hl
-	ld [hl], " "
-	inc hl
-
-	ld de, wStartDay
-	call .PrintTime
-
-	ld [hl], " "
-	inc hl
-
-	ld a, [wDST]
-	bit 7, a
-	jr z, .off
-
-	ld [hl], "O"
-	inc hl
-	ld [hl], "N"
-	inc hl
-	jr .done
-
-.off
-	ld [hl], "O"
-	inc hl
-	ld [hl], "F"
-	inc hl
-	ld [hl], "F"
-	inc hl
-
-.done
-	ld hl, .NowOnDebug
-	ret
-
-.NowOnDebug:
-	text_start
-	para "Now on DEBUG…"
-	prompt
-
-.PrintTime:
-	lb bc, 1, 3
-	call PrintNum
-	ld [hl], "."
-	inc hl
-	inc de
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ld [hl], ":"
-	inc hl
-	inc de
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jmp PrintNum
 
 PrintHour:
 	ld l, e

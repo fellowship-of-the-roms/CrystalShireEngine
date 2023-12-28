@@ -17,7 +17,7 @@ Load2DMenuData::
 	xor a
 	ld [hli], a ; wCursorOffCharacter
 	ld [hli], a ; wCursorCurrentTile
-	ld [hli], a
+	ld [hl], a
 	pop bc
 	pop hl
 	ret
@@ -164,9 +164,9 @@ GetWindowStackTop::
 PlaceVerticalMenuItems::
 	call CopyMenuData
 	ld hl, wMenuDataPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	call GetMenuTextStartCoord
 	call Coord2Tile ; hl now contains the tilemap address where we will start printing text.
 	inc de
@@ -272,9 +272,7 @@ MenuBoxCoord2Attr::
 	ld c, a
 	ld a, [wMenuBorderTopCoord]
 	ld b, a
-	; fallthrough
-
-Coord2Attr:: ; unreferenced
+; Coord2Attr
 ; Return the address of wAttrmap(c, b) in hl.
 	xor a
 	ld h, a
@@ -305,10 +303,6 @@ CopyMenuHeader::
 	rst CopyBytes
 	ldh a, [hROMBank]
 	ld [wMenuDataBank], a
-	ret
-
-StoreMenuCursorPosition::
-	ld [wMenuCursorPosition], a
 	ret
 
 MenuTextbox::
@@ -421,9 +415,7 @@ PlaceYesNoBox::
 	add 4
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
-; fallthrough
-
-InterpretTwoOptionMenu::
+;InterpretTwoOptionMenu
 	call VerticalMenu
 	push af
 	ld c, $f
@@ -753,8 +745,8 @@ MenuClickSound::
 	jr z, .nosound
 	ld hl, wMenuFlags
 	bit 3, [hl]
-	jr nz, .nosound
-	call PlayClickSFX
+	call z, PlayClickSFX
+; fallthrough
 .nosound
 	pop af
 	ret

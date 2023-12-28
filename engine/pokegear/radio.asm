@@ -52,7 +52,7 @@ RadioJumptable:
 	dw BenFernMusic4     ; $19
 	dw BenFernMusic5     ; $1a
 	dw BenFernMusic6     ; $1b
-	dw BenFernMusic7     ; $1c
+	dw DoNothing         ; $1c BenFernMusic7
 	dw FernMonMusic2     ; $1d
 ; Lucky Number Show
 	dw LuckyNumberShow2  ; $1e
@@ -142,21 +142,6 @@ PrintRadioLine:
 	ld [wCurRadioLine], a
 	ld a, 100
 	ld [wRadioTextDelay], a
-	ret
-
-ReplacePeriodsWithSpaces: ; unreferenced
-	push hl
-	ld b, SCREEN_WIDTH * 2
-.loop
-	ld a, [hl]
-	cp "."
-	jr nz, .next
-	ld [hl], " "
-.next
-	inc hl
-	dec b
-	jr nz, .loop
-	pop hl
 	ret
 
 RadioScroll:
@@ -427,7 +412,7 @@ OaksPKMNTalk9:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wOaksPKMNTalkSegmentCounter]
+	ld a, [wOaksPKMNTalkSegmentCounter] ; no-optimize Inefficient WRAM increment/decrement
 	dec a
 	ld [wOaksPKMNTalkSegmentCounter], a
 	ld a, OAKS_POKEMON_TALK_4
@@ -717,10 +702,10 @@ PokedexShow8:
 	jmp PrintRadioLine
 
 CopyDexEntry:
-	ld a, [wPokedexShowPointerAddr]
+	ld hl, wPokedexShowPointerAddr
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wPokedexShowPointerAddr + 1]
-	ld h, a
 	ld a, [wPokedexShowPointerBank]
 	push af
 	push hl
@@ -738,10 +723,10 @@ CopyDexEntryPart1:
 	ld bc, SCREEN_WIDTH - 1
 	call FarCopyBytes
 	ld hl, wPokedexShowPointerAddr
-	ld [hl], TX_START
-	inc hl
-	ld [hl], "<LINE>"
-	inc hl
+	ld a, TX_START
+	ld [hli], a
+	ld a, "<LINE>"
+	ld [hli], a
 .loop
 	ld a, [hli]
 	cp "@"
@@ -828,9 +813,6 @@ BenFernMusic6:
 .SunTueThurSun:
 	ld a, POKEMON_MUSIC_7
 	jmp NextRadioLine
-
-BenFernMusic7:
-	ret
 
 StartPokemonMusicChannel:
 	call RadioTerminator
@@ -1041,10 +1023,10 @@ PeoplePlaces3:
 	ld hl, PnP_Text3
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
-.ok
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 	jmp NextRadioLine
 
 PnP_Text1:
@@ -1120,9 +1102,10 @@ PeoplePlaces5:
 	jr c, .ok
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 .ok
 	jmp NextRadioLine
 
@@ -1219,8 +1202,8 @@ PeoplePlaces6: ; Places
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	call GetWorldMapLocation
 	ld e, a
@@ -1256,9 +1239,10 @@ PeoplePlaces7:
 	jr c, .ok
 	call Random
 	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
+	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
+	sbc a
+	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
+	add PLACES_AND_PEOPLE_6
 .ok
 	jmp PrintRadioLine
 
@@ -1787,9 +1771,9 @@ StartRadioStation:
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	farjp RadioMusicRestartDE
 
 INCLUDE "data/radio/channel_music.asm"

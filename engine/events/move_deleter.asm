@@ -107,8 +107,7 @@ MoveDeletion:
 	jr z, .okay
 	inc hl
 	ld a, [hld]
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	inc b
 	jr .loop
 
@@ -135,8 +134,7 @@ MoveDeletion:
 	jr z, .done
 	inc hl
 	ld a, [hld]
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	inc b
 	jr .loop2
 

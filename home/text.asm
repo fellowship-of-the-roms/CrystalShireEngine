@@ -135,8 +135,7 @@ TextboxPalette::
 SpeechTextbox::
 ; Standard textbox.
 	hlcoord TEXTBOX_X, TEXTBOX_Y
-	ld b, TEXTBOX_INNERH
-	ld c, TEXTBOX_INNERW
+	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 	jr Textbox
 
 RadioTerminator::
@@ -475,9 +474,8 @@ Paragraph::
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
 	cp LINK_MOBILE
-	jr z, .linkbattle
-	call LoadBlinkingCursor
-
+	call nz, LoadBlinkingCursor
+; fallthrough
 .linkbattle
 	call Text_WaitBGMap
 	call PromptButton
@@ -494,10 +492,7 @@ Paragraph::
 _ContText::
 	ld a, [wLinkMode]
 	or a
-	jr nz, .communication
-	call LoadBlinkingCursor
-
-.communication
+	call z, LoadBlinkingCursor
 	call Text_WaitBGMap
 
 	push de
@@ -542,9 +537,8 @@ PromptText::
 	cp LINK_COLOSSEUM
 	jr z, .ok
 	cp LINK_MOBILE
-	jr z, .ok
-	call LoadBlinkingCursor
-
+	call nz, LoadBlinkingCursor
+; fallthrough
 .ok
 	call Text_WaitBGMap
 	call PromptButton
@@ -552,13 +546,11 @@ PromptText::
 	cp LINK_COLOSSEUM
 	jr z, DoneText
 	cp LINK_MOBILE
-	jr z, DoneText
-	call UnloadBlinkingCursor
-
+	call nz, UnloadBlinkingCursor
+; fallthrough
 DoneText::
 	pop hl
-	ld de, .stop
-	dec de
+	ld de, .stop - 1
 	ret
 
 .stop:
@@ -672,9 +664,9 @@ DoTextUntilTerminator::
 	ld hl, TextCommands
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	pop bc
 	pop hl
 
@@ -842,8 +834,7 @@ TextCommand_START_ASM::
 	jp hl
 
 .not_rom
-	ld a, TX_END
-	ld [hl], a
+	ld [hl], TX_END
 	ret
 
 TextCommand_DECIMAL::
@@ -905,9 +896,9 @@ TextCommand_SOUND::
 
 .play
 	push de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	call PlaySFX
 	call WaitSFX
 	pop de

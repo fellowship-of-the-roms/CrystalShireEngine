@@ -10,10 +10,10 @@ _GetVarAction::
 	add hl, bc
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 	ld b, [hl]
 	ld a, b
 	and RETVAR_EXECUTE

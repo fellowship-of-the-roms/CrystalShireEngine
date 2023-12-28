@@ -199,10 +199,10 @@ endc
 	ld [wWhichMomItem], a
 
 	ld hl, wMomItemTriggerBalance
-	ld [hl], HIGH(MOM_MONEY >> 8)
-	inc hl
-	ld [hl], HIGH(MOM_MONEY) ; mid
-	inc hl
+	assert MOM_MONEY < $10000
+	ld [hli], a
+	ld a, HIGH(MOM_MONEY) ; mid
+	ld [hli], a
 	ld [hl], LOW(MOM_MONEY)
 
 	call InitializeNPCNames
@@ -293,7 +293,7 @@ LoadOrRegenerateLuckyIDNumber:
 
 Continue:
 	farcall TryLoadSaveFile
-	jr c, .FailToLoad
+	ret c
 	farcall _LoadData
 	call LoadStandardMenuHeader
 	call DisplaySaveInfoOnContinue
@@ -302,17 +302,9 @@ Continue:
 	ld c, 20
 	call DelayFrames
 	call ConfirmContinue
-	jr nc, .Check1Pass
-	call CloseWindow
-	jr .FailToLoad
-
-.Check1Pass:
+	jmp c, CloseWindow
 	call Continue_CheckRTC_RestartClock
-	jr nc, .Check2Pass
-	call CloseWindow
-	jr .FailToLoad
-
-.Check2Pass:
+	jmp c, CloseWindow
 	ld a, $8
 	ld [wMusicFade], a
 	ld a, LOW(MUSIC_NONE)
@@ -334,9 +326,6 @@ Continue:
 	ld a, MAPSETUP_CONTINUE
 	ldh [hMapEntryMethod], a
 	jr FinishContinueFunction
-
-.FailToLoad:
-	ret
 
 .SpawnAfterE4:
 	ld a, SPAWN_NEW_BARK
@@ -361,13 +350,10 @@ ConfirmContinue:
 	call GetJoypad
 	ld hl, hJoyPressed
 	bit A_BUTTON_F, [hl]
-	jr nz, .PressA
+	ret nz
 	bit B_BUTTON_F, [hl]
 	jr z, .loop
 	scf
-	ret
-
-.PressA:
 	ret
 
 Continue_CheckRTC_RestartClock:
@@ -398,10 +384,7 @@ FinishContinueFunction:
 	farcall OverworldLoop
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
-	jr z, .AfterRed
-	jmp Reset
-
-.AfterRed:
+	jmp nz, Reset
 	call SpawnAfterRed
 	jr .loop
 
@@ -549,8 +532,8 @@ Continue_DisplayGameTime:
 	ld de, wGameTimeHours
 	lb bc, 2, 3
 	call PrintNum
-	ld [hl], "<COLON>"
-	inc hl
+	ld a, "<COLON>"
+	ld [hli], a
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum
@@ -682,8 +665,7 @@ NamePlayer:
 	jr z, .NewName
 	call StorePlayerName
 	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
-	ret
+	farjp MovePlayerPicLeft
 
 .NewName:
 	ld b, NAME_PLAYER
@@ -806,21 +788,6 @@ IntroFadePalettes:
 	db %11100100
 .End
 
-Intro_WipeInFrontpic:
-	ld a, $77
-	ldh [hWX], a
-	call DelayFrame
-	ld a, %11100100
-	call DmgToCgbBGPals
-.loop
-	call DelayFrame
-	ldh a, [hWX]
-	sub $8
-	cp -1
-	ret z
-	ldh [hWX], a
-	jr .loop
-
 Intro_PrepTrainerPic:
 	ld de, vTiles2
 	farcall GetTrainerPic
@@ -828,8 +795,7 @@ Intro_PrepTrainerPic:
 	ldh [hGraphicStartTile], a
 	hlcoord 6, 4
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 ShrinkFrame:
 	ld de, vTiles2
@@ -839,8 +805,7 @@ ShrinkFrame:
 	ldh [hGraphicStartTile], a
 	hlcoord 6, 4
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 Intro_PlacePlayerSprite:
 	farcall GetPlayerIcon
@@ -872,10 +837,17 @@ Intro_PlacePlayerSprite:
 	ld b, PAL_OW_BLUE
 .male
 	ld a, b
-
+	ld [wNeededPalIndex], a
+	xor a
 	ld [hli], a ; attributes
 	dec c
 	jr nz, .loop
+	ld de, wOBPals1 palette 0
+	ld hl, wPalFlags
+	set USE_DAYTIME_PAL_F, [hl]
+	farcall CopySpritePal
+	ld hl, wPalFlags
+	res USE_DAYTIME_PAL_F, [hl]
 	ret
 
 .sprites
@@ -1011,7 +983,7 @@ TitleScreenEntrance:
 ; Reversed signage for every other line's position.
 ; This is responsible for the interlaced effect.
 	ld a, e
-	xor $ff
+	cpl
 	inc a
 
 	ld b, 8 * 10 / 2 ; logo height / 2
@@ -1049,32 +1021,31 @@ TitleScreenTimer:
 ; Start a timer
 	ld hl, wTitleScreenTimer
 	ld de, 73 * 60 + 36
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 
 TitleScreenMain:
 ; Run the timer down.
 	ld hl, wTitleScreenTimer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
-	ld a, e
+	ld e, a
 	or d
 	jr z, .end
 
 	dec de
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 
 ; Save data can be deleted by pressing Up + B + Select.
 	call GetJoypad
 	ld hl, hJoyDown
 	ld a, [hl]
-	and D_UP + B_BUTTON + SELECT
-	cp  D_UP + B_BUTTON + SELECT
+	or ~(D_UP + B_BUTTON + SELECT)
+	inc a
 	jr z, .delete_save_data
 
 ; To bring up the clock reset dialog:
@@ -1085,8 +1056,8 @@ TitleScreenMain:
 	jr z, .check_clock_reset
 
 	ld a, [hl]
-	and D_DOWN + B_BUTTON + SELECT
-	cp  D_DOWN + B_BUTTON + SELECT
+	or ~(D_DOWN + B_BUTTON + SELECT)
+	inc a
 	jr nz, .check_start
 
 	ld a, $34
@@ -1103,18 +1074,15 @@ TitleScreenMain:
 	ldh [hClockResetTrigger], a
 
 	ld a, [hl]
-	and D_LEFT + D_UP
-	cp  D_LEFT + D_UP
+	or ~(D_LEFT + D_UP)
+	inc a
 	jr z, .reset_clock
 
 ; Press Start or A to start the game.
 .check_start
 	ld a, [hl]
 	and START | A_BUTTON
-	jr nz, .incave
-	ret
-
-.incave
+	ret z
 	ld a, TITLESCREENOPTION_MAIN_MENU
 	jr .done
 

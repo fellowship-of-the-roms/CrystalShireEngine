@@ -8,8 +8,8 @@ _LoadOverworldMonIcon:
 	ld de, IconPointers
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	jmp GetIconBank
 
 SetMenuMonIconColor:
@@ -230,16 +230,13 @@ Mobile_InitAnimatedMonIcon:
 	call PartyMenu_InitAnimatedMonIcon
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
-	ld a, SPRITE_ANIM_FUNC_NULL
-	ld [hl], a
+	ld [hl], SPRITE_ANIM_FUNC_NULL
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
-	ld a, 9 * TILE_WIDTH
-	ld [hl], a
+	ld [hl], 9 * TILE_WIDTH
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld a, 9 * TILE_WIDTH
-	ld [hl], a
+	ld [hl], 9 * TILE_WIDTH
 	ret
 
 Mobile_InitPartyMenuBGPal71:
@@ -247,16 +244,13 @@ Mobile_InitPartyMenuBGPal71:
 	call SetPartyMonIconAnimSpeed
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
-	ld a, SPRITE_ANIM_FUNC_NULL
-	ld [hl], a
+	ld [hl], SPRITE_ANIM_FUNC_NULL
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
-	ld a, 3 * TILE_WIDTH
-	ld [hl], a
+	ld [hl], 3 * TILE_WIDTH
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld a, 12 * TILE_WIDTH
-	ld [hl], a
+	ld [hl], 12 * TILE_WIDTH
 	ld a, c
 	ld [wc608], a
 	ld a, b
@@ -284,13 +278,10 @@ PartyMenu_InitAnimatedMonIcon:
 	farcall ItemIsMail
 	pop bc
 	pop hl
-	jr c, .mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
-	jr .okay
-
-.mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL
-.okay
+	; a = carry ? SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL : SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
+	assert SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL + 1 == SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
+	sbc a
+	add SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], a
@@ -382,8 +373,7 @@ MoveList_InitAnimatedMonIcon:
 	ld [wCurIcon], a
 	xor a
 	call GetIconGFX
-	ld d, 3 * TILE_WIDTH + 2 ; depixel 3, 4, 2, 4
-	ld e, 4 * TILE_WIDTH + 4
+	lb de, 3 * TILE_WIDTH + 2, 4 * TILE_WIDTH + 4
 	ld a, SPRITE_ANIM_OBJ_PARTY_MON
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
@@ -482,8 +472,8 @@ endr
 	add hl, de
 .is_egg
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 
 	call GetIconBank
@@ -543,13 +533,9 @@ FreezeMonIcons:
 	and a
 	jr z, .next
 	cp d
-	jr z, .loadwithtwo
 	ld a, SPRITE_ANIM_FUNC_NULL
-	jr .ok
-
-.loadwithtwo
+	jr nz, .ok
 	ld a, SPRITE_ANIM_FUNC_PARTY_MON_SWITCH
-
 .ok
 	push hl
 	ld c, l
@@ -597,11 +583,8 @@ HoldSwitchmonIcon:
 	and a
 	jr z, .next
 	cp d
-	jr z, .is_switchmon
 	ld a, SPRITE_ANIM_FUNC_PARTY_MON_SELECTED
-	jr .join_back
-
-.is_switchmon
+	jr nz, .join_back
 	ld a, SPRITE_ANIM_FUNC_PARTY_MON_SWITCH
 .join_back
 	push hl

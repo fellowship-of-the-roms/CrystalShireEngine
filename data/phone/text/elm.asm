@@ -153,7 +153,7 @@ ElmPhoneEggAssistantText:
 	para "My assistant is at"
 	line "the #MON CENTER"
 
-	para "in VIOLET CITY. "
+	para "in VIOLET CITY."
 	line "Could you talk to"
 	cont "him?"
 	done
@@ -193,19 +193,6 @@ ElmPhoneGiftText:
 
 	para "Could you swing by"
 	line "my LAB?"
-
-	para "See you later!"
-	done
-
-ElmPhoneGotAholdOfSomethingNeatText:
-	text "Hello, <PLAY_G>?"
-	line "How's it going?"
-
-	para "I got ahold of"
-	line "something neat."
-
-	para "Swing by my LAB"
-	line "and pick it up!"
 
 	para "See you later!"
 	done

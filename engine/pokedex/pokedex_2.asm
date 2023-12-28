@@ -178,12 +178,12 @@ DisplayDexEntry:
 	rst ByteFill
 	; page number
 	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
+	ld a, $55
+	ld [hli], a
 	ld [hl], $55
 	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
+	ld a, $56 ; P.
+	ld [hli], a
 	ld [hl], $57 ; 1
 	pop de
 	inc de
@@ -208,21 +208,18 @@ DisplayDexEntry:
 	rst ByteFill
 	; page number
 	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
+	ld a, $55
+	ld [hli], a
 	ld [hl], $55
 	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
+	ld a, $56 ; P.
+	ld [hli], a
 	ld [hl], $58 ; 2
 	pop de
 	inc de
 	pop af
 	hlcoord 2, 11
 	jmp PlaceFarString
-
-POKeString: ; unreferenced
-	db "#@"
 
 GetDexEntryPointer:
 ; return dex entry pointer b:de
@@ -239,8 +236,8 @@ GetDexEntryPointer:
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	pop hl
 	ret
 

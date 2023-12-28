@@ -1,20 +1,3 @@
-PrintFiveDigitNumber: ; unreferenced
-; Debug function?
-; Input: bc = value, de = destination
-	ld a, b
-	ld b, c
-	ld c, a
-	push bc ; de points to this on the stack for PrintNum
-	push de
-	ld hl, sp+2
-	ld d, h
-	ld e, l
-	pop hl
-	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
-	pop bc
-	ret
-
 PrintHoursMins:
 ; Hours in b, minutes in c
 	ld a, b
@@ -40,8 +23,8 @@ PrintHoursMins:
 	ld [hl], " "
 	lb bc, 1, 2
 	call PrintNum
-	ld [hl], ":"
-	inc hl
+	ld a, ":"
+	ld [hli], a
 	ld d, h
 	ld e, l
 	ld hl, sp+0

@@ -19,39 +19,6 @@ _InterpretBattleMenu::
 	call ApplyTilemap
 	jr Get2DMenuSelection
 
-_InterpretMobileMenu::
-	ld hl, CopyMenuData
-	ld a, [wMenuData_2DMenuItemStringsBank]
-	call FarCall_hl
-
-	call Draw2DMenu
-	farcall MobileTextBorder
-	call UpdateSprites
-	call ApplyTilemap
-	call Init2DMenuCursorPosition
-	ld hl, w2DMenuFlags1
-	set 7, [hl]
-.loop
-	call DelayFrame
-	farcall Function10032e
-	ld a, [wcd2b]
-	and a
-	jr nz, .quit
-	call MobileMenuJoypad
-	ld a, [wMenuJoypadFilter]
-	and c
-	jr z, .loop
-	jr Mobile_GetMenuSelection
-
-.quit
-	ld a, [w2DMenuNumCols]
-	ld c, a
-	ld a, [w2DMenuNumRows]
-	call SimpleMultiply
-	ld [wMenuCursorPosition], a
-	and a
-	ret
-
 Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
@@ -112,9 +79,9 @@ Get2DMenuNumberOfRows:
 
 Place2DMenuItemStrings:
 	ld hl, wMenuData_2DMenuItemStringsAddr
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	call GetMenuTextStartCoord
 	call Coord2Tile
 	call Get2DMenuNumberOfRows
@@ -258,9 +225,7 @@ MobileMenuJoypad:
 	push af
 	call Move2DMenuCursor
 	call Do2DMenuRTCJoypad
-	jr nc, .skip_joypad
-	call _2DMenuInterpretJoypad
-.skip_joypad
+	call c,  _2DMenuInterpretJoypad
 	pop af
 	ldh [hBGMapMode], a
 	call GetMenuJoypad
@@ -308,19 +273,17 @@ MenuJoypadLoop:
 	call Move2DMenuCursor
 	call .BGMap_OAM
 	call Do2DMenuRTCJoypad
-	jr nc, .done
+	ret nc
 	call _2DMenuInterpretJoypad
-	jr c, .done
+	ret c
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	jr nz, .done
+	ret nz
 	call GetMenuJoypad
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
-
-.done
 	ret
 
 .BGMap_OAM:
@@ -556,9 +519,9 @@ _PushWindow::
 	ldh [rSVBK], a
 
 	ld hl, wWindowStackPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	push de
 
 	ld b, wMenuHeaderEnd - wMenuHeader
@@ -601,7 +564,6 @@ _PushWindow::
 
 .done
 	pop hl
-	call .ret ; empty function
 	ld a, h
 	ld [de], a
 	dec de
@@ -609,8 +571,8 @@ _PushWindow::
 	ld [de], a
 	dec de
 	ld hl, wWindowStackPointer
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 	pop af
@@ -623,7 +585,6 @@ _PushWindow::
 	call GetMenuBoxDims
 	inc b
 	inc c
-	call .ret ; empty function
 
 .row
 	push bc
@@ -642,10 +603,6 @@ _PushWindow::
 	pop bc
 	dec b
 	jr nz, .row
-
-	ret
-
-.ret
 	ret
 
 _ExitMenu::
@@ -677,53 +634,19 @@ _ExitMenu::
 	call GetWindowStackTop
 	ld a, h
 	or l
-	jr z, .done
-	call PopWindow
-
-.done
+	call nz, PopWindow
 	pop af
 	ldh [rSVBK], a
 	ld hl, wWindowStackSize
 	dec [hl]
 	ret
 
-RestoreOverworldMapTiles: ; unreferenced
-	ld a, [wVramState]
-	bit 0, a
-	ret z
-	xor a ; sScratch
-	call OpenSRAM
-	hlcoord 0, 0
-	ld de, sScratch
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	rst CopyBytes
-	call CloseSRAM
-	call OverworldTextModeSwitch
-	xor a ; sScratch
-	call OpenSRAM
-	ld hl, sScratch
-	decoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.loop
-	ld a, [hl]
-	cp $61
-	jr c, .next
-	ld [de], a
-.next
-	inc hl
-	inc de
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
-	jmp CloseSRAM
-
 Error_Cant_ExitMenu:
 	ld hl, .WindowPoppingErrorText
 	call PrintText
 	call WaitBGMap
 .infinite_loop
-	jr .infinite_loop
+	jr .infinite_loop ; no-optimize Stub jump infinite loop
 
 .WindowPoppingErrorText:
 	text_far _WindowPoppingErrorText
@@ -786,8 +709,8 @@ _InitVerticalMenuCursor::
 .load_at_the_top
 	ld c, 1
 .load_position
-	ld [hl], c
-	inc hl
+	ld a, c
+	ld [hli], a
 ; wMenuCursorX
 	ld a, 1
 	ld [hli], a

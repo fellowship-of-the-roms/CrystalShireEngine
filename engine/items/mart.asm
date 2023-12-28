@@ -118,9 +118,9 @@ GetMart:
 	ld hl, Marts
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld b, BANK(Marts)
 	ret
 
@@ -273,14 +273,11 @@ FarReadMart: ; read mart items (index -> ID conversion)
 	ld a, [de]
 	inc de
 	cp -1
-	jr z, .done
+	ret z
 	push de
 	call GetMartItemPrice
 	pop de
 	jr .ReadMartItem
-
-.done
-	ret
 
 GetMartItemPrice:
 ; Return the price of item a in BCD at hl and in tiles at wStringBuffer1.
@@ -626,9 +623,9 @@ RooftopSaleAskPurchaseQuantity:
 	add hl, de
 	add hl, de
 	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ret
 
 MartHowManyText:
@@ -787,15 +784,12 @@ SellMenu:
 
 .dw
 	dw .try_sell
-	dw .cant_buy
-	dw .cant_buy
-	dw .cant_buy
+	dw DoNothing ; .cant_buy
+	dw DoNothing ; .cant_buy
+	dw DoNothing ; .cant_buy
 	dw .try_sell
 	dw .try_sell
 	dw .try_sell
-
-.cant_buy
-	ret
 
 .try_sell
 	farcall _CheckTossableItem

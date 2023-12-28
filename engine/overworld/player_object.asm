@@ -161,8 +161,7 @@ CopyObjectStruct::
 	ld hl, OBJECT_FLAGS2
 	add hl, de
 	set 5, [hl]
-	farcall CheckForUsedObjPals
-	ret
+	farjp CheckForUsedObjPals
 
 CopyMapObjectToObjectStruct:
 	call .CopyMapObjectToTempObject
@@ -249,7 +248,7 @@ InitializeVisibleSprites:
 	ld hl, MAPOBJECT_X_COORD
 	add hl, bc
 	ld a, [hl]
-	add 1
+	inc a
 	sub d
 	jr c, .next
 
@@ -259,7 +258,7 @@ InitializeVisibleSprites:
 	ld hl, MAPOBJECT_Y_COORD
 	add hl, bc
 	ld a, [hl]
-	add 1
+	inc a
 	sub e
 	jr c, .next
 
@@ -269,7 +268,7 @@ InitializeVisibleSprites:
 	push bc
 	call CopyObjectStruct
 	pop bc
-	jr c, .ret
+	ret c
 
 .next
 	ld hl, MAPOBJECT_LENGTH
@@ -280,9 +279,6 @@ InitializeVisibleSprites:
 	inc a
 	cp NUM_OBJECTS
 	jr nz, .loop
-	ret
-
-.ret
 	ret
 
 CheckObjectEnteringVisibleRange::
@@ -300,7 +296,7 @@ CheckObjectEnteringVisibleRange::
 
 .Up:
 	ld a, [wYCoord]
-	sub 1
+	dec a
 	jr .Vertical
 
 .Down:
@@ -332,7 +328,7 @@ CheckObjectEnteringVisibleRange::
 	ld hl, MAPOBJECT_X_COORD
 	add hl, bc
 	ld a, [hl]
-	add 1
+	inc a
 	sub e
 	jr c, .next_v
 	cp MAPOBJECT_SCREEN_WIDTH
@@ -356,7 +352,7 @@ CheckObjectEnteringVisibleRange::
 
 .Left:
 	ld a, [wXCoord]
-	sub 1
+	dec a
 	jr .Horizontal
 
 .Right:
@@ -388,7 +384,7 @@ CheckObjectEnteringVisibleRange::
 	ld hl, MAPOBJECT_Y_COORD
 	add hl, bc
 	ld a, [hl]
-	add 1
+	inc a
 	sub d
 	jr c, .next_h
 	cp MAPOBJECT_SCREEN_HEIGHT

@@ -11,8 +11,8 @@ _NamingScreen:
 
 NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, wNamingScreenType
 	ld [hl], b
@@ -364,9 +364,9 @@ NamingScreenJoypadLoop:
 	lb bc, 1, 18
 	call ClearBox
 	ld hl, wNamingScreenDestinationPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, wNamingScreenStringEntryCoord
 	ld a, [hli]
 	ld h, [hl]
@@ -435,9 +435,9 @@ NamingScreenJoypadLoop:
 
 .start
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $8
@@ -473,10 +473,10 @@ NamingScreenJoypadLoop:
 
 .GetCursorPosition:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
-
+	ld c, a
+; fallthrough
 NamingScreen_GetCursorPosition:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
@@ -570,10 +570,7 @@ NamingScreen_AnimateCursor:
 	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .right
-	ret
-
-.right
+	ret z
 	call NamingScreen_GetCursorPosition
 	and a
 	jr nz, .target_right
@@ -720,8 +717,8 @@ NamingScreen_DeleteCharacter:
 	ret z
 	dec [hl]
 	call NamingScreen_GetTextCursorPosition
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	inc hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hli], a
 	ld a, [hl]
 	cp NAMINGSCREEN_UNDERLINE
 	ret nz
@@ -747,8 +744,8 @@ NamingScreen_InitNameEntry:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	inc hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hli], a
 	ld a, [wNamingScreenMaxNameLength]
 	dec a
 	ld c, a
@@ -783,9 +780,9 @@ NamingScreen_StoreEntry:
 
 NamingScreen_GetLastCharacter:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
@@ -793,9 +790,10 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $8
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	ld e, a
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -804,9 +802,10 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $10
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	ld d, a
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
@@ -877,9 +876,6 @@ INCBIN "gfx/naming_screen/cursor.2bpp"
 
 INCLUDE "data/text/name_input_chars.asm"
 
-NamingScreenGFX_End: ; unreferenced
-INCBIN "gfx/naming_screen/end.1bpp"
-
 NamingScreenGFX_MiddleLine:
 INCBIN "gfx/naming_screen/middle_line.1bpp"
 
@@ -888,8 +884,8 @@ INCBIN "gfx/naming_screen/underline.1bpp"
 
 _ComposeMailMessage:
 	ld hl, wNamingScreenDestinationPointer
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ldh a, [hMapAnims]
 	push af
@@ -948,9 +944,9 @@ _ComposeMailMessage:
 	call DmgToCgbObjPal0
 	call NamingScreen_InitNameEntry
 	ld hl, wNamingScreenDestinationPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, MAIL_LINE_LENGTH
 	add hl, de
 	ld [hl], "<NEXT>"
@@ -1026,9 +1022,9 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	lb bc, 4, 18
 	call ClearBox
 	ld hl, wNamingScreenDestinationPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	hlcoord 2, 2
 	rst PlaceString
 	ld a, $1
@@ -1093,16 +1089,16 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ret nz
 	inc [hl]
 	call NamingScreen_GetTextCursorPosition
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	dec hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hld], a
 	ld [hl], "<NEXT>"
 	ret
 
 .start
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $9
@@ -1119,8 +1115,8 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ret nz
 	dec [hl]
 	call NamingScreen_GetTextCursorPosition
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	inc hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hli], a
 	ld [hl], "<NEXT>"
 	ret
 
@@ -1157,7 +1153,7 @@ ComposeMail_AnimateCursor:
 	ld [hl], e
 	cp $5
 	ld de, .LetterEntries
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .got_pointer
 	ld de, .CaseDelEnd
 	ld a, 1
@@ -1198,10 +1194,7 @@ ComposeMail_AnimateCursor:
 	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .right
-	ret
-
-.right
+	ret z
 	call ComposeMail_GetCursorPosition
 	and a
 	jr nz, .case_del_done_right
@@ -1289,10 +1282,10 @@ ComposeMail_AnimateCursor:
 
 NamingScreen_PressedA_GetCursorCommand:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
-
+	ld c, a
+; fallthrough
 ComposeMail_GetCursorPosition:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc

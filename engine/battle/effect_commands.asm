@@ -69,10 +69,10 @@ DoMove:
 
 .ReadMoveEffectCommand:
 ; ld a, [wBattleScriptBufferAddress++]
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
 
 	ld a, [hli]
 
@@ -835,8 +835,7 @@ BattleCommand_CheckObedience:
 
 	ld hl, wBattleMonPP
 	ld de, wBattleMonMoves
-	ld b, 0
-	ld c, NUM_MOVES
+	lb bc, 0, NUM_MOVES
 
 .GetTotalPP:
 	ld a, [hli]
@@ -1320,10 +1319,8 @@ BattleCommand_Stab:
 	cp b
 	jr z, .stab
 	cp c
-	jr z, .stab
-
-	jr .SkipStab
-
+	jr nz, .SkipStab
+; fallthrough
 .stab
 	ld hl, wCurDamage + 1
 	ld a, [hld]
@@ -1373,9 +1370,8 @@ BattleCommand_Stab:
 	cp d
 	jr z, .GotMatchup
 	cp e
-	jr z, .GotMatchup
-	jr .SkipType
-
+	jr nz, .SkipType
+; fallthrough
 .GotMatchup:
 	push hl
 	push bc
@@ -1467,8 +1463,8 @@ CheckTypeMatchup:
 	push de
 	push bc
 	ld d, a
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	ld a, EFFECTIVE
 	ld [wTypeMatchup], a
@@ -1654,24 +1650,18 @@ BattleCommand_CheckHit:
 .skip_brightpowder
 	ld a, b
 	cp -1
-	jr z, .Hit
+	ret z ; Hit
 
 	call BattleRandom
 	cp b
-	jr nc, .Miss
-
-.Hit:
-	ret
-
+	ret c
+; fallthrough
 .Miss:
 ; Keep the damage value intact if we're using (Hi) Jump Kick.
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_JUMP_KICK
-	jr z, .Missed
-	call ResetDamage
-
-.Missed:
+	call nz, ResetDamage
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
@@ -1981,7 +1971,7 @@ BattleCommand_LowerSub:
 .rollout_rampage
 	ld a, [wSomeoneIsRampaging]
 	and a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	ld [wSomeoneIsRampaging], a
 	ret
 
@@ -2138,9 +2128,8 @@ BattleCommand_FailureText:
 	cp EFFECT_POISON_MULTI_HIT
 	jr z, .multihit
 	cp EFFECT_BEAT_UP
-	jr z, .multihit
-	jmp EndMoveEffect
-
+	jmp nz, EndMoveEffect
+; fallthrough
 .multihit
 	call BattleCommand_RaiseSub
 	jmp EndMoveEffect
@@ -2287,7 +2276,7 @@ rept 3
 	srl a
 	rr b
 endr
-	ld [hl], b
+	ld [hl], b ; no-optimize *hl++|*hl-- = b|c|d|e (a is used)
 	dec hl
 	ld [hli], a
 	or b
@@ -2414,7 +2403,7 @@ BattleCommand_CheckFaint:
 	and a
 	ld hl, wEnemyMonMaxHP + 1
 	bccoord 2, 2 ; hp bar
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .got_max_hp
 	ld hl, wBattleMonMaxHP + 1
 	bccoord 10, 9 ; hp bar
@@ -2451,7 +2440,7 @@ BattleCommand_CheckFaint:
 	call LoadAnim
 	call BattleCommand_SwitchTurn
 
-	jr .finish
+	jr EndMoveEffect
 
 .no_dbond
 	ld a, BATTLE_VARS_MOVE_EFFECT
@@ -2465,12 +2454,10 @@ BattleCommand_CheckFaint:
 	cp EFFECT_TRIPLE_KICK
 	jr z, .multiple_hit_raise_sub
 	cp EFFECT_BEAT_UP
-	jr nz, .finish
+	jr nz, EndMoveEffect
 
 .multiple_hit_raise_sub
 	call BattleCommand_RaiseSub
-
-.finish
 	jr EndMoveEffect
 
 BattleCommand_BuildOpponentRage:
@@ -2527,10 +2514,10 @@ BattleCommand_RageDamage:
 	ret
 
 EndMoveEffect:
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
 	ld a, endmove_command
 	ld [hli], a
 	ld [hli], a
@@ -2857,8 +2844,7 @@ DoubleStatIfSpeciesHoldingItem:
 	ret nz
 
 ; Double the stat
-	sla l
-	rl h
+	add hl, hl
 
 	ld a, HIGH(MAX_STAT_VALUE)
 	cp h
@@ -3226,7 +3212,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	ldh [hQuotient + 3], a
 
 	ldh a, [hQuotient + 2]
-	rl a
+	rla
 	ldh [hQuotient + 2], a
 
 ; Cap at $ffff.
@@ -3252,7 +3238,7 @@ BattleCommand_ConstantDamage:
 	call GetBattleVar
 	cp EFFECT_LEVEL_DAMAGE
 	ld b, [hl]
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .got_power
 
 	ld a, BATTLE_VARS_MOVE_EFFECT
@@ -3269,7 +3255,7 @@ BattleCommand_ConstantDamage:
 	ld a, BATTLE_VARS_MOVE_POWER
 	call GetBattleVar
 	ld b, a
-	ld a, $0
+	xor a
 	jr .got_power
 
 .psywave
@@ -3284,7 +3270,7 @@ BattleCommand_ConstantDamage:
 	cp b
 	jr nc, .psywave_loop
 	ld b, a
-	ld a, 0
+	xor a
 	jr .got_power
 
 .super_fang
@@ -3298,14 +3284,14 @@ BattleCommand_ConstantDamage:
 	srl a
 	ld b, a
 	ld a, [hl]
-	rr a
+	rra
 	push af
 	ld a, b
 	pop bc
 	and a
 	jr nz, .got_power
 	or b
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .got_power
 	ld b, 1
 .got_power
@@ -3341,17 +3327,17 @@ BattleCommand_ConstantDamage:
 
 	ldh a, [hProduct + 4]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hDivisor], a
 	ldh a, [hProduct + 2]
 	ld b, a
 	srl b
 	ldh a, [hProduct + 3]
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hDividend + 3], a
 	ld a, b
 	ldh [hDividend + 2], a
@@ -3426,8 +3412,7 @@ BattleCommand_DefrostOpponent:
 	push hl
 	push af
 
-	ld a, EFFECT_ATTACK_UP
-	ld [hl], a
+	ld [hl], EFFECT_ATTACK_UP
 	call BattleCommand_StatUp
 
 	pop af
@@ -3946,7 +3931,7 @@ SapHealth:
 	ldh [hDividend], a
 	ld b, a
 	ld a, [hl]
-	rr a
+	rra
 	ldh [hDividend + 1], a
 	or b
 	jr nz, .at_least_one
@@ -4295,9 +4280,9 @@ RaiseStat:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .no_carry
-	inc d
-.no_carry
+	adc d
+	sub e
+	ld d, a
 	pop bc
 	ld a, [hld]
 	sub LOW(MAX_STAT_VALUE)
@@ -4637,14 +4622,14 @@ TryLowerStat:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .no_carry
-	inc d
-.no_carry
+	adc d
+	sub e
+	ld d, a
 	pop bc
 
 ; The lowest possible stat is 1.
 	ld a, [hld]
-	sub 1
+	dec a
 	jr nz, .not_min
 	ld a, [hl]
 	and a
@@ -5158,7 +5143,7 @@ BattleCommand_ForceSwitch:
 .force_player_switch
 	ld a, [wAttackMissed]
 	and a
-	jr nz, .player_miss
+	jmp nz, .fail
 
 	ld a, [wBattleMode]
 	dec a
@@ -5181,11 +5166,8 @@ BattleCommand_ForceSwitch:
 	srl b
 	srl b
 	cp b
-	jr nc, .wild_succeed_playeristarget
-
-.player_miss
-	jr .fail
-
+	jr c, .fail
+; fallthrough
 .wild_succeed_playeristarget
 	call UpdateBattleMonInParty
 	xor a
@@ -5408,9 +5390,7 @@ BattleCommand_EndLoop:
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_BEAT_UP
-	jr z, .beat_up_2
-	call StdBattleTextbox
-.beat_up_2
+	call nz, StdBattleTextbox
 
 	pop bc
 	xor a
@@ -5418,9 +5398,9 @@ BattleCommand_EndLoop:
 	ret
 
 .loop_back_to_critical
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
 .not_critical
 	ld a, [hld]
@@ -5709,10 +5689,6 @@ BattleCommand_Charge:
 	text_far _BattleDugText
 	text_end
 
-BattleCommand_Unused3C:
-; effect0x3c
-	ret
-
 BattleCommand_TrapTarget:
 	ld a, [wAttackMissed]
 	and a
@@ -5907,9 +5883,8 @@ BattleCommand_FinishConfusingTarget:
 	cp EFFECT_SNORE
 	jr z, .got_effect
 	cp EFFECT_SWAGGER
-	jr z, .got_effect
-	call AnimateCurrentMove
-
+	call nz, AnimateCurrentMove
+; fallthough
 .got_effect
 	ld de, ANIM_CONFUSED
 	call PlayOpponentBattleAnim
@@ -6089,12 +6064,11 @@ DoubleDamage:
 	sla [hl]
 	dec hl
 	rl [hl]
-	jr nc, .quit
+	ret nc
 
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
-.quit
 	ret
 
 INCLUDE "engine/battle/move_effects/mimic.asm"
@@ -6463,10 +6437,6 @@ INCLUDE "engine/battle/move_effects/perish_song.asm"
 INCLUDE "engine/battle/move_effects/sandstorm.asm"
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
-
-BattleCommand_Unused5D:
-; effect0x5d
-	ret
 
 INCLUDE "engine/battle/move_effects/fury_cutter.asm"
 
@@ -6837,9 +6807,9 @@ BattleCommand_ClearText:
 
 SkipToBattleCommand:
 ; Skip over commands until reaching command b.
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
+	ld hl, wBattleScriptBufferAddress
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
 .loop
 	ld a, [hli]

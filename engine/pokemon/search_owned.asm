@@ -103,12 +103,3 @@ CheckOwnMonAnywhere:
 	; Failed to find a matching mon
 	xor a
 	ret
-
-UpdateOTPointer:
-	push hl
-	ld hl, NAME_LENGTH
-	add hl, bc
-	ld b, h
-	ld c, l
-	pop hl
-	ret

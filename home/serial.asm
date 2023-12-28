@@ -167,13 +167,11 @@ Serial_ExchangeByte::
 	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp 1 << SERIAL
 	jr nz, .loop
-	ld a, [wLinkByteTimeout]
-	dec a
-	ld [wLinkByteTimeout], a
+	ld hl, wLinkByteTimeout
+	dec [hl]
 	jr nz, .loop
-	ld a, [wLinkByteTimeout + 1]
-	dec a
-	ld [wLinkByteTimeout + 1], a
+	ld hl, wLinkByteTimeout + 1
+	dec [hl]
 	jr nz, .loop
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -268,7 +266,7 @@ Serial_ExchangeSyncBytes::
 	inc hl
 	ldh a, [hSerialIgnoringInitialData]
 	and a
-	ld a, FALSE
+	ld a, FALSE ; no-optimize a = 0
 	ldh [hSerialIgnoringInitialData], a
 	jr nz, .exchange
 	ld a, b

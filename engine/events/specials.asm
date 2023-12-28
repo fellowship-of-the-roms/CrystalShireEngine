@@ -4,8 +4,8 @@ Special::
 	add hl, de
 	add hl, de
 	add hl, de
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -13,9 +13,6 @@ Special::
 	jmp FarCall_hl
 
 INCLUDE "data/events/special_pointers.asm"
-
-UnusedDummySpecial:
-	ret
 
 GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]

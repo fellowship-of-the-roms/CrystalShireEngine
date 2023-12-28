@@ -324,7 +324,7 @@ BridgetWhitneyCriesText:
 
 BeautyVictoriaSeenText:
 	text "Oh, you are a cute"
-	line "little trainer! "
+	line "little trainer!"
 
 	para "I like you, but I"
 	line "won't hold back!"

@@ -15,22 +15,22 @@ GetSpriteVTile::
 	push hl
 	push de
 	push bc
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	farcall GetSprite
 	ld hl, wSpriteFlags
 	res 5, [hl]
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	cp FIRST_VRAM1_OBJECT_STRUCT
 	jr c, .continue
 	set 5, [hl]
 	sub FIRST_VRAM1_OBJECT_STRUCT
 .continue
-	add a, a
-	add a, a
+	add a
+	add a
 	ld b, a
-	add a, b
-	add a, b
-	ld [hUsedSpriteTile], a
+	add b
+	add b
+	ldh [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite
 	pop af
@@ -224,10 +224,9 @@ CheckObjectTime::
 	ld a, [wTimeOfDay]
 	add l
 	ld l, a
-	jr nc, .ok
-	inc h
-
-.ok
+	adc h
+	sub l
+	ld h, a
 	ld a, [hl]
 	ld hl, MAPOBJECT_TIMEOFDAY
 	add hl, bc
@@ -469,8 +468,8 @@ _GetMovementIndex::
 	add hl, bc
 	add [hl]
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	inc [hl]
 	ld a, [de]
