@@ -48,7 +48,7 @@ for filename in iglob('**/*.asm', recursive=True):
 					labels[scope].filename = filename
 					labels[scope].line_no = index + 1
 			for label in re.findall(reference_rx, line):
-				if label in labels and label != scope:
+				if label in labels:
 					labels[label].references += 1
 
 for label in labels.values():
