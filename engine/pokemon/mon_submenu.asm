@@ -155,7 +155,6 @@ GetMonSubmenuItems:
 	farcall ItemIsMail
 	pop hl
 	; a = carry ? MONMENUITEM_MAIL : MONMENUITEM_ITEM
-	assert MONMENUITEM_MAIL > MONMENUITEM_ITEM
 	sbc a
 	and MONMENUITEM_MAIL - MONMENUITEM_ITEM
 	add MONMENUITEM_ITEM

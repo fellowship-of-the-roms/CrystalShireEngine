@@ -1024,7 +1024,6 @@ PeoplePlaces3:
 	call Random
 	cp 49 percent - 1
 	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
-	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
 	sbc a
 	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
 	add PLACES_AND_PEOPLE_6
@@ -1104,7 +1103,6 @@ PeoplePlaces5:
 	call Random
 	cp 49 percent - 1
 	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
-	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
 	sbc a
 	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
 	add PLACES_AND_PEOPLE_6
@@ -1242,7 +1240,6 @@ PeoplePlaces7:
 	call Random
 	cp 49 percent - 1
 	; a = carry ? PLACES_AND_PEOPLE_4 : PLACES_AND_PEOPLE_6
-	assert PLACES_AND_PEOPLE_6 > PLACES_AND_PEOPLE_4
 	sbc a
 	and PLACES_AND_PEOPLE_4 - PLACES_AND_PEOPLE_6
 	add PLACES_AND_PEOPLE_6

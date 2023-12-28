@@ -166,9 +166,8 @@ _DisplayUnownWords_FillAttr:
 	ret z
 	cp $60
 	; a = carry ? (VRAM_BANK_1 | PAL_BG_BROWN) : PAL_BG_BROWN
-	assert (VRAM_BANK_1 | PAL_BG_BROWN) > PAL_BG_BROWN
 	sbc a
-	and (VRAM_BANK_1 | PAL_BG_BROWN) - PAL_BG_BROWN
+	and VRAM_BANK_1
 	add PAL_BG_BROWN
 	call .PlaceSquare
 	inc hl
