@@ -728,7 +728,7 @@ BattlePack:
 	call Pack_InterpretJoypad
 	ret c
 	xor a
-	jmp TMHMSubmenu
+	jr TMHMSubmenu
 
 .InitBallsPocket:
 	ld a, BALL_POCKET
