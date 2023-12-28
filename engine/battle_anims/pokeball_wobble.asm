@@ -11,9 +11,9 @@ GetPokeBallWobble:
 	ld a, BANK(wThrownBallWobbleCount) ; aka BANK(wFinalCatchRate)
 	ldh [rSVBK], a
 
-	ld hl, wThrownBallWobbleCount
-	inc [hl]
-	ld a, [hl]
+	ld a, [wThrownBallWobbleCount]
+	inc a
+	ld [wThrownBallWobbleCount], a
 
 ; Wobble up to 3 times.
 	cp 3 + 1
