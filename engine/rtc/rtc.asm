@@ -54,12 +54,6 @@ TimesOfDay:
 	db MAX_HOUR,  NITE_F
 	db -1, MORN_F
 
-BetaTimesOfDay: ; unreferenced
-	db 20, NITE_F
-	db 40, MORN_F
-	db 60, DAY_F
-	db -1, MORN_F
-
 StageRTCTimeForSave:
 	call UpdateTime
 	ld hl, wRTC
@@ -96,7 +90,7 @@ StartClock::
 	; bit 5: Day count exceeds 139
 	; bit 6: Day count exceeds 255
 	call c, RecordRTCStatus ; set flag on sRTCStatusFlags
-	jmp StartRTC
+	jr StartRTC
 
 _FixDays:
 	ld hl, hRTCDayHi

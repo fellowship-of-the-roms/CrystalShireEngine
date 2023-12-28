@@ -784,21 +784,6 @@ IntroFadePalettes:
 	db %11100100
 .End
 
-Intro_WipeInFrontpic:
-	ld a, $77
-	ldh [hWX], a
-	call DelayFrame
-	ld a, %11100100
-	call DmgToCgbBGPals
-.loop
-	call DelayFrame
-	ldh a, [hWX]
-	sub $8
-	cp -1
-	ret z
-	ldh [hWX], a
-	jr .loop
-
 Intro_PrepTrainerPic:
 	ld de, vTiles2
 	farcall GetTrainerPic

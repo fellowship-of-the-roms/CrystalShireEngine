@@ -223,68 +223,6 @@ ReadBTTrainerParty:
 BT_ChrisName:
 	db "CHRIS@"
 
-Function17042c:
-	ld hl, w3_d202TrainerData
-	ld a, BATTLETOWER_STREAK_LENGTH
-.loop
-	push af
-	push hl
-	ld c, BATTLETOWER_TRAINERDATALENGTH / 2
-.loop2
-	; First byte is a comparison value.
-	ld a, [hli]
-	ld b, a
-	; Second byte is a lookup index.
-	ld a, [hli]
-	and a
-	jr z, .empty
-	cp (Unknown_170470.end - Unknown_170470) + 1
-	jr nc, .copy_data
-
-	push hl
-	ld hl, Unknown_170470
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld a, [hl]
-	pop hl
-
-	; If Unknown_170470[a-1] <= b, overwrite the current trainer's data
-	; with Unknown_17047e, and exit the inner loop.
-	cp b
-	jr c, .copy_data
-	jr z, .copy_data
-	jr .next_iteration
-
-.empty
-	; If a == 0 and b >= $fc, overwrite the current trainer's data with
-	; Unknown_17047e, and exit the inner loop.
-	ld a, b
-	cp NUM_POKEMON + 1
-	jr nc, .copy_data
-
-.next_iteration
-	dec c
-	jr nz, .loop2
-	jr .next_trainer
-
-.copy_data
-	pop de
-	push de
-	ld hl, Unknown_17047e
-	ld bc, BATTLETOWER_TRAINERDATALENGTH
-	rst CopyBytes
-
-.next_trainer
-	pop hl
-	ld de, BATTLE_TOWER_STRUCT_LENGTH
-	add hl, de
-	pop af
-	dec a
-	jr nz, .loop
-	ret
-
 INCLUDE "data/battle_tower/unknown_levels.asm"
 
 CopyBTTrainer_FromBT_OT_TowBT_OTTemp:

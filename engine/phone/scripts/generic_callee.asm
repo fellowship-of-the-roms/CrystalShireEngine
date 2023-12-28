@@ -1103,11 +1103,6 @@ PhoneScript_Generic_Male:
 	promptbutton
 	end
 
-.Unknown: ; unreferenced
-	farwritetext UnknownGenericText
-	promptbutton
-	end
-
 .Gaven:
 	farwritetext GavenGenericText
 	promptbutton

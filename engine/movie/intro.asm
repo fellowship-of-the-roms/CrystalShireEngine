@@ -942,15 +942,6 @@ IntroScene20:
 	xor a
 	jmp Intro_Scene20_AppearUnown
 
-.AppearUnownPal2: ; unreferenced
-	ld a, c
-	and $1c
-	srl a
-	srl a
-	ld [wIntroSceneTimer], a
-	ld a, 1
-	jmp Intro_Scene20_AppearUnown
-
 .finished:
 	jmp NextIntroScene
 

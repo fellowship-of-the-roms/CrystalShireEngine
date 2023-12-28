@@ -33,7 +33,7 @@ HDMATransferTilemapToWRAMBank3::
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -46,7 +46,7 @@ HDMATransferAttrmapToWRAMBank3:
 
 ReloadMapPart::
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -68,34 +68,6 @@ ReloadMapPart::
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
 	call HDMATransfer_Wait127Scanlines_toBGMap
-	pop af
-	ldh [rVBK], a
-	reti
-
-Mobile_ReloadMapPart:
-	ld hl, .Function
-	jmp CallInSafeGFXMode
-
-.Function:
-	decoord 0, 0, wAttrmap
-	ld hl, wScratchAttrmap
-	call PadAttrmapForHDMATransfer
-	decoord 0, 0
-	ld hl, wScratchTilemap
-	call PadTilemapForHDMATransfer
-	call DelayFrame
-
-	di
-	ldh a, [rVBK]
-	push af
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wScratchAttrmap
-	call HDMATransfer_NoDI
-	xor a
-	ldh [rVBK], a
-	ld hl, wScratchTilemap
-	call HDMATransfer_NoDI
 	pop af
 	ldh [rVBK], a
 	reti
@@ -131,31 +103,6 @@ OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 	pop af
 	ldh [rVBK], a
 	reti
-
-Mobile_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap:
-	ld hl, .Function
-	jr CallInSafeGFXMode
-
-.Function:
-	; Transfer wAttrmap and Tilemap to BGMap
-	; Fill vBGAttrs with $00
-	; Fill vBGTiles with $ff
-	decoord 0, 0, wAttrmap
-	ld hl, wScratchAttrmap
-	call PadAttrmapForHDMATransfer
-	ld c, $ff
-	decoord 0, 0
-	ld hl, wScratchTilemap
-	call PadMapForHDMATransfer
-
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wScratchAttrmap
-	call HDMATransfer_Wait127Scanlines_toBGMap
-	xor a
-	ldh [rVBK], a
-	ld hl, wScratchTilemap
-	jr HDMATransfer_Wait127Scanlines_toBGMap
 
 CallInSafeGFXMode:
 	ldh a, [hBGMapMode]

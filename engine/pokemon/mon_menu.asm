@@ -683,10 +683,6 @@ MonMenu_Fly:
 	xor a
 	ret
 
-.NoReload: ; unreferenced
-	ld a, $1
-	ret
-
 MonMenu_Flash:
 	farcall FlashFunction
 	ld a, [wFieldMoveSucceeded]

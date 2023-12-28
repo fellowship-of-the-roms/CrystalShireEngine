@@ -59,17 +59,6 @@ BlkPacket_SlotMachine:
 	attr_blk_data %011, 0,0,0, 04,04, 15,09 ; slot reels: pal 0
 	attr_blk_data %011, 0,0,0, 00,12, 19,17 ; text box: pal 0
 
-BlkPacket_PartyMenu: ; unreferenced
-	attr_blk 7
-	attr_blk_data %111, 0,0,1, 00,00, 02,12
-	attr_blk_data %010, 0,0,0, 12,00, 18,01
-	attr_blk_data %010, 0,0,0, 12,02, 18,03
-	attr_blk_data %010, 0,0,0, 12,04, 18,05
-	attr_blk_data %010, 0,0,0, 12,06, 18,07
-	attr_blk_data %010, 0,0,0, 12,08, 18,09
-	attr_blk_data %010, 0,0,0, 12,10, 18,11
-	ds 4, 0
-
 BlkPacket_GSTitleScreen:
 	attr_blk 3
 	attr_blk_data %111, 0,0,2, 00,00, 19,04

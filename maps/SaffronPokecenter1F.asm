@@ -50,24 +50,6 @@ SaffronPokecenter1FTeacherText:
 	cont "then!"
 	done
 
-SaffronPokecenter1FTeacherMobileText:
-	text "What are JOHTO's"
-	line "#MON CENTERS"
-	cont "like?"
-
-	para "…Oh, I see."
-	line "So they let you"
-
-	para "link with people"
-	line "far away?"
-
-	para "Then I'll get my"
-	line "friend in JOHTO to"
-
-	para "catch a MARILL and"
-	line "trade it to me!"
-	done
-
 SaffronPokecenter1FFisherText:
 	text "I just happened to"
 	line "come through ROCK"

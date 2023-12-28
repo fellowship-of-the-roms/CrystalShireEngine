@@ -163,22 +163,6 @@ EcruteakPokecenter1FPokefanMText:
 	cont "use their #MON."
 	done
 
-EcruteakPokecenter1FPokefanMTextMobile:
-	text "You must be hoping"
-	line "to battle more"
-
-	para "people, right?"
-	line "There's apparently"
-
-	para "some place where"
-	line "trainers gather."
-
-	para "Where, you ask?"
-
-	para "It's a little past"
-	line "OLIVINE CITY."
-	done
-
 EcruteakPokecenter1FCooltrainerFText:
 	text "MORTY, the GYM"
 	line "LEADER, is soooo"

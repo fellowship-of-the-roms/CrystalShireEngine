@@ -274,42 +274,6 @@ WillObjectBumpIntoSomeoneElse:
 	ld e, [hl]
 	jr IsNPCAtCoord
 
-IsObjectFacingSomeoneElse: ; unreferenced
-	ldh a, [hMapObjectIndex]
-	call GetObjectStruct
-	call .GetFacingCoords
-	jr IsNPCAtCoord
-
-.GetFacingCoords:
-	ld hl, OBJECT_MAP_X
-	add hl, bc
-	ld d, [hl]
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
-	ld e, [hl]
-	call GetSpriteDirection
-	and a ; OW_DOWN?
-	jr z, .down
-	cp OW_UP
-	jr z, .up
-	cp OW_LEFT
-	jr z, .left
-	; OW_RIGHT
-	inc d
-	ret
-
-.down
-	inc e
-	ret
-
-.up
-	dec e
-	ret
-
-.left
-	dec d
-	ret
-
 IsNPCAtCoord:
 	ld bc, wObjectStructs
 	xor a
@@ -466,71 +430,6 @@ IsObjectMovingOffEdgeOfScreen:
 
 .nope
 	and a
-	ret
-
-.yes
-	scf
-	ret
-
-IsNPCAtPlayerCoord: ; unreferenced
-	ld a, [wPlayerMapX]
-	ld d, a
-	ld a, [wPlayerMapY]
-	ld e, a
-	ld bc, wObjectStructs
-	xor a
-.loop
-	ldh [hObjectStructIndex], a
-	call DoesObjectHaveASprite
-	jr z, .next
-
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, bc
-	ld a, [hl]
-	cp SPRITEMOVEDATA_BIGDOLLSYM
-	jr nz, .not_big
-	call WillObjectIntersectBigObject
-	jr c, .yes
-	jr .next
-
-.not_big
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .check_current_coords
-	ld hl, OBJECT_MAP_X
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jr nz, .check_current_coords
-	ldh a, [hObjectStructIndex]
-	cp PLAYER_OBJECT
-	jr z, .next
-	jr .yes
-
-.check_current_coords
-	ld hl, OBJECT_LAST_MAP_Y
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .next
-	ld hl, OBJECT_LAST_MAP_X
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jr z, .yes
-; fallthrough
-.next
-	ld hl, OBJECT_LENGTH
-	add hl, bc
-	ld b, h
-	ld c, l
-	ldh a, [hObjectStructIndex]
-	inc a
-	cp NUM_OBJECT_STRUCTS
-	jr nz, .loop
-	xor a
 	ret
 
 .yes

@@ -424,9 +424,6 @@ BillsPC_PreviewTheme:
 	ldh [hCGBPalUpdate], a
 	ret
 
-BillsPCOrangePalette:
-INCLUDE "gfx/pc/orange.pal"
-
 _CGB_PokedexUnownMode:
 	ld de, wBGPals1
 	ld a, PREDEFPAL_POKEDEX

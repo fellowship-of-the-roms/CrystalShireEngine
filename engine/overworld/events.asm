@@ -905,11 +905,6 @@ CountStep:
 	scf
 	ret
 
-.whiteout ; unreferenced
-	ld a, PLAYEREVENT_WHITEOUT
-	scf
-	ret
-
 DoRepelStep:
 	ld a, [wRepelEffect]
 	and a

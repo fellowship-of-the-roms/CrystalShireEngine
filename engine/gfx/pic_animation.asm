@@ -12,26 +12,6 @@ Unused_AnimateMon_Slow_Normal:
 	lb de, $0, ANIM_MON_NORMAL
 	jr AnimateFrontpic
 
-AnimateMon_Menu:
-	lb de, $0, ANIM_MON_MENU
-	jr AnimateFrontpic
-
-AnimateMon_Trade:
-	lb de, $0, ANIM_MON_TRADE
-	jr AnimateFrontpic
-
-AnimateMon_Evolve:
-	lb de, $0, ANIM_MON_EVOLVE
-	jr AnimateFrontpic
-
-AnimateMon_Hatch:
-	lb de, $0, ANIM_MON_HATCH
-	jr AnimateFrontpic
-
-AnimateMon_HOF:
-	lb de, $0, ANIM_MON_HOF
-	jr AnimateFrontpic
-
 MACRO pokeanim
 	rept _NARG
 		db (PokeAnim_\1_SetupCommand - PokeAnim_SetupCommands) / 2

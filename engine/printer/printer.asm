@@ -114,10 +114,6 @@ PrintDexEntry:
 	ld [wPrinterQueueLength], a
 	ret
 
-Printer_ResetRegistersAndStartDataSend:
-	call Printer_ResetJoypadRegisters
-	jmp SendScreenToPrinter
-
 PrintUnownStamp:
 	ld a, [wPrinterQueueLength]
 	push af

@@ -80,111 +80,6 @@ _LinkAskTradeForText::
 	text "?"
 	done
 
-_MobileBattleMustPickThreeMonText::
-	text "To enter a mobile"
-	line "battle, you must"
-
-	para "pick a team of"
-	line "three #MON."
-
-	para "Is that OK?"
-	done
-
-_MobileBattleMoreInfoText::
-	text "Need more info on"
-	line "mobile battles?"
-	done
-
-_MobileBattleRulesText::
-	text "For a mobile"
-	line "battle, choose"
-	cont "three #MON."
-
-	para "The maximum daily"
-	line "play time is ten"
-
-	para "minutes for each"
-	line "linked player."
-
-	para "If a battle isn't"
-	line "finished within"
-
-	para "the time limit,"
-	line "the player with"
-
-	para "the fewest fainted"
-	line "#MON wins."
-
-	para "If tied, the team"
-	line "that lost the"
-
-	para "least amount of HP"
-	line "wins."
-	done
-
-_WouldYouLikeToMobileBattleText::
-	text "Today's remaining"
-	line "time is @"
-	text_decimal wStringBuffer2, 1, 2
-	text " min."
-
-	para "Would you like to"
-	line "battle?"
-	done
-
-_WantAQuickMobileBattleText::
-	text "There are only @"
-	text_decimal wStringBuffer2, 1, 2
-	text_start
-	line "min. left today."
-
-	para "Want a quick"
-	line "battle?"
-	done
-
-_WantToRushThroughAMobileBattleText::
-	text "There is only"
-	line "1 min. left today!"
-
-	para "Want to rush"
-	line "through a battle?"
-	done
-
-_PleaseTryAgainTomorrowText::
-	text "There is less than"
-	line "1 min. left today!"
-
-	para "Please try again"
-	line "tomorrow."
-	done
-
-_TryAgainUsingSameSettingsText::
-	text "Try again using"
-	line "the same settings?"
-	done
-
-_MobileBattleLessThanOneMinuteLeftText::
-	text "There is less than"
-	line "1 min. left today!"
-	done
-
-_MobileBattleNoTimeLeftForLinkingText::
-	text "No time left for"
-	line "linking today."
-	done
-
-_PickThreeMonForMobileBattleText::
-	text "Pick three #MON"
-	line "for battle."
-	done
-
-_MobileBattleRemainingTimeText::
-	text "Today's remaining"
-	line "time is @"
-	text_decimal wStringBuffer2, 1, 2
-	text " min."
-	done
-
 _WouldYouLikeToSaveTheGameText::
 	text "Would you like to"
 	line "save the game?"
@@ -682,169 +577,6 @@ _SlotsDarnText::
 	text "Darn!"
 	done
 
-_MobileStadiumEntryText::
-	text "Data for use in"
-	line "the MOBILE STADIUM"
-
-	para "of the N64 #MON"
-	line "STADIUM 2 can be"
-	cont "read here."
-
-	para "Read the data?"
-	done
-
-_MobileStadiumSuccessText::
-	text "Data transfer is"
-	line "complete."
-
-	para "We hope you enjoy"
-	line "MOBILE STADIUM"
-
-	para "battles in the N64"
-	line "#MON STADIUM 2."
-
-	para ""
-	done
-
-_MainMenuTimeUnknownText::
-	text "Clock time unknown"
-	done
-
-_DeleteSavedLoginPasswordText::
-	text "Delete the saved"
-	line "LOG-IN PASSWORD?"
-	done
-
-_DeletedTheLoginPasswordText::
-	text "Deleted the LOG-IN"
-	line "PASSWORD."
-	done
-
-_MobilePickThreeMonForBattleText::
-	text "Pick three #MON"
-	line "for battle."
-	prompt
-
-_MobileUseTheseThreeMonText::
-	text_ram wMobileParticipant1Nickname
-	text ","
-	line "@"
-	text_ram wMobileParticipant2Nickname
-	text " and"
-	cont "@"
-	text_ram wMobileParticipant3Nickname
-	text "."
-
-	para "Use these three?"
-	done
-
-_MobileOnlyThreeMonMayEnterText::
-	text "Only three #MON"
-	line "may enter."
-	prompt
-
-_MobileCardFolderIntro1Text::
-	text "The CARD FOLDER"
-	line "stores your and"
-
-	para "your friends'"
-	line "CARDS."
-
-	para "A CARD contains"
-	line "information like"
-
-	para "the person's name,"
-	line "phone number and"
-	cont "profile."
-
-	para ""
-	done
-
-_MobileCardFolderIntro2Text::
-	text "This is your CARD."
-
-	para "Once you've"
-	line "entered your phone"
-
-	para "number, you can"
-	line "trade CARDS with"
-	cont "your friends."
-
-	para ""
-	done
-
-_MobileCardFolderIntro3Text::
-	text "If you have your"
-	line "friend's CARD, you"
-
-	para "can use it to make"
-	line "a call from a"
-
-	para "mobile phone on"
-	line "the 2nd floor of a"
-	cont "#MON CENTER."
-
-	para ""
-	done
-
-_MobileCardFolderIntro4Text::
-	text "To safely store"
-	line "your collection of"
-
-	para "CARDS, you must"
-	line "set a PASSCODE for"
-	cont "your CARD FOLDER."
-
-	para ""
-	done
-
-_MobileCardFolderAskDeleteText::
-	text "If the CARD FOLDER"
-	line "is deleted, all"
-
-	para "its CARDS and the"
-	line "PASSCODE will also"
-	cont "be deleted."
-
-	para "Beware--a deleted"
-	line "CARD FOLDER can't"
-	cont "be restored."
-
-	para "Want to delete"
-	line "your CARD FOLDER?"
-	done
-
-_MobileCardFolderDeleteAreYouSureText::
-	text "Are you sure you"
-	line "want to delete it?"
-	done
-
-_MobileCardFolderDeletedText::
-	text "The CARD FOLDER"
-	line "has been deleted."
-
-	para ""
-	done
-
-_MobileCardFolderAskOpenOldText::
-	text "There is an older"
-	line "CARD FOLDER from a"
-	cont "previous journey."
-
-	para "Do you want to"
-	line "open it?"
-	done
-
-_MobileCardFolderAskDeleteOldText::
-	text "Delete the old"
-	line "CARD FOLDER?"
-	done
-
-_MobileCardFolderFinishRegisteringCardsText::
-	text "Finish registering"
-	line "CARDS?"
-	done
-
 _PhoneWrongNumberText::
 	text "Huh? Sorry, wrong"
 	line "number!"
@@ -866,10 +598,6 @@ _PhoneOutOfAreaText::
 _PhoneJustTalkToThemText::
 	text "Just go talk to"
 	line "that person!"
-	done
-
-_PhoneThankYouText::
-	text "Thank you!"
 	done
 
 _PasswordAskResetText::
@@ -1072,12 +800,6 @@ _BuenaComeAgainText::
 	line "back again!"
 	done
 
-_BTExcuseMeText::
-	text "Excuse me!"
-
-	para ""
-	done
-
 _ExcuseMeYoureNotReadyText::
 	text "Excuse me."
 	line "You're not ready."
@@ -1088,20 +810,6 @@ _ExcuseMeYoureNotReadyText::
 _BattleTowerReturnWhenReadyText::
 	text "Please return when"
 	line "you're ready."
-	done
-
-_NeedAtLeastThreeMonText::
-	text "You need at least"
-	line "three #MON."
-
-	para ""
-	done
-
-_EggDoesNotQualifyText::
-	text "Sorry, an EGG"
-	line "doesn't qualify."
-
-	para ""
 	done
 
 _OnlyThreeMonMayBeEnteredText::
@@ -1137,19 +845,6 @@ _YouCantTakeAnEggText::
 
 	para ""
 	done
-
-_BallDodgedText::
-	text "It dodged the"
-	line "thrown BALL!"
-
-	para "This #MON"
-	line "can't be caught!"
-	prompt
-
-_BallMissedText::
-	text "You missed the"
-	line "#MON!"
-	prompt
 
 _BallBrokeFreeText::
 	text "Oh no! The #MON"
@@ -1311,11 +1006,6 @@ _ItemOakWarningText::
 	cont "time to use that!"
 	prompt
 
-_ItemBelongsToSomeoneElseText::
-	text "That belongs to"
-	line "someone else!"
-	prompt
-
 _ItemWontHaveEffectText::
 	text "It won't have any"
 	line "effect."
@@ -1328,18 +1018,6 @@ _BallBlockedText::
 
 _BallDontBeAThiefText::
 	text "Don't be a thief!"
-	prompt
-
-_NoCyclingText::
-	text "Cycling isn't"
-	line "allowed here."
-	prompt
-
-_ItemCantGetOnText::
-	text "Can't get on your"
-	line "@"
-	text_ram wStringBuffer1
-	text " now."
 	prompt
 
 _CurBoxFullText::
@@ -1369,21 +1047,6 @@ _ItemUsedText::
 	text_ram wStringBuffer2
 	text "."
 	done
-
-_ItemGotOnText::
-	text "<PLAYER> got on the@"
-	text_low
-	text_ram wStringBuffer2
-	text "."
-	prompt
-
-_ItemGotOffText::
-	text "<PLAYER> got off@"
-	text_low
-	text "the @"
-	text_ram wStringBuffer2
-	text "."
-	prompt
 
 _KnowsMoveText::
 	text_ram wStringBuffer1

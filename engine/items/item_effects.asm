@@ -2709,7 +2709,6 @@ CantUseOnEggMessage:
 	jr CantUseItemMessage
 
 NoEffect:
-IsntTheTimeMessage:
 	ld hl, ItemOakWarningText
 	jr CantUseItemMessage
 
@@ -2734,10 +2733,6 @@ ItemOakWarningText:
 	text_far _ItemOakWarningText
 	text_end
 
-ItemBelongsToSomeoneElseText:
-	text_far _ItemBelongsToSomeoneElseText
-	text_end
-
 ItemWontHaveEffectText:
 	text_far _ItemWontHaveEffectText
 	text_end
@@ -2748,14 +2743,6 @@ BallBlockedText:
 
 BallDontBeAThiefText:
 	text_far _BallDontBeAThiefText
-	text_end
-
-NoCyclingText:
-	text_far _NoCyclingText
-	text_end
-
-ItemCantGetOnText:
-	text_far _ItemCantGetOnText
 	text_end
 
 StorageFullText:

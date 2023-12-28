@@ -196,16 +196,3 @@ ElmPhoneGiftText:
 
 	para "See you later!"
 	done
-
-ElmPhoneGotAholdOfSomethingNeatText:
-	text "Hello, <PLAY_G>?"
-	line "How's it going?"
-
-	para "I got ahold of"
-	line "something neat."
-
-	para "Swing by my LAB"
-	line "and pick it up!"
-
-	para "See you later!"
-	done

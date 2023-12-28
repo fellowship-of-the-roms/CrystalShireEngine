@@ -190,10 +190,6 @@ FirebreatherRayAfterBattleText:
 	cont "up this cave."
 	done
 
-UnionCave1FUnusedSignText:
-	text "UNION CAVE"
-	done
-
 UnionCave1F_MapEvents:
 	db 0, 0 ; filler
 

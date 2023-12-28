@@ -434,19 +434,6 @@ UpdatePlayerStep:
 	set PLAYERSTEP_CONTINUE_F, [hl]
 	ret
 
-GetMapObjectField: ; unreferenced
-	push bc
-	ld e, a
-	ld d, 0
-	ld hl, OBJECT_MAP_OBJECT_INDEX
-	add hl, bc
-	ld a, [hl]
-	call GetMapObject
-	add hl, de
-	ld a, [hl]
-	pop bc
-	ret
-
 RestoreDefaultMovement:
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
@@ -463,12 +450,6 @@ RestoreDefaultMovement:
 
 .ok
 	ld a, SPRITEMOVEDATA_STANDING_DOWN
-	ret
-
-ObjectMovement_ZeroAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], 0
 	ret
 
 ObjectMovement_IncAnonJumptableIndex:
@@ -508,18 +489,6 @@ ObjectStep_AnonJumptable:
 	ld a, [hl]
 	pop hl
 	jmp JumpTable
-
-ObjectStep_GetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld a, [hl]
-	ret
-
-ObjectStep_SetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
 
 StepFunction_Reset:
 	ld hl, OBJECT_MAP_X

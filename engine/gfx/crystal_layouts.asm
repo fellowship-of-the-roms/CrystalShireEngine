@@ -114,13 +114,6 @@ LoadOW_BGPal7::
 Palette_TextBG7:
 INCLUDE "gfx/font/bg_text.pal"
 
-Function49420::
-	ld hl, MansionPalette1 palette 8
-	ld de, wBGPals1 palette PAL_BG_ROOF
-	ld bc, 1 palettes
-	ld a, BANK(wBGPals1)
-	jmp FarCopyWRAM
-
 _CrystalCGB_MobileLayout1:
 	call MG_Mobile_Layout_LoadPals
 	ld de, wBGPals1 palette PAL_BG_TEXT
@@ -201,17 +194,6 @@ INCLUDE "gfx/mystery_gift/name_card_bg.pal"
 
 .OBPalette:
 INCLUDE "gfx/mystery_gift/name_card_ob.pal"
-
-Function49742:
-	ld hl, .MobileBorderPalettes
-	ld de, wBGPals1
-	ld bc, 8 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	farjp ApplyPals
-
-.MobileBorderPalettes:
-INCLUDE "gfx/trade/mobile_border.pal"
 
 _InitMG_Mobile_LinkTradePalMap:
 	hlcoord 0, 0, wAttrmap

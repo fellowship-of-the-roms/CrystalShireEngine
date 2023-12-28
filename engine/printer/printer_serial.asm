@@ -419,12 +419,6 @@ PrinterDataPacket3:
 PrinterDataPacket4:
 	db  4, 0, $00, 0
 	dw 4
-PrinterDataPacket5: ; unreferenced
-	db  8, 0, $00, 0
-	dw 8
-PrinterDataPacket6: ; unreferenced
-	db 15, 0, $00, 0
-	dw 15
 
 _PrinterReceive::
 	ld a, [wPrinterOpcode]

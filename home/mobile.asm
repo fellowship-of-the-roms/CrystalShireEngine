@@ -25,30 +25,7 @@ MobileAPI::
 	ld a, BANK(_MobileAPI)
 	ld [wc981], a
 	rst Bankswitch
-
 	jmp _MobileAPI
-
-ReturnMobileAPI::
-; Return from _MobileAPI
-	ld [wc986], a
-	ld a, l
-	ld [wc987], a
-	ld a, h
-	ld [wMobileAPIIndex], a
-
-	pop bc
-	ld a, b
-	ld [wc981], a
-	rst Bankswitch
-
-	ld hl, wc822
-	res 6, [hl]
-	ld hl, wc987
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wc986]
-	ret
 
 Function3eea::
 	push hl
@@ -64,12 +41,8 @@ Function3eea::
 	pop hl
 	jr MobileHome_PlaceBox
 
-Function3f20::
 Function3f35::
 MobileHome_PlaceBox:
-Function3f7c::
-Function3f88::
-Function3f9f::
 MobileReceive::
 	; dummied out Mobile Code.
 	; TODO: item-newbox should find a way to restore this.

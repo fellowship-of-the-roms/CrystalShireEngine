@@ -78,11 +78,6 @@ ScrollingMenuJoyAction:
 	jmp nz, .d_down
 	jr .loop
 
-.no_zero_no_carry ; unreferenced
-	ld a, -1
-	and a
-	ret
-
 .a_button
 	call PlaceHollowCursor
 	ld a, [wMenuCursorY]

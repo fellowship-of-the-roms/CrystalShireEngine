@@ -339,14 +339,6 @@ RuinsOfAlphResearchCenterUnownPrinterText:
 	line "printed out."
 	done
 
-RuinsOfAlphResearchCenterProfSilktreePhotoText:
-	text "It's a photo of"
-	line "the RESEARCH"
-
-	para "CENTER'S founder,"
-	line "PROF.SILKTREE."
-	done
-
 RuinsOfAlphResearchCenterAcademicBooksText:
 	text "There are many"
 	line "academic books."

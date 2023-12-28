@@ -1,29 +1,3 @@
-CheckForMobileBattleRules:
-	ld de, .PointerTables
-	call BattleTower_ExecuteJumptable
-	ret z
-	call BattleTower_PleaseReturnWhenReady
-	scf
-	ret
-
-.PointerTables:
-	db 2
-	dw .Functions
-	dw .TextPointers
-
-.Functions:
-	dw BattleTower_CheckPartyLengthIs3
-	dw BattleTower_CheckPartyHasThreeMonsThatAreNotEggs
-
-.TextPointers:
-	dw .BTExcuseMeText
-	dw NeedAtLeastThreeMonText
-	dw EggDoesNotQualifyText
-
-.BTExcuseMeText:
-	text_far _BTExcuseMeText
-	text_end
-
 _CheckForBattleTowerRules:
 	ld hl, wStringBuffer2
 	ld a, "3"
@@ -64,14 +38,6 @@ BattleTower_PleaseReturnWhenReady:
 
 .BattleTowerReturnWhenReadyText:
 	text_far _BattleTowerReturnWhenReadyText
-	text_end
-
-NeedAtLeastThreeMonText:
-	text_far _NeedAtLeastThreeMonText
-	text_end
-
-EggDoesNotQualifyText:
-	text_far _EggDoesNotQualifyText
 	text_end
 
 OnlyThreeMonMayBeEnteredText:
@@ -174,32 +140,6 @@ BattleTower_ExecuteJumptable:
 	call .LoadTextPointer
 	call PrintText
 	pop bc
-	ret
-
-BattleTower_CheckPartyLengthIs3:
-	ld a, [wPartyCount]
-	cp BATTLETOWER_PARTY_LENGTH
-	ret
-
-BattleTower_CheckPartyHasThreeMonsThatAreNotEggs:
-	ld hl, wPartyCount
-	ld a, [hli]
-	ld b, 0
-	ld c, a
-.loop
-	ld a, [hli]
-	cp EGG
-	jr z, .egg
-	inc b
-
-.egg
-	dec c
-	jr nz, .loop
-	ld a, [wPartyCount]
-	cp b
-	ret z
-	ld a, b
-	cp BATTLETOWER_PARTY_LENGTH
 	ret
 
 CheckBTRule_PartyCountEq3:

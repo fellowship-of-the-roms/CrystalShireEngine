@@ -180,14 +180,6 @@ ManiaText_HappinessSpeech:
 	line "treats them well."
 	done
 
-ManiaText_ShuckleIsYourLastMon:
-	text "If I take my #-"
-	line "MON back, what are"
-
-	para "you going to use"
-	line "in battle?"
-	done
-
 ManiasHouse_MapEvents:
 	db 0, 0 ; filler
 

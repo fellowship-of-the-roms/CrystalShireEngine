@@ -128,14 +128,6 @@ TrainerCard_Page1_Joypad:
 	ld [wJumptableIndex], a
 	ret
 
-.KantoBadgeCheck: ; unreferenced
-	ld a, [wKantoBadges]
-	and a
-	ret z
-	ld a, TRAINERCARDSTATE_PAGE3_LOADGFX
-	ld [wJumptableIndex], a
-	ret
-
 TrainerCard_Page2_LoadGFX:
 	call ClearSprites
 	hlcoord 0, 8
@@ -156,7 +148,7 @@ TrainerCard_Page2_LoadGFX:
 	call Request2bpp
 	ld hl, TrainerCard_JohtoBadgesOAM
 	call TrainerCard_Page2_3_InitObjectsAndStrings
-	jmp TrainerCard_IncrementJumptable
+	jr TrainerCard_IncrementJumptable
 
 TrainerCard_Page2_Joypad:
 	ld hl, TrainerCard_JohtoBadgesOAM
@@ -313,9 +305,6 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 .Dex_PlayTime:
 	db   "#DEX"
 	next "PLAY TIME@"
-
-.Unused: ; unreferenced
-	db "@"
 
 .Badges:
 	db "  BADGES▶@"

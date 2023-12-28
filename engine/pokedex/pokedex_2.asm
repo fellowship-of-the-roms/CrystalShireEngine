@@ -221,9 +221,6 @@ DisplayDexEntry:
 	hlcoord 2, 11
 	jmp PlaceFarString
 
-POKeString: ; unreferenced
-	db "#@"
-
 GetDexEntryPointer:
 ; return dex entry pointer b:de
 	push hl

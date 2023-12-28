@@ -198,32 +198,6 @@ DisplayHourOClock:
 	pop hl
 	ret
 
-DisplayHoursMinutesWithMinString: ; unreferenced
-	ld h, d
-	ld l, e
-	push hl
-	call DisplayHourOClock
-	pop de
-	inc de
-	inc de
-	ld a, ":"
-	ld [de], a
-	inc de
-	push de
-	ld hl, 3
-	add hl, de
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	ld [hl], a
-	pop hl
-	call DisplayMinutesWithMinString
-	inc hl
-	inc hl
-	inc hl
-	ret
-
 SetMinutes:
 	ldh a, [hJoyPressed]
 	and A_BUTTON

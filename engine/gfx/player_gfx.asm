@@ -99,8 +99,7 @@ GetPlayerBackpic:
 	ld a, [wPlayerGender]
 	bit PLAYERGENDER_FEMALE_F, a
 	jmp nz, GetKrisBackpic
-; fallthrough
-GetChrisBackpic:
+; GetChrisBackpic:
 	ld hl, ChrisBackpic
 	ld b, BANK(ChrisBackpic)
 	ld de, vTiles2 tile $31

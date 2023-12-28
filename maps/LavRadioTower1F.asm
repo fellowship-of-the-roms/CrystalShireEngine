@@ -207,15 +207,6 @@ LavRadioTower1FPokeFluteSignText:
 	line "on CHANNEL 20"
 	done
 
-LavRadioTower1FReferenceLibraryText:
-	text "Wow! A full rack"
-	line "of #MON CDs and"
-	cont "videos."
-
-	para "This must be the"
-	line "reference library."
-	done
-
 LavRadioTower1F_MapEvents:
 	db 0, 0 ; filler
 

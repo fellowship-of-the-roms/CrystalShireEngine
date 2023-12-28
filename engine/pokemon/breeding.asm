@@ -969,10 +969,3 @@ DayCareMonCompatibilityText:
 .BreedShowsInterestText:
 	text_far _BreedShowsInterestText
 	text_end
-
-DayCareMonPrintEmptyString: ; unreferenced
-	ld hl, .string
-	ret
-
-.string
-	db "@"

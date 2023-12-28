@@ -535,21 +535,6 @@ Route32CooltrainerMText_AideIsWaiting:
 	line "CENTER."
 	done
 
-Route32CooltrainerMText_UnusedSproutTower:
-	text "Have you gone to"
-	line "SPROUT TOWER?"
-
-	para "If you ever visit"
-	line "VIOLET CITY,"
-
-	para "they'll expect you"
-	line "to train there."
-
-	para "That's basic for"
-	line "trainers. Go to"
-	cont "SPROUT TOWER!"
-	done
-
 Route32CooltrainerMText_VioletGym:
 	text "Have you gone to"
 	line "the #MON GYM?"

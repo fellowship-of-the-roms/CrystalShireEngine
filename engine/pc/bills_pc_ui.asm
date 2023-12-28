@@ -587,8 +587,7 @@ SetPartyIcons:
 	ld hl, vTiles4 tile $00
 	ld a, PARTY_LENGTH
 	call BillsPC_BlankTiles
-
-_SetPartyIcons:
+; _SetPartyIcons:
 	; Write party members
 	lb bc, 0, 1
 	ld hl, wBillsPC_PartyList
@@ -609,8 +608,7 @@ SetBoxIcons:
 	ld hl, vTiles4 tile $18
 	ld a, MONS_PER_BOX
 	call BillsPC_BlankTiles
-
-_SetBoxIcons:
+; _SetBoxIcons:
 	; Write box members
 	ld a, [wCurBox]
 	inc a

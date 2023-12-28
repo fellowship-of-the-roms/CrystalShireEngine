@@ -19,39 +19,6 @@ _InterpretBattleMenu::
 	call ApplyTilemap
 	jr Get2DMenuSelection
 
-_InterpretMobileMenu::
-	ld hl, CopyMenuData
-	ld a, [wMenuData_2DMenuItemStringsBank]
-	call FarCall_hl
-
-	call Draw2DMenu
-	farcall MobileTextBorder
-	call UpdateSprites
-	call ApplyTilemap
-	call Init2DMenuCursorPosition
-	ld hl, w2DMenuFlags1
-	set 7, [hl]
-.loop
-	call DelayFrame
-	farcall Function10032e
-	ld a, [wcd2b]
-	and a
-	jr nz, .quit
-	call MobileMenuJoypad
-	ld a, [wMenuJoypadFilter]
-	and c
-	jr z, .loop
-	jr Mobile_GetMenuSelection
-
-.quit
-	ld a, [w2DMenuNumCols]
-	ld c, a
-	ld a, [w2DMenuNumRows]
-	call SimpleMultiply
-	ld [wMenuCursorPosition], a
-	and a
-	ret
-
 Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
@@ -673,37 +640,6 @@ _ExitMenu::
 	ld hl, wWindowStackSize
 	dec [hl]
 	ret
-
-RestoreOverworldMapTiles: ; unreferenced
-	ld a, [wVramState]
-	bit 0, a
-	ret z
-	xor a ; sScratch
-	call OpenSRAM
-	hlcoord 0, 0
-	ld de, sScratch
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	rst CopyBytes
-	call CloseSRAM
-	call OverworldTextModeSwitch
-	xor a ; sScratch
-	call OpenSRAM
-	ld hl, sScratch
-	decoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.loop
-	ld a, [hl]
-	cp $61
-	jr c, .next
-	ld [de], a
-.next
-	inc hl
-	inc de
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
-	jmp CloseSRAM
 
 Error_Cant_ExitMenu:
 	ld hl, .WindowPoppingErrorText
