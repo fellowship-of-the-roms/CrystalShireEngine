@@ -636,8 +636,7 @@ SetNewsDownloadURL:
 	ldh [rSVBK], a
 	ld de, w3_d100
 	ld bc, $e00
-	jr Function118b10
-
+; fallthrough
 Function118b10:
 	push de
 	push bc
