@@ -60,8 +60,8 @@ _DoFadePalettes::
 .inner_loop
 	push de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld a, [wPalFadeMode]
 	bit PALFADE_FLASH_F, a
 	jr z, .no_flash
@@ -108,18 +108,14 @@ _DoFadePalettes::
 	sla l
 	swap l
 	ld a, l
+	xor e
 	and %11100000
-	ld h, a
-	ld a, e
-	and %00011111
-	or h
+	xor e
 	ld e, a
 	ld a, l
+	xor d
 	and %00000011
-	ld l, a
-	ld a, d
-	and %01111100
-	or l
+	xor d
 	ld d, a
 
 	; Blue
@@ -146,9 +142,8 @@ _DoFadePalettes::
 	dec d
 	jr nz, .inner_loop
 	call .FadeDelay
-	ld a, [wPalFadeDelayFrames]
-	dec a
-	ld [wPalFadeDelayFrames], a
+	ld hl, wPalFadeDelayFrames
+	dec [hl]
 	jmp nz, .outer_loop
 .done
 	pop bc

@@ -151,8 +151,8 @@ PryceText_Intro:
 	text "#MON have many"
 	line "experiences in"
 
-	para "their lives, just "
-	line "like we do. "
+	para "their lives, just"
+	line "like we do."
 
 	para "I, too, have seen"
 	line "and suffered much"

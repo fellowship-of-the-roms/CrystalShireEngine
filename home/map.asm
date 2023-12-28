@@ -147,18 +147,16 @@ GetDestinationWarpNumber::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .found_warp
-
+	jr z, .found_warp
+; fallthrough
 .next
 	pop hl
 	ld a, WARP_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .okay
-	inc h
-
-.okay
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a
@@ -435,20 +433,18 @@ ReadObjectEvents::
 
 ; get NUM_OBJECTS - [wCurMapObjectEventCount] - 1
 	ld a, [wCurMapObjectEventCount]
-	ld c, a
-	ld a, NUM_OBJECTS - 1
-	sub c
-	jr z, .skip
-	jr c, .skip
-
-	; could have done "inc hl" instead
-	ld bc, 1
-	add hl, bc
+	cp NUM_OBJECTS - 1
+	jr nc, .skip
+	; a = NUM_OBJECTS - 1 - a
+	cpl
+	add NUM_OBJECTS - 1 + 1
+	inc hl
+; Fill the remaining sprite IDs and y coords with 0 and -1, respectively
 	ld bc, MAPOBJECT_LENGTH
 .loop
-	ld [hl],  0
+	ld [hl],  0 ; no-optimize *hl++|*hl-- = N
 	inc hl
-	ld [hl], -1
+	ld [hl], -1 ; no-optimize *hl++|*hl-- = N
 	dec hl
 	add hl, bc
 	dec a
@@ -515,10 +511,7 @@ endr
 	; destination warp number
 	ld a, [hli]
 	cp -1
-	jr nz, .skip
-	call .backup
-
-.skip
+	call z, .backup
 	farjp GetMapScreenCoords
 
 .backup
@@ -533,7 +526,7 @@ endr
 LoadBlockData::
 	ld hl, wOverworldMapBlocks
 	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
-	ld a, 0
+	xor a
 	rst ByteFill
 	call ChangeMap
 	call FillMapConnections
@@ -579,9 +572,9 @@ ChangeMap::
 	ldh a, [hConnectionStripLength]
 	add l
 	ld l, a
-	jr nc, .okay
-	inc h
-.okay
+	adc h
+	sub l
+	ld h, a
 	dec b
 	jr nz, .row
 
@@ -599,10 +592,10 @@ FillMapConnections::
 	ld c, a
 	call GetAnyMapBlocksBank
 
-	ld a, [wNorthConnectionStripPointer]
+	ld hl, wNorthConnectionStripPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wNorthConnectionStripPointer + 1]
-	ld h, a
 	ld a, [wNorthConnectionStripLocation]
 	ld e, a
 	ld a, [wNorthConnectionStripLocation + 1]
@@ -622,10 +615,10 @@ FillMapConnections::
 	ld c, a
 	call GetAnyMapBlocksBank
 
-	ld a, [wSouthConnectionStripPointer]
+	ld hl, wSouthConnectionStripPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wSouthConnectionStripPointer + 1]
-	ld h, a
 	ld a, [wSouthConnectionStripLocation]
 	ld e, a
 	ld a, [wSouthConnectionStripLocation + 1]
@@ -645,10 +638,10 @@ FillMapConnections::
 	ld c, a
 	call GetAnyMapBlocksBank
 
-	ld a, [wWestConnectionStripPointer]
+	ld hl, wWestConnectionStripPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wWestConnectionStripPointer + 1]
-	ld h, a
 	ld a, [wWestConnectionStripLocation]
 	ld e, a
 	ld a, [wWestConnectionStripLocation + 1]
@@ -668,10 +661,10 @@ FillMapConnections::
 	ld c, a
 	call GetAnyMapBlocksBank
 
-	ld a, [wEastConnectionStripPointer]
+	ld hl, wEastConnectionStripPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wEastConnectionStripPointer + 1]
-	ld h, a
 	ld a, [wEastConnectionStripLocation]
 	ld e, a
 	ld a, [wEastConnectionStripLocation + 1]
@@ -709,9 +702,9 @@ FillSouthConnectionStrip::
 	add 6
 	add e
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	dec c
 	jr nz, .y
 	ret
@@ -746,9 +739,9 @@ FillEastConnectionStrip::
 	ldh a, [hConnectedMapWidth]
 	add e
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	dec b
 	jr nz, .loop
 	ret
@@ -914,14 +907,14 @@ GetScriptByte::
 	rst Bankswitch
 
 	ld hl, wScriptPos
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 
 	ld a, [bc]
 
 	inc bc
-	ld [hl], b
+	ld [hl], b ; no-optimize *hl++|*hl-- = b|c|d|e (a is not available)
 	dec hl
 	ld [hl], c
 
@@ -986,8 +979,8 @@ ComputeROMXChecksum::
 	ld a, [hli]
 	add e
 	ld e, a
-	ld a, d
-	adc 0
+	adc d
+	sub e
 	ld d, a
 	ld a, h
 	cp $80 ; HIGH(ROMX end)
@@ -1020,10 +1013,10 @@ ScrollMapDown::
 	hlcoord 0, SCREEN_HEIGHT - 2, wAttrmap
 	ld de, wBGMapPalBuffer
 	call BackupBGMapRow
-	ld a, [wBGMapAnchor]
+	ld hl, wBGMapAnchor
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBGMapAnchor + 1]
-	ld h, a
 	ld bc, BG_MAP_WIDTH tiles
 	add hl, bc
 ; cap d at HIGH(vBGMap0)
@@ -1098,10 +1091,9 @@ BackupBGMapColumn::
 	ld a, SCREEN_WIDTH - 1
 	add l
 	ld l, a
-	jr nc, .skip
-	inc h
-
-.skip
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	ret
@@ -1125,11 +1117,9 @@ UpdateBGMapRow::
 	ld a, e
 	inc a
 	inc a
+	xor e
 	and $1f
-	ld b, a
-	ld a, e
-	and $e0
-	or b
+	xor e
 	ld e, a
 	dec c
 	jr nz, .loop
@@ -1208,9 +1198,8 @@ LoadTilesetGFX::
 	cp TILESET_JOHTO_MODERN
 	jr z, .load_roof
 	cp TILESET_BATTLE_TOWER_OUTSIDE
-	jr z, .load_roof
-	jr .skip_roof
-
+	jr nz, .skip_roof
+; fallthrough
 .load_roof
 	farcall LoadMapGroupRoof
 
@@ -1225,8 +1214,7 @@ BufferScreen::
 	ld h, [hl]
 	ld l, a
 	ld de, wScreenSave
-	ld c, SCREEN_META_HEIGHT
-	ld b, SCREEN_META_WIDTH
+	lb bc, SCREEN_META_WIDTH, SCREEN_META_HEIGHT
 .row
 	push bc
 	push hl
@@ -1278,8 +1266,7 @@ SaveScreen::
 .down
 	ld de, wScreenSave
 .vertical
-	ld b, SCREEN_META_WIDTH
-	ld c, SCREEN_META_HEIGHT - 1
+	lb bc, SCREEN_META_WIDTH, SCREEN_META_HEIGHT - 1
 	jr SaveScreen_LoadConnection
 
 .left
@@ -1290,8 +1277,7 @@ SaveScreen::
 .right
 	ld de, wScreenSave
 .horizontal
-	ld b, SCREEN_META_WIDTH - 1
-	ld c, SCREEN_META_HEIGHT
+	lb bc, SCREEN_META_WIDTH - 1, SCREEN_META_HEIGHT
 	jr SaveScreen_LoadConnection
 
 LoadConnectionBlockData::
@@ -1303,8 +1289,7 @@ LoadConnectionBlockData::
 	add 6
 	ldh [hConnectionStripLength], a
 	ld de, wScreenSave
-	ld b, SCREEN_META_WIDTH
-	ld c, SCREEN_META_HEIGHT
+	lb bc, SCREEN_META_WIDTH, SCREEN_META_HEIGHT
 ; fallthrough
 
 SaveScreen_LoadConnection::
@@ -1322,9 +1307,9 @@ SaveScreen_LoadConnection::
 	ld a, e
 	add 6
 	ld e, a
-	jr nc, .okay
-	inc d
-.okay
+	adc d
+	sub e
+	ld d, a
 	pop hl
 	ldh a, [hConnectionStripLength]
 	ld c, a
@@ -1352,11 +1337,10 @@ GetMovementPermissions::
 
 	ld a, [wPlayerTile]
 	and 7
-	ld hl, .MovementPermissionsData
-	add l
+	add LOW(.MovementPermissionsData)
 	ld l, a
-	ld a, 0
-	adc h
+	adc HIGH(.MovementPermissionsData)
+	sub l
 	ld h, a
 	ld a, [hl]
 	ld hl, wTilePermissions
@@ -1504,10 +1488,10 @@ GetFacingTileCoord::
 	ld de, .Directions
 	add hl, de
 
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld e, a
 
 	ld a, [hli]
 	ld h, [hl]
@@ -1634,18 +1618,16 @@ CheckIfFacingTileCoordIsBGEvent::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .copysign
-
+	jr z, .copysign
+; fallthrough
 .next
 	pop hl
 	ld a, BG_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .nocarry
-	inc h
-
-.nocarry
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a
@@ -1706,18 +1688,16 @@ CheckCurrentMapCoordEvents::
 	jr nz, .next
 	ld a, [hli]
 	cp d
-	jr nz, .next
-	jr .copy_coord_event
-
+	jr z, .copy_coord_event
+; fallthough
 .next
 	pop hl
 	ld a, COORD_EVENT_SIZE
 	add l
 	ld l, a
-	jr nc, .nocarry
-	inc h
-
-.nocarry
+	adc h
+	sub l
+	ld h, a
 	dec c
 	jr nz, .loop
 	xor a
@@ -1863,9 +1843,9 @@ GetAnyMapField::
 
 	call GetAnyMapPointer
 	add hl, de
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 
 	; bankswitch back
 	pop af

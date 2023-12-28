@@ -196,21 +196,6 @@ _TMHMNotCompatibleText::
 	text "."
 	prompt
 
-_NoRoomTMHMText::
-	text "You have no room"
-	line "for any more"
-	cont "@"
-	text_ram wStringBuffer1
-	text "S."
-	prompt
-
-_ReceivedTMHMText::
-	text "You received"
-	line "@"
-	text_ram wStringBuffer1
-	text "!"
-	prompt
-
 _MysteryGiftCanceledText::
 	text "The link has been"
 	line "cancelled."
@@ -258,36 +243,6 @@ _MysteryGiftSentHomeText::
 	cont "to @"
 	text_ram wMysteryGiftPlayerName
 	text "'s home."
-	prompt
-
-_NameCardReceivedCardText::
-	text "Received"
-	line "@"
-	text_ram wMysteryGiftCardHolderName
-	text "'s CARD."
-	prompt
-
-_NameCardListedCardText::
-	text_ram wMysteryGiftCardHolderName
-	text "'s CARD was"
-	line "listed as no.@"
-	text_decimal wTextDecimalByte, 1, 2
-	text "."
-	prompt
-
-_NameCardNotRegisteredCardText::
-	text "The CARD was not"
-	line "registered."
-	prompt
-
-_NameCardLinkCancelledText::
-	text "The link has been"
-	line "cancelled."
-	prompt
-
-_NameCardLinkCommErrorText::
-	text "Communication"
-	line "error."
 	prompt
 
 _BadgeRequiredText::
@@ -485,11 +440,6 @@ _RodNothingText::
 	text "Not even a nibble!"
 	prompt
 
-_UnusedNothingHereText::
-	text "Looks like there's"
-	line "nothing here."
-	prompt
-
 _CantGetOffBikeText::
 	text "You can't get off"
 	line "here!"
@@ -559,14 +509,6 @@ _PoisonFaintText::
 	line "fainted!"
 	prompt
 
-_PoisonWhiteoutText::
-	text "<PLAYER> is out of"
-	line "useable #MON!"
-
-	para "<PLAYER> whited"
-	line "out!"
-	prompt
-
 _UseSweetScentText::
 	text_ram wStringBuffer3
 	text " used"
@@ -595,10 +537,6 @@ _AnEggCantHoldAnItemText::
 	text "An EGG can't hold"
 	line "an item."
 	prompt
-
-_PackNoItemText::
-	text "No items."
-	done
 
 _AskThrowAwayText::
 	text "Throw away how"
@@ -652,11 +590,6 @@ _AskItemMoveText::
 _PackEmptyText::
 	text_start
 	done
-
-_YouCantUseItInABattleText::
-	text "You can't use it"
-	line "in a battle."
-	prompt
 
 _AreYouABoyOrAreYouAGirlText::
 	text "Are you a boy?"
@@ -863,33 +796,6 @@ _WasSentToBillsPCText::
 _PCGottaHavePokemonText::
 	text "You gotta have"
 	line "#MON to call!"
-	prompt
-
-_PCWhatText::
-	text "What?"
-	done
-
-_PCMonHoldingMailText::
-	text "There is a #MON"
-	line "holding MAIL."
-
-	para "Please remove the"
-	line "MAIL."
-	prompt
-
-_PCNoSingleMonText::
-	text "You don't have a"
-	line "single #MON!"
-	prompt
-
-_PCCantDepositLastMonText::
-	text "You can't deposit"
-	line "your last #MON!"
-	prompt
-
-_PCCantTakeText::
-	text "You can't take any"
-	line "more #MON."
 	prompt
 
 _ContestCaughtMonText::

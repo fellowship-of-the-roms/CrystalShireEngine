@@ -274,8 +274,8 @@ Script_memcallasm:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -348,10 +348,10 @@ Script_repeattext:
 	call GetScriptByte
 	ld h, a
 	cp -1
-	jr nz, .done
+	ret nz
 	ld a, l
 	cp -1
-	jr nz, .done
+	ret nz
 	ld hl, wScriptTextBank
 	ld a, [hli]
 	ld b, a
@@ -359,9 +359,6 @@ Script_repeattext:
 	ld h, [hl]
 	ld l, a
 	jmp MapTextbox
-
-.done
-	ret
 
 Script_waitbutton:
 	jmp WaitButton
@@ -379,10 +376,9 @@ Script_promptbutton:
 
 Script_yesorno:
 	call YesNoBox
-	ld a, FALSE
-	jr c, .no
-	ld a, TRUE
-.no
+	; a = carry ? FALSE : TRUE
+	sbc a
+	inc a	
 	ld [wScriptVar], a
 	vc_hook Unknown_yesorno_ret
 	ret
@@ -447,11 +443,7 @@ Script_verbosegiveitem:
 	ld de, GiveItemScript
 	jmp ScriptCall
 
-GiveItemScript_DummyFunction:
-	ret
-
 GiveItemScript:
-	callasm GiveItemScript_DummyFunction
 	writetext .ReceivedItemText
 	iffalse .Full
 	waitsfx
@@ -491,10 +483,9 @@ Script_verbosegiveitemvar:
 	ld [wItemQuantityChange], a
 	ld hl, wNumItems
 	call ReceiveItem
-	ld a, TRUE
-	jr c, .ok2
-	xor a
-.ok2
+	; a = carry ? TRUE : FALSE
+	sbc a
+	and TRUE
 	ld [wScriptVar], a
 	call CurItemName
 	ld de, wStringBuffer1
@@ -673,9 +664,9 @@ Script_trainerflagaction:
 	xor a
 	ld [wScriptVar], a
 	ld hl, wTempTrainerEventFlag
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	call GetScriptByte
 	ld b, a
 	call EventFlagAction
@@ -891,9 +882,7 @@ ApplyObjectFacing:
 	call SetSpriteDirection
 	ld hl, wVramState
 	bit 6, [hl]
-	jr nz, .text_state
-	call .DisableTextTiles
-.text_state
+	call z, .DisableTextTiles
 	jmp UpdateSprites
 
 .not_visible
@@ -918,13 +907,12 @@ Script_variablesprite:
 	call GetScriptByte
 	ld e, a
 	ld d, 0
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	ld hl, wVariableSprites
 	add hl, de
 	call GetScriptByte
 	ld [hl], a
-	farcall ReloadSpriteIndex
-	ret
+	farjp ReloadSpriteIndex
 
 Script_appear:
 	call GetScriptByte
@@ -953,9 +941,9 @@ ApplyEventActionAppearDisappear:
 	ld hl, MAPOBJECT_EVENT_FLAG
 	add hl, bc
 	pop bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld a, -1
 	cp e
 	jr nz, .okay
@@ -1187,13 +1175,12 @@ Script_memcall:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld b, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	; fallthrough
-
 ScriptCall:
 	ld hl, wScriptStackSize
 	ld a, [hl]
@@ -1251,8 +1238,8 @@ Script_memjump:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -1395,10 +1382,9 @@ DoScene:
 	call GetMapSceneID
 	ld a, d
 	or e
-	jr z, .no_scene
+	ret z
 	call GetScriptByte
 	ld [de], a
-.no_scene
 	ret
 
 Script_readmem:
@@ -1756,10 +1742,8 @@ Script_checkmoney:
 
 CompareMoneyAction:
 	jr c, .less
-	jr z, .exact
 	ld a, HAVE_MORE
-	jr .done
-.exact
+	jr nz, .done
 	ld a, HAVE_AMOUNT
 	jr .done
 .less
@@ -1905,9 +1889,9 @@ Script_givepoke:
 	ld b, a
 	jr z, .ok
 	ld hl, wScriptPos
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	call GetScriptByte
 	call GetScriptByte
 	call GetScriptByte
@@ -2160,9 +2144,6 @@ Script_writeunusedbyte:
 	ld [wUnusedScriptByte], a
 	ret
 
-UnusedClosetextScript: ; unreferenced
-	closetext
-
 Script_closetext:
 	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	jmp CloseText
@@ -2206,10 +2187,7 @@ Script_stopandsjump:
 
 Script_end:
 	call ExitScriptSubroutine
-	jr c, .resume
-	ret
-
-.resume
+	ret nc
 	xor a
 	ld [wScriptRunning], a
 	ld a, SCRIPT_OFF
@@ -2303,14 +2281,6 @@ Script_checksave:
 	ld [wScriptVar], a
 	ret
 
-Script_checkver_duplicate: ; unreferenced
-	ld a, [.gs_version]
-	ld [wScriptVar], a
-	ret
-
-.gs_version:
-	db GS_VERSION
-
 Script_loadmonindex:
 	call LoadScriptPokemonID
 	ld [wScriptVar], a
@@ -2378,7 +2348,7 @@ Script_loaditemindex:
 	cp NUM_MAP_LOCKED_ITEM_IDS
 	ret nc
 	if LOCKED_ITEM_ID_MAP_1 > 1
-		add a, LOCKED_ITEM_TD_MAP_1
+		add LOCKED_ITEM_TD_MAP_1
 	elif LOCKED_ITEM_ID_MAP_1 == 1
 		inc a
 	endc

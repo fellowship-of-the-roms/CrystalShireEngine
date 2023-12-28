@@ -51,10 +51,7 @@ MonMenuLoop:
 	bit A_BUTTON_F, a
 	jr nz, .select
 	bit B_BUTTON_F, a
-	jr nz, .cancel
-	jr .loop
-
-.cancel
+	jr z, .loop
 	ld a, MONMENUITEM_CANCEL
 	ret
 
@@ -132,9 +129,8 @@ GetMonSubmenuItems:
 	push hl
 	call IsFieldMove
 	pop hl
-	jr nc, .next
-	call AddMonMenuItem
-
+	call c,  AddMonMenuItem
+; fallthrough
 .next
 	pop de
 	inc de
@@ -158,21 +154,18 @@ GetMonSubmenuItems:
 	ld d, [hl]
 	farcall ItemIsMail
 	pop hl
-	ld a, MONMENUITEM_MAIL
-	jr c, .ok
-	ld a, MONMENUITEM_ITEM
-
-.ok
+	; a = carry ? MONMENUITEM_MAIL : MONMENUITEM_ITEM
+	sbc a
+	and MONMENUITEM_MAIL - MONMENUITEM_ITEM
+	add MONMENUITEM_ITEM
 	call AddMonMenuItem
 
 .skip2
 	ld a, [wMonSubmenuCount]
 	cp NUM_MONMENU_ITEMS
-	jr z, .ok2
+	jr z, TerminateMonSubmenu
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
-
-.ok2
 	jr TerminateMonSubmenu
 
 .egg

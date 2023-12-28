@@ -27,7 +27,7 @@ ResetMapLockedIDs:
 	ld e, NUM_MAP_LOCKED_ITEM_IDS
 .item_loop
 	ld a, LOCKED_ITEM_ID_MAP_1 - 1
-	add a, e
+	add e
 	ld l, a
 	xor a
 	call LockItemID
@@ -238,10 +238,8 @@ EnterMapWarp:
 	cp TILESET_POKECENTER
 	jr z, .pokecenter_pokecom
 	cp TILESET_POKECOM_CENTER
-	jr z, .pokecenter_pokecom
-	ret
+	ret nz
 .pokecenter_pokecom
-
 	ld a, [wPrevMapGroup]
 	ld [wLastSpawnMapGroup], a
 	ld a, [wPrevMapNumber]
@@ -298,8 +296,7 @@ LoadMapTimeOfDay:
 	ldh [rVBK], a
 .copy
 	hlbgcoord 0, 0
-	ld c, SCREEN_WIDTH
-	ld b, SCREEN_HEIGHT
+	lb bc, SCREEN_HEIGHT, SCREEN_WIDTH
 .row
 	push bc
 .column
@@ -313,7 +310,7 @@ LoadMapTimeOfDay:
 	pop bc
 	dec b
 	jr nz, .row
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ret
 
@@ -414,10 +411,10 @@ GetMapScreenCoords::
 	jr nz, .odd_x
 ; even x
 	srl a
-	add 1
+	inc a
 	jr .got_block_x
 .odd_x
-	add 1
+	inc a
 	srl a
 .got_block_x
 	ld c, a
@@ -432,10 +429,10 @@ GetMapScreenCoords::
 	jr nz, .odd_y
 ; even y
 	srl a
-	add 1
+	inc a
 	jr .got_block_y
 .odd_y
-	add 1
+	inc a
 	srl a
 .got_block_y
 	rst AddNTimes

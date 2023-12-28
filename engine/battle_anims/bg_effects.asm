@@ -207,10 +207,7 @@ BattleBGEffect_FlashContinue:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .apply_pal
-	jmp EndBattleBGEffect
-
-.apply_pal
+	jmp z, EndBattleBGEffect
 	dec a
 	ld [hl], a
 	and 1
@@ -370,10 +367,7 @@ BattleBGEffect_HideMon:
 
 BattleBGEffect_ShowMon:
 	call BGEffect_CheckFlyDigStatus
-	jr z, .not_flying
-	jmp EndBattleBGEffect
-
-.not_flying
+	jmp nz, EndBattleBGEffect
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
 	ld de, .EnemyData
@@ -546,11 +540,8 @@ BattleBGEffect_RemoveMon:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .user
 	ld a, $9
-	jr .okay
-
-.user
+	jr nz, .okay
 	ld a, $8
 .okay
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -703,10 +694,10 @@ BattleBGEffect_RunPicResizeScript:
 	ld e, [hl]
 	ld d, $0
 	inc [hl]
-	ld a, [wBattlePicResizeTempPointer]
+	ld hl, wBattlePicResizeTempPointer
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	ld a, [wBattlePicResizeTempPointer + 1]
-	ld h, a
 	add hl, de
 	add hl, de
 	add hl, de
@@ -716,9 +707,7 @@ BattleBGEffect_RunPicResizeScript:
 	cp -2
 	jr z, .clear
 	cp -3
-	jr z, .skip
-	call .PlaceGraphic
-.skip
+	call nz, .PlaceGraphic
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -785,9 +774,9 @@ BattleBGEffect_RunPicResizeScript:
 	and $f
 	ld b, a
 ; store pointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 ; get byte
 	pop hl
 	inc hl
@@ -999,7 +988,7 @@ BattleBGEffect_Water:
 	ld a, [hl]
 	and $f0
 	swap a
-	xor $ff
+	cpl
 	add $4
 	ld d, a
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
@@ -1116,7 +1105,7 @@ BattleBGEffect_DoubleTeam:
 	dw .one
 	dw .two
 	dw .three
-	dw .four
+	dw DoNothing ; .four
 	dw .five
 
 .zero
@@ -1170,13 +1159,11 @@ BattleBGEffect_DoubleTeam:
 	ld a, [hl]
 	add $4
 	ld [hl], a
-
-.four
 	ret
 
 .UpdateLYOverrides:
 	ld e, a
-	xor $ff
+	cpl
 	inc a
 	ld d, a
 	ld h, HIGH(wLYOverridesBackup)
@@ -1187,9 +1174,9 @@ BattleBGEffect_DoubleTeam:
 	srl a
 	push af
 .loop
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
 	dec a
 	jr nz, .loop
@@ -1405,11 +1392,8 @@ BattleBGEffect_Tackle:
 	add hl, bc
 	ld [hl], 0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_side
 	ld a, 2
-	jr .okay
-
-.player_side
+	jr z, .okay
 	ld a, -2
 .okay
 	ld [hl], a
@@ -1443,11 +1427,8 @@ BattleBGEffect_BodySlam:
 	add hl, bc
 	ld [hl], 0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_side
 	ld a, 2
-	jr .okay
-
-.player_side
+	jr z, .okay
 	ld a, -2
 .okay
 	ld [hl], a
@@ -1488,14 +1469,12 @@ Tackle_ReturnMove:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .move_back
-	call BattleBGEffects_IncAnonJumptableIndex
-.move_back
+	call z, BattleBGEffects_IncAnonJumptableIndex
 	call Rollout_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
@@ -1586,11 +1565,8 @@ VitalThrow_MoveBackwards:
 	add hl, bc
 	ld [hl], $0
 	call BGEffect_CheckBattleTurn
-	jr nz, .player_turn
 	ld a, -2
-	jr .okay
-
-.player_turn
+	jr z, .okay
 	ld a, 2
 .okay
 	ld [hl], a
@@ -1601,14 +1577,12 @@ BattleBGEffect_VitalThrow:
 .anon_dw
 	dw VitalThrow_MoveBackwards
 	dw Tackle_MoveForward
-	dw .two
+	dw DoNothing ; .two
 	dw Tackle_ReturnMove
 	dw .four
 
 .four
-	call BattleAnim_ResetLCDStatCustom
-.two
-	ret
+	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_WobbleMon:
 ; Similar to BattleBGEffect_WobblePlayer, except it can affect either side and the sine movement has a radius of 8 instead of 6 and it moves at twice the rate
@@ -1800,10 +1774,10 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	call BattleBGEffects_AnonJumptable
 .anon_dw
 	dw .zero
-	dw .one
+	dw DoNothing ; .one
 	dw .two
 	dw .three
-	dw .four
+	dw DoNothing ; .four
 	dw .five
 
 .zero
@@ -1832,16 +1806,11 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	ld [hl], $0
-.one
-.four
 	ret
 
 .two
 	call .GetLYOverride
-	jr nc, .next
-	jr .SetLYOverridesBackup
-
-.next
+	jr c, .SetLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	ld [hl], $0
@@ -1872,7 +1841,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	srl a
 	ld h, HIGH(wLYOverridesBackup)
 .loop2
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is loop counter)
 	inc hl
 	inc hl
 	dec a
@@ -1887,9 +1856,10 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	ld e, a
 	ld d, 0
 	ld hl, .data
@@ -1927,9 +1897,10 @@ BattleBGEffect_BetaSendOutMon2: ; unused
 	and a
 	jr z, .done
 	dec [hl]
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	and $f
 	ld d, a
 	ld e, a
@@ -1972,9 +1943,9 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	ret nz
 	ld a, e
 	and $18
-	sla a
+	add a
 	swap a
-	sla a
+	add a
 	ld e, a
 	ld d, 0
 	push bc
@@ -1992,8 +1963,8 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 .player
 	ld hl, .DMG_PlayerData
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld a, [hl]
 	ld [wOBP1], a
 	ld e, a
@@ -2013,13 +1984,13 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 .DMG_LYOverrideLoads:
 	ld hl, wLYOverridesBackup
 .loop1
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	dec b
 	jr nz, .loop1
 .loop2
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	dec c
 	jr nz, .loop2
 	ret
@@ -2051,9 +2022,9 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	ret nz
 	ld a, e
 	and $18
-	sla a
+	add a
 	swap a
-	sla a
+	add a
 	ld e, a
 	ld d, 0
 	call BGEffect_CheckBattleTurn
@@ -2204,7 +2175,7 @@ BattleBGEffect_VibrateMon:
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	jmp BGEffect_FillLYOverridesBackup
@@ -2267,7 +2238,7 @@ BattleBGEffect_Rollout:
 	call DelayFrame
 	pop af
 	ldh [hSCY], a
-	xor $ff
+	cpl
 	inc a
 	ld [wAnimObject1YOffset], a
 	ret
@@ -2320,7 +2291,7 @@ BattleBGEffects_GetShakeAmount:
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	and a
@@ -2419,10 +2390,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_2_dmg
-	jmp BGEffect_FillLYOverridesBackup
-
-.okay_2_dmg
+	jmp nc, BGEffect_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	dec [hl]
@@ -2479,10 +2447,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_2_cgb
-	jr BGEffects_LoadPlayerPals
-
-.okay_2_cgb
+	jr nc, BGEffects_LoadPlayerPals
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	dec [hl]
@@ -2508,10 +2473,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_4_cgb
-	jr BGEffects_LoadEnemyPals
-
-.okay_4_cgb
+	jr nc, BGEffects_LoadEnemyPals
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	dec [hl]
@@ -2774,8 +2736,8 @@ DeformWater:
 	ldh a, [hLYOverrideStart]
 	cp l
 	jr nc, .skip2
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 .skip2
 	ld a, [wBattleSineWaveTempOffset]
 	add $4
@@ -2859,7 +2821,7 @@ BGEffect_DisplaceLYOverridesBackup:
 	dec e
 	jr nz, .loop
 	pop af
-	xor $ff
+	cpl
 .loop2
 	ld [hli], a
 	dec d

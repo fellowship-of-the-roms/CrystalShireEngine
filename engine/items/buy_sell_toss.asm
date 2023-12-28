@@ -62,7 +62,7 @@ BuySellToss_InterpretJoypad:
 	ret
 
 .a
-	ld a, 0
+	xor a
 	scf
 	ret
 
@@ -93,9 +93,8 @@ BuySellToss_InterpretJoypad:
 	ld a, [wItemQuantityChange]
 	sub 10
 	jr c, .load_1
-	jr z, .load_1
-	jr .finish_left
-
+	jr nz, .finish_left
+; fallthrough
 .load_1
 	ld a, 1
 
@@ -124,8 +123,8 @@ BuySellToss_UpdateQuantityDisplay:
 	call MenuBoxCoord2Tile
 	ld de, SCREEN_WIDTH + 1
 	add hl, de
-	ld [hl], "×"
-	inc hl
+	ld a, "×"
+	ld [hli], a
 	ld de, wItemQuantityChange
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
@@ -135,10 +134,6 @@ BuySellToss_UpdateQuantityDisplay:
 	ld d, a
 	ld a, [wMenuDataBank]
 	jmp FarCall_de
-
-NoPriceToDisplay:
-; Does nothing.
-	ret
 
 DisplayPurchasePrice:
 	call BuySell_MultiplyPrice
@@ -197,7 +192,7 @@ BuySell_DisplaySubtotal:
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 15, 9, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
-	dw NoPriceToDisplay
+	dw DoNothing ; NoPriceToDisplay
 	db 0 ; default option
 
 BuyItem_MenuHeader:

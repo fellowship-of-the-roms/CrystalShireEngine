@@ -3,7 +3,7 @@
 
 ; Copies certain values at the time the player enters the Hall of Fame.
 StubbedTrainerRankings_HallOfFame2::
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingGameTimeHOF)
 	call OpenSRAM
 
@@ -33,7 +33,7 @@ StubbedTrainerRankings_HallOfFame2::
 	jmp CloseSRAM
 
 StubbedTrainerRankings_MagikarpLength:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingLongestMagikarp)
 	call OpenSRAM
 	ld de, wMagikarpLength
@@ -100,7 +100,7 @@ StubbedTrainerRankings_MagikarpLength:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_BugContestScore:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingBugContestScore)
 	call OpenSRAM
 	ldh a, [hProduct]
@@ -128,7 +128,7 @@ StubbedTrainerRankings_BugContestScore:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsWinStreak:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingCurrentSlotsStreak)
 	call OpenSRAM
 
@@ -167,7 +167,7 @@ StubbedTrainerRankings_AddToSlotsWinStreak:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_EndSlotsWinStreak:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingCurrentSlotsStreak)
 	call OpenSRAM
 	ld hl, sTrainerRankingCurrentSlotsStreak
@@ -178,7 +178,7 @@ StubbedTrainerRankings_EndSlotsWinStreak:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToSlotsPayouts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingTotalSlotsPayouts)
 	call OpenSRAM
 	ld hl, sTrainerRankingTotalSlotsPayouts + 3
@@ -205,7 +205,7 @@ StubbedTrainerRankings_AddToSlotsPayouts:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_AddToBattlePayouts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankingTotalBattlePayouts)
 	call OpenSRAM
 	ld hl, sTrainerRankingTotalBattlePayouts + 3
@@ -234,22 +234,22 @@ StubbedTrainerRankings_AddToBattlePayouts:
 	jmp CloseSRAM
 
 StubbedTrainerRankings_StepCount:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingStepCount
 	jmp StubbedTrainerRankings_Increment4Byte
 
 StubbedTrainerRankings_BattleTowerWins: ; unreferenced
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingBattleTowerWins
 	jmp StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_TMsHMsTaught:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTMsHMsTaught
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Battles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
@@ -257,7 +257,7 @@ StubbedTrainerRankings_Battles:
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL ; Exclude the Dude’s tutorial battle
 	ret z
@@ -265,102 +265,92 @@ StubbedTrainerRankings_WildBattles:
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_TrainerBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTrainerBattles
 	jmp StubbedTrainerRankings_Increment3Byte
 
-StubbedTrainerRankings_Unused1: ; unreferenced
-	ret
-	ld hl, sTrainerRankingUnused1
-	jmp StubbedTrainerRankings_Increment3Byte
-
 StubbedTrainerRankings_HallOfFame::
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHOFEntries
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WildMonsCaught:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWildMonsCaught
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_HookedEncounters:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHookedEncounters
 	jmp StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_EggsHatched:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingEggsHatched
-	jmp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MonsEvolved:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingMonsEvolved
-	jmp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_FruitPicked:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingFruitPicked
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Healings:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingHealings
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MysteryGift:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingMysteryGift
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Trades:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTrades
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Fly:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingFly
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Surf:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingSurf
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Waterfall:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWaterfall
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_WhiteOuts:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingWhiteOuts
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_LuckyNumberShow:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingLuckyNumberShow
 	jr StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_PhoneCalls:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingPhoneCalls
 	jr StubbedTrainerRankings_Increment3Byte
 
-StubbedTrainerRankings_Unused2: ; unreferenced
-	ret
-	ld hl, sTrainerRankingUnused2
-	jr StubbedTrainerRankings_Increment3Byte
-
 StubbedTrainerRankings_LinkBattles:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingLinkBattles
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_Splash:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	; Only counts if it’s the player’s turn
 	ldh a, [hBattleTurn]
 	and a
@@ -369,33 +359,28 @@ StubbedTrainerRankings_Splash:
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_TreeEncounters:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingTreeEncounters
 	jr StubbedTrainerRankings_Increment3Byte
 
-StubbedTrainerRankings_Unused3: ; unreferenced
-	ret
-	ld hl, sTrainerRankingUnused3
-	jr StubbedTrainerRankings_Increment3Byte
-
 StubbedTrainerRankings_ColosseumWins:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumWins
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumLosses:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumLosses
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumDraws:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld hl, sTrainerRankingColosseumDraws
 	jr StubbedTrainerRankings_Increment3Byte
 
 ; Counts uses of both Selfdestruct and Explosion.
 StubbedTrainerRankings_Selfdestruct:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	; Only counts if it’s the player’s turn
 	ldh a, [hBattleTurn]
 	and a
@@ -460,7 +445,7 @@ StubbedTrainerRankings_Increment:
 
 ; Used when SRAM bank 5 isn’t already loaded — what’s the point of this?
 UpdateTrainerRankingsChecksum2:
-	ret
+	ret ; no-optimize Stub function (Plans for functions in the future)
 	ld a, BANK(sTrainerRankings)
 	call OpenSRAM
 	call UpdateTrainerRankingsChecksum
@@ -470,8 +455,8 @@ UpdateTrainerRankingsChecksum:
 	push de
 	call CalculateTrainerRankingsChecksum
 	ld hl, sTrainerRankingsChecksum
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld [hl], e
 	pop de
 	ret
@@ -557,358 +542,18 @@ InitializeTrainerRankings: ; unreferenced
 	ld bc, sTrainerRankingsEnd - sTrainerRankings
 	jmp CopyBytes
 
-_MobilePrintNum::
-; Supports signed 31-bit integers (up to 10 digits)
-; b: Bits 0-4 = # bytes
-;    Bit 7 = set if negative
-; c: Number of digits
-; de: highest byte of number to convert
-; hl: where to print the converted string
-	push bc
-	xor a
-	ldh [hPrintNumBuffer + 0], a
-	ldh [hPrintNumBuffer + 1], a
-	ldh [hPrintNumBuffer + 2], a
-	ld a, b
-	and $f
-	cp $1
-	jr z, .one_byte
-	cp $2
-	jr z, .two_bytes
-	cp $3
-	jr z, .three_bytes
-; four bytes
-	ld a, [de]
-	ldh [hPrintNumBuffer + 0], a
-	inc de
-
-.three_bytes
-	ld a, [de]
-	ldh [hPrintNumBuffer + 1], a
-	inc de
-
-.two_bytes
-	ld a, [de]
-	ldh [hPrintNumBuffer + 2], a
-	inc de
-
-.one_byte
-	ld a, [de]
-	ldh [hPrintNumBuffer + 3], a
-	inc de
-
-	push de
-	xor a
-	ldh [hPrintNumBuffer + 8], a
-	ld a, b
-	ldh [hPrintNumBuffer + 9], a
-	ld a, c
-	cp 2
-	jr z, .two_digits
-	ld de, ._2
-	cp 3
-	jr z, .three_to_nine_digits
-	ld de, ._3
-	cp 4
-	jr z, .three_to_nine_digits
-	ld de, ._4
-	cp 5
-	jr z, .three_to_nine_digits
-	ld de, ._5
-	cp 6
-	jr z, .three_to_nine_digits
-	ld de, ._6
-	cp 7
-	jr z, .three_to_nine_digits
-	ld de, ._7
-	cp 8
-	jr z, .three_to_nine_digits
-	ld de, ._8
-	cp 9
-	jr z, .three_to_nine_digits
-	ld de, ._9
-
-.three_to_nine_digits
-	inc de
-	inc de
-	inc de
-	dec a
-	dec a
-
-.digit_loop
-	push af
-	call .Function1062b2
-	call .Function1062ff
-rept 4
-	inc de
-endr
-	pop af
-	dec a
-	jr nz, .digit_loop
-
-.two_digits
-	ld c, 0
-	ldh a, [hPrintNumBuffer + 3]
-.mod_ten_loop
-	cp 10
-	jr c, .simple_divide_done
-	sub 10
-	inc c
-	jr .mod_ten_loop
-
-.simple_divide_done
-	ld b, a
-	ldh a, [hPrintNumBuffer + 8]
-	or c
-	ldh [hPrintNumBuffer + 8], a
-	jr nz, .create_digit
-	call .LoadMinusTenIfNegative
-	jr .done
-
-.create_digit
-	ld a, "0"
-	add c
-	ld [hl], a
-
-.done
-	call .Function1062ff
-	ld a, "0"
-	add b
-	ld [hli], a
-	pop de
-	pop bc
-	ret
-
-._9
-	dd 1000000000
-._8
-	dd 100000000
-._7
-	dd 10000000
-._6
-	dd 1000000
-._5
-	dd 100000
-._4
-	dd 10000
-._3
-	dd 1000
-._2
-	dd 100
-
-.Function1062b2:
-	ld c, $0
-.asm_1062b4
-	ld a, [de]
-	dec de
-	ld b, a
-	ldh a, [hPrintNumBuffer + 3]
-	sub b
-	ldh [hPrintNumBuffer + 7], a
-	ld a, [de]
-	dec de
-	ld b, a
-	ldh a, [hPrintNumBuffer + 2]
-	sbc b
-	ldh [hPrintNumBuffer + 6], a
-	ld a, [de]
-	dec de
-	ld b, a
-	ldh a, [hPrintNumBuffer + 1]
-	sbc b
-	ldh [hPrintNumBuffer + 5], a
-	ld a, [de]
-	inc de
-	inc de
-	inc de
-	ld b, a
-	ldh a, [hPrintNumBuffer + 0]
-	sbc b
-	ldh [hPrintNumBuffer + 4], a
-	jr c, .asm_1062eb
-	ldh a, [hPrintNumBuffer + 4]
-	ldh [hPrintNumBuffer + 0], a
-	ldh a, [hPrintNumBuffer + 5]
-	ldh [hPrintNumBuffer + 1], a
-	ldh a, [hPrintNumBuffer + 6]
-	ldh [hPrintNumBuffer + 2], a
-	ldh a, [hPrintNumBuffer + 7]
-	ldh [hPrintNumBuffer + 3], a
-	inc c
-	jr .asm_1062b4
-
-.asm_1062eb
-	ldh a, [hPrintNumBuffer + 8]
-	or c
-	jr z, .LoadMinusTenIfNegative
-	ld a, -10
-	add c
-	ld [hl], a
-	ldh [hPrintNumBuffer + 8], a
-	ret
-
-.LoadMinusTenIfNegative:
-	ldh a, [hPrintNumBuffer + 9]
-	bit 7, a
-	ret z
-
-	ld [hl], -10
-	ret
-
-.Function1062ff:
-	ldh a, [hPrintNumBuffer + 9]
-	bit 7, a
-	jr nz, .asm_10630d
-	bit 6, a
-	jr z, .asm_10630d
-	ldh a, [hPrintNumBuffer + 8]
-	and a
-	ret z
-
-.asm_10630d
-	inc hl
-	ret
-
 ; functions related to the cable club and various NPC scripts referencing communications
-
-
-Function1063cc:
-	ld a, $78
-	ld [wcd42], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-
-Function1063d8:
-	ld hl, wcd42
-	dec [hl]
-	ret nz
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function1063e5:
-	ld a, [wcf64]
-	cp $3
-	ret nz
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function1063f3:
-	ld de, wcd31
-	ld a, MOBILEAPI_TELEPHONESTATUS
-	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function106442:
-	ld a, MOBILEAPI_1B
-	call MobileAPI
-	xor a
-	ldh [hMobile], a
-	ldh [hMobileReceive], a
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-
-Function106453:
-	ld a, [wMobileCommsJumptableIndex]
-	set 7, a
-	ld [wMobileCommsJumptableIndex], a
-	ld a, $4
-	ld [wcf64], a
-	ret
-
-Stubbed_Function106462:
-	ret
 
 Function106464::
 	ld de, MobileDialingFrameGFX
 	ld hl, vTiles2 tile $62
-	ld c, 9
-	ld b, BANK(MobileDialingFrameGFX)
+	lb bc, BANK(MobileDialingFrameGFX), 9
 	call Get2bpp
 ;	ld de, $40b0
 ;	ld hl, vTiles2 tile $6b
 ;	ld b, $0f ; no graphics at 0f:40b0; JP leftover???
 ;	call Get2bpp
 	farjp LoadFrame
-
-Function10649b: ; unreferenced
-	ld a, [wTextboxFrame]
-	maskbits NUM_FRAMES
-	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
-	ld hl, Frames
-	rst AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, vTiles2 tile "┌" ; $79
-	ld c, TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	ld b, BANK(Frames)
-	call Function1064c3
-	ld hl, vTiles2 tile " " ; $7f
-	ld de, TextboxSpaceGFX
-	ld c, 1
-	ld b, BANK(TextboxSpaceGFX)
-; fallthrough
-Function1064c3:
-	ldh a, [rSVBK]
-	push af
-	ld a, $6
-	ldh [rSVBK], a
-	push bc
-	push hl
-	ld hl, Function3f88
-	ld a, b
-	call FarCall_hl
-	pop hl
-	pop bc
-	pop af
-	ldh [rSVBK], a
-	jr asm_1064ed
-
-Function1064d8: ; unreferenced
-	ldh a, [rSVBK]
-	push af
-	ld a, $6
-	ldh [rSVBK], a
-	push bc
-	push hl
-	ld hl, Function3f9f
-	ld a, b
-	call FarCall_hl
-	pop hl
-	pop bc
-	pop af
-	ldh [rSVBK], a
-; fallthrough
-asm_1064ed:
-	ld de, wDecompressScratch
-	ld b, $0
-	ldh a, [rSVBK]
-	push af
-	ld a, $6
-	ldh [rSVBK], a
-	ldh a, [rVBK]
-	push af
-	ld a, $1
-	ldh [rVBK], a
-	call Get2bpp
-	pop af
-	ldh [rVBK], a
-	pop af
-	ldh [rSVBK], a
-	ret
-
-Function10650a: ; unreferenced
-	ld de, MobilePhoneTilesGFX
-	lb bc, BANK(MobilePhoneTilesGFX), 17
-	jmp Get2bpp
 
 MobileDialingFrameGFX:
 INCBIN "gfx/mobile/dialing_frame.2bpp"

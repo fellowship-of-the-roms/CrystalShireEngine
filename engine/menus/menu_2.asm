@@ -1,37 +1,36 @@
 PlaceMenuItemName:
 	push de
 	ld a, [wMenuSelection]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	pop hl
-	jmp PlaceString
-
+	jr _PlaceSimpleMenuQuantity
+	
 PlaceMenuItemQuantity:
 	push de
 	ld a, [wMenuSelection]
-	ld [wCurItem], a
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	pop hl
-	and a
-	jr nz, .done
-	ld de, $15
-	add hl, de
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jr _PlaceMenuQuantity
 
 PlaceMenuItemBallName:
 	push de
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_BALL_ITEM)
 	ld l, a
+	jr _PlaceSimpleMenuQuantity16bit
+
+PlaceMenuItemBerryName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_BERRY_ITEM)
+	ld l, a
+	jr _PlaceSimpleMenuQuantity16bit
+
+PlaceMenuKeyItemName:
+	push de
+	ld a, [wMenuSelection]
+	ld h, HIGH(FIRST_KEY_ITEM)
+	ld l, a
+; fallthrough
+_PlaceSimpleMenuQuantity16bit:
 	call GetItemIDFromIndex
+_PlaceSimpleMenuQuantity:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
@@ -42,91 +41,37 @@ PlaceMenuItemBallQuantity:
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_BALL_ITEM)
 	ld l, a
-	call GetItemIDFromIndex
-	ld [wCurItem], a
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	pop hl
-	and a
-	jr nz, .done
-	ld de, $15
-	add hl, de
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
-
-PlaceMenuItemBerryName:
-	push de
-	ld a, [wMenuSelection]
-	ld h, HIGH(FIRST_BERRY_ITEM)
-	ld l, a
-	call GetItemIDFromIndex
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	pop hl
-	jmp PlaceString
+	jr _PlaceMenuQuantity16bit
 
 PlaceMenuItemBerryQuantity:
 	push de
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_BERRY_ITEM)
 	ld l, a
-	call GetItemIDFromIndex
-	ld [wCurItem], a
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	pop hl
-	and a
-	jr nz, .done
-	ld de, $15
-	add hl, de
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
-
-PlaceMenuKeyItemName:
-	push de
-	ld a, [wMenuSelection]
-	ld h, HIGH(FIRST_KEY_ITEM)
-	ld l, a
-	call GetItemIDFromIndex
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	pop hl
-	jmp PlaceString
+	jr _PlaceMenuQuantity16bit
 
 PlaceMenuKeyItemQuantity:
 	push de
 	ld a, [wMenuSelection]
 	ld h, HIGH(FIRST_KEY_ITEM)
 	ld l, a
+; fallthrough
+_PlaceMenuQuantity16bit:
 	call GetItemIDFromIndex
+_PlaceMenuQuantity:
 	ld [wCurItem], a
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
 	pop hl
 	and a
-	jr nz, .done
+	ret nz
 	ld de, $15
 	add hl, de
-	ld [hl], "×"
-	inc hl
+	ld a, "x"
+	ld [hli], a
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jmp PrintNum
 
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader
@@ -167,8 +112,7 @@ MoneyBottomLeftMenuHeader:
 DisplayCoinCaseBalance:
 	; Place a text box of size 1x7 at 11, 0.
 	hlcoord 11, 0
-	ld b, 1
-	ld c, 7
+	lb bc, 1, 7
 	call Textbox
 	hlcoord 12, 0
 	ld de, CoinString
@@ -183,8 +127,7 @@ DisplayCoinCaseBalance:
 
 DisplayMoneyAndCoinBalance:
 	hlcoord 5, 0
-	ld b, 3
-	ld c, 13
+	lb bc, 3, 13
 	call Textbox
 	hlcoord 6, 1
 	ld de, MoneyString
@@ -208,42 +151,9 @@ CoinString:
 ShowMoney_TerminatorString:
 	db "@"
 
-StartMenu_PrintSafariGameStatus: ; unreferenced
-	ld hl, wOptions
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	hlcoord 0, 0
-	ld b, 3
-	ld c, 7
-	call Textbox
-	hlcoord 1, 1
-	ld de, wSafariTimeRemaining
-	lb bc, 2, 3
-	call PrintNum
-	hlcoord 4, 1
-	ld de, .slash_500
-	rst PlaceString
-	hlcoord 1, 3
-	ld de, .booru_ko
-	rst PlaceString
-	hlcoord 5, 3
-	ld de, wSafariBallsRemaining
-	lb bc, 1, 2
-	call PrintNum
-	pop af
-	ld [wOptions], a
-	ret
-
-.slash_500
-	db "／５００@"
-.booru_ko
-	db "ボール　　　こ@"
-
 StartMenu_DrawBugContestStatusBox:
 	hlcoord 0, 0
-	ld b, 5
-	ld c, 17
+	lb bc, 5, 17
 	jmp Textbox
 
 StartMenu_PrintBugContestStatus:
@@ -324,8 +234,7 @@ FindApricornsInBag:
 	pop hl
 	inc hl
 	inc hl
-	jr nc, .loop
-	call .addtobuffer
+	call c, .addtobuffer
 	jr .loop
 .done
 	pop hl

@@ -41,9 +41,8 @@ SetFacingStandAction:
 	add hl, bc
 	ld a, [hl]
 	and 1
-	jr nz, SetFacingStepAction
-	jr SetFacingCurrent
-
+	jr z, SetFacingCurrent
+; fallthrough
 SetFacingStepAction:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
@@ -134,7 +133,7 @@ SetFacingCounterclockwiseSpin2:
 
 CounterclockwiseSpinAction:
 ; Here, OBJECT_STEP_FRAME consists of two components,
-; bits 0,1,2 form a 3-bit timer (6 overworld frames) 
+; bits 0,1,2 form a 3-bit timer (6 overworld frames)
 ; and bits 4,5 form a 2-bit value that determines the facing - the direction is counterclockwise.
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
@@ -227,9 +226,8 @@ SetFacingFreezeBounce:
 SetFacingWeirdTree:
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
+	inc [hl]
 	ld a, [hl]
-	inc a
-	ld [hl], a
 	maskbits NUM_DIRECTIONS, 2
 	rrca
 	rrca

@@ -441,7 +441,7 @@ PicnickerTiffanySeenText:
 	text "Are you going to"
 	line "LAKE OF RAGE too?"
 
-	para "Let's play for a "
+	para "Let's play for a"
 	line "little while!"
 	done
 

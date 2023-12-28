@@ -132,8 +132,7 @@ ForgetMove:
 	ld hl, MoveAskForgetText
 	call PrintText
 	hlcoord 5, 2
-	ld b, NUM_MOVES * 2
-	ld c, MOVE_NAME_LENGTH
+	lb bc, NUM_MOVES * 2, MOVE_NAME_LENGTH
 	call Textbox
 	hlcoord 5 + 2, 2 + 2
 	ld a, SCREEN_WIDTH * 2

@@ -15,7 +15,7 @@ PopBCDEHL::
 	pop de
 	pop hl
 DoNothing::
-	ret
+	ret ; no-optimize Stub Function (global do nothing)
 
 SECTION "rst10", ROM0[$0010]
 Bankswitch::
@@ -62,7 +62,7 @@ SECTION "lcd", ROM0[$0048]
 	jr hLCDInterruptFunction
 
 SECTION "timer", ROM0[$0050]
-	jmp MobileTimer
+	reti
 
 SECTION "serial", ROM0[$0058]
 	jmp Serial

@@ -2,8 +2,8 @@ ClearSpriteAnims:
 	ld hl, wSpriteAnimData
 	ld bc, wSpriteAnimDataEnd - wSpriteAnimData
 .loop
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	dec bc
 	ld a, c
 	or b
@@ -42,7 +42,7 @@ DoNextFrameForAllSprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -57,13 +57,10 @@ DoNextFrameForAllSprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> wShadowOAMEnd)
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
 
 DoNextFrameForFirst16Sprites:
 	ld hl, wSpriteAnimationStructs
@@ -81,7 +78,7 @@ DoNextFrameForFirst16Sprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -96,13 +93,10 @@ DoNextFrameForFirst16Sprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> Sprites + $40)
 	ld a, l
 	cp LOW(wShadowOAMSprite16)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
 
 _InitSpriteAnimStruct::
 ; Initialize animation a at pixel x=e, y=d
@@ -167,7 +161,7 @@ _InitSpriteAnimStruct::
 ; Take the mapped value and load it in.
 	ld a, [de]
 	call GetSpriteAnimVTile
-	ld [hli], a ; SPRITEANIMSTRUCT_TILE_ID
+	ld [hl], a ; SPRITEANIMSTRUCT_TILE_ID
 	pop de
 ; Set hl to field 4 (X coordinate).  Kinda pointless, because we're presumably already here.
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -321,7 +315,7 @@ AddOrSubtractY:
 	jr z, .ok
 	; -8 - a
 	add 8
-	xor $ff
+	cpl
 	inc a
 
 .ok
@@ -336,7 +330,7 @@ AddOrSubtractX:
 	jr z, .ok
 	; -8 - a
 	add 8
-	xor $ff
+	cpl
 	inc a
 
 .ok
@@ -484,9 +478,9 @@ GetSpriteAnimFrame:
 	ld hl, SpriteAnimFrameData
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, SPRITEANIMSTRUCT_FRAME
 	add hl, bc
 	ld l, [hl]
@@ -504,27 +498,6 @@ GetFrameOAMPointer:
 	add hl, de
 	ret
 
-UnusedLoadSpriteAnimGFX: ; unreferenced
-	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	ld de, UnusedSpriteAnimGFX
-	add hl, de
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	pop hl
-	push bc
-	call Request2bpp
-	pop bc
-	ret
-
 INCLUDE "data/sprite_anims/objects.asm"
 
 INCLUDE "engine/sprite_anims/functions.asm"
@@ -532,8 +505,6 @@ INCLUDE "engine/sprite_anims/functions.asm"
 INCLUDE "data/sprite_anims/framesets.asm"
 
 INCLUDE "data/sprite_anims/oam.asm"
-
-INCLUDE "data/sprite_anims/unused_gfx.asm"
 
 AnimateEndOfExpBar:
 	ldh a, [hSGB]
@@ -569,9 +540,9 @@ AnimateEndOfExpBar:
 	dec c
 	ld a, c
 ; multiply by 8
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	push af
 
 	push de
@@ -591,7 +562,7 @@ AnimateEndOfExpBar:
 	add 10 * TILE_WIDTH + 4
 	ld [hli], a ; x
 
-	ld a, $0
+	xor a
 	ld [hli], a ; tile id
 	ld a, PAL_BATTLE_OB_BLUE
 	ld [hli], a ; attributes
@@ -610,8 +581,8 @@ ClearSpriteAnims2:
 	ld hl, wSpriteAnimData
 	ld bc, wSpriteAnimDataEnd - wSpriteAnimData
 .loop
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	dec bc
 	ld a, c
 	or b

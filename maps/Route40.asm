@@ -218,15 +218,6 @@ Route40PokefanMText:
 	para "What is it?"
 	done
 
-Route40PokefanMText_Mobile:
-	text "Hm! Look at all"
-	line "those serious-"
-	cont "looking trainers"
-	cont "streaming in."
-
-	para "What? What?"
-	done
-
 Route40Lass2Text:
 	text "I came to OLIVINE"
 	line "by ship to see the"

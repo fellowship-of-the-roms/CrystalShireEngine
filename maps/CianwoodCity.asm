@@ -218,7 +218,7 @@ ChucksWifeFlySpeechText:
 	para "You will be able"
 	line "to FLY instantly"
 
-	para "to anywhere you "
+	para "to anywhere you"
 	line "have visited."
 	done
 
@@ -259,16 +259,6 @@ CianwoodCityLassText:
 
 	para "his fighting #-"
 	line "MON."
-	done
-
-CianwoodCityUnusedText:
-	text "There are several"
-	line "islands between"
-	cont "here and OLIVINE."
-
-	para "A mythical sea"
-	line "creature supposed-"
-	cont "ly lives there."
 	done
 
 EusineSuicuneText:

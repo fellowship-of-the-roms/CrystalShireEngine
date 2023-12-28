@@ -3,7 +3,7 @@ ChadAskNumber1Text:
 	line "a #DEX? Have"
 	cont "you met PROF.OAK?"
 
-	para "Huh? You have? "
+	para "Huh? You have?"
 	line "That's way cool!"
 
 	para "I have a dream of"

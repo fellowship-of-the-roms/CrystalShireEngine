@@ -133,7 +133,6 @@ Kurt_SelectQuantity:
 	cp -1
 	jr z, .done
 	ld a, [wItemQuantityChange]
-	ld [wItemQuantityChange], a ; What is the point of this operation?
 	scf
 
 .done
@@ -158,8 +157,8 @@ PlaceApricornQuantity:
 	call MenuBoxCoord2Tile
 	ld de, 2 * SCREEN_WIDTH + 10
 	add hl, de
-	ld [hl], "×"
-	inc hl
+	ld a, "×"
+	ld [hli], a
 	ld de, wItemQuantityChange
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum
@@ -229,7 +228,7 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 ; Search for [wCurItem] in the bag.
 .loop1
 ; Increase the total count.
-	ld a, [wCurItemQuantity]
+	ld a, [wCurItemQuantity] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wCurItemQuantity], a
 ; Get the index of the next item.
@@ -253,8 +252,7 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 	ld a, [wCurItemQuantity]
 	dec a
 	ld [hli], a
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 	pop hl
 	jr .loop1
 
@@ -351,14 +349,12 @@ Kurt_GiveUpSelectedQuantityOfSelectedApricorn:
 Kurt_GetAddressOfApricornQuantity:
 	push hl
 	push bc
-	ld hl, wNumItems
-	inc hl
+	ld hl, wNumItems + 2
 	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc
-	inc hl
 	ld a, [hl]
 	pop bc
 	pop hl
@@ -367,11 +363,10 @@ Kurt_GetAddressOfApricornQuantity:
 Kurt_GetRidOfItem:
 	push bc
 	push de
-	ld hl, wNumItems
+	ld hl, wNumItems + 1
 	ld a, [wCurItemQuantity]
 	ld c, a
 	ld b, 0
-	inc hl
 	add hl, bc
 	add hl, bc
 	add hl, bc

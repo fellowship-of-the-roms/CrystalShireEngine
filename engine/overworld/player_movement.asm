@@ -100,9 +100,7 @@ endc
 	ret c
 	ld a, [wWalkingDirection]
 	cp STANDING
-	jr z, .HitWall
-	call .BumpSound
-.HitWall:
+	call nz, .BumpSound
 	call .StandInPlace
 	xor a
 	ret
@@ -115,9 +113,7 @@ endc
 ; Walking into an edge warp won't bump.
 	ld a, [wWalkingIntoEdgeWarp]
 	and a
-	jr nz, .CantMove
-	call .BumpSound
-.CantMove:
+	call z, .BumpSound
 	call ._WalkInPlace
 	xor a
 	ret
@@ -246,7 +242,7 @@ endc
 ; the player change facing without moving by tapping a direction.
 
 	ld a, [wPlayerTurningDirection]
-	cp 0
+	and a
 	jr nz, .not_turning
 	ld a, [wWalkingDirection]
 	cp STANDING
@@ -555,7 +551,7 @@ endc
 	db $80 | RIGHT
 
 .StandInPlace:
-	ld a, 0
+	xor a
 	ld [wPlayerTurningDirection], a
 	ld a, movement_step_sleep
 	ld [wMovementAnimation], a
@@ -563,7 +559,7 @@ endc
 	ret
 
 ._WalkInPlace:
-	ld a, 0
+	xor a
 	ld [wPlayerTurningDirection], a
 	ld a, movement_step_bump
 	ld [wMovementAnimation], a
@@ -577,7 +573,7 @@ endc
 	ret nc
 
 	ld a, [wPlayerTurningDirection]
-	cp 0
+	and a
 	ret z
 
 	maskbits NUM_DIRECTIONS
@@ -655,7 +651,7 @@ ENDM
 ; Returns 1 if there is no NPC in front
 ; Returns 2 if there is a movable NPC in front. The game actually treats
 ; this the same as an NPC in front (bump).
-	ld a, 0
+	xor a
 	ldh [hMapObjectIndex], a
 ; Load the next X coordinate into d
 	ld a, [wPlayerMapX]
@@ -824,7 +820,7 @@ ENDM
 
 CheckStandingOnIce::
 	ld a, [wPlayerTurningDirection]
-	cp 0
+	and a
 	jr z, .not_ice
 	cp $f0
 	jr z, .not_ice
@@ -918,8 +914,7 @@ CheckTrainerRun:
 	ld a, [hl]
 	cp $40
 	jr nc, .next
-	ld a, $40
-	ld [hl], a
+	ld [hl], $40
 
 .next
 	pop de
@@ -953,7 +948,7 @@ AnyFacingPlayerDistance_bc::
 	add hl, bc
 	ld e, [hl]
 
-	ld a, [hJoypadDown]
+	ldh a, [hJoypadDown]
 	bit 7, a
 	jr nz, .down
 	bit 6, a
@@ -1010,6 +1005,6 @@ StopPlayerForEvent::
 	ret z
 
 	ld [hl], a
-	ld a, 0
+	xor a
 	ld [wPlayerTurningDirection], a
 	ret

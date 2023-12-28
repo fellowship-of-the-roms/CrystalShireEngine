@@ -29,8 +29,7 @@ ForceUpdateCGBPals::
 ; copy 8 pals to bgpd
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
-	ld c, LOW(rBGPD)
-	ld b, 8 / 2
+	lb bc, 8 / 2, LOW(rBGPD)
 .bgp
 rept (1 palettes) * 2
 	ld a, [hli]
@@ -45,8 +44,7 @@ endr
 ; copy 8 pals to obpd
 	ld a, 1 << rOBPI_AUTO_INCREMENT
 	ldh [rOBPI], a
-	ld c, LOW(rOBPD)
-	ld b, 8 / 2
+	lb bc, 8 / 2, LOW(rOBPD)
 .obp
 rept (1 palettes) * 2
 	ld a, [hli]
@@ -247,17 +245,15 @@ CopyPals::
 	ld l, a
 	ld h, 0
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
 
 ; dest
 	pop hl
 ; write color
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
+	ld [hli], a
+	ld a, d
+	ld [hli], a
 ; next pal color
 rept PAL_COLOR_SIZE
 	srl b

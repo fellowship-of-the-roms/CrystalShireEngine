@@ -158,10 +158,10 @@ rept MON_CRY_LENGTH
 	add hl, bc
 endr
 
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 	ld a, [hli]
 	ld [wCryPitch], a
@@ -201,7 +201,7 @@ PrintLevel::
 
 	ld a, [wTempMonLevel]
 _PrintLevel::
-	ld [hl], "<LV>"
+	ld [hl], "<LV>" ; no-optimize *hl++|*hl-- = N (a is used)
 	inc hl
 
 ; How many digits?
@@ -216,7 +216,7 @@ _PrintLevel::
 
 PrintLevel_Force3Digits::
 ; Print :L and all 3 digits
-	ld [hl], "<LV>"
+	ld [hl], "<LV>" ; no-optimize *hl++|*hl-- = N (a is used)
 	inc hl
 	ld c, 3
 
@@ -263,12 +263,12 @@ GetBaseData::
 ; Beta front and back sprites
 ; (see pokegold-spaceworld's data/pokemon/base_stats/*)
 	ld hl, wBaseUnusedFrontpic
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 .end

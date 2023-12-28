@@ -17,17 +17,6 @@ MobileBattleRoomInitializeAndPreparePokecenter2FScript:
 	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_MOBILE_BATTLE_ROOM
 	end
 
-MobileBattleRoom_EstablishingCommsText:
-	text "Establishing"
-	line "communications…"
-	done
-
-MobileBattleRoom_HealText:
-	text "Your #MON will"
-	line "be fully healed"
-	cont "before battle."
-	done
-
 MobileBattleRoom_MapEvents:
 	db 0, 0 ; filler
 

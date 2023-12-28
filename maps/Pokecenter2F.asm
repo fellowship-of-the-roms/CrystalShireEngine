@@ -130,11 +130,6 @@ endc
 	closetext
 	end
 
-BattleTradeMobile_WalkIn:
-	applymovementlasttalked Pokecenter2FMobileMobileMovementData_ReceptionistWalksUpAndLeft_LookDown
-	applymovement PLAYER, Pokecenter2FMobileMovementData_PlayerWalksIntoMobileBattleRoom
-	end
-
 LinkReceptionistScript_Battle:
 if !DEF(_DEBUG)
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
@@ -390,66 +385,9 @@ Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight:
 	turn_head RIGHT
 	step_end
 
-Pokecenter2FMobileMobileMovementData_ReceptionistWalksUpAndLeft_LookDown:
-	slow_step UP
-	slow_step LEFT
-	turn_head DOWN
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsLeftLooksDown:
-	slow_step LEFT
-	turn_head DOWN
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsRightLooksDown:
-	slow_step RIGHT
-	turn_head DOWN
-	step_end
-
-Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight_2:
-	slow_step UP
-	slow_step LEFT
-	turn_head RIGHT
-	step_end
-
-Pokecenter2FMovementData_ReceptionistLooksRight:
-	turn_head RIGHT
-	step_end
-
 Pokecenter2FMovementData_PlayerTakesThreeStepsUp:
 	step UP
 	step UP
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesTwoStepsUp:
-	step UP
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepUp:
-	step UP
-	step_end
-
-Pokecenter2FMobileMovementData_PlayerWalksIntoMobileBattleRoom:
-	step UP
-	step UP
-	step RIGHT
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesTwoStepsUp_2:
-	step UP
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerWalksLeftAndUp:
-	step LEFT
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerWalksRightAndUp:
-	step RIGHT
 	step UP
 	step_end
 
@@ -459,34 +397,9 @@ Pokecenter2FMovementData_PlayerTakesThreeStepsDown:
 	step DOWN
 	step_end
 
-Pokecenter2FMovementData_PlayerTakesTwoStepsDown:
-	step DOWN
-	step DOWN
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepDown:
-	step DOWN
-	step_end
-
 Pokecenter2FMovementData_ReceptionistStepsRightAndDown:
 	slow_step RIGHT
 	slow_step DOWN
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_2:
-	slow_step RIGHT
-	turn_head DOWN
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3:
-	slow_step UP
-	slow_step LEFT
-	turn_head RIGHT
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsLeftLooksRight:
-	slow_step LEFT
-	turn_head RIGHT
 	step_end
 
 Pokecenter2FMobileMovementData_ReceptionistWalksUpAndLeft:
@@ -506,61 +419,6 @@ Pokecenter2FMobileMovementData_ReceptionistWalksRightAndDown:
 	slow_step RIGHT
 	slow_step DOWN
 	step_end
-
-Pokecenter2FMovementData_PlayerSpinsClockwiseEndsFacingDown:
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepDown_2:
-	step DOWN
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesTwoStepsDown_2:
-	step DOWN
-	step DOWN
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepUp_2:
-	step UP
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepRight:
-	step RIGHT
-	step_end
-
-Pokecenter2FMovementData_PlayerTakesOneStepLeft:
-	step LEFT
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsLeftLooksRight_2:
-	slow_step LEFT
-	turn_head RIGHT
-	step_end
-
-Pokecenter2FMovementData_ReceptionistStepsRightLooksLeft_2:
-	slow_step RIGHT
-	turn_head LEFT
-	step_end
-
-Text_BattleReceptionistMobile:
-	text "Would you like to"
-	line "battle over a GAME"
-
-	para "LINK cable or by"
-	line "mobile phone?"
-	done
-
-Text_TradeReceptionistMobile:
-	text "Would you like to"
-	line "trade over a GAME"
-
-	para "LINK cable or by"
-	line "mobile phone?"
-	done
 
 Text_BattleReceptionistIntro:
 	text "Welcome to CABLE"
@@ -714,40 +572,6 @@ Text_MysteryGiftDeliveryGuy_NoRoom:
 Text_MysteryGiftDeliveryGuy_SaidNo:
 	text "No? That's very"
 	line "strange…"
-	done
-
-Text_OhPleaseWait:
-	text "Oh, please wait."
-	done
-
-Text_ChangeTheLook:
-	text "We need to change"
-	line "the look here…"
-	done
-
-Text_LikeTheLook:
-	text "How does this"
-	line "style look to you?"
-	done
-
-Text_BrokeStadiumRules:
-	text "Excuse me!"
-
-	para "For STADIUM rules,"
-	line "please bring six"
-
-	para "different #MON,"
-	line "excluding EGGS."
-
-	para "The six #MON"
-	line "must be different."
-
-	para "Also, they must"
-	line "not be holding"
-	cont "identical items."
-
-	para "Please come back"
-	line "when you're ready."
 	done
 
 Pokecenter2F_MapEvents:

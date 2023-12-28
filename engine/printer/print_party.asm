@@ -64,8 +64,8 @@ PrintPage2:
 	ld b, 6
 	call .FillColumn
 	hlcoord 0, 6, wPrinterTilemapBuffer
-	ld [hl], $38
-	inc hl
+	ld a, $38
+	ld [hli], a
 	ld a, $39
 	ld bc, SCREEN_HEIGHT
 	rst ByteFill
@@ -155,15 +155,14 @@ PrintPartyMonPage1:
 	ld [wMonType], a
 	farcall CopyMonToTempMon
 	hlcoord 0, 7
-	ld b, 9
-	ld c, 18
+	lb bc, 9, 18
 	call Textbox
 	hlcoord 8, 2
 	ld a, [wTempMonLevel]
 	call PrintLevel_Force3Digits
 	hlcoord 12, 2
-	ld [hl], PRINTPARTY_HP
-	inc hl
+	ld a, PRINTPARTY_HP
+	ld [hli], a
 	ld de, wTempMonMaxHP
 	lb bc, 2, 3
 	call PrintNum
@@ -180,10 +179,10 @@ PrintPartyMonPage1:
 	hlcoord 10, 6
 	rst PlaceString
 	hlcoord 8, 0
-	ld [hl], "№"
-	inc hl
-	ld [hl], "."
-	inc hl
+	ld a, "№"
+	ld [hli], a
+	ld a, "."
+	ld [hli], a
 	ld de, wNamedObjectIndex
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
@@ -253,8 +252,7 @@ PrintPartyMonPage2:
 	ld [wMonType], a
 	farcall CopyMonToTempMon
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call Textbox
 	ld bc, SCREEN_WIDTH
 	decoord 0, 0

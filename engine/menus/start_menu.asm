@@ -49,7 +49,7 @@ StartMenu::
 .Select:
 	call .GetInput
 	jr c, .Exit
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
 	call PlayClickSFX
@@ -95,7 +95,7 @@ StartMenu::
 ; Return carry on exit, and no-carry on selection.
 	xor a
 	ldh [hBGMapMode], a
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	call SetUpMenu
 	ld a, $ff
 	ld [wMenuSelection], a
@@ -106,8 +106,8 @@ StartMenu::
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
-	jr z, .a
-	jr .loop
+	jr nz, .loop
+; fallthrough
 .a
 	call PlayClickSFX
 	and a
@@ -355,25 +355,21 @@ endr
 	inc c
 	ret
 
-.DrawMenuAccount:
-	jr ._DrawMenuAccount
-
 .PrintMenuAccount:
 	call .IsMenuAccountOn
 	ret z
-	call ._DrawMenuAccount
+	call .DrawMenuAccount
 	decoord 0, 14
 	jmp .MenuDesc
 
-._DrawMenuAccount:
+.DrawMenuAccount:
 	call .IsMenuAccountOn
 	ret z
 	hlcoord 0, 13
 	lb bc, 5, 10
 	call ClearBox
 	hlcoord 0, 13
-	ld b, 3
-	ld c, 8
+	lb bc, 3, 8
 	jmp TextboxPalette
 
 .IsMenuAccountOn:
@@ -390,9 +386,7 @@ endr
 .DrawBugContestStatus:
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr nz, .contest
-	ret
-.contest
+	ret z
 	farjp StartMenu_PrintBugContestStatus
 
 StartMenu_Exit:
@@ -414,7 +408,7 @@ StartMenu_Quit:
 	ret
 
 .DontEndContest:
-	ld a, 0
+	xor a
 	ret
 
 .StartMenuContestEndText:
@@ -427,7 +421,7 @@ StartMenu_Save:
 	call BufferScreen
 	farcall SaveMenu
 	jr nc, .saved
-	ld a, 0
+	xor a
 	ret
 
 .saved
@@ -448,7 +442,7 @@ StartMenu_Status:
 	call FadeToMenu
 	farcall TrainerCard
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pokedex:
@@ -461,14 +455,14 @@ StartMenu_Pokedex:
 	call CloseSubmenu
 
 .empty
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pokegear:
 	call FadeToMenu
 	farcall PokeGear
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 StartMenu_Pack:
@@ -478,7 +472,7 @@ StartMenu_Pack:
 	and a
 	jr nz, .used_item
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 .used_item
@@ -515,7 +509,7 @@ StartMenu_Pokemon:
 	call PokemonActionSubmenu
 	cp 3
 	jr z, .menu
-	cp 0
+	and a
 	jr z, .choosemenu
 	cp 1
 	jr z, .menunoreload
@@ -524,7 +518,7 @@ StartMenu_Pokemon:
 
 .return
 	call CloseSubmenu
-	ld a, 0
+	xor a
 	ret
 
 .quit

@@ -49,9 +49,7 @@ PrintLetterDelay::
 ; Wait one frame if holding A or B.
 	ldh a, [hJoyDown]
 	bit A_BUTTON_F, a
-	jr z, .checkb
-	jr .delay
-.checkb
+	jr nz, .delay
 	bit B_BUTTON_F, a
 	jr z, .wait
 
@@ -87,10 +85,6 @@ CopyDataUntil::
 
 PrintNum::
 	homecall _PrintNum
-	ret
-
-MobilePrintNum::
-	homecall _MobilePrintNum
 	ret
 
 FarPrintText::

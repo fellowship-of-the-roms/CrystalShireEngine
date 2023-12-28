@@ -112,10 +112,7 @@ endc
 	jr nz, .press_right
 	ldh a, [hJoyLast]
 	and D_LEFT
-	jr nz, .press_left
-	ret
-
-.press_left
+	ret z
 	ld hl, wJumptableIndex
 	ld a, [hl]
 	and a
@@ -231,5 +228,4 @@ PlaceUnownPrinterFrontpic:
 	ld a, $31
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic

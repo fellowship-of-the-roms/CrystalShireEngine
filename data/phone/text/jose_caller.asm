@@ -113,18 +113,3 @@ JoseReminderText:
 	para "Please come as"
 	line "soon as you can!"
 	done
-
-JoseComePickUpText:
-	text "What's wrong?"
-
-	para "Don't you want"
-	line "this gift?"
-
-	para "Catch up to me on"
-	line "@"
-	text_ram wStringBuffer5
-	text ","
-
-	para "and I'll let you"
-	line "have it."
-	done

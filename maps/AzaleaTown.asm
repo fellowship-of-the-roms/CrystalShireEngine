@@ -370,10 +370,6 @@ AzaleaTownSlowpokeText2:
 	text "<……> <……>Yawn?"
 	done
 
-WoosterText:
-	text "WOOSTER: Gugyoo…"
-	done
-
 AzaleaTownKurtText1:
 	text "ILEX FOREST is"
 	line "restless!"

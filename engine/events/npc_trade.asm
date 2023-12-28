@@ -192,10 +192,10 @@ DoNPCTrade:
 	call GetTradeAttr
 	ld a, [hl]
 	cp TRADE_DIALOGSET_GIRL
-	ld a, CAUGHT_BY_GIRL
-	jr c, .okay
-	ld a, CAUGHT_BY_BOY
-.okay
+	; a = carry ? CAUGHT_BY_GIRL : CAUGHT_BY_BOY
+	assert CAUGHT_BY_GIRL + 1 == CAUGHT_BY_BOY
+	sbc a
+	add CAUGHT_BY_BOY
 	ld [wOTTrademonCaughtData], a
 
 	ld hl, wPartyMon1Level

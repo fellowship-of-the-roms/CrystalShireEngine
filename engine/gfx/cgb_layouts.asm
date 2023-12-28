@@ -22,11 +22,7 @@ LoadSGBLayoutCGB:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .done
-	push de
 	jp hl
-.done:
-	ret
 
 CGBLayoutJumptable:
 	table_width 2, CGBLayoutJumptable
@@ -428,9 +424,6 @@ BillsPC_PreviewTheme:
 	ldh [hCGBPalUpdate], a
 	ret
 
-BillsPCOrangePalette:
-INCLUDE "gfx/pc/orange.pal"
-
 _CGB_PokedexUnownMode:
 	ld de, wBGPals1
 	ld a, PREDEFPAL_POKEDEX
@@ -683,8 +676,7 @@ _CGB_UnownPuzzle:
 	ld hl, wOBPals1
 	ld a, LOW(palred 31 + palgreen 0 + palblue 0)
 	ld [hli], a
-	ld a, HIGH(palred 31 + palgreen 0 + palblue 0)
-	ld [hl], a
+	ld [hl], HIGH(palred 31 + palgreen 0 + palblue 0)
 	pop af
 	ldh [rSVBK], a
 	call WipeAttrmap
@@ -728,7 +720,7 @@ _CGB_TrainerCard:
 	and a
 	ld a, $1 ; kris
 	jr z, .got_gender
-	ld a, $0 ; chris
+	xor a ; chris
 .got_gender
 	rst ByteFill
 	; fill trainer sprite area with same-gender palette
@@ -736,7 +728,7 @@ _CGB_TrainerCard:
 	lb bc, 7, 5
 	ld a, [wPlayerGender]
 	and a
-	ld a, $0 ; chris
+	ld a, $0 ; no-optimize a = 0 chris
 	jr z, .got_gender2
 	ld a, $1 ; kris
 .got_gender2
@@ -837,7 +829,7 @@ _CGB_TrainerCardKanto:
 	and a
 	ld a, $1 ; kris
 	jr z, .got_gender
-	ld a, $0 ; chris
+	xor a ; chris
 .got_gender
 	rst ByteFill
 	; fill trainer sprite area with same-gender palette
@@ -845,7 +837,7 @@ _CGB_TrainerCardKanto:
 	lb bc, 7, 5
 	ld a, [wPlayerGender]
 	and a
-	ld a, $0 ; chris
+	ld a, $0 ; no-optimize a = 0 chris
 	jr z, .got_gender2
 	ld a, $1 ; kris
 .got_gender2
@@ -856,7 +848,7 @@ _CGB_TrainerCardKanto:
 	call FillBoxCGB
 	hlcoord 7, 10, wAttrmap
 	lb bc, 3, 3
-	ld a, $0 ; misty / chris
+	xor a ; misty / chris
 	call FillBoxCGB
 	hlcoord 11, 10, wAttrmap
 	lb bc, 3, 3
@@ -887,7 +879,7 @@ _CGB_TrainerCardKanto:
 	and a
 	ld a, $1 ; kris
 	jr z, .got_gender3
-	ld a, $0 ; chris
+	xor a ; chris
 .got_gender3
 	hlcoord 18, 1, wAttrmap
 	ld [hl], a

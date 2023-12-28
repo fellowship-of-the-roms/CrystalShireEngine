@@ -27,15 +27,15 @@ BattleCommand_Substitute:
 	ld a, [hld]
 	sub b
 	ld e, a
-	ld a, [hl]
-	sbc 0
+	sbc e
+	add [hl]
 	ld d, a
 	jr c, .too_weak_to_sub
 	ld a, d
 	or e
 	jr z, .too_weak_to_sub
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld [hl], e
 
 	ld a, BATTLE_VARS_SUBSTATUS4

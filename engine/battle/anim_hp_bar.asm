@@ -61,9 +61,8 @@ _AnimateHPBar:
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
+	ld b, [hl]
 	ld c, a
-	ld a, [hli]
-	ld b, a
 	pop hl
 	call ComputeHPBarPixels
 	ld a, e
@@ -94,9 +93,8 @@ _AnimateHPBar:
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
+	ld d, [hl]
 	ld e, a
-	ld a, [hli]
-	ld d, a
 	pop hl
 	ld a, e
 	sub c
@@ -118,11 +116,11 @@ _AnimateHPBar:
 	ld a, [wCurHPAnimNewHP]
 	ld [wCurHPAnimLowHP], a
 	ld a, e
-	xor $ff
+	cpl
 	inc a
 	ld e, a
 	ld a, d
-	xor $ff
+	cpl
 	ld d, a
 	ld bc, -1
 .got_direction
@@ -239,8 +237,8 @@ HPBarAnim_RedrawHPBar:
 	ld a, 2 * SCREEN_WIDTH
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 .skip
 	jmp DrawBattleHPBar
@@ -299,11 +297,8 @@ HPBarAnim_BGMapUpdate:
 	jr z, .load_1
 	ld a, [wCurPartyMon]
 	cp $3
-	jr nc, .bottom_half_of_screen
 	ld c, $0
-	jr .got_third
-
-.bottom_half_of_screen
+	jr c, .got_third
 	ld c, $1
 .got_third
 	push af
@@ -326,9 +321,8 @@ HPBarAnim_BGMapUpdate:
 	cp $2
 	jr z, .two_frames
 	cp $5
-	jr z, .two_frames
-	ret
-
+	ret nz
+; fallthrough
 .two_frames
 	inc c
 	ld a, $2
@@ -371,8 +365,8 @@ ShortHPBar_CalcPixelFrame:
 	ld a, l
 	sub HP_BAR_LENGTH_PX
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr z, .done
 	jr c, .done
@@ -387,8 +381,8 @@ ShortHPBar_CalcPixelFrame:
 	ld a, l
 	sub HP_BAR_LENGTH_PX
 	ld l, a
-	ld a, h
-	sbc $0
+	sbc l
+	add h
 	ld h, a
 	jr c, .no_carry
 	inc b

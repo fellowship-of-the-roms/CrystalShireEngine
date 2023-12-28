@@ -10,7 +10,6 @@ OverworldLoop::
 	ld a, [wMapStatus]
 	cp MAPSTATUS_DONE
 	jr nz, .loop
-.done
 	ret
 
 .Jumptable:
@@ -18,7 +17,7 @@ OverworldLoop::
 	dw StartMap
 	dw EnterMap
 	dw HandleMap
-	dw .done
+	dw DoNothing ; .done
 
 DisableEvents:
 	xor a
@@ -115,9 +114,7 @@ EnterMap:
 
 	ldh a, [hMapEntryMethod]
 	cp MAPSETUP_CONNECTION
-	jr nz, .dont_enable
-	call EnableEvents
-.dont_enable
+	call z, EnableEvents
 
 	ldh a, [hMapEntryMethod]
 	cp MAPSETUP_RELOADMAP
@@ -160,11 +157,11 @@ MapEvents:
 NextOverworldFrame:
 	; If we haven't already performed a delay outside DelayFrame as a result
 	; of a busy LY overflow, perform that now.
-	ld a, [hDelayFrameLY]
+	ldh a, [hDelayFrameLY]
 	inc a
 	jmp nz, DelayFrame
 	xor a
-	ld [hDelayFrameLY], a
+	ldh [hDelayFrameLY], a
 	ret
 
 HandleMapTimeAndJoypad:
@@ -305,8 +302,7 @@ CheckTileEvent:
 
 	call RandomEncounter
 	ret c
-	jr .ok ; pointless
-
+; fallthrough
 .ok
 	xor a
 	ret
@@ -349,16 +345,6 @@ CheckWildEncounterCooldown::
 
 SetUpFiveStepWildEncounterCooldown:
 	ld a, 5
-	ld [wWildEncounterCooldown], a
-	ret
-
-SetMinTwoStepWildEncounterCooldown:
-; dummied out
-	ret
-	ld a, [wWildEncounterCooldown]
-	cp 2
-	ret nc
-	ld a, 2
 	ld [wWildEncounterCooldown], a
 	ret
 
@@ -505,8 +491,6 @@ TryObjectEvent:
 	add hl, bc
 	ld a, [hl]
 	ldh [hLastTalked], a
-
-	ldh a, [hLastTalked]
 	call GetMapObject
 	ld hl, MAPOBJECT_TYPE
 	add hl, bc
@@ -771,7 +755,6 @@ PlayerMovementPointers:
 	ret
 
 .jump:
-	call SetMinTwoStepWildEncounterCooldown
 	xor a
 	ld c, a
 	ret
@@ -922,11 +905,6 @@ CountStep:
 	scf
 	ret
 
-.whiteout ; unreferenced
-	ld a, PLAYEREVENT_WHITEOUT
-	scf
-	ret
-
 DoRepelStep:
 	ld a, [wRepelEffect]
 	and a
@@ -1056,13 +1034,13 @@ LoadScriptBDE::
 	and a
 	ret nz
 ; Set the flag
-	ld [hl], 1
-	inc hl
+	ld a, 1
+	ld [hli], a
 ; Load the script pointer b:de into (wMapReentryScriptBank):(wMapReentryScriptAddress)
-	ld [hl], b
-	inc hl
-	ld [hl], e
-	inc hl
+	ld a, b
+	ld [hli], a
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	scf
 	ret
@@ -1108,9 +1086,8 @@ TryTileCollisionEvent::
 
 .surf
 	farcall TrySurfOW
-	jr nc, .noevent
-	jr .done
-
+	jr c, .done
+; fallthrough
 .noevent
 	xor a
 	ret
@@ -1137,9 +1114,8 @@ RandomEncounter::
 
 .bug_contest
 	call _TryWildEncounter_BugContest
-	jr nc, .nope
-	jr .ok_bug_contest
-
+	jr c, .ok_bug_contest
+; fallthrough
 .nope
 	ld a, 1
 	and a
@@ -1305,8 +1281,8 @@ DoBikeStep::
 
 .increment
 	inc de
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 
 .dont_increment

@@ -89,8 +89,7 @@ Pack:
 	ld [wItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wItemsPocketCursor], a
-	ld b, PACKSTATE_INITTMHMPOCKET ; left
-	ld c, PACKSTATE_INITBALLSPOCKET ; right
+	lb bc, PACKSTATE_INITTMHMPOCKET, PACKSTATE_INITBALLSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jmp .ItemBallsKey_LoadSubmenu
@@ -116,8 +115,7 @@ Pack:
 	ld [wKeyItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wKeyItemsPocketCursor], a
-	ld b, PACKSTATE_INITBERRYPOCKET ; left
-	ld c, PACKSTATE_INITTMHMPOCKET ; right
+	lb bc, PACKSTATE_INITBERRYPOCKET, PACKSTATE_INITTMHMPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jmp .ItemBallsKey_LoadSubmenu
@@ -135,8 +133,7 @@ Pack:
 
 .TMHMPocketMenu:
 	farcall TMHMPocket
-	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
-	ld c, PACKSTATE_INITITEMSPOCKET ; right
+	lb bc, PACKSTATE_INITKEYITEMSPOCKET, PACKSTATE_INITITEMSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	farcall _CheckTossableItem
@@ -176,7 +173,7 @@ Pack:
 
 .Jumptable1:
 	dw .UseItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 .MenuHeader2:
 	db MENU_BACKUP_TILES ; flags
@@ -194,7 +191,7 @@ Pack:
 .Jumptable2:
 	dw .UseItem
 	dw GiveItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 .UseItem:
 	farcall AskTeachTMHM
@@ -263,8 +260,7 @@ Pack:
 	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBallsPocketCursor], a
-	ld b, PACKSTATE_INITITEMSPOCKET ; left
-	ld c, PACKSTATE_INITBERRYPOCKET ; righ
+	lb bc, PACKSTATE_INITITEMSPOCKET, PACKSTATE_INITBERRYPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 ; fallthrough
@@ -357,7 +353,7 @@ Jumptable_UseGiveTossRegisterQuit:
 	dw GiveItem
 	dw TossMenu
 	dw RegisterItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 MenuHeader_UsableItem:
 	db MENU_BACKUP_TILES ; flags
@@ -377,7 +373,7 @@ Jumptable_UseGiveTossQuit:
 	dw UseItem
 	dw GiveItem
 	dw TossMenu
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 MenuHeader_UnusableItem:
 	db MENU_BACKUP_TILES ; flags
@@ -393,7 +389,7 @@ MenuHeader_UnusableItem:
 
 Jumptable_UseQuit:
 	dw UseItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 MenuHeader_UnusableKeyItem:
 	db MENU_BACKUP_TILES ; flags
@@ -411,7 +407,7 @@ MenuHeader_UnusableKeyItem:
 Jumptable_UseRegisterQuit:
 	dw UseItem
 	dw RegisterItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 MenuHeader_HoldableKeyItem:
 	db MENU_BACKUP_TILES ; flags
@@ -431,7 +427,7 @@ Jumptable_GiveTossRegisterQuit:
 	dw GiveItem
 	dw TossMenu
 	dw RegisterItem
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 MenuHeader_HoldableItem:
 	db MENU_BACKUP_TILES ; flags
@@ -449,7 +445,7 @@ MenuHeader_HoldableItem:
 Jumptable_GiveTossQuit:
 	dw GiveItem
 	dw TossMenu
-	dw QuitItemSubmenu
+	dw DoNothing ; QuitItemSubmenu
 
 UseItem:
 	farcall CheckItemMenu
@@ -505,7 +501,7 @@ TossMenu:
 	push af
 	call ExitMenu
 	pop af
-	jr c, .finish
+	ret c
 	call Pack_GetItemName
 	ld hl, AskQuantityThrowAwayText
 	call MenuTextbox
@@ -513,15 +509,13 @@ TossMenu:
 	push af
 	call ExitMenu
 	pop af
-	jr c, .finish
+	ret c
 	ld hl, wNumItems
 	ld a, [wCurItemQuantity]
 	call TossItem
 	call Pack_GetItemName
 	ld hl, ThrewAwayText
-	call Pack_PrintTextNoScroll
-.finish
-	ret
+	jmp Pack_PrintTextNoScroll
 
 RegisterItem:
 	farcall CheckSelectableItem
@@ -610,9 +604,6 @@ GiveItem:
 	text_far _AnEggCantHoldAnItemText
 	text_end
 
-QuitItemSubmenu:
-	ret
-
 BattlePack:
 	ld hl, wItemFlags
 	set IN_BAG_F, [hl]
@@ -688,8 +679,7 @@ BattlePack:
 	ld [wItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wItemsPocketCursor], a
-	ld b, PACKSTATE_INITTMHMPOCKET ; left
-	ld c, PACKSTATE_INITBALLSPOCKET ; right
+	lb bc, PACKSTATE_INITTMHMPOCKET , PACKSTATE_INITBALLSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jmp ItemSubmenu
@@ -715,8 +705,7 @@ BattlePack:
 	ld [wKeyItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wKeyItemsPocketCursor], a
-	ld b, PACKSTATE_INITBERRYPOCKET ; left
-	ld c, PACKSTATE_INITTMHMPOCKET ; right
+	lb bc, PACKSTATE_INITBERRYPOCKET, PACKSTATE_INITTMHMPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	jmp ItemSubmenu
@@ -736,8 +725,7 @@ BattlePack:
 
 .TMHMPocketMenu:
 	farcall TMHMPocket
-	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
-	ld c, PACKSTATE_INITITEMSPOCKET ; right
+	lb bc, PACKSTATE_INITKEYITEMSPOCKET, PACKSTATE_INITITEMSPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 	xor a
@@ -790,8 +778,7 @@ BattlePack:
 	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBallsPocketCursor], a
-	ld b, PACKSTATE_INITITEMSPOCKET ; left
-	ld c, PACKSTATE_INITBERRYPOCKET ; right
+	lb bc, PACKSTATE_INITITEMSPOCKET, PACKSTATE_INITBERRYPOCKET ; left / right
 	call Pack_InterpretJoypad
 	ret c
 ; fallthrough
@@ -834,7 +821,7 @@ TMHMSubmenu:
 
 .UsableJumptable:
 	dw .Use
-	dw .Quit
+	dw DoNothing ; .Quit
 
 .UnusableMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -848,7 +835,7 @@ TMHMSubmenu:
 	db "QUIT@"
 
 .UnusableJumptable:
-	dw .Quit
+	dw DoNothing ; .Quit
 
 .Use:
 	farcall CheckItemContext
@@ -907,8 +894,6 @@ TMHMSubmenu:
 .didnt_use_item
 	xor a
 	ld [wItemEffectSucceeded], a
-	ret
-.Quit:
 	ret
 
 InitPackBuffers:
@@ -998,7 +983,6 @@ DepositSellPack:
 	call WaitBGMap_DrawPackGFX
 	farcall TMHMPocket
 	ld a, [wCurItem]
-	ld [wCurItem], a
 	ret
 
 .BallsPocket:
@@ -1173,7 +1157,6 @@ TutorialPack:
 	call WaitBGMap_DrawPackGFX
 	farcall TMHMPocket
 	ld a, [wCurItem]
-	ld [wCurItem], a
 	ret
 
 .Balls:
@@ -1280,8 +1263,8 @@ DrawPackGFX:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, vTiles2 tile $50
 	lb bc, BANK(PackGFX), 15
 	jmp Request2bpp

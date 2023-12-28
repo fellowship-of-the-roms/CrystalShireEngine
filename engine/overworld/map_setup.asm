@@ -30,8 +30,8 @@ ReadMapSetupScript:
 	add hl, bc
 
 	; bank
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 
 	; address
 	ld a, [hli]
@@ -80,9 +80,6 @@ LoadMapObjects:
 	farcall LoadObjectMasks
 	farjp InitializeVisibleSprites
 
-MapSetup_DummyFunction: ; unreferenced
-	ret
-
 ResetPlayerObjectAction:
 	ld hl, wPlayerSpriteSetupFlags
 	set PLAYERSPRITESETUP_RESET_ACTION_F, [hl]
@@ -99,9 +96,7 @@ CheckUpdatePlayerSprite:
 	call .CheckSurfing
 	jr c, .ok
 	call .CheckSurfing2
-	jr c, .ok
-	ret
-
+	ret nc
 .ok
 	jmp UpdatePlayerSprite
 
@@ -131,8 +126,8 @@ CheckUpdatePlayerSprite:
 	cp ENVIRONMENT_5
 	jr z, .no_biking
 	cp DUNGEON
-	jr z, .no_biking
-	jr .nope
+	jr nz, .nope
+; fallthrough
 .no_biking
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
@@ -173,10 +168,7 @@ ApplyMapPalettes:
 	farjp _UpdateTimePals
 
 FadeMapMusicAndPalettes:
-	ld e, LOW(MUSIC_NONE)
-	ld a, [wMusicFadeID]
-	ld d, HIGH(MUSIC_NONE)
-	ld a, [wMusicFadeID + 1]
+	lb de, HIGH(MUSIC_NONE), LOW(MUSIC_NONE)
 	ld a, $4
 	ld [wMusicFade], a
 	farjp FadeOutPalettes
@@ -206,13 +198,13 @@ DecompressMetatiles:
 	ld h, [hl]
 	ld l, a
 	ld de, wDecompressedMetatiles
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, c
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, b
 	ld bc, $1000
 	call FarDecompress
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret

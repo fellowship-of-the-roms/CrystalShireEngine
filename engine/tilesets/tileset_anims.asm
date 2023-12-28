@@ -23,10 +23,10 @@ _AnimateTileset::
 
 ; 2-byte parameter
 ; All functions take input de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 ; Function address
 	ld a, [hli]
@@ -39,36 +39,36 @@ Tileset0Anim:
 TilesetJohtoModernAnim:
 TilesetKantoAnim:
 	dw vTiles2 tile $14, AnimateWaterTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateWaterPalette
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateFlowerTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  StandingTileFrame8
 	dw NULL,  DoneTileAnimation
 
 TilesetParkAnim:
 	dw vTiles2 tile $14, AnimateWaterTile
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw vTiles2 tile $5f, AnimateFountainTile
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateWaterPalette
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateFlowerTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  StandingTileFrame8
 	dw NULL,  DoneTileAnimation
 
 TilesetForestAnim:
 	dw NULL,  ForestTreeLeftAnimation
 	dw NULL,  ForestTreeRightAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  ForestTreeLeftAnimation2
 	dw NULL,  ForestTreeRightAnimation2
 	dw NULL,  AnimateFlowerTile
@@ -79,101 +79,41 @@ TilesetForestAnim:
 
 TilesetJohtoAnim:
 	dw vTiles2 tile $14, AnimateWaterTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateWaterPalette
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateFlowerTile
 	dw WhirlpoolFrames1, AnimateWhirlpoolTile
 	dw WhirlpoolFrames2, AnimateWhirlpoolTile
 	dw WhirlpoolFrames3, AnimateWhirlpoolTile
 	dw WhirlpoolFrames4, AnimateWhirlpoolTile
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  StandingTileFrame8
-	dw NULL,  DoneTileAnimation
-
-UnusedTilesetAnim1: ; unreferenced
-; Scrolls tile $03 like cave water, but also has the standard $03 flower tile.
-	dw vTiles2 tile $03, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileRightLeft
-	dw vTiles2 tile $03, WriteTileFromAnimBuffer
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  AnimateFlowerTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  DoneTileAnimation
-
-UnusedTilesetAnim2: ; unreferenced
-; Scrolls tile $14 like cave water.
-	dw vTiles2 tile $14, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileRightLeft
-	dw vTiles2 tile $14, WriteTileFromAnimBuffer
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
 	dw NULL,  DoneTileAnimation
 
 TilesetPortAnim:
 	dw vTiles2 tile $14, AnimateWaterTile
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateWaterPalette
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  StandingTileFrame8
 	dw NULL,  DoneTileAnimation
 
 TilesetEliteFourRoomAnim:
 	dw NULL,  AnimateLavaBubbleTile2
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  AnimateLavaBubbleTile1
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  StandingTileFrame8
-	dw NULL,  DoneTileAnimation
-
-UnusedTilesetAnim3: ; unreferenced
-; Scrolls tile $53 like a waterfall; scrolls tile $03 like cave water.
-	dw vTiles2 tile $53, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileDown
-	dw wTileAnimBuffer, ScrollTileDown
-	dw vTiles2 tile $53, WriteTileFromAnimBuffer
-	dw vTiles2 tile $03, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileRightLeft
-	dw vTiles2 tile $03, WriteTileFromAnimBuffer
-	dw vTiles2 tile $53, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileDown
-	dw wTileAnimBuffer, ScrollTileDown
-	dw vTiles2 tile $53, WriteTileFromAnimBuffer
-	dw NULL,  DoneTileAnimation
-
-UnusedTilesetAnim4: ; unreferenced
-; Scrolls tile $54 like a waterfall; scrolls tile $03 like cave water.
-	dw vTiles2 tile $54, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileDown
-	dw wTileAnimBuffer, ScrollTileDown
-	dw vTiles2 tile $54, WriteTileFromAnimBuffer
-	dw NULL,  WaitTileAnimation
-	dw vTiles2 tile $03, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileRightLeft
-	dw vTiles2 tile $03, WriteTileFromAnimBuffer
-	dw NULL,  WaitTileAnimation
-	dw vTiles2 tile $54, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileDown
-	dw wTileAnimBuffer, ScrollTileDown
-	dw vTiles2 tile $54, WriteTileFromAnimBuffer
 	dw NULL,  DoneTileAnimation
 
 TilesetCaveAnim:
@@ -231,23 +171,10 @@ TilesetTowerAnim:
 	dw TowerPillarTilePointer1, AnimateTowerPillarTile
 	dw TowerPillarTilePointer2, AnimateTowerPillarTile
 	dw NULL,  StandingTileFrame
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  DoneTileAnimation
-
-UnusedTilesetAnim5: ; unreferenced
-; Scrolls tile $4f like cave water.
-	dw vTiles2 tile $4f, ReadTileToAnimBuffer
-	dw wTileAnimBuffer, ScrollTileRightLeft
-	dw vTiles2 tile $4f, WriteTileFromAnimBuffer
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  DoneTileAnimation
 
 TilesetBattleTowerOutsideAnim:
@@ -275,10 +202,10 @@ TilesetHoOhWordRoomAnim:
 TilesetKabutoWordRoomAnim:
 TilesetOmanyteWordRoomAnim:
 TilesetAerodactylWordRoomAnim:
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
-	dw NULL,  WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
+	dw NULL,  DoNothing ; WaitTileAnimation
 	dw NULL,  DoneTileAnimation
 
 DoneTileAnimation:
@@ -286,15 +213,11 @@ DoneTileAnimation:
 	xor a
 	ldh [hTileAnimFrame], a
 
-WaitTileAnimation:
-; Do nothing this frame.
-	ret
-
 StandingTileFrame8:
-; Tick the wTileAnimationTimer, wrapping from 7 to 0.
+; Tick the wTileAnimationTimer, wrapping from 15 to 0.
 	ld a, [wTileAnimationTimer]
 	inc a
-	and %111
+	and %1111
 	ld [wTileAnimationTimer], a
 	ret
 
@@ -302,22 +225,11 @@ ScrollTileRightLeft:
 ; Scroll right for 4 ticks, then left for 4 ticks.
 	ld a, [wTileAnimationTimer]
 	inc a
-	and %111
+	and %1111
 	ld [wTileAnimationTimer], a
-	and %100
-	jr nz, ScrollTileLeft
-	jr ScrollTileRight
-
-ScrollTileUpDown: ; unreferenced
-; Scroll up for 4 ticks, then down for 4 ticks.
-	ld a, [wTileAnimationTimer]
-	inc a
-	and %111
-	ld [wTileAnimationTimer], a
-	and %100
-	jr nz, ScrollTileDown
-	jr ScrollTileUp
-
+	and %1000
+	jr z, ScrollTileRight
+; fallthrough
 ScrollTileLeft:
 	ld h, d
 	ld l, e
@@ -349,24 +261,24 @@ endr
 ScrollTileUp:
 	ld h, d
 	ld l, e
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	ld bc, LEN_2BPP_TILE - 2
 	add hl, bc
 	ld a, LEN_2BPP_TILE / 4
 .loop
 	ld c, [hl]
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	dec hl
 	ld b, [hl]
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	dec hl
 	ld e, [hl]
-	ld [hl], c
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	dec hl
 	ld d, [hl]
-	ld [hl], b
+	ld [hl], b ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	dec hl
 	dec a
 	jr nz, .loop
@@ -378,23 +290,23 @@ ScrollTileDown:
 	ld de, LEN_2BPP_TILE - 2
 	push hl
 	add hl, de
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	pop hl
 	ld a, LEN_2BPP_TILE / 4
 .loop
 	ld b, [hl]
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	inc hl
 	ld c, [hl]
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	inc hl
 	ld d, [hl]
-	ld [hl], b
+	ld [hl], b ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	inc hl
 	ld e, [hl]
-	ld [hl], c
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is the .loop counter)
 	inc hl
 	dec a
 	jr nz, .loop
@@ -410,15 +322,16 @@ AnimateFountainTile:
 
 ; A cycle of 8 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %111
 
 ; hl = [.FountainTileFramePointers + a * 2]
 	add a
 	add l
 	ld l, a
-	jr nc, .okay
-	inc h
-.okay
+	adc h
+	sub l
+	ld h, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -453,6 +366,7 @@ AnimateWaterTile:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; hl = .WaterTileFrames + a * 8
@@ -462,8 +376,8 @@ AnimateWaterTile:
 	add a
 	add LOW(.WaterTileFrames)
 	ld l, a
-	ld a, 0
 	adc HIGH(.WaterTileFrames)
+	sub l
 	ld h, a
 
 ; Write the tile graphic from hl (now sp) to de (now hl)
@@ -491,6 +405,7 @@ ForestTreeLeftAnimation:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; hl = ForestTreeLeftFrames + a * 8
@@ -500,8 +415,8 @@ ForestTreeLeftAnimation:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
 	adc HIGH(ForestTreeLeftFrames)
+	sub l
 	ld h, a
 
 .got_frames
@@ -534,6 +449,7 @@ ForestTreeRightAnimation:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; hl = ForestTreeRightFrames + a * 8
@@ -543,8 +459,8 @@ ForestTreeRightAnimation:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
 	adc HIGH(ForestTreeLeftFrames)
+	sub l
 	ld h, a
 	push bc
 	ld bc, ForestTreeRightFrames - ForestTreeLeftFrames
@@ -573,6 +489,7 @@ ForestTreeLeftAnimation2:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; Offset by 1 frame from ForestTreeLeftAnimation
@@ -585,8 +502,8 @@ ForestTreeLeftAnimation2:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
 	adc HIGH(ForestTreeLeftFrames)
+	sub l
 	ld h, a
 
 .got_frames
@@ -611,6 +528,7 @@ ForestTreeRightAnimation2:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; Offset by 1 frame from ForestTreeRightAnimation
@@ -623,8 +541,8 @@ ForestTreeRightAnimation2:
 	add a
 	add LOW(ForestTreeLeftFrames)
 	ld l, a
-	ld a, 0
 	adc HIGH(ForestTreeLeftFrames)
+	sub l
 	ld h, a
 	push bc
 	ld bc, ForestTreeRightFrames - ForestTreeLeftFrames
@@ -640,7 +558,6 @@ ForestTreeRightAnimation2:
 GetForestTreeFrame:
 ; Return 0 if a is even, or 2 if odd.
 	and 1
-	and a
 	ret
 
 AnimateFlowerTile:
@@ -651,6 +568,7 @@ AnimateFlowerTile:
 
 ; A cycle of 2 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %10
 
 ; CGB has different tile graphics for flowers
@@ -685,6 +603,7 @@ AnimateLavaBubbleTile1:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; Offset by 2 frames from AnimateLavaBubbleTile2
@@ -713,6 +632,7 @@ AnimateLavaBubbleTile2:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; hl = LavaBubbleTileFrames + a * 8
@@ -746,23 +666,23 @@ AnimateTowerPillarTile:
 
 ; A cycle of 8 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %111
 
 ; a = [.TowerPillarTileFrameOffsets + a]
-	ld hl, .TowerPillarTileFrameOffsets
-	add l
+	add LOW(.TowerPillarTileFrameOffsets)
 	ld l, a
-	ld a, 0
-	adc h
+	adc HIGH(.TowerPillarTileFrameOffsets)
+	sub l
 	ld h, a
 	ld a, [hl]
 
 ; de = the destination in VRAM
 	ld l, e
 	ld h, d
-	ld e, [hl]
+	ld e, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
-	ld d, [hl]
+	ld d, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is used.)
 	inc hl
 
 ; hl = the source tile frames + offset a
@@ -770,8 +690,8 @@ AnimateTowerPillarTile:
 	inc hl
 	ld h, [hl]
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 
 ; Write the tile graphic from hl (now sp) to de (now hl)
@@ -807,13 +727,14 @@ AnimateWhirlpoolTile:
 ; de = the destination in VRAM
 	ld l, e
 	ld h, d
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 
 ; A cycle of 4 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %11
 
 ; hl = the source tile frames + a * 16
@@ -822,8 +743,8 @@ AnimateWhirlpoolTile:
 	inc hl
 	ld h, [hl]
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 
 ; Write the tile graphic from hl (now sp) to de (now hl)
@@ -867,13 +788,13 @@ WriteTile:
 ; copy data with a "pop slide".
 
 	pop de
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
 	ld [hl], d
 rept (LEN_2BPP_TILE - 2) / 2
 	pop de
 	inc hl
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e
 	inc hl
 	ld [hl], d
 endr
@@ -899,6 +820,7 @@ AnimateWaterPalette:
 
 ; Only update on even ticks
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	ld l, a
 	and 1 ; odd
 	ret nz

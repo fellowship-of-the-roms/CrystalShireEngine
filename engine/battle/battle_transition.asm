@@ -102,8 +102,7 @@ LoadTrainerBattlePokeballTiles:
 ; at the start of every Trainer battle.
 	ld de, TrainerBattlePokeballTiles
 	ld hl, vTiles0 tile BATTLETRANSITION_SQUARE
-	ld b, BANK(TrainerBattlePokeballTiles)
-	ld c, 2
+	lb bc, BANK(TrainerBattlePokeballTiles), 2
 	call Request2bpp
 
 	ldh a, [rVBK]
@@ -113,8 +112,7 @@ LoadTrainerBattlePokeballTiles:
 
 	ld de, TrainerBattlePokeballTiles
 	ld hl, vTiles3 tile BATTLETRANSITION_SQUARE
-	ld b, BANK(TrainerBattlePokeballTiles)
-	ld c, 2
+	lb bc, BANK(TrainerBattlePokeballTiles), 2
 	call Request2bpp
 
 	pop af
@@ -131,8 +129,8 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 	ld bc, $28 tiles
 
 .loop
-	ld [hl], -1
-	inc hl
+	ld a, -1
+	ld [hli],a
 	dec bc
 	ld a, c
 	or b
@@ -140,8 +138,7 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 
 	pop hl
 	ld de, wDecompressScratch
-	ld b, BANK(@)
-	ld c, $28
+	lb bc, BANK(@), $28
 	call Request2bpp
 	pop af
 	ldh [rSVBK], a
@@ -351,10 +348,7 @@ StartTrainerBattle_SetUpForWavyOutro:
 StartTrainerBattle_SineWave:
 	ld a, [wBattleTransitionCounter]
 	cp $60
-	jr nc, .end
-	jr .DoSineWave
-
-.end
+	jr c, .DoSineWave
 	ld a, BATTLETRANSITION_FINISH
 	ld [wJumptableIndex], a
 	ret
@@ -640,7 +634,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 ; Loading is done bit by bit
 	and a
 	jr z, .done
-	sla a
+	add a
 	jr nc, .no_load
 	ld [hl], BATTLETRANSITION_SQUARE
 .no_load

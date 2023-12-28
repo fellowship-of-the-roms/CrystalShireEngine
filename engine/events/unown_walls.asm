@@ -29,7 +29,7 @@ OmanyteChamber:
 	call EventFlagAction
 	ld a, c
 	and a
-	jr nz, .nope
+	ret nz
 
 	ld hl, WATER_STONE
 	call GetItemIDFromIndex
@@ -43,7 +43,7 @@ OmanyteChamber:
 	inc b
 .loop
 	dec b
-	jr z, .nope
+	ret z
 	ld a, b
 	dec a
 	ld [wCurPartyMon], a
@@ -62,10 +62,7 @@ OmanyteChamber:
 	call GetMapAttributesPointer ; pointless?
 	ld de, EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
 	ld b, SET_FLAG
-	call EventFlagAction
-
-.nope
-	ret
+	jmp EventFlagAction
 
 SpecialAerodactylChamber:
 	push de
@@ -121,8 +118,7 @@ DisplayUnownWords:
 	and a
 	jr z, .load
 
-	ld d, $0
-	ld e, $5
+	lb de, $0, $5
 .loop
 	add hl, de
 	dec a
@@ -137,8 +133,7 @@ DisplayUnownWords:
 	call ApplyTilemap
 	call MenuBoxCoord2Tile
 	inc hl
-	ld d, 0
-	ld e, SCREEN_WIDTH
+	lb de, 0, SCREEN_WIDTH
 	add hl, de
 	add hl, de
 	ld a, [wScriptVar]
@@ -170,11 +165,10 @@ _DisplayUnownWords_FillAttr:
 	cp $ff
 	ret z
 	cp $60
-	ld a, VRAM_BANK_1 | PAL_BG_BROWN
-	jr c, .got_pal
-	ld a, PAL_BG_BROWN
-
-.got_pal
+	; a = carry ? (VRAM_BANK_1 | PAL_BG_BROWN) : PAL_BG_BROWN
+	sbc a
+	and VRAM_BANK_1
+	add PAL_BG_BROWN
 	call .PlaceSquare
 	inc hl
 	inc hl
@@ -185,8 +179,7 @@ _DisplayUnownWords_FillAttr:
 	push hl
 	ld [hli], a
 	ld [hld], a
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	ld [hli], a
 	ld [hl], a
@@ -225,8 +218,7 @@ _DisplayUnownWords_CopyWord:
 	inc a
 	ld [hld], a
 	dec a
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	ld c, $10
 	add c
@@ -237,37 +229,37 @@ _DisplayUnownWords_CopyWord:
 	ret
 
 .Tile60:
-	ld [hl], $5b
-	inc hl
+	ld a, $5b
+	ld [hli], a
 	ld [hl], $5c
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld [hl], $4d
-	inc hl
+	ld a, $4d
+	ld [hli], a
 	ld [hl], $5d
 	pop hl
 	ret
 
 .Tile62:
-	ld [hl], $4e
-	inc hl
+	ld a, $4e
+	ld [hli], a
 	ld [hl], $4f
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld [hl], $5e
-	inc hl
+	ld a, $5e
+	ld [hli], a
 	ld [hl], $5f
 	pop hl
 	ret
 
 .Tile64:
-	ld [hl], $2
-	inc hl
+	ld a, $2
+	ld [hli], a
 	ld [hl], $3
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld [hl], $3
-	inc hl
+	ld a, $3
+	ld [hli], a
 	ld [hl], $2
 	pop hl
 	ret

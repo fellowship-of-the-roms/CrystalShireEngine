@@ -259,9 +259,9 @@ CheckOverworldTileArrays:
 	jr nc, .nope
 	; Load the replacement to b
 	inc hl
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
 	; Load the animation type parameter to c
-	inc hl
 	ld c, [hl]
 	scf
 	ret
@@ -559,10 +559,7 @@ FlyFunction:
 	jr c, .nostormbadge
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .outdoors
-	jr .indoors
-
-.outdoors
+	jr nz, .indoors
 	xor a
 	ldh [hMapAnims], a
 	call LoadStandardMenuHeader
@@ -889,10 +886,7 @@ TeleportFunction:
 .TryTeleport:
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .CheckIfSpawnPoint
-	jr .nope
-
-.CheckIfSpawnPoint:
+	jr nz, .nope
 	ld a, [wLastSpawnMapGroup]
 	ld d, a
 	ld a, [wLastSpawnMapNumber]
@@ -1399,13 +1393,9 @@ AskRockSmashText:
 HasRockSmash:
 	ld hl, ROCK_SMASH
 	call CheckPartyMoveIndex
-	jr nc, .yes
-; no
-	ld a, 1
-	jr .done
-.yes
-	xor a
-.done
+	; a = carry ? TRUE : FALSE
+	sbc a
+	and TRUE
 	ld [wScriptVar], a
 	ret
 
@@ -1494,7 +1484,7 @@ FishFunction:
 	ret
 
 .FishNoFish:
-	ld a, $0
+	xor a
 	ld [wFishingResult], a
 	ld hl, Script_NotEvenANibble2
 	call QueueScript
@@ -1651,7 +1641,7 @@ BikeFunction:
 	jr .done
 
 .CannotUseBike:
-	ld a, $0
+	xor a
 	ret
 
 .done
@@ -1674,9 +1664,8 @@ BikeFunction:
 	cp CAVE
 	jr z, .ok
 	cp GATE
-	jr z, .ok
-	jr .nope
-
+	jr nz, .nope
+; fallthrough
 .ok
 	call GetPlayerTile
 	and $f ; lo nybble only

@@ -82,9 +82,9 @@ GetBattleAnimFrame:
 	ld hl, BattleAnimFrameData
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, BATTLEANIMSTRUCT_FRAME
 	add hl, bc
 	ld l, [hl]
@@ -112,10 +112,10 @@ LoadBattleAnimGFX:
 	add hl, hl
 	ld de, AnimObjGFX
 	add hl, de
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -127,11 +127,11 @@ LoadBattleAnimGFX:
 
 .LoadBallPalette:
 	; save the current WRAM bank
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	; switch to the WRAM bank of wCurItem so we can read it
 	ld a, BANK(wCurItem)
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	; store the current item in b
 	ld a, [wCurItem]
 	ld b, a
@@ -156,7 +156,7 @@ endr
 .done
 	; switch to the WRAM bank of wOBPals2 so we can write to it
 	ld a, BANK(wOBPals2)
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	; load the RGB colors into the middle two colors of PAL_BATTLE_OB_RED
 	ld de, wOBPals2 palette PAL_BATTLE_OB_RED color 1
 rept PAL_COLOR_SIZE * 2 - 1
@@ -171,7 +171,7 @@ endr
 	ldh [hCGBPalUpdate], a
 	; restore the previous WRAM bank
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	; restore the graphics index to be loaded
 	ld a, BATTLE_ANIM_GFX_POKE_BALL
 	ret

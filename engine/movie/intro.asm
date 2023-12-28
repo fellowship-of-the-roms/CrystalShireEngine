@@ -104,7 +104,7 @@ IntroScene1:
 	ld hl, IntroUnownAAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroUnownsGFX
 	ld de, vTiles2 tile $00
@@ -177,7 +177,7 @@ IntroScene3:
 	ld hl, IntroBackgroundAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroBackgroundGFX
 	ld de, vTiles2 tile $00
@@ -240,7 +240,7 @@ IntroScene5:
 	ld hl, IntroUnownHIAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroUnownsGFX
 	ld de, vTiles2 tile $00
@@ -291,10 +291,7 @@ IntroScene6:
 	cp $40
 	jr nc, .StopUnown
 	cp $20
-	jr z, .FirstUnown
-	jr .NoUnown
-
-.FirstUnown:
+	jr nz, .NoUnown
 	push af
 	depixel 7, 15
 	call CrystalIntro_InitUnownAnim
@@ -339,7 +336,7 @@ IntroScene7:
 	ld de, vTiles0 tile $00
 	call Intro_DecompressRequest2bpp_128Tiles
 
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneRunGFX
 	ld de, vTiles0 tile $00
@@ -467,10 +464,7 @@ IntroScene10:
 	cp $20
 	jr z, .wooper
 	cp $40
-	jr z, .pichu
-	ret
-
-.pichu
+	ret nz
 	depixel 21, 16, 1, 0
 	ld a, SPRITE_ANIM_OBJ_INTRO_PICHU
 	call InitSpriteAnimStruct
@@ -501,7 +495,7 @@ IntroScene11:
 	ld hl, IntroUnownsAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroUnownsGFX
 	ld de, vTiles2 tile $00
@@ -550,7 +544,7 @@ IntroScene12:
 ; first half
 	ld c, a
 	and $1f
-	sla a
+	add a
 	ld [wIntroSceneTimer], a
 	ld a, c
 	and $e0
@@ -562,8 +556,8 @@ IntroScene12:
 ; double speed
 	ld c, a
 	and $f
-	sla a
-	sla a
+	add a
+	add a
 	ld [wIntroSceneTimer], a
 	ld a, c
 	and $70
@@ -619,7 +613,7 @@ IntroScene13:
 	ld hl, IntroBackgroundAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneRunGFX
 	ld de, vTiles0 tile $00
@@ -720,7 +714,7 @@ IntroScene15:
 	ld hl, IntroSuicuneJumpAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneJumpGFX
 	ld de, vTiles2 tile $00
@@ -800,7 +794,7 @@ IntroScene17:
 	ld hl, IntroSuicuneCloseAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneCloseGFX
 	ld de, vTiles1 tile $00
@@ -864,7 +858,7 @@ IntroScene19:
 	ld hl, IntroSuicuneBackAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneBackGFX
 	ld de, vTiles2 tile $00
@@ -937,8 +931,8 @@ IntroScene20:
 .AppearUnown:
 	sub $18
 	ld c, a
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	ret nz
 	ld a, c
 	and $1c
@@ -946,15 +940,6 @@ IntroScene20:
 	srl a
 	ld [wIntroSceneTimer], a
 	xor a
-	jmp Intro_Scene20_AppearUnown
-
-.AppearUnownPal2: ; unreferenced
-	ld a, c
-	and $1c
-	srl a
-	srl a
-	ld [wIntroSceneTimer], a
-	ld a, 1
 	jmp Intro_Scene20_AppearUnown
 
 .finished:
@@ -976,9 +961,7 @@ IntroScene22:
 	ld a, [hl]
 	inc [hl]
 	cp $8
-	jr nc, .done
-	ret
-.done
+	ret c
 	farcall DeinitializeAllSprites
 	jmp NextIntroScene
 
@@ -1001,7 +984,7 @@ IntroScene24:
 
 	ld a, c
 	and $1c
-	sla a
+	add a
 	jmp Intro_Scene24_ApplyPaletteFade
 
 .done
@@ -1032,7 +1015,7 @@ IntroScene26:
 	ld hl, IntroCrystalUnownsAttrmap
 	debgcoord 0, 0
 	call Intro_DecompressRequest2bpp_64Tiles
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, IntroCrystalUnownsGFX
 	ld de, vTiles2 tile $00
@@ -1117,11 +1100,10 @@ IntroScene28:
 
 Intro_Scene24_ApplyPaletteFade:
 ; load the (a)th palette from .FadePals to all wBGPals2
-	ld hl, .FadePals
-	add l
+	add LOW(.FadePals)
 	ld l, a
-	ld a, $0
-	adc h
+	adc HIGH(.FadePals)
+	sub l
 	ld h, a
 
 	ldh a, [rSVBK]
@@ -1196,18 +1178,15 @@ CrystalIntro_UnownFade:
 	add a
 	ld e, a
 	ld d, 0
-	ld hl, wBGPals2
+	ld hl, wBGPals2 + 2
 	add hl, de
-	inc hl
-	inc hl
 	ld a, [wIntroSceneTimer]
 	and %111111
 	cp %011111
 	jr z, .okay
 	jr c, .okay
-	ld c, a
-	ld a, %111111
-	sub c
+	cpl
+	add %111111 + 1
 .okay
 
 	ld c, a
@@ -1318,8 +1297,8 @@ Intro_Scene20_AppearUnown:
 	ld a, c
 	add e
 	ld e, a
-	ld a, $0
 	adc d
+	sub e
 	ld d, a
 
 	ld bc, 1 palettes
@@ -1330,8 +1309,8 @@ Intro_Scene20_AppearUnown:
 	ld a, c
 	add e
 	ld e, a
-	ld a, $0
 	adc d
+	sub e
 	ld d, a
 
 	ld bc, 1 palettes
@@ -1355,11 +1334,8 @@ Intro_FadeUnownWordPals:
 	add a
 	ld e, a
 	ld d, 0
-	ld hl, wBGPals2
+	ld hl, wBGPals2 + 4
 	add hl, de
-rept 4
-	inc hl
-endr
 	ld a, [wIntroSceneTimer]
 	add a
 	ld c, a
@@ -1436,8 +1412,8 @@ Intro_LoadTilemap:
 	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	dec b
 	jr nz, .row
@@ -1451,10 +1427,7 @@ Intro_Scene16_AnimateSuicune:
 	and $3
 	jr z, Intro_ColoredSuicuneFrameSwap
 	cp $3
-	jr z, .PrepareForSuicuneSwap
-	ret
-
-.PrepareForSuicuneSwap:
+	ret nz
 	xor a
 	ldh [hBGMapMode], a
 	ret

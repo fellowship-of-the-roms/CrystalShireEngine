@@ -313,7 +313,7 @@ SageKojiAfterBattleSpeechText:
 	text "I see…"
 
 	para "We, the WISE TRIO,"
-	line "have been given "
+	line "have been given"
 
 	para "the responsibility"
 	line "of protecting the"

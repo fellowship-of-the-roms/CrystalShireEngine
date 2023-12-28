@@ -113,7 +113,7 @@ EvolutionAnimation:
 	call .PlayEvolvedSFX
 	farcall ClearSpriteAnims
 	call .check_statused
-	jr c, .no_anim
+	ret c ; .no_anim
 
 	ld a, [wBoxAlignment]
 	push af
@@ -125,17 +125,13 @@ EvolutionAnimation:
 	ld a, [wPlayerHPPal]
 	ld [wCurPartySpecies], a
 	hlcoord 7, 2
-	ld d, $0
-	ld e, ANIM_MON_EVOLVE
+	lb de, $0, ANIM_MON_EVOLVE
 	predef AnimateFrontpic
 
 	pop af
 	ld [wCurPartySpecies], a
 	pop af
 	ld [wBoxAlignment], a
-	ret
-
-.no_anim
 	ret
 
 .cancel_evo
@@ -297,7 +293,7 @@ EvolutionAnimation:
 	inc [hl]
 	and $1
 	jr nz, .done_balls
-	ld e, $0
+	ld e, a
 	call .GenerateBallOfLight
 	ld e, $10
 	call .GenerateBallOfLight
@@ -315,7 +311,7 @@ EvolutionAnimation:
 	add hl, bc
 	ld a, [wJumptableIndex]
 	and %1110
-	sla a
+	add a
 	pop de
 	add e
 	ld [hl], a

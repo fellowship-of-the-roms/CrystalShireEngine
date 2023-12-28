@@ -90,8 +90,7 @@ _UnownPuzzle:
 	ret
 
 InitUnownPuzzlePiecePositions:
-	ld c, 1
-	ld b, 16
+	lb bc, 16, 1
 .load_loop
 	call Random
 	and $f
@@ -164,8 +163,7 @@ PlaceStartCancelBoxBorder:
 	ld a, $f1
 	rst ByteFill
 	hlcoord 15, 17
-	ld a, $f5
-	ld [hl], a
+	ld [hl], $f5
 	ret
 
 UnownPuzzleJumptable:
@@ -454,11 +452,10 @@ UnownPuzzle_CheckCurrentTileOccupancy:
 
 GetCurrentPuzzlePieceVTileCorner:
 	ld a, [wUnownPuzzleHeldPiece]
-	ld hl, .Corners
-	add l
+	add LOW(.Corners)
 	ld l, a
-	ld a, $0
-	adc h
+	adc HIGH(.Corners)
+	sub l
 	ld h, a
 	ld a, [hl]
 	ret
@@ -707,11 +704,10 @@ ConvertLoadedPuzzlePieces:
 
 .GetEnlargedTile:
 	push hl
-	ld hl, .EnlargedTiles
-	add l
+	add LOW(.EnlargedTiles)
 	ld l, a
-	ld a, 0
-	adc h
+	adc HIGH(.EnlargedTiles)
+	sub l
 	ld h, a
 	ld a, [hl]
 	pop hl

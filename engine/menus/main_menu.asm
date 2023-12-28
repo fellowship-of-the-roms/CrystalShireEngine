@@ -30,15 +30,12 @@ MainMenu:
 	call LoadMenuHeader
 	call MainMenuJoypadLoop
 	call CloseWindow
-	jr c, .quit
+	ret c
 	call ClearTilemap
 	ld a, [wMenuSelection]
 	ld hl, .Jumptable
 	call JumpTable
 	jr .loop
-
-.quit
-	ret
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -155,9 +152,8 @@ MainMenuJoypadLoop:
 	cp B_BUTTON
 	jr z, .b_button
 	cp A_BUTTON
-	jr z, .a_button
-	jr .loop
-
+	jr nz, .loop
+; fallthrough
 .a_button
 	call PlayClickSFX
 	and a
@@ -190,8 +186,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	and %10000000 ; Day count exceeded 16383
 	jr nz, .TimeFail
 	hlcoord 0, 14
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	jmp Textbox
 
 .TimeFail:
@@ -213,8 +208,8 @@ MainMenu_PrintCurrentTimeAndDay:
 	ldh a, [hHours]
 	ld c, a
 	farcall PrintHour
-	ld [hl], ":"
-	inc hl
+	ld a, ":"
+	ld [hli], a
 	ld de, hMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum

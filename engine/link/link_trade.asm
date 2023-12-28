@@ -139,8 +139,7 @@ PrintWaitingTextAndSyncAndExchangeNybble:
 
 .PrintWaitingText:
 	hlcoord 4, 10
-	ld b, 1
-	ld c, 10
+	lb bc, 1, 10
 	predef LinkTextboxAtHL
 	hlcoord 5, 11
 	ld de, .Waiting
@@ -186,19 +185,17 @@ LinkTradeMenu:
 	call .UpdateCursor
 	call .UpdateBGMapAndOAM
 	call .loop2
-	jr nc, .done
+	ret nc
 	farcall _2DMenuInterpretJoypad
-	jr c, .done
+	ret c
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	jr nz, .done
+	ret nz
 	call .GetJoypad
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
-
-.done
 	ret
 
 .UpdateBGMapAndOAM:

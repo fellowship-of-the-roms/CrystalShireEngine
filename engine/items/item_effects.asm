@@ -306,10 +306,7 @@ PokeBallEffect:
 	inc de
 	ld a, [de]
 	ld h, a
-	ld de, .skip_or_return_from_ball_fn
-	push de
-	jp hl
-
+	call _hl_
 .skip_or_return_from_ball_fn
 	ld a, [wCurItem]
 	call GetItemIndexFromID
@@ -321,12 +318,12 @@ PokeBallEffect:
 	ldh [hMultiplicand + 2], a
 
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	sla c
 	rl b
@@ -416,7 +413,7 @@ PokeBallEffect:
 	call Random
 
 	cp b
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr z, .catch_without_fail
 	jr nc, .fail_to_catch
 
@@ -623,8 +620,7 @@ PokeBallEffect:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 
-	ld a, FRIEND_BALL_HAPPINESS
-	ld [hl], a
+	ld [hl], FRIEND_BALL_HAPPINESS
 
 .SkipPartyMonFriendBall:
 	ld hl, AskGiveNicknameText
@@ -984,10 +980,9 @@ MoonBallMultiplier:
 	sla b
 	jr c, .max
 	sla b
-	jr nc, .done
+	ret nc
 .max
 	ld b, $ff
-.done
 	ret
 
 LoveBallMultiplier:
@@ -1208,10 +1203,8 @@ EvoStoneEffect:
 
 	ld a, [wMonTriedToEvolve]
 	and a
-	jr z, .NoEffect
-
-	jmp UseDisposableItem
-
+	jmp nz, UseDisposableItem
+; fallthrough
 .NoEffect:
 	call WontHaveAnyEffectMessage
 
@@ -1242,16 +1235,16 @@ VitaminEffect:
 	ld a, [hli]
 	add c
 	ld c, a
-	jr nc, .cont
-	inc b
-.cont
+	adc b
+	sub c
+	ld b, a
 	dec e
 	jr nz, .count_evs
 	ld a, d
 	add c
 	ld c, a
 	adc b
-	sub c 
+	sub c
 	ld b, a
 	ld e, d
 .decrease_evs_gained
@@ -1261,8 +1254,8 @@ VitaminEffect:
 	dec bc
 	jr .decrease_evs_gained
 .check_ev_overflow
-	pop hl 
-	pop bc 
+	pop hl
+	pop bc
 
 	ld a, e
 	and a
@@ -1453,8 +1446,7 @@ RareCandyEffect:
 	predef CopyMonToTempMon
 
 	hlcoord 9, 0
-	ld b, 10
-	ld c, 9
+	lb bc, 10, 9
 	call Textbox
 
 	hlcoord 11, 1
@@ -1488,9 +1480,8 @@ HealPowderEffect:
 	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
 	call LooksBitterMessage
-
-	ld a, $0
-
+	xor a
+; fallthrough
 .not_used
 	jmp StatusHealer_Jumptable
 
@@ -1526,7 +1517,7 @@ UseStatusHealer:
 	call Play_SFX_FULL_HEAL
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, FALSE
+	xor a ; FALSE
 	ret
 
 IsItemUsedOnConfusedMon:
@@ -1596,8 +1587,8 @@ GetItemHealingAction:
 .found_it
 	inc hl
 	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hl]
 	ld c, a
 	cp %11111111
@@ -1623,15 +1614,12 @@ RevivalHerbEffect:
 
 	call RevivePokemon
 	cp FALSE
-	jr nz, .not_used
+	jr nz, StatusHealer_Jumptable
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
-
-	ld a, $0
-
-.not_used
+	xor a
 	jr StatusHealer_Jumptable
 
 ReviveEffect:
@@ -1688,7 +1676,7 @@ RevivePokemon:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, FALSE
+	xor a ; FALSE
 	ret
 
 FullRestoreEffect:
@@ -1700,11 +1688,7 @@ FullRestoreEffect:
 	jmp z, StatusHealer_NoEffect
 
 	call IsMonAtFullHealth
-	jr c, .NotAtFullHealth
-
-	jmp FullyHealStatus
-
-.NotAtFullHealth:
+	jmp nc, FullyHealStatus
 	call .FullRestore
 	jmp StatusHealer_Jumptable
 
@@ -1724,7 +1708,7 @@ FullRestoreEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 BitterBerryEffect:
@@ -1740,9 +1724,8 @@ BitterBerryEffect:
 
 	ld hl, ConfusedNoMoreText
 	call StdBattleTextbox
-
-	ld a, 0
-
+	xor a
+; fallthrough
 .done
 	jmp StatusHealer_Jumptable
 
@@ -1761,13 +1744,13 @@ EnergypowderEnergyRootCommon:
 	push bc
 	call ItemRestoreHP
 	pop bc
-	cp 0
+	and a
 	jr nz, .skip_happiness
 
 	farcall ChangeHappiness
 	call LooksBitterMessage
-	ld a, 0
-
+	xor a
+; fallthrough
 .skip_happiness
 	jmp StatusHealer_Jumptable
 
@@ -1795,7 +1778,7 @@ ItemRestoreHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 HealHP_SFX_GFX:
@@ -1924,8 +1907,8 @@ ReviveFullHP:
 ContinueRevive:
 	ld a, MON_HP
 	call GetPartyParamLocation
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld [hl], e
 	jr LoadCurHPIntoBuffer3
 
@@ -1938,7 +1921,7 @@ RestoreHealth:
 	ld a, [hl]
 	adc d
 	ld [hl], a
-	jr c, .full_hp
+	jr c, ReviveFullHP
 	call LoadCurHPIntoBuffer3
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
@@ -1952,11 +1935,8 @@ RestoreHealth:
 	dec hl
 	ld a, [de]
 	sbc [hl]
-	jr c, .finish
-.full_hp
-	call ReviveFullHP
-.finish
-	ret
+	ret c
+	jr ReviveFullHP
 
 RemoveHP:
 	ld a, MON_HP + 1
@@ -1967,11 +1947,10 @@ RemoveHP:
 	ld a, [hl]
 	sbc d
 	ld [hl], a
-	jr nc, .okay
+	jr nc, LoadCurHPIntoBuffer3
 	xor a
 	ld [hld], a
 	ld [hl], a
-.okay
 	jr LoadCurHPIntoBuffer3
 
 IsMonFainted:
@@ -2077,11 +2056,7 @@ GetHealingItemAmount:
 	inc hl ; hl at price
 
 	cp b
-	jr nz, .next_item
-
-	jr .done
-
-.next_item
+	jr z, .done
 	inc hl
 	inc hl
 	jr .check
@@ -2091,9 +2066,9 @@ GetHealingItemAmount:
 	inc hl
 	scf
 .done
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	pop hl
 	ret
 
@@ -2509,9 +2484,8 @@ BattleRestorePP:
 	jr nz, .not_in_battle
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .not_in_battle
-	call .UpdateBattleMonPP
-
+	call z, .UpdateBattleMonPP
+; fallthrough
 .not_in_battle
 	call Play_SFX_FULL_HEAL
 	ld hl, PPRestoredText
@@ -2528,7 +2502,7 @@ BattleRestorePP:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	cp [hl]
 	jr nz, .next
 	push hl
@@ -2550,8 +2524,6 @@ endr
 	inc de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 Not_PP_Up:
@@ -2698,9 +2670,6 @@ OpenBox:
 	text_far _SentTrophyHomeText
 	text_end
 
-NoEffect:
-	jr IsntTheTimeMessage
-
 Play_SFX_FULL_HEAL:
 	push de
 	ld de, SFX_FULL_HEAL
@@ -2766,14 +2735,13 @@ CantUseOnEggMessage:
 	ld hl, ItemCantUseOnEggText
 	jr CantUseItemMessage
 
-IsntTheTimeMessage:
+NoEffect:
 	ld hl, ItemOakWarningText
 	jr CantUseItemMessage
 
 WontHaveAnyEffectMessage:
 	ld hl, ItemWontHaveEffectText
-	jr CantUseItemMessage
-
+; fallthrough
 CantUseItemMessage:
 ; Item couldn't be used.
 	xor a
@@ -2792,10 +2760,6 @@ ItemOakWarningText:
 	text_far _ItemOakWarningText
 	text_end
 
-ItemBelongsToSomeoneElseText:
-	text_far _ItemBelongsToSomeoneElseText
-	text_end
-
 ItemWontHaveEffectText:
 	text_far _ItemWontHaveEffectText
 	text_end
@@ -2806,14 +2770,6 @@ BallBlockedText:
 
 BallDontBeAThiefText:
 	text_far _BallDontBeAThiefText
-	text_end
-
-NoCyclingText:
-	text_far _NoCyclingText
-	text_end
-
-ItemCantGetOnText:
-	text_far _ItemCantGetOnText
 	text_end
 
 StorageFullText:

@@ -606,10 +606,7 @@ Pokedex_UpdateOptionScreen:
 	jr nz, .return_to_main_screen
 	ld a, [hl]
 	and A_BUTTON
-	jr nz, .do_menu_action
-	ret
-
-.do_menu_action
+	ret z
 	ld a, [wDexArrowCursorPosIndex]
 	ld hl, .MenuActionJumptable
 	call Pokedex_LoadPointer
@@ -704,10 +701,7 @@ Pokedex_UpdateSearchScreen:
 	jr nz, .cancel
 	ld a, [hl]
 	and A_BUTTON
-	jr nz, .do_menu_action
-	ret
-
-.do_menu_action
+	ret z
 	ld a, [wDexArrowCursorPosIndex]
 	ld hl, .MenuActionJumptable
 	call Pokedex_LoadPointer
@@ -884,27 +878,20 @@ Pokedex_UpdateUnownMode:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and A_BUTTON | B_BUTTON
-	jr nz, .a_b
-	jr Pokedex_UnownModeHandleDPadInput
-
-.a_b
+	jr z, Pokedex_UnownModeHandleDPadInput
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_OPTION_SCR
 	ld [wJumptableIndex], a
 	call DelayFrame
 	call Pokedex_CheckSGB
 	jr nz, .decompress
-	farcall LoadSGBPokedexGFX2
-	jr .done
+	farjp LoadSGBPokedexGFX2
 
 .decompress
 	ld hl, PokedexLZ
 	ld de, vTiles2 tile $31
 	lb bc, BANK(PokedexLZ), 58
-	call DecompressRequest2bpp
-
-.done
-	ret
+	jmp DecompressRequest2bpp
 
 Pokedex_UnownModeHandleDPadInput:
 	ld hl, hJoyLast
@@ -994,7 +981,7 @@ Pokedex_LoadListingScrollParams:
 	ld e, a
 	ld a, h
 	jr nc, .check_overflow
-	sub 1
+	sub 1 ; no-optimize a++|a--
 	jr c, .underflow
 .check_overflow
 	and a
@@ -1088,7 +1075,7 @@ Pokedex_ListingMoveCursorUp:
 	and a
 	ret z
 .go
-	sub 1
+	sub 1 ; no-optimize a++|a--
 	ld [hli], a
 	jr nc, .done
 	dec [hl]
@@ -1281,8 +1268,6 @@ Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_PlaceString
 	jmp Pokedex_PlaceFrontpicTopLeftCorner
 
-.Number: ; unreferenced
-	db $5c, $5d, -1 ; No.
 .Height:
 	db "HT  ?", $5e, "??", $5f, -1 ; HT  ?'??"
 .Weight:
@@ -1401,14 +1386,13 @@ Pokedex_PlaceSearchResultsTypeStrings:
 	ld b, a
 	ld a, [wDexSearchMonType2]
 	and a
-	jr z, .done
+	ret z
 	cp b
-	jr z, .done
+	ret z
 	hlcoord 2, 15
 	call Pokedex_PlaceTypeString
 	hlcoord 1, 15
 	ld [hl], "/"
-.done
 	ret
 
 Pokedex_DrawUnownModeBG:
@@ -1426,8 +1410,7 @@ Pokedex_DrawUnownModeBG:
 	hlcoord 6, 5
 	call PlaceFrontpicAtHL
 	ld de, 0
-	ld b, 0
-	ld c, NUM_UNOWN
+	lb bc, 0, NUM_UNOWN
 .loop
 	ld hl, wUnownDex
 	add hl, de
@@ -1528,8 +1511,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $34
 	call .FillRow
-	ld a, $35
-	ld [hl], a
+	ld [hl], $35
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
@@ -1539,8 +1521,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $7f
 	call .FillRow
-	ld a, $37
-	ld [hl], a
+	ld [hl], $37
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
@@ -1550,8 +1531,7 @@ Pokedex_PlaceBorder:
 	ld [hli], a
 	ld d, $39
 	call .FillRow
-	ld a, $3a
-	ld [hl], a
+	ld [hl], $3a
 	ret
 
 .FillRow:
@@ -2117,8 +2097,8 @@ Pokedex_SearchForMons:
 	ld [wDexConvertedMonType], a
 	ld hl, wDexListingEnd
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ld hl, wPokedexOrder
 	ld d, h
 	ld e, l
@@ -2657,8 +2637,7 @@ Pokedex_LoadSelectedMonTiles:
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	ld de, vTiles2
-	predef GetMonFrontpic
-	ret
+	predef_jump GetMonFrontpic
 
 .QuestionMark:
 	ld a, BANK(sScratch)
@@ -2730,7 +2709,7 @@ Pokedex_LoadInvertedFont:
 Pokedex_InvertTiles:
 .loop
 	ld a, [hl]
-	xor $ff
+	cpl
 	ld [hli], a
 	dec bc
 	ld a, b
@@ -2807,8 +2786,8 @@ _NewPokedexEntry:
 	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_DrawFootprint
 	hlcoord 0, 17
-	ld [hl], $3b
-	inc hl
+	ld a, $3b
+	ld [hli], a
 	ld bc, 19
 	ld a, " "
 	rst ByteFill
@@ -2838,9 +2817,7 @@ Pokedex_SetBGMapMode4:
 Pokedex_SetBGMapMode_3ifDMG_4ifCGB:
 	ldh a, [hCGB]
 	and a
-	jr z, .DMG
-	call Pokedex_SetBGMapMode4
-.DMG:
+	call nz, Pokedex_SetBGMapMode4
 	jr Pokedex_SetBGMapMode3
 
 Pokedex_ResetBGMapMode:

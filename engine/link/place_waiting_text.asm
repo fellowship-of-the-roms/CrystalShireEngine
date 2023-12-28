@@ -1,7 +1,6 @@
 PlaceWaitingText::
 	hlcoord 3, 10
-	ld b, 1
-	ld c, 11
+	lb bc, 1, 11
 
 	ld a, [wBattleMode]
 	and a

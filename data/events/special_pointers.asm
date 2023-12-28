@@ -127,7 +127,6 @@ SpecialsPointers::
 	add_special BattleTowerRoomMenu
 	add_special Function1700ba
 	add_special BattleTowerBattle
-	add_special UnusedBattleTowerDummySpecial1
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
 	add_special Function11ba38
 	add_special CheckForBattleTowerRules
@@ -151,7 +150,6 @@ SpecialsPointers::
 	add_special SampleKenjiBreakCountdown
 	add_special BeastsCheck
 	add_special MonCheck
-	add_special UnusedBattleTowerDummySpecial2
 	add_special StubbedTrainerRankings_Healings
 	add_special RefreshSprites
 	add_special AskRememberPassword
@@ -159,4 +157,3 @@ SpecialsPointers::
 
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
-	add_special UnusedDummySpecial ; unused

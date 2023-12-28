@@ -33,14 +33,6 @@ HandleCmdQueue::
 	jr nz, .loop
 	ret
 
-GetNthCmdQueueEntry: ; unreferenced
-	ld hl, wCmdQueue
-	ld bc, CMDQUEUE_ENTRY_SIZE
-	rst AddNTimes
-	ld b, h
-	ld c, l
-	ret
-
 WriteCmdQueue::
 	push bc
 	push de
@@ -127,8 +119,8 @@ HandleQueuedCommand:
 	jmp FarCall_hl
 
 .Jumptable:
-	dba CmdQueue_Null
-	dba CmdQueue_Type1
+	dba DoNothing ; CmdQueue_Null
+	dba DoNothing ; CmdQueue_Type1
 	dba CmdQueue_StoneTable
 	dba CmdQueue_Type3
 	dba CmdQueue_Type4
@@ -152,12 +144,6 @@ CmdQueues_DecAnonJumptableIndex:
 	dec [hl]
 	ret
 
-CmdQueue_Null:
-	ret
-
-CmdQueue_Type1:
-	ret
-
 CmdQueue_Type4:
 	call CmdQueues_AnonJumptable
 .anon_dw
@@ -173,9 +159,8 @@ CmdQueue_Type4:
 .one
 	ld hl, CMDQUEUE_ADDR
 	add hl, bc
+	dec [hl]
 	ld a, [hl]
-	dec a
-	ld [hl], a
 	jr z, .finish
 	and 1
 	jr z, .add

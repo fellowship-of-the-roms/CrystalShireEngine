@@ -74,10 +74,7 @@ else
 	and START
 endc
 	vc_patch_end
-	jr nz, .pressed_start
-	ret
-
-.pressed_start
+	ret z
 	ld a, [wJumptableIndex]
 	push af
 	farcall PrintMailAndExit ; printer
@@ -121,8 +118,7 @@ endc
 	jr .loop2
 
 .invalid
-	ld hl, MailGFXPointers
-	inc hl
+	ld hl, MailGFXPointers + 1
 
 .got_pointer
 	inc hl
@@ -136,7 +132,7 @@ endc
 	push de
 	jp hl
 .done
-	ret
+	ret ; no-optimize Stub function (used to push ret to stack for return)
 
 MailGFXPointers:
 ; entries correspond to *MAIL_INDEX constants
@@ -740,18 +736,6 @@ MailGFX_PlaceMessage:
 .place_author
 	jmp PlaceString
 
-InvertBytes: ; unreferenced
-; invert bc bytes starting at hl
-.loop
-	ld a, [hl]
-	xor $ff
-	ld [hli], a
-	dec bc
-	ld a, b
-	or c
-	jr nz, .loop
-	ret
-
 DrawMailBorder:
 	hlcoord 0, 0
 	ld a, $31
@@ -769,8 +753,7 @@ DrawMailBorder:
 	hlcoord 19, 1
 	ld a, $35
 	call Mail_DrawLeftRightBorder
-	ld a, $38
-	ld [hl], a
+	ld [hl], $38
 	ret
 
 DrawMailBorder2:
@@ -779,11 +762,11 @@ DrawMailBorder2:
 	ld [hli], a
 	inc a
 	call Mail_DrawTopBottomBorder
-	ld [hl], $31
+	ld [hl], $31 ; no-optimize *hl++|*hl-- = N (a is used.)
 	inc hl
 	inc a
 	call Mail_DrawLeftRightBorder
-	ld [hl], $31
+	ld [hl], $31 ; no-optimize *hl++|*hl-- = N (a is used.)
 	inc hl
 	inc a
 	call Mail_DrawTopBottomBorder
@@ -796,11 +779,6 @@ DrawMailBorder2:
 Mail_Place14TileAlternatingRow:
 	push af
 	ld b, 14 / 2
-	jr Mail_PlaceAlternatingRow
-
-Mail_Place16TileAlternatingRow: ; unreferenced
-	push af
-	ld b, 16 / 2
 	jr Mail_PlaceAlternatingRow
 
 Mail_Place18TileAlternatingRow:
@@ -843,10 +821,6 @@ Mail_PlaceAlternatingColumn:
 	ld [hl], a
 	pop af
 	ret
-
-Mail_Draw7TileRow: ; unreferenced
-	ld b, 7
-	jr Mail_DrawRowLoop
 
 Mail_Draw13TileRow:
 	ld b, 13

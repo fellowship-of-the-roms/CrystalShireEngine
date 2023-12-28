@@ -53,19 +53,19 @@ CatchTutorial::
 
 .LoadDudeData:
 	ld hl, wDudeNumItems
-	ld [hl], 1
-	inc hl
+	ld a, 1
+	ld [hli], a
 	push hl
 	ld hl, POTION
 	call GetItemIDFromIndex
 	pop hl
 	ld [hli], a
-	ld [hl], 1
-	inc hl
+	ld a, 1
+	ld [hli], a
 	ld [hl], -1
 	ld hl, wDudeNumKeyItems
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	ld [hl], -1
 	ld hl, wDudeNumBalls
 	ld a, 1

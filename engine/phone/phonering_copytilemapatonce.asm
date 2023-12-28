@@ -3,7 +3,7 @@ PhoneRing_CopyTilemapAtOnce:
 	and a
 	jmp z, WaitBGMap
 	ld a, [wSpriteUpdatesEnabled]
-	cp $0
+	and a
 	jmp z, WaitBGMap
 
 ; The following is a modified version of _CopyTilemapAtOnce
@@ -54,8 +54,7 @@ PhoneRing_CopyTilemapAtOnce:
 	ld l, 0
 	ld a, SCREEN_HEIGHT
 	ldh [hTilesPerCycle], a
-	ld b, 1 << 1 ; not in v/hblank
-	ld c, LOW(rSTAT)
+	lb bc, 1 << 1, LOW(rSTAT) ; b = not in v/hblank
 
 .loop
 rept SCREEN_WIDTH / 2

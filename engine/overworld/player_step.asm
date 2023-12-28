@@ -1,10 +1,10 @@
 _HandlePlayerStep::
 	ld a, [wPlayerStepFlags]
-	add a, a
+	add a
 	jr c, .update_overworld_map ; starting step
-	add a, a
+	add a
 	jr c, .update_player_coords ; finishing step
-	add a, a
+	add a
 	jr c, .finish ; ongoing step
 	ret
 
@@ -57,24 +57,18 @@ HandlePlayerStep:
 	dw GetMovementPermissions
 	dw BufferScreen
 	dw .mobile
-	dw .fail2
+	dw DoNothing ; .fail2
 ; The rest are never used.  Ever.
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-
-.fail1
-	ret
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
+	dw DoNothing ; .fail1
 
 .mobile
 	farjp StubbedTrainerRankings_StepCount
-
-.fail2
-	ret
 
 UpdatePlayerCoords:
 	ld a, [wPlayerStepDirection]
@@ -152,13 +146,8 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2 ; was 1
-	jr nz, .done_down
+	ret nz
 	ld [hl], 0
-	call .ScrollMapDataDown
-.done_down
-	ret
-
-.ScrollMapDataDown:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
 	add 3 * 2 ; surrounding tiles
@@ -183,13 +172,8 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1 ; was 0
-	jr nz, .done_up
+	ret nz
 	ld [hl], $1
-	call .ScrollMapDataUp
-.done_up
-	ret
-
-.ScrollMapDataUp:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
 	add 3 * 2 ; surrounding tiles
@@ -215,16 +199,11 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1
-	jr nz, .done_left
+	ret nz
 	ld [hl], 1
-	call .ScrollMapDataLeft
-.done_left
-	ret
-
-.ScrollMapDataLeft:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
-	sub 1
+	sub 1 ; no-optimize a++|a--
 	ld [hli], a
 	ret nc
 	dec [hl]
@@ -244,16 +223,11 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2
-	jr nz, .done_right
+	ret nz
 	ld [hl], 0
-	call .ScrollMapDataRight
-.done_right
-	ret
-
-.ScrollMapDataRight:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
-	add 1
+	add 1 ; no-optimize a++|a--
 	ld [hli], a
 	ret nc
 	inc [hl]

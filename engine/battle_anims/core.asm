@@ -120,7 +120,7 @@ BattleAnimOAMUpdate:
 	bit OAM_Y_FLIP, [hl]
 	jr z, .no_yflip
 	add $8
-	xor $ff
+	cpl
 	inc a
 .no_yflip
 	pop hl
@@ -141,7 +141,7 @@ BattleAnimOAMUpdate:
 	bit OAM_X_FLIP, [hl]
 	jr z, .no_xflip
 	add $8
-	xor $ff
+	cpl
 	inc a
 .no_xflip
 	pop hl
@@ -241,9 +241,8 @@ InitBattleAnimBuffer:
 	ld hl, BATTLEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hli]
-	ld d, a
-	ld a, (-10 * TILE_WIDTH) + 4
-	sub d
+	cpl
+	add (-10 * TILE_WIDTH) + 4 + 1
 	ld [wBattleAnimTempXCoord], a
 	ld a, [hli]
 	ld d, a
@@ -260,8 +259,8 @@ InitBattleAnimBuffer:
 	push bc
 	ld hl, wFXAnimID
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	ld de, 2
 	ld hl, .extra_offset_moves
 	call IsInWordArray
@@ -274,7 +273,7 @@ InitBattleAnimBuffer:
 	add d
 	ld [wBattleAnimTempYCoord], a
 	ld a, [hli]
-	xor $ff
+	cpl
 	inc a
 	ld [wBattleAnimTempXOffset], a
 	ret

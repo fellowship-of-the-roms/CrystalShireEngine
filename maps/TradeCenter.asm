@@ -39,11 +39,6 @@ TradeCenterConsoleScript:
 	newloadmap MAPSETUP_LINKRETURN
 	end
 
-TradeCenterFriendReadyText:
-	text "Your friend is"
-	line "ready."
-	done
-
 TradeCenter_MapEvents:
 	db 0, 0 ; filler
 

@@ -17,14 +17,12 @@ TryAddMonToParty:
 	ret nc
 	; Increase the party count
 	ld [de], a
-	ld a, [de] ; Why are we doing this?
 	ldh [hMoveMon], a ; HRAM backup
 	add e
 	ld e, a
-	jr nc, .loadspecies
-	inc d
-
-.loadspecies
+	adc d
+	sub e
+	ld d, a
 	; Load the species of the Pokemon into the party list.
 	; The terminator is usually here, but it'll be back.
 	ld a, [wCurPartySpecies]
@@ -99,7 +97,7 @@ GeneratePartyMonStats:
 	; Copy the item if it's a wild mon
 	ld a, [wBattleMode]
 	and a
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .skipitem
 	ld a, [wEnemyMonItem]
 .skipitem
@@ -568,8 +566,7 @@ RetrieveMonFromDayCareLady:
 	ld [wCurPartyLevel], a
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
-	jr RetrieveBreedmon ; pointless
-
+; fallthrough
 RetrieveBreedmon:
 	ld hl, wPartyCount
 	ld a, [hl]
@@ -595,8 +592,7 @@ RetrieveBreedmon:
 .okay
 	ld [hli], a
 	ld [wCurSpecies], a
-	ld a, $ff
-	ld [hl], a
+	ld [hl], $ff
 	ld hl, wPartyMonNicknames
 	ld a, [wPartyCount]
 	dec a
@@ -902,8 +898,7 @@ GiveEgg::
 	ld b, 0
 	ld c, a
 	add hl, bc
-	ld a, EGG
-	ld [hl], a
+	ld [hl], EGG
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
@@ -1531,9 +1526,8 @@ GivePoke::
 .set_caught_data
 	farcall GiveANickname_YesNo
 	pop de
-	jr c, .skip_nickname
-	call InitNickname
-
+	call nc, InitNickname
+; fallthrough
 .skip_nickname
 	pop bc
 	pop de

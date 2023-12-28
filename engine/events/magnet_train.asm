@@ -200,9 +200,9 @@ DrawMagnetTrain:
 	ret
 
 .FillAlt:
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a is used)
 	inc hl
-	ld [hl], d
+	ld [hl], d ; no-optimize *hl++|*hl-- = b|c|d|e (a is used)
 	inc hl
 	dec b
 	jr nz, .FillAlt
@@ -215,9 +215,9 @@ GetMagnetTrainBGTiles:
 	ld hl, MagnetTrainBGTiles
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	pop hl
 	ret
 
@@ -268,7 +268,7 @@ SetMagnetTrainPals:
 	ld a, PAL_BG_YELLOW
 	rst ByteFill
 
-	ld a, 0
+	xor a
 	ldh [rVBK], a
 	ret
 
@@ -312,7 +312,7 @@ MagnetTrain_Jumptable:
 	jr z, .PrepareToHoldTrain
 	ld e, a
 	ld a, [wMagnetTrainDirection]
-	xor $ff
+	cpl
 	inc a
 	add e
 	ld [wMagnetTrainPosition], a
@@ -332,21 +332,18 @@ MagnetTrain_Jumptable:
 	ld hl, wMagnetTrainWaitCounter
 	ld a, [hl]
 	and a
-	jr z, .DoneWaiting
+	jr z, .Next
 	dec [hl]
 	ret
-
-.DoneWaiting:
-	jr .Next
 
 .MoveTrain2:
 	ld hl, wMagnetTrainFinalPosition
 	ld a, [wMagnetTrainPosition]
 	cp [hl]
-	jr z, .PrepareToFinishAnim
+	jr z, .Next
 	ld e, a
 	ld a, [wMagnetTrainDirection]
-	xor $ff
+	cpl
 	inc a
 	ld d, a
 	ld a, e
@@ -361,11 +358,6 @@ MagnetTrain_Jumptable:
 	add d
 	ld [hl], a
 	ret
-
-	ret
-
-.PrepareToFinishAnim:
-	jr .Next
 
 .TrainArrived:
 	ld hl, wPalFlags

@@ -195,8 +195,7 @@ AI_Types:
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	ld d, a
 	ld hl, wEnemyMonMoves
-	ld b, NUM_MOVES + 1
-	ld c, 0
+	lb bc, NUM_MOVES + 1, 0
 .checkmove2
 	dec b
 	jr z, .movesdone
@@ -211,9 +210,8 @@ AI_Types:
 	jr z, .checkmove2
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr nz, .damaging
-	jr .checkmove2
-
+	jr z, .checkmove2
+; fallthrough
 .damaging
 	ld c, a
 .movesdone
@@ -287,8 +285,8 @@ AI_Smart:
 	jr nc, .nextmove
 
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 
 	pop hl
 	push hl
@@ -1342,8 +1340,7 @@ AI_Smart_Mimic:
 AI_Smart_Counter:
 	push hl
 	ld hl, wPlayerUsedMoves
-	ld c, NUM_MOVES
-	ld b, 0
+	lb bc, 0, NUM_MOVES
 
 .playermoveloop
 	ld a, [hli]
@@ -1376,26 +1373,24 @@ AI_Smart_Counter:
 
 	ld a, [wLastPlayerCounterMove]
 	and a
-	jr z, .done
+	ret z
 
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .done
+	ret z
 
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	cp SPECIAL
-	jr nc, .done
+	ret nc
 
 .encourage
 	call Random
 	cp 39 percent + 1
-	jr c, .done
+	ret c
 
 	dec [hl]
-
-.done
 	ret
 
 .discourage
@@ -1459,8 +1454,8 @@ AI_Smart_PainSplit:
 
 	push hl
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	sla c
 	rl b
@@ -2470,8 +2465,7 @@ AI_Smart_BellyDrum:
 AI_Smart_PsychUp:
 	push hl
 	ld hl, wEnemyAtkLevel
-	ld b, NUM_LEVEL_STATS
-	ld c, 100
+	lb bc, NUM_LEVEL_STATS, 100
 
 ; Calculate the sum of all enemy's stat level modifiers. Add 100 first to prevent underflow.
 ; Put the result in c. c will range between 58 and 142.
@@ -2527,8 +2521,7 @@ AI_Smart_PsychUp:
 AI_Smart_MirrorCoat:
 	push hl
 	ld hl, wPlayerUsedMoves
-	ld c, NUM_MOVES
-	ld b, 0
+	lb bc, 0, NUM_MOVES
 
 .playermoveloop
 	ld a, [hli]
@@ -2561,25 +2554,23 @@ AI_Smart_MirrorCoat:
 
 	ld a, [wLastPlayerCounterMove]
 	and a
-	jr z, .done
+	ret z
 
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .done
+	ret z
 
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	cp SPECIAL
-	jr c, .done
+	ret c
 
 .encourage
 	call Random
 	cp 39 percent + 1
-	jr c, .done
+	ret c
 	dec [hl]
-
-.done
 	ret
 
 .discourage
@@ -2755,8 +2746,8 @@ AICheckMaxHP:
 AICheckPlayerHalfHP:
 	push hl
 	ld hl, wBattleMonHP
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	sla c
 	rl b
@@ -2774,8 +2765,8 @@ AICheckEnemyHalfHP:
 	push de
 	push bc
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	sla c
 	rl b
@@ -2792,8 +2783,8 @@ AICheckEnemyQuarterHP:
 	push de
 	push bc
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	sla c
 	rl b
@@ -2810,8 +2801,8 @@ AICheckEnemyQuarterHP:
 AICheckPlayerQuarterHP:
 	push hl
 	ld hl, wBattleMonHP
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld c, [hl]
 	sla c
 	rl b
@@ -2916,12 +2907,12 @@ AI_Opportunist:
 .checkmove
 	inc hl
 	dec c
-	jr z, .done
+	ret z
 
 	ld a, [de]
 	inc de
 	and a
-	jr z, .done
+	ret z
 
 	push hl
 	push de
@@ -2936,9 +2927,6 @@ AI_Opportunist:
 
 	inc [hl]
 	jr .checkmove
-
-.done
-	ret
 
 INCLUDE "data/battle/ai/stall_moves.asm"
 
@@ -3234,10 +3222,6 @@ endr
 	jr .checkmove
 
 INCLUDE "data/battle/ai/risky_effects.asm"
-
-
-AI_None:
-	ret
 
 AIDiscourageMove:
 	ld a, [hl]

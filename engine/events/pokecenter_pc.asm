@@ -375,7 +375,7 @@ PlayerWithdrawItemMenu:
 	farcall SelectQuantityToToss
 	call ExitMenu
 	call ExitMenu
-	jr c, .done
+	ret c
 
 .withdraw
 	ld a, [wItemQuantityChange]
@@ -401,9 +401,6 @@ PlayerWithdrawItemMenu:
 .PackFull:
 	ld hl, .PlayersPCNoRoomWithdrawText
 	jmp MenuTextboxBackup
-
-.done
-	ret
 
 .PlayersPCHowManyWithdrawText:
 	text_far _PlayersPCHowManyWithdrawText
@@ -490,7 +487,7 @@ PlayerDepositItemMenu:
 .TryDepositItem:
 	ld a, [wSpriteUpdatesEnabled]
 	push af
-	ld a, FALSE
+	xor a ; FALSE
 	ld [wSpriteUpdatesEnabled], a
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
@@ -503,15 +500,12 @@ PlayerDepositItemMenu:
 .dw
 ; entries correspond to ITEMMENU_* constants
 	dw .tossable ; ITEMMENU_NOUSE
-	dw .no_toss
-	dw .no_toss
-	dw .no_toss
+	dw DoNothing ; .no_toss
+	dw DoNothing ; .no_toss
+	dw DoNothing ; .no_toss
 	dw .tossable ; ITEMMENU_CURRENT
 	dw .tossable ; ITEMMENU_PARTY
 	dw .tossable ; ITEMMENU_CLOSE
-
-.no_toss
-	ret
 
 .tossable
 	ld a, [wPCItemQuantityChange]
@@ -593,13 +587,12 @@ PCItemsJoypad:
 .loop
 	ld a, [wSpriteUpdatesEnabled]
 	push af
-	ld a, FALSE
+	xor a ; FALSE
 	ld [wSpriteUpdatesEnabled], a
 	ld hl, .PCItemsMenuData
 	call CopyMenuHeader
 	hlcoord 0, 0
-	ld b, 10
-	ld c, 18
+	lb bc, 10, 18
 	call Textbox
 	ld a, [wPCItemsCursor]
 	ld [wMenuCursorPosition], a
@@ -622,7 +615,7 @@ PCItemsJoypad:
 	jr z, .a_1
 	cp SELECT
 	jr z, .select_1
-	jr .next
+	jr .loop
 
 .moving_stuff_around
 	ld a, [wMenuJoypad]
@@ -632,18 +625,17 @@ PCItemsJoypad:
 	jr z, .a_select_2
 	cp SELECT
 	jr z, .a_select_2
-	jr .next
+	jr .loop
 
 .b_2
 	xor a
 	ld [wSwitchItem], a
-	jr .next
+	jr .loop
 
 .a_select_2
 	call PC_PlaySwapItemsSound
 .select_1
 	farcall SwitchItemsInBag
-.next
 	jr .loop
 
 .a_1

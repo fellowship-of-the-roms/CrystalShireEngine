@@ -2,8 +2,6 @@ LoadPoisonBGPals:
 	call .LoadPals
 	ldh a, [hCGB]
 	and a
-	ret nz
-	; code was probably dummied out here
 	ret
 
 .LoadPals:
@@ -13,7 +11,7 @@ LoadPoisonBGPals:
 	ld a, [wTimeOfDayPal]
 	maskbits NUM_DAYTIMES
 	cp DARKNESS_F
-	ld a, %00000000
+	ld a, %00000000 ; no-optimize a = 0
 	jr z, .convert_pals
 	ld a, %10101010
 

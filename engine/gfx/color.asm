@@ -75,7 +75,7 @@ LoadTrainerClassPaletteAsNthBGPal:
 
 LoadMonPaletteAsNthBGPal:
 	ld a, [wCurPartySpecies]
-	call _GetMonPalettePointer
+	call GetMonPalettePointer
 	ld a, e
 	bit 7, a
 	jr z, LoadNthMiddleBGPal
@@ -220,7 +220,7 @@ LoadMailPalettes:
 	ld [wSGBPals + 4], a
 	ld a, [hli]
 	ld [wSGBPals + 5], a
-	ld a, [hli]
+	ld a, [hl]
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
 	call PushSGBPals
@@ -420,7 +420,7 @@ ApplyAttrmap:
 	ld e, a
 	dec b
 	jr nz, .row
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ret
 
@@ -520,13 +520,10 @@ GetTrainerPalettePointer:
 	add hl, bc
 	ret
 
-GetMonPalettePointer:
-	jr _GetMonPalettePointer
-
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
 
-_GetMonPalettePointer:
+GetMonPalettePointer:
 	call GetPokemonIndexFromID
 	add hl, hl
 	add hl, hl
@@ -537,7 +534,7 @@ _GetMonPalettePointer:
 
 GetMonNormalOrShinyPalettePointer:
 	push bc
-	call _GetMonPalettePointer
+	call GetMonPalettePointer
 	pop bc
 	push hl
 	call CheckShininess
@@ -629,8 +626,7 @@ InitSGBBorder:
 .skip
 	pop af
 	ld [wJoypadDisable], a
-	ei
-	ret
+	reti
 
 InitCGBPals::
 	call CheckCGB
@@ -739,8 +735,8 @@ PushSGBBorderPalsAndWait:
 	call _PushSGBPals
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	ld a, $20
 	ldh [rJOYP], a
@@ -767,8 +763,8 @@ endr
 	call SGBDelayCycles
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	call .FinalPush
 	and a

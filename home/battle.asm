@@ -97,9 +97,8 @@ UpdateOpponentInParty::
 UpdateUserInParty::
 	ldh a, [hBattleTurn]
 	and a
-	jr z, UpdateBattleMonInParty
-	jr UpdateEnemyMonInParty
-
+	jr nz, UpdateEnemyMonInParty
+; fallthrough
 UpdateBattleMonInParty::
 ; Update level, status, current HP
 
@@ -227,9 +226,9 @@ GetBattleAnimByte::
 	push de
 
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 
 	ld a, BANK(BattleAnimations)
 	rst Bankswitch
@@ -241,8 +240,8 @@ GetBattleAnimByte::
 	ld a, BANK(BattleAnimCommands)
 	rst Bankswitch
 
-	ld [hl], d
-	dec hl
+	ld a, d
+	ld [hld], a
 	ld [hl], e
 
 	pop de

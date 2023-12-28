@@ -447,8 +447,7 @@ DayCare_GiveEgg:
 	ld a, [wEggMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld a, -1
-	ld [hl], a
+	ld [hl], -1
 
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
@@ -562,10 +561,10 @@ DayCare_InitBreeding:
 	jr z, .LoadWhichBreedmonIsTheMother
 	ld a, [wBreedMon2Species]
 	cp c
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .LoadWhichBreedmonIsTheMother
 	farcall GetGender
-	ld a, $0
+	ld a, $0 ; no-optimize a = 0
 	jr z, .LoadWhichBreedmonIsTheMother
 	inc a
 

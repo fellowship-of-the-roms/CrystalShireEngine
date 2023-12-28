@@ -474,9 +474,8 @@ AI_Items:
 	jr z, .DontUse
 	call Random
 	cp 20 percent - 1
-	jr nc, .DontUse
-	jr .Use
-
+	jr c, .Use
+; fallthrough
 .DontUse:
 	scf
 	ret

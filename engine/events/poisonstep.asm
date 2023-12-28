@@ -75,8 +75,8 @@ DoPoisonStep::
 
 ; do 1 HP damage
 	dec bc
-	ld [hl], c
-	dec hl
+	ld a, c
+	ld [hld], a
 	ld [hl], b
 
 ; check if mon has fainted as a result of poison damage

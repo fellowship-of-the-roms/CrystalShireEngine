@@ -5,7 +5,7 @@ HealParty:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
+	ret z
 	cp EGG
 	jr z, .next
 
@@ -14,13 +14,10 @@ HealParty:
 	pop hl
 
 .next
-	ld a, [wCurPartyMon]
+	ld a, [wCurPartyMon] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
 	ld [wCurPartyMon], a
 	jr .loop
-
-.done
-	ret
 
 HealPartyMon:
 	ld a, MON_SPECIES
@@ -79,9 +76,9 @@ ComputeHPBarPixels:
 	ld b, a
 	ldh a, [hProduct + 3]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hDividend + 3], a
 	ld a, b
 	ldh [hDividend + 2], a

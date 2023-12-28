@@ -81,7 +81,7 @@ RefreshSprites::
 	push bc
 	call GetPlayerSprite
 	xor a
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
 	call LoadMiscTiles
 	pop bc
@@ -95,11 +95,11 @@ ReloadSpriteIndex::
 	ld hl, wObjectStructs
 	ld de, OBJECT_LENGTH
 	push bc
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	ld b, a
 	xor a
 .loop
-	ld [hObjectStructIndex], a
+	ldh [hObjectStructIndex], a
 	ld a, [hl]
 	and a
 	jr z, .done
@@ -118,7 +118,7 @@ ReloadSpriteIndex::
 	pop hl
 .done
 	add hl, de
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop
@@ -222,8 +222,7 @@ GetMonSprite:
 
 	farcall LoadOverworldMonIcon
 
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	scf
 	ret
 
@@ -239,8 +238,7 @@ GetMonSprite:
 
 .NoBreedmon:
 	ld a, WALKING_SPRITE
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	and a
 	ret
 
@@ -359,7 +357,7 @@ GetUsedSprites:
 
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	ldh [hUsedSpriteIndex], a
 
 	ld a, [hli]
@@ -380,8 +378,6 @@ GetUsedSprites:
 	pop bc
 	dec c
 	jr nz, .loop
-
-.done
 	ret
 
 GetUsedSprite::
@@ -394,10 +390,7 @@ GetUsedSprite::
 	push bc
 	ld a, [wSpriteFlags]
 	bit 7, a
-	jr nz, .skip
-	call .CopyToVram
-
-.skip
+	call z, .CopyToVram
 	pop bc
 	ld l, c
 	ld h, $0
@@ -412,31 +405,27 @@ endr
 
 	ld a, [wSpriteFlags]
 	bit 5, a
-	jr nz, .done
+	ret nz
 	bit 6, a
-	jr nz, .done
+	ret nz
 
 	ldh a, [hUsedSpriteIndex]
 	call _DoesSpriteHaveFacings
-	jr c, .done
+	ret c
 
 	ld a, h
 	add HIGH(vTiles1 - vTiles0)
 	ld h, a
-	call .CopyToVram
-
-.done
-	ret
+	jr .CopyToVram
 
 .GetTileAddr:
 ; Return the address of tile (a) in (hl).
 	and $7f
+	swap a
 	ld l, a
-	ld h, 0
-rept 4
-	add hl, hl
-endr
-	ld a, l
+	and $f
+	ld h, a
+	xor l
 	add LOW(vTiles0)
 	ld l, a
 	ld a, h
@@ -451,7 +440,7 @@ endr
 	bit 5, a
 	ld a, $1
 	jr z, .bankswitch
-	ld a, $0
+	xor a
 
 .bankswitch
 	ldh [rVBK], a
@@ -468,18 +457,18 @@ LoadEmote::
 	ld hl, Emotes
 	rst AddNTimes
 ; Load the emote address into de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 ; load the length of the emote (in tiles) into c
-	inc hl
-	ld c, [hl]
+	ld a, [hli]
+	ld c, a
 	swap c
 ; load the emote pointer bank into b
-	inc hl
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
 ; load the VRAM destination into hl
-	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

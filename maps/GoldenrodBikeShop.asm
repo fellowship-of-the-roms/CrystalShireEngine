@@ -80,13 +80,6 @@ GoldenrodBikeShopClerkRefusedText:
 	cont "people…"
 	done
 
-GoldenrodBikeShopJustReleasedCompactBikeText:
-	text "Just released!"
-
-	para "First-rate compact"
-	line "BICYCLES!"
-	done
-
 GoldenrodBikeShopBicycleText:
 	text "It's a shiny new"
 	line "BICYCLE!"

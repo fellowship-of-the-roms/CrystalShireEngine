@@ -331,7 +331,7 @@ MrPokemonText_GimmeTheScale:
 	line "What's that?"
 	cont "A red GYARADOS?"
 
-	para "That's rare! "
+	para "That's rare!"
 	line "I, I want it…"
 
 	para "<PLAY_G>, would you"

@@ -190,7 +190,6 @@ SlotsLoop:
 	ld [wCurSpriteOAMAddr], a
 	farcall DoNextFrameForFirst16Sprites
 	call .PrintCoinsAndPayout
-	call .Stubbed_AlternateMatchingSevensPalette
 	call DelayFrame
 	and a
 	ret
@@ -198,21 +197,6 @@ SlotsLoop:
 .stop
 	scf
 	ret
-
-.Stubbed_AlternateMatchingSevensPalette:
-; dummied out
-	ret
-	ld a, [wReel1ReelAction]
-	and a
-	ret nz
-	ld a, [wReel2ReelAction]
-	and a
-	ret nz
-	ld a, [wFirstTwoReelsMatchingSevens]
-	and a
-	jr nz, .matching_sevens
-	ld a, %11100100
-	jmp DmgToCgbBGPals
 
 .matching_sevens
 	ld a, [wTextDelayFrames]
@@ -392,7 +376,7 @@ SlotsAction_FlashScreen:
 	ret z
 
 	ldh a, [rOBP0]
-	xor $ff
+	cpl
 	ld e, a
 	ld d, a
 	jmp DmgToCgbObjPals
@@ -428,19 +412,19 @@ SlotsAction_PayoutAnim:
 	jr z, .done
 	ld e, [hl]
 	dec de
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ld hl, wCoins
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	call Slots_CheckCoinCaseFull
 	jr c, .okay
 	inc de
 .okay
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ld a, [wSlotsDelay]
 	and $7
@@ -621,14 +605,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite16
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel1Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc
@@ -639,14 +623,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite24
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel2Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc
@@ -657,14 +641,14 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite32
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_TILEMAP_ADDR
 	add hl, bc
 	ld de, Reel3Tilemap
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, REEL_X_COORD
 	add hl, bc
@@ -694,9 +678,7 @@ Slots_SpinReels:
 	add hl, bc
 	ld a, [hl]
 	and $f
-	jr nz, .skip
-	call ReelActionJumptable
-.skip
+	call z, ReelActionJumptable
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
 	ld a, [hl]
@@ -811,7 +793,7 @@ ReelActionJumptable:
 	jp hl
 
 .Jumptable:
-	dw ReelAction_DoNothing                   ; 00
+	dw DoNothing                              ; 00
 	dw ReelAction_StopReelIgnoreJoypad        ; 01
 	dw ReelAction_QuadrupleRate               ; 02
 	dw ReelAction_DoubleRate                  ; 03
@@ -836,9 +818,6 @@ ReelActionJumptable:
 	dw ReelAction_WaitChansey                 ; 16
 	dw ReelAction_WaitEgg                     ; 17
 	dw ReelAction_DropReel                    ; 18
-
-ReelAction_DoNothing:
-	ret
 
 ReelAction_QuadrupleRate:
 	ld hl, REEL_SPIN_RATE
@@ -892,8 +871,7 @@ ReelAction_StopReelIgnoreJoypad:
 .EndReel:
 	ld hl, REEL_ACTION
 	add hl, bc
-	ld a, REEL_ACTION_DO_NOTHING
-	ld [hl], a
+	ld [hl], REEL_ACTION_DO_NOTHING
 	ret
 
 ReelAction_StopReel1:
@@ -904,16 +882,15 @@ ReelAction_StopReel1:
 
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	call .CheckForBias
 	ret nz
-.NoBias:
 	jr Slots_StopReel
 
 .CheckForBias:
@@ -941,21 +918,18 @@ ReelAction_StopReel2:
 	ld a, [wSlotBuildingMatch]
 	ld hl, wSlotBias
 	cp [hl]
-	jr z, .NoBias
+	jr z, Slots_StopReel
 .nope
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	ret
-
-.NoBias:
-	jr Slots_StopReel
 
 ReelAction_StopReel3:
 ; Manipulate the reel up to wReel3ManipCounter (i.e. 4) slots,
@@ -1000,9 +974,8 @@ ReelAction_SetUpReel2SkipTo7:
 	jr nc, .no_match
 	ld a, [wFirstTwoReelsMatchingSevens]
 	and a
-	jr z, .no_match
-	jmp Slots_StopReel
-
+	jmp nz, Slots_StopReel
+; fallthrough
 .no_match
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
@@ -1305,11 +1278,7 @@ Slots_CheckMatchedFirstTwoReels:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .return
-	push de
-	jp hl
-
-.return
+	call _hl_
 	ld a, [wFirstTwoReelsMatching]
 	and a
 	ret z
@@ -1317,8 +1286,8 @@ Slots_CheckMatchedFirstTwoReels:
 	ret
 
 .Jumptable:
-	dw .zero
-	dw .one
+	dw DoNothing ; zero
+	dw .CheckMiddleRow
 	dw .two
 	dw .three
 
@@ -1329,12 +1298,7 @@ Slots_CheckMatchedFirstTwoReels:
 .two
 	call .CheckBottomRow
 	call .CheckTopRow
-
-.one
-	call .CheckMiddleRow
-
-.zero
-	ret
+	jr .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped
@@ -1368,9 +1332,8 @@ Slots_CheckMatchedFirstTwoReels:
 	ld hl, wCurReelStopped + 2
 	ld a, [wReel1Stopped + 2]
 	cp [hl]
-	jr z, .StoreResult
-	ret
-
+	ret nz
+; fallthrough
 .StoreResult:
 	ld [wSlotBuildingMatch], a
 	and a
@@ -1398,11 +1361,7 @@ Slots_CheckMatchedAllThreeReels:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .return
-	push de
-	jp hl
-
-.return
+	call _hl_
 	ld a, [wSlotMatched]
 	cp SLOTS_NO_MATCH
 	jr nz, .matched_nontrivial
@@ -1414,8 +1373,8 @@ Slots_CheckMatchedAllThreeReels:
 	ret
 
 .Jumptable:
-	dw .zero
-	dw .one
+	dw DoNothing ; zero
+	dw .CheckMiddleRow
 	dw .two
 	dw .three
 
@@ -1426,12 +1385,7 @@ Slots_CheckMatchedAllThreeReels:
 .two
 	call .CheckBottomRow
 	call .CheckTopRow
-
-.one
-	call .CheckMiddleRow
-
-.zero
-	ret
+	jr .CheckMiddleRow
 
 .CheckBottomRow:
 	ld hl, wCurReelStopped
@@ -1480,9 +1434,8 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 2
 	cp [hl]
-	jr z, .StoreResult
-	ret
-
+	ret nz
+; fallthrough
 .StoreResult:
 	ld [wSlotMatched], a
 	ret
@@ -1516,7 +1469,7 @@ Slots_GetNumberOfGolems:
 	ld a, [wSlotBias]
 	and a
 	jr nz, .not_biased_to_seven
-	ld e, $0
+	ld e, a
 .loop1
 	ld hl, REEL_POSITION
 	add hl, bc
@@ -1640,9 +1593,8 @@ Slots_AskBet:
 	call CloseWindow
 	ret c
 	ld a, [wMenuCursorY]
-	ld b, a
-	ld a, 4
-	sub b
+	cpl
+	add 4 + 1
 	ld [wSlotBet], a
 	ld hl, wCoins
 	ld c, a
@@ -1790,11 +1742,7 @@ Slots_PayoutText:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .return
-	push de
-	jp hl
-
-.return
+	call _hl_
 	ld hl, .Text_PrintPayout
 	call PrintText
 	farjp StubbedTrainerRankings_AddToSlotsWinStreak
@@ -1955,7 +1903,7 @@ Slots_AnimateGolem:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ldh [hSCY], a

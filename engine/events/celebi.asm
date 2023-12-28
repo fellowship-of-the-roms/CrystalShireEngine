@@ -21,8 +21,7 @@ CelebiShrineEvent:
 	ld [hl], SPRITE_ANIM_FUNC_CELEBI
 	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
-	ld a, $80
-	ld [hl], a
+	ld [hl], $80
 	ld a, 160 ; frame count
 	ld [wFrameCounter], a
 	ld d, $0
@@ -168,9 +167,7 @@ UpdateCelebiPosition:
 .float_up
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld a, [hl]
-	add $1
-	ld [hl], a
+	inc [hl]
 .ReinitSpriteAnimFrame:
 	pop af
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -183,16 +180,13 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_RIGHT
-	call ReinitSpriteAnimFrame
-	jr .done
+	jmp ReinitSpriteAnimFrame
 
 .left
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_LEFT
-	call ReinitSpriteAnimFrame
-.done
-	ret
+	jmp ReinitSpriteAnimFrame
 
 .FreezeCelebiPosition:
 	pop af
@@ -208,7 +202,7 @@ GetCelebiSpriteTile:
 	ld a, d
 	ld d, $3
 	ld e, d
-	cp $0
+	and a
 	jr z, .Frame1
 	cp d
 	jr z, .Frame2
@@ -274,11 +268,9 @@ CheckCaughtCelebi:
 	jr z, .false
 	ld a, TRUE
 	ld [wScriptVar], a
-	jr .done
+	ret
 
 .false
 	xor a ; FALSE
 	ld [wScriptVar], a
-
-.done
 	ret

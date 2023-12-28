@@ -31,10 +31,6 @@ DEF NUM_PC_MODES EQU const_value
 	const BOXMENU_BAGITEM
 	const BOXMENU_GIVEITEM
 
-; Stubbed functions
-_ManagePokemonMoves:
-	ret
-
 _BillsPC:
 	call .CheckCanUsePC
 	ret c
@@ -317,7 +313,7 @@ UseBillsPC:
 	ld a, HIGH(wLCDBillsPC1)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	set LCD_STAT, [hl]
 
 	; Display data about current Pokémon pointed to by cursor
@@ -407,12 +403,12 @@ UseBillsPC:
 	inc a
 	ld bc, -SCREEN_WIDTH + (wAttrmap - wTilemap)
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a == d)
 	inc hl
 	ld [hl], e
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; no-optimize *hl++|*hl-- = b|c|d|e (a == d)
 	inc hl
 	ld [hl], e
 	inc e
@@ -541,11 +537,10 @@ BillsPC_Get2bpp:
 	ld a, h
 	sub $80
 	cp $20
-	jr nc, .get2bpp ; copying to non-VRAM
-
 	; Valid case. Apply GDMA.
-	jmp SafeHDMATransfer
-
+	jmp c, SafeHDMATransfer
+; copying to non-VRAM
+; fallthrough
 .get2bpp
 	jmp Get2bpp
 
@@ -592,8 +587,7 @@ SetPartyIcons:
 	ld hl, vTiles4 tile $00
 	ld a, PARTY_LENGTH
 	call BillsPC_BlankTiles
-
-_SetPartyIcons:
+; _SetPartyIcons:
 	; Write party members
 	lb bc, 0, 1
 	ld hl, wBillsPC_PartyList
@@ -614,8 +608,7 @@ SetBoxIcons:
 	ld hl, vTiles4 tile $18
 	ld a, MONS_PER_BOX
 	call BillsPC_BlankTiles
-
-_SetBoxIcons:
+; _SetBoxIcons:
 	; Write box members
 	ld a, [wCurBox]
 	inc a
@@ -1038,7 +1031,7 @@ _GetCursorMon:
 	and VRAM_BANK_1
 	pop hl
 	push af
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .dont_switch_vbk
 	ld a, 1
 	ldh [rVBK], a
@@ -2129,7 +2122,6 @@ BillsPC_Moves:
 	ld hl, .CantCheckEggMoves
 	jmp z, BillsPC_PrintText
 	call BillsPC_PrepareTransistion
-	farcall _ManagePokemonMoves
 	jr BillsPC_ReturnFromTransistion
 
 .CantCheckEggMoves:
@@ -2195,7 +2187,7 @@ GetMonItemUnlessCursor:
 	call .do_it
 	pop bc
 	pop de
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	ret z
 	ld a, [wBufferMonItem]
 	and a
@@ -3522,7 +3514,7 @@ endr
 	ld a, HIGH(wLCDBillsPC2)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop bc
 	pop hl
 .donepc
@@ -3601,7 +3593,7 @@ endr
 	ld a, HIGH(wLCDBillsPC3)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl
@@ -3644,7 +3636,7 @@ endr
 	ld a, HIGH(wLCDBillsPC1)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl

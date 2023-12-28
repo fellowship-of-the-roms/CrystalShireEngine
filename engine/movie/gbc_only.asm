@@ -12,7 +12,7 @@ GBCOnlyScreen:
 	ld de, wGBCOnlyDecompressBuffer
 	ldh a, [rSVBK]
 	push af
-	ld a, 0 ; this has the same effect as selecting bank 1
+	xor a
 	ldh [rSVBK], a
 	call Decompress
 	pop af
@@ -42,15 +42,13 @@ DrawGBCOnlyScreen:
 
 	; Pokemon
 	hlcoord 3, 2
-	ld b, 14
-	ld c, 4
+	lb bc, 14, 4
 	ld a, $8
 	call DrawGBCOnlyGraphic
 
 	; Crystal
 	hlcoord 5, 6
-	ld b, 10
-	ld c, 2
+	lb bc, 10, 2
 	ld a, $40
 	call DrawGBCOnlyGraphic
 
@@ -62,10 +60,10 @@ DrawGBCOnlyScreen:
 
 DrawGBCOnlyBorder:
 	hlcoord 0, 0
-	ld [hl], 0 ; top-left
+	xor a ; top-left
+	ld [hli], a
 
-	inc hl
-	ld a, 1 ; top
+	inc a ; top
 	call .FillRow
 
 	ld [hl], 2 ; top-right
@@ -79,9 +77,9 @@ DrawGBCOnlyBorder:
 	call .FillColumn
 
 	hlcoord 0, 17
-	ld [hl], 5 ; bottom-left
+	ld a, 5 ; bottom-left
+	ld [hli], a
 
-	inc hl
 	ld a, 6 ; bottom
 	call .FillRow
 
