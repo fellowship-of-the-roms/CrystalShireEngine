@@ -13,6 +13,7 @@ GetPokeBallWobble:
 
 	ld hl, wThrownBallWobbleCount
 	inc [hl]
+	ld a, [hl]
 
 ; Wobble up to 3 times.
 	cp 3 + 1
