@@ -187,15 +187,9 @@ MACRO anim_setobjpal
 	db \2 ; battle pal
 ENDM
 
-	const anim_0xec_command ; $ec
-MACRO anim_0xec
-	db anim_0xec_command
-ENDM
+	const_skip ; $ec
 
-	const anim_0xed_command ; $ed
-MACRO anim_0xed
-	db anim_0xed_command
-ENDM
+	const_skip ; $ed
 
 	const anim_if_param_and_command ; $ee
 MACRO anim_if_param_and
@@ -247,15 +241,9 @@ MACRO anim_keepspritesandoam
 	db anim_keepspritesandoam_command
 ENDM
 
-	const anim_0xf6_command ; $f6
-MACRO anim_0xf6
-	db anim_0xf6_command
-ENDM
+	const_skip ; $f6
 
-	const anim_0xf7_command ; $f7
-MACRO anim_0xf7
-	db anim_0xf7_command
-ENDM
+	const_skip ; $f7
 
 	const anim_if_param_equal_command ; $f8
 MACRO anim_if_param_equal
