@@ -1180,7 +1180,6 @@ wMobileMonMailPointer:: dw
 
 NEXTU
 ; more mobile data
-wcd20:: ds 1
 wcd21:: ds 1
 wcd23:: ds 1
 wcd24:: ds 1
@@ -1215,12 +1214,7 @@ wcd37:: db ; mins
 wcd38:: db ; secs
 
 wcd39:: ds 1
-wcd3a:: ds 1
-wcd3b:: ds 1
 wBattleTowerRoomMenu2JumptableIndex:: ds 1
-wcd3d:: ds 1
-wcd3e:: ds 1
-wcd40:: ds 1
 wcd42:: ds 1
 wcd43:: ds 1
 
@@ -1253,15 +1247,6 @@ wcd55:: ds 1
 wcd56:: ds 1
 wcd57:: ds 1
 wcd58:: ds 1
-wcd59:: ds 1
-wcd5a:: ds 1
-wcd5b:: ds 1
-wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
-wcd60:: ds 2
-wcd64:: ds 1
 wcd65:: ds 1
 wcd66:: ds 1
 wcd67:: ds 1
@@ -1269,7 +1254,6 @@ wcd68:: ds 1
 wcd69:: ds 1
 wcd6a:: ds 1
 wcd6b:: ds 1
-wcd6c:: ds 1
 wcd6d:: ds 1
 wcd6e:: ds 1
 wcd6f:: ds 1
@@ -1279,7 +1263,6 @@ wcd72:: ds 1
 wcd73:: ds 1
 wcd74:: ds 1
 
-wOTMonSelection:: ds 2 ; ds BATTLETOWER_PARTY_LENGTH
 wcd77:: ds 1
 
 wMobileCrashCheckPointer:: dw
@@ -1288,8 +1271,6 @@ wcd7f:: ds 1
 wcd80:: ds 1
 wcd81:: ds 1
 wcd82:: ds 1
-wcd83:: ds 1
-wcd84:: ds 1
 wcd85:: ds 4
 wcd89:: ds 1
 wcd8a:: ds 1
@@ -1323,14 +1304,6 @@ wAttrmap::
 wAttrmapEnd::
 
 UNION
-; addresses dealing with serial comms
-	ds 1
-wcf42:: db
-	ds 1
-wcf44:: db
-wcf45:: db
-
-NEXTU
 wTileAnimBuffer:: ds 1 tiles
 ENDU
 
@@ -1428,16 +1401,6 @@ NEXTU
 wBattleTransitionCounter:: db
 wBattleTransitionSineWaveOffset::
 wBattleTransitionSpinQuadrant:: db
-
-NEXTU
-; bill's pc
-wUnusedBillsPCData:: ds 3
-
-NEXTU
-; debug mon color picker
-wDebugColorRGBJumptableIndex:: db
-wDebugColorCurColor:: db
-wDebugColorCurMon:: db
 
 NEXTU
 ; debug tileset color picker
@@ -3233,8 +3196,6 @@ NEXTU
 wBTChoiceOfLvlGroup:: db
 	ds $1
 w3_d80e:: db
-	ds $1
-w3_d880:: ds 1
 ENDU
 
 SECTION "Metatiles", WRAMX
