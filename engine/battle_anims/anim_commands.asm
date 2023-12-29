@@ -372,11 +372,11 @@ BattleAnimCmd_Call:
 	ld a, [wBattleAnimBank]
 	ld [wBattleAnimParentBank], a
 	pop de
-	pop af
 	ld hl, wBattleAnimAddress
 	ld a, e
 	ld [hli], a
 	ld [hl], d
+	pop af
 	ld [wBattleAnimBank], a
 	ld hl, wBattleAnimFlags
 	set BATTLEANIM_IN_SUBROUTINE_F, [hl]
