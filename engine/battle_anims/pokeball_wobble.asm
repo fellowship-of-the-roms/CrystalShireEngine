@@ -11,7 +11,7 @@ GetPokeBallWobble:
 	ld a, BANK(wThrownBallWobbleCount) ; aka BANK(wFinalCatchRate)
 	ldh [rSVBK], a
 
-	ld a, [wThrownBallWobbleCount]
+	ld a, [wThrownBallWobbleCount] ; no-optimize inefficient WRAM increment/decrement
 	inc a
 	ld [wThrownBallWobbleCount], a
 
