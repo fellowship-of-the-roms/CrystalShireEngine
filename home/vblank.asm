@@ -168,11 +168,13 @@ VBlank1::
 	; discard requested ints
 	xor a
 	ldh [rIF], a
+	ldh a, [rIE]
+	and 1 << LCD_STAT
 	ldh [rIE], a
 	; rerequest serial int if applicable (still disabled)
 	; request lcd stat
 	ld a, b
-	and 1 << SERIAL
+	and (1 << SERIAL | 1 << LCD_STAT)
 	ldh [rIF], a
 
 	ei
@@ -186,7 +188,9 @@ VBlank1::
 	xor a
 	ldh [rIF], a
 	; enable ints besides joypad
-	ld a, IE_DEFAULT
+	ldh a, [rIE]
+	and 1 << LCD_STAT
+	or IE_DEFAULT
 	ldh [rIE], a
 	; rerequest ints
 	ld a, b
@@ -239,7 +243,10 @@ VBlank3::
 	push af
 	xor a
 	ldh [rIF], a
+	ld a, [rIE]
+	and 1 << LCD_STAT
 	ldh [rIE], a
+	ldh [rIF], a
 
 	ei
 	call VBlank2
@@ -302,7 +309,10 @@ VBlank5::
 
 	xor a
 	ldh [rIF], a
+	ldh a, [rIE]
+	and 1 << LCD_STAT
 	ldh [rIE], a
+	ldh [rIF], a
 
 	ei
 	call VBlank2
