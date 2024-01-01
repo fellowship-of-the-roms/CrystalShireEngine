@@ -310,7 +310,7 @@ GetTradeAttr:
 	push de
 	ld a, [wJumptableIndex]
 	and $f
-	swap a
+	swap a ; multiply a * 16
 	ld e, a
 	ld d, 0
 	ld hl, NPCTrades

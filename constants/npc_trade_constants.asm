@@ -9,7 +9,7 @@ DEF NPCTRADE_ITEM     rw
 DEF NPCTRADE_OT_ID    rw
 DEF NPCTRADE_OT_NAME  rb PLAYER_NAME_LENGTH
 DEF NPCTRADE_GENDER   rb
-                      rb_skip 2
+                      rb_skip
 DEF NPCTRADE_STRUCT_LENGTH EQU _RS
 
 ; NPCTrades indexes (see data/events/npc_trades.asm)
