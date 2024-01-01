@@ -306,18 +306,17 @@ DoNPCTrade:
 	ret
 
 GetTradeAttr:
+	push bc
 	ld d, 0
 	push de
 	ld a, [wJumptableIndex]
 	and $f
-	swap a ; multiply a * 16
-	ld e, a
-	ld d, 0
 	ld hl, NPCTrades
-	add hl, de
-	add hl, de
+	ld bc, NPCTRADE_STRUCT_LENGTH
+	rst AddNTimes
 	pop de
 	add hl, de
+	pop bc
 	ret
 
 Trade_GetAttributeOfCurrentPartymon:
