@@ -1,5 +1,5 @@
 MAJOR EQU 0
-MINOR EQU 6
+MINOR EQU 7
 PATCH EQU 0
 
 WRONG_RGBDS EQUS "fail \"pokecrystal requires rgbds v0.6.0 or newer.\""

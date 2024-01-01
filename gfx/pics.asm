@@ -777,4 +777,4 @@ INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
 
 SECTION "Pics 20", ROMX
 
-KrisPic: INCBIN "gfx/trainers/kris.2bpp.lz"
+KrisTrainerPic: INCBIN "gfx/trainers/kris.2bpp.lz"

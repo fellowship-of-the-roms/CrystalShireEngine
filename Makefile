@@ -89,11 +89,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -hL -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
-# Create a sym/map for debug purposes if `make` run with `DEBUG=1`
-ifeq ($(DEBUG),1)
-RGBASMFLAGS += -E
-endif
+RGBASMFLAGS = -E -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
 
 $(pokecrystal_obj):       RGBASMFLAGS +=
 $(pokecrystal_debug_obj): RGBASMFLAGS += -D _DEBUG
@@ -184,7 +180,6 @@ gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/question_mark.2bpp: rgbgfx += -Z
 gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/question_mark.2bpp: rgbgfx += -h
 
 gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
 gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace

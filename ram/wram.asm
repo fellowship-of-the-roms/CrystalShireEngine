@@ -856,7 +856,7 @@ SECTION UNION "Overworld Map", WRAM0
 
 	; LCD hblank code block. Labels are defined as part of the code.
 	ds $de
-	assert BillsPC_LCDCodeEnd - BillsPC_LCDCode == @ - STARTOF("Overworld Map")
+	assert BillsPC_LCDCode.End - BillsPC_LCDCode == @ - STARTOF("Overworld Map")
 
 ; If you change ordering of this, remember to fix LCD hblank code too.
 ; Note that (as of when comment was written), hblank can't always keep up
