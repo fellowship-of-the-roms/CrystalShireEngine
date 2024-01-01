@@ -9,7 +9,7 @@ MACRO npctrade
 	shift
 	dw \7
 	db \8, \9
-	db 0, 0
+	db 0
 ENDM
 
 NPCTrades:

@@ -2977,6 +2977,7 @@ wUnusedTwoDayTimerOn:: db
 wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
 wMobileOrCable_LastSelection:: db
+	ds 9
 wBuenasPassword:: db
 wBlueCardBalance:: db
 wDailyRematchFlags:: ds 4
@@ -2986,6 +2987,7 @@ wKenjiBreakTimer:: ds 2 ; Kenji
 wYanmaMapGroup:: db
 wYanmaMapNumber:: db
 wPlayerMonSelection:: ds 3
+	ds 2
 
 wStepCount:: db
 wPoisonStepCount:: db
