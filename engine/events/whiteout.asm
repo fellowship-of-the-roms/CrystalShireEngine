@@ -30,6 +30,8 @@ Script_Whiteout:
 
 OverworldBGMap:
 	farcall FadeOutPalettes
+	xor a
+	ldh [hMapAnims], a
 	call ClearTilemap
 	call ClearSprites
 	ld a, CGB_PLAIN
