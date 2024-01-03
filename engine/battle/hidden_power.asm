@@ -7,7 +7,8 @@ HiddenPowerDamage:
 	ld hl, wEnemyMonIVs
 .got_ivs
 
-; Power:
+; Power = [[(u + 2v + 4w + 8x + 16y + 32z) * 40] / 63] + 30
+; where u, v, w, x, y, z (the "damage bits") are the second least significant bit of their respective IVs.
 	call GetHPIV
 	and 2
 	rra
@@ -56,7 +57,8 @@ HiddenPowerDamage:
 	add 30
 	ld d, a
 
-; Type
+; Type = [(a + 2b + 4c + 8d + 16e + 32f) * 15] / 63
+; where a, b, c, d, e, f (the "type bits") are the least significant bit of their respective IVs.
 	call GetHPIV
 	and 1
 	ld b, a
