@@ -1131,82 +1131,28 @@ CalcMonStatC:
 	jr z, .Special_Atk
 	cp STAT_SDEF
 	jr z, .Special_Def
-
 ; HP
-	inc hl
-	inc hl
-	inc hl
-	ld a, [hld]
-	and IV_HP_MASK
-	dec hl
-	dec hl
+	call GetHPIV
 	jr .GotIV
 
 .Attack:
-	ld a, [hl]
-	and IV_ATK_MASK
-	rra
+	call GetAttackIV
 	jr .GotIV
 
 .Defense:
-	ld a, [hli]
-	and IV_DEF_HIGH_MASK
-	rla
-	rla
-	rla
-	rla
-	push bc
-	ld b, a
-	ld a, [hld]
-	and IV_DEF_LOW_MASK
-	swap a
-	or b
-	pop bc
+	call GetDefenseIV
 	jr .GotIV
 
 .Speed:
-	inc hl
-	ld a, [hli]
-	and IV_SPD_HIGH_MASK
-	rla
-	push bc
-	ld b, a
-	ld a, [hld]
-	and IV_SPD_LOW_MASK
-	rla
-	rla
-	or b
-	pop bc
-	dec hl
+	call GetSpeedIV
 	jr .GotIV
 
 .Special_Atk:
-	inc hl
-	inc hl
-	ld a, [hld]
-	and IV_SP_ATK_MASK
-	rra
-	rra
-	dec hl
+	call GetSpecialAttackIV
 	jr .GotIV
 
 .Special_Def:
-	inc hl
-	inc hl
-	ld a, [hli]
-	and IV_SP_DEF_HIGH_MASK
-	swap a
-	rra
-	push bc
-	ld b, a
-	ld a, [hld]
-	and IV_SP_DEF_LOW_MASK
-	swap a
-	rra
-	or b
-	pop bc
-	dec hl
-	dec hl
+	call GetSpecialDefenseIV
 ; fallthrough
 .GotIV:
 	ld d, 0
