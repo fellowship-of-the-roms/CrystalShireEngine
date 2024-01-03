@@ -122,10 +122,11 @@ MACRO sine_table
 	endr
 ENDM
 
-MACRO ivstat
-; attack, defense, speed, special attack, special defense, hp
-	db (\1 << 1) | (\2 & %10000)
-	db ((\2 & %01111) << 4) | ((\3 & %11110) >> 1)
-	db ((\3 & %10000) << 3) | (\4 << 2) | ((\5 & %11000) >> 3)
-	db ((\5 & %00111) << 5) | \6
+MACRO ivs
+; input: \1 = hp (h), \2 = atk (a), \3 = def (Dd), \4 = spd (Ss), \5 = sat (t), \6 = sdf (Ff)
+; output: db %00aa_aaaD, %dddd_SSSS, %sttt_ttFF %fffh_hhhh
+	db LOW(((\2) << 1) | ((\3) >> 4))
+	db LOW(((\3) << 4) | ((\4) >> 1))
+	db LOW(((\4) << 7) | ((\5) << 2) | ((\6) >> 3))
+	db LOW(((\6) << 5) | (\1))
 ENDM

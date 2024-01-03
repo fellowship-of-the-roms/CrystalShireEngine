@@ -6,7 +6,7 @@ BadEgg:
 	dw 0 ; OT ID
 	db 0, 0, 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
-	ivstat  0, 0, 0, 0, 0, 0 ; IVs
+	ivs 0, 0, 0, 0, 0, 0 ; IVs
 	db 0, 0, 0 ; padding
 	db 0, 0, 0, 0 ; PP
 	db 255 ; Step cycles to hatch

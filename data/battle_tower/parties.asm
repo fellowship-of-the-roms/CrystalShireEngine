@@ -12,7 +12,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 224, 200, 200, 188, 200, 200 ; EVs
-	ivstat  26, 26, 22, 26, 26, 25 ; IVs
+	ivs 25, 26, 26, 22, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 20 ; PP
 	db 100 ; Happiness
@@ -35,7 +35,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 200, 224, 188, 200, 200, 200 ; EVs
-	ivstat  28, 26, 31, 22, 22, 25 ; IVs
+	ivs 25, 28, 26, 31, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 10, 10 ; PP
 	db 100 ; Happiness
@@ -58,7 +58,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 200, 200, 213, 224, 200, 200 ; EVs
-	ivstat  26, 22, 28, 31, 31, 27 ; IVs
+	ivs 27, 26, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -81,7 +81,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  14, 31, 26, 14, 14, 19 ; IVs
+	ivs 19, 14, 31, 26, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 25, 5 ; PP
 	db 100 ; Happiness
@@ -104,7 +104,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 200, 174, 200, 174, 174, 174 ; EVs
-	ivstat  28, 31, 24, 31, 31, 29 ; IVs
+	ivs 29, 28, 31, 24, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 10, 15 ; PP
 	db 100 ; Happiness
@@ -127,7 +127,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 200, 174, 183, 174, 174, 174 ; EVs
-	ivstat  31, 28, 31, 26, 26, 28 ; IVs
+	ivs 28, 31, 28, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 20, 5 ; PP
 	db 100 ; Happiness
@@ -150,7 +150,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 188, 188 ; EVs
-	ivstat  22, 22, 26, 31, 31, 26 ; IVs
+	ivs 26, 22, 22, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 10 ; PP
 	db 100 ; Happiness
@@ -173,7 +173,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  26, 22, 31, 22, 22, 24 ; IVs
+	ivs 24, 26, 22, 31, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 20, 10, 25 ; PP
 	db 100 ; Happiness
@@ -196,7 +196,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -219,7 +219,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 188, 174, 174, 174, 174 ; EVs
-	ivstat  31, 22, 22, 31, 31, 27 ; IVs
+	ivs 27, 31, 22, 22, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 15, 5 ; PP
 	db 100 ; Happiness
@@ -242,7 +242,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 200, 174, 174, 174 ; EVs
-	ivstat  31, 22, 26, 28, 28, 27 ; IVs
+	ivs 27, 31, 22, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 5, 10 ; PP
 	db 100 ; Happiness
@@ -265,7 +265,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  28, 31, 26, 31, 31, 29 ; IVs
+	ivs 29, 28, 31, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 20, 15 ; PP
 	db 100 ; Happiness
@@ -288,7 +288,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 182, 174, 174 ; EVs
-	ivstat  31, 26, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 20, 5 ; PP
 	db 100 ; Happiness
@@ -311,7 +311,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  28, 26, 31, 26, 26, 27 ; IVs
+	ivs 27, 28, 26, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 15, 30 ; PP
 	db 100 ; Happiness
@@ -334,7 +334,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 179, 200, 174, 174, 174, 174 ; EVs
-	ivstat  26, 31, 24, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 24, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 20, 15 ; PP
 	db 100 ; Happiness
@@ -357,7 +357,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  28, 31, 31, 14, 14, 23 ; IVs
+	ivs 23, 28, 31, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -380,7 +380,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 25 ; PP
 	db 100 ; Happiness
@@ -403,7 +403,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  31, 14, 31, 14, 14, 20 ; IVs
+	ivs 20, 31, 14, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 20, 15 ; PP
 	db 100 ; Happiness
@@ -426,7 +426,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  31, 31, 31, 31, 31, 31 ; IVs
+	ivs 31, 31, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
@@ -449,7 +449,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 10, 10, 14, 14, 12 ; IVs
+	ivs 12, 12, 10, 10, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 30, 15 ; PP
 	db 0 ; Happiness
@@ -472,7 +472,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 6, 12, 14, 14, 12 ; IVs
+	ivs 12, 14, 6, 12, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 15, 15 ; PP
 	db 0 ; Happiness
@@ -498,7 +498,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  24, 31, 22, 24, 24, 25 ; IVs
+	ivs 25, 24, 31, 22, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 10, 15 ; PP
 	db 100 ; Happiness
@@ -521,7 +521,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  26, 22, 26, 22, 22, 23 ; IVs
+	ivs 23, 26, 22, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 15, 10 ; PP
 	db 100 ; Happiness
@@ -544,7 +544,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 20, 31, 26, 26, 26 ; IVs
+	ivs 26, 31, 20, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 5 ; PP
 	db 100 ; Happiness
@@ -567,7 +567,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 213, 224, 174, 224, 224 ; EVs
-	ivstat  31, 31, 31, 31, 31, 31 ; IVs
+	ivs 31, 31, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -590,7 +590,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 224, 174, 224, 200, 200 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 10, 15 ; PP
 	db 100 ; Happiness
@@ -613,7 +613,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 188, 213, 224, 235, 224, 224 ; EVs
-	ivstat  26, 22, 31, 22, 22, 24 ; IVs
+	ivs 24, 26, 22, 31, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 5, 15 ; PP
 	db 100 ; Happiness
@@ -636,7 +636,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 174, 213, 174, 213, 213 ; EVs
-	ivstat  26, 31, 26, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -659,7 +659,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 10, 15 ; PP
 	db 100 ; Happiness
@@ -682,7 +682,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  31, 22, 22, 22, 22, 23 ; IVs
+	ivs 23, 31, 22, 22, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 10 ; PP
 	db 100 ; Happiness
@@ -705,7 +705,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 224, 174, 174, 224, 224 ; EVs
-	ivstat  22, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 22, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 25, 10, 20 ; PP
 	db 100 ; Happiness
@@ -728,7 +728,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 235, 174, 200, 235, 174, 174 ; EVs
-	ivstat  31, 28, 26, 14, 14, 22 ; IVs
+	ivs 22, 31, 28, 26, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 5, 10 ; PP
 	db 100 ; Happiness
@@ -751,7 +751,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 213, 224, 213, 224, 224, 224 ; EVs
-	ivstat  31, 24, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 24, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 15, 10 ; PP
 	db 100 ; Happiness
@@ -774,7 +774,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 200, 213, 200, 213, 224, 224 ; EVs
-	ivstat  31, 26, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 20, 10, 10 ; PP
 	db 100 ; Happiness
@@ -797,7 +797,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 213, 188, 224, 174, 174 ; EVs
-	ivstat  31, 22, 31, 26, 26, 27 ; IVs
+	ivs 27, 31, 22, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 15, 20 ; PP
 	db 100 ; Happiness
@@ -820,7 +820,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 224, 200, 224, 174, 174, 174 ; EVs
-	ivstat  31, 22, 28, 31, 31, 28 ; IVs
+	ivs 28, 31, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 5, 5 ; PP
 	db 100 ; Happiness
@@ -843,7 +843,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  28, 26, 31, 14, 14, 22 ; IVs
+	ivs 22, 28, 26, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 5 ; PP
 	db 100 ; Happiness
@@ -866,7 +866,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  26, 31, 31, 28, 28, 28 ; IVs
+	ivs 28, 26, 31, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -889,7 +889,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  24, 14, 31, 28, 28, 25 ; IVs
+	ivs 25, 24, 14, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 5, 15 ; PP
 	db 100 ; Happiness
@@ -912,7 +912,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  24, 14, 14, 14, 14, 16 ; IVs
+	ivs 16, 24, 14, 14, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 15 ; PP
 	db 0 ; Happiness
@@ -935,7 +935,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  10, 12, 8, 12, 12, 10 ; IVs
+	ivs 10, 10, 12, 8, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 15 ; PP
 	db 0 ; Happiness
@@ -958,7 +958,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 8000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  10, 10, 8, 14, 14, 11 ; IVs
+	ivs 11, 10, 10, 8, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 15, 5 ; PP
 	db 0 ; Happiness
@@ -984,7 +984,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 224, 224, 224, 235, 235 ; EVs
-	ivstat  26, 22, 28, 26, 26, 25 ; IVs
+	ivs 25, 26, 22, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 20, 10 ; PP
 	db 100 ; Happiness
@@ -1007,7 +1007,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 235, 235, 235, 224, 224 ; EVs
-	ivstat  26, 26, 31, 22, 22, 25 ; IVs
+	ivs 25, 26, 26, 31, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 5, 25 ; PP
 	db 100 ; Happiness
@@ -1030,7 +1030,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 31, 31, 31, 31, 31 ; IVs
+	ivs 31, 31, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 20, 15 ; PP
 	db 100 ; Happiness
@@ -1053,7 +1053,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 224, 224, 174, 224, 224 ; EVs
-	ivstat  31, 22, 28, 28, 28, 27 ; IVs
+	ivs 27, 31, 22, 28, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -1076,7 +1076,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 224, 174, 224, 224, 224 ; EVs
-	ivstat  28, 31, 31, 31, 31, 30 ; IVs
+	ivs 30, 28, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 20, 10 ; PP
 	db 100 ; Happiness
@@ -1099,7 +1099,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 213, 213, 224, 235, 224, 224 ; EVs
-	ivstat  26, 31, 26, 22, 22, 25 ; IVs
+	ivs 25, 26, 31, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 10, 15 ; PP
 	db 100 ; Happiness
@@ -1122,7 +1122,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 174, 213, 174, 213, 213 ; EVs
-	ivstat  31, 22, 28, 26, 26, 26 ; IVs
+	ivs 26, 31, 22, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1145,7 +1145,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 15, 15 ; PP
 	db 100 ; Happiness
@@ -1168,7 +1168,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  31, 26, 22, 28, 28, 27 ; IVs
+	ivs 27, 31, 26, 22, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 10, 5 ; PP
 	db 100 ; Happiness
@@ -1191,7 +1191,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 224, 174, 174, 224, 224 ; EVs
-	ivstat  28, 31, 26, 24, 24, 26 ; IVs
+	ivs 26, 28, 31, 26, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 35 ; PP
 	db 100 ; Happiness
@@ -1214,7 +1214,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 235, 174, 200, 235, 174, 174 ; EVs
-	ivstat  26, 31, 26, 22, 22, 25 ; IVs
+	ivs 25, 26, 31, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 5, 10 ; PP
 	db 100 ; Happiness
@@ -1237,7 +1237,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 213, 224, 213, 224, 174, 174 ; EVs
-	ivstat  26, 26, 28, 22, 22, 24 ; IVs
+	ivs 24, 26, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 5, 10 ; PP
 	db 255 ; Happiness
@@ -1260,7 +1260,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 200, 213, 200, 213, 224, 224 ; EVs
-	ivstat  22, 26, 28, 31, 31, 27 ; IVs
+	ivs 27, 22, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 30, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1283,7 +1283,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 213, 188, 224, 174, 174 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 25, 15, 15 ; PP
 	db 100 ; Happiness
@@ -1306,7 +1306,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 200, 224, 174, 174, 174 ; EVs
-	ivstat  26, 26, 28, 22, 22, 24 ; IVs
+	ivs 24, 26, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -1329,7 +1329,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 213, 224, 224, 224, 224, 224 ; EVs
-	ivstat  28, 31, 31, 14, 14, 23 ; IVs
+	ivs 23, 28, 31, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 20, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1352,7 +1352,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 213, 224, 217, 213, 213 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 10, 20 ; PP
 	db 100 ; Happiness
@@ -1375,7 +1375,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 224, 213, 224, 224, 224, 224 ; EVs
-	ivstat  31, 14, 31, 14, 14, 20 ; IVs
+	ivs 20, 31, 14, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 30, 15, 5 ; PP
 	db 100 ; Happiness
@@ -1398,7 +1398,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 14, 8, 10, 10, 11 ; IVs
+	ivs 11, 14, 14, 8, 10, 10 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 20, 30 ; PP
 	db 0 ; Happiness
@@ -1421,7 +1421,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 14, 14, 14, 14, 13 ; IVs
+	ivs 13, 12, 14, 14, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 35, 20 ; PP
 	db 0 ; Happiness
@@ -1444,7 +1444,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 27000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 14, 12, 14, 14, 13 ; IVs
+	ivs 13, 14, 14, 12, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 25, 15, 30 ; PP
 	db 0 ; Happiness
@@ -1470,7 +1470,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 5, 10, 15 ; PP
 	db 255 ; Happiness
@@ -1493,7 +1493,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 5, 5 ; PP
 	db 100 ; Happiness
@@ -1516,7 +1516,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  28, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 28, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1539,7 +1539,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 15 ; PP
 	db 100 ; Happiness
@@ -1562,7 +1562,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  28, 31, 26, 22, 22, 25 ; IVs
+	ivs 25, 28, 31, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1585,7 +1585,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 213, 224, 235, 224, 224 ; EVs
-	ivstat  26, 26, 28, 31, 31, 28 ; IVs
+	ivs 28, 26, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 20, 15 ; PP
 	db 100 ; Happiness
@@ -1608,7 +1608,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 213, 224, 213, 213 ; EVs
-	ivstat  31, 26, 22, 28, 28, 27 ; IVs
+	ivs 27, 31, 26, 22, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -1631,7 +1631,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 213, 224, 224, 224, 224, 224 ; EVs
-	ivstat  22, 31, 28, 14, 14, 21 ; IVs
+	ivs 21, 22, 31, 28, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 25, 5 ; PP
 	db 100 ; Happiness
@@ -1654,7 +1654,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  26, 26, 28, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 20, 10 ; PP
 	db 100 ; Happiness
@@ -1677,7 +1677,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 200, 224, 224 ; EVs
-	ivstat  22, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 22, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 25, 20, 5 ; PP
 	db 100 ; Happiness
@@ -1700,7 +1700,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 213, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 22, 22, 22, 25 ; IVs
+	ivs 25, 31, 28, 22, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1723,7 +1723,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 213, 224, 213, 224, 224, 224 ; EVs
-	ivstat  22, 31, 24, 31, 31, 27 ; IVs
+	ivs 27, 22, 31, 24, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 5 ; PP
 	db 100 ; Happiness
@@ -1746,7 +1746,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 213, 224, 224, 224, 224 ; EVs
-	ivstat  22, 24, 28, 31, 31, 27 ; IVs
+	ivs 27, 22, 24, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 30, 30, 20, 10 ; PP
 	db 100 ; Happiness
@@ -1769,7 +1769,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 22, 22, 22, 25 ; IVs
+	ivs 25, 31, 28, 22, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 30, 15, 20 ; PP
 	db 100 ; Happiness
@@ -1792,7 +1792,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 20, 14, 31, 31, 25 ; IVs
+	ivs 25, 31, 20, 14, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 40, 10, 10, 10 ; PP
 	db 100 ; Happiness
@@ -1815,7 +1815,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  28, 31, 31, 14, 14, 23 ; IVs
+	ivs 23, 28, 31, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 25, 5, 15 ; PP
 	db 100 ; Happiness
@@ -1838,7 +1838,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 15, 20 ; PP
 	db 100 ; Happiness
@@ -1861,7 +1861,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 14, 28, 14, 14, 20 ; IVs
+	ivs 20, 31, 14, 28, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 10, 25 ; PP
 	db 100 ; Happiness
@@ -1884,7 +1884,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 14, 14, 20, 20, 16 ; IVs
+	ivs 16, 14, 14, 14, 20, 20 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 15, 15, 20 ; PP
 	db 0 ; Happiness
@@ -1907,7 +1907,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 10, 12, 22, 22, 16 ; IVs
+	ivs 16, 14, 10, 12, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 40, 10, 20, 30 ; PP
 	db 0 ; Happiness
@@ -1930,7 +1930,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 64000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 10, 14, 14, 14, 12 ; IVs
+	ivs 12, 12, 10, 14, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 30, 15, 20, 15 ; PP
 	db 0 ; Happiness
@@ -1956,7 +1956,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 235, 235, 245, 224, 235, 235 ; EVs
-	ivstat  26, 26, 31, 31, 31, 29 ; IVs
+	ivs 29, 26, 26, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 5, 20 ; PP
 	db 0 ; Happiness
@@ -1979,7 +1979,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 235, 224, 245, 245, 245, 245 ; EVs
-	ivstat  26, 26, 31, 24, 24, 26 ; IVs
+	ivs 26, 26, 26, 31, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 15 ; PP
 	db 0 ; Happiness
@@ -2002,7 +2002,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 245, 245, 245, 245, 235, 235 ; EVs
-	ivstat  31, 26, 24, 31, 31, 28 ; IVs
+	ivs 28, 31, 26, 24, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 10, 20 ; PP
 	db 0 ; Happiness
@@ -2025,7 +2025,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 245, 235, 235, 245, 235, 235 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 10 ; PP
 	db 0 ; Happiness
@@ -2048,7 +2048,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 235, 245, 245, 235, 245, 245 ; EVs
-	ivstat  26, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 10, 5 ; PP
 	db 0 ; Happiness
@@ -2071,7 +2071,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 235, 245, 239, 235, 235, 235 ; EVs
-	ivstat  28, 26, 31, 31, 31, 29 ; IVs
+	ivs 29, 28, 26, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 15, 15 ; PP
 	db 0 ; Happiness
@@ -2094,7 +2094,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  26, 31, 28, 26, 26, 27 ; IVs
+	ivs 27, 26, 31, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 20, 30, 35 ; PP
 	db 0 ; Happiness
@@ -2117,7 +2117,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 224, 200, 213, 224, 224, 224 ; EVs
-	ivstat  26, 31, 26, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 20 ; PP
 	db 15 ; Happiness
@@ -2140,7 +2140,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 200, 213, 224, 200, 210, 210 ; EVs
-	ivstat  31, 31, 28, 24, 24, 27 ; IVs
+	ivs 27, 31, 31, 28, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 15 ; PP
 	db 13 ; Happiness
@@ -2163,7 +2163,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 210, 200, 213, 200, 200 ; EVs
-	ivstat  31, 31, 31, 31, 31, 31 ; IVs
+	ivs 31, 31, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 15, 15 ; PP
 	db 0 ; Happiness
@@ -2186,7 +2186,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 200, 224, 213, 224, 224 ; EVs
-	ivstat  31, 14, 31, 28, 28, 26 ; IVs
+	ivs 26, 31, 14, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 5, 10 ; PP
 	db 0 ; Happiness
@@ -2209,7 +2209,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 224, 213, 233, 200, 224, 224 ; EVs
-	ivstat  14, 26, 31, 28, 28, 25 ; IVs
+	ivs 25, 14, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 20, 10 ; PP
 	db 0 ; Happiness
@@ -2232,7 +2232,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  31, 26, 26, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 15 ; PP
 	db 0 ; Happiness
@@ -2255,7 +2255,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 200, 224, 200, 224, 224 ; EVs
-	ivstat  28, 31, 31, 31, 31, 30 ; IVs
+	ivs 30, 28, 31, 31, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 5, 10 ; PP
 	db 0 ; Happiness
@@ -2278,7 +2278,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 224, 213, 200, 224, 224 ; EVs
-	ivstat  31, 26, 26, 28, 28, 27 ; IVs
+	ivs 27, 31, 26, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 20, 5 ; PP
 	db 0 ; Happiness
@@ -2301,7 +2301,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 224, 224, 224, 200, 200 ; EVs
-	ivstat  26, 14, 28, 26, 26, 24 ; IVs
+	ivs 24, 26, 14, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 25, 10 ; PP
 	db 0 ; Happiness
@@ -2324,7 +2324,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 224, 224, 235, 213, 200, 200 ; EVs
-	ivstat  24, 31, 26, 26, 26, 26 ; IVs
+	ivs 26, 24, 31, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 5, 15 ; PP
 	db 0 ; Happiness
@@ -2347,7 +2347,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 213, 224, 224, 200, 213, 213 ; EVs
-	ivstat  26, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 10 ; PP
 	db 0 ; Happiness
@@ -2370,7 +2370,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  8, 10, 10, 12, 12, 10 ; IVs
+	ivs 10, 8, 10, 10, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -2393,7 +2393,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  14, 10, 12, 10, 10, 11 ; IVs
+	ivs 11, 14, 10, 12, 10, 10 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 5, 5 ; PP
 	db 100 ; Happiness
@@ -2416,7 +2416,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 125000 ; Exp
 	db 200, 200, 200, 200, 200, 200 ; EVs
-	ivstat  8, 10, 10, 12, 12, 10 ; IVs
+	ivs 10, 8, 10, 10, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 20, 15 ; PP
 	db 0 ; Happiness
@@ -2442,7 +2442,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 235, 235, 224, 245, 245, 245 ; EVs
-	ivstat  26, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 26, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 5, 5 ; PP
 	db 100 ; Happiness
@@ -2465,7 +2465,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 235, 245, 235, 245, 235, 235 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 5 ; PP
 	db 100 ; Happiness
@@ -2488,7 +2488,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 245, 235, 235, 245, 235, 235 ; EVs
-	ivstat  31, 22, 28, 31, 31, 28 ; IVs
+	ivs 28, 31, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -2511,7 +2511,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 235, 224, 224, 224, 235, 235 ; EVs
-	ivstat  26, 26, 26, 28, 28, 26 ; IVs
+	ivs 26, 26, 26, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 20, 10, 10 ; PP
 	db 100 ; Happiness
@@ -2534,7 +2534,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 213, 224, 224, 224 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 10 ; PP
 	db 100 ; Happiness
@@ -2557,7 +2557,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 213, 224, 235, 224, 224 ; EVs
-	ivstat  26, 26, 31, 26, 26, 27 ; IVs
+	ivs 27, 26, 26, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 15, 20 ; PP
 	db 100 ; Happiness
@@ -2580,7 +2580,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 213, 224, 213, 213 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 20, 5, 25 ; PP
 	db 100 ; Happiness
@@ -2603,7 +2603,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  31, 26, 26, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 20, 10, 25 ; PP
 	db 100 ; Happiness
@@ -2626,7 +2626,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  26, 26, 31, 26, 26, 27 ; IVs
+	ivs 27, 26, 26, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 15 ; PP
 	db 100 ; Happiness
@@ -2649,7 +2649,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 20 ; PP
 	db 100 ; Happiness
@@ -2672,7 +2672,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 235, 224, 200, 235, 224, 224 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 5, 15 ; PP
 	db 100 ; Happiness
@@ -2695,7 +2695,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 213, 224, 224, 224 ; EVs
-	ivstat  31, 22, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 22, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -2718,7 +2718,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 213, 224, 213, 224, 224 ; EVs
-	ivstat  31, 22, 24, 26, 26, 25 ; IVs
+	ivs 25, 31, 22, 24, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 10, 10 ; PP
 	db 100 ; Happiness
@@ -2741,7 +2741,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 213, 224, 224, 224, 224 ; EVs
-	ivstat  31, 20, 31, 24, 24, 26 ; IVs
+	ivs 26, 31, 20, 31, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -2764,7 +2764,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 200, 224, 224, 224, 224 ; EVs
-	ivstat  26, 31, 28, 26, 26, 27 ; IVs
+	ivs 27, 26, 31, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 20 ; PP
 	db 100 ; Happiness
@@ -2787,7 +2787,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 31, 28, 22, 22, 26 ; IVs
+	ivs 26, 31, 31, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -2810,7 +2810,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 40, 5 ; PP
 	db 100 ; Happiness
@@ -2833,7 +2833,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 22, 31, 20, 20, 24 ; IVs
+	ivs 24, 31, 22, 31, 20, 20 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -2856,7 +2856,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  22, 14, 12, 14, 14, 15 ; IVs
+	ivs 15, 22, 14, 12, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 5, 15 ; PP
 	db 0 ; Happiness
@@ -2879,7 +2879,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 12, 10, 31, 31, 19 ; IVs
+	ivs 19, 12, 12, 10, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 5, 10 ; PP
 	db 0 ; Happiness
@@ -2902,7 +2902,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 216000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 12, 10, 14, 14, 12 ; IVs
+	ivs 12, 14, 12, 10, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 20 ; PP
 	db 0 ; Happiness
@@ -2928,7 +2928,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 245, 237, 235, 224, 245, 245 ; EVs
-	ivstat  31, 22, 28, 31, 31, 28 ; IVs
+	ivs 28, 31, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 20 ; PP
 	db 100 ; Happiness
@@ -2951,7 +2951,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 245, 245, 224, 224 ; EVs
-	ivstat  22, 31, 28, 31, 31, 28 ; IVs
+	ivs 28, 22, 31, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -2974,7 +2974,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 233, 245, 235, 224, 241, 241 ; EVs
-	ivstat  26, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 5, 10, 10 ; PP
 	db 100 ; Happiness
@@ -2997,7 +2997,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 235, 235, 235, 241, 224, 224 ; EVs
-	ivstat  26, 31, 28, 26, 26, 27 ; IVs
+	ivs 27, 26, 31, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -3020,7 +3020,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 235, 235, 245, 235, 224, 224 ; EVs
-	ivstat  26, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 5, 15 ; PP
 	db 100 ; Happiness
@@ -3043,7 +3043,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 241, 224, 235, 245, 235, 235 ; EVs
-	ivstat  26, 26, 24, 26, 26, 25 ; IVs
+	ivs 25, 26, 26, 24, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 20, 20 ; PP
 	db 100 ; Happiness
@@ -3066,7 +3066,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 213, 213, 224, 213, 213 ; EVs
-	ivstat  26, 22, 26, 31, 31, 27 ; IVs
+	ivs 27, 26, 22, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 5 ; PP
 	db 100 ; Happiness
@@ -3089,7 +3089,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  26, 22, 26, 31, 31, 27 ; IVs
+	ivs 27, 26, 22, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 20, 5 ; PP
 	db 100 ; Happiness
@@ -3112,7 +3112,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 213, 224, 200, 224, 213, 213 ; EVs
-	ivstat  26, 26, 28, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 5 ; PP
 	db 100 ; Happiness
@@ -3135,7 +3135,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 213, 213, 224, 224 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 20, 10, 15 ; PP
 	db 100 ; Happiness
@@ -3158,7 +3158,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 235, 213, 224, 235, 224, 224 ; EVs
-	ivstat  26, 22, 28, 31, 31, 27 ; IVs
+	ivs 27, 26, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 5, 20 ; PP
 	db 100 ; Happiness
@@ -3181,7 +3181,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 213, 224, 224, 224 ; EVs
-	ivstat  26, 28, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 28, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 15 ; PP
 	db 100 ; Happiness
@@ -3204,7 +3204,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 213, 224, 213, 224, 224 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 5, 15 ; PP
 	db 100 ; Happiness
@@ -3227,7 +3227,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 213, 213, 224, 224, 224 ; EVs
-	ivstat  22, 26, 31, 22, 22, 24 ; IVs
+	ivs 24, 22, 26, 31, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 10, 5 ; PP
 	db 100 ; Happiness
@@ -3250,7 +3250,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 200, 224, 224, 224, 224 ; EVs
-	ivstat  22, 26, 28, 31, 31, 27 ; IVs
+	ivs 27, 22, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -3273,7 +3273,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 26, 26, 28 ; IVs
+	ivs 28, 31, 28, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 30, 40, 15, 10 ; PP
 	db 100 ; Happiness
@@ -3296,7 +3296,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 15, 5 ; PP
 	db 100 ; Happiness
@@ -3319,7 +3319,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 14, 31, 14, 14, 20 ; IVs
+	ivs 20, 31, 14, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3342,7 +3342,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 12, 8, 8, 8, 10 ; IVs
+	ivs 10, 14, 12, 8, 8, 8 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 5 ; PP
 	db 0 ; Happiness
@@ -3365,7 +3365,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  10, 12, 8, 8, 8, 9 ; IVs
+	ivs 9, 10, 12, 8, 8, 8 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 5, 15 ; PP
 	db 0 ; Happiness
@@ -3388,7 +3388,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 343000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 12, 12, 8, 8, 10 ; IVs
+	ivs 10, 14, 12, 12, 8, 8 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 5, 15 ; PP
 	db 0 ; Happiness
@@ -3414,7 +3414,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 245, 235, 245, 235, 235, 235 ; EVs
-	ivstat  31, 26, 28, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 28, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 15, 20 ; PP
 	db 100 ; Happiness
@@ -3437,7 +3437,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 245, 235, 224, 236, 245, 245 ; EVs
-	ivstat  26, 22, 28, 26, 26, 25 ; IVs
+	ivs 25, 26, 22, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 15, 10 ; PP
 	db 100 ; Happiness
@@ -3460,7 +3460,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 235, 224, 235, 235, 235, 235 ; EVs
-	ivstat  31, 26, 26, 22, 22, 25 ; IVs
+	ivs 25, 31, 26, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 5 ; PP
 	db 100 ; Happiness
@@ -3483,7 +3483,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 224, 174, 224, 224 ; EVs
-	ivstat  31, 26, 26, 28, 28, 27 ; IVs
+	ivs 27, 31, 26, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 5 ; PP
 	db 100 ; Happiness
@@ -3506,7 +3506,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 224, 235, 224, 224 ; EVs
-	ivstat  26, 31, 26, 22, 22, 25 ; IVs
+	ivs 25, 26, 31, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3529,7 +3529,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 235, 224, 235, 224, 224 ; EVs
-	ivstat  26, 31, 26, 22, 22, 25 ; IVs
+	ivs 25, 26, 31, 26, 22, 22 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3552,7 +3552,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 213, 235, 224, 224 ; EVs
-	ivstat  26, 28, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 28, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3575,7 +3575,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 213, 224, 224, 213, 224, 224 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 10, 15 ; PP
 	db 100 ; Happiness
@@ -3598,7 +3598,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 213, 224, 200, 235, 224, 224 ; EVs
-	ivstat  31, 22, 28, 26, 26, 26 ; IVs
+	ivs 26, 31, 22, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 5, 20 ; PP
 	db 100 ; Happiness
@@ -3621,7 +3621,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 224, 224, 213, 213 ; EVs
-	ivstat  26, 26, 26, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 15, 15 ; PP
 	db 100 ; Happiness
@@ -3644,7 +3644,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 235, 224, 200, 235, 224, 224 ; EVs
-	ivstat  26, 31, 28, 26, 26, 27 ; IVs
+	ivs 27, 26, 31, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 5, 10 ; PP
 	db 100 ; Happiness
@@ -3667,7 +3667,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 235, 224, 213, 224, 224, 224 ; EVs
-	ivstat  26, 31, 26, 31, 31, 29 ; IVs
+	ivs 29, 26, 31, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 15, 10 ; PP
 	db 100 ; Happiness
@@ -3690,7 +3690,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 200, 213, 200, 213, 224, 224 ; EVs
-	ivstat  26, 31, 26, 24, 24, 26 ; IVs
+	ivs 26, 26, 31, 26, 24, 24 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 5, 35 ; PP
 	db 100 ; Happiness
@@ -3713,7 +3713,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 213, 188, 224, 224, 224 ; EVs
-	ivstat  26, 26, 28, 31, 31, 28 ; IVs
+	ivs 28, 26, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3736,7 +3736,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 200, 224, 200, 224, 224 ; EVs
-	ivstat  26, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 26, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 25, 5 ; PP
 	db 100 ; Happiness
@@ -3759,7 +3759,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 200, 224, 200, 224, 224 ; EVs
-	ivstat  31, 31, 28, 26, 26, 28 ; IVs
+	ivs 28, 31, 31, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 10, 20 ; PP
 	db 100 ; Happiness
@@ -3782,7 +3782,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 200, 200, 224, 224 ; EVs
-	ivstat  31, 31, 28, 31, 31, 30 ; IVs
+	ivs 30, 31, 31, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 20, 10 ; PP
 	db 100 ; Happiness
@@ -3805,7 +3805,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 224, 224, 200, 224, 200, 200 ; EVs
-	ivstat  31, 26, 26, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 10, 10 ; PP
 	db 100 ; Happiness
@@ -3828,7 +3828,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 10, 12, 10, 10, 10 ; IVs
+	ivs 10, 12, 10, 12, 10, 10 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 10 ; PP
 	db 0 ; Happiness
@@ -3851,7 +3851,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 8, 12, 8, 8, 10 ; IVs
+	ivs 10, 14, 8, 12, 8, 8 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 25, 15, 10 ; PP
 	db 0 ; Happiness
@@ -3874,7 +3874,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 512000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 12, 10, 14, 14, 12 ; IVs
+	ivs 12, 14, 12, 10, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 5, 15 ; PP
 	db 0 ; Happiness
@@ -3900,7 +3900,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 245, 245, 235, 245, 235, 235 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 10, 5, 10 ; PP
 	db 100 ; Happiness
@@ -3923,7 +3923,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 255, 224, 237, 245, 245, 245 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 15, 5 ; PP
 	db 100 ; Happiness
@@ -3946,7 +3946,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 245, 245, 245, 235, 245, 245 ; EVs
-	ivstat  26, 31, 26, 26, 26, 27 ; IVs
+	ivs 27, 26, 31, 26, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -3969,7 +3969,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  26, 22, 26, 31, 31, 27 ; IVs
+	ivs 27, 26, 22, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 15, 15 ; PP
 	db 100 ; Happiness
@@ -3992,7 +3992,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 24, 31, 31, 28 ; IVs
+	ivs 28, 31, 26, 24, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 35, 30, 5, 5 ; PP
 	db 100 ; Happiness
@@ -4015,7 +4015,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 213, 224, 235, 224, 224 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 20, 10 ; PP
 	db 100 ; Happiness
@@ -4038,7 +4038,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 235, 224, 213, 213 ; EVs
-	ivstat  26, 31, 26, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 5, 5 ; PP
 	db 100 ; Happiness
@@ -4061,7 +4061,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 235, 224, 213, 224, 224 ; EVs
-	ivstat  26, 31, 26, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 10, 10 ; PP
 	db 100 ; Happiness
@@ -4084,7 +4084,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 213, 224, 224, 224, 235, 235 ; EVs
-	ivstat  22, 26, 28, 31, 31, 27 ; IVs
+	ivs 27, 22, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 15, 10 ; PP
 	db 100 ; Happiness
@@ -4107,7 +4107,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 235, 224, 224, 235, 224, 224 ; EVs
-	ivstat  26, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 26, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 15, 5, 5 ; PP
 	db 100 ; Happiness
@@ -4130,7 +4130,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 235, 235, 224, 235, 224, 224 ; EVs
-	ivstat  26, 26, 28, 26, 26, 26 ; IVs
+	ivs 26, 26, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4153,7 +4153,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 213, 224, 235, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 26, 26, 28 ; IVs
+	ivs 28, 31, 28, 31, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 10, 5 ; PP
 	db 100 ; Happiness
@@ -4176,7 +4176,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 213, 224, 213, 235, 235 ; EVs
-	ivstat  26, 31, 26, 28, 28, 27 ; IVs
+	ivs 27, 26, 31, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4199,7 +4199,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 213, 224, 224, 224, 224 ; EVs
-	ivstat  22, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 22, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 10, 5 ; PP
 	db 100 ; Happiness
@@ -4222,7 +4222,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 200, 224, 224, 224, 224 ; EVs
-	ivstat  26, 22, 31, 28, 28, 27 ; IVs
+	ivs 27, 26, 22, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4245,7 +4245,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  28, 31, 31, 14, 14, 23 ; IVs
+	ivs 23, 28, 31, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 25, 10, 20 ; PP
 	db 255 ; Happiness
@@ -4268,7 +4268,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 20, 10, 5 ; PP
 	db 100 ; Happiness
@@ -4291,7 +4291,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 14, 31, 14, 14, 20 ; IVs
+	ivs 20, 31, 14, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 15, 15, 20 ; PP
 	db 100 ; Happiness
@@ -4314,7 +4314,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  8, 14, 10, 14, 14, 12 ; IVs
+	ivs 12, 8, 14, 10, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 15, 15 ; PP
 	db 0 ; Happiness
@@ -4337,7 +4337,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 10, 14, 12, 12, 12 ; IVs
+	ivs 12, 12, 10, 14, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 10 ; PP
 	db 0 ; Happiness
@@ -4360,7 +4360,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 729000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  10, 8, 8, 8, 8, 8 ; IVs
+	ivs 8, 10, 8, 8, 8, 8 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 15, 5 ; PP
 	db 0 ; Happiness
@@ -4386,7 +4386,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 245, 245, 245, 245, 245, 245 ; EVs
-	ivstat  31, 26, 28, 26, 26, 27 ; IVs
+	ivs 27, 31, 26, 28, 26, 26 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 15, 20, 10 ; PP
 	db 100 ; Happiness
@@ -4409,7 +4409,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 245, 245, 245, 245, 245, 245 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4432,7 +4432,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 245, 245, 245, 245, 245, 245 ; EVs
-	ivstat  26, 31, 31, 28, 28, 28 ; IVs
+	ivs 28, 26, 31, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 10, 10 ; PP
 	db 100 ; Happiness
@@ -4455,7 +4455,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 174, 224, 224 ; EVs
-	ivstat  31, 26, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 20, 20, 15 ; PP
 	db 100 ; Happiness
@@ -4478,7 +4478,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 15, 15 ; PP
 	db 100 ; Happiness
@@ -4501,7 +4501,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 235, 224, 224, 235, 224, 224 ; EVs
-	ivstat  26, 26, 28, 31, 31, 28 ; IVs
+	ivs 28, 26, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 15, 5 ; PP
 	db 100 ; Happiness
@@ -4524,7 +4524,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 235, 235, 235, 235 ; EVs
-	ivstat  31, 28, 26, 31, 31, 29 ; IVs
+	ivs 29, 31, 28, 26, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 20, 15 ; PP
 	db 100 ; Happiness
@@ -4547,7 +4547,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 213, 224, 224, 213, 213, 213 ; EVs
-	ivstat  31, 22, 28, 31, 31, 28 ; IVs
+	ivs 28, 31, 22, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 5, 20 ; PP
 	db 100 ; Happiness
@@ -4570,7 +4570,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 235, 224, 235, 224, 213, 213 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 10, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4593,7 +4593,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 235, 245, 224, 224 ; EVs
-	ivstat  31, 26, 26, 28, 28, 27 ; IVs
+	ivs 27, 31, 26, 26, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 15, 15 ; PP
 	db 100 ; Happiness
@@ -4616,7 +4616,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 235, 224, 224, 235, 224, 224 ; EVs
-	ivstat  31, 26, 24, 31, 31, 28 ; IVs
+	ivs 28, 31, 26, 24, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 25, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4639,7 +4639,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 213, 224, 235, 224, 235, 235 ; EVs
-	ivstat  22, 26, 28, 31, 31, 27 ; IVs
+	ivs 27, 22, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 5, 20, 15 ; PP
 	db 100 ; Happiness
@@ -4662,7 +4662,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 220, 213, 224, 224 ; EVs
-	ivstat  31, 26, 28, 31, 31, 29 ; IVs
+	ivs 29, 31, 26, 28, 31, 31 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 5, 15, 20 ; PP
 	db 100 ; Happiness
@@ -4685,7 +4685,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 224, 213, 213 ; EVs
-	ivstat  31, 22, 31, 28, 28, 28 ; IVs
+	ivs 28, 31, 22, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 25, 5, 20, 10 ; PP
 	db 100 ; Happiness
@@ -4708,7 +4708,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 200, 224, 174, 174, 174 ; EVs
-	ivstat  26, 26, 31, 28, 28, 27 ; IVs
+	ivs 27, 26, 26, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4731,7 +4731,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 14, 14, 23 ; IVs
+	ivs 23, 31, 28, 31, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 5, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4754,7 +4754,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 28, 31, 28, 28, 29 ; IVs
+	ivs 29, 31, 28, 31, 28, 28 ; IVs
 	db 0, 0, 0 ; padding
 	db 10, 10, 5, 5 ; PP
 	db 100 ; Happiness
@@ -4777,7 +4777,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 224, 224, 224, 224, 224, 224 ; EVs
-	ivstat  31, 22, 28, 14, 14, 21 ; IVs
+	ivs 21, 31, 22, 28, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 5, 10 ; PP
 	db 100 ; Happiness
@@ -4800,7 +4800,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 8, 8, 12, 12, 10 ; IVs
+	ivs 10, 14, 8, 8, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 5, 10, 10, 5 ; PP
 	db 0 ; Happiness
@@ -4823,7 +4823,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  12, 14, 14, 12, 12, 12 ; IVs
+	ivs 12, 12, 14, 14, 12, 12 ; IVs
 	db 0, 0, 0 ; padding
 	db 20, 15, 15, 15 ; PP
 	db 0 ; Happiness
@@ -4846,7 +4846,7 @@ BattleTowerMons:
 	dw 0 ; OT ID
 	dt 1000000 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
-	ivstat  14, 12, 10, 14, 14, 12 ; IVs
+	ivs 12, 14, 12, 10, 14, 14 ; IVs
 	db 0, 0, 0 ; padding
 	db 15, 5, 5, 10 ; PP
 	db 0 ; Happiness
