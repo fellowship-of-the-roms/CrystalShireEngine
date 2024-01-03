@@ -1,18 +1,7 @@
 GetHPIV:
-	push bc
 	inc hl
 	inc hl
-	ld a, [hli]
-	and %01100000
-	rra
-	rra
-	ld b, a
-	ld a, [hld]
-	swap a
-	rra
-	and %00000111
-	or b
-	pop bc
+	call GetSpeedIV
 	dec hl
 	dec hl
 	ret
@@ -45,18 +34,12 @@ GetSpeedIV:
 
 GetSpecialAttackIV:
 	inc hl
-	inc hl
-	ld a, [hld]
-	and %00011111
+	call GetDefenseIV
 	dec hl
 	ret
 
 GetSpecialDefenseIV:
 	inc hl
-	inc hl
-	inc hl
-	ld a, [hld]
-	and %00011111
+	call GetSpecialAttackIV
 	dec hl
-	dec hl 
 	ret
