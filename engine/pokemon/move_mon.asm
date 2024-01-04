@@ -1113,7 +1113,6 @@ CalcMonStatC:
 	add hl, bc
 	ld a, [hl]
 	ld b, a
-; TODO: Fix DV to IVs here for stats
 .no_stat_exp
 	pop hl
 	push bc
