@@ -243,7 +243,7 @@ VBlank3::
 	push af
 	xor a
 	ldh [rIF], a
-	ld a, [rIE]
+	ldh a, [rIE]
 	and 1 << LCD_STAT
 	ldh [rIE], a
 	ldh [rIF], a

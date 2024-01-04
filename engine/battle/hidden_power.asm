@@ -38,22 +38,22 @@ HiddenPowerDamage:
 	and 2
 	swap a
 	or b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	xor a
-	ld [hMultiplicand + 1], a
-	ld [hMultiplicand + 0], a
+	ldh [hMultiplicand + 1], a
+	ldh [hMultiplicand + 0], a
 	ld a, 40
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct + 2]
-	ld [hDividend + 0], a
-	ld a, [hProduct + 3]
-	ld [hDividend + 1], a
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
 	ld a, 63
 	ldh [hDivisor], a
 	ld b, 2
 	call Divide
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	add 30
 	ld d, a
 
@@ -90,22 +90,22 @@ HiddenPowerDamage:
 	swap a
 	rla
 	or b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	xor a
-	ld [hMultiplicand + 1], a
-	ld [hMultiplicand + 0], a
+	ldh [hMultiplicand + 1], a
+	ldh [hMultiplicand + 0], a
 	ld a, 15
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct + 2]
-	ld [hDividend + 0], a
-	ld a, [hProduct + 3]
-	ld [hDividend + 1], a
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
 	ld a, 63
 	ldh [hDivisor], a
 	ld b, 2
 	call Divide
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 
 ; Skip Normal
 	inc a
