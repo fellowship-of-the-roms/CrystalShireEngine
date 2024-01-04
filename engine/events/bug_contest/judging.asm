@@ -285,12 +285,47 @@ ContestScore:
 	xor a
 	ldh [hProduct], a
 	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 
 	ld a, [wContestMonSpecies] ; Species
 	and a
 	ret z
 
 	; Tally the following:
+
+	; IVs
+	ld hl, wContestMonIVs
+	call GetHPIV
+	ld b, a
+	call GetAttackIV
+	add b
+	ld b, a
+	call GetDefenseIV
+	add b
+	ld b, a
+	call GetSpeedIV
+	add b
+	ld b, a
+	call GetSpecialAttackIV
+	add b
+	ld b, a
+	call GetSpecialDefenseIV
+	add b
+	ldh [hMultiplicand + 2], a
+	ld a, 29 ; Max contest points for IVs
+	ldh [hMultiplier], a
+	call Multiply
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
+	ld a, MAX_IV * NUM_STATS
+	ldh [hDivisor], a
+	ld b, 2
+	call Divide
+	ldh a, [hQuotient + 3]
+
+	call .AddContestStat
 
 	; Max HP * 4
 	ld a, [wContestMonMaxHP + 1]
@@ -312,37 +347,6 @@ ContestScore:
 	ld a, [wContestMonSpclAtk + 1]
 	call .AddContestStat
 	ld a, [wContestMonSpclDef + 1]
-	call .AddContestStat
-
-	; DVs
-	ld a, [wContestMonIVs + 0]
-	ld b, a
-	and %0010
-	add a
-	add a
-	ld c, a
-
-	swap b
-	ld a, b
-	and %0010
-	add a
-	add c
-	ld d, a
-
-	ld a, [wContestMonIVs + 1]
-	ld b, a
-	and %0010
-	ld c, a
-
-	swap b
-	ld a, b
-	and %0010
-	srl a
-	add c
-	add c
-	add d
-	add d
-
 	call .AddContestStat
 
 	; Remaining HP / 8
