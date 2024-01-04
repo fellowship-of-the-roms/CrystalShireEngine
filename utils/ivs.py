@@ -10,9 +10,9 @@ Compatible with this asm macro for declaring IVs:
 MACRO ivs
 ; input: \1 = hp (Hh), \2 = atk (a), \3 = def (d), \4 = spd (Ss), \5 = sat (t), \6 = sdf (f)
 ; output: db %0SSa_aaaa, %sssd_dddd, %0HHt_tttt, %hhhf_ffff
-	db LOW((\2) | ((\4) << 2) & %1100000)
+	db LOW((\2) | (((\4) << 2) & %1100000))
 	db LOW((\3) | ((\4) << 5))
-	db LOW((\5) | ((\1) << 2) & %1100000)
+	db LOW((\5) | (((\1) << 2) & %1100000))
 	db LOW((\6) | ((\1) << 5))
 ENDM
 """
