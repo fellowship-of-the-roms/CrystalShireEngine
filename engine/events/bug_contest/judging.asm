@@ -280,8 +280,6 @@ ComputeAIContestantScores:
 
 ContestScore:
 ; Determine the player's score in the Bug Catching Contest.
-; TODO: Fix DVs to IVs ContestScore
-
 	xor a
 	ldh [hProduct], a
 	ldh [hMultiplicand], a
@@ -292,6 +290,12 @@ ContestScore:
 	ret z
 
 	; Tally the following:
+
+	; check for shiny
+	ld a, [wContestMonShiny]
+	and SHINY_MASK
+	ld a, 29 ; Max contest points for IVs
+	jr nz, .shiny
 
 	; IVs
 	ld hl, wContestMonIVs
@@ -324,7 +328,7 @@ ContestScore:
 	ld b, 2
 	call Divide
 	ldh a, [hQuotient + 3]
-
+.shiny
 	call .AddContestStat
 
 	; Max HP * 4
