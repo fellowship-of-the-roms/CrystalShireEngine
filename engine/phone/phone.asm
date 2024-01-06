@@ -549,7 +549,7 @@ CheckCanDeletePhoneNumber:
 	ld a, c
 	call GetCallerTrainerClass
 	ld a, c
-	; and a
+	and a
 	ret nz
 	ld a, b
 	cp PHONECONTACT_MOM

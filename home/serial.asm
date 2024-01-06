@@ -167,11 +167,13 @@ Serial_ExchangeByte::
 	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp 1 << SERIAL
 	jr nz, .loop
-	ld hl, wLinkByteTimeout
-	dec [hl]
+	ld a, [wLinkByteTimeout]
+	dec a ; no-optimize inefficient WRAM increment/decrement
+	ld [wLinkByteTimeout], a
 	jr nz, .loop
-	ld hl, wLinkByteTimeout + 1
-	dec [hl]
+	ld a, [wLinkByteTimeout + 1]
+	dec a ; no-optimize inefficient WRAM increment/decrement
+	ld [wLinkByteTimeout + 1], a
 	jr nz, .loop
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
