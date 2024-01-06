@@ -7233,9 +7233,9 @@ GiveExperiencePoints:
 	xor a ; FALSE
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
-	farcall ApplyStatusEffectOnPlayerStats
-	farcall BadgeStatBoosts
-	farcall UpdatePlayerHUD
+	call ApplyStatusEffectOnPlayerStats
+	call BadgeStatBoosts
+	call UpdatePlayerHUD
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	ld a, $1
@@ -8253,7 +8253,7 @@ ShowLinkBattleParticipantsAfterEnd:
 	farjp _ShowLinkBattleParticipants
 
 DisplayLinkBattleResult:
-	farcall CheckMobileBattleError
+	call CheckMobileBattleError
 	jr c, .Mobile_InvalidBattle
 	call IsMobileBattle2
 	jr nz, .proceed
@@ -8783,7 +8783,7 @@ InitBattleDisplay:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	farcall MobileTextBorder
+	call MobileTextBorder
 	hlcoord 1, 5
 	lb bc, 3, 7
 	call ClearBox
@@ -8963,7 +8963,7 @@ BattleStartMessage:
 	call Call_PlayBattleAnim
 
 .not_shiny
-	farcall CheckSleepingTreeMon
+	call CheckSleepingTreeMon
 	jr c, .skip_cry
 
 	farcall CheckBattleScene

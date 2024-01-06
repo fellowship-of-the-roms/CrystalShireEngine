@@ -10,7 +10,7 @@ _DeleteSaveData:
 	call PrintText
 	call NoYesBox
 	ret c
-	farjp EmptyAllSRAMBanks
+	jmp EmptyAllSRAMBanks
 
 .ClearAllSaveDataText:
 	text_far _ClearAllSaveDataText

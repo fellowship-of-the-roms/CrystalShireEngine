@@ -251,7 +251,7 @@ InitPokegearTilemap:
 	ld l, a
 	call _hl_
 	call Pokegear_FinishTilemap
-	farcall TownMapPals
+	call TownMapPals
 	ld a, [wPokegearMapRegion]
 	and a
 	jr nz, .kanto_0
@@ -324,7 +324,7 @@ InitPokegearTilemap:
 .kanto
 	ld e, 1
 .ok
-	farcall PokegearMap
+	call PokegearMap
 	ld a, $07
 	ld bc, SCREEN_WIDTH - 2
 	hlcoord 1, 2
@@ -876,7 +876,7 @@ PokegearPhone_MakePhoneCall:
 	ret
 
 .no_service
-	farcall Phone_NoSignal
+	call Phone_NoSignal
 	ld hl, .GearOutOfServiceText
 	call PrintText
 	ld a, POKEGEARSTATE_PHONEJOYPAD
@@ -896,7 +896,7 @@ PokegearPhone_FinishPhoneCall:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret z
-	farcall HangUp
+	call HangUp
 	ld a, POKEGEARSTATE_PHONEJOYPAD
 	ld [wJumptableIndex], a
 	ld hl, PokegearAskWhoCallText
@@ -1047,7 +1047,7 @@ PokegearPhoneContactSubmenu:
 	ld d, 0
 	add hl, de
 	ld c, [hl]
-	farcall CheckCanDeletePhoneNumber
+	call CheckCanDeletePhoneNumber
 	ld a, c
 	and a
 	jr z, .cant_delete
@@ -1805,7 +1805,7 @@ _TownMap:
 	jr c, .okay_tilemap
 	ld e, KANTO_REGION
 .okay_tilemap
-	farcall PokegearMap
+	call PokegearMap
 	ld a, $07
 	ld bc, 6
 	hlcoord 1, 0
@@ -1826,7 +1826,7 @@ _TownMap:
 	ld [hl], $17
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
-	farjp TownMapPals
+	jmp TownMapPals
 
 PlayRadio:
 	ld hl, wOptions

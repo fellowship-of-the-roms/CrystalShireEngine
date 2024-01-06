@@ -2229,7 +2229,7 @@ UpdateObjectTile:
 	ld hl, OBJECT_TILE
 	add hl, bc
 	ld [hl], a
-	farjp UpdateTallGrassFlags ; no need to farcall
+	jmp UpdateTallGrassFlags
 
 CheckObjectOnScreen:
 	ld hl, OBJECT_MAP_X

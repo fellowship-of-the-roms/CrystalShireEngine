@@ -724,7 +724,7 @@ PokeBallEffect:
 	jr .return_from_capture
 
 .catch_bug_contest_mon
-	farcall BugContest_SetCaughtContestMon
+	call BugContest_SetCaughtContestMon
 	jr .return_from_capture
 
 .FinishTutorial:
@@ -1152,7 +1152,7 @@ TownMapEffect:
 	farjp PokegearMap
 
 BicycleEffect:
-	farjp BikeFunction
+	jmp BikeFunction
 
 EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
@@ -2118,7 +2118,7 @@ Softboiled_MilkDrinkFunction:
 EscapeRopeEffect:
 	xor a
 	ld [wItemEffectSucceeded], a
-	farcall EscapeRopeFunction
+	call EscapeRopeFunction
 
 	ld a, [wItemEffectSucceeded]
 	cp 1
@@ -2342,7 +2342,7 @@ SuperRodEffect:
 	ld e, $2
 ; fallthrough
 UseRod:
-	farjp FishFunction
+	jmp FishFunction
 
 ItemfinderEffect:
 	farjp ItemFinder

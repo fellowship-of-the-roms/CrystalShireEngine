@@ -24,7 +24,7 @@ SaveMenu:
 
 SaveAfterLinkTrade:
 	call PauseGameLogic
-	farcall StageRTCTimeForSave
+	call StageRTCTimeForSave
 	farcall BackupMysteryGift
 	call SavePokemonData
 	call SaveIndexTables
@@ -33,7 +33,7 @@ SaveAfterLinkTrade:
 	call SaveBackupIndexTables
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
-	farcall SaveRTC
+	call SaveRTC
 	jr ResumeGameLogic
 
 Link_SaveGame:
@@ -145,7 +145,7 @@ SavedTheGame:
 SaveGameData:
 	ld a, TRUE
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	call StageRTCTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -171,7 +171,7 @@ SaveGameData:
 
 	call SaveChecksum
 	call WriteBackupSave
-	farcall SaveRTC
+	call SaveRTC
 	jmp CloseSRAM ; just in case
 
 WriteBackupSave:

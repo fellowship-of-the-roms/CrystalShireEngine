@@ -9,19 +9,19 @@ PlayWhirlpoolSound:
 	jmp WaitSFX
 
 BlindingFlash:
-	farcall FadeOutPalettes
+	call FadeOutPalettes
 	ld hl, wStatusFlags
 	set STATUSFLAGS_FLASH_F, [hl]
-	farcall ReplaceTimeOfDayPals
-	farcall UpdateTimeOfDayPal
+	call ReplaceTimeOfDayPals
+	call UpdateTimeOfDayPal
 	ld b, SCGB_MAPPALS
 	call GetSGBLayout
 	farcall LoadOW_BGPal7
-	farjp FadeInPalettes
+	jmp FadeInPalettes
 
 ShakeHeadbuttTree:
 	farcall CopyBGGreenToOBPal7
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	ld de, CutGrassGFX
 	ld hl, vTiles0 tile FIELDMOVE_GRASS
 	lb bc, BANK(CutGrassGFX), 4
@@ -38,7 +38,7 @@ ShakeHeadbuttTree:
 	ld [hl], FIELDMOVE_TREE
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call HideHeadbuttTree
 	ld a, 32
 	ld [wFrameCounter], a
@@ -53,7 +53,7 @@ ShakeHeadbuttTree:
 	dec [hl]
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call DelayFrame
 	jr .loop
 
@@ -62,7 +62,7 @@ ShakeHeadbuttTree:
 	call WaitBGMap
 	xor a
 	ldh [hBGMapMode], a
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	ld hl, wShadowOAMSprite36
 	ld bc, wShadowOAMEnd - wShadowOAMSprite36
 	xor a
@@ -125,13 +125,13 @@ OWCutAnimation:
 	ret nz
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call OWCutJumptable
 	call DelayFrame
 	jr .loop
 
 .LoadCutGFX:
-	farcall ClearSpriteAnims ; pointless to farcall
+	call ClearSpriteAnims
 	ld de, CutGrassGFX
 	ld hl, vTiles0 tile FIELDMOVE_GRASS
 	lb bc, BANK(CutGrassGFX), 4
@@ -314,7 +314,7 @@ FlyFromAnim:
 	jr nz, .exit
 	ld a, 0 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
@@ -351,7 +351,7 @@ FlyToAnim:
 	jr nz, .exit
 	ld a, 0 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
@@ -378,7 +378,7 @@ endr
 	jmp ByteFill
 
 FlyFunction_InitGFX:
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	call SetOWFlyMonColor
 	ld de, CutGrassGFX
 	ld hl, vTiles0 tile FIELDMOVE_GRASS
@@ -392,7 +392,7 @@ FlyFunction_InitGFX:
 	ld a, [hl]
 	ld [wTempIconSpecies], a
 	ld e, FIELDMOVE_FLY
-	farcall FlyFunction_GetMonIcon
+	call FlyFunction_GetMonIcon
 	xor a
 	ld [wJumptableIndex], a
 	ret

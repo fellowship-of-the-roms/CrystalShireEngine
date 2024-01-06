@@ -133,7 +133,7 @@ LinkTextbox:
 PrintWaitingTextAndSyncAndExchangeNybble:
 	call LoadStandardMenuHeader
 	call .PrintWaitingText
-	farcall WaitLinkTransfer
+	call WaitLinkTransfer
 	call ExitMenu
 	jmp WaitBGMap2
 
