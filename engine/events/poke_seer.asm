@@ -103,7 +103,7 @@ ReadCaughtData:
 
 	inc hl
 	ld a, [wPlayerID + 1]
-	; cp [hl]
+	cp [hl]
 	jr nz, .traded
 
 	ld a, SEERACTION_MET

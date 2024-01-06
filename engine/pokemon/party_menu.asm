@@ -240,10 +240,10 @@ PlacePartyMonLevel:
 	ld a, "<LV>"
 	ld [hli], a
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	; jr .okay
+	jr .okay
 .ThreeDigits:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-; .okay
+.okay
 	call PrintNum
 
 .next
