@@ -195,6 +195,7 @@ ROMX $3f
 	"bank3F"
 ROMX $40
 	"mobile40"
+	"Battle Animation Data"
 ROMX $41
 	"bank41"
 	"Enemy Trainer Parties 1"
