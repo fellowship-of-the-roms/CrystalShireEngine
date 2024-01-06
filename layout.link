@@ -43,17 +43,17 @@ ROMX $03
 	"bank3"
 	"VWF"
 	"mobile5C"
-	"Fade System"
 ROMX $04
 	"bank4"
 	"Dynamic Pals System"
-	"Prism tilemap copy functions"
+	"Fade System"
 ROMX $05
 	"bank5"
 	"Load Map Part"
-	"Pics 20"
 ROMX $06
 	"Tileset Data 1"
+	"Prism tilemap copy functions"
+	"Pics 20"
 ROMX $07
 	"Roofs"
 	"Tileset Data 2"
