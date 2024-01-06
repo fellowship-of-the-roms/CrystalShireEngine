@@ -3,10 +3,6 @@ DEF MAP_NAME_SIGN_START EQU $c0
 InitMapNameSign::
 	xor a
 	ldh [hBGMapMode], a
-	farjp .inefficient_farcall ; this is a waste of 6 ROM bytes and 6 stack bytes
-
-; should have just been a fallthrough
-.inefficient_farcall
 	ld a, [wMapGroup]
 	ld b, a
 	ld a, [wMapNumber]

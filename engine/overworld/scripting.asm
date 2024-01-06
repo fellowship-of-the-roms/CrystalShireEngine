@@ -1140,7 +1140,7 @@ Script_reloadmapafterbattle:
 	jr z, .done
 	ld b, BANK(Script_SpecialBillCall)
 	ld de, Script_SpecialBillCall
-	farcall LoadScriptBDE
+	call LoadScriptBDE
 .done
 ; fallthrough
 Script_reloadmap:
@@ -2070,14 +2070,14 @@ Script_writecmdqueue:
 	ld d, a
 	ld a, [wScriptBank]
 	ld b, a
-	farjp WriteCmdQueue ; no need to farcall
+	jmp WriteCmdQueue
 
 Script_delcmdqueue:
 	xor a
 	ld [wScriptVar], a
 	call GetScriptByte
 	ld b, a
-	farcall DelCmdQueue ; no need to farcall
+	call DelCmdQueue
 	ret c
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -2116,10 +2116,10 @@ Script_reloadmappart::
 Script_warpcheck:
 	call WarpCheck
 	ret nc
-	farjp EnableEvents
+	jmp EnableEvents
 
 Script_enableevents: ; unreferenced
-	farjp EnableEvents
+	jmp EnableEvents
 
 Script_newloadmap:
 	call GetScriptByte

@@ -248,11 +248,11 @@ GiveTakePartyMonItem:
 
 GetItemToGive:
 ; Returns nz if we got an item to give.
-	farcall DepositSellInitPackBuffers
+	call DepositSellInitPackBuffers
 	; fallthrough
 _GetItemToGive:
 .loop
-	farcall DepositSellPack
+	call DepositSellPack
 
 	ld a, [wPackUsedItem]
 	and a
@@ -493,7 +493,7 @@ StartMenuYesNo:
 
 ComposeMailMessage:
 	ld de, wTempMailMessage
-	farcall _ComposeMailMessage
+	call _ComposeMailMessage
 	ld hl, wPlayerName
 	ld de, wTempMailAuthor
 	ld bc, NAME_LENGTH - 1

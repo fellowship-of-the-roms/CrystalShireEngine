@@ -723,7 +723,7 @@ endc
 .asm_100a92
 	call DelayFrame
 	call GetJoypad
-	farcall Function100382
+	call Function100382
 	lb bc, $03, $01
 	push bc
 	call AdvanceMobileInactivityTimerAndCheckExpired
@@ -845,7 +845,7 @@ Function100b7a:
 	ld a, [wMenuData_2DMenuItemStringsBank]
 	call FarCall_hl
 	farcall Draw2DMenu
-	farcall MobileTextBorder
+	call MobileTextBorder
 	call UpdateSprites
 	call ApplyTilemap
 	farcall Init2DMenuCursorPosition
@@ -1158,12 +1158,12 @@ Mobile_SetOverworldDelay:
 
 Function100dd8:
 	lb bc, $03, $01
-	farcall AdvanceMobileInactivityTimerAndCheckExpired
+	call AdvanceMobileInactivityTimerAndCheckExpired
 	jr c, .asm_100dfb
 	lb bc, $01, $3c
 	call Function10079c
 	jr c, .asm_100dfb
-	farcall Function10032e
+	call Function10032e
 	ld a, [wcd2b]
 	and a
 	jr nz, .asm_100dfb
@@ -1181,7 +1181,7 @@ MobileComms_CheckInactivityTimer:
 	ld c, a
 	ld b, 3
 	push bc
-	farcall AdvanceMobileInactivityTimerAndCheckExpired ; useless to farcall
+	call AdvanceMobileInactivityTimerAndCheckExpired
 	pop bc
 	jr c, .quit
 	ld b, 1
@@ -1189,7 +1189,7 @@ MobileComms_CheckInactivityTimer:
 	jr c, .quit
 	call Function1009f3
 	jr c, .quit
-	farcall Function10032e ; useless to farcall
+	call Function10032e
 	ld a, [wcd2b]
 	and a
 	jr nz, .quit
@@ -1207,7 +1207,7 @@ Function100e2d:
 	ld c, a
 	ld b, 3
 	push bc
-	farcall AdvanceMobileInactivityTimerAndCheckExpired
+	call AdvanceMobileInactivityTimerAndCheckExpired
 	pop bc
 	jr c, .asm_100e61
 	ld b, 1
@@ -1215,7 +1215,7 @@ Function100e2d:
 	jr c, .asm_100e61
 	call Function1009f3
 	jr c, .asm_100e61
-	farcall Function10032e
+	call Function10032e
 	ld a, [wcd2b]
 	and a
 	jr nz, .asm_100e61

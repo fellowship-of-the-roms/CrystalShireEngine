@@ -193,7 +193,7 @@ CheckPokerusTick::
 	and a
 	jr z, .done ; not even a day has passed since game start
 	ld b, a
-	farcall ApplyPokerusTick
+	call ApplyPokerusTick
 .done
 	xor a
 	ret

@@ -13,6 +13,8 @@ ROM0
 	"rst20"
 	org $0028
 	"rst28"
+	org $0030
+	"rst30"
 	org $0038
 	"rst38"
 	org $0040
@@ -31,16 +33,27 @@ ROM0
 	"Home"
 ROMX $01
 	"bank1"
+	"Tileset Data 10"
+	"Tileset Data 11"
 ROMX $02
 	"bank2"
+	"Tileset Data 9"
+	"Battle Weather Images"
 ROMX $03
 	"bank3"
+	"VWF"
+	"mobile5C"
 ROMX $04
 	"bank4"
+	"Dynamic Pals System"
+	"Fade System"
 ROMX $05
 	"bank5"
+	"Load Map Part"
 ROMX $06
 	"Tileset Data 1"
+	"Prism tilemap copy functions"
+	"Pics 20"
 ROMX $07
 	"Roofs"
 	"Tileset Data 2"
@@ -55,6 +68,7 @@ ROMX $09
 ROMX $0a
 	"bankA"
 	"Trainer Backpics"
+	"Map Attributes"
 ROMX $0b
 	"bankB"
 ROMX $0c
@@ -108,6 +122,7 @@ ROMX $1f
 	"Map Scripts 10"
 ROMX $20
 	"bank20"
+	"Enemy Trainer Parties 2"
 ROMX $21
 	"bank21"
 ROMX $22
@@ -190,6 +205,7 @@ ROMX $43
 	"Title"
 ROMX $44
 	"Mobile Adapter SDK"
+	"Mon Icons 2"
 ROMX $45
 	"mobile45"
 ROMX $46
@@ -204,6 +220,7 @@ ROMX $49
 	"Pics 2"
 ROMX $4a
 	"Trainer Pic Pointers"
+	"Pics 3"
 ROMX $4b
 	"Pics 4"
 ROMX $4c
@@ -239,6 +256,7 @@ ROMX $5a
 ROMX $5b
 	"bank5B"
 ROMX $5c
+	"Mon Icons 1"
 ROMX $5d
 	"Crystal Phone Text 2"
 ROMX $5e
@@ -334,6 +352,7 @@ WRAMX 1
 	"More WRAM 1"
 	"Enemy Party"
 	"Party"
+	"Used Storage"
 WRAMX 2
 	"Pic Animations"
 	align 8

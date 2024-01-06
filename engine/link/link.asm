@@ -14,7 +14,7 @@ LinkCommunications:
 	call UpdateSprites
 	call LoadStandardFont
 	call LoadFontsBattleExtra
-	farcall LinkComms_LoadPleaseWaitTextboxBorderGFX
+	call LinkComms_LoadPleaseWaitTextboxBorderGFX
 	call WaitBGMap2
 	hlcoord 3, 8
 	lb bc, 2, 12
@@ -1610,7 +1610,7 @@ Link_FindFirstNonControlCharacter_AllowZero:
 InitTradeMenuDisplay:
 	call ClearScreen
 	call LoadTradeScreenBorderGFX
-	farcall InitTradeSpeciesList
+	call InitTradeSpeciesList
 	xor a
 	ld hl, wOtherPlayerLinkMode
 	ld [hli], a
@@ -1646,7 +1646,7 @@ LinkTrade_OTPartyMenu:
 	ld [w2DMenuFlags2], a
 
 LinkTradeOTPartymonMenuLoop:
-	farcall LinkTradeMenu
+	call LinkTradeMenu
 	ld a, d
 	and a
 	jmp z, LinkTradePartiesMenuMasterLoop
@@ -1711,7 +1711,7 @@ LinkTrade_PlayerPartyMenu:
 	call WaitBGMap2
 
 LinkTradePartymonMenuLoop:
-	farcall LinkTradeMenu
+	call LinkTradeMenu
 	ld a, d
 	and a
 	jr z, LinkTradePartiesMenuMasterLoop
@@ -1857,7 +1857,7 @@ LinkTrade_TradeStatsMenu:
 	dec a
 	ld [wCurTradePartyMon], a
 	ld [wPlayerLinkAction], a
-	farcall PrintWaitingTextAndSyncAndExchangeNybble
+	call PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jmp z, InitTradeMenuDisplay
@@ -1910,7 +1910,7 @@ LinkTrade_TradeStatsMenu:
 	rst PlaceString
 	ld a, $1
 	ld [wPlayerLinkAction], a
-	farcall PrintWaitingTextAndSyncAndExchangeNybble
+	call PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 100
 	call DelayFrames
 	jmp InitTradeMenuDisplay
@@ -1972,7 +1972,7 @@ LinkTradePartymonMenuCheckCancel:
 	ldcoord_a 9, 17
 	ld a, $f
 	ld [wPlayerLinkAction], a
-	farcall PrintWaitingTextAndSyncAndExchangeNybble
+	call PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jr nz, .loop1
@@ -2099,13 +2099,13 @@ LinkTrade:
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
 	rst PlaceString
-	farcall PrintWaitingTextAndSyncAndExchangeNybble
+	call PrintWaitingTextAndSyncAndExchangeNybble
 	jmp InitTradeMenuDisplay_Delay
 
 .try_trade
 	ld a, $2
 	ld [wPlayerLinkAction], a
-	farcall PrintWaitingTextAndSyncAndExchangeNybble
+	call PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	dec a
 	jr nz, .do_trade
@@ -2419,13 +2419,13 @@ String_TooBadTheTradeWasCanceled:
 LinkTextboxAtHL:
 	ld d, h
 	ld e, l
-	farjp LinkTextbox
+	jmp LinkTextbox
 
 LoadTradeScreenBorderGFX:
-	farjp _LoadTradeScreenBorderGFX
+	jmp _LoadTradeScreenBorderGFX
 
 SetTradeRoomBGPals:
-	farcall LoadTradeRoomBGPals ; just a nested farcall; so wasteful
+	call LoadTradeRoomBGPals
 	jmp SetPalettes
 
 INCLUDE "engine/movie/trade_animation.asm"
@@ -2923,7 +2923,7 @@ TimeCapsule:
 	ld a, LINK_TIMECAPSULE
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	farcall LinkCommunications
+	call LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a
@@ -2934,7 +2934,7 @@ TradeCenter:
 	ld a, LINK_TRADECENTER
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	farcall LinkCommunications
+	call LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a
@@ -2945,7 +2945,7 @@ Colosseum:
 	ld a, LINK_COLOSSEUM
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	farcall LinkCommunications
+	call LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a

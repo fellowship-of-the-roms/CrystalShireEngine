@@ -4,14 +4,14 @@ MACRO farcall ; bank, address
 	rst FarCall
 	dbw BANK(\1), \1
 	assert !(\1 & $8000), "farcall cannot call things above ROMX"
-;	assert warn, BANK(\1) != 0 && BANK(\1) != BANK(@), "unnecessary `farcall \1`"
+	assert warn, BANK(\1) != 0 && BANK(\1) != BANK(@), "unnecessary `farcall \1`"
 ENDM
 
 MACRO farjp ; bank, address
 	rst FarCall
 	dbw BANK(\1), \1 | $8000
 	assert !(\1 & $8000), "farjp cannot call things above ROMX"
-;	assert warn, BANK(\1) != 0 && BANK(\1) != BANK(@), "unnecessary `farjp \1`"
+	assert warn, BANK(\1) != 0 && BANK(\1) != BANK(@), "unnecessary `farjp \1`"
 ENDM
 
 MACRO homecall ; bank, address
@@ -31,6 +31,6 @@ MACRO homecall ; bank, address
 	pop af
 	rst Bankswitch
 	if _NARG == 1
-;		assert warn, BANK(\1) != 0, "unnecessary `homecall \1`"
+		assert warn, BANK(\1) != 0, "unnecessary `homecall \1`"
 	endc
 ENDM

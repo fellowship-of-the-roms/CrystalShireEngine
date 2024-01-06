@@ -1828,6 +1828,22 @@ MACRO inc_crash_check_pointer_farcall
 	ret
 ENDM
 
+MACRO inc_crash_check_pointer_call
+	call IncCrashCheckPointer
+	call HlToCrashCheckPointer ; redundant
+	ldh a, [rSVBK]
+	push af
+	ld a, $1
+	ldh [rSVBK], a
+	rept _NARG
+		call \1
+		shift
+	endr
+	pop af
+	ldh [rSVBK], a
+	ret
+ENDM
+
 IncCrashCheckPointer_SaveGameData:
 	inc_crash_check_pointer_farcall SaveGameData
 
@@ -1835,7 +1851,7 @@ IncCrashCheckPointer_SaveAfterLinkTrade:
 	inc_crash_check_pointer_farcall SaveAfterLinkTrade
 
 IncCrashCheckPointer_SaveBox:
-	inc_crash_check_pointer_farcall DoNothing
+	inc_crash_check_pointer_call DoNothing
 
 IncCrashCheckPointer_SaveChecksum:
 	inc_crash_check_pointer_farcall SaveChecksum

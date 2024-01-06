@@ -39,8 +39,9 @@ DoMysteryGift:
 	call ClearMysteryGiftTrainer
 	vc_patch Infrared_stage_party_data
 if DEF(_CRYSTAL_VC)
-	farcall StagePartyDataForMysteryGift
+	call StagePartyDataForMysteryGift
 	call ClearMysteryGiftTrainer
+	nop ; no-optimize nops
 	nop ; no-optimize nops
 	nop ; no-optimize nops
 	nop ; no-optimize nops
@@ -102,9 +103,9 @@ endc
 	cp RESERVED_GAME_VERSION
 	jr z, .skip_append_save
 	call .SaveMysteryGiftTrainerName
-	farcall RestoreGSBallFlag
-	farcall StubbedTrainerRankings_MysteryGift
-	farcall BackupGSBallFlag
+	call RestoreGSBallFlag
+	call StubbedTrainerRankings_MysteryGift
+	call BackupGSBallFlag
 .skip_append_save
 	ld a, [wMysteryGiftPartnerSentDeco]
 	and a
@@ -515,7 +516,7 @@ EndOrContinueMysteryGiftIRCommunication:
 	jr nc, .quit
 
 	; Prepare the second message for wMysteryGiftTrainer
-	farcall StagePartyDataForMysteryGift
+	call StagePartyDataForMysteryGift
 	call ClearMysteryGiftTrainer
 	ld a, wMysteryGiftTrainerEnd - wMysteryGiftTrainer
 	ld [wMysteryGiftStagedDataLength], a

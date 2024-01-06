@@ -40,7 +40,7 @@ ReanchorBGMap_NoOAMUpdate::
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hWY], a
-	farcall HDMATransfer_FillBGMap0WithBlack ; no need to farcall
+	call HDMATransfer_FillBGMap0WithBlack
 	ld a, HIGH(vBGMap0)
 	call .LoadBGMapAddrIntoHRAM
 	xor a ; LOW(vBGMap0)

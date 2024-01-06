@@ -71,14 +71,14 @@ RunBattleTowerTrainer:
 	xor a
 	ld [wLinkMode], a
 	farcall StubbedTrainerRankings_Healings
-	farcall HealParty
+	call HealParty
 	call ReadBTTrainerParty
 	call Clears5_a89a
 
 	predef StartBattle
 
 	farcall LoadPokemonData
-	farcall HealParty
+	call HealParty
 	ld a, [wBattleResult]
 	ld [wScriptVar], a
 	and a ; WIN?

@@ -343,7 +343,7 @@ PlayerWithdrawItemMenu:
 	ld hl, wItemFlags
 	set IN_PC_F, [hl]
 	call LoadStandardMenuHeader
-	farcall ClearPCItemScreen
+	call ClearPCItemScreen
 .loop
 	call PCItemsJoypad
 	jr c, .quit
@@ -418,7 +418,7 @@ PlayerTossItemMenu:
 	ld hl, wItemFlags
 	set IN_PC_F, [hl]
 	call LoadStandardMenuHeader
-	farcall ClearPCItemScreen
+	call ClearPCItemScreen
 .loop
 	call PCItemsJoypad
 	jr c, .quit

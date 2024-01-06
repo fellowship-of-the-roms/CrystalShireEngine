@@ -167,7 +167,7 @@ CheckPokeMail::
 	jr nz, .loop
 
 .done
-	farcall CheckCurPartyMonFainted
+	call CheckCurPartyMonFainted
 	ld a, POKEMAIL_LAST_MON
 	jr c, .close_sram_return
 	xor a ; REMOVE_PARTY

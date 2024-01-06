@@ -139,7 +139,7 @@ SwapStorageBoxSlots:
 	jr c, .pop_bcde_and_return
 
 	; Otherwise, check if it is our last healthy mon.
-	farcall CheckCurPartyMonFainted
+	call CheckCurPartyMonFainted
 	jr nc, .not_last_healthy
 
 	; Doing this would lose us our last healthy mon, so abort.
