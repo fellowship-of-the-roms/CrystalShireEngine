@@ -191,25 +191,23 @@ DayCareStep::
 	dec [hl]
 	ret nz
 
-	call Random
-	ld [hl], a
 	farcall CheckBreedmonCompatibility
 	ld a, [wBreedingCompatibility]
-	cp 230
-	ld b, 31 percent + 1
-	jr nc, .okay
-	ld a, [wBreedingCompatibility]
-	cp 170
-	ld b, 16 percent
-	jr nc, .okay
-	ld a, [wBreedingCompatibility]
-	cp 110
-	ld b, 12 percent
-	jr nc, .okay
-	ld b, 4 percent
+	; Egg initialization shouldn't happen if incompatible, but just in case
+	and a
+	ret z
 
-.okay
-	call Random
+	dec a ; 1: Semi-compatible
+	ld b, 20
+	jr z, .got_odds
+	dec a ; 2: Compatible
+	ld b, 50
+	jr z, .got_odds
+	; 3: Very compatible
+	ld b, 70
+.got_odds
+	ld a, 100
+	call RandomRange
 	cp b
 	ret nc
 	ld hl, wDayCareMan

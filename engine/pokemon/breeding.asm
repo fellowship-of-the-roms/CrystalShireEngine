@@ -1,79 +1,50 @@
+	const_def
+	const INCOMPATIBLE
+	const SLIGHTLY_COMPATIBLE
+	const MODERATELY_COMPATIBLE
+	const HIGHLY_COMPATIBLE
+
+	const_def
+	const BREEDGEN_MALE
+	const BREEDGEN_FEMALE
+	const BREEDGEN_GENDERLESS
+	const BREEDGEN_DITTO
+
+
 CheckBreedmonCompatibility:
 	call .CheckBreedingGroupCompatibility
-	ld c, $0
-	jmp nc, .done
+	ld c, INCOMPATIBLE
+	jr nc, .done
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1IVs]
-	ld [wTempMonIVs], a
-	ld a, [wBreedMon1IVs + 1]
-	ld [wTempMonIVs + 1], a
-	ld a, [wBreedMon1IVs + 2]
-	ld [wTempMonIVs + 2], a
-	ld a, [wBreedMon1IVs + 3]
-	ld [wTempMonIVs + 3], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
-	jr c, .genderless
-	ld b, $1
-	jr nz, .breedmon2
-	inc b
-
-.breedmon2
-	push bc
-	ld a, [wBreedMon2Species]
-	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2IVs]
-	ld [wTempMonIVs], a
-	ld a, [wBreedMon2IVs + 1]
-	ld [wTempMonIVs + 1], a
-	ld a, [wBreedMon2IVs + 2]
-	ld [wTempMonIVs + 2], a
-	ld a, [wBreedMon2IVs + 3]
-	ld [wTempMonIVs + 3], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
-	pop bc
-	jr c, .genderless
-	ld a, $1
-	jr nz, .compare_gender
-	inc a
-
-.compare_gender
-	cp b
-	jr nz, .compute
-
-.genderless
-	ld hl, DITTO
-	call GetPokemonIDFromIndex
+	ld a, [wBreedMon1Gender]
+	ld [wTempMonGender], a
+	call .SetGenderData
 	ld b, a
-	ld c, $0
-	ld a, [wBreedMon1Species]
-	cp b
-	jr z, .ditto1
 	ld a, [wBreedMon2Species]
+	ld [wCurPartySpecies], a
+	ld a, [wBreedMon2Gender]
+	ld [wTempMonGender], a
+	call .SetGenderData
 	cp b
-	jr nz, .done
-	jr .compute
+	ld c, INCOMPATIBLE
+	jr z, .done ; both are same gender, both are dittos or both are genderless
+	; Check for Ditto
+	or b
+	bit BREEDGEN_DITTO, a
+	jr nz, .breed_ok
+	; Check for genderless
+	bit BREEDGEN_GENDERLESS, a
+	jr nz, .done ; Any mon being genderless is incompatible with non-Ditto
 
-.ditto1
-	ld a, [wBreedMon2Species]
-	cp b
-	jr z, .done
-
-.compute
-	call .CheckDVs
-	ld c, 255
-	jr z, .done
+.breed_ok
 	ld a, [wBreedMon2Species]
 	ld b, a
 	ld a, [wBreedMon1Species]
 	cp b
-	ld c, 254
+	ld c, HIGHLY_COMPATIBLE
 	jr z, .compare_ids
-	ld c, 128
+	ld c, MODERATELY_COMPATIBLE
 .compare_ids
 	; Speed up
 	ld a, [wBreedMon1ID]
@@ -86,32 +57,11 @@ CheckBreedmonCompatibility:
 	ld a, [wBreedMon2ID + 1]
 	cp b
 	jr nz, .done
-	ld a, c
-	sub 77
-	ld c, a
+	dec c ; SLIGHTLY_COMPATIBLE
 
 .done
 	ld a, c
 	ld [wBreedingCompatibility], a
-	ret
-
-.CheckDVs:
-; If Defense DVs match and the lower 3 bits of the Special DVs match,
-; avoid breeding
-; TODO: fix DVs to IVs
-	ld a, [wBreedMon1IVs]
-	and %1111
-	ld b, a
-	ld a, [wBreedMon2IVs]
-	and %1111
-	cp b
-	ret nz
-	ld a, [wBreedMon1IVs + 1]
-	and %111
-	ld b, a
-	ld a, [wBreedMon2IVs + 1]
-	and %111
-	cp b
 	ret
 
 .CheckBreedingGroupCompatibility:
@@ -121,14 +71,16 @@ CheckBreedmonCompatibility:
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wBaseEggGroups]
-	cp EGG_NONE * $11
+	assert EGG_NONE * $11 == $ff
+	inc a
 	jr z, .Incompatible
 
 	ld a, [wBreedMon1Species]
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wBaseEggGroups]
-	cp EGG_NONE * $11
+	assert EGG_NONE * $11 == $ff
+	inc a
 	jr z, .Incompatible
 
 ; Ditto is automatically compatible with everything.
@@ -186,7 +138,32 @@ CheckBreedmonCompatibility:
 	scf
 	ret
 
+.SetGenderData:
+	ld a, [wCurPartySpecies]
+	call GetPokemonIndexFromID
+	cphl16 DITTO
+	ld a, 1 << BREEDGEN_DITTO
+	ret z
+	ld a, TEMPMON
+	ld [wMonType], a
+	push bc
+	farcall GetGender
+	pop bc
+	ld a, 1 << BREEDGEN_GENDERLESS
+	ret c
+	ld a, 1 << BREEDGEN_FEMALE
+	ret z
+	srl a ; 1 << BREEDGEN_MALE
+	ret
+
+
 DoEggStep::
+	ld a, [wPartyCount]
+	and a
+	ret z
+
+	; TODO: Breeding Cycles for Flame Body/Magama Armor
+
 	ld de, wPartySpecies
 	ld hl, wPartyMon1Happiness
 	ld c, 0
@@ -955,16 +932,20 @@ DayCareMonCompatibilityText:
 	ld hl, .BreedBrimmingWithEnergyText
 	cp -1
 	ret z
+
 	ld hl, .BreedNoInterestText
 	and a
 	ret z
-	ld hl, .BreedAppearsToCareForText
-	cp 230
-	ret nc
-	cp 70
-	ld hl, .BreedFriendlyText
-	ret nc
+
 	ld hl, .BreedShowsInterestText
+	dec a
+	ret z
+
+	ld hl, .BreedFriendlyText
+	dec a
+	ret z
+
+	ld hl, .BreedAppearsToCareForText
 	ret
 
 .BreedBrimmingWithEnergyText:

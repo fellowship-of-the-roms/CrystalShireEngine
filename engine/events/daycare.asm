@@ -430,6 +430,7 @@ DayCareManOutside:
 	text_end
 
 DayCare_GiveEgg:
+	call DayCare_GenerateEgg
 	ld a, [wEggMonLevel]
 	ld [wCurPartyLevel], a
 	ld hl, wPartyCount
@@ -519,8 +520,6 @@ DayCare_InitBreeding:
 	ld a, [wBreedingCompatibility]
 	and a
 	ret z
-	inc a
-	ret z
 	ld hl, wDayCareMan
 	set DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
 .loop
@@ -528,8 +527,9 @@ DayCare_InitBreeding:
 	cp 150
 	jr c, .loop
 	ld [wStepsToEgg], a
-; fallthrough
-.UselessJump:
+	ret
+
+DayCare_GenerateEgg:
 	xor a
 	ld hl, wEggMon
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -557,7 +557,7 @@ DayCare_InitBreeding:
 	ld c, a
 	ld a, [wBreedMon1Species]
 	cp c
-	ld a, $1
+	ld a, 1
 	jr z, .LoadWhichBreedmonIsTheMother
 	ld a, [wBreedMon2Species]
 	cp c
@@ -636,11 +636,9 @@ DayCare_InitBreeding:
 	call Random
 	ld [hl], a
 
-	; Normal DV inheritance is 3 random IVs from the parents
+	; Normal IV inheritance is 3 random IVs from the parents
 	; at random.
-	ld a, 3
-	ld b, a
-	ld c, %000000 ; Already inherited
+	lb bc, 3, %000000 ; Already inherited
 
 	; Do the rest of the IVs
 .iv_inherit_loop
@@ -660,6 +658,8 @@ DayCare_InitBreeding:
 	xor a
 	ld [wEggMonPersonality], a
 	ld [wEggMonPersonality + 1], a
+
+	; TODO: Breeding abilities
 
 	call Random
 	and a
@@ -695,6 +695,31 @@ DayCare_InitBreeding:
 	rrca
 	or [hl]
 	ld [hl], a
+
+	ld a, [wCurPartySpecies]
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, BaseData
+	ld a, BANK(BaseData)
+	call LoadIndirectPointer
+	ld bc, BASE_GENDER
+	add hl, bc
+	call GetFarByte
+	cp -1
+	jr z, .genderless_or_male
+	cp GENDER_F100
+	jr z, .female
+	ld b, a
+	ld hl, wEggMonGender
+	call Random
+	cp b
+	jr c, .female
+	jr nz, .genderless_or_male
+.female
+	set MON_GENDER_F, [hl]
+.genderless_or_male
+
 
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
@@ -775,12 +800,12 @@ InheritIV: ; TODO actually adapt this for IVs
 	; Have we inherited as much as we can?
 	ld a, b
 	and a
-	jr z, .cant_inherit_any_more
+	jmp z, .cant_inherit_any_more
 
 	; Have we inherited every stat?
 	ld a, c
 	cp %111111
-	jr z, .cant_inherit_any_more
+	jmp z, .cant_inherit_any_more
 
 	; Have we already inherited the given stat?
 	push de
@@ -805,38 +830,95 @@ InheritIV: ; TODO actually adapt this for IVs
 
 	; Inherit the stat
 	; inc/dec doesn't alter carry flag
-	; DV is stored as %xxxxyyyy, %zzzzaaaa, %bbbbcccc
-	; x=HP, y=Atk, z=Def, a=Speed, b=SpAtk, c=SpDef
-	; To inherit the correct nibble, copy high from HL, low from DE
-	; a=0, 2 or 4 :: HL is Parent, DE is Egg
-	; a=1, 3 or 5 :: HL is Egg, DE is Parent
+	; IVs are stored as %0SSa_aaaa, %sssd_dddd, %0HHt_tttt, %hhhf_ffff
+	; Hh=HP, a=Atk, d=Def, Ss=Speed, t=SpAtk, f=SpDef
 	ld a, e
 	push de
 	push hl
 	ld de, wEggMonIVs
-	; halve A; 0-1: first byte, 2-3: second, 4-5: third
-	srl a ; sets carry if a is odd, maintained thorough the loop
-	inc a
-.find_iv_loop
-	dec a
-	jr z, .found_iv
-	inc de
-	inc hl
-	jr .find_iv_loop
-.found_iv
-	push de ; Egg IVs inherited to
+	bit 0, a ; Test if a is odd
+	push de
 	; current HL is Parent, DE is Egg, if a is odd, swap
-	call c, SwapHLDE
-	; inherit x from HL, y from DE in %xxxxyyyy
-	; This means that half is "inherited" from Egg, half from Parent
-	ld a, [hl]
-	and $f0
+	call nz, SwapHLDE
+	inc a
+	dec a
+	jr z, .HP
+	dec a
+	jr z, .Atk
+	dec a
+	jr z, .Def
+	dec a
+	jr z, .Speed
+	dec a
+	jr z, .SpAtk
+; SpDef
+	call GetSpecialDefenseIV
 	ld h, a
-	ld a, [de]
-	and $f
-	or h
 	pop de
+	inc de
+	inc de
+	inc de
+	jr .set_simple_egg_iv
+
+.SpAtk
+	call GetSpecialAttackIV
+	ld h, a
+	pop de
+	inc de
+	inc de
+	jr .set_simple_egg_iv
+
+.Def
+	call GetDefenseIV
+	ld h, a
+	pop de
+	inc de
+	jr .set_simple_egg_iv
+
+.Atk
+	call GetAttackIV
+	ld h, a
+	pop de
+.set_simple_egg_iv
+	ld a, [de]
+	and %11100000
+	or h
 	ld [de], a
+	jr .inherit_done
+
+.Speed
+	call GetSpeedIV
+	ld h, a
+	pop de
+	jr .set_split_egg_iv
+
+.HP
+	call GetHPIV
+	ld h, a
+	pop de
+	inc de
+	inc de
+.set_split_egg_iv
+	ld a, [de]
+	and %00011111
+	ld l, a
+	ld a, h
+	and %11000
+	rla
+	rla
+	or l
+	ld [de], a
+	inc de
+	ld a, [de]
+	and %00011111
+	ld l, a
+	ld a, h
+	and %00111
+	swap a
+	rla
+	or l
+	ld [de], a
+.inherit_done
 	pop hl
 	pop de
 .cant_inherit_this_stat
