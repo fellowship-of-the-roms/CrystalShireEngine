@@ -157,13 +157,24 @@ CaughtAskNicknameText:
 SetCaughtData:
 	ld a, [wPartyCount]
 	dec a
-	ld hl, wPartyMon1CaughtLevel
+	ld hl, wPartyMon1CaughtData
 	call GetPartyLocation
 SetBoxmonOrEggmonCaughtData:
 	ld a, [wTimeOfDay]
 	inc a
 	rrca
 	rrca
+	ld b, a
+	ld a, [wCurItem]
+	push hl
+	call GetItemIndexFromID
+	ld a, l
+	pop hl
+	inc a
+	or b
+	ld [hli], a
+	ld a, [wPlayerGender]
+	rrca ; shift bit 0 (PLAYERGENDER_FEMALE_F) to bit 7 (CAUGHT_GENDER_MASK)
 	ld b, a
 	ld a, [wCurPartyLevel]
 	or b
@@ -185,10 +196,6 @@ SetBoxmonOrEggmonCaughtData:
 
 .NotPokecenter2F:
 	call GetWorldMapLocation
-	ld b, a
-	ld a, [wPlayerGender]
-	rrca ; shift bit 0 (PLAYERGENDER_FEMALE_F) to bit 7 (CAUGHT_GENDER_MASK)
-	or b
 	ld [hl], a
 	ret
 

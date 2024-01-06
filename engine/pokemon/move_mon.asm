@@ -235,9 +235,6 @@ endr
 	inc de
 	inc de
 
-	; Skip extra byte
-	inc de
-
 	; Initialize PP.
 	push hl
 	push de
@@ -259,10 +256,13 @@ endr
 	; PokerusStatus
 	ld [de], a
 	inc de
-	; CaughtData/CaughtTime/CaughtLevel
+	; CaughtData/CaughtTime/CaughtBall
 	ld [de], a
 	inc de
-	; CaughtGender/CaughtLocation
+	; CaughtGender/CaughtLevel
+	ld [de], a
+	inc de
+	; CaughtLocation
 	ld [de], a
 	inc de
 
@@ -316,9 +316,6 @@ endr
 	ld [de], a
 	inc de
 
-	; Skip extra byte
-	inc de
-
 	push hl
 	ld hl, wEnemyMonPP
 	ld b, NUM_MOVES
@@ -339,10 +336,13 @@ endr
 	; PokerusStatus
 	ld [de], a
 	inc de
-	; CaughtData/CaughtTime/CaughtLevel
+	; CaughtData/CaughtTime/CaughtBall
 	ld [de], a
 	inc de
-	; CaughtGender/CaughtLocation
+	; CaughtGender/CaughtLevel
+	ld [de], a
+	inc de
+	; CaughtLocation
 	ld [de], a
 	inc de
 
@@ -782,7 +782,7 @@ SendMonIntoBox:
 	jr nz, .loop2
 
 	ld hl, wEnemyMonIVs
-	ld b, MON_HAPPINESS - MON_IVS ; IVs, Personality, extra byte, and PP ; wEnemyMonHappiness - wEnemyMonIVs
+	ld b, MON_HAPPINESS - MON_IVS ; IVs, Personality, and PP ; wEnemyMonHappiness - wEnemyMonIVs
 .loop3
 	ld a, [hli]
 	ld [de], a
@@ -794,6 +794,8 @@ SendMonIntoBox:
 	ld [de], a
 	inc de
 	xor a
+	ld [de], a
+	inc de
 	ld [de], a
 	inc de
 	ld [de], a
@@ -1370,6 +1372,9 @@ GivePoke::
 	farcall UpdateStorageBoxMonFromTemp
 
 .done
+	ld hl, POKE_BALL ; given mon's use POKE_BALL for MON_CAUGHTBALL
+	call GetItemIDFromIndex
+	ld [wCurItem], a
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
 	ld [wTempEnemyMonSpecies], a

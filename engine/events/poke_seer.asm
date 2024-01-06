@@ -86,11 +86,17 @@ ReadCaughtData:
 	ld a, MON_CAUGHTDATA
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [wSeerCaughtData], a
-	ld a, [hld]
+	ld [wSeerCaughtTime], a
+	ld a, [hli]
 	ld [wSeerCaughtGender], a
+	ld a, [hld]
+	ld [wSeerCaughtLocation], a
+	or [hl]
+	jr nz, .ok
+	dec hl
 	or [hl]
 	jr z, .error
+.ok
 
 	ld a, SEERACTION_TRADED
 	ld [wSeerAction], a
@@ -103,7 +109,7 @@ ReadCaughtData:
 
 	inc hl
 	ld a, [wPlayerID + 1]
-	; cp [hl]
+	cp [hl]
 	jr nz, .traded
 
 	ld a, SEERACTION_MET
@@ -139,8 +145,7 @@ GetCaughtLevel:
 	rst ByteFill
 
 	; caught level
-	; Limited to between 1 and 63 since it's a 6-bit quantity.
-	ld a, [wSeerCaughtData]
+	ld a, [wSeerCaughtLevel]
 	and CAUGHT_LEVEL_MASK
 	jr z, .unknown
 	cp CAUGHT_EGG_LEVEL ; egg marker value
@@ -164,7 +169,7 @@ GetCaughtLevel:
 	db "???@"
 
 GetCaughtTime:
-	ld a, [wSeerCaughtData]
+	ld a, [wSeerCaughtTime]
 	and CAUGHT_TIME_MASK
 	jr z, .none
 
@@ -198,8 +203,8 @@ UnknownCaughtData:
 	db "Unknown@"
 
 GetCaughtLocation:
-	ld a, [wSeerCaughtGender]
-	and CAUGHT_LOCATION_MASK
+	ld a, [wSeerCaughtLocation]
+	and a
 	jr z, .Unknown
 	cp LANDMARK_EVENT
 	jr z, .event
@@ -208,14 +213,14 @@ GetCaughtLocation:
 	ld e, a
 	farcall GetLandmarkName
 	ld hl, wStringBuffer1
-	ld de, wSeerCaughtLocation
+	ld de, wSeerCaughtLocationString
 	ld bc, 17
 	rst CopyBytes
 	and a
 	ret
 
 .Unknown:
-	ld de, wSeerCaughtLocation
+	ld de, wSeerCaughtLocationString
 	jr UnknownCaughtData
 
 .event
@@ -365,14 +370,17 @@ SeerImpressedText:
 	text_end
 
 GetCaughtGender:
-	ld hl, MON_CAUGHTGENDER
+	ld hl, MON_CAUGHTLOCATION
 	add hl, bc
 
 	ld a, [hl]
-	and CAUGHT_LOCATION_MASK
+	and a
 	jr z, .genderless
 	cp LANDMARK_EVENT
 	jr z, .genderless
+
+	ld hl, MON_CAUGHTGENDER
+	add hl, bc
 
 	ld a, [hl]
 	and CAUGHT_GENDER_MASK

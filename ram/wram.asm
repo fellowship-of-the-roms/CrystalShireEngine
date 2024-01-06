@@ -1673,14 +1673,15 @@ SECTION UNION "Miscellaneous WRAM 1", WRAMX
 ; poke seer
 wSeerAction:: db
 wSeerNickname:: ds MON_NAME_LENGTH
-wSeerCaughtLocation:: ds 17
+wSeerCaughtLocationString:: ds 17
 wSeerTimeOfDay:: ds NAME_LENGTH
 wSeerOT:: ds NAME_LENGTH
 wSeerOTGrammar:: db
 wSeerCaughtLevelString:: ds 4
+wSeerCaughtTime:: db
+wSeerCaughtGender::
 wSeerCaughtLevel:: db
-wSeerCaughtData:: db
-wSeerCaughtGender:: db
+wSeerCaughtLocation:: db
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX

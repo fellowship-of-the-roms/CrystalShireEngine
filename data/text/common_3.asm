@@ -164,7 +164,7 @@ _SeerNameLocationText::
 	text_ram wSeerNickname
 	text " here:"
 	cont "@"
-	text_ram wSeerCaughtLocation
+	text_ram wSeerCaughtLocationString
 	text "!"
 	prompt
 
@@ -191,7 +191,7 @@ _SeerTradeText::
 	cont "in a trade?"
 
 	para "@"
-	text_ram wSeerCaughtLocation
+	text_ram wSeerCaughtLocationString
 	text_start
 	line "was where @"
 	text_ram wSeerOT

@@ -26,14 +26,14 @@ MACRO box_struct
 \1IsEgg::
 \1ExtraBit::
 \1Form::           db
-\1Padding::        db
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
 \1CaughtTime::
-\1CaughtLevel::    db
+\1CaughtBall::     db
 \1CaughtGender::
+\1CaughtLevel::    db
 \1CaughtLocation:: db
 \1Level::          db
 \1BoxEnd::
@@ -61,15 +61,15 @@ MACRO savemon_struct
 \1IsEgg::
 \1ExtraBit::
 \1Form::           db
-\1Padding::        db
 \1MovesHigh::
 \1PPUps::          ds NUM_MOVES
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
 \1CaughtTime::
-\1CaughtLevel::    db
+\1CaughtBall::     db
 \1CaughtGender::
+\1CaughtLevel::    db
 \1CaughtLocation:: db
 \1Level::          db
 \1SpeciesHigh::    db
@@ -154,7 +154,6 @@ MACRO battle_struct
 \1IsEgg::
 \1ExtraBit::
 \1Form::        db
-\1Padding::     db
 \1PP::          ds NUM_MOVES
 \1Happiness::   db
 \1Level::       db
