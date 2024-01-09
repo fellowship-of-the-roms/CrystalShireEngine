@@ -51,9 +51,10 @@ SwapHLDE::
 	ret
 
 SECTION "rst38", ROM0[$0038]
-	rst $38
 
-; Game Boy hardware interrupts
+GetScriptByte::
+	jmp GetScriptByte
+
 
 SECTION "vblank", ROM0[$0040]
 	jmp VBlank

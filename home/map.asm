@@ -896,7 +896,7 @@ GetMovementData::
 	rst Bankswitch
 	ret
 
-GetScriptByte::
+_GetScriptByte::
 ; Return byte at wScriptBank:wScriptPos in a.
 
 	push hl
