@@ -1,5 +1,4 @@
 	db "FLYCATCHER@" ; species name
-	dw 507, 340 ; height, weight
 
 	db   "Once ingested into"
 	next "this #MON's"

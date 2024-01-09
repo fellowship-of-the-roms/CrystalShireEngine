@@ -1,5 +1,4 @@
 	db "SUPERPOWER@" ; species name
-	dw 411, 1550 ; height, weight
 
 	db   "This tough #MON"
 	next "always stays in"

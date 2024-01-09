@@ -1,5 +1,4 @@
 	db "TADPOLE@" ; species name
-	dw 303, 440 ; height, weight
 
 	db   "Though it is"
 	next "skilled at walk-"

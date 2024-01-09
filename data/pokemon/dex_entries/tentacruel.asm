@@ -1,5 +1,4 @@
 	db "JELLYFISH@" ; species name
-	dw 503, 1210 ; height, weight
 
 	db   "When its 80 feel-"
 	next "ers absorb water,"

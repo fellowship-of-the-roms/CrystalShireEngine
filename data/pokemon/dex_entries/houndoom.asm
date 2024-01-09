@@ -1,5 +1,4 @@
 	db "DARK@" ; species name
-	dw 407, 770 ; height, weight
 
 	db   "The pungent-"
 	next "smelling flame"

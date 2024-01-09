@@ -1,5 +1,4 @@
 	db "ARMOR BIRD@" ; species name
-	dw 507, 1110 ; height, weight
 
 	db   "The feathers that"
 	next "it sheds are very"

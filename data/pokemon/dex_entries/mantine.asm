@@ -1,5 +1,4 @@
 	db "KITE@" ; species name
-	dw 611, 4850 ; height, weight
 
 	db   "It swims along"
 	next "freely, eating"

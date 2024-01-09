@@ -1,5 +1,4 @@
 	db "DRILL@" ; species name
-	dw 603, 2650 ; height, weight
 
 	db   "By lightly spin-"
 	next "ning its drill-"

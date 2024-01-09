@@ -1,5 +1,4 @@
 	db "GOLDFISH@" ; species name
-	dw 403, 860 ; height, weight
 
 	db   "When autumn comes,"
 	next "the males patrol"
