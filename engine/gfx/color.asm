@@ -1049,11 +1049,11 @@ LoadMapPals:
 	ld hl, wOBPals1
 	ld bc, 8 palettes
 	ld a, $ff
-	call ByteFill
+	rst ByteFill
 	ld hl, wOBPals2
 	ld bc, 8 palettes
 	ld a, $ff
-	call ByteFill
+	rst ByteFill
 	pop af
 	ldh [rSVBK], a
 	farcall ClearSavedObjPals
