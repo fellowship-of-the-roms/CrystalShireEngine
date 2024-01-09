@@ -18,7 +18,7 @@ CopySpritePal::
 	jr c, .not_copy_bg
 	ld hl, wBGPals1
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 	jr .got_pal
 
 .not_copy_bg
@@ -42,7 +42,7 @@ CopySpritePal::
 	jr nc, .not_darkness
 	ld hl, DarknessOBPalette
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 	jr .got_pal
 
 .not_darkness
@@ -51,13 +51,13 @@ CopySpritePal::
 	jr c, .time_of_day_pal
 	ld hl, SingleObjectPals - NUM_OW_TIME_OF_DAY_PALS palettes
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 	jr .got_pal
 
 .time_of_day_pal
 	ld hl, MapObjectPals
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 .check_daytimes
 	ld a, [wPalFlags]
 	bit USE_DAYTIME_PAL_F, a
@@ -67,7 +67,7 @@ CopySpritePal::
 .daytime
 	maskbits NUM_DAYTIMES
 	ld bc, NUM_OW_TIME_OF_DAY_PALS palettes
-	call AddNTimes
+	rst AddNTimes
 .got_pal
 	pop de
 	ld bc, 1 palettes

@@ -143,7 +143,7 @@ MarkUsedPal:
 	ld a, c
 	ld bc, 1 palettes
 	ld hl, wOBPals1
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	call CopySpritePal
