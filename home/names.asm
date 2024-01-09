@@ -207,7 +207,7 @@ GetItemName::
 	ld de, wStringBuffer1
 	push de
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 
 .done
