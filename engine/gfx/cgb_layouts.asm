@@ -106,7 +106,7 @@ _CGB_BattleGrayscale:
 	; At this point, a is 1-6. Load a battle object pal.
 	ld hl, BattleObjectPals - 1 palettes
 	ld bc, 1 palettes
-	call AddNTimes
+	rst AddNTimes
 	call FarCopyWRAM
 	pop af
 	ldh [rSVBK], a

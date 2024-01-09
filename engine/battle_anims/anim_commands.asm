@@ -1117,7 +1117,7 @@ SetBattleAnimPal:
 	ld hl, wBGPals1
 	ld bc, 1 palettes
 	ld a, d
-	call AddNTimes
+	rst AddNTimes
 
 	; Get palette to set.
 	call SwapHLDE
@@ -1125,7 +1125,7 @@ SetBattleAnimPal:
 	inc l
 	jr z, .SetDefaultPal
 	ld hl, CustomBattlePalettes
-	call AddNTimes
+	rst AddNTimes
 
 	; Write the palette.
 	call FarCopyColorWRAM

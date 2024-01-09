@@ -56,7 +56,7 @@ Function118180:
 	ld hl, wcd69
 	ld de, s5_a89c
 	ld bc, 22
-	call CopyBytes
+	rst CopyBytes
 
 	ldh a, [rSVBK]
 	push af
@@ -76,7 +76,7 @@ Function118180:
 	ld hl, w3_d202
 	ld de, s5_a8b2
 	ld bc, 150
-	call CopyBytes
+	rst CopyBytes
 .reset_banks
 	pop af
 	ldh [rSVBK], a
