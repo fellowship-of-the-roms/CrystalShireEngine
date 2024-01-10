@@ -6865,3 +6865,5 @@ CheckMoveInList:
 	pop de
 	pop bc
 	ret
+
+INCLUDE "engine/battle/move_effects/low_kick.asm"

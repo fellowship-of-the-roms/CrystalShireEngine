@@ -822,41 +822,41 @@ ParkBallMultiplier:
 	ld b, $ff
 	ret
 
+GetSpeciesWeight::
+	; input: hl = species
+	; output: hl = weight
+	dec hl
+	add hl, hl
+	add hl, hl
+	; skip height
+	inc hl
+	inc hl
+	ld bc, PokemonBodyData
+	add hl, bc
+	ld a, BANK(PokemonBodyData)
+	jmp GetFarWord ; get weight
+
+GetSpeciesHeight::
+	; input: hl = species
+	; output: hl = height
+	dec hl
+	add hl, hl
+	add hl, hl
+	ld bc, PokemonBodyData
+	add hl, bc
+	ld a, BANK(PokemonBodyData)
+	jmp GetFarWord ; get weight
+
 HeavyBallMultiplier:
 ; subtract 20 from catch rate if weight < 102.4 kg
 ; else add 0 to catch rate if weight < 204.8 kg
 ; else add 20 to catch rate if weight < 307.2 kg
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate
+	push bc
 	ld a, [wEnemyMonSpecies]
 	call GetPokemonIndexFromID
-	dec hl
-	ld d, h
-	ld e, l
-	add hl, hl
-	add hl, de
-	ld de, PokedexDataPointerTable
-	add hl, de
-	ld a, BANK(PokedexDataPointerTable)
-	call GetFarByte
-	push af
-	inc hl
-	ld a, BANK(PokedexDataPointerTable)
-	call GetFarWord
-	pop de
-
-.SkipText:
-	ld a, d
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .SkipText
-
-	ld a, d
-	push bc
-	inc hl
-	inc hl
-	call GetFarWord
+	call GetSpeciesWeight
 
 	srl h
 	rr l

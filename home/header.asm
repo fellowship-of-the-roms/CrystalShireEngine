@@ -53,7 +53,7 @@ SwapHLDE::
 SECTION "rst38", ROM0[$0038]
 
 GetScriptByte::
-	jr GetScriptByte
+	jmp _GetScriptByte
 
 
 SECTION "vblank", ROM0[$0040]

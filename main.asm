@@ -682,6 +682,11 @@ SECTION "Fade System", ROMX
 INCLUDE "engine/gfx/fade.asm"
 
 
+SECTION "Pokemon Body Data", ROMX
+
+INCLUDE "data/pokemon/body_data.asm"
+
+
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
 
 ; The end of the ROM is taken up by checksums of the content, apparently used

@@ -54,6 +54,7 @@ ROMX $06
 	"Tileset Data 1"
 	"Prism tilemap copy functions"
 	"Pics 20"
+	"Pokemon Body Data"
 ROMX $07
 	"Roofs"
 	"Tileset Data 2"

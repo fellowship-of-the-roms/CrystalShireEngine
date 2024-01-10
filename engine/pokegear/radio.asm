@@ -661,9 +661,6 @@ PokedexShow2:
 	pop hl
 	pop af
 	call CopyDexEntryPart2
-rept 4
-	inc hl
-endr
 	ld a, l
 	ld [wPokedexShowPointerAddr], a
 	ld a, h

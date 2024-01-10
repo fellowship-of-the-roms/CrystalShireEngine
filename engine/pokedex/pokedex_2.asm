@@ -117,16 +117,15 @@ DisplayDexEntry:
 ; Get the height of the Pokemon.
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	inc hl
 	ld a, b
 	push af
 	push hl
-	call GetFarWord
+	ld a, [wCurSpecies]
+	call GetPokemonIndexFromID
+	farcall GetSpeciesHeight
 	ld d, l
 	ld e, h
 	pop hl
-	inc hl
-	inc hl
 	ld a, d
 	or e
 	jr z, .skip_height
@@ -148,10 +147,10 @@ DisplayDexEntry:
 .skip_height
 	pop af
 	push af
-	inc hl
 	push hl
-	dec hl
-	call GetFarWord
+	ld a, [wCurSpecies]
+	call GetPokemonIndexFromID
+	farcall GetSpeciesWeight
 	ld d, l
 	ld e, h
 	ld a, e
@@ -253,10 +252,6 @@ GetDexEntryPagePointer:
 	inc hl
 	cp "@"
 	jr nz, .loop1
-; skip height and weight
-rept 4
-	inc hl
-endr
 ; if c != 1: skip entry
 	dec c
 	jr z, .done
