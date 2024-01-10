@@ -1288,7 +1288,6 @@ PainSplit:
 	checkobedience
 	usedmovetext
 	doturn
-	checkhit
 	painsplit
 	endmove
 
