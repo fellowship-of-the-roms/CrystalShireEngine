@@ -1131,7 +1131,6 @@ Mimic:
 	checkobedience
 	usedmovetext
 	doturn
-	checkhit
 	mimic
 	endmove
 
