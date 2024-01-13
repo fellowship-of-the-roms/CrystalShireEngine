@@ -655,7 +655,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	add hl, bc
 	ld a, [hl]
 	ld d, $18
-	call Cosine
+	farcall Cosine
 	sub $18
 	sra a
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -665,7 +665,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	add hl, bc
 	ld a, [hl]
 	ld d, $18
-	call Sine
+	farcall Sine
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
