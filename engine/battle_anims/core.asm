@@ -89,7 +89,7 @@ BattleAnimOAMUpdate:
 	pop af
 
 	push bc
-	farcall GetBattleAnimOAMPointer
+	call GetBattleAnimOAMPointer
 	ld a, [wBattleAnimTempTileID]
 	add [hl] ; tile offset
 	ld [wBattleAnimTempTileID], a
