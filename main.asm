@@ -492,6 +492,11 @@ INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
 
 
+SECTION "Move Animation Framesets", ROMX
+
+INCLUDE "engine/battle_anims/framesets.asm"
+
+
 SECTION "Title", ROMX
 
 INCLUDE "engine/movie/title.asm"
