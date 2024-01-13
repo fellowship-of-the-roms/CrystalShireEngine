@@ -656,7 +656,7 @@ endr
 	ld de, vTiles0 tile BATTLEANIM_BASE_TILE
 	add hl, de
 	ld a, [wBattleAnimByte]
-	farcall LoadBattleAnimGFX
+	call LoadBattleAnimGFX
 	ld a, [wBattleAnimGFXTempTileID]
 	add c
 	ld [wBattleAnimGFXTempTileID], a
