@@ -21,7 +21,7 @@
 	const POTION       ; 000D
 	const ESCAPE_ROPE  ; 000E
 	const REPEL        ; 000F
-	const MAX_ELIXER   ; 0010
+	const MAX_ELIXIR   ; 0010
 	const FIRE_STONE   ; 0011
 	const THUNDERSTONE ; 0012
 	const WATER_STONE  ; 0013
@@ -60,7 +60,7 @@
 	const PP_UP        ; 0034
 	const ETHER        ; 0035
 	const MAX_ETHER    ; 0036
-	const ELIXER       ; 0037
+	const ELIXIR       ; 0037
 	const MOOMOO_MILK  ; 0038
 	const QUICK_CLAW   ; 0039
 	const GOLD_LEAF    ; 003A
@@ -76,7 +76,7 @@
 	const CLEANSE_TAG  ; 0044
 	const MYSTIC_WATER ; 0045
 	const TWISTEDSPOON ; 0046
-	const BLACKBELT_I  ; 0047
+	const BLACK_BELT_I ; 0047
 	const ITEM_64      ; 0048
 	const BLACKGLASSES ; 0049
 	const SLOWPOKETAIL ; 004A

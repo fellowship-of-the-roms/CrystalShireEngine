@@ -12,7 +12,7 @@ TinTower8FNugget:
 	itemball NUGGET
 
 TinTower8FMaxElixer:
-	itemball MAX_ELIXER
+	itemball MAX_ELIXIR
 
 TinTower8FFullRestore:
 	itemball FULL_RESTORE

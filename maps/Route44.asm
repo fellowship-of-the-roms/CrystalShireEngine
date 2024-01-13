@@ -316,7 +316,7 @@ Route44MaxRepel:
 	itemball MAX_REPEL
 
 Route44HiddenElixer:
-	hiddenitem ELIXER, EVENT_ROUTE_44_HIDDEN_ELIXER
+	hiddenitem ELIXIR, EVENT_ROUTE_44_HIDDEN_ELIXER
 
 FisherWilton1SeenText:
 	text "Aack! You made me"

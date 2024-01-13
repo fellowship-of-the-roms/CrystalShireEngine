@@ -298,7 +298,7 @@ Route45Revive:
 	itemball REVIVE
 
 Route45Elixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 Route45MaxPotion:
 	itemball MAX_POTION

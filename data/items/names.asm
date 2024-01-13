@@ -15,7 +15,7 @@ ItemNames::
 	li "POTION"       ; 000D
 	li "ESCAPE ROPE"  ; 000E
 	li "REPEL"        ; 000F
-	li "MAX ELIXER"   ; 0010
+	li "MAX ELIXIR"   ; 0010
 	li "FIRE STONE"   ; 0011
 	li "THUNDERSTONE" ; 0012
 	li "WATER STONE"  ; 0013
@@ -49,12 +49,12 @@ ItemNames::
 	li "X SPEED"      ; 002F
 	li "X SPECIAL"    ; 0030
 	li "TERU-SAMA"    ; 0031
-	li "EXP.SHARE"    ; 0032
+	li "EXP. SHARE"   ; 0032
 	li "SILVER LEAF"  ; 0033
 	li "PP UP"        ; 0034
 	li "ETHER"        ; 0035
 	li "MAX ETHER"    ; 0036
-	li "ELIXER"       ; 0037
+	li "ELIXIR"       ; 0037
 	li "MOOMOO MILK"  ; 0038
 	li "QUICK CLAW"   ; 0039
 	li "GOLD LEAF"    ; 003A
@@ -70,7 +70,7 @@ ItemNames::
 	li "CLEANSE TAG"  ; 0044
 	li "MYSTIC WATER" ; 0045
 	li "TWISTEDSPOON" ; 0046
-	li "BLACKBELT"    ; 0047
+	li "BLACK BELT"   ; 0047
 	li "TERU-SAMA"    ; 0048
 	li "BLACKGLASSES" ; 0049
 	li "SLOWPOKETAIL" ; 004A

@@ -36,7 +36,7 @@ MountMortar2FInsideDragonScale:
 	itemball DRAGON_SCALE
 
 MountMortar2FInsideElixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 MountMortar2FInsideEscapeRope:
 	itemball ESCAPE_ROPE

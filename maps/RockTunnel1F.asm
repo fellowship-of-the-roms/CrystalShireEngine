@@ -8,7 +8,7 @@ RockTunnel1F_MapScripts:
 	def_callbacks
 
 RockTunnel1FElixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 RockTunnel1FTMSteelWing:
 	itemball TM_STEEL_WING

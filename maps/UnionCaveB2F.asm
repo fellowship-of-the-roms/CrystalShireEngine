@@ -69,7 +69,7 @@ TrainerCooltrainerfEmma:
 	end
 
 UnionCaveB2FElixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 UnionCaveB2FHyperPotion:
 	itemball HYPER_POTION

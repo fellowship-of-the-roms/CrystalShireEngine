@@ -62,7 +62,7 @@ Route2Carbos:
 	itemball CARBOS
 
 Route2Elixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 Route2FruitTree:
 	fruittree FRUITTREE_ROUTE_2

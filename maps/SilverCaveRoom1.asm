@@ -10,7 +10,7 @@ SilverCaveRoom1_MapScripts:
 	def_callbacks
 
 SilverCaveRoom1MaxElixer:
-	itemball MAX_ELIXER
+	itemball MAX_ELIXIR
 
 SilverCaveRoom1Protein:
 	itemball PROTEIN

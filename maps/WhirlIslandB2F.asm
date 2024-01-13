@@ -15,7 +15,7 @@ WhirlIslandB2FMaxRevive:
 	itemball MAX_REVIVE
 
 WhirlIslandB2FMaxElixer:
-	itemball MAX_ELIXER
+	itemball MAX_ELIXIR
 
 WhirlIslandB2F_MapEvents:
 	db 0, 0 ; filler

@@ -250,7 +250,7 @@ Route26FruitTree:
 	fruittree FRUITTREE_ROUTE_26
 
 Route26MaxElixer:
-	itemball MAX_ELIXER
+	itemball MAX_ELIXIR
 
 CooltrainermJakeSeenText:
 	text "I'm making my"

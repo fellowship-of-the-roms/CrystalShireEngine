@@ -63,7 +63,7 @@ Route17HiddenMaxEther:
 	hiddenitem MAX_ETHER, EVENT_ROUTE_17_HIDDEN_MAX_ETHER
 
 Route17HiddenMaxElixer:
-	hiddenitem MAX_ELIXER, EVENT_ROUTE_17_HIDDEN_MAX_ELIXER
+	hiddenitem MAX_ELIXIR, EVENT_ROUTE_17_HIDDEN_MAX_ELIXER
 
 BikerRileySeenText:
 	text "Hey, you! You're"

@@ -46,7 +46,7 @@ ItemEffects1:
 	dw RestoreHPEffect     ; POTION
 	dw EscapeRopeEffect    ; ESCAPE_ROPE
 	dw RepelEffect         ; REPEL
-	dw RestorePPEffect     ; MAX_ELIXER
+	dw RestorePPEffect     ; MAX_ELIXIR
 	dw EvoStoneEffect      ; FIRE_STONE
 	dw EvoStoneEffect      ; THUNDERSTONE
 	dw EvoStoneEffect      ; WATER_STONE
@@ -85,7 +85,7 @@ ItemEffects1:
 	dw RestorePPEffect     ; PP_UP
 	dw RestorePPEffect     ; ETHER
 	dw RestorePPEffect     ; MAX_ETHER
-	dw RestorePPEffect     ; ELIXER
+	dw RestorePPEffect     ; ELIXIR
 	dw RestoreHPEffect     ; MOOMOO_MILK
 	dw NoEffect            ; QUICK_CLAW
 	dw NoEffect            ; GOLD_LEAF
@@ -101,7 +101,7 @@ ItemEffects1:
 	dw NoEffect            ; CLEANSE_TAG
 	dw NoEffect            ; MYSTIC_WATER
 	dw NoEffect            ; TWISTEDSPOON
-	dw NoEffect            ; BLACKBELT_I
+	dw NoEffect            ; BLACK_BELT_I
 	dw NoEffect            ; ITEM_64
 	dw NoEffect            ; BLACKGLASSES
 	dw NoEffect            ; SLOWPOKETAIL
@@ -2387,9 +2387,9 @@ RestorePPEffect:
 .loop2
 	ld a, [wTempRestorePPItem]
 	call GetItemIndexFromID
-	cphl16 MAX_ELIXER
+	cphl16 MAX_ELIXIR
 	jmp z, Elixer_RestorePPofAllMoves
-	cphl16 ELIXER
+	cphl16 ELIXIR
 	jmp z, Elixer_RestorePPofAllMoves
 
 	ld hl, RaiseThePPOfWhichMoveText
@@ -2586,7 +2586,7 @@ RestorePP:
 
 	ld a, [wTempRestorePPItem]
 	call GetItemIndexFromID
-	cphl16 MAX_ELIXER
+	cphl16 MAX_ELIXIR
 	jr z, .restore_all
 	cphl16 MAX_ETHER
 	jr z, .restore_all

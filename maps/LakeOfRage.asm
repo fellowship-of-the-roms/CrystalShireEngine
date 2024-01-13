@@ -202,7 +202,7 @@ WesleyScript:
 .MetWesley:
 	writetext WesleyGivesGiftText
 	promptbutton
-	verbosegiveitem BLACKBELT_I
+	verbosegiveitem BLACK_BELT_I
 	iffalse WesleyDoneScript
 	setevent EVENT_GOT_BLACKBELT_FROM_WESLEY
 	writetext WesleyGaveGiftText
@@ -224,7 +224,7 @@ WesleyNotWednesdayScript:
 	end
 
 LakeOfRageElixer:
-	itemball ELIXER
+	itemball ELIXIR
 
 LakeOfRageTMDetect:
 	itemball TM_DETECT

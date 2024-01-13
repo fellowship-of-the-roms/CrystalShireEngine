@@ -68,7 +68,7 @@ Route12Nugget:
 	itemball NUGGET
 
 Route12HiddenElixer:
-	hiddenitem ELIXER, EVENT_ROUTE_12_HIDDEN_ELIXER
+	hiddenitem ELIXIR, EVENT_ROUTE_12_HIDDEN_ELIXER
 
 FisherMartinSeenText:
 	text "Patience is the"
