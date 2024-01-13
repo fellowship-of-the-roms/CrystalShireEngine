@@ -100,6 +100,7 @@ DoBattleAnimFrame:
 	dba BattleAnimFunc_Cotton
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
+PUSHS ; push the current section onto the stack.
 
 ; The functions in the following section require the
 ; BattleAnimFunc_ThrowFromUserToTarget Function as a
@@ -4112,3 +4113,5 @@ BattleAnimFunc_AncientPower:
 
 .done
 	jmp DeinitBattleAnimation
+
+POPS ; restore the original section from the stack
