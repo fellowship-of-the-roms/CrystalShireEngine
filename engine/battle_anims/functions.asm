@@ -105,7 +105,7 @@ DoBattleAnimFrame:
 ; BattleAnimFunc_ThrowFromUserToTarget Function as a
 ; dependency, so please keep them in the same section.
 
-; SECTION "BattleAnimFunc_ThrowFromUserToTarget", ROMX
+SECTION "BattleAnimFunc_ThrowFromUserToTarget", ROMX
 
 BattleAnimFunc_ThrowFromUserToTarget:
 	; If x coord at $88 or beyond, abort.
@@ -297,7 +297,7 @@ GetBallAnimPal:
 ; BattleAnimFunc_MoveInCircle Function as a dependency,
 ; so please keep them in the same section.
 
-; SECTION "BattleAnimFunc_MoveInCircle", ROMX
+SECTION "BattleAnimFunc_MoveInCircle", ROMX
 
 BattleAnimFunc_MoveInCircle:
 ; Slow circular motion. Examples: Thundershock, Flamethrower
@@ -362,7 +362,7 @@ BattleAnimFunc_RazorWind:
 ; BattleAnimFunc_SpiralDescent Function as a dependency,
 ; so please keep them in the same section.
 
-; SECTION "BattleAnimFunc_SpiralDescent", ROMX
+SECTION "BattleAnimFunc_SpiralDescent", ROMX
 
 BattleAnimFunc_SpiralDescent:
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -445,7 +445,7 @@ BattleAnimFunc_PoisonGas:
 ; to reference another function, please place them within the
 ; same section.
 
-; SECTION "BattleAnimFunc_Null", ROMX
+SECTION "BattleAnimFunc_Null", ROMX
 
 BattleAnimFunc_Null:
 	call BattleAnim_AnonJumptable
@@ -455,7 +455,7 @@ BattleAnimFunc_Null:
 .one
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_MoveWaveToTarget", ROMX
+SECTION "BattleAnimFunc_MoveWaveToTarget", ROMX
 
 BattleAnimFunc_MoveWaveToTarget:
 ; Wave motion from one mon to another. Obj is cleared when it reaches x coord $88. Examples: Shadow Ball, Dragon Rage
@@ -495,7 +495,7 @@ BattleAnimFunc_MoveWaveToTarget:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_MoveFromUserToTarget", ROMX
+SECTION "BattleAnimFunc_MoveFromUserToTarget", ROMX
 
 BattleAnimFunc_MoveFromUserToTarget:
 ; Moves object diagonally at a ~30° angle towards opponent and stops when it reaches x coord $84. Obj Param changes the speed
@@ -517,7 +517,7 @@ BattleAnimFunc_MoveFromUserToTarget:
 	ld a, [hl]
 	jmp BattleAnim_StepToTarget
 
-; SECTION "BattleAnimFunc_MoveFromUserToTargetAndDisappear", ROMX
+SECTION "BattleAnimFunc_MoveFromUserToTargetAndDisappear", ROMX
 
 BattleAnimFunc_MoveFromUserToTargetAndDisappear:
 ; Same as BattleAnimFunc_01 but objs are cleared when they reach x coord $84
@@ -534,7 +534,7 @@ BattleAnimFunc_MoveFromUserToTargetAndDisappear:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Ember", ROMX
+SECTION "BattleAnimFunc_Ember", ROMX
 
 BattleAnimFunc_Ember:
 	call BattleAnim_AnonJumptable
@@ -574,7 +574,7 @@ BattleAnimFunc_Ember:
 	ld a, BATTLE_ANIM_FRAMESET_FLAMETHROWER
 	jmp ReinitBattleAnimFrameset
 
-; SECTION "BattleAnimFunc_Drop", ROMX
+SECTION "BattleAnimFunc_Drop", ROMX
 
 BattleAnimFunc_Drop:
 ; Drops obj. The Obj Param dictates how fast it is (lower value is faster) and how long it stays bouncing (lower value is longer). Example: Rock Slide
@@ -623,7 +623,7 @@ BattleAnimFunc_Drop:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_MoveFromUserToTargetSpinAround", ROMX
+SECTION "BattleAnimFunc_MoveFromUserToTargetSpinAround", ROMX
 
 BattleAnimFunc_MoveFromUserToTargetSpinAround:
 ; Object moves from user to target target and spins around it once. Example: Fire Spin, Swift
@@ -728,7 +728,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	jr nz, .loop
 	ret
 
-; SECTION "BattleAnimFunc_Shake", ROMX
+SECTION "BattleAnimFunc_Shake", ROMX
 
 BattleAnimFunc_Shake:
 ; Object switches position side to side. Obj Param defines how far to move it. Example: Dynamic Punch
@@ -779,7 +779,7 @@ BattleAnimFunc_Shake:
 .two
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_FireBlast", ROMX
+SECTION "BattleAnimFunc_FireBlast", ROMX
 
 BattleAnimFunc_FireBlast:
 	call BattleAnim_AnonJumptable
@@ -879,7 +879,7 @@ BattleAnimFunc_FireBlast:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_RazorLeaf", ROMX
+SECTION "BattleAnimFunc_RazorLeaf", ROMX
 
 BattleAnimFunc_RazorLeaf:
 	call BattleAnim_AnonJumptable
@@ -1022,7 +1022,7 @@ BattleAnimFunc_RazorLeaf:
 	ld a, $8
 	jmp BattleAnim_StepToTarget
 
-; SECTION "BattleAnimFunc_RockSmash", ROMX
+SECTION "BattleAnimFunc_RockSmash", ROMX
 
 BattleAnimFunc_RockSmash:
 ; Object moves at an arc
@@ -1086,7 +1086,7 @@ BattleAnimFunc_RockSmash:
 	ld [hl], e
 	ret
 
-; SECTION "BattleAnimFunc_Bubble", ROMX
+SECTION "BattleAnimFunc_Bubble", ROMX
 
 BattleAnimFunc_Bubble:
 	call BattleAnim_AnonJumptable
@@ -1171,7 +1171,7 @@ BattleAnimFunc_Bubble:
 	ld [hl], d
 	ret
 
-; SECTION "BattleAnimFunc_Surf", ROMX
+SECTION "BattleAnimFunc_Surf", ROMX
 
 BattleAnimFunc_Surf:
 	call BattleAnim_AnonJumptable
@@ -1260,7 +1260,7 @@ BattleAnimFunc_Surf:
 	ldh [hLYOverrideStart], a
 	ret
 
-; SECTION "BattleAnimFunc_Sing", ROMX
+SECTION "BattleAnimFunc_Sing", ROMX
 
 BattleAnimFunc_Sing:
 	call BattleAnim_AnonJumptable
@@ -1295,7 +1295,7 @@ BattleAnimFunc_Sing:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_WaterGun", ROMX
+SECTION "BattleAnimFunc_WaterGun", ROMX
 
 BattleAnimFunc_WaterGun:
 	call BattleAnim_AnonJumptable
@@ -1355,7 +1355,7 @@ BattleAnimFunc_WaterGun:
 	ld a, BATTLE_ANIM_FRAMESET_WATER_GUN_3
 	jmp ReinitBattleAnimFrameset
 
-; SECTION "BattleAnimFunc_Powder", ROMX
+SECTION "BattleAnimFunc_Powder", ROMX
 
 BattleAnimFunc_Powder:
 ; Obj moves down and disappears at x coord $38
@@ -1387,7 +1387,7 @@ BattleAnimFunc_Powder:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_Recover", ROMX
+SECTION "BattleAnimFunc_Recover", ROMX
 
 BattleAnimFunc_Recover:
 ; Obj moves in an ever shrinking circle. Obj Param defines initial position in the circle
@@ -1454,7 +1454,7 @@ BattleAnimFunc_Recover:
 	dec [hl]
 	ret
 
-; SECTION "BattleAnimFunc_ThunderWave", ROMX
+SECTION "BattleAnimFunc_ThunderWave", ROMX
 
 BattleAnimFunc_ThunderWave:
 	call BattleAnim_AnonJumptable
@@ -1472,7 +1472,7 @@ BattleAnimFunc_ThunderWave:
 .three
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Clamp_Encore", ROMX
+SECTION "BattleAnimFunc_Clamp_Encore", ROMX
 
 BattleAnimFunc_Clamp_Encore:
 ; Claps two objects together, twice. Also used by Encore
@@ -1560,7 +1560,7 @@ BattleAnimFunc_Clamp_Encore:
 	ld [hl], $1
 	ret
 
-; SECTION "BattleAnimFunc_Bite", ROMX
+SECTION "BattleAnimFunc_Bite", ROMX
 
 BattleAnimFunc_Bite:
 ; Claps two objects together (vertically), twice
@@ -1635,7 +1635,7 @@ BattleAnimFunc_Bite:
 	ld [hl], $1
 	ret
 
-; SECTION "BattleAnimFunc_SolarBeam", ROMX
+SECTION "BattleAnimFunc_SolarBeam", ROMX
 
 BattleAnimFunc_SolarBeam:
 ; Solar Beam charge up animation
@@ -1694,7 +1694,7 @@ BattleAnimFunc_SolarBeam:
 .zero_radius
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Gust", ROMX
+SECTION "BattleAnimFunc_Gust", ROMX
 
 BattleAnimFunc_Gust:
 	call BattleAnim_AnonJumptable
@@ -1816,7 +1816,7 @@ BattleAnimFunc_Gust:
 .GustOffsets:
 	db 8, 6, 5, 4, 5, 6, 8, 12, 16
 
-; SECTION "BattleAnimFunc_Absorb", ROMX
+SECTION "BattleAnimFunc_Absorb", ROMX
 
 BattleAnimFunc_Absorb:
 ; Moves object from target to user and disappears when reaches x coord $30. Example: Absorb, Mega Drain, Leech Seed status
@@ -1845,7 +1845,7 @@ BattleAnimFunc_Absorb:
 	jr nz, .loop
 	ret
 
-; SECTION "BattleAnimFunc_Wrap", ROMX
+SECTION "BattleAnimFunc_Wrap", ROMX
 
 BattleAnimFunc_Wrap:
 ; Plays out object frameset. Use anim_incobj to move to next frameset
@@ -1868,7 +1868,7 @@ BattleAnimFunc_Wrap:
 	ld [hl], $8
 	ret
 
-; SECTION "BattleAnimFunc_LeechSeed", ROMX
+SECTION "BattleAnimFunc_LeechSeed", ROMX
 
 BattleAnimFunc_LeechSeed:
 	call BattleAnim_AnonJumptable
@@ -1909,7 +1909,7 @@ BattleAnimFunc_LeechSeed:
 	ld a, BATTLE_ANIM_FRAMESET_LEECH_SEED_3
 	jmp ReinitBattleAnimFrameset
 
-; SECTION "BattleAnimFunc_Spikes", ROMX
+SECTION "BattleAnimFunc_Spikes", ROMX
 
 BattleAnimFunc_Spikes:
 ; Object is thrown at target. After $20 frames it stops and waits another $20 frames then disappear
@@ -1934,7 +1934,7 @@ BattleAnimFunc_Spikes:
 	jmp nc, BattleAnim_StepThrownToTarget
 	jmp BattleAnim_IncAnonJumptableIndex
 
-; SECTION "BattleAnimFunc_Kick", ROMX
+SECTION "BattleAnimFunc_Kick", ROMX
 
 BattleAnimFunc_Kick:
 ; Uses anim_setobj for different kick types
@@ -2017,7 +2017,7 @@ BattleAnimFunc_Kick:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_Egg", ROMX
+SECTION "BattleAnimFunc_Egg", ROMX
 
 BattleAnimFunc_Egg:
 ; Used by Egg Bomb and Softboiled
@@ -2228,7 +2228,7 @@ BattleAnimFunc_Egg:
 	ld [hl], a
 	jmp BattleAnim_IncAnonJumptableIndex
 
-; SECTION "BattleAnimFunc_MoveUp", ROMX
+SECTION "BattleAnimFunc_MoveUp", ROMX
 
 BattleAnimFunc_MoveUp:
 ; Moves object up for 41 frames
@@ -2252,7 +2252,7 @@ BattleAnimFunc_MoveUp:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_Sound", ROMX
+SECTION "BattleAnimFunc_Sound", ROMX
 
 BattleAnimFunc_Sound:
 ; Moves object back and forth in one of three angles using a sine behavior and disappear after 8 frames. Used in Growl, Snore and Kinesis
@@ -2331,7 +2331,7 @@ BattleAnimFunc_Sound:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_ConfuseRay", ROMX
+SECTION "BattleAnimFunc_ConfuseRay", ROMX
 
 BattleAnimFunc_ConfuseRay:
 ; Creates the Confuse Ray object and moves it across the screen until x coord $80
@@ -2402,7 +2402,7 @@ BattleAnimFunc_ConfuseRay:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_Dizzy", ROMX
+SECTION "BattleAnimFunc_Dizzy", ROMX
 
 BattleAnimFunc_Dizzy:
 ; Moves object in a circle where the height is 1/4 the width, with the next frameset from base whether moving left or right. Also used for Nightmare
@@ -2477,7 +2477,7 @@ BattleAnimFunc_Dizzy:
 .got_frameset
 	jmp ReinitBattleAnimFrameset
 
-; SECTION "BattleAnimFunc_Amnesia", ROMX
+SECTION "BattleAnimFunc_Amnesia", ROMX
 
 BattleAnimFunc_Amnesia:
 ; Creates 3 objects based on Obj Param
@@ -2515,7 +2515,7 @@ BattleAnimFunc_Amnesia:
 .AmnesiaOffsets: ; Hardcoded Y Offsets for each Obj Param
 	db $ec, $f8, $00
 
-; SECTION "BattleAnimFunc_FloatUp", ROMX
+SECTION "BattleAnimFunc_FloatUp", ROMX
 
 BattleAnimFunc_FloatUp:
 ; Object moves horizontally in a sine wave, while also moving up. Also used by Charm and the Nightmare status
@@ -2547,7 +2547,7 @@ BattleAnimFunc_FloatUp:
 	ld [hl], e
 	ret
 
-; SECTION "BattleAnimFunc_Dig", ROMX
+SECTION "BattleAnimFunc_Dig", ROMX
 
 BattleAnimFunc_Dig:
 ; Object moves up then down with a wave motion, while also moving away from the user 1 pixel per frame
@@ -2566,7 +2566,7 @@ BattleAnimFunc_Dig:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_String", ROMX
+SECTION "BattleAnimFunc_String", ROMX
 
 BattleAnimFunc_String:
 	call BattleAnim_AnonJumptable
@@ -2589,7 +2589,7 @@ BattleAnimFunc_String:
 	add BATTLE_ANIM_FRAMESET_STRING_SHOT_1 ; BATTLE_ANIM_FRAMESET_STRING_SHOT_2 BATTLE_ANIM_FRAMESET_STRING_SHOT_3
 	jmp ReinitBattleAnimFrameset
 
-; SECTION "BattleAnimFunc_Paralyzed", ROMX
+SECTION "BattleAnimFunc_Paralyzed", ROMX
 
 BattleAnimFunc_Paralyzed:
 ; Also used by Disable
@@ -2654,7 +2654,7 @@ BattleAnimFunc_Paralyzed:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_PetalDance", ROMX
+SECTION "BattleAnimFunc_PetalDance", ROMX
 
 BattleAnimFunc_PetalDance:
 ; Object moves downwards in a spiral around the user. Object disappears at y coord $28
@@ -2697,7 +2697,7 @@ BattleAnimFunc_PetalDance:
 .end
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_SmokeFlameWheel", ROMX
+SECTION "BattleAnimFunc_SmokeFlameWheel", ROMX
 
 BattleAnimFunc_SmokeFlameWheel:
 ; Object spins around target while also moving upward until it disappears at x coord $e8
@@ -2742,7 +2742,7 @@ BattleAnimFunc_SmokeFlameWheel:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_SacredFire", ROMX
+SECTION "BattleAnimFunc_SacredFire", ROMX
 
 BattleAnimFunc_SacredFire:
 ; Moves object in a circle where the height is 1/8 the width, while also moving upward 2 pixels per frame for 24 frames after which it disappears
@@ -2788,7 +2788,7 @@ BattleAnimFunc_SacredFire:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_PresentSmokescreen", ROMX
+SECTION "BattleAnimFunc_PresentSmokescreen", ROMX
 
 BattleAnimFunc_PresentSmokescreen:
 ; Object bounces from user to target and stops at x coord $6c. Uses anim_incobj to clear object
@@ -2846,7 +2846,7 @@ BattleAnimFunc_PresentSmokescreen:
 .two
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Horn", ROMX
+SECTION "BattleAnimFunc_Horn", ROMX
 
 BattleAnimFunc_Horn:
 	call BattleAnim_AnonJumptable
@@ -2912,7 +2912,7 @@ BattleAnimFunc_Horn:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_Needle", ROMX
+SECTION "BattleAnimFunc_Needle", ROMX
 
 BattleAnimFunc_Needle:
 ; Moves object towards target, either in a straight line or arc. Stops at x coord $84
@@ -2964,7 +2964,7 @@ BattleAnimFunc_Needle:
 	ld a, [hl]
 	jmp BattleAnim_StepToTarget
 
-; SECTION "BattleAnimFunc_ThiefPayday", ROMX
+SECTION "BattleAnimFunc_ThiefPayday", ROMX
 
 BattleAnimFunc_ThiefPayday:
 ; Object drops off target and bounces once on the floor
@@ -3019,7 +3019,7 @@ BattleAnimFunc_ThiefPayday:
 	srl [hl]
 	ret
 
-; SECTION "BattleAnimFunc_AbsorbCircle", ROMX
+SECTION "BattleAnimFunc_AbsorbCircle", ROMX
 
 BattleAnimFunc_AbsorbCircle:
 ; A circle of objects that starts at the target and moves to the user. It expands until x coord $5a and then shrinks. Once radius reaches 0, the object disappears. Also used by Mimic and Conversion2
@@ -3081,7 +3081,7 @@ BattleAnimFunc_AbsorbCircle:
 .end
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Conversion", ROMX
+SECTION "BattleAnimFunc_Conversion", ROMX
 
 BattleAnimFunc_Conversion:
 ; A rotating circle of objects centered at a position. It expands for $40 frames and then shrinks. Once radius reaches 0, the object disappears.
@@ -3123,7 +3123,7 @@ BattleAnimFunc_Conversion:
 	ret nz
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_Bonemerang", ROMX
+SECTION "BattleAnimFunc_Bonemerang", ROMX
 
 BattleAnimFunc_Bonemerang:
 ; Boomerang-like movement from user to target
@@ -3167,7 +3167,7 @@ BattleAnimFunc_Bonemerang:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_Shiny", ROMX
+SECTION "BattleAnimFunc_Shiny", ROMX
 
 BattleAnimFunc_Shiny:
 ; Puts object in a circle formation of radius $10. Also used by Flash and Light Screen
@@ -3200,7 +3200,7 @@ BattleAnimFunc_Shiny:
 	ld [hl], $f
 	ret
 
-; SECTION "BattleAnimFunc_SkyAttack", ROMX
+SECTION "BattleAnimFunc_SkyAttack", ROMX
 
 BattleAnimFunc_SkyAttack:
 ; Uses anim_incobj to move to next step
@@ -3281,7 +3281,7 @@ BattleAnimFunc_SkyAttack:
 .SGBPals:
 	db $ff, $ff, $00, $00
 
-; SECTION "BattleAnimFunc_GrowthSwordsDance", ROMX
+SECTION "BattleAnimFunc_GrowthSwordsDance", ROMX
 
 BattleAnimFunc_GrowthSwordsDance:
 ; Moves object in a circle where the height is 1/8 the width, while also moving upward 2 pixels per frame
@@ -3315,7 +3315,7 @@ BattleAnimFunc_GrowthSwordsDance:
 	dec [hl]
 	ret
 
-; SECTION "BattleAnimFunc_StrengthSeismicToss", ROMX
+SECTION "BattleAnimFunc_StrengthSeismicToss", ROMX
 
 BattleAnimFunc_StrengthSeismicToss:
 ; Moves object up for $e0 frames, then shakes it vertically and throws it at the target. Uses anim_incobj to move to final phase
@@ -3390,7 +3390,7 @@ BattleAnimFunc_StrengthSeismicToss:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_SpeedLine", ROMX
+SECTION "BattleAnimFunc_SpeedLine", ROMX
 
 BattleAnimFunc_SpeedLine:
 ; Used in moves where the user disappears for a speed-based attack such as Quick Attack, Mach Punch and Extremespeed
@@ -3423,7 +3423,7 @@ BattleAnimFunc_SpeedLine:
 	dec [hl]
 	ret
 
-; SECTION "BattleAnimFunc_Sludge", ROMX
+SECTION "BattleAnimFunc_Sludge", ROMX
 
 BattleAnimFunc_Sludge:
 ; Object moves upward for $c frames and switches to BATTLE_ANIM_FRAMESET_SLUDGE_BUBBLE_BURST
@@ -3459,7 +3459,7 @@ BattleAnimFunc_Sludge:
 	dec [hl]
 	ret
 
-; SECTION "BattleAnimFunc_MetronomeHand", ROMX
+SECTION "BattleAnimFunc_MetronomeHand", ROMX
 
 BattleAnimFunc_MetronomeHand:
 ; Fast circular motion with an x radius of $8 and y radius of $2
@@ -3482,7 +3482,7 @@ BattleAnimFunc_MetronomeHand:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_MetronomeSparkleSketch", ROMX
+SECTION "BattleAnimFunc_MetronomeSparkleSketch", ROMX
 
 BattleAnimFunc_MetronomeSparkleSketch:
 ; Sideways wave motion while also moving downward until it disappears at y coord $20
@@ -3512,7 +3512,7 @@ BattleAnimFunc_MetronomeSparkleSketch:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_Agility", ROMX
+SECTION "BattleAnimFunc_Agility", ROMX
 
 BattleAnimFunc_Agility:
 ; Object moves sideways at a speed determined by Obj Param. Can use anim_incobj to make it disappear
@@ -3534,7 +3534,7 @@ BattleAnimFunc_Agility:
 .one
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_SafeguardProtect", ROMX
+SECTION "BattleAnimFunc_SafeguardProtect", ROMX
 
 BattleAnimFunc_SafeguardProtect:
 ; Moves object in a circle where the width is 1/2 the height
@@ -3562,7 +3562,7 @@ BattleAnimFunc_SafeguardProtect:
 	inc [hl]
 	ret
 
-; SECTION "BattleAnimFunc_LockOnMindReader", ROMX
+SECTION "BattleAnimFunc_LockOnMindReader", ROMX
 
 BattleAnimFunc_LockOnMindReader:
 ; Moves objects towards a center position
@@ -3631,7 +3631,7 @@ BattleAnimFunc_LockOnMindReader:
 	ret nz
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_HealBellNotes", ROMX
+SECTION "BattleAnimFunc_HealBellNotes", ROMX
 
 BattleAnimFunc_HealBellNotes:
 ; Object moves horizontally in a sine wave, while also moving left every other frame and downwards for $38 frames after which it disappears
@@ -3677,7 +3677,7 @@ BattleAnimFunc_HealBellNotes:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_BatonPass", ROMX
+SECTION "BattleAnimFunc_BatonPass", ROMX
 
 BattleAnimFunc_BatonPass:
 ; Object falls vertically and bounces on the ground
@@ -3711,7 +3711,7 @@ BattleAnimFunc_BatonPass:
 	srl [hl]
 	ret
 
-; SECTION "BattleAnimFunc_EncoreBellyDrum", ROMX
+SECTION "BattleAnimFunc_EncoreBellyDrum", ROMX
 
 BattleAnimFunc_EncoreBellyDrum:
 ; Object moves at an arc for 8 frames and disappears
@@ -3744,7 +3744,7 @@ BattleAnimFunc_EncoreBellyDrum:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_SwaggerMorningSun", ROMX
+SECTION "BattleAnimFunc_SwaggerMorningSun", ROMX
 
 BattleAnimFunc_SwaggerMorningSun:
 ; Moves object at an angle
@@ -3777,7 +3777,7 @@ BattleAnimFunc_SwaggerMorningSun:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_HiddenPower", ROMX
+SECTION "BattleAnimFunc_HiddenPower", ROMX
 
 BattleAnimFunc_HiddenPower:
 ; Moves object in a ring around position. Uses anim_incobj to move to second phase, where it expands the radius 8 pixels at a time for 13 frames and then disappears
@@ -3821,7 +3821,7 @@ BattleAnimFunc_HiddenPower:
 .step_circle
 	jmp BattleAnim_StepCircle
 
-; SECTION "BattleAnimFunc_Curse", ROMX
+SECTION "BattleAnimFunc_Curse", ROMX
 
 BattleAnimFunc_Curse:
 ; Object moves down and to the left 2 pixels at a time until it reaches x coord $30 and disappears
@@ -3849,7 +3849,7 @@ BattleAnimFunc_Curse:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_PerishSong", ROMX
+SECTION "BattleAnimFunc_PerishSong", ROMX
 
 BattleAnimFunc_PerishSong:
 ; Moves object in a large circle with a x radius of $50 and a y radius 1/4 or that, while also moving downwards
@@ -3880,7 +3880,7 @@ BattleAnimFunc_PerishSong:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_RapidSpin", ROMX
+SECTION "BattleAnimFunc_RapidSpin", ROMX
 
 BattleAnimFunc_RapidSpin:
 ; Object moves upwards 4 pixels per frame until it disappears at y coord $d0
@@ -3898,7 +3898,7 @@ BattleAnimFunc_RapidSpin:
 .done
 	jmp DeinitBattleAnimation
 
-; SECTION "BattleAnimFunc_BetaPursuit", ROMX
+SECTION "BattleAnimFunc_BetaPursuit", ROMX
 
 BattleAnimFunc_BetaPursuit:
 ; Working but unused animation
@@ -3951,7 +3951,7 @@ BattleAnimFunc_BetaPursuit:
 	dec [hl]
 	ret
 
-; SECTION "BattleAnimFunc_RainSandstorm", ROMX
+SECTION "BattleAnimFunc_RainSandstorm", ROMX
 
 BattleAnimFunc_RainSandstorm:
 ; Object moves down 4 pixels at a time and right a variable distance
@@ -4025,7 +4025,7 @@ BattleAnimFunc_RainSandstorm:
 	ld [hl], a
 	ret
 
-; SECTION "BattleAnimFunc_AnimObjB0: ; unuse", ROMX
+SECTION "BattleAnimFunc_AnimObjB0: ; unuse", ROMX
 
 BattleAnimFunc_AnimObjB0: ; unused
 ; Used by object BATTLE_ANIM_OBJ_B0, with itself is not used in any animation
@@ -4060,7 +4060,7 @@ BattleAnimFunc_AnimObjB0: ; unused
 	ld [hl], e
 	ret
 
-; SECTION "BattleAnimFunc_PsychUp", ROMX
+SECTION "BattleAnimFunc_PsychUp", ROMX
 
 BattleAnimFunc_PsychUp:
 ; Object moves in a circle
@@ -4072,7 +4072,7 @@ BattleAnimFunc_PsychUp:
 	inc [hl]
 	jmp BattleAnim_StepCircle
 
-; SECTION "BattleAnimFunc_Cotton", ROMX
+SECTION "BattleAnimFunc_Cotton", ROMX
 
 BattleAnimFunc_Cotton:
 ; Object moves in a circle slowly
@@ -4088,7 +4088,7 @@ BattleAnimFunc_Cotton:
 	add [hl]
 	jmp BattleAnim_StepCircle
 
-; SECTION "BattleAnimFunc_AncientPower", ROMX
+SECTION "BattleAnimFunc_AncientPower", ROMX
 
 BattleAnimFunc_AncientPower:
 ; Object moves up and down in an arc for $20 frames and then disappears
