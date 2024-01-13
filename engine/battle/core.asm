@@ -847,39 +847,40 @@ CompareMovePriority:
 	ret
 
 GetMovePriority:
-; Return the priority (0-3) of move a.
+; Return the priority (0-9) of move a.
+	push bc
 
-	ld b, a
-
-	; Vital Throw goes last.
 	call GetMoveIndexFromID
-	ld a, h
-	if HIGH(VITAL_THROW)
-		cp HIGH(VITAL_THROW)
-	else
-		and a
-	endc
-	jr nz, .not_vital_throw
-	ld a, l
-	sub LOW(VITAL_THROW)
-	ret z
+	ld b, h
+	ld c, l
 
-.not_vital_throw
-	call GetMoveEffect
 	ld hl, MoveEffectPriorities
 .loop
 	ld a, [hli]
+	cp -1
+	jr z, .default_priority
 	cp b
+	jr nz, .skip
+	ld a, [hli]
+	cp c
 	jr z, .done
 	inc hl
-	cp -1
-	jr nz, .loop
+	jr .loop
 
-	ld a, BASE_PRIORITY
+.skip
+	inc hl
+	inc hl
+	jr .loop
+
+.default_priority
+	pop bc
+	xor a
 	ret
 
 .done
 	ld a, [hl]
+	xor $80 ; treat it as a signed byte
+	pop bc
 	ret
 
 INCLUDE "data/moves/effects_priorities.asm"
