@@ -190,3 +190,5 @@ hFunctionTargetHi:: db
 hDelayFrameLY:: db
 
 	ds 12
+
+ENDSECTION

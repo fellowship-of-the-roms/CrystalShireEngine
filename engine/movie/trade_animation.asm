@@ -167,7 +167,7 @@ RunTradeAnimScript:
 	jr z, .NotCGB
 	ld a, $1
 	ldh [rVBK], a
-	ld hl, vTiles0
+	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
 	rst ByteFill
