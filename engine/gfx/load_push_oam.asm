@@ -24,4 +24,4 @@ hTransferShadowOAM::
 	jr nz, .wait
 	ret
 ENDL
-OAMDMACode.End
+.End:

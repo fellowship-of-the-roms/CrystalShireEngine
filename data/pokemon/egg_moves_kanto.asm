@@ -584,3 +584,5 @@ DratiniEggMoves:
 	dw SUPERSONIC
 NoEggMoves1:
 	dw -1 ; end
+
+ENDSECTION

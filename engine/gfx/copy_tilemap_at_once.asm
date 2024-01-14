@@ -69,6 +69,7 @@ _SafeCopyTilemapAtOnce::
 	pop af
 	ldh [hBGMapMode], a
 	ret
+
 _CopyTilemapAtOnce::
 	ldh a, [hBGMapMode]
 	push af

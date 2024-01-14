@@ -107,7 +107,7 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	ld a, [hl]
-	cp 8 * 10 + 2
+	cp 10 * TILE_WIDTH + 2
 	jr nc, .FreezeCelebiPosition
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
@@ -134,9 +134,9 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
-	cp 8 * 11 + 4
+	cp 11 * TILE_WIDTH + 4
 	jr nc, .ShiftY
-	cp 8 *  8 + 4
+	cp 8 * TILE_WIDTH + 4
 	jr nc, .ReinitSpriteAnimFrame
 .ShiftY:
 	pop af
@@ -146,7 +146,7 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
-	cp 8 * 10
+	cp 10 * TILE_WIDTH
 	jr c, .float_up
 	jr .float_down
 
@@ -154,7 +154,7 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
-	cp 8 * 10
+	cp 10 * TILE_WIDTH
 	jr nc, .float_up
 .float_down
 	ld hl, SPRITEANIMSTRUCT_YCOORD
@@ -173,9 +173,9 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
-	cp 8 * 10
+	cp 10 * TILE_WIDTH
 	jr c, .left
-	cp -(8 * 3 + 2)
+	cp -(3 * TILE_WIDTH + 2)
 	jr nc, .left
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc

@@ -142,6 +142,28 @@ SwapStorageBoxSlots:
 	call CheckCurPartyMonFainted
 	jr nc, .not_last_healthy
 
+	; Check if the box mon is healthy.
+	pop bc
+	pop de
+	push de
+	push bc
+	push bc
+	ld b, d
+	ld c, e
+	call GetStorageBoxMon
+	jr z, .no_boxmon
+	ld hl, wBufferMonHP
+	ld a, [hli]
+	or [hl]
+.no_boxmon
+	pop bc
+
+	; Ensure that we return with wTempMon pointing towards the partymon.
+	push af
+	call GetStorageBoxMon
+	pop af
+	jr nz, .not_last_healthy
+
 	; Doing this would lose us our last healthy mon, so abort.
 	ld a, 4
 .pop_bcde_and_return
@@ -250,7 +272,7 @@ SwapPartyMons:
 
 	; Swap partymon struct
 	ld hl, wPartyMon1
-	ld c, PARTYMON_STRUCT_LENGTH
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call DoPartySwap
 
 	; Swap nickname
@@ -430,7 +452,8 @@ FlushStorageSystem:
 	ld c, 1
 .inner_loop
 	call GetStorageBoxPointer
-	call _AllocateStorageFlag
+	; If e==0 (null entry), this will not set any flag.
+	call SetStorageAllocationFlag
 	ld a, c
 	inc c
 	cp MONS_PER_BOX
@@ -1432,7 +1455,7 @@ AllocateStorageFlag:
 ; Allocates the given storage flag. Returns nz if storage is already in use.
 	call IsStorageUsed
 	ret nz
-	call _AllocateStorageFlag
+	call SetStorageAllocationFlag
 	xor a
 	ret
 
@@ -1440,7 +1463,7 @@ IsStorageUsed:
 ; Returns z if the given storage slot is unused. Preserves wBufferMon.
 	ld a, CHECK_FLAG
 	jr StorageFlagAction
-_AllocateStorageFlag:
+SetStorageAllocationFlag:
 	ld a, SET_FLAG
 	; fallthrough
 StorageFlagAction:
@@ -1494,6 +1517,9 @@ Special_CurBoxFullCheck:
 ; Returns [wScriptVar] = zero if wBufferMonBox == wCurBox
 ; Returns [wScriptVar] = nonzero if wBufferMonBox != wCurBox
 	call CurBoxFullCheck
+	jr nz, .not_equal
+	xor a
+.not_equal
 	ld [wScriptVar], a
 	ret
 

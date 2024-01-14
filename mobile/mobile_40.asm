@@ -1311,7 +1311,7 @@ MACRO macro_100fc0
 	;     Bit 7 set: Not SRAM
 	;     Lower 7 bits: Bank if SRAM
 	; address, size[, OT address]
-	db ($80 * (\1 >= (STARTOF(SRAM) + SIZEOF(SRAM)))) | (BANK(\1) * (\1 < (STARTOF(SRAM) + SIZEOF(SRAM)))
+	db ($80 * (\1 >= STARTOF(SRAM) + SIZEOF(SRAM))) | (BANK(\1) * (\1 < STARTOF(SRAM) + SIZEOF(SRAM)))
 	dw \1, \2
 	if _NARG == 3
 		dw \3
@@ -1319,46 +1319,3 @@ MACRO macro_100fc0
 		dw NULL
 	endc
 ENDM
-
-Function101220:
-	xor a
-	ld [wLinkMode], a
-	ret
-
-AskMobileOrCable:
-	ld hl, MenuHeader_103640
-	call LoadMenuHeader
-	ld a, [wMobileOrCable_LastSelection]
-	and $0f
-	jr z, .skip_load
-	ld [wMenuCursorPosition], a
-
-.skip_load
-	call VerticalMenu
-	call CloseWindow
-	jr c, .pressed_b
-	ld a, [wMenuCursorY]
-	ld [wScriptVar], a
-	ld c, a
-	ld a, [wMobileOrCable_LastSelection]
-	and $f0
-	or c
-	ld [wMobileOrCable_LastSelection], a
-	ret
-
-.pressed_b
-	xor a
-	ld [wScriptVar], a
-	ret
-
-MenuHeader_103640:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 13, 6, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
-	dw MenuData_103648
-	db 1 ; default option
-
-MenuData_103648:
-	db STATICMENU_CURSOR ; flags
-	db 2
-	db "モバイル@"
-	db "ケーブル@"
