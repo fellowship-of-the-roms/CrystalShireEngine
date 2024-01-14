@@ -34,3 +34,13 @@ MACRO homecall ; bank, address
 		assert warn, BANK(\1) != 0, "unnecessary `homecall \1`"
 	endc
 ENDM
+
+MACRO xcall
+	REDEF _x EQUS "BANK(\1) == BANK(@)"
+	assert FarCall == $0008
+	; $cd = call, $cf == rst $08
+	db ($cd * (_x)) + ($cf * !(_x))
+	db (LOW(\1) * (_x)) + (BANK(\1) * !(_x))
+	db (HIGH(\1) * (_x)) + (LOW(\1) * !(_x))
+	db HIGH(\1) * !(_x)
+ENDM
