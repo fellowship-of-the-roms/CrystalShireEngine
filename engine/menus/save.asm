@@ -112,8 +112,8 @@ CompareLoadedAndSavedPlayerID:
 	call OpenSRAM
 	ld hl, sPlayerData + (wPlayerID - wPlayerData)
 	ld a, [hli]
-	ld c, [hl]
 	ld b, a
+	ld c, [hl]
 	call CloseSRAM
 	ld a, [wPlayerID]
 	cp b

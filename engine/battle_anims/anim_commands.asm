@@ -1406,8 +1406,8 @@ ClearBattleAnims::
 
 	ld hl, wFXAnimID
 	ld a, [hli]
-	ld c, a
 	ld b, [hl]
+	ld c, a
 	call GetBattleAnimPointer
 	call BattleAnimAssignPals
 	jmp DelayFrame
