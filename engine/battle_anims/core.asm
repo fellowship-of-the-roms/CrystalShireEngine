@@ -17,19 +17,11 @@ QueueBattleAnimation:
 	ld b, h
 	ld hl, wLastAnimObjectIndex
 	inc [hl]
-	jr InitBattleAnimation
-
-DeinitBattleAnimation:
-	ld hl, BATTLEANIMSTRUCT_INDEX
-	add hl, bc
-	ld [hl], $0
-	ret
-
-InitBattleAnimation:
+; InitBattleAnimation:
 	ld hl, wBattleObjectTempID
 	ld a, [hli]
-	ld e, a
 	ld d, [hl]
+	ld e, a
 	ld hl, BattleAnimObjects
 rept BATTLEANIMOBJ_LENGTH
 	add hl, de

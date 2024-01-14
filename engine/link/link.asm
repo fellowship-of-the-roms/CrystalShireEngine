@@ -2800,8 +2800,8 @@ Link_CheckCommunicationError:
 	vc_hook Wireless_prompt
 	ld hl, wLinkTimeoutFrames
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	push hl
 	call .CheckConnected
 	pop hl

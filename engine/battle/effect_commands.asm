@@ -2808,8 +2808,8 @@ SpeciesItemBoost:
 ; it's holding item d, double it.
 
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	; fallthrough
 
 DoubleStatIfSpeciesHoldingItem:
@@ -2972,8 +2972,8 @@ HitSelfInConfusion:
 	dec hl
 	dec hl
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	call TruncateHL_BC
 	ld d, 40
 	pop af

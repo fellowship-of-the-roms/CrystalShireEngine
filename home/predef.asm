@@ -22,15 +22,15 @@ Predef::
 ; Call the Predef function
 	ld hl, wPredefAddress
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	push hl
 
 ; Get hl back
 	ld hl, wPredefHL
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	ret
 
 .Return:
@@ -47,6 +47,6 @@ Predef::
 
 	ld hl, wPredefHL
 	ld a, [hli]
-	ld l, [hl]
 	ld h, a
+	ld l, [hl]
 	ret
