@@ -463,7 +463,7 @@ MACRO battle_anim_struct
 \1Index::          db
 \1OAMFlags::       db
 \1FixY::           db
-\1FramesetID::     db
+\1FramesetID::     dw
 \1Function::       db
 \1Palette::        db
 \1TileID::         db
@@ -477,7 +477,7 @@ MACRO battle_anim_struct
 \1JumptableIndex:: db
 \1Var1::           db
 \1Var2::           db
-	ds 7
+	ds 6
 ENDM
 
 MACRO battle_bg_effect

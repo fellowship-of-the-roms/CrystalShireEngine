@@ -66,7 +66,8 @@ GetBattleAnimFrame:
 	ld hl, BATTLEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld e, [hl]
-	ld d, 0
+	inc hl
+	ld d, [hl]
 	ld hl, BattleAnimFrameData
 	add hl, de
 	add hl, de
