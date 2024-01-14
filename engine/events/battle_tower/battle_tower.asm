@@ -3,11 +3,6 @@ BattleTowerRoomMenu:
 	call InitBattleTowerChallengeRAM
 	farjp _BattleTowerRoomMenu
 
-Function1700ba:
-; special
-	call InitBattleTowerChallengeRAM
-	farjp Function11811a
-
 BattleTowerBattle:
 	xor a ; FALSE
 	ld [wBattleTowerBattleEnded], a

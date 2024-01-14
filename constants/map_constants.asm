@@ -385,8 +385,6 @@ ENDM
 	map_const TRADE_CENTER,                                 5,  4 ;  2
 	map_const COLOSSEUM,                                    5,  4 ;  3
 	map_const TIME_CAPSULE,                                 5,  4 ;  4
-	map_const MOBILE_TRADE_ROOM,                            5,  4 ;  5
-	map_const MOBILE_BATTLE_ROOM,                           5,  4 ;  6
 	endgroup
 
 	newgroup CELADON                                              ; 21
