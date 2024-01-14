@@ -1403,3 +1403,5 @@ CelebiEvosAttacks:
 	dbw 40, BATON_PASS
 	dbw 50, PERISH_SONG
 	db 0 ; no more level-up moves
+
+ENDSECTION

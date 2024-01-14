@@ -2193,3 +2193,5 @@ MewEvosAttacks:
 	dbw 40, PSYCHIC_M
 	dbw 50, ANCIENTPOWER
 	db 0 ; no more level-up moves
+
+ENDSECTION

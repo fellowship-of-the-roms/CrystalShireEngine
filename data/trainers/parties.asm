@@ -5287,3 +5287,5 @@ KrisGroup:
 	db -1 ; end
 
 	end_list_items
+
+ENDSECTION
