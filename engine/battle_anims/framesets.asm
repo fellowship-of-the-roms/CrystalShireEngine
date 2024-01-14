@@ -70,9 +70,9 @@ GetBattleAnimFrame:
 	ld hl, BattleAnimFrameData
 	add hl, de
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, BATTLEANIMSTRUCT_FRAME
 	add hl, bc
 	ld l, [hl]
