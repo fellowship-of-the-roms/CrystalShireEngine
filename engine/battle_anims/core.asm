@@ -17,9 +17,7 @@ QueueBattleAnimation:
 	ld b, h
 	ld hl, wLastAnimObjectIndex
 	inc [hl]
-	jr InitBattleAnimation
-
-InitBattleAnimation:
+; InitBattleAnimation:
 	ld hl, wBattleObjectTempID
 	ld a, [hli]
 	ld e, a
