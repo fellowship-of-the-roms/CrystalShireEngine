@@ -2808,8 +2808,8 @@ SpeciesItemBoost:
 ; it's holding item d, double it.
 
 	ld a, [hli]
-	ld h, a
 	ld l, [hl]
+	ld h, a
 	; fallthrough
 
 DoubleStatIfSpeciesHoldingItem:
