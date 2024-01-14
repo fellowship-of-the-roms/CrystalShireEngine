@@ -3,7 +3,7 @@ GetBattleAnimOAMPointer:
 	ld h, 0
 	ld de, BattleAnimOAMData
 	ld a, [wBattleAnimTempFrameOAMFlags]
-	add a, a
+	add a
 	jr nc, .ok
 	ld de, BattleAnimOAMData + 4 * NUM_BATTLE_ANIM_OAMSETS
 .ok
