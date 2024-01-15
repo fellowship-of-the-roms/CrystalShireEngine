@@ -76,18 +76,17 @@ BattleAnimOAMUpdate:
 	call InitBattleAnimBuffer
 	farcall GetBattleAnimFrame
 	ld a, h
-	cp oamwait_command
+	cp HIGH(battleoamwait_command)
 	jmp z, .done
-	cp oamdelete_command
+	cp HIGH(battleoamdelete_command)
 	jmp z, .delete
-
-	push af
+	ld d, h
+	ld e, l
 	ld hl, wBattleAnimTempOAMFlags
 	ld a, [wBattleAnimTempFrameOAMFlags]
 	xor [hl]
 	and PRIORITY | Y_FLIP | X_FLIP
 	ld [hl], a
-	pop af
 
 	push bc
 	call GetBattleAnimOAMPointer

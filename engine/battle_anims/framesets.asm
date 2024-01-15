@@ -8,7 +8,12 @@ GetBattleAnimFrame:
 	dec [hl]
 	call .GetPointer
 	ld a, [hli]
-	push af
+	ld h, [hl]
+	ld l, a
+	push hl
+	call .GetPointer
+	inc hl
+	inc hl
 	jr .okay
 
 .next_frame
@@ -17,12 +22,18 @@ GetBattleAnimFrame:
 	inc [hl]
 	call .GetPointer
 	ld a, [hli]
-	cp oamrestart_command
+	ld h, [hl]
+	ld l, a
+	ld a, h
+	cp HIGH(battleoamrestart_command)
 	jr z, .restart
-	cp oamend_command
+	cp HIGH(battleoamend_command)
 	jr z, .repeat_last
 
-	push af
+	push hl
+	call .GetPointer
+	inc hl
+	inc hl
 	ld a, [hl]
 	push hl
 	and ~(Y_FLIP << 1 | X_FLIP << 1)
@@ -76,9 +87,14 @@ GetBattleAnimFrame:
 	ld d, [hl]
 	ld hl, BATTLEANIMSTRUCT_FRAME
 	add hl, bc
-	ld l, [hl]
-	ld h, 0
-	add hl, hl
+	push bc
+	ld c, [hl]
+	ld b, 0
+	ld hl, 0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	pop bc
 	add hl, de
 	ret
 
