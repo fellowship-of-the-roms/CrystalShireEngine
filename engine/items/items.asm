@@ -634,8 +634,9 @@ TossKeyItem:
 	ret
 
 .ok3
-	ld hl, wNumKeyItems
-	dec [hl]
+	ld a, [wNumKeyItems] ; no-optimize Inefficient WRAM increment/decrement (hl is needed)
+	dec a
+	ld [wNumKeyItems], a
 	scf
 	ret
 
