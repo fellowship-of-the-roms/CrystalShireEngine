@@ -648,10 +648,14 @@ SkipEvolutions::
 	and a
 	ret z
 	cp EVOLVE_STAT
+	jr z, .inc_hl
+	cp EVOLVE_TRADE
+	jr z, .inc_hl
+	cp EVOLVE_ITEM
 	jr nz, .no_extra_skip
+.inc_hl
 	inc hl
 .no_extra_skip
-	inc hl
 	inc hl
 	inc hl
 	inc hl
