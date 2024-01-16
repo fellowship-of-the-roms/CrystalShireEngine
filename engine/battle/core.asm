@@ -5397,8 +5397,9 @@ MoveSelectionScreen:
 
 	xor a
 	ld [wSwappingMove], a
-	ld hl, wMenuCursorY
-	dec [hl]
+	ld a, [wMenuCursorY] ; no-optimize Inefficient WRAM increment/decrement (value is needed in a)
+	dec a
+	ld [wMenuCursorY], a
 	ld b, a
 	ld a, [wMoveSelectionMenuType]
 	dec a
