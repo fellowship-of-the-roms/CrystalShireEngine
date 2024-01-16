@@ -1,6 +1,6 @@
 GetBattleAnimOAMPointer:
-	ld l, a
-	ld h, 0
+	ld h, d
+	ld l, e
 	ld de, BattleAnimOAMData
 	ld a, [wBattleAnimTempFrameOAMFlags]
 	add a
@@ -87,7 +87,3 @@ endr
 	ret
 
 INCLUDE "data/battle_anims/ball_colors.asm"
-
-INCLUDE "data/battle_anims/oam.asm"
-
-INCLUDE "data/battle_anims/object_gfx.asm"
