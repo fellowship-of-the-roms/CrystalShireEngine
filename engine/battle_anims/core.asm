@@ -26,9 +26,10 @@ DeinitBattleAnimation:
 	ret
 
 InitBattleAnimation:
-	ld a, [wBattleObjectTempID]
+	ld hl, wBattleObjectTempID
+	ld a, [hli]
 	ld e, a
-	ld d, 0
+	ld d, [hl]
 	ld hl, BattleAnimObjects
 rept BATTLEANIMOBJ_LENGTH
 	add hl, de
