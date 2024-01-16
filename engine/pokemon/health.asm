@@ -98,8 +98,3 @@ ComputeHPBarPixels:
 .zero
 	ld e, 0
 	ret
-
-AnimateHPBar:
-	call WaitBGMap
-	call _AnimateHPBar
-	jmp WaitBGMap
