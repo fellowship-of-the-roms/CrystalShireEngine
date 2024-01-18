@@ -11,7 +11,6 @@
 	db GENDER_F12_5 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/togetic/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_FAST ; growth rate
 	dn EGG_FLYING, EGG_FAIRY ; egg groups
 
