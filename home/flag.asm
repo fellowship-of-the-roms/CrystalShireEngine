@@ -6,9 +6,7 @@ ResetMapBufferEventFlags::
 
 ResetBikeFlags::
 	xor a
-	ld hl, wBikeFlags
-	ld [hli], a
-	ld [hl], a
+	ld [wBikeFlags], a
 	ret
 
 ResetFlashIfOutOfCave::

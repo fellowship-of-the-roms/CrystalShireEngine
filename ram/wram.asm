@@ -2928,7 +2928,8 @@ wBikeFlags::
 ; bit 1: always on bike
 ; bit 2: downhill
 	db
-	ds 1 ; cleared along with wBikeFlags by ResetBikeFlags
+
+wWildBattlePanic:: db
 
 wCurMapSceneScriptPointer:: dw
 
