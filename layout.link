@@ -46,7 +46,6 @@ ROMX $03
 ROMX $04
 	"bank4"
 	"Dynamic Pals System"
-	"Fade System"
 ROMX $05
 	"bank5"
 	"Load Map Part"
