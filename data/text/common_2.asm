@@ -895,7 +895,7 @@ _KarpGuruRecordText::
 	text "CURRENT RECORD"
 
 	para "@"
-	text_ram wStringBuffer1
+	text_decimal wBufferMonID, 2, 5
 	text " caught by"
 	line "@"
 	text_ram wMagikarpRecordHoldersName
@@ -909,7 +909,7 @@ _LuckyNumberMatchPartyText::
 	line "with the ID number"
 
 	para "of @"
-	text_ram wStringBuffer1
+	text_ram wStringBuffer2
 	text " in"
 	line "your party."
 	prompt
@@ -921,9 +921,11 @@ _LuckyNumberMatchPCText::
 	line "with the ID number"
 
 	para "of @"
+	text_decimal wBufferMonID, 2, 5
+	text " in Box"
+	line "“@"
 	text_ram wStringBuffer1
-	text " in"
-	line "your PC BOX."
+	text "”."
 	prompt
 
 _CaughtAskNicknameText::
