@@ -2479,6 +2479,8 @@ wBaseItem2:: dw
 wBaseGender:: db
 wBaseEggSteps:: db
 wBasePicSize:: db
+wBaseUnusedFrontpic:: dw
+wBaseUnusedBackpic:: dw
 wBaseGrowthRate:: db
 wBaseEggGroups:: db
 wBaseTMHM:: flag_array NUM_TM_HM_TUTOR
