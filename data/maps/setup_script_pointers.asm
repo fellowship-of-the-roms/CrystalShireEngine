@@ -54,3 +54,4 @@ MapSetupCommands:
 	add_mapsetup DisableDynPalUpdates ; 2f
 	add_mapsetup EnableDynPalUpdates ; 30
 	add_mapsetup EnableDynPalUpdatesNoApply ; 31
+	add_mapsetup ClearWeather ; 32

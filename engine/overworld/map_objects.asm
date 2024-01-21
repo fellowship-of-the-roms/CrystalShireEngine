@@ -2666,6 +2666,9 @@ _UpdateSprites::
 	ld b, (NUM_SPRITE_OAM_STRUCTS - 12) * SPRITEOAMSTRUCT_LENGTH
 .ok
 	ldh a, [hUsedSpriteIndex]
+	ld c, a
+	ldh a, [hUsedWeatherSpriteIndex]
+	add c
 	cp b
 	ret nc
 	ld l, a

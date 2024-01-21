@@ -137,6 +137,8 @@ LoadMiscTiles:
 
 	ld c, EMOTE_SHADOW
 	call LoadEmote
+	ld c, EMOTE_RAIN
+	call LoadEmote
 	call GetMapEnvironment
 	call CheckOutdoorMap
 	ld c, EMOTE_GRASS_RUSTLE
