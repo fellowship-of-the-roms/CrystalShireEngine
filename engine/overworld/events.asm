@@ -139,11 +139,11 @@ HandleMap:
 	cp MAPSTATUS_HANDLE
 	ret nz
 
-	farcall DoOverworldRain
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
 	call CheckPlayerState
+	farcall DoOverworldWeather
 	xor a
 	ret
 

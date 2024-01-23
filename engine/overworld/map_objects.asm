@@ -2665,22 +2665,22 @@ _UpdateSprites::
 	jr z, .ok
 	ld b, (NUM_SPRITE_OAM_STRUCTS - 12) * SPRITEOAMSTRUCT_LENGTH
 .ok
-	ldh a, [hUsedSpriteIndex]
-	ld c, a
 	ldh a, [hUsedWeatherSpriteIndex]
-	add c
-	cp b
+	ld c, a
+	ldh a, [hUsedSpriteIndex]
+	cp c
 	ret nc
 	ld l, a
 	ld h, HIGH(wShadowOAM)
 	ld de, SPRITEOAMSTRUCT_LENGTH
-	ld a, b
+	ld a, c
 	ld c, SCREEN_HEIGHT_PX + 2 * TILE_WIDTH
 .loop
 	ld [hl], c ; y
 	add hl, de
 	cp l
 	jr nz, .loop
+	
 	ret
 
 ApplyBGMapAnchorToObjects:
