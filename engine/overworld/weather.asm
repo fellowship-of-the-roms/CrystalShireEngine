@@ -66,14 +66,14 @@ SpawnSnowFlake:
 	jr z, .spawn_on_right
 	ld a, 0
 	ld [hli], a
-	ld a, 167
+	ld a, SCREEN_WIDTH_PX + 7
 	call RandomRange
 	add 1
 	ld [hli], a
 .finish
-	ld a, $f6
+	ld a, $f6 ; tile id
 	ld [hli], a
-	ld [hl], 08 | 07
+	ld [hl], VRAM_BANK_1 | 7 ; pallete 7
 	dec hl
 	dec hl
 	dec hl
@@ -85,10 +85,10 @@ SpawnSnowFlake:
 	ret
 
 .spawn_on_right
-	ld a, 160
+	ld a, SCREEN_HEIGHT_PX + 8
 	call RandomRange
 	ld [hli], a
-	ld a, 168
+	ld a, SCREEN_WIDTH_PX + 8
 	ld [hli], a
 	jr .finish
 
@@ -99,15 +99,15 @@ DoSnowFall:
 .loop
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	ld a, [hl]
-	cp 160
+	cp SCREEN_HEIGHT_PX + 16
 	jr z, .next
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
 	ld a, [hli]
-	cp $f6
+	cp $f6 ; tile id
 	jr nz, .next
 	ld a, [hl]
-	cp 08 | 07
+	cp VRAM_BANK_1 | 7 ; pallete 7
 	jr nz, .next
 
 	call Random
@@ -130,7 +130,7 @@ DoSnowFall:
 	add 2
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	cp 160
+	cp SCREEN_HEIGHT_PX + 16
 	ld [hl], a
 	jr nc, .despawn
 ;	and 11
@@ -170,7 +170,7 @@ DoSnowFall:
 .despawn
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, 160
+	ld a, SCREEN_HEIGHT_PX + 16
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -185,7 +185,7 @@ ScanForEmptyOAM:
 	ld b, NUM_SPRITE_OAM_STRUCTS
 .loop
 	ld a, [hl]
-	cp 160 ; offscreen
+	cp SCREEN_HEIGHT_PX + 16 ; offscreen
 	ret z
 	ld hl, SPRITEOAMSTRUCT_LENGTH
 	add hl, de
@@ -206,14 +206,14 @@ SpawnRainDrop:
 	jr z, .spawn_on_right
 	ld a, 0
 	ld [hli], a
-	ld a, 160
+	ld a, SCREEN_WIDTH_PX + 7
 	call RandomRange
 	add 8
 	ld [hli], a
 .finish
-	ld a, $f7
+	ld a, $f7 ; tile id
 	ld [hli], a
-	ld [hl], 08 | 07
+	ld [hl], VRAM_BANK_1 | 7 ; pallete 7
 	dec hl
 	dec hl
 	dec hl
@@ -225,10 +225,10 @@ SpawnRainDrop:
 	ret
 
 .spawn_on_right
-	ld a, 160
+	ld a, SCREEN_HEIGHT_PX + 8
 	call RandomRange
 	ld [hli], a
-	ld a, 168
+	ld a, SCREEN_WIDTH_PX + 8
 	ld [hli], a
 	jr .finish
 
@@ -244,15 +244,15 @@ DoRainFall:
 .loop
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	ld a, [hl]
-	cp 160
+	cp SCREEN_HEIGHT_PX + 16
 	jr z, .next
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
 	ld a, [hli]
-	cp $f7
+	cp $f7 ; tile id
 	jr nz, .next
 	ld a, [hl]
-	cp 08 | 07
+	cp VRAM_BANK_1 | 7 ; pallete 7
 	jr nz, .next
 
 	call Random
@@ -274,7 +274,7 @@ DoRainFall:
 	add 4
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	cp 160
+	cp SCREEN_HEIGHT_PX + 16
 	ld [hl], a
 	jr nc, .despawn
 
@@ -309,7 +309,7 @@ DoRainFall:
 .despawn
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, 160
+	ld a, SCREEN_HEIGHT_PX + 16
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -331,15 +331,15 @@ WeatherMovement:
 .loop
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	ld a, [hl]
-	cp 160
+	cp SCREEN_HEIGHT_PX + 16
 	jr z, .next
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
 	ld a, [hli]
-	cp $f6
+	cp $f6 ; tile id
 	jr nz, .next
 	ld a, [hl]
-	cp 08 | 07
+	cp VRAM_BANK_1 | 7 ; pallete 7
 	jr nz, .next
 
 	ld hl, SPRITEOAMSTRUCT_XCOORD
