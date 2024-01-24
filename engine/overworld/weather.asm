@@ -1,10 +1,22 @@
 DoOverworldWeather:
-	ret
+	call GetMapEnvironment
+	call CheckOutdoorMap
+	ret nz ; don't rain indoors.
 	push de
 	push hl
 	push bc
-	call DoOverworldSnow
-;	call DoOverworldRain
+	ld a, [wOverworldWeatherDelay]
+	and a
+	jr z, .done
+	ld a, [hUsedSpriteIndex]
+	ld hl, hUsedWeatherSpriteIndex
+	cp [hl]
+	jr c, .ok
+	add SPRITEOAMSTRUCT_LENGTH
+	ldh [hUsedWeatherSpriteIndex], a
+.ok
+	call DoOverworldRain
+;	call DoOverworldSnow
 	call Random
 	cp 1 percent
 	jr nc, .done
@@ -14,10 +26,14 @@ DoOverworldWeather:
 ;	farcall BlindingFlash
 ;	farcall BlindingFlash
 .done
+	ld a, [wOverworldWeatherDelay]
+	xor %1
+	ld [wOverworldWeatherDelay], a
 	pop bc
 	pop hl
 	pop de
 	ret
+
 
 DoOverworldSnow:
 	call ScanForEmptyOAM
@@ -43,7 +59,7 @@ DoOverworldRain:
 
 SpawnSnowFlake:
 	call Random
-	cp 10 percent
+	cp 80 percent
 	ret nc
 	call Random
 	and 11
@@ -102,18 +118,43 @@ DoSnowFall:
 	jr c, .despawn
 .ok
 
+	ld a, [wPlayerStepVectorY]
+	ld c, a
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
 	ld a, [hl]
-	add 1
+	sub c
+	ld c, a
+	call GetDropSpeedModifier
+	add c
+	add 2
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
 	cp 160
 	ld [hl], a
 	jr nc, .despawn
-	and 11
-	jr nz, .next
+;	and 11
+;	jr nz, .next
+
+	call Random
+	and 1
+	ld a, [wPlayerStepVectorX]
+	jr nz, .no_add_1
+	add 1
+.no_add_1
+	ld c, a
 	ld hl, SPRITEOAMSTRUCT_XCOORD
 	add hl, de
 	ld a, [hl]
+	sub c
+;	ld c, a
+;	call GetDropSpeedModifier
+;	cpl
+;	add 1
+;	add c
+	add 1
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
 	sub 1
 	ld [hl], a
 	jr c, .despawn
@@ -157,9 +198,9 @@ ScanForEmptyOAM:
 	ret
 
 SpawnRainDrop:
-	call Random
-	cp 70 percent
-	ret nc
+;	call Random
+;	cp 90 percent
+;	ret nc
 	call Random
 	and 1
 	jr z, .spawn_on_right
@@ -218,17 +259,42 @@ DoRainFall:
 	cp 3 percent
 	jr c, .despawn
 
+	ld a, [wPlayerStepVectorY]
+	add a
+	add a
+	ld c, a
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
 	ld a, [hl]
+	sub c
+	ld c, a
+	call GetDropSpeedModifier
+	add a
+	add c
 	add 4
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
 	cp 160
 	ld [hl], a
 	jr nc, .despawn
+
+	ld a, [wPlayerStepVectorX]
+	add a
+	add a
+	ld c, a
 	ld hl, SPRITEOAMSTRUCT_XCOORD
 	add hl, de
 	ld a, [hl]
+	sub c
+	ld c, a
+	call GetDropSpeedModifier
+	cpl
+	add 1
+	add a
+	add c
 	sub 4
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
 	ld [hl], a
 	jr c, .despawn
 .next
@@ -250,3 +316,84 @@ DoRainFall:
 	ld [hli], a
 	ld [hl], a
 	jr .next
+
+WeatherMovement:
+	ret
+	push hl
+	push de
+	push bc
+	ld h, d
+	ld l, e
+	push hl
+	ld de, wShadowOAM
+	ld hl, wShadowOAM
+	ld b, NUM_SPRITE_OAM_STRUCTS
+.loop
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	ld a, [hl]
+	cp 160
+	jr z, .next
+	ld hl, SPRITEOAMSTRUCT_TILE_ID
+	add hl, de
+	ld a, [hli]
+	cp $f6
+	jr nz, .next
+	ld a, [hl]
+	cp 08 | 07
+	jr nz, .next
+
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
+	ld a, [hl]
+	pop hl
+	push hl
+	sub h
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
+	ld [hl], a
+
+	and 11
+	jr nz, .next
+
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld a, [hl]
+	pop hl
+	push hl
+	sub l
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld [hl], a
+
+
+.next
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld d, h
+	ld e, l
+	dec b
+	jr nz, .loop
+	pop hl
+	jmp PopBCDEHL
+
+GetDropSpeedModifier:
+; input: de = sprite index
+; if ((SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS) - [hUsedWeatherSpriteIndex])  / 2 > de
+; then return 0
+; else return 1
+	ld a, [hUsedWeatherSpriteIndex]
+	ld l, a
+	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
+	sub l
+	rra ; div 2
+	ld l, a
+	ld a, [hUsedWeatherSpriteIndex]
+	add l
+	ld l, a
+	ld a, e
+	cp l
+	ld a, 1
+	ret c
+	ld a, 0
+	ret
+

@@ -1520,7 +1520,7 @@ wJoypadDisable::
 ; bit 7: ongoing sgb data transfer
 	db
 
-	ds 1
+wOverworldWeatherDelay:: db
 
 wInBattleTowerBattle::
 ; 0 not in BattleTower-Battle
