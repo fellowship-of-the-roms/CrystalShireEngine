@@ -2668,11 +2668,16 @@ _UpdateSprites::
 	ldh a, [hUsedWeatherSpriteIndex]
 	ld c, a
 	ldh a, [hUsedSpriteIndex]
+	ld l, a
+	ld a, NUM_SPRITE_OAM_STRUCTS * (SPRITEOAMSTRUCT_LENGTH)
+	sub l
+	sub SPRITEOAMSTRUCT_LENGTH
 	cp c
-	ret nc
+	ret c
+	ret z
 	ld l, a
 	ld h, HIGH(wShadowOAM)
-	ld de, SPRITEOAMSTRUCT_LENGTH
+	ld de, -SPRITEOAMSTRUCT_LENGTH
 	ld a, c
 	ld c, SCREEN_HEIGHT_PX + 2 * TILE_WIDTH
 .loop
@@ -2680,7 +2685,6 @@ _UpdateSprites::
 	add hl, de
 	cp l
 	jr nz, .loop
-	
 	ret
 
 ApplyBGMapAnchorToObjects:
@@ -2879,12 +2883,15 @@ InitSprites:
 	ld l, a
 	ldh a, [hUsedSpriteIndex]
 	ld c, a
+	ld a, SPRITEOAMSTRUCT_LENGTH * (NUM_SPRITE_OAM_STRUCTS - 1)
+	sub c
+	ld c, a
 	ld b, HIGH(wShadowOAM)
 	ld a, [hli]
 	ldh [hUsedSpriteTile], a
-	add c
-	cp LOW(wShadowOAMEnd)
-	jr nc, .full
+	sub c
+	cp LOW(wShadowOAM)
+	jr c, .full
 .addsprite
 	ldh a, [hCurSpriteYPixel]
 	add [hl]
@@ -2917,11 +2924,16 @@ InitSprites:
 	or d
 	ld [bc], a ; attributes
 	inc c
+	ld a, c
+	sub SPRITEOAMSTRUCT_LENGTH * 2
+	ld c, a
 	ldh a, [hUsedSpriteTile]
 	dec a
 	ldh [hUsedSpriteTile], a
 	jr nz, .addsprite
-	ld a, c
+	ld a, SPRITEOAMSTRUCT_LENGTH * (NUM_SPRITE_OAM_STRUCTS - 1)
+	sub c
+	ld c, a
 	ldh [hUsedSpriteIndex], a
 .done
 	xor a

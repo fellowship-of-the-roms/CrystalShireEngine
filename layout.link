@@ -34,7 +34,6 @@ ROM0
 ROMX $01
 	"bank1"
 	"Tileset Data 10"
-	"Tileset Data 11"
 ROMX $02
 	"bank2"
 	"Tileset Data 9"

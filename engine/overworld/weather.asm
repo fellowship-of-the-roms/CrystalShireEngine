@@ -6,13 +6,16 @@ DoOverworldWeather:
 	push hl
 	push bc
 	ld a, [wOverworldWeatherDelay]
-	and a
+	and %1 ; 30 fps
 	jr z, .done
 	ld a, [hUsedSpriteIndex]
+	ld c, a
+	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
+	sub c
 	ld hl, hUsedWeatherSpriteIndex
 	cp [hl]
-	jr c, .ok
-	add SPRITEOAMSTRUCT_LENGTH
+	jr nc, .ok
+	add -SPRITEOAMSTRUCT_LENGTH
 	ldh [hUsedWeatherSpriteIndex], a
 .ok
 	call DoOverworldRain
@@ -27,13 +30,12 @@ DoOverworldWeather:
 ;	farcall BlindingFlash
 .done
 	ld a, [wOverworldWeatherDelay]
-	xor %1
+	inc a
 	ld [wOverworldWeatherDelay], a
 	pop bc
 	pop hl
 	pop de
 	ret
-
 
 DoOverworldSnow:
 	call ScanForEmptyOAM
@@ -45,24 +47,27 @@ DoOverworldSnow:
 
 DoOverworldRain:
 	ld a, [wLoadedObjPal7]
-	cp PAL_OW_COPY_BG_WATER
+	cp PAL_OW_RAIN
 	jr z, .continue
-	ld a, PAL_OW_COPY_BG_WATER
+	ld a, PAL_OW_RAIN
 	farcall CopySpritePalToOBPal7
 .continue
 	call ScanForEmptyOAM
 	call nc, SpawnRainDrop
 	call ScanForEmptyOAM
 	call nc, SpawnRainDrop
+	call ScanForEmptyOAM
+	call nc, SpawnRainDrop
 	call DoRainFall
+	call RainSplashCleanup
 	ret
 
 SpawnSnowFlake:
 	call Random
-	cp 80 percent
+	cp 40 percent
 	ret nc
 	call Random
-	and 11
+	and %11
 	jr z, .spawn_on_right
 	ld a, 0
 	ld [hli], a
@@ -79,7 +84,7 @@ SpawnSnowFlake:
 	dec hl
 	ldh a, [hUsedWeatherSpriteIndex]
 	cp l
-	ret c
+	ret nc
 	ld a, l
 	ldh [hUsedWeatherSpriteIndex], a
 	ret
@@ -197,6 +202,31 @@ ScanForEmptyOAM:
 	scf
 	ret
 
+RainSplashCleanup:
+	ld a, [wOverworldWeatherDelay]
+	and %1110
+	ret nz
+	ld de, wShadowOAM
+	ld b, NUM_SPRITE_OAM_STRUCTS
+.loop
+	ld hl, SPRITEOAMSTRUCT_TILE_ID
+	add hl, de
+	ld a, [hli]
+	cp $f5 ; tile id
+	jr nz, .next
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld a, SCREEN_HEIGHT_PX + 16 ; offscreen
+	ld [hl], a
+.next
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld d, h
+	ld e, l
+	dec b
+	jr nz, .loop
+	ret
+
 SpawnRainDrop:
 ;	call Random
 ;	cp 90 percent
@@ -219,7 +249,7 @@ SpawnRainDrop:
 	dec hl
 	ldh a, [hUsedWeatherSpriteIndex]
 	cp l
-	ret c
+	ret nc
 	ld a, l
 	ldh [hUsedWeatherSpriteIndex], a
 	ret
@@ -233,7 +263,7 @@ SpawnRainDrop:
 	jr .finish
 
 ClearWeather:
-	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
+	xor a
 	ldh [hUsedWeatherSpriteIndex], a
 	ret
 
@@ -256,8 +286,8 @@ DoRainFall:
 	jr nz, .next
 
 	call Random
-	cp 3 percent
-	jr c, .despawn
+	cp 5 percent
+	jr c, .splash
 
 	ld a, [wPlayerStepVectorY]
 	add a
@@ -271,7 +301,7 @@ DoRainFall:
 	call GetDropSpeedModifier
 	add a
 	add c
-	add 4
+	add 8
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
 	cp SCREEN_HEIGHT_PX + 16
@@ -317,83 +347,18 @@ DoRainFall:
 	ld [hl], a
 	jr .next
 
-WeatherMovement:
-	ret
-	push hl
-	push de
-	push bc
-	ld h, d
-	ld l, e
-	push hl
-	ld de, wShadowOAM
-	ld hl, wShadowOAM
-	ld b, NUM_SPRITE_OAM_STRUCTS
-.loop
-	ld hl, SPRITEOAMSTRUCT_YCOORD
-	ld a, [hl]
-	cp SCREEN_HEIGHT_PX + 16
-	jr z, .next
+.splash
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
-	ld a, [hli]
-	cp $f6 ; tile id
-	jr nz, .next
-	ld a, [hl]
-	cp VRAM_BANK_1 | 7 ; pallete 7
-	jr nz, .next
-
-	ld hl, SPRITEOAMSTRUCT_XCOORD
-	add hl, de
-	ld a, [hl]
-	pop hl
-	push hl
-	sub h
-	ld hl, SPRITEOAMSTRUCT_XCOORD
-	add hl, de
-	ld [hl], a
-
-	and 11
-	jr nz, .next
-
-	ld hl, SPRITEOAMSTRUCT_YCOORD
-	add hl, de
-	ld a, [hl]
-	pop hl
-	push hl
-	sub l
-	ld hl, SPRITEOAMSTRUCT_YCOORD
-	add hl, de
-	ld [hl], a
-
-
-.next
-	ld hl, SPRITEOAMSTRUCT_LENGTH
-	add hl, de
-	ld d, h
-	ld e, l
-	dec b
-	jr nz, .loop
-	pop hl
-	jmp PopBCDEHL
+	ld [hl], $f5 ; tile id
+	jr .next
 
 GetDropSpeedModifier:
-; input: de = sprite index
-; if ((SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS) - [hUsedWeatherSpriteIndex])  / 2 > de
-; then return 0
-; else return 1
-	ld a, [hUsedWeatherSpriteIndex]
-	ld l, a
-	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
-	sub l
-	rra ; div 2
-	ld l, a
-	ld a, [hUsedWeatherSpriteIndex]
-	add l
-	ld l, a
+; input: e = sprite index
+; output: a = is_even(e / 4)
 	ld a, e
-	cp l
-	ld a, 1
-	ret c
-	ld a, 0
+	rra
+	rra ; / 4
+	and 1
 	ret
 
