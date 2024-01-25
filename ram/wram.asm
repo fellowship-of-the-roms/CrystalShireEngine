@@ -1543,7 +1543,7 @@ wOBP1:: db
 
 wNumHits:: db
 
-	ds 1
+wSpriteOverlapCount:: db
 
 wOptions::
 ; bit 0-2: number of frames to delay when printing text
@@ -3312,6 +3312,10 @@ wDecompressEnemyFrontpic:: ds $80 tiles
 NEXTU
 ; unidentified uses
 w6_d000:: ds $1000
+
+NEXTU
+wWeatherScratch:: ds SCREEN_HEIGHT_PX
+
 ENDU
 
 

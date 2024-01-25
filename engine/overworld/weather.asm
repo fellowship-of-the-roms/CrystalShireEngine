@@ -32,6 +32,7 @@ DoOverworldWeather:
 	ld a, [wOverworldWeatherDelay]
 	inc a
 	ld [wOverworldWeatherDelay], a
+	call WeatherSpriteLimitCheck
 	pop bc
 	pop hl
 	pop de
@@ -124,6 +125,7 @@ DoSnowFall:
 .ok
 
 	ld a, [wPlayerStepVectorY]
+	add a
 	ld c, a
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
@@ -362,3 +364,107 @@ GetDropSpeedModifier:
 	and 1
 	ret
 
+WeatherSpriteLimitCheck:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wWeatherScratch)
+	ldh [rSVBK], a
+	xor a
+	; clear wWeatherScratch
+	ld hl, wWeatherScratch
+	ld bc, SCREEN_HEIGHT_PX
+	rst ByteFill
+	ld hl, wShadowOAM
+	ld de, wShadowOAM
+	ld b, NUM_SPRITE_OAM_STRUCTS
+.loop
+	ld a, [hl]
+	; convert OAM y cord to screen y cord
+	sub 2 * TILE_WIDTH
+	jr c, .next ; OAM is above the screen
+	cp SCREEN_HEIGHT_PX + 1
+	jr nc, .next ; OAM is below the screen
+	; incerement bytes in wWeatherScratch associated with this sprite
+	ld h, HIGH(wWeatherScratch)
+	ld l, a
+rept TILE_WIDTH - 1
+	inc [hl]
+	inc l
+endr
+	inc [hl]
+.next
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld e, l
+	dec b
+	jr nz, .loop
+
+	; scan wWeatherScratch for scanlines with more than 10 sprites
+	ld hl, wWeatherScratch
+	ld a, 10 ; horizontal sprite limit
+rept SCREEN_HEIGHT_PX - 1
+	cp [hl]
+	call c, SpriteLimitExceeded
+	inc hl
+endr
+	cp [hl]
+	call c, SpriteLimitExceeded
+
+	pop af
+	ldh [rSVBK], a
+	ret
+
+SpriteLimitExceeded:
+	push hl
+	push af
+	; initliaze wSpriteOverlapCount to 0.
+	xor a
+	ld [wSpriteOverlapCount], a
+	ld a, l
+	; convert screen y cord to OAM y cord
+	add 2 * TILE_WIDTH
+	ld c, a
+	ld hl, wShadowOAM + (NUM_SPRITE_OAM_STRUCTS - 1) * SPRITEOAMSTRUCT_LENGTH
+	ld e, l ; d is still set to HIGH(wShadowOAM)
+rept NUM_SPRITE_OAM_STRUCTS
+	; check if OAM y cord is <= (scanline + 16)
+	ld a, [hl]
+	sub c ; get distance between OAM y cord and (scanline + 16)
+	jr z, :+ ; Sprite starts on the scanline; continue
+	jr nc, :++ ; OAM's y cord is below the scanline; skip sprite
+:
+	; use two's complement to make a positive number
+	cpl
+	inc a
+	; check if distance <= TILE_WIDTH
+	cp TILE_WIDTH
+	jr nc, :+ ; distance is greater than TILE_WIDTH; skip sprite
+	ld a, [wSpriteOverlapCount]
+	inc a
+	cp 11 ; horizontal sprite limit + 1
+	ld [wSpriteOverlapCount], a
+	call nc, .delete_sprite ; for all sprites after the 10th, delete them
+: ; anonymous label
+	ld hl, -SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld e, l
+endr
+	pop af
+	pop hl
+	ret
+
+.delete_sprite
+	; hl = sprite to delete
+	ld a, [hl]
+	ld [hl], SCREEN_HEIGHT_PX + 16
+	; convert OAM y cord to screen y cord
+	sub 2 * TILE_WIDTH
+	; decerement bytes in wWeatherScratch associated with this sprite
+	ld h, HIGH(wWeatherScratch)
+	ld l, a
+rept TILE_WIDTH - 1
+	dec [hl]
+	inc l
+endr
+	dec [hl]
+	ret
