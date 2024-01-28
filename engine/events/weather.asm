@@ -25,6 +25,6 @@ SetCurrentWeather::
 	ld a, [wCurrentWeather]
 	cp b
 	ret z
-	ld a, 80
+	ld a, 90
 	ld [wOverworldWeatherCooldown], a
 	ret

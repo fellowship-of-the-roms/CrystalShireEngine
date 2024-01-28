@@ -157,9 +157,12 @@ DoSnowFall:
 	ld [hl], a
 	jr nc, .despawn
 
+	ld a, [wPlayerStepVectorX]
+	add a
+	ld c, a
 	call Random
 	and 1
-	ld a, [wPlayerStepVectorX]
+	ld a, c
 	jr nz, .no_add_1
 	add 1
 .no_add_1
