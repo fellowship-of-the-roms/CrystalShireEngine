@@ -73,6 +73,13 @@ DEF NUM_FISHGROUPS EQU const_value - 1
 	shift_const SOUTH
 	shift_const NORTH
 
+; GetCurrentWeather return values
+	const_def
+	const OW_WEATHER_NONE
+	const OW_WEATHER_RAIN
+	const OW_WEATHER_SNOW
+	DEF NUM_WEATHERS EQU const_value
+
 ; SpawnPoints indexes (see data/maps/spawn_points.asm)
 	const_def
 	const SPAWN_HOME

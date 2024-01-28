@@ -22,6 +22,10 @@ CopySpritePal::
 	jr .got_pal
 
 .not_copy_bg
+	ld a, [wPalFlags]
+	bit USE_DAYTIME_PAL_F, a
+	jr nz, .not_overcast
+
 	; check darkness
 	push hl
 	push de
@@ -46,6 +50,19 @@ CopySpritePal::
 	jr .got_pal
 
 .not_darkness
+	; check overcast
+	ld a, [wCurrentWeather]
+	and a
+	jr z, .not_overcast
+	ld a, [wNeededPalIndex]
+	cp NUM_OW_TIME_OF_DAY_PALS
+	jr nc, .not_overcast
+	ld hl, OvercastOBPalette
+	ld bc, 1 palettes
+	rst AddNTimes
+	jr .check_daytimes
+
+.not_overcast
 	ld a, [wNeededPalIndex]
 	cp NUM_OW_TIME_OF_DAY_PALS
 	jr c, .time_of_day_pal
@@ -105,3 +122,8 @@ DarknessOBPalette:
 	table_width 1 palettes, DarknessOBPalette
 INCLUDE "gfx/overworld/npc_sprites_darkness.pal"
 	assert_table_length NUM_OW_TIME_OF_DAY_PALS + NUM_OW_INDIVIDUAL_PALS
+
+OvercastOBPalette:
+	table_width 1 palettes, OvercastOBPalette
+INCLUDE "gfx/overworld/npc_sprites_overcast.pal"
+	assert_table_length NUM_OW_TIME_OF_DAY_PALS * NUM_DAYTIMES

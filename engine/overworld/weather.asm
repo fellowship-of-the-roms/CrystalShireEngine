@@ -1,13 +1,16 @@
 DoOverworldWeather:
-	call GetMapEnvironment
-	call CheckOutdoorMap
-	ret nz ; don't rain indoors.
 	push de
 	push hl
 	push bc
 	ld a, [wOverworldWeatherDelay]
 	and %1 ; 30 fps
 	jr z, .done
+	ld a, [wOverworldWeatherCooldown]
+	and a
+	jr z, .no_cooldown
+	dec a
+	ld [wOverworldWeatherCooldown], a
+.no_cooldown
 	ld a, [hUsedSpriteIndex]
 	ld c, a
 	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
@@ -18,8 +21,15 @@ DoOverworldWeather:
 	add -SPRITEOAMSTRUCT_LENGTH
 	ldh [hUsedWeatherSpriteIndex], a
 .ok
-	call DoOverworldRain
-;	call DoOverworldSnow
+	ld a, [wOverworldWeatherCooldown]
+	and a
+	jr nz, .on_cooldown
+	ld a, [wCurrentWeather]
+	dec a
+	call z, DoOverworldRain
+	ld a, [wCurrentWeather]
+	cp OW_WEATHER_SNOW
+	call z, DoOverworldSnow
 	call Random
 	cp 1 percent
 	jr nc, .done
@@ -37,6 +47,12 @@ DoOverworldWeather:
 	pop hl
 	pop de
 	ret
+
+.on_cooldown
+	call DoSnowFall
+	call DoRainFall
+	call RainSplashCleanup
+	jr .done
 
 DoOverworldSnow:
 	call ScanForEmptyOAM
@@ -140,8 +156,6 @@ DoSnowFall:
 	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hl], a
 	jr nc, .despawn
-;	and 11
-;	jr nz, .next
 
 	call Random
 	and 1
@@ -154,11 +168,6 @@ DoSnowFall:
 	add hl, de
 	ld a, [hl]
 	sub c
-;	ld c, a
-;	call GetDropSpeedModifier
-;	cpl
-;	add 1
-;	add c
 	add 1
 	ld hl, SPRITEOAMSTRUCT_XCOORD
 	add hl, de
@@ -230,9 +239,6 @@ RainSplashCleanup:
 	ret
 
 SpawnRainDrop:
-;	call Random
-;	cp 90 percent
-;	ret nc
 	call Random
 	and 1
 	jr z, .spawn_on_right

@@ -1707,6 +1707,7 @@ HandleWeather:
 	call .PrintWeatherMessage
 	xor a
 	ld [wBattleWeather], a
+	ld [wCurrentWeather], a
 	ret
 
 .continues

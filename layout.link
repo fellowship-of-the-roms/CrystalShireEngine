@@ -37,7 +37,6 @@ ROMX $01
 ROMX $02
 	"bank2"
 	"Tileset Data 9"
-	"Battle Weather Images"
 ROMX $03
 	"bank3"
 	"VWF"

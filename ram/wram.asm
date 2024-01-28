@@ -130,7 +130,9 @@ wMapTimeOfDay:: db
 
 wPalFlags:: db
 
-	ds 2
+wCurrentWeather:: db
+
+	ds 1
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db
@@ -529,20 +531,6 @@ wEnemyReflectCount:: db
 
 	ds 1
 
-wBattleWeather::
-; 00 normal
-; 01 rain
-; 02 sun
-; 03 sandstorm
-; 04 rain stopped
-; 05 sunliight faded
-; 06 sandstorm subsided
-	db
-
-wWeatherCount::
-; # turns remaining
-	db
-
 wLoweredStat:: db
 wEffectFailed:: db
 wFailedMessage:: db
@@ -599,6 +587,20 @@ wSomeoneIsRampaging:: db
 wPlayerJustGotFrozen:: db
 wEnemyJustGotFrozen:: db
 wBattleEnd::
+
+wBattleWeather::
+; 00 normal
+; 01 rain
+; 02 sun
+; 03 sandstorm
+; 04 rain stopped
+; 05 sunliight faded
+; 06 sandstorm subsided
+	db
+
+wWeatherCount::
+; # turns remaining
+	db
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -1527,7 +1529,7 @@ wInBattleTowerBattle::
 ; 1 BattleTower-Battle
 	db
 
-	ds 1
+wOverworldWeatherCooldown:: db
 
 wFXAnimID:: dw
 

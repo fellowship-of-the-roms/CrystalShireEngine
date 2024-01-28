@@ -686,6 +686,7 @@ INCLUDE "engine/gfx/fade.asm"
 SECTION "Weather System", ROMX
 
 INCLUDE "engine/overworld/weather.asm"
+INCLUDE "engine/events/weather.asm"
 
 
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]

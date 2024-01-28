@@ -988,6 +988,23 @@ LoadMapPals:
 	; Which palette group is based on whether we're outside or inside
 	ld a, [wEnvironment]
 	and 7
+	cp INDOOR
+	jr nc, .continue
+	ld e, a
+	ld a, [wCurrentWeather]
+	and a
+	ld a, e
+	jr z, .continue
+	ld hl, OvercastBGPalette
+	ld a, [wTimeOfDayPal]
+	maskbits NUM_DAYTIMES
+	ld bc, 8 palettes
+	rst AddNTimes
+	ld de, wBGPals1
+	ld bc, 8 palettes
+	call FarCopyColorWRAM
+	jr .got_pals
+.continue
 	ld e, a
 	ld d, 0
 	ld hl, EnvironmentColorsPointers
@@ -1111,6 +1128,9 @@ BillsPC_ItemPalette:
 
 TilesetBGPalette:
 INCLUDE "gfx/tilesets/bg_tiles.pal"
+
+OvercastBGPalette:
+INCLUDE "gfx/tilesets/bg_tiles_overcast.pal"
 
 RoofPals:
 	table_width PAL_COLOR_SIZE * 3 * 2, RoofPals
