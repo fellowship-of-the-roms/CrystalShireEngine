@@ -57,59 +57,7 @@ DoOverworldSnow:
 	call nc, SpawnSnowFlake
 	call ScanForEmptyOAM
 	call nc, SpawnSnowFlake
-	jr DoSnowFall
-
-DoOverworldRain:
-	ld a, [wLoadedObjPal7]
-	cp PAL_OW_RAIN
-	jr z, .continue
-	ld a, PAL_OW_RAIN
-	farcall CopySpritePalToOBPal7
-.continue
-	call ScanForEmptyOAM
-	call nc, SpawnRainDrop
-	call ScanForEmptyOAM
-	call nc, SpawnRainDrop
-	call ScanForEmptyOAM
-	call nc, SpawnRainDrop
-	call DoRainFall
-	jmp RainSplashCleanup
-
-SpawnSnowFlake:
-	call Random
-	cp 40 percent
-	ret nc
-	call Random
-	and %11
-	jr z, .spawn_on_right
-	xor a
-	ld [hli], a
-	ld a, SCREEN_WIDTH_PX + 7
-	call RandomRange
-	inc a
-	ld [hli], a
-.finish
-	ld a, $f6 ; tile id
-	ld [hli], a
-	ld a, VRAM_BANK_1 | 7 ; pallete 7
-	ld [hld], a
-	dec hl
-	dec hl
-	ldh a, [hUsedWeatherSpriteIndex]
-	cp l
-	ret nc
-	ld a, l
-	ldh [hUsedWeatherSpriteIndex], a
-	ret
-
-.spawn_on_right
-	ld a, SCREEN_HEIGHT_PX + 8
-	call RandomRange
-	ld [hli], a
-	ld a, SCREEN_WIDTH_PX + 8
-	ld [hli], a
-	jr .finish
-
+; fallthrough
 DoSnowFall:
 	ld de, wShadowOAM
 	ld hl, wShadowOAM
@@ -193,25 +141,21 @@ DoSnowFall:
 	ld [hl], a
 	jr .next
 
-ScanForEmptyOAM:
-; return empty OAM slot in de or carry set if none
-	ld de, wShadowOAM
-	ld hl, wShadowOAM
-	ld b, NUM_SPRITE_OAM_STRUCTS
-.loop
-	ld a, [hl]
-	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
-	ret z
-	ld hl, SPRITEOAMSTRUCT_LENGTH
-	add hl, de
-	ld d, h
-	ld e, l
-	dec b
-	jr nz, .loop
-	; all sprites are onscreen
-	scf
-	ret
-
+DoOverworldRain:
+	ld a, [wLoadedObjPal7]
+	cp PAL_OW_RAIN
+	jr z, .continue
+	ld a, PAL_OW_RAIN
+	farcall CopySpritePalToOBPal7
+.continue
+	call ScanForEmptyOAM
+	call nc, SpawnRainDrop
+	call ScanForEmptyOAM
+	call nc, SpawnRainDrop
+	call ScanForEmptyOAM
+	call nc, SpawnRainDrop
+	call DoRainFall
+; fallthrough
 RainSplashCleanup:
 	ld a, [wOverworldWeatherDelay]
 	and %1110
@@ -234,6 +178,60 @@ RainSplashCleanup:
 	ld e, l
 	dec b
 	jr nz, .loop
+	ret
+
+SpawnSnowFlake:
+	call Random
+	cp 40 percent
+	ret nc
+	call Random
+	and %11
+	jr z, .spawn_on_right
+	xor a
+	ld [hli], a
+	ld a, SCREEN_WIDTH_PX + 7
+	call RandomRange
+	inc a
+	ld [hli], a
+.finish
+	ld a, $f6 ; tile id
+	ld [hli], a
+	ld a, VRAM_BANK_1 | 7 ; pallete 7
+	ld [hld], a
+	dec hl
+	dec hl
+	ldh a, [hUsedWeatherSpriteIndex]
+	cp l
+	ret nc
+	ld a, l
+	ldh [hUsedWeatherSpriteIndex], a
+	ret
+
+.spawn_on_right
+	ld a, SCREEN_HEIGHT_PX + 8
+	call RandomRange
+	ld [hli], a
+	ld a, SCREEN_WIDTH_PX + 8
+	ld [hli], a
+	jr .finish
+
+ScanForEmptyOAM:
+; return empty OAM slot in de or carry set if none
+	ld de, wShadowOAM
+	ld hl, wShadowOAM
+	ld b, NUM_SPRITE_OAM_STRUCTS
+.loop
+	ld a, [hl]
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
+	ret z
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld d, h
+	ld e, l
+	dec b
+	jr nz, .loop
+	; all sprites are onscreen
+	scf
 	ret
 
 SpawnRainDrop:
