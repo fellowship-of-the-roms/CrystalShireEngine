@@ -2725,9 +2725,9 @@ ApplyBGMapAnchorToObjects:
 	ld [wPlayerBGMapOffsetY], a
 	jmp PopBCDEHL
 
-DEF PRIORITY_LOW  EQU $10
+DEF PRIORITY_LOW  EQU $30
 DEF PRIORITY_NORM EQU $20
-DEF PRIORITY_HIGH EQU $30
+DEF PRIORITY_HIGH EQU $10
 
 InitSprites:
 	call .DeterminePriorities
