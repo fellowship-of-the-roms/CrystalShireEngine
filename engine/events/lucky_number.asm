@@ -54,7 +54,7 @@ CheckForLuckyNumberWinners:
 	; if matching digits were found...
 	ld [wScriptVar], a
 	ld hl, sp+0 ; store box + position on the stack for mon with matching digits
-	ld [hl], c
+	ld [hl], c ; no-optimize *hl++|*hl-- = b|c|d|e (a is needed)
 	inc hl
 	ld [hl], b
 	cp 5
