@@ -21,6 +21,7 @@ BattleAnimationsNegatives::
 	dw BattleAnim_Wobble
 	dw BattleAnim_Shake
 	dw BattleAnim_HitConfusion
+	dw BattleAnim_InHail
 .IndirectEnd::
 
 BattleAnim_ThrowPokeBall:
@@ -410,4 +411,19 @@ BattleAnim_ShowMon_1:
 	anim_wait 4
 	anim_incobj 1
 	anim_wait 1
+	anim_ret
+
+BattleAnim_InHail:
+	anim_1gfx BATTLE_ANIM_GFX_ICE
+	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+	anim_obj BATTLE_ANIM_OBJ_HAIL, 88, 0, $0
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_HAIL, 72, 0, $1
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_HAIL, 56, 0, $2
+.loop
+	anim_sound 0, 1, SFX_SHINE
+	anim_wait 8
+	anim_loop 8, .loop
+	anim_wait 8
 	anim_ret
