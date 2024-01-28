@@ -87,7 +87,6 @@ MapSetupScript_Connection:
 	mapsetup EnterMapConnection
 	mapsetup LoadMapAttributes
 	mapsetup HandleNewMap
-	mapsetup ClearWeather
 	mapsetup RefreshPlayerCoords
 	mapsetup LoadBlockData
 	mapsetup LoadMapTileset
@@ -136,6 +135,7 @@ MapSetupScript_Train:
 	db -1 ; end
 
 MapSetupScript_ReloadMap:
+	mapsetup ClearWeather
 	mapsetup FadeMapMusicAndPalettes
 	mapsetup ClearBGPalettes
 	mapsetup DisableLCD

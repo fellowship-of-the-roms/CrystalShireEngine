@@ -281,7 +281,9 @@ DoRainFall:
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
 	ld a, [hli]
-	cp $f7 ; tile id
+	cp $f5
+	jr z, .update_splash
+	cp $f7 ; rain tile id
 	jr nz, .next
 	ld a, [hl]
 	cp VRAM_BANK_1 | 7 ; pallete 7
@@ -348,6 +350,29 @@ DoRainFall:
 	ld [hli], a
 	ld [hl], a
 	jr .next
+
+.update_splash
+	ld a, [hl]
+	cp VRAM_BANK_1 | 7 ; pallete 7
+	jr nz, .next
+	ld a, [wPlayerStepVectorY]
+	add a
+	ld c, a
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld a, [hl]
+	sub c
+	cp SCREEN_HEIGHT_PX + 16
+	jr nc, .despawn
+	ld [hli], a
+	ld a, [wPlayerStepVectorX]
+	add a
+	ld c, a
+	ld a, [hl]
+	sub c
+	ld [hl], a
+	jr .next
+
 
 .splash
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
@@ -430,21 +455,21 @@ rept NUM_SPRITE_OAM_STRUCTS
 	; check if OAM y cord is <= (scanline + 16)
 	ld a, [hl]
 	sub c ; get distance between OAM y cord and (scanline + 16)
-	jr z, :+ ; Sprite starts on the scanline; continue
-	jr nc, :++ ; OAM's y cord is below the scanline; skip sprite
-:
+	jr z, .continue_\@ ; Sprite starts on the scanline; continue
+	jr nc, .next_\@ ; OAM's y cord is below the scanline; skip sprite
+.continue_\@
 	; use two's complement to make a positive number
 	cpl
 	inc a
 	; check if distance <= TILE_WIDTH
 	cp TILE_WIDTH
-	jr nc, :+ ; distance is greater than TILE_WIDTH; skip sprite
+	jr nc, .next_\@ ; distance is greater than TILE_WIDTH; skip sprite
 	ld a, [wSpriteOverlapCount]
 	inc a
 	cp 11 ; horizontal sprite limit + 1
 	ld [wSpriteOverlapCount], a
 	call nc, .delete_sprite ; for all sprites after the 10th, delete them
-: ; anonymous label
+.next_\@
 	ld hl, -SPRITEOAMSTRUCT_LENGTH
 	add hl, de
 	ld e, l
