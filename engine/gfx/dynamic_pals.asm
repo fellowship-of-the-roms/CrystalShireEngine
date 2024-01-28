@@ -112,21 +112,15 @@ MarkUsedPal:
 	push bc
 
 	; Pal is not already loaded, find a empty pal slot
-	lb bc, 0, 8
-	ld hl, wUsedObjectPals
-	ld a, 1
-	ld d, a
-.search_again
-	ld a, d
-	and [hl]
-	jr z, .found_empty
-	ld a, d
-	rla
-	ld d, a
+	ld a, [wUsedObjectPals]
+	ld b, 0
+.bit_check_loop
+	bit 0, a
+	jr z, .unset_bit_found
+	rrca
 	inc b
-	dec c
-	jr nz, .search_again
-.found_empty
+	jr .bit_check_loop
+.unset_bit_found
 	ld a, b
 	pop bc
 
