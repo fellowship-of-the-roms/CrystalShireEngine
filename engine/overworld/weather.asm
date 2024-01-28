@@ -105,7 +105,7 @@ DoSnowFall:
 .loop
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	ld a, [hl]
-	cp SCREEN_HEIGHT_PX + 16
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	jr z, .next
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
@@ -137,7 +137,7 @@ DoSnowFall:
 	add 2
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	cp SCREEN_HEIGHT_PX + 16
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hl], a
 	jr nc, .despawn
 ;	and 11
@@ -177,7 +177,7 @@ DoSnowFall:
 .despawn
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, SCREEN_HEIGHT_PX + 16
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -192,7 +192,7 @@ ScanForEmptyOAM:
 	ld b, NUM_SPRITE_OAM_STRUCTS
 .loop
 	ld a, [hl]
-	cp SCREEN_HEIGHT_PX + 16 ; offscreen
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
 	ret z
 	ld hl, SPRITEOAMSTRUCT_LENGTH
 	add hl, de
@@ -218,7 +218,7 @@ RainSplashCleanup:
 	jr nz, .next
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, SCREEN_HEIGHT_PX + 16 ; offscreen
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
 	ld [hl], a
 .next
 	ld hl, SPRITEOAMSTRUCT_LENGTH
@@ -257,10 +257,10 @@ SpawnRainDrop:
 	ret
 
 .spawn_on_right
-	ld a, SCREEN_HEIGHT_PX + 8
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	call RandomRange
 	ld [hli], a
-	ld a, SCREEN_WIDTH_PX + 8
+	ld a, SCREEN_WIDTH_PX + TILE_WIDTH
 	ld [hli], a
 	jr .finish
 
@@ -276,7 +276,7 @@ DoRainFall:
 .loop
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	ld a, [hl]
-	cp SCREEN_HEIGHT_PX + 16
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	jr z, .next
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
 	add hl, de
@@ -308,7 +308,7 @@ DoRainFall:
 	add 8
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	cp SCREEN_HEIGHT_PX + 16
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hl], a
 	jr nc, .despawn
 
@@ -343,7 +343,7 @@ DoRainFall:
 .despawn
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, SCREEN_HEIGHT_PX + 16
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -362,7 +362,7 @@ DoRainFall:
 	add hl, de
 	ld a, [hl]
 	sub c
-	cp SCREEN_HEIGHT_PX + 16
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	jr nc, .despawn
 	ld [hli], a
 	ld a, [wPlayerStepVectorX]
@@ -405,7 +405,7 @@ WeatherSpriteLimitCheck:
 .loop
 	ld a, [hl]
 	; convert OAM y cord to screen y cord
-	sub 2 * TILE_WIDTH
+	sub TILE_WIDTH * 2
 	jr c, .next ; OAM is above the screen
 	cp SCREEN_HEIGHT_PX + 1
 	jr nc, .next ; OAM is below the screen
@@ -447,7 +447,7 @@ SpriteLimitExceeded:
 	ld [wSpriteOverlapCount], a
 	ld a, l
 	; convert screen y cord to OAM y cord
-	add 2 * TILE_WIDTH
+	add TILE_WIDTH * 2
 	ld c, a
 	ld hl, wShadowOAM + (NUM_SPRITE_OAM_STRUCTS - 1) * SPRITEOAMSTRUCT_LENGTH
 	ld e, l ; d is still set to HIGH(wShadowOAM)
@@ -481,9 +481,9 @@ endr
 .delete_sprite
 	; hl = sprite to delete
 	ld a, [hl]
-	ld [hl], SCREEN_HEIGHT_PX + 16
+	ld [hl], SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	; convert OAM y cord to screen y cord
-	sub 2 * TILE_WIDTH
+	sub TILE_WIDTH * 2
 	; decerement bytes in wWeatherScratch associated with this sprite
 	ld h, HIGH(wWeatherScratch)
 	ld l, a
