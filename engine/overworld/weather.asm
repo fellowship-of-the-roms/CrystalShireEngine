@@ -11,10 +11,9 @@ DoOverworldWeather:
 	dec a
 	ld [wOverworldWeatherCooldown], a
 .no_cooldown
-	ld a, [hUsedSpriteIndex]
-	ld c, a
-	ld a, SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS
-	sub c
+	ldh a, [hUsedSpriteIndex]
+	cpl
+	add (SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS) + 1
 	ld hl, hUsedWeatherSpriteIndex
 	cp [hl]
 	jr nc, .ok
@@ -39,9 +38,8 @@ DoOverworldWeather:
 ;	farcall BlindingFlash
 ;	farcall BlindingFlash
 .done
-	ld a, [wOverworldWeatherDelay]
-	inc a
-	ld [wOverworldWeatherDelay], a
+	ld hl, wOverworldWeatherDelay
+	inc [hl]
 	call WeatherSpriteLimitCheck
 	pop bc
 	pop hl
@@ -59,8 +57,7 @@ DoOverworldSnow:
 	call nc, SpawnSnowFlake
 	call ScanForEmptyOAM
 	call nc, SpawnSnowFlake
-	call DoSnowFall
-	ret
+	jr DoSnowFall
 
 DoOverworldRain:
 	ld a, [wLoadedObjPal7]
@@ -76,8 +73,7 @@ DoOverworldRain:
 	call ScanForEmptyOAM
 	call nc, SpawnRainDrop
 	call DoRainFall
-	call RainSplashCleanup
-	ret
+	jmp RainSplashCleanup
 
 SpawnSnowFlake:
 	call Random
@@ -86,17 +82,17 @@ SpawnSnowFlake:
 	call Random
 	and %11
 	jr z, .spawn_on_right
-	ld a, 0
+	xor a
 	ld [hli], a
 	ld a, SCREEN_WIDTH_PX + 7
 	call RandomRange
-	add 1
+	inc a
 	ld [hli], a
 .finish
 	ld a, $f6 ; tile id
 	ld [hli], a
-	ld [hl], VRAM_BANK_1 | 7 ; pallete 7
-	dec hl
+	ld a, VRAM_BANK_1 | 7 ; pallete 7
+	ld [hld], a
 	dec hl
 	dec hl
 	ldh a, [hUsedWeatherSpriteIndex]
@@ -164,17 +160,17 @@ DoSnowFall:
 	and 1
 	ld a, c
 	jr nz, .no_add_1
-	add 1
+	inc a
 .no_add_1
 	ld c, a
 	ld hl, SPRITEOAMSTRUCT_XCOORD
 	add hl, de
 	ld a, [hl]
 	sub c
-	add 1
+	inc a
 	ld hl, SPRITEOAMSTRUCT_XCOORD
 	add hl, de
-	sub 1
+	sub 1 ; no-optimize a++|a-- (need to set carry)
 	ld [hl], a
 	jr c, .despawn
 .next
@@ -230,8 +226,7 @@ RainSplashCleanup:
 	jr nz, .next
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
-	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
-	ld [hl], a
+	ld [hl], SCREEN_HEIGHT_PX + (TILE_WIDTH * 2) ; offscreen
 .next
 	ld hl, SPRITEOAMSTRUCT_LENGTH
 	add hl, de
@@ -245,7 +240,7 @@ SpawnRainDrop:
 	call Random
 	and 1
 	jr z, .spawn_on_right
-	ld a, 0
+	xor a
 	ld [hli], a
 	ld a, SCREEN_WIDTH_PX + 7
 	call RandomRange
@@ -254,8 +249,8 @@ SpawnRainDrop:
 .finish
 	ld a, $f7 ; tile id
 	ld [hli], a
-	ld [hl], VRAM_BANK_1 | 7 ; pallete 7
-	dec hl
+	ld a, VRAM_BANK_1 | 7 ; pallete 7
+	ld [hld], a
 	dec hl
 	dec hl
 	ldh a, [hUsedWeatherSpriteIndex]
@@ -332,7 +327,7 @@ DoRainFall:
 	ld c, a
 	call GetDropSpeedModifier
 	cpl
-	add 1
+	inc a
 	add a
 	add c
 	sub 4

@@ -2668,9 +2668,8 @@ _UpdateSprites::
 	ldh a, [hUsedWeatherSpriteIndex]
 	ld c, a
 	ldh a, [hUsedSpriteIndex]
-	ld l, a
-	ld a, NUM_SPRITE_OAM_STRUCTS * (SPRITEOAMSTRUCT_LENGTH)
-	sub l
+	cpl
+	add (NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH) + 1
 	sub SPRITEOAMSTRUCT_LENGTH
 	cp c
 	ret c
@@ -2883,7 +2882,7 @@ InitSprites:
 	ld h, [hl]
 	ld l, a
 	ldh a, [hUsedSpriteIndex]
-	ld c, a
+	ld c, a ; no-optimize a = N - a (c gets used below)
 	ld a, SPRITEOAMSTRUCT_LENGTH * (NUM_SPRITE_OAM_STRUCTS - 1)
 	sub c
 	ld c, a
