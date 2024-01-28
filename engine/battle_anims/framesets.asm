@@ -76,9 +76,9 @@ GetBattleAnimFrame:
 .GetPointer:
 	ld hl, BATTLEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, BattleAnimFrameData
 	add hl, de
 	add hl, de
