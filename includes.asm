@@ -74,5 +74,6 @@ INCLUDE "constants/trainer_data_constants.asm"
 INCLUDE "constants/type_constants.asm"
 INCLUDE "constants/battle_tower_constants.asm"
 INCLUDE "constants/nature_constants.asm"
+INCLUDE "constants/ability_constants.asm"
 INCLUDE "constants/16_bit_translation_constants.asm"
 INCLUDE "constants/16_bit_locking_constants.asm" ; MUST come after the translation constants file!
