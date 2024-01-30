@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 35 ; step cycles to hatch
 	INCBIN "gfx/pokemon/eevee/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db RUN_AWAY, RUN_AWAY ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 

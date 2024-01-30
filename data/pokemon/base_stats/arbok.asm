@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/arbok/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db INTIMIDATE, SHED_SKIN ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GROUND, EGG_DRAGON ; egg groups
 

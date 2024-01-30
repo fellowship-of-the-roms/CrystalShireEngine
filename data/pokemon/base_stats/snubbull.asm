@@ -11,7 +11,8 @@
 	db GENDER_F75 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/snubbull/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db INTIMIDATE, RUN_AWAY ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_FAST ; growth rate
 	dn EGG_GROUND, EGG_FAIRY ; egg groups
 

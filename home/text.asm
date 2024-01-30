@@ -246,6 +246,7 @@ MACRO dict
 ENDM
 
 	dict "<LINE>",    LineChar
+	dict "<LNBRK>",   LineBreak
 	dict "<NEXT>",    NextLineChar
 	dict "<CR>",      CarriageReturnChar
 	dict "<NULL>",    NullChar
@@ -412,6 +413,13 @@ NextLineChar::
 	add hl, bc
 	push hl
 	jmp NextChar
+
+LineBreak::
+	ld bc, SCREEN_WIDTH
+	pop hl
+	add hl, bc
+	push hl
+	jp NextChar
 
 LineFeedChar::
 	pop hl

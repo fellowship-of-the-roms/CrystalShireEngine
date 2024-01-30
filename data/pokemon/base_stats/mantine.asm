@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/mantine/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db SWIFT_SWIM, WATER_ABSORB ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_1, EGG_WATER_1 ; egg groups
 

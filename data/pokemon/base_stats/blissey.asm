@@ -11,7 +11,8 @@
 	db GENDER_F100 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/blissey/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db NATURAL_CURE, SERENE_GRACE ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 

@@ -11,7 +11,8 @@
 	db GENDER_UNKNOWN ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/unown_a/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db LEVITATE, LEVITATE ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

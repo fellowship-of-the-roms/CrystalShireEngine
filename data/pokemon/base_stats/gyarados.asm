@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 5 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gyarados/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db INTIMIDATE, INTIMIDATE ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_2, EGG_DRAGON ; egg groups
 

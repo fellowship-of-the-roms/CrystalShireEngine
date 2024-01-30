@@ -260,9 +260,9 @@ GetBaseData::
 	ld hl, wBasePicSize
 	ld [hl], b
 
-; Beta front and back sprites
-; (see pokegold-spaceworld's data/pokemon/base_stats/*)
-	ld hl, wBaseUnusedFrontpic
+; Ability (which was formerly the unused frontpic)
+; I don't want to screw with this at the moment because it will break something else
+	ld hl, wBaseAbility1
 	ld a, e
 	ld [hli], a
 	ld a, d
