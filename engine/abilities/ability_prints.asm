@@ -45,7 +45,7 @@ PrintAbility:
     ld d, [hl]
     ld e, a
     pop bc
-    hlcoord 0, 11
+    hlcoord 0, 10
     jp PlaceString
 
 .AbilityString1:
