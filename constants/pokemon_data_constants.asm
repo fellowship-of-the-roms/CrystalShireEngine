@@ -19,7 +19,7 @@ DEF BASE_TYPE_1             rb
 DEF BASE_TYPE_2             rb
 DEF BASE_CATCH_RATE         rb
 DEF BASE_EXP                rb
-DEF BASE_ITEMS              rw
+DEF BASE_ITEMS              rw 2
 rsset BASE_ITEMS
 DEF BASE_ITEM_1             rw
 DEF BASE_ITEM_2             rw
