@@ -289,6 +289,7 @@ GetAbility::
 
 .Function:
 	push bc
+	push de
 	push hl
 	ld a, c
 	call GetPokemonIndexFromID
@@ -300,15 +301,19 @@ GetAbility::
 
 	; Assumes this returns z for ability 1.
 	and ABILITY_MASK
+	ld de, BASE_ABILITY1
+	jr z, .ability_1
+	ld de, BASE_ABILITY2
+.ability_1
 
-	ld hl, BaseData + BASE_ABILITY1
-	jr z, .got_ability
-	inc hl
-.got_ability
-	ld a, BASE_DATA_SIZE
-	rst AddNTimes
+	ld a, BANK(BaseData)
+	ld hl, BaseData
+	call LoadIndirectPointer
+	add hl, de
+	call GetFarByte
 	ld a, [hl]
 	pop hl
+	pop de
 	pop bc
 	ret
 
