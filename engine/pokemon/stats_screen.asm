@@ -786,17 +786,17 @@ LoadOrangePage:
 	farcall PrintAbility
 	; Place "Nature:"
 	ld de, .NatureString1
-    hlcoord 0, 13
-    call PlaceString
+	hlcoord 0, 13
+	call PlaceString
 
 	; Snag our nature
-    push bc
-    ld a, [wCurPartyMon]
-    ld bc, PARTYMON_STRUCT_LENGTH
-    ld hl, wPartyMon1Personality
-    call AddNTimes
-    ld a, [hl]
-    and NATURE_MASK
+	push bc
+	ld a, [wCurPartyMon]
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld hl, wPartyMon1Personality
+	call AddNTimes
+	ld a, [hl]
+	and NATURE_MASK
 	ld b, a
 	hlcoord 4, 14
 	farcall PrintNature
@@ -804,7 +804,7 @@ LoadOrangePage:
 	ret
 
 .NatureString1
-    db "Nature:@"
+	db "Nature:@"
 
 HelloWorldString:
 	db "Hello world!@"
