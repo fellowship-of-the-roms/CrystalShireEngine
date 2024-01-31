@@ -118,11 +118,11 @@ MarvelScaleDesc:
 
 PlusDesc:
     db    "Boosts SP.ATK in"
-    next1 "presence of MINUS.@"
+    next1 "presence of Minus.@"
 
 MinusDesc:
     db    "Boosts SP.ATK in"
-    next1 "presence of PLUS.@"
+    next1 "presence of Plus.@"
 
 CompoundeyesDesc:
     db    "Boosts ACCURACY"
