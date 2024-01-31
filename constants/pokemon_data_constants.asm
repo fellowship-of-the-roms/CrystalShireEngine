@@ -27,7 +27,7 @@ DEF BASE_GENDER             rb
 DEF BASE_EGG_STEPS          rb
 DEF BASE_PIC_SIZE           rb
 DEF BASE_ABILITY1           rb
-DEF BASE_ABLITY2            rb
+DEF BASE_ABILITY2           rb
 DEF BASE_PADDING            rw
 DEF BASE_GROWTH_RATE        rb
 DEF BASE_EGG_GROUPS         rb

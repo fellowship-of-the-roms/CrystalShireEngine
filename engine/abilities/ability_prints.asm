@@ -4,20 +4,18 @@ CalcAbility_StatsScreen:
 	push hl
 	push bc
 
-	; Grab the ability from the stats page 
+	; Target the relevant mon.
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Personality
-	call AddNTimes
-	pop bc
-	ld a, [hl] ; Loads the top byte of the PV bank
-	and ABILITY_MASK
-	ld hl, wBaseAbility2
-	cp %00100000  ; We compare it to the second ability first, since that's easiest for math
-	jr z, .done
-	ld hl, wBaseAbility1
-.done
+	ld hl, wPartyMon1Species
+	rst AddNTimes
+
 	ld a, [hl]
+	ld bc, wPartyMon1Personality - wPartyMon1Species
+	add hl, bc
+	ld c, a
+	call GetAbility
+	pop bc
 	pop hl
 	ret
 

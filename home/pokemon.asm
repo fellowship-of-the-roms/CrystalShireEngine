@@ -280,6 +280,38 @@ GetBaseData::
 	rst Bankswitch
 	jmp PopBCDEHL
 
+GetAbility::
+; 'hl' contains the target personality to check (ability and form)
+; 'c' contains the target species
+; returns ability in a
+; preserves curspecies and base data
+	anonbankpush BaseData
+
+.Function:
+	push bc
+	push hl
+	ld a, c
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	pop hl
+	push hl
+	ld a, [hl]
+
+	; Assumes this returns z for ability 1.
+	and ABILITY_MASK
+
+	ld hl, BaseData + BASE_ABILITY1
+	jr z, .got_ability
+	inc hl
+.got_ability
+	ld a, BASE_DATA_SIZE
+	rst AddNTimes
+	ld a, [hl]
+	pop hl
+	pop bc
+	ret
+
 GetCurNickname::
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames

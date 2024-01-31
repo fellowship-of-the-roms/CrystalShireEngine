@@ -1,5 +1,11 @@
 ; Far calls to another bank
 
+MACRO anonbankpush
+	call AnonBankPush
+	db BANK(\1)
+	assert warn, BANK(\1) != 0, "unnecessary `anonbankpush \1`"
+ENDM
+
 MACRO farcall ; bank, address
 	rst FarCall
 	dbw BANK(\1), \1
