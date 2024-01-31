@@ -8,6 +8,7 @@ SetCurrentWeather::
 	jr nz, .got_weather ; no weather indoors.
 	ld a, NUM_WEATHERS
 	call RandomRange
+	ld a, OW_WEATHER_RAIN
 .got_weather
 	ld [wCurrentWeather], a
 	dec a ; OW_WEATHER_RAIN

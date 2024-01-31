@@ -67,7 +67,6 @@ PushWindow::
 ExitMenu::
 	push af
 	farcall _ExitMenu
-	farcall ClearWeather
 	pop af
 	ret
 
@@ -78,7 +77,6 @@ CloseWindow::
 	push af
 	call ExitMenu
 	call ApplyTilemap
-	farcall ClearWeather
 	call UpdateSprites
 	pop af
 	ret

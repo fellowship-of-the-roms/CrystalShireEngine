@@ -1585,7 +1585,9 @@ wMinutesSince:: db
 wHoursSince:: db
 wDaysSince:: db
 
-	ds 7
+wWeatherFlags:: db
+
+	ds 6
 
 wTempLoopCounter:: db
 
@@ -3160,6 +3162,17 @@ wBTChoiceOfLvlGroup:: db
 	ds $1
 w3_d80e:: db
 ENDU
+
+
+SECTION "OAM Backup", WRAMX
+
+wShadowOAMBackup::
+; wShadowOAMSpriteBackup00 - wShadowOAMSpriteBackup39
+for n, NUM_SPRITE_OAM_STRUCTS
+wShadowOAMSpriteBackup{02d:n}:: sprite_oam_struct wShadowOAMSpriteBackup{02d:n}
+endr
+wShadowOAMBackupEnd::
+
 
 SECTION "Metatiles", WRAMX
 

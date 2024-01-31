@@ -1716,6 +1716,7 @@ FadeToMenu::
 	ldh [hBGMapMode], a
 	call LoadStandardMenuHeader
 	farcall FadeOutPalettes
+	call BackupSprites
 	call ClearSprites
 	jmp DisableSpriteUpdates
 
@@ -1741,6 +1742,8 @@ FinishExitMenu::
 	farcall LoadOW_BGPal7
 	call WaitBGMap2
 	farcall FadeInPalettes_EnableDynNoApply
+	farcall LoadWeatherPal
+	call RestoreSprites
 	jmp EnableSpriteUpdates
 
 ReturnToMapWithSpeechTextbox::

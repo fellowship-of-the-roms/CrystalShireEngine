@@ -314,12 +314,16 @@ FlyFromAnim:
 	jr nz, .exit
 	ld a, 0 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
+	ld hl, wWeatherFlags
+	set OW_WEATHER_DO_FLY_F, [hl]
 	call DoNextFrameForAllSprites
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
 
 .exit
+	ld hl, wWeatherFlags
+	res OW_WEATHER_DO_FLY_F, [hl]
 	pop af
 	ld [wVramState], a
 	ret
@@ -351,7 +355,10 @@ FlyToAnim:
 	jr nz, .exit
 	ld a, 0 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
+	ld hl, wWeatherFlags
+	set OW_WEATHER_DO_FLY_F, [hl]
 	call DoNextFrameForAllSprites
+	farcall DoOverworldRain
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
@@ -359,22 +366,24 @@ FlyToAnim:
 .exit
 	pop af
 	ld [wVramState], a
+	ld hl, wWeatherFlags
+	res OW_WEATHER_DO_FLY_F, [hl]
 ; fallthrough
 .RestorePlayerSprite_DespawnLeaves:
-	ld hl, wShadowOAMSprite00TileID
+	ld hl, wShadowOAMSprite39TileID
 	xor a
 	ld c, 4
 .OAMloop
-	ld [hli], a ; tile id
+	ld [hld], a ; tile id
 rept SPRITEOAMSTRUCT_LENGTH - 1
-	inc hl
+	dec hl
 endr
 	inc a
 	dec c
 	jr nz, .OAMloop
-	ld hl, wShadowOAMSprite04
-	ld bc, wShadowOAMEnd - wShadowOAMSprite04
-	xor a
+	ld hl, wShadowOAMSprite00
+	ld bc, wShadowOAMSprite12 - wShadowOAMSprite00
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	jmp ByteFill
 
 FlyFunction_InitGFX:

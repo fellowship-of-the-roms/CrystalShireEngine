@@ -52,7 +52,78 @@ DoOverworldWeather:
 	call RainSplashCleanup
 	jr .done
 
+SpawnRandomWeatherFullScreen::
+	lb bc, SCREEN_WIDTH_PX, SCREEN_HEIGHT_PX
+; fallthrough
+SpawnRandomWeatherCoords::
+; This is used to randomize the weather's starting position within an area
+; assumes minimum sprite x/y coords are 0.
+; bc = max screen x/y coords
+	ld a, [wCurrentWeather]
+	and a
+	ret z
+	ld a, [wCurrentWeather]
+	dec a ; rain
+	jr z, .rain
+.snow_loop
+	push bc
+	call ScanForEmptyOAM
+	pop bc
+	ret c
+	ld a, c
+	call RandomRange
+	ld [hli], a
+	ld a, b
+	call RandomRange
+	ld [hli], a
+	ld a, $f6
+	ld [hli], a
+	ld a, VRAM_BANK_1 | 6 ; pallete 6
+	ld [hld], a
+	dec hl
+	dec hl
+	ldh a, [hUsedWeatherSpriteIndex]
+	cp l
+	jr nc, .snow_loop
+	ld a, l
+	ldh [hUsedWeatherSpriteIndex], a
+	jr .snow_loop
+
+.rain
+	push bc
+	call ScanForEmptyOAM
+	pop bc
+	ret c
+	ld a, c
+	call RandomRange
+	ld [hli], a
+	ld a, b
+	call RandomRange
+	ld [hli], a
+	call Random
+	cp 20 percent ; 20 percent splashes
+	ld a, $f5
+	jr c, .got_tile
+	ld a, $f7
+.got_tile
+	ld [hli], a
+	ld a, VRAM_BANK_1 | 6 ; pallete 6
+	ld [hld], a
+	dec hl
+	dec hl
+	ldh a, [hUsedWeatherSpriteIndex]
+	cp l
+	jr nc, .rain
+	ld a, l
+	ldh [hUsedWeatherSpriteIndex], a
+	jr .rain
+
 DoOverworldSnow:
+	ld a, [wLoadedObjPal6]
+	inc a
+	jr z, .continue
+	farcall LoadWeatherPal
+.continue
 	call ScanForEmptyOAM
 	call nc, SpawnSnowFlake
 	call ScanForEmptyOAM
@@ -73,7 +144,7 @@ DoSnowFall:
 	cp $f6 ; tile id
 	jr nz, .next
 	ld a, [hl]
-	cp VRAM_BANK_1 | 7 ; pallete 7
+	cp VRAM_BANK_1 | 6 ; pallete 6
 	jr nz, .next
 
 	call Random
@@ -142,11 +213,10 @@ DoSnowFall:
 	jr .next
 
 DoOverworldRain:
-	ld a, [wLoadedObjPal7]
+	ld a, [wLoadedObjPal6]
 	cp PAL_OW_RAIN
 	jr z, .continue
-	ld a, PAL_OW_RAIN
-	farcall CopySpritePalToOBPal7
+	farcall LoadWeatherPal
 .continue
 	call ScanForEmptyOAM
 	call nc, SpawnRainDrop
@@ -196,7 +266,7 @@ SpawnSnowFlake:
 .finish
 	ld a, $f6 ; tile id
 	ld [hli], a
-	ld a, VRAM_BANK_1 | 7 ; pallete 7
+	ld a, VRAM_BANK_1 | 6 ; pallete 6
 	ld [hld], a
 	dec hl
 	dec hl
@@ -247,7 +317,7 @@ SpawnRainDrop:
 .finish
 	ld a, $f7 ; tile id
 	ld [hli], a
-	ld a, VRAM_BANK_1 | 7 ; pallete 7
+	ld a, VRAM_BANK_1 | 6 ; pallete 6
 	ld [hld], a
 	dec hl
 	dec hl
@@ -288,7 +358,7 @@ DoRainFall:
 	cp $f7 ; rain tile id
 	jr nz, .next
 	ld a, [hl]
-	cp VRAM_BANK_1 | 7 ; pallete 7
+	cp VRAM_BANK_1 | 6 ; pallete 6
 	jr nz, .next
 
 	call Random
@@ -355,7 +425,7 @@ DoRainFall:
 
 .update_splash
 	ld a, [hl]
-	cp VRAM_BANK_1 | 7 ; pallete 7
+	cp VRAM_BANK_1 | 6 ; pallete 6
 	jr nz, .next
 	ld a, [wPlayerStepVectorY]
 	add a

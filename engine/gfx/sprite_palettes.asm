@@ -1,3 +1,37 @@
+LoadWeatherPal::
+	ld a, [wCurrentWeather]
+	and a
+	ret z
+	dec a
+	jr z, .rain
+	; snow
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals1)
+	ldh [rSVBK], a
+	ld a, -1
+	ld [wLoadedObjPal7], a
+	ld hl, wOBPals1 palette 6
+	ld bc, 1 palettes
+	rst ByteFill
+	ld hl, wPalFlags
+	bit NO_DYN_PAL_APPLY_F, [hl]
+	jr nz, .skip_apply
+	call ApplyOBPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.skip_apply
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.rain
+	ld a, PAL_OW_RAIN
+	ld [wNeededPalIndex], a
+	ld [wLoadedObjPal6], a
+	ld de, wOBPals1 palette 6
+	jr CopySpritePal
+
 CopyBGGreenToOBPal7:
 ; Some overworld effects (Fly leaves, Cut leaves, Cut trees, Headbutt trees)
 ; have hard-coded OB palette 7 in their OAM data.

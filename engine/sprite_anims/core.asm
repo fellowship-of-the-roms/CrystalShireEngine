@@ -50,6 +50,10 @@ DoNextFrameForAllSprites:
 	dec e
 	jr nz, .loop
 
+	ld hl, wWeatherFlags
+	bit OW_WEATHER_DO_FLY_F, [hl]
+	jr nz, .do_fly_weather
+
 	ld a, [wCurSpriteOAMAddr]
 	ld l, a
 	ld h, HIGH(wShadowOAM)
@@ -58,9 +62,12 @@ DoNextFrameForAllSprites:
 	ld a, l
 	cp LOW(wShadowOAMEnd)
 	ret nc
-	xor a
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
 	ld [hli], a
 	jr .loop2
+
+.do_fly_weather
+	farjp DoOverworldWeather
 
 DoNextFrameForFirst16Sprites:
 	ld hl, wSpriteAnimationStructs

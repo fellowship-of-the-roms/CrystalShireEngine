@@ -603,7 +603,7 @@ FlyFunction:
 
 .FlyScript:
 	reloadmappart
-	callasm HideSprites
+	callasm HideNormalSprites
 	callasm ClearSavedObjPals
 	callasm CopyBGGreenToOBPal7
 	special UpdateTimePals
@@ -613,6 +613,8 @@ FlyFunction:
 	callasm SkipUpdateMapSprites
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_FLY
+	callasm HideSprites
+	callasm SpawnRandomWeatherFullScreen
 	callasm CopyBGGreenToOBPal7
 	callasm FlyToAnim
 	special WaitSFX
