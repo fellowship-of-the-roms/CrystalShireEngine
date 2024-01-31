@@ -378,7 +378,7 @@ Script_yesorno:
 	call YesNoBox
 	; a = carry ? FALSE : TRUE
 	sbc a
-	inc a	
+	inc a
 	ld [wScriptVar], a
 	vc_hook Unknown_yesorno_ret
 	ret

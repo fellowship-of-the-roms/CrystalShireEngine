@@ -9112,7 +9112,7 @@ GetWeatherImage:
 	ld b, PAL_BATTLE_OB_BROWN
 	cp WEATHER_SANDSTORM
 	ret nz
-	
+
 .done
 	push bc
 	ld b, BANK(WeatherImages) ; c = 4

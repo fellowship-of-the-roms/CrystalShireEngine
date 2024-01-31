@@ -55,7 +55,7 @@ MACRO smartcp
 		cp \1
 	ENDC
 ENDM
-	
+
 MACRO cphl16
 ; arg1: 16 bit register
 ; arg2: value to compare to

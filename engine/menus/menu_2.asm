@@ -2,7 +2,7 @@ PlaceMenuItemName:
 	push de
 	ld a, [wMenuSelection]
 	jr _PlaceSimpleMenuQuantity
-	
+
 PlaceMenuItemQuantity:
 	push de
 	ld a, [wMenuSelection]
