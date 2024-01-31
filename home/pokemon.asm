@@ -285,9 +285,6 @@ GetAbility::
 ; 'c' contains the target species
 ; returns ability in a
 ; preserves curspecies and base data
-	anonbankpush BaseData
-
-.Function:
 	push bc
 	push de
 	push hl
@@ -311,7 +308,6 @@ GetAbility::
 	call LoadIndirectPointer
 	add hl, de
 	call GetFarByte
-	ld a, [hl]
 	pop hl
 	pop de
 	pop bc
