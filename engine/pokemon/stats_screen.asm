@@ -781,12 +781,9 @@ LoadBluePage:
 	dw wBufferMonOT ; unused
 	dw wBufferMonOT
 
-; TODO - Place ability and description here
-;        from either Delta or MAE
+; TODO - Load and print nature
 LoadOrangePage:
-	ld de, HelloWorldString
-	hlcoord 1, 9
-	call PlaceString
+	farcall PrintAbility
 	ret
 	
 HelloWorldString:

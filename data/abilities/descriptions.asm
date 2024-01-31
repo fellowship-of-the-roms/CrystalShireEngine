@@ -3,7 +3,7 @@
 ; Directly corresponds to the ability IDs (see constants/ability_constants.asm)
 ; Used to display the ability description on the Stats screen
 
-AbilityDescriptions::
+AbilityDescriptions:
     dw ArenaTrapDesc
     dw ShadowTagDesc
     dw MagnetPullDesc
@@ -83,8 +83,8 @@ AbilityDescriptions::
     dw PickupDesc
 
 ; Actual descriptions start here
-ShadowTagDesc:
 ArenaTrapDesc:
+ShadowTagDesc:
     db    "Prevents foes"
     next1 "from escaping.@"
 
@@ -118,11 +118,11 @@ MarvelScaleDesc:
 
 PlusDesc:
     db    "Boosts SP.ATK in"
-    next1 "presence of MINUS."
+    next1 "presence of MINUS.@"
 
 MinusDesc:
     db    "Boosts SP.ATK in"
-    next1 "presence of PLUS."
+    next1 "presence of PLUS.@"
 
 CompoundeyesDesc:
     db    "Boosts ACCURACY"
@@ -210,7 +210,7 @@ WhiteSmokeDesc:
 
 RockHeadDesc:
     db    "Prevents damage"
-    next1 "from recoil."
+    next1 "from recoil.@"
 
 BattleArmorDesc:
 ShellArmorDesc:
