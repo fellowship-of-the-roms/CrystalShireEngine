@@ -13,6 +13,7 @@
 	const_def
 
 ; Prevents fleeing of certain pokemon, provided they do not have Run Away or a Smoke Ball. Also prevents switching out, except by added move effect.
+	const NO_ABILITY  ; sentinel for lack of ability
 	const ARENA_TRAP  ; Also doubles the overworld encounter rate if in the first slot
 	const SHADOW_TAG  ; Only affects non-Ghost type Pokémon
 	const MAGNET_PULL ; Only may affect Steel-type Pokémon. Also increases the overworld encounter rate of Steel-type Pokémon by 50% if in the first slot

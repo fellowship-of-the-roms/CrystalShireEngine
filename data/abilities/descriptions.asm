@@ -4,6 +4,7 @@
 ; Used to display the ability description on the Stats screen
 
 AbilityDescriptions:
+	dw NoAbilityDesc
 	dw ArenaTrapDesc
 	dw ShadowTagDesc
 	dw MagnetPullDesc
@@ -83,6 +84,11 @@ AbilityDescriptions:
 	dw PickupDesc
 
 ; Actual descriptions start here
+NoAbilityDesc:
+; This shouldn't be possible, but just in case.
+	db    "No special"
+	next1 "ability.@"
+
 ArenaTrapDesc:
 ShadowTagDesc:
 	db    "Prevents foes"

@@ -6,6 +6,7 @@
 ; - On the Stats screen (- TODO -)
 
 AbilityNames::
+	db "???@"
 	db "Arena Trap@"
 	db "Shadow Tag@"
 	db "Magnet Pull@"
