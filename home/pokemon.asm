@@ -280,6 +280,23 @@ GetBaseData::
 	rst Bankswitch
 	jmp PopBCDEHL
 
+GetLeadAbility:
+; Returns ability of lead mon unless it's an Egg. Used for field
+; abilities
+	ld a, [wPartyMon1Species]
+	call IsAPokemon
+	jr nc, .valid_mon
+	xor a
+	ret
+
+.valid_mon
+	push hl
+	ld hl, wPartyMon1Personality
+	ld c, a
+	call GetAbility
+	pop hl
+	ret
+
 GetAbility::
 ; 'hl' contains the target personality to check (ability and form)
 ; 'c' contains the target species
