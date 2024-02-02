@@ -1114,48 +1114,6 @@ wccb4:: ds 1
 wccb5:: ds 3
 
 
-if DEF(_DEBUG)
-SECTION UNION "Overworld Map", WRAM0
-
-; debug room RTC values
-wDebugRoomRTCSec::  db
-wDebugRoomRTCMin::  db
-wDebugRoomRTCHour:: db
-wDebugRoomRTCDay::  dw
-wDebugRoomRTCCurSec::  db
-wDebugRoomRTCCurMin::  db
-wDebugRoomRTCCurHour:: db
-wDebugRoomRTCCurDay::  dw
-
-; debug room paged values
-wDebugRoomCurPage::        db
-wDebugRoomCurValue::       db
-wDebugRoomAFunction::      dw
-wDebugRoomStartFunction::  dw
-wDebugRoomSelectFunction:: dw
-wDebugRoomAutoFunction::   dw
-wDebugRoomPageCount::      db
-wDebugRoomPagesPointer::   dw
-
-wDebugRoomROMChecksum:: dw
-wDebugRoomCurChecksumBank:: db
-
-UNION
-; debug room new item values
-wDebugRoomItemID::       db
-wDebugRoomItemQuantity:: db
-NEXTU
-; debug room new pokemon values
-wDebugRoomMon::    box_struct wDebugRoomMon
-wDebugRoomMonBox:: db
-NEXTU
-; debug room GB ID values
-wDebugRoomGBID:: dw
-ENDU
-
-endc
-
-
 SECTION "Video", WRAM0
 
 UNION
