@@ -163,10 +163,6 @@ _OakTimeIsItText::
 	text ", is it?"
 	done
 
-; Mobile Adapter
-
-; Mobile Adapter End
-
 _NothingToChooseText::
 	text "There's nothing to"
 	line "choose."

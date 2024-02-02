@@ -45,8 +45,6 @@ ROMX $03
 	"mobile5C"
 ROMX $04
 	"bank4"
-	"Dynamic Pals System"
-	"Fade System"
 ROMX $05
 	"bank5"
 	"Load Map Part"
@@ -194,7 +192,8 @@ ROMX $3e
 ROMX $3f
 	"bank3F"
 ROMX $40
-	"mobile40"
+	"Dynamic Pals System"
+	"Fade System"
 ROMX $41
 	"bank41"
 	"Enemy Trainer Parties 1"
