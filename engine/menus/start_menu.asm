@@ -12,6 +12,8 @@
 
 StartMenu::
 	call ClearWindowData
+	call BackupSprites
+	call ClearSpritesUnderStartMenu
 
 	ld de, SFX_MENU
 	call PlaySFX
@@ -526,3 +528,37 @@ StartMenu_Pokemon:
 	call ExitAllMenus
 	pop af
 	ret
+
+
+ClearSpritesUnderStartMenu:
+	ld de, wShadowOAM
+	ld hl, wShadowOAM
+	ld c, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
+.loop
+	ld a, [hli]
+	cp $70
+	jr nc, .clear_sprite
+	ld a, [hl]
+	cp $51
+	jr nc, .clear_sprite
+; fallthrough
+.next
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld e, l
+	dec c
+	jr nz, .loop
+	ldh a, [hOAMUpdate]
+	push af
+	ld a, TRUE
+	ld [hOAMUpdate], a
+	call DelayFrame
+	pop af
+	ld [hOAMUpdate], a
+	ret
+
+.clear_sprite
+	dec l
+	ld a, SCREEN_HEIGHT_PX + (2 * TILE_WIDTH)
+	ld [hl], a
+	jr .next

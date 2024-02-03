@@ -1716,7 +1716,6 @@ FadeToMenu::
 	ldh [hBGMapMode], a
 	call LoadStandardMenuHeader
 	farcall FadeOutPalettes
-	call BackupSprites
 	call ClearSprites
 	jmp DisableSpriteUpdates
 

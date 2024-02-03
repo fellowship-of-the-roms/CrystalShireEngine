@@ -2647,7 +2647,7 @@ _UpdateSprites::
 	bit 0, a
 	ret z
 	xor a
-	ldh [hUsedSpriteIndex], a
+	ldh [hUsedOAMIndex], a
 	ldh a, [hOAMUpdate]
 	push af
 	ld a, 1
@@ -2667,7 +2667,7 @@ _UpdateSprites::
 .ok
 	ldh a, [hUsedWeatherSpriteIndex]
 	ld c, a
-	ldh a, [hUsedSpriteIndex]
+	ldh a, [hUsedOAMIndex]
 	cpl
 	add (NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH) + 1
 	sub SPRITEOAMSTRUCT_LENGTH
@@ -2881,7 +2881,7 @@ InitSprites:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ldh a, [hUsedSpriteIndex]
+	ldh a, [hUsedOAMIndex]
 	ld c, a ; no-optimize a = N - a (c gets used below)
 	ld a, SPRITEOAMSTRUCT_LENGTH * (NUM_SPRITE_OAM_STRUCTS - 1)
 	sub c
@@ -2934,7 +2934,7 @@ InitSprites:
 	ld a, SPRITEOAMSTRUCT_LENGTH * (NUM_SPRITE_OAM_STRUCTS - 1)
 	sub c
 	ld c, a
-	ldh [hUsedSpriteIndex], a
+	ldh [hUsedOAMIndex], a
 .done
 	xor a
 	ret

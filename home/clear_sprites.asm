@@ -20,7 +20,7 @@ HideSprites::
 
 HideNormalSprites::
 ; Set all normal sprites (non-weather) to 160 to hide them offscreen
-	ldh a, [hUsedSpriteIndex]
+	ldh a, [hUsedOAMIndex]
 	cpl
 	add (NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH) + 1
 	ld h, HIGH(wShadowOAM)

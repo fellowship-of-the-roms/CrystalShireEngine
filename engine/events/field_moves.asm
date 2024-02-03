@@ -358,7 +358,6 @@ FlyToAnim:
 	ld hl, wWeatherFlags
 	set OW_WEATHER_DO_FLY_F, [hl]
 	call DoNextFrameForAllSprites
-	farcall DoOverworldRain
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop

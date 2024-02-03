@@ -11,7 +11,7 @@ DoOverworldWeather:
 	dec a
 	ld [wOverworldWeatherCooldown], a
 .no_cooldown
-	ldh a, [hUsedSpriteIndex]
+	ldh a, [hUsedOAMIndex]
 	cpl
 	add (SPRITEOAMSTRUCT_LENGTH * NUM_SPRITE_OAM_STRUCTS) + 1
 	ld hl, hUsedWeatherSpriteIndex

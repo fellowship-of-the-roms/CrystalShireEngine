@@ -187,7 +187,8 @@ hFunctionTargetHi:: db
 hDelayFrameLY:: db
 
 hUsedWeatherSpriteIndex:: db
+hUsedOAMIndex::db
 
-	ds 11
+	ds 10
 
 ENDSECTION
