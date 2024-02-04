@@ -29,15 +29,8 @@ DoOverworldWeather:
 	ld a, [wCurrentWeather]
 	cp OW_WEATHER_SNOW
 	call z, DoOverworldSnow
-	call Random
-	cp 1 percent
-	jr nc, .done
-	call Random
-	cp 15 percent
-	jr nc, .done
-;	farcall BlindingFlash
-;	farcall BlindingFlash
 .done
+	farcall OWFadePalettesStep
 	ld hl, wOverworldWeatherDelay
 	inc [hl]
 	call WeatherSpriteLimitCheck
@@ -218,6 +211,13 @@ DoOverworldRain:
 	jr z, .continue
 	farcall LoadWeatherPal
 .continue
+	call Random
+	cp 1 percent
+	jr nc, .no_lightning
+	call Random
+	cp 100 percent
+	call c, Lightning ; Do you get the reference?
+.no_lightning
 	call ScanForEmptyOAM
 	call nc, SpawnRainDrop
 	call ScanForEmptyOAM
@@ -565,3 +565,14 @@ rept TILE_WIDTH - 1
 endr
 	dec [hl]
 	ret
+
+Lightning:
+	call SetWhitePals
+	farcall ApplyPals
+	call DelayFrame
+	farcall LoadMapPals
+	farcall ClearSavedObjPals
+	ld hl, wPalFlags
+	set NO_DYN_PAL_APPLY_UNTIL_RESET_F, [hl]
+	farcall CheckForUsedObjPals
+	farjp OWFadePalettesInit

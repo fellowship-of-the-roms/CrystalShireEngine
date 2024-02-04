@@ -551,14 +551,13 @@ ClearSpritesUnderStartMenu:
 	ldh a, [hOAMUpdate]
 	push af
 	ld a, TRUE
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call DelayFrame
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 .clear_sprite
 	dec l
-	ld a, SCREEN_HEIGHT_PX + (2 * TILE_WIDTH)
-	ld [hl], a
+	ld [hl], SCREEN_HEIGHT_PX + (2 * TILE_WIDTH)
 	jr .next

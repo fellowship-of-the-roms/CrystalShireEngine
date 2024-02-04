@@ -14,8 +14,8 @@ LoadWeatherPal::
 	ld hl, wOBPals1 palette 6
 	ld bc, 1 palettes
 	rst ByteFill
-	ld hl, wPalFlags
-	bit NO_DYN_PAL_APPLY_F, [hl]
+	ld a, [wPalFlags]
+	and NO_DYN_PAL_APPLY
 	jr nz, .skip_apply
 	call ApplyOBPals
 	ld a, TRUE
@@ -123,8 +123,8 @@ CopySpritePal::
 	pop de
 	ld bc, 1 palettes
 	call FarCopyColorWRAM
-	ld hl, wPalFlags
-	bit NO_DYN_PAL_APPLY_F, [hl]
+	ld a, [wPalFlags]
+	and NO_DYN_PAL_APPLY
 	jr nz, .skip_apply
 	call ApplyOBPals
 	ld a, TRUE
