@@ -1,10 +1,16 @@
 LoadWeatherPal::
 	ld a, [wCurrentWeather]
 	and a
-	ret z
+	ret z ; no weather
 	dec a
 	jr z, .rain
-	; snow
+	dec a
+	jr z, .snow
+	dec a
+	jr z, .rain ; thunerstorm
+	dec a
+	jr z, .sandstorm
+.snow
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wOBPals1)
@@ -27,6 +33,13 @@ LoadWeatherPal::
 
 .rain
 	ld a, PAL_OW_RAIN
+	ld [wNeededPalIndex], a
+	ld [wLoadedObjPal6], a
+	ld de, wOBPals1 palette 6
+	jr CopySpritePal
+
+.sandstorm
+	ld a, PAL_OW_SAND
 	ld [wNeededPalIndex], a
 	ld [wLoadedObjPal6], a
 	ld de, wOBPals1 palette 6

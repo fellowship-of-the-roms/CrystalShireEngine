@@ -8,6 +8,7 @@ ENDM
 Emotes:
 ; entries correspond to EMOTE_* constants
 	table_width EMOTE_LENGTH, Emotes
+	emote SandGFX,        1, $f4
 	emote SplashGFX,      1, $f5
 	emote SnowGFX,        1, $f6
 	emote RainGFX,        1, $f7

@@ -190,6 +190,7 @@ DEF NUM_FLOORS EQU const_value
 ; showemote arguments
 ; Emotes indexes (see data/sprites/emotes.asm)
 	const_def
+	const EMOTE_SAND
 	const EMOTE_SPLASH
 	const EMOTE_SNOW
 	const EMOTE_RAIN

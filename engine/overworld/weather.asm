@@ -32,6 +32,9 @@ DoOverworldWeather:
 	ld a, [wCurrentWeather]
 	cp OW_WEATHER_THUNDERSTORM
 	call z, DoOverworldRain
+	ld a, [wCurrentWeather]
+	cp OW_WEATHER_SANDSTORM
+	call z, DoOverworldSandstorm
 .done
 	farcall OWFadePalettesStep
 	ld hl, wOverworldWeatherDelay
@@ -457,6 +460,132 @@ DoRainFall:
 	add hl, de
 	ld [hl], $f5 ; tile id
 	jr .next
+
+
+DoOverworldSandstorm:
+	ld a, [wLoadedObjPal6]
+	cp PAL_OW_SAND
+	jr z, .continue
+	farcall LoadWeatherPal
+.continue
+	call ScanForEmptyOAM
+	call nc, SpawnSandDrop
+	call ScanForEmptyOAM
+	call nc, SpawnSandDrop
+	call ScanForEmptyOAM
+	call nc, SpawnSandDrop
+; fallthrough
+DoSandFall:
+	ld de, wShadowOAM
+	ld hl, wShadowOAM
+	ld b, NUM_SPRITE_OAM_STRUCTS
+.loop
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	ld a, [hl]
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
+	jr z, .next
+	ld hl, SPRITEOAMSTRUCT_TILE_ID
+	add hl, de
+	ld a, [hli]
+	cp $f4 ; sand tile id
+	jr nz, .next
+	ld a, [hl]
+	cp VRAM_BANK_1 | 6 ; pallete 6
+	jr nz, .next
+
+	call Random
+	cp 5 percent
+	jr c, .despawn
+
+	ld a, [wPlayerStepVectorY]
+	add a
+	add a
+	ld c, a
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld a, [hl]
+	sub c
+	ld c, a
+	call GetDropSpeedModifier
+	add a
+	add c
+	add 4
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
+	ld [hl], a
+	jr nc, .despawn
+
+	ld a, [wPlayerStepVectorX]
+	add a
+	add a
+	ld c, a
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
+	ld a, [hl]
+	sub c
+	ld c, a
+	call GetDropSpeedModifier
+	cpl
+	inc a
+	add a
+	add c
+	sub 12
+	ld hl, SPRITEOAMSTRUCT_XCOORD
+	add hl, de
+	ld [hl], a
+	jr c, .despawn
+.next
+	ld hl, SPRITEOAMSTRUCT_LENGTH
+	add hl, de
+	ld d, h
+	ld e, l
+	dec b
+	jr nz, .loop
+	ret
+
+.despawn
+	ld hl, SPRITEOAMSTRUCT_YCOORD
+	add hl, de
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	jr .next
+
+SpawnSandDrop:
+	call Random
+	and 1
+	jr z, .spawn_on_right
+	xor a
+	ld [hli], a
+	ld a, SCREEN_WIDTH_PX + 7
+	call RandomRange
+	add 8
+	ld [hli], a
+.finish
+	ld a, $f4 ; tile id
+	ld [hli], a
+	ld a, VRAM_BANK_1 | 6 ; pallete 6
+	ld [hld], a
+	dec hl
+	dec hl
+	ldh a, [hUsedWeatherSpriteIndex]
+	cp l
+	ret nc
+	ld a, l
+	ldh [hUsedWeatherSpriteIndex], a
+	ret
+
+.spawn_on_right
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
+	call RandomRange
+	ld [hli], a
+	ld a, SCREEN_WIDTH_PX + TILE_WIDTH
+	ld [hli], a
+	jr .finish
 
 GetDropSpeedModifier:
 ; input: e = sprite index
