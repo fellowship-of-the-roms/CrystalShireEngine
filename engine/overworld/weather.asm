@@ -24,11 +24,14 @@ DoOverworldWeather:
 	and a
 	jr nz, .on_cooldown
 	ld a, [wCurrentWeather]
-	dec a
+	dec a ; OW_WEATHER_RAIN
 	call z, DoOverworldRain
 	ld a, [wCurrentWeather]
 	cp OW_WEATHER_SNOW
 	call z, DoOverworldSnow
+	ld a, [wCurrentWeather]
+	cp OW_WEATHER_THUNDERSTORM
+	call z, DoOverworldRain
 .done
 	farcall OWFadePalettesStep
 	ld hl, wOverworldWeatherDelay
@@ -211,11 +214,14 @@ DoOverworldRain:
 	jr z, .continue
 	farcall LoadWeatherPal
 .continue
+	ld a, [wCurrentWeather]
+	cp OW_WEATHER_THUNDERSTORM
+	jr nz, .no_lightning
 	call Random
 	cp 1 percent
 	jr nc, .no_lightning
 	call Random
-	cp 100 percent
+	cp 50 percent
 	call c, Lightning ; Do you get the reference?
 .no_lightning
 	call ScanForEmptyOAM

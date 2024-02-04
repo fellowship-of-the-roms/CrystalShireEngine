@@ -85,6 +85,7 @@ StartMenu::
 	ld a, 1
 	ldh [hOAMUpdate], a
 	call LoadFontsExtra
+	call RestoreSprites
 	pop af
 	ldh [hOAMUpdate], a
 .ReturnEnd:

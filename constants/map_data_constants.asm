@@ -78,6 +78,7 @@ DEF NUM_FISHGROUPS EQU const_value - 1
 	const OW_WEATHER_NONE
 	const OW_WEATHER_RAIN
 	const OW_WEATHER_SNOW
+	const OW_WEATHER_THUNDERSTORM
 	DEF NUM_WEATHERS EQU const_value
 
 ; wWeatherFlags
