@@ -509,7 +509,7 @@ DoSandFall:
 	call GetDropSpeedModifier
 	add a
 	add c
-	add 4
+	sub 4
 	ld hl, SPRITEOAMSTRUCT_YCOORD
 	add hl, de
 	cp SCREEN_HEIGHT_PX + (TILE_WIDTH * 2)
@@ -559,7 +559,7 @@ SpawnSandDrop:
 	call Random
 	and 1
 	jr z, .spawn_on_right
-	xor a
+	ld a, SCREEN_HEIGHT_PX + (TILE_WIDTH * 1)
 	ld [hli], a
 	ld a, SCREEN_WIDTH_PX + 7
 	call RandomRange
