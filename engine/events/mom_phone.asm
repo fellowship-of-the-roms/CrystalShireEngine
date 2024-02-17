@@ -194,13 +194,13 @@ GetItemFromMom:
 .GetFromList:
 	ld l, a
 	ld h, 0
+	push de
+	ld d, h
+	ld e, l
 ; multiply hl by 9
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	push de
-	ld d, h
-	ld e, l
 	add hl, de
 	pop de
 	add hl, de

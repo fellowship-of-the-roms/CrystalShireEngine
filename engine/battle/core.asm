@@ -128,27 +128,14 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
 	ld hl, BattleText_EnemyFled
-	call CheckMobileBattleError
-	jr nc, .print_text
-
-	ld hl, wcd2a
-	bit 4, [hl]
-	jr nz, .skip_text
-
-	ld hl, BattleText_LinkErrorBattleCanceled
 
 .print_text
 	call StdBattleTextbox
 
 .skip_text
 	call StopDangerSound
-	call CheckMobileBattleError
-	jr c, .skip_sfx
-
 	ld de, SFX_RUN
 	call WaitPlaySFX
-
-.skip_sfx
 	call SetPlayerTurn
 	ld a, 1
 	ld [wBattleEnded], a
@@ -171,14 +158,6 @@ BattleTurn:
 	call HandleBerserkGene
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
-
-	call IsMobileBattle
-	jr nz, .not_disconnected
-	farcall Function100da5
-	farcall StartMobileInactivityTimer
-	farcall Function100dd8
-	ret c
-.not_disconnected
 
 	call CheckPlayerLockedIn
 	jr c, .skip_iteration
@@ -208,9 +187,6 @@ BattleTurn:
 .false
 	call Battle_PlayerFirst
 .proceed
-	call CheckMobileBattleError
-	ret c
-
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
@@ -902,8 +878,6 @@ Battle_EnemyFirst:
 	farcall AI_SwitchOrTryItem
 	jr c, .switch_item
 	call EnemyTurn_EndOpponentProtectEndureDestinyBond
-	call CheckMobileBattleError
-	ret c
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
@@ -918,8 +892,6 @@ Battle_EnemyFirst:
 	jmp z, HandleEnemyMonFaint
 	call RefreshBattleHuds
 	call PlayerTurn_EndOpponentProtectEndureDestinyBond
-	call CheckMobileBattleError
-	ret c
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
@@ -946,8 +918,6 @@ Battle_PlayerFirst:
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
-	call CheckMobileBattleError
-	ret c
 	call HasEnemyFainted
 	jmp z, HandleEnemyMonFaint
 	call HasPlayerFainted
@@ -965,8 +935,6 @@ Battle_PlayerFirst:
 	call TryEnemyFlee
 	jmp c, WildFled_EnemyFled_LinkBattleCanceled
 	call EnemyTurn_EndOpponentProtectEndureDestinyBond
-	call CheckMobileBattleError
-	ret c
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
@@ -2071,8 +2039,6 @@ HandleEnemyMonFaint:
 
 .dont_flee
 	call ForcePlayerMonChoice
-	call CheckMobileBattleError
-	jmp c, WildFled_EnemyFled_LinkBattleCanceled
 
 	ld a, BATTLEPLAYERACTION_USEITEM
 	ld [wBattlePlayerAction], a
@@ -2644,8 +2610,6 @@ HandlePlayerMonFaint:
 
 .switch
 	call ForcePlayerMonChoice
-	call CheckMobileBattleError
-	jmp c, WildFled_EnemyFled_LinkBattleCanceled
 	ld a, c
 	and a
 	ret nz
@@ -2735,14 +2699,11 @@ ForcePlayerMonChoice:
 .skip_link
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
-	call CheckMobileBattleError
-	jr c, .enemy_fainted_mobile_error
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
 	jr nz, .send_out_pokemon
-
-.enemy_fainted_mobile_error
+.enemy_fainted
 	call ClearSprites
 	call ClearBGPalettes
 	call _LoadHPBar
@@ -2800,28 +2761,6 @@ PlayerPartyMonEntrance:
 	call SetPlayerTurn
 	jmp SpikesDamage
 
-CheckMobileBattleError:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jr nz, .not_mobile ; It's not a mobile battle
-
-	ld a, [wcd2b]
-	and a
-	jr z, .not_mobile
-
-; We have a mobile battle and something else happened
-	scf
-	ret
-
-.not_mobile
-	xor a
-	ret
-
-IsMobileBattle:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	ret
-
 SetUpBattlePartyMenu:
 	call ClearBGPalettes
 SetUpBattlePartyMenu_Loop: ; switch to fullscreen menu?
@@ -2838,12 +2777,7 @@ JumpToPartyMenuAndPrintText:
 	jmp DelayFrame
 
 SelectBattleMon:
-	call IsMobileBattle
-	jr z, .mobile
 	farjp PartyMenuSelect
-
-.mobile
-	farjp Mobile_PartyMenuSelect
 
 PickPartyMonInBattle:
 .loop
@@ -2878,8 +2812,6 @@ ForcePickPartyMonInBattle:
 .pick
 	call PickPartyMonInBattle
 	ret nc
-	call CheckMobileBattleError
-	ret c
 
 	ld de, SFX_WRONG
 	call PlaySFX
@@ -2900,8 +2832,6 @@ ForcePickSwitchMonInBattle:
 
 .pick
 	call ForcePickPartyMonInBattle
-	call CheckMobileBattleError
-	ret c
 	call SwitchMonAlreadyOut
 	jr c, .pick
 
@@ -3802,8 +3732,6 @@ TryToRunAwayFromBattle:
 	ld [wCurPlayerMove], a
 	call LinkBattleSendReceiveAction
 	call SafeLoadTempTilemapToTilemap
-	call CheckMobileBattleError
-	jr c, .mobile
 
 	; Got away safely
 	ld a, [wBattleAction]
@@ -3825,20 +3753,6 @@ TryToRunAwayFromBattle:
 	call WaitSFX
 	ld hl, BattleText_GotAwaySafely
 	call StdBattleTextbox
-	call WaitSFX
-	call LoadTilemapToTempTilemap
-	scf
-	ret
-
-.mobile
-	call StopDangerSound
-	ld hl, wcd2a
-	bit 4, [hl]
-	jr nz, .skip_link_error
-	ld hl, BattleText_LinkErrorBattleCanceled
-	call StdBattleTextbox
-
-.skip_link_error
 	call WaitSFX
 	call LoadTilemapToTempTilemap
 	scf
@@ -4911,28 +4825,8 @@ BattleMenu_Fight:
 	ret
 
 LoadBattleMenu2:
-	call IsMobileBattle
-	jr z, .mobile
-
 	farcall LoadBattleMenu
 	and a
-	ret
-
-.mobile
-	farcall Mobile_LoadBattleMenu
-	ld a, [wcd2b]
-	and a
-	ret z
-
-	ld hl, wcd2a
-	bit 4, [hl]
-	jr nz, .error
-	ld hl, BattleText_LinkErrorBattleCanceled
-	call StdBattleTextbox
-	ld c, 60
-	call DelayFrames
-.error
-	scf
 	ret
 
 BattleMenu_Pack:
@@ -5044,27 +4938,21 @@ BattleMenuPKMN_Loop:
 .loop
 	farcall FreezeMonIcons
 	call .GetMenu
-	jr c, .PressedB
+	jr c, BattleMenuPKMN_Loop ; .PressedB
 	call PlaceHollowCursor
 	ld a, [wMenuCursorY]
 	cp $1 ; SWITCH
-	jmp z, TryPlayerSwitch
+	jr z, TryPlayerSwitch
 	cp $2 ; STATS
 	jr z, .Stats
 	cp $3 ; CANCEL
 	jr z, .Cancel
 	jr .loop
 
-.PressedB:
-	call CheckMobileBattleError
-	jr c, .Cancel
-	jr BattleMenuPKMN_Loop
-
 .Stats:
 	call Battle_StatsScreen
-	call CheckMobileBattleError
-	jr nc, BattleMenuPKMN_ReturnFromStats
-; fallthrough
+	jr BattleMenuPKMN_ReturnFromStats
+
 .Cancel:
 	call ClearSprites
 	call ClearPalettes
@@ -5077,12 +4965,7 @@ BattleMenuPKMN_Loop:
 	jmp BattleMenu
 
 .GetMenu:
-	call IsMobileBattle
-	jr z, .mobile
 	farjp BattleMonMenu
-
-.mobile
-	farjp MobileBattleMonMenu
 
 Battle_StatsScreen:
 	call DisableLCD
@@ -5103,7 +4986,7 @@ Battle_StatsScreen:
 	call LowVolume
 	xor a ; PARTYMON
 	ld [wMonType], a
-	farcall BattleStatsScreenInit
+	farcall StatsScreenInit
 	call MaxVolume
 
 	call DisableLCD
@@ -5291,11 +5174,6 @@ CheckAmuletCoin:
 	ret
 
 MoveSelectionScreen:
-	call IsMobileBattle
-	jr nz, .not_mobile
-	farjp Mobile_MoveSelectionScreen
-
-.not_mobile
 	ld hl, wEnemyMonMoves
 	ld a, [wMoveSelectionMenuType]
 	dec a
@@ -5910,7 +5788,92 @@ CheckEnemyLockedIn:
 	ret
 
 LinkBattleSendReceiveAction:
-	farjp _LinkBattleSendReceiveAction
+	call .StageForSend
+	ld [wLinkBattleSentAction], a
+	vc_hook Wireless_start_exchange
+	farcall PlaceWaitingText
+	jr .LinkBattle_SendReceiveAction
+
+.StageForSend:
+	ld a, [wBattlePlayerAction]
+	and a ; BATTLEPLAYERACTION_USEMOVE?
+	jr nz, .switch
+	ld a, [wCurPlayerMove]
+	call GetMoveIndexFromID
+	ld b, BATTLEACTION_STRUGGLE
+	ld a, h
+	if HIGH(STRUGGLE)
+		cp HIGH(STRUGGLE)
+	else
+		and a
+	endc
+	jr nz, .not_struggle
+	ld a, l
+	cp LOW(STRUGGLE)
+	jr z, .struggle
+.not_struggle
+	ld b, BATTLEACTION_SKIPTURN
+	cp $ff
+	jr z, .struggle
+	ld a, [wCurMoveNum]
+	jr .use_move
+
+.switch
+	ld a, [wCurPartyMon]
+	add BATTLEACTION_SWITCH1
+	jr .use_move
+
+.struggle
+	ld a, b
+
+.use_move
+	and $0f
+	ret
+
+.LinkBattle_SendReceiveAction:
+	ld a, [wLinkBattleSentAction]
+	ld [wPlayerLinkAction], a
+	ld a, $ff
+	ld [wOtherPlayerLinkAction], a
+.waiting
+	call LinkTransfer
+	call DelayFrame
+	ld a, [wOtherPlayerLinkAction]
+	inc a
+	jr z, .waiting
+
+	vc_hook Wireless_end_exchange
+	vc_patch Wireless_net_delay_3
+if DEF(_CRYSTAL_VC)
+	ld b, 26
+else
+	ld b, 10
+endc
+	vc_patch_end
+.receive
+	call DelayFrame
+	call LinkTransfer
+	dec b
+	jr nz, .receive
+
+	vc_hook Wireless_start_send_zero_bytes
+	vc_patch Wireless_net_delay_4
+if DEF(_CRYSTAL_VC)
+	ld b, 26
+else
+	ld b, 10
+endc
+	vc_patch_end
+.acknowledge
+	call DelayFrame
+	call LinkDataReceived
+	dec b
+	jr nz, .acknowledge
+
+	vc_hook Wireless_end_send_zero_bytes
+	ld a, [wOtherPlayerLinkAction]
+	ld [wBattleAction], a
+	ret
 
 LoadEnemyMon:
 ; Initialize enemy monster parameters
@@ -8344,18 +8307,6 @@ ShowLinkBattleParticipantsAfterEnd:
 	farjp _ShowLinkBattleParticipants
 
 DisplayLinkBattleResult:
-	call CheckMobileBattleError
-	jr c, .Mobile_InvalidBattle
-	call IsMobileBattle2
-	jr nz, .proceed
-
-	ld hl, wcd2a
-	bit 4, [hl]
-	jr z, .proceed
-
-	farcall DetermineLinkBattleResult
-
-.proceed
 	ld a, [wBattleResult]
 	and $f
 	cp LOSE
@@ -8389,14 +8340,7 @@ DisplayLinkBattleResult:
 
 	call CloseSRAM
 
-	call IsMobileBattle2
-	jr z, .mobile
 	call WaitPressAorB_BlinkCursor
-	jmp ClearTilemap
-
-.mobile
-	ld c, 200
-	call DelayFrames
 	jmp ClearTilemap
 
 .YouWin:
@@ -8405,22 +8349,6 @@ DisplayLinkBattleResult:
 	db "YOU LOSE@"
 .Draw:
 	db "  DRAW@"
-
-.Mobile_InvalidBattle:
-	hlcoord 6, 8
-	ld de, .InvalidBattle
-	rst PlaceString
-	ld c, 200
-	call DelayFrames
-	jmp ClearTilemap
-
-.InvalidBattle:
-	db "INVALID BATTLE@"
-
-IsMobileBattle2:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	ret
 
 _DisplayLinkRecord:
 	ld a, BANK(sLinkBattleStats)

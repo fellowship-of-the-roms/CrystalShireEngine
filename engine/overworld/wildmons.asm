@@ -404,7 +404,7 @@ _ChooseWildEncounter:
 
 	; Otherwise, we failed to find any valid mon. This can only happen if our
 	; type filtering failed.
-	jmp z, .nowildbattle
+	jr z, .nowildbattle
 
 	; We've found our target. Set de to a - de (a - e cannot become zero).
 	; This way, we can move hl, which points to the encounter table, to our

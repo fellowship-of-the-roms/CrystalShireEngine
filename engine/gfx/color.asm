@@ -1042,9 +1042,6 @@ endr
 
 INCLUDE "data/maps/environment_colors.asm"
 
-PartyMenuBGMobilePalette:
-INCLUDE "gfx/stats/party_menu_bg_mobile.pal"
-
 PartyMenuBGPalette:
 INCLUDE "gfx/stats/party_menu_bg.pal"
 

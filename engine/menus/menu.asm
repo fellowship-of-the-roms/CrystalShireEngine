@@ -29,7 +29,6 @@ Get2DMenuSelection:
 	call Init2DMenuCursorPosition
 	call StaticMenuJoypad
 	call MenuClickSound
-Mobile_GetMenuSelection:
 	ld a, [wMenuDataFlags]
 	bit 1, a
 	jr z, .skip
@@ -216,20 +215,6 @@ _ScrollingMenuJoypad::
 	call MenuJoypadLoop
 	pop af
 	ldh [hBGMapMode], a
-	ret
-
-MobileMenuJoypad:
-	ld hl, w2DMenuFlags2
-	res 7, [hl]
-	ldh a, [hBGMapMode]
-	push af
-	call Move2DMenuCursor
-	call Do2DMenuRTCJoypad
-	call c,  _2DMenuInterpretJoypad
-	pop af
-	ldh [hBGMapMode], a
-	call GetMenuJoypad
-	ld c, a
 	ret
 
 _NoYesBox::

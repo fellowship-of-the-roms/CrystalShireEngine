@@ -151,3 +151,5 @@ SpecialsPointers::
 
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
+
+	add_special FadeInPalettes_EnableDynNoApply

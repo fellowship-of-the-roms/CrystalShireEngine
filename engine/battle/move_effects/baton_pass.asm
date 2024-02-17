@@ -32,10 +32,6 @@ BattleCommand_BatonPass:
 	call SetPalettes
 	call BatonPass_LinkPlayerSwitch
 
-; Mobile link battles handle entrances differently
-	farcall CheckMobileBattleError
-	jmp c, EndMoveEffect
-
 	ld hl, PassedBattleMonEntrance
 	call CallBattleCore
 
@@ -53,10 +49,6 @@ BattleCommand_BatonPass:
 	call UpdateEnemyMonInParty
 	call AnimateCurrentMove
 	call BatonPass_LinkEnemySwitch
-
-; Mobile link battles handle entrances differently
-	farcall CheckMobileBattleError
-	jmp c, EndMoveEffect
 
 ; Passed enemy PartyMon entrance
 	xor a
