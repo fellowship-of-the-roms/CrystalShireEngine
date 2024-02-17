@@ -90,6 +90,7 @@ _TimeOfDayPals::
 	ldh [rSVBK], a
 
 ; update palettes
+	farcall CheckForUsedObjPals
 	call _UpdateTimePals
 	call DelayFrame
 
@@ -107,6 +108,9 @@ _UpdateTimePals::
 	call GetTimePalFade
 	jmp DmgToCgbTimePals
 
+FadeInPalettes_EnableDynNoApply:
+	farcall EnableDynPalUpdatesNoApply
+	; fallthrough
 FadeInPalettes::
 	ld c, 10
 	jmp FadePalettes

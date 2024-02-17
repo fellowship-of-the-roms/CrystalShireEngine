@@ -53,3 +53,4 @@ MapSetupCommands:
 	add_mapsetup DecompressMetatiles ; 2e
 	add_mapsetup DisableDynPalUpdates ; 2f
 	add_mapsetup EnableDynPalUpdates ; 30
+	add_mapsetup EnableDynPalUpdatesNoApply ; 31

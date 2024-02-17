@@ -312,3 +312,18 @@ ReloadSpritesNoPalettes::
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	jmp DelayFrame
+
+SetBlackObjectPals::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals2)
+	ldh [rSVBK], a
+	ld hl, wOBPals2
+	ld bc, 8 palettes
+	xor a
+	rst ByteFill
+	pop af
+	ldh [rSVBK], a
+	ld a, 1
+	ldh [hCGBPalUpdate], a
+	jmp DelayFrame

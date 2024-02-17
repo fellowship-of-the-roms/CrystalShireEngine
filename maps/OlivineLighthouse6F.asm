@@ -51,8 +51,9 @@ OlivineLighthouseJasmine:
 	special RestartMapMusic
 	cry AMPHAROS
 	special FadeOutPalettes
+	special LoadMapPalettes
 	pause 10
-	special FadeInPalettes
+	special FadeInPalettes_EnableDynNoApply
 	opentext
 	writetext AmphyPaluPaluluText
 	waitbutton
@@ -122,9 +123,11 @@ OlivineLighthouseAmphy:
 	waitbutton
 	closetext
 	special FadeOutPalettes
-	special FadeInPalettes
+	special LoadMapPalettes
+	special FadeInPalettes_EnableDynNoApply
 	special FadeOutPalettes
-	special FadeInPalettes
+	special LoadMapPalettes
+	special FadeInPalettes_EnableDynNoApply
 	end
 
 OlivineLighthouse6FSuperPotion:

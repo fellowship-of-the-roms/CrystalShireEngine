@@ -37,6 +37,7 @@ ClosePokepic::
 	call OverworldTextModeSwitch
 	call ApplyTilemap
 	call UpdateSprites
+	farcall EnableDynPalUpdates
 	jmp LoadStandardFont
 
 PokepicMenuHeader:
