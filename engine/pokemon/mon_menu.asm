@@ -1016,8 +1016,9 @@ MoveScreenLoop:
 	jmp MoveScreenLoop
 
 .cycle_right
-	ld hl, wCurPartyMon
-	inc [hl]
+	ld a, [wCurPartyMon] ; no-optimize Inefficient WRAM increment/decrement (value is needed in a)
+	inc a
+	ld [wCurPartyMon], a
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies
@@ -1034,8 +1035,9 @@ MoveScreenLoop:
 	and a
 	ret z
 .cycle_left_loop
-	ld hl, wCurPartyMon
-	dec [hl]
+	ld a, [wCurPartyMon] ; no-optimize Inefficient WRAM increment/decrement (value is needed in a)
+	dec a
+	ld [wCurPartyMon], a
 	ld c, a
 	ld b, 0
 	ld hl, wPartySpecies
