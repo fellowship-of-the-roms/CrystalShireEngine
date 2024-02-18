@@ -1987,7 +1987,6 @@ ExitLinkCommunications:
 	call WaitBGMap2
 	xor a
 	ld [wUnusedLinkCommunicationByte], a
-	xor a
 	ldh [rSB], a
 	ldh [hSerialSend], a
 	ld a, (0 << rSC_ON) | (1 << rSC_CLOCK)

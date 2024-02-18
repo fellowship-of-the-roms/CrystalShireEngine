@@ -390,7 +390,6 @@ Function11636e:
 	ld [wMusicFadeID], a
 	xor a
 	ld [wMusicFadeID + 1], a
-	xor a
 	ld [wc319], a
 	ld [wc30d], a
 	ret
@@ -463,7 +462,6 @@ Function116441:
 	ld [wMusicFadeID], a
 	xor a
 	ld [wMusicFadeID + 1], a
-	xor a
 	ld [wc319], a
 	ld [wc30d], a
 	ret

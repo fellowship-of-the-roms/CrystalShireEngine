@@ -319,7 +319,6 @@ LoadMapGraphics:
 	call LoadTilesetGFX
 	xor a
 	ldh [hMapAnims], a
-	xor a
 	ldh [hTileAnimFrame], a
 	farcall RefreshSprites
 	call LoadFontsExtra

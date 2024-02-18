@@ -97,7 +97,6 @@ CheckWildEncountersScriptFlag:
 StartMap:
 	xor a
 	ld [wScriptVar], a
-	xor a
 	ld [wScriptRunning], a
 	ld hl, wMapStatus
 	ld bc, wMapStatusEnd - wMapStatus
