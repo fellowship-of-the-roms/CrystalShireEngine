@@ -156,6 +156,7 @@ SetBoxmonOrEggmonCaughtData:
 	inc a
 	rrca
 	rrca
+	and CAUGHT_TIME_MASK
 	ld b, a
 	ld a, [wCurItem]
 	push hl

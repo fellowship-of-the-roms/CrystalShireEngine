@@ -250,7 +250,7 @@ DEF NUM_HOF_TEAMS EQU 30
 	const_def 1
 	const TR_ANYTIME
 	const TR_MORNDAY
-	const TR_NITE
+	const TR_EVENITE
 
 ; EVOLVE_STAT triggers
 	const_def 1
