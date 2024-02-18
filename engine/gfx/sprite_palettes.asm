@@ -32,7 +32,7 @@ CopySpritePal::
 	inc a
 	jr nz, .not_darkness
 	ld a, [wStatusFlags]
-	bit 2, a ; Flash
+	bit STATUSFLAGS_FLASH_F, a ; Flash
 	jr nz, .not_darkness
 	ld a, [wPalFlags]
 	bit USE_DAYTIME_PAL_F, a
@@ -94,7 +94,7 @@ ApplyOBPals:
 MapObjectPals:
 	table_width 1 palettes, MapObjectPals
 INCLUDE "gfx/overworld/npc_sprites.pal"
-	assert_table_length NUM_OW_TIME_OF_DAY_PALS * (NUM_DAYTIMES - 1) ; morn, day, nite
+	assert_table_length NUM_OW_TIME_OF_DAY_PALS * NUM_DAYTIMES ; morn, day, nite, eve
 
 SingleObjectPals:
 	table_width 1 palettes, SingleObjectPals

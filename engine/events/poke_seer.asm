@@ -166,11 +166,10 @@ GetCaughtLevel:
 GetCaughtTime:
 	ld a, [wSeerCaughtData]
 	and CAUGHT_TIME_MASK
-	jr z, .none
-
 	rlca
 	rlca
 	dec a
+	maskbits NUM_DAYTIMES
 	ld hl, .times
 	call GetNthString
 	ld d, h
@@ -180,14 +179,11 @@ GetCaughtTime:
 	and a
 	ret
 
-.none
-	ld de, wSeerTimeOfDay
-	jr UnknownCaughtData
-
 .times
 	db "Morning@"
 	db "Day@"
 	db "Night@"
+	db "Evening@"
 
 UnknownCaughtData:
 	ld hl, .unknown

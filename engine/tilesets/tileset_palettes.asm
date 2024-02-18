@@ -1,4 +1,12 @@
 LoadSpecialMapPalette:
+	call GetMapTimeOfDay
+	bit IN_DARKNESS_F, a
+	jr z, .not_dark
+	ld a, [wStatusFlags]
+	bit STATUSFLAGS_FLASH_F, a
+	jr z, .darkness
+
+.not_dark
 	ld a, [wMapTileset]
 	cp TILESET_POKECOM_CENTER
 	jr z, .pokecom_2f
@@ -13,6 +21,11 @@ LoadSpecialMapPalette:
 	cp TILESET_MANSION
 	jr z, .mansion_mobile
 	jr .do_nothing
+
+.darkness
+	call LoadDarknessPalette
+	scf
+	ret
 
 .pokecom_2f
 	call LoadPokeComPalette
@@ -51,6 +64,16 @@ LoadSpecialMapPalette:
 .do_nothing
 	and a
 	ret
+
+LoadDarknessPalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, DarknessPalette
+	ld bc, 8 palettes
+	jmp FarCopyWRAM
+
+DarknessPalette:
+INCLUDE "gfx/tilesets/darkness.pal"
 
 LoadPokeComPalette:
 	ld a, BANK(wBGPals1)
