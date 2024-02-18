@@ -17,6 +17,17 @@ DEF MAP_PALETTE            rb ; 7
 DEF MAP_FISHGROUP          rb ; 8
 DEF MAP_LENGTH EQU _RS
 
+; map landmark name signs
+	const_def
+	const SIGN_WOOD
+	const SIGN_CITY
+	const SIGN_FOREST
+	const SIGN_CAVE
+	const SIGN_ROUTE
+	const SIGN_WATER
+	const SIGN_BUILDING
+DEF NUM_SIGNS EQU const_value
+
 ; map environments (wEnvironment)
 ; EnvironmentColorsPointers indexes (see data/maps/environment_colors.asm)
 	const_def 1

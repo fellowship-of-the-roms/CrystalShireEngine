@@ -273,80 +273,70 @@ endr
 Serve1bppRequest::
 ; Only call during the first fifth of VBlank
 
-	ld a, [wRequested1bppSize]
+	ldh a, [hRequested1bpp]
 	and a
 	ret z
 
+	ld b, a
 ; Back out if we're too far into VBlank
 	ldh a, [rLY]
-	cp LY_VBLANK
+	cp 144
 	ret c
-	cp LY_VBLANK + 2
+	cp 146
 	ret nc
 
-; Copy [wRequested1bppSize] 1bpp tiles from [wRequested1bppSource] to [wRequested1bppDest]
-
+	xor a
+	ldh [hRequested1bpp], a
+; fallthrough
+_Serve1bppRequest::
+; Copy [hRequested1bpp] 1bpp tiles from [hRequestedVTileSource] to [hRequestedVTileDest]
 	ld [hSPBuffer], sp
-
-; Source
-	ld hl, wRequested1bppSource
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld sp, hl
-
 ; Destination
-	ld hl, wRequested1bppDest
+	ld hl, hRequestedVTileDest
 	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld e, a
+	ld a, [hli]
+	ld d, a
+; Source
+	ld sp, hl
+	pop hl
+	ld sp, hl
+	ld h, d
+	ld l, e
+	ldh a, [hRequestOpaque1bpp]
+	dec a
+	jr z, .nextopaque
 
 ; # tiles to copy
-	ld a, [wRequested1bppSize]
-	ld b, a
-
-	xor a
-	ld [wRequested1bppSize], a
-
 .next
-
-rept 3
+rept 4
 	pop de
-	ld [hl], e
-	inc l
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-	ld [hl], d
-	inc l
-endr
-	pop de
-	ld [hl], e
-	inc l
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
+	ld a, e
+	ld [hli], a
+	ld [hli], a
 	ld a, d
 	ld [hli], a
-
+	ld [hli], a
+endr
 	dec b
 	jr nz, .next
+	jmp WriteVTileSourceAndDestinationAndReturn
 
-	ld a, l
-	ld [wRequested1bppDest], a
-	ld a, h
-	ld [wRequested1bppDest + 1], a
-
-	ld [wRequested1bppSource], sp
-
-	ldh a, [hSPBuffer]
-	ld l, a
-	ldh a, [hSPBuffer + 1]
-	ld h, a
-	ld sp, hl
-	ret
+.nextopaque
+rept 4
+	pop de
+	ld a, $ff
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	ld a, $ff
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+endr
+	dec b
+	jr nz, .nextopaque
+	jr WriteVTileSourceAndDestinationAndReturn
 
 Serve2bppRequest::
 ; Only call during the first fifth of VBlank
@@ -422,6 +412,16 @@ endr
 	ld l, a
 	ldh a, [hSPBuffer + 1]
 	ld h, a
+	ld sp, hl
+	ret
+
+WriteVTileSourceAndDestinationAndReturn:
+	ld [hRequestedVTileSource], sp
+	ld sp, hl
+	ld [hRequestedVTileDest], sp
+
+	ld sp, hSPBuffer
+	pop hl
 	ld sp, hl
 	ret
 

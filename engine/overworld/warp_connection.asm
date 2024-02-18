@@ -320,9 +320,7 @@ LoadMapGraphics:
 	xor a
 	ldh [hMapAnims], a
 	ldh [hTileAnimFrame], a
-	farcall RefreshSprites
-	call LoadFontsExtra
-	jmp LoadOverworldFont
+	farjp RefreshSprites
 
 LoadMapPalettes:
 	ld b, SCGB_MAPPALS
@@ -330,6 +328,8 @@ LoadMapPalettes:
 
 RefreshMapSprites:
 	call ClearSprites
+	xor a
+	ldh [hBGMapMode], a
 	farcall InitMapNameSign
 	call GetMovementPermissions
 	farcall RefreshPlayerSprite

@@ -1,6 +1,17 @@
 Font:
 INCBIN "gfx/font/font.1bpp"
 
+Signs:
+	table_width 8 tiles, Signs
+INCBIN "gfx/signs/wood.2bpp"
+INCBIN "gfx/signs/city.2bpp"
+INCBIN "gfx/signs/forest.2bpp"
+INCBIN "gfx/signs/cave.2bpp"
+INCBIN "gfx/signs/route.2bpp"
+INCBIN "gfx/signs/water.2bpp"
+INCBIN "gfx/signs/building.2bpp"
+	assert_table_length NUM_SIGNS
+
 FontBattleExtra:
 INCBIN "gfx/font/font_battle_extra.2bpp"
 

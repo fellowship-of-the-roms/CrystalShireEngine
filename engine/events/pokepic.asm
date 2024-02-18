@@ -37,8 +37,7 @@ ClosePokepic::
 	call OverworldTextModeSwitch
 	call ApplyTilemap
 	call UpdateSprites
-	farcall EnableDynPalUpdates
-	jmp LoadStandardFont
+	farjp EnableDynPalUpdates
 
 PokepicMenuHeader:
 	db MENU_BACKUP_TILES ; flags

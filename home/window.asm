@@ -36,11 +36,13 @@ CloseText::
 	xor a
 	ldh [hBGMapMode], a
 	call SafeUpdateSprites
+	farcall RefreshSprites
 	ld a, $90
 	ldh [hWY], a
 	call UpdatePlayerSprite
-	farcall InitMapNameSign
-	farjp LoadOverworldFont
+	xor a
+	ldh [hBGMapMode], a
+	farjp InitMapNameSign
 
 OpenText::
 	call ClearWindowData

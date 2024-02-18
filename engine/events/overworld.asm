@@ -231,8 +231,7 @@ CutDownTreeOrGrass:
 	call BufferScreen
 	call GetMovementPermissions
 	call UpdateSprites
-	call DelayFrame
-	jmp LoadStandardFont
+	jmp DelayFrame
 
 CheckOverworldTileArrays:
 	; Input: c contains the tile you're facing
@@ -624,8 +623,7 @@ FlyFunction:
 	farcall ClearSavedObjPals
 	farcall CheckForUsedObjPals
 	call DelayFrame
-	call UpdatePlayerSprite
-	farjp LoadOverworldFont
+	jmp UpdatePlayerSprite
 
 WaterfallFunction:
 	call .TryWaterfall
