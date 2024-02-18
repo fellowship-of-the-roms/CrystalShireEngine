@@ -2903,6 +2903,16 @@ InitSprites:
 	add [hl]
 	inc hl
 	ld [bc], a ; tile id
+	ld a, d
+	and VRAM_BANK_1
+	jr z, .vram0
+	ld a, [bc]
+	cp $80
+	jr c, .standing
+	sub $40
+	ld [bc], a
+.standing
+.vram0
 	inc c
 	ld a, e
 	bit RELATIVE_ATTRIBUTES_F, a

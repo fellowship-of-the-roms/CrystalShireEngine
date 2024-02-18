@@ -39,7 +39,7 @@ GetSpriteVTile::
 	ld a, b
 	ld hl, wSpriteFlags
 	bit 5, [hl]
-	jr z, .using_vbk1
+	jr nz, .using_vbk1
 	or $80
 .using_vbk1
 	jmp PopBCDEHL

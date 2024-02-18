@@ -401,8 +401,6 @@ endr
 	pop hl
 
 	ld a, [wSpriteFlags]
-	bit 5, a
-	ret nz
 	bit 6, a
 	ret nz
 
@@ -410,10 +408,27 @@ endr
 	call _DoesSpriteHaveFacings
 	ret c
 
+	ld a, [wSpriteFlags]
+	bit 5, a
 	ld a, h
-	add HIGH(vTiles1 - vTiles0)
+	jr nz, .vram1
+	add 4
+.vram1
+	add 4
 	ld h, a
-	jr .CopyToVram
+; fallthrough
+.CopyToVram:
+	ldh a, [rVBK]
+	push af
+	ld a, [wSpriteFlags]
+	and 1 << 5
+	swap a
+	rra
+	ldh [rVBK], a
+	call Get2bpp
+	pop af
+	ldh [rVBK], a
+	ret
 
 .GetTileAddr:
 ; Return the address of tile (a) in (hl).
@@ -428,23 +443,6 @@ endr
 	ld a, h
 	adc HIGH(vTiles0)
 	ld h, a
-	ret
-
-.CopyToVram:
-	ldh a, [rVBK]
-	push af
-	ld a, [wSpriteFlags]
-	bit 5, a
-	ld a, $1
-	jr z, .bankswitch
-	xor a
-
-.bankswitch
-	ldh [rVBK], a
-	call Get2bpp
-	pop af
-	ldh [rVBK], a
-	;farcall CopySpritePal
 	ret
 
 LoadEmote::
