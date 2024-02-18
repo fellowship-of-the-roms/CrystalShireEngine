@@ -33,10 +33,7 @@ Multiply::
 
 	farcall _Multiply
 
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 Divide::
 ; Divide hDividend length b (max 4 bytes) by hDivisor. Result in hQuotient.

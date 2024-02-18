@@ -42,10 +42,7 @@ GetSpriteVTile::
 	jr z, .using_vbk1
 	or $80
 .using_vbk1
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 DoesSpriteHaveFacings::
 	push de

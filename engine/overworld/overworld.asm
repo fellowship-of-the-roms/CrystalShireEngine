@@ -84,10 +84,7 @@ RefreshSprites::
 	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
 	call LoadMiscTiles
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 ReloadSpriteIndex::
 ; Reloads sprites using hUsedSpriteIndex.
