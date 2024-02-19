@@ -58,6 +58,7 @@ crystal_vc:    pokecrystal.patch
 clean: tidy
 	find gfx \
 	     \( -name "*.[12]bpp" \
+	        -o -name "*.2bpp.vtiles[245]" \
 	        -o -name "*.lz" \
 	        -o -name "*.gbcpal" \
 	        -o -name "*.sgb.tilemap" \) \
@@ -266,6 +267,15 @@ gfx/mobile/stadium2_n64.2bpp: tools/gfx += --trim-whitespace
 	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+
+%.2bpp.vtiles2: %.2bpp
+	$Qtools/sub_2bpp.sh $< 128 > $@
+
+%.2bpp.vtiles4: %.2bpp
+	$Qtools/sub_2bpp.sh $< 256 128 > $@
+
+%.2bpp.vtiles5: %.2bpp
+	$Qtools/sub_2bpp.sh $< 128 128 > $@
 
 %.gbcpal: %.png
 	$(RGBGFX) -c embedded -p $@ $<

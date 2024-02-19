@@ -4,6 +4,9 @@
 # compiled graphics
 *.1bpp
 *.2bpp
+*.2bpp.vtiles2
+*.2bpp.vtiles4
+*.2bpp.vtiles5
 *.lz
 *.gbcpal
 *.dimensions

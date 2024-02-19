@@ -192,6 +192,8 @@ hRequestedVTileDest::   dw
 hRequestedVTileSource:: dw
 hRequestOpaque1bpp::    db
 
-	ds 5
+hTilesetGFXBank:: db
+
+	ds 4
 
 ENDSECTION

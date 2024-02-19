@@ -2194,8 +2194,10 @@ wWestMapConnection::  map_connection_struct wWest
 wEastMapConnection::  map_connection_struct wEast
 
 wTileset::
-wTilesetBank:: db
-wTilesetAddress:: dw
+wTilesetGFXBank:: db
+wTilesetvTiles2GFXAddress:: dw
+wTilesetvTiles4GFXAddress:: dw
+wTilesetvTiles5GFXAddress:: dw
 wTilesetBlocksBank:: db
 wTilesetBlocksAddress:: dw
 wTilesetCollisionBank:: db

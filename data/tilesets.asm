@@ -1,5 +1,7 @@
 MACRO tileset
-	dba \1GFX, \1Meta, \1Coll, \1Attr
+	dba \1vTiles2GFX
+	dw \1vTiles4GFX, \1vTiles5GFX
+	dba \1Meta, \1Coll, \1Attr
 	dw \1Anim
 ENDM
 

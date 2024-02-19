@@ -39,7 +39,7 @@
 DEF NUM_TILESETS EQU const_value - 1
 
 ; wTileset struct size
-DEF TILESET_LENGTH EQU 14
+DEF TILESET_LENGTH EQU 18
 
 ; roof length (see gfx/tilesets/roofs)
 DEF ROOF_LENGTH EQU 9
