@@ -1,5 +1,5 @@
 GetEmote2bpp:
-	ld a, $1
+	ld a, $0
 	ldh [rVBK], a
 	call Get2bpp
 	xor a
