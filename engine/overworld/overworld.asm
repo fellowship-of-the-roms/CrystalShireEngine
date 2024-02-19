@@ -1,11 +1,3 @@
-GetEmote2bpp:
-	ld a, $0
-	ldh [rVBK], a
-	call Get2bpp
-	xor a
-	ldh [rVBK], a
-	ret
-
 _UpdatePlayerSprite::
 	call GetPlayerSprite
 	ld a, [wUsedSprites]
@@ -471,7 +463,7 @@ LoadEmote::
 	ld a, c
 	and a
 	ret z
-	jmp GetEmote2bpp
+	jmp Get2bpp
 
 INCLUDE "data/sprites/emotes.asm"
 
