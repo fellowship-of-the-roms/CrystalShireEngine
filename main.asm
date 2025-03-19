@@ -679,7 +679,9 @@ INCLUDE "engine/gfx/dynamic_pals.asm"
 
 SECTION "Abilities", ROMX
 
+INCLUDE "data/text/ability_text.asm"
 INCLUDE "engine/abilities/ability_prints.asm"
+INCLUDE "engine/abilities/battle_abilities.asm"
 
 SECTION "Fade System", ROMX
 

@@ -204,6 +204,21 @@ StdBattleTextbox::
 	rst Bankswitch
 	ret
 
+StdAbilityTextbox::
+; Similar to the Battle Textbox...but does this for the abilities instead
+
+	ldh a, [hROMBank]
+	push af
+
+	ld a, BANK(AbilityText)
+	rst Bankswitch
+
+	call BattleTextbox
+
+	pop af
+	rst Bankswitch
+	ret
+
 BattleJumptable::
 ; hl = jumptable, a = target. Returns z if no jump was made, nz otherwise
 	; Maybe make this a common function? Maybe one exist?
