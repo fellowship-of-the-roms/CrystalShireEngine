@@ -10,9 +10,13 @@ Check_Entrance_Ability:
     jr z, .drought
     cp SAND_STREAM
     jr z, .sand_stream
-
+    cp PRESSURE
+    jr z, .pressure
+    cp INTIMIDATE
+    jr z, .intimidate
     ; Otherwise, do nothing
     ret
+
 .drizzle
     ld hl, AbilityText_MadeItRain
     call StdAbilityTextbox
@@ -38,4 +42,59 @@ Check_Entrance_Ability:
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
+    ret
+
+.pressure
+    ld hl, AbilityText_ExertingPressure
+    call StdAbilityTextbox
+    ret
+
+.intimidate
+    push bc
+    ld c, a
+    xor a
+    cp b
+    jr z, .enemy ; Check the enemy ability
+    ld a, [wBattleMonSpecies]
+    ld c, a
+    ld hl, wBattleMonPersonality
+.back_to_intimidate
+    call GetAbility
+    cp WHITE_SMOKE
+    jr z, .blocked_intimidate
+    cp HYPER_CUTTER
+    jr z, .blocked_intimidate
+    cp CLEAR_BODY
+    jr z, .blocked_intimidate
+    ; We're still here? Jump forward!
+    jr .continue_intimidate
+
+.enemy
+    ld a, [wEnemyMonSpecies]
+    ld c, a
+    ld hl, wEnemyMonPersonality
+    jr .back_to_intimidate
+
+.continue_intimidate
+    pop bc
+    ld hl, AbilityText_IntimidateCutsAttack
+    call StdAbilityTextbox
+    ret
+
+; At this point, we say "Hey, this blocked that!"
+.blocked_intimidate
+    pop bc
+    ld hl, AbilityNames
+	call GetNthString
+    ld d, h
+    ld e, l
+    ld hl, wStringBuffer1
+.intimidate_loop
+	ld a, [de]
+	inc de
+	ld [hli], a
+	cp "@"
+	jr nz, .intimidate_loop
+    ld hl, AbilityText_IntimidateBlocked
+    call StdAbilityTextbox
     ret
