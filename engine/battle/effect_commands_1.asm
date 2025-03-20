@@ -2021,7 +2021,7 @@ BattleCommand_StatDownAnim:
 	ld a, [wAttackMissed]
 	and a
 	jmp nz, AnimateFailedMove
-
+.intimidate_skip
 	ldh a, [hBattleTurn]
 	and a
 	ld a, ANIM_ENEMY_STAT_DOWN - BATTLE_AFTERANIMS

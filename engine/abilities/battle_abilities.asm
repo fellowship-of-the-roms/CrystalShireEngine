@@ -22,7 +22,7 @@ Check_Entrance_Ability:
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
-    call .PlayWeatherAnimation
+    farcall HandleWeather.weather_ability_skip
     ld hl, AbilityText_MadeItRain
     call StdAbilityTextbox
     ret
@@ -32,7 +32,7 @@ Check_Entrance_Ability:
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
-    call .PlayWeatherAnimation
+    farcall HandleWeather.weather_ability_skip
     ld hl, AbilityText_SunRaysIntensified
     call StdAbilityTextbox
     ret
@@ -42,7 +42,7 @@ Check_Entrance_Ability:
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
-    call .PlayWeatherAnimation
+    farcall HandleWeather.weather_ability_skip
     ld hl, AbilityText_WhippedUpASandStorm
     call StdAbilityTextbox
     ret
@@ -80,7 +80,9 @@ Check_Entrance_Ability:
 
 .continue_intimidate
     pop bc
-; Lower the target stats
+; Play the animation for dropping the stat
+; Known bug: it does briefly flash the HP bar due to the presumed prior "state"
+    farcall BattleCommand_StatDownAnim.intimidate_skip
 ; Finally, print this
     ld hl, AbilityText_IntimidateCutsAttack
     call StdAbilityTextbox
@@ -103,27 +105,3 @@ Check_Entrance_Ability:
     ld hl, AbilityText_IntimidateBlocked
     call StdAbilityTextbox
     ret
-
-; Plays the weather animation
-; Borrowed and modified from engine/battle/core.asm
-.PlayWeatherAnimation:
-	xor a
-	ld [wNumHits], a
-	ld hl, .WeatherAnimations
-	ld a, [wBattleWeather]
-	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	farcall Call_PlayBattleAnim
-    ret
-
-.WeatherAnimations:
-	dw RAIN_DANCE
-	dw SUNNY_DAY
-	dw SANDSTORM
-	dw HAIL

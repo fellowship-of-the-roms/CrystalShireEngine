@@ -1854,6 +1854,8 @@ HandleWeather:
 
 
 .PlayWeatherAnimation:
+	call SetPlayerTurn
+.weather_ability_skip
 	xor a ; uses one byte of ROM, compared to two for "ld a, 1"
 	ld [wBattleAfterAnim], a
 	call SetPlayerTurn
