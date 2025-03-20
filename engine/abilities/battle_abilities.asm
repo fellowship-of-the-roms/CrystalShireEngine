@@ -80,9 +80,9 @@ Check_Entrance_Ability:
 
 .continue_intimidate
     pop bc
-; Play the animation for dropping the stat
-; Known bug: it does briefly flash the HP bar due to the presumed prior "state"
+; Known bug: it does briefly flash the HP bar
     farcall BattleCommand_StatDownAnim.intimidate_skip
+    farcall BattleCommand_AttackDown
 ; Finally, print this
     ld hl, AbilityText_IntimidateCutsAttack
     call StdAbilityTextbox
