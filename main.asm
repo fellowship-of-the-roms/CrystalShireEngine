@@ -682,6 +682,7 @@ SECTION "Abilities", ROMX
 INCLUDE "data/text/ability_text.asm"
 INCLUDE "engine/abilities/ability_prints.asm"
 INCLUDE "engine/abilities/battle_abilities.asm"
+INCLUDE "engine/abilities/ability_utils.asm"
 
 SECTION "Fade System", ROMX
 

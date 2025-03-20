@@ -53,15 +53,7 @@ Check_Entrance_Ability:
     ret
 
 .intimidate
-    push bc
-    ld c, a
-    xor a
-    cp b
-    jr z, .enemy ; Check the enemy ability
-    ld a, [wBattleMonSpecies]
-    ld c, a
-    ld hl, wBattleMonPersonality
-.back_to_intimidate
+    call Ability_LoadOppSpeciesAndPersonality
     call GetAbility
     cp WHITE_SMOKE
     jr z, .blocked_intimidate
@@ -69,17 +61,7 @@ Check_Entrance_Ability:
     jr z, .blocked_intimidate
     cp CLEAR_BODY
     jr z, .blocked_intimidate
-    ; We're still here? Jump forward!
-    jr .continue_intimidate
-
-.enemy
-    ld a, [wEnemyMonSpecies]
-    ld c, a
-    ld hl, wEnemyMonPersonality
-    jr .back_to_intimidate
-
-.continue_intimidate
-    pop bc
+    ; We're still here? Push forward!
 ; Known bug: it does briefly flash the HP bar
     farcall BattleCommand_StatDownAnim.intimidate_skip
     farcall BattleCommand_AttackDown
@@ -90,18 +72,7 @@ Check_Entrance_Ability:
 
 ; At this point, we say "Hey, this blocked that!"
 .blocked_intimidate
-    pop bc
-    ld hl, AbilityNames
-	call GetNthString
-    ld d, h
-    ld e, l
-    ld hl, wStringBuffer1
-.intimidate_loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp "@"
-	jr nz, .intimidate_loop
+    call Ability_LoadAbilityName
     ld hl, AbilityText_IntimidateBlocked
     call StdAbilityTextbox
     ret
