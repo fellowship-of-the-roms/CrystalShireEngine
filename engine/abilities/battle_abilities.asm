@@ -18,30 +18,33 @@ Check_Entrance_Ability:
     ret
 
 .drizzle
-    ld hl, AbilityText_MadeItRain
-    call StdAbilityTextbox
     ld a, WEATHER_RAIN
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
+    call .PlayWeatherAnimation
+    ld hl, AbilityText_MadeItRain
+    call StdAbilityTextbox
     ret
 
 .drought
-    ld hl, AbilityText_SunRaysIntensified
-    call StdAbilityTextbox
     ld a, WEATHER_SUN
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
+    call .PlayWeatherAnimation
+    ld hl, AbilityText_SunRaysIntensified
+    call StdAbilityTextbox
     ret
 
 .sand_stream
-    ld hl, AbilityText_WhippedUpASandStorm
-    call StdAbilityTextbox
     ld a, WEATHER_SANDSTORM
     ld [wBattleWeather], a
     ld a, 255 ; 8-bit restriction. only 255 turns allowed.
     ld [wWeatherCount], a
+    call .PlayWeatherAnimation
+    ld hl, AbilityText_WhippedUpASandStorm
+    call StdAbilityTextbox
     ret
 
 .pressure
@@ -77,6 +80,8 @@ Check_Entrance_Ability:
 
 .continue_intimidate
     pop bc
+; Lower the target stats
+; Finally, print this
     ld hl, AbilityText_IntimidateCutsAttack
     call StdAbilityTextbox
     ret
@@ -98,3 +103,27 @@ Check_Entrance_Ability:
     ld hl, AbilityText_IntimidateBlocked
     call StdAbilityTextbox
     ret
+
+; Plays the weather animation
+; Borrowed and modified from engine/battle/core.asm
+.PlayWeatherAnimation:
+	xor a
+	ld [wNumHits], a
+	ld hl, .WeatherAnimations
+	ld a, [wBattleWeather]
+	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	farcall Call_PlayBattleAnim
+    ret
+
+.WeatherAnimations:
+	dw RAIN_DANCE
+	dw SUNNY_DAY
+	dw SANDSTORM
+	dw HAIL
