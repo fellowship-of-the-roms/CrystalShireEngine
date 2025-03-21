@@ -39,10 +39,11 @@ AbilityText_IntimidateBlocked:
     para "vented ATTACK from"
     line "being lowered by"
 
-    para "<USER>s"
+    para "<USER>'s"
     line "INTIMIDATE!"
     prompt
 
+; In the name of looking pretty, and in not adding VWT/VWF, I have these two lovely functions.
 AbilityText_TracedTheAbilityPlayer:
     text "<USER> traced"
     line "<TARGET>'s"
