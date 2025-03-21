@@ -4,6 +4,9 @@ AbilityText:: ; Defines the ability text bank, referenced as BANK(AbilityText)
 ; Performs the ability if applicable.
 Check_Entrance_Ability:
     call GetAbility
+    call Ability_LoadTracedAbility
+    cp TRACE
+    jp z, .trace
     cp DRIZZLE
     jr z, .drizzle
     cp DROUGHT
@@ -75,4 +78,34 @@ Check_Entrance_Ability:
     call Ability_LoadAbilityName
     ld hl, AbilityText_IntimidateBlocked
     call StdAbilityTextbox
+    ret
+
+.trace
+    ; First sort out if the enemy's ability is also still TRACE, and do nothing otherwise.
+    call Ability_LoadOppSpeciesAndPersonality
+    call GetAbility
+    cp TRACE
+    jr z, .cannot_trace ; In Gen III, you could not trace a traced ability... or Trace, for that matter. 
+    
+    push af
+    ld a, b
+    and a
+    pop af
+    ld [wBattleMonTracedAbility], a
+    jr z, .print_traced
+    push af
+    ld a, TRACE
+    ld [wBattleMonTracedAbility], a ; Reset this
+    pop af
+    ld [wEnemyMonTracedAbility], a
+.print_traced
+    call Ability_LoadAbilityName
+    ld a, b
+    and a
+    ld hl, AbilityText_TracedTheAbilityPlayer
+    jr z, .call_text
+    ld hl, AbilityText_TracedTheAbilityEnemy
+.call_text
+    call StdAbilityTextbox
+.cannot_trace
     ret

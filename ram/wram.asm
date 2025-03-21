@@ -341,7 +341,9 @@ wBattleMonNickname:: ds MON_NAME_LENGTH
 
 wBattleMon:: battle_struct wBattleMon
 
-	ds 2
+; Traced abilities get stored.
+wEnemyMonTracedAbility:: db
+wBattleMonTracedAbility:: db
 
 wWildMon:: db
 	ds 1

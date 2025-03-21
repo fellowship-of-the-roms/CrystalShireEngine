@@ -21,7 +21,7 @@ Ability_LoadAbilityName:
 	jr nz, .loop
     ret
 
-; Loads the personality and species of the opponent of the abilityuser stored in 'b', where 0 is the player and 1 is the enemy.
+; Loads the personality and species of the opponent of the ability user stored in 'b', where 0 is the player and 1 is the enemy.
 ; Used to pull the opponents ability if it may block/copy an ability activation, or have additional effects/affects based on the user's ability.
 Ability_LoadOppSpeciesAndPersonality:
     xor a
@@ -36,8 +36,16 @@ Ability_LoadOppSpeciesAndPersonality:
 .done
     ret
 
-; A Pokémon with the TRACE ability can technically have any ability in the game. This replaces the ability
-; being pointed to if TRACE is present.
-Ability_CheckTracedAbility:
-    
+; A Pokémon with the TRACE ability can technically have any ability in the game. This replaces the ability being pointed to if TRACE is the default.
+; Loads the traced ability of the ability user in 'b', where 0 is the player and 1 is the enemy.
+Ability_LoadTracedAbility:
+    cp TRACE
+    jr nz, .done ; If the base ability isn't TRACE, don't do anything.
+
+    xor a
+    cp b
+    ld a, [wBattleMonTracedAbility]
+    jr z, .done
+    ld a, [wEnemyMonTracedAbility]
+.done
     ret 

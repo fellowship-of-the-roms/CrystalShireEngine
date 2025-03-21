@@ -42,3 +42,19 @@ AbilityText_IntimidateBlocked:
     para "<USER>s"
     line "INTIMIDATE!"
     prompt
+
+AbilityText_TracedTheAbilityPlayer:
+    text "<USER> traced"
+    line "<TARGET>'s"
+    cont "@"
+    text_ram wStringBuffer1
+    text "!"
+    prompt
+
+AbilityText_TracedTheAbilityEnemy:
+    text "<USER>"
+    line "traced <TARGET>'s"
+    cont "@"
+    text_ram wStringBuffer1
+    text "!"
+    prompt

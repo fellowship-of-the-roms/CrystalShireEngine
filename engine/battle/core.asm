@@ -7,6 +7,9 @@ DoBattle:
 	ld [wBattlePlayerAction], a
 	ld [wBattleEnded], a
 	ld [wTotalBattleTurns], a
+	ld a, TRACE
+	ld [wBattleMonTracedAbility], a ; Load these with TRACE as a placeholder...
+	ld [wEnemyMonTracedAbility], a
 	ld hl, wOTPartyMon1HP
 	ld bc, PARTYMON_STRUCT_LENGTH - 1
 	ld d, BATTLEACTION_SWITCH1 - 1
