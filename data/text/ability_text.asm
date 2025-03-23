@@ -59,3 +59,9 @@ AbilityText_TracedTheAbilityEnemy:
     text_ram wStringBuffer1
     text "!"
     prompt
+
+AbilityText_RunAway:
+    text "<TARGET>" ; Because the turn swaps, this matters.
+    line "fled using RUN"
+    cont "AWAY!"
+    prompt

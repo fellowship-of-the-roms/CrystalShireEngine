@@ -109,3 +109,27 @@ Check_Entrance_Ability:
     call StdAbilityTextbox
 .cannot_trace
     ret
+
+; Checks an ability that activates upon attempting to flee. It returns NZ if the "flee-er" can flee, or Z if it cannot.
+Check_Flee_Ability:
+    call GetAbility
+    call Ability_LoadTracedAbility
+    ; RUN AWAY always allows fleeing or switching out without fail
+    cp RUN_AWAY
+    jr z, .run_away
+    ; Now the rest of these are more specific. See constants/ability_constants.asm for more detail on specific abilities.
+
+    xor a ; Otherwise return Z.
+    cp a
+    ret
+
+.run_away:
+    ld a, 1 ; Sets the NZ flag, which is used to determine quite a few things in core.
+    and a
+    ret
+
+; This is only ever called from battle/engine/core.asm in 2 spots.
+.PrintRunawayText
+    ld hl, AbilityText_RunAway
+    call StdAbilityTextbox
+    ret

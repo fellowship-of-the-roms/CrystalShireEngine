@@ -132,7 +132,7 @@ DoBattle:
 	ld hl, wEnemyMonPersonality
 	farcall Check_Entrance_Ability
 	call SetPlayerTurn
-	jr BattleTurn
+	jp BattleTurn
 .enemy_first
 	call SetEnemyTurn
 	ld a, [wEnemyMonSpecies]
@@ -172,7 +172,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	ld a, [wLinkMode]
 	and a
 	ld hl, BattleText_WildFled
-	jr z, .print_text
+	jr z, .check_run_away
 
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
@@ -188,6 +188,17 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	call WaitPlaySFX
 	call SetPlayerTurn
 	jmp EndBattle
+
+.check_run_away:
+	ld hl, wEnemyMonPersonality
+	ld a, [wEnemyMonSpecies]
+	ld b, 1
+	ld c, a
+	farcall Check_Flee_Ability
+	ld hl, BattleText_EnemyFled
+	jr z, .print_text
+	farcall Check_Flee_Ability.PrintRunawayText
+	jr .skip_text
 
 BattleTurn:
 .loop
@@ -810,6 +821,14 @@ TryEnemyFlee:
 	dec a
 	jr nz, .Stay
 
+; We need to check Run Away here
+	ld a, [wEnemyMonSpecies]
+	ld b, 1
+	ld c, a
+	ld hl, wEnemyMonPersonality
+	farcall Check_Flee_Ability
+	jr nz, .run_away_skips
+
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr nz, .Stay
@@ -818,6 +837,7 @@ TryEnemyFlee:
 	and a
 	jr nz, .Stay
 
+.run_away_skips
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ | SLP_MASK
 	jr nz, .Stay
@@ -3775,6 +3795,14 @@ TryToRunAwayFromBattle:
 	dec a
 	jmp nz, .cant_run_from_trainer
 
+	; Run Away is guaranteed.
+	ld a, [wBattleMonSpecies]
+	ld b, 0
+	ld c, a
+	ld hl, wBattleMonPersonality
+	farcall Check_Flee_Ability
+	jp nz, .fled
+
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jmp nz, .cant_escape
@@ -3917,8 +3945,19 @@ TryToRunAwayFromBattle:
 	call WaitPlaySFX
 	pop de
 	call WaitSFX
+	ld a, [wBattleMonSpecies]
+	ld b, 0
+	ld c, a
+	ld hl, wBattleMonPersonality
+	farcall Check_Flee_Ability
+	jr nz, .fled_using_run_away
 	ld hl, BattleText_GotAwaySafely
 	call StdBattleTextbox
+	jr .done_flee
+
+.fled_using_run_away
+	farcall Check_Flee_Ability.PrintRunawayText
+.done_flee
 	call WaitSFX
 	call LoadTilemapToTempTilemap
 	scf
@@ -6255,6 +6294,12 @@ LoadEnemyMon:
 	ld hl, wEnemyMonNature
 	call BattleRandomRange
 	and NATURE_MASK
+	or [hl]
+	ld [hl], a
+
+; generate personality
+	call BattleRandom
+	and ABILITY_MASK
 	or [hl]
 	ld [hl], a
 
