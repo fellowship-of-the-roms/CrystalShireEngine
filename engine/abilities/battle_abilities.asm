@@ -200,3 +200,12 @@ Check_Trap_Ability:
     ld a, 1
     and a
     jr .done
+
+; Shell Armor and Battle Armor prevent critical hits. Z is returned if the ability blocks critical hits entirely.
+Check_CritBlockingAbility:
+    call GetAbility
+    call Ability_LoadTracedAbility
+    cp BATTLE_ARMOR
+    ret z
+    cp SHELL_ARMOR
+    ret

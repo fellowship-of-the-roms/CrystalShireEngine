@@ -1123,12 +1123,23 @@ BattleCommand_Critical:
 	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonItem
+	push hl
+	ld hl, wEnemyMonPersonality
 	ld a, [wEnemyMonSpecies]
-	jr nz, .Item
+	jr nz, .check_crit_blocking_ability
 	ld hl, wBattleMonItem
 	ld a, [wBattleMonSpecies]
+	ld hl, wBattleMonPersonality
 
-.Item:
+.check_crit_blocking_ability:
+	ld b, a
+	push bc
+	farcall Check_CritBlockingAbility
+	pop bc
+	pop hl
+	jp z, .skip_critical_hit
+	ld a, b
+; This used to be "".Item"
 	ld c, 0
 	ld b, [hl]
 	call GetPokemonIndexFromID
@@ -1230,6 +1241,7 @@ BattleCommand_Critical:
 	ret nc
 	ld a, 1
 	ld [wCriticalHit], a
+.skip_critical_hit
 	ret
 
 INCLUDE "data/moves/critical_hit_moves.asm"
