@@ -23,7 +23,9 @@ Ability_LoadAbilityName:
 
 ; Loads the personality and species of the opponent of the ability user stored in 'b', where 0 is the player and 1 is the enemy.
 ; Used to pull the opponents ability if it may block/copy an ability activation, or have additional effects/affects based on the user's ability.
+; Preserves BC
 Ability_LoadOppSpeciesAndPersonality:
+    push bc
     xor a
     cp b
     ld a, [wEnemyMonSpecies]
@@ -34,6 +36,7 @@ Ability_LoadOppSpeciesAndPersonality:
     ld c, a
     ld hl, wBattleMonPersonality
 .done
+    pop bc
     ret
 
 ; A Pokémon with the TRACE ability can technically have any ability in the game. This replaces the ability being pointed to if TRACE is the default.
@@ -49,3 +52,28 @@ Ability_LoadTracedAbility:
     ld a, [wEnemyMonTracedAbility]
 .done
     ret 
+
+; Checks the types of the opponent of the ability holder stored in 'b', where 0 is the player and 1 is the enemy. Returns a Z if it does.
+; Preserves BC
+Ability_CheckOpponentMonType:
+    push bc
+    push af
+    xor a
+    cp b
+    ld a, [wEnemyMonType1]
+    ld b, a
+    ld a, [wEnemyMonType2]
+    ld c, a
+    jr z, .compare_types
+    ld a, [wBattleMonType1]
+    ld b, a
+    ld a, [wBattleMonType2]
+    ld c, a
+.compare_types
+    pop af
+    cp b
+    jr z, .done
+    cp c
+.done
+    pop bc
+    ret

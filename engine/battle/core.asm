@@ -829,6 +829,14 @@ TryEnemyFlee:
 	farcall Check_Flee_Ability
 	jr nz, .run_away_skips
 
+; We also need to check if the player's ability is a trap ability.
+	ld a, [wBattleMonSpecies]
+	ld b, 0
+	ld c, a
+	ld hl, wBattleMonPersonality
+	farcall Check_Trap_Ability
+	jr nz, .Stay
+	
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr nz, .Stay
@@ -3795,6 +3803,14 @@ TryToRunAwayFromBattle:
 	dec a
 	jmp nz, .cant_run_from_trainer
 
+	; Surpise, the enemy is here!
+	ld a, [wEnemyMonSpecies]
+	ld b, 1
+	ld c, a
+	ld hl, wEnemyMonPersonality
+	farcall Check_Trap_Ability
+	jmp nz, .ability_fleeing_prevented
+
 	; Run Away is guaranteed.
 	ld a, [wBattleMonSpecies]
 	ld b, 0
@@ -3905,6 +3921,7 @@ TryToRunAwayFromBattle:
 
 .print_inescapable_text
 	call StdBattleTextbox
+.ability_fleeing_prevented ; We already printed something, just keep going.
 	ld a, TRUE
 	ld [wFailedToFlee], a
 	call LoadTilemapToTempTilemap
@@ -5173,6 +5190,13 @@ TryPlayerSwitch:
 	ld a, [wPlayerWrapCount]
 	and a
 	jr nz, .trapped
+; Check the opponent's ability for things like Arena Trap
+	ld a, [wEnemyMonSpecies]
+	ld b, 1
+	ld c, a
+	ld hl, wEnemyMonPersonality
+	farcall Check_Trap_Ability
+	jr nz, .ability_trapped
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr z, .try_switch
@@ -5180,6 +5204,7 @@ TryPlayerSwitch:
 .trapped
 	ld hl, BattleText_MonCantBeRecalled
 	call StdBattleTextbox
+.ability_trapped
 	jmp BattleMenuPKMN_Loop
 
 .try_switch

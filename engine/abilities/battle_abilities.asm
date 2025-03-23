@@ -110,21 +110,18 @@ Check_Entrance_Ability:
 .cannot_trace
     ret
 
-; Checks an ability that activates upon attempting to flee. It returns NZ if the "flee-er" can flee, or Z if it cannot.
+; This is just Run Away. Returns NZ if it is.
 Check_Flee_Ability:
     call GetAbility
     call Ability_LoadTracedAbility
     ; RUN AWAY always allows fleeing or switching out without fail
     cp RUN_AWAY
     jr z, .run_away
-    ; Now the rest of these are more specific. See constants/ability_constants.asm for more detail on specific abilities.
-
     xor a ; Otherwise return Z.
     cp a
     ret
-
 .run_away:
-    ld a, 1 ; Sets the NZ flag, which is used to determine quite a few things in core.
+    ld a, 1 ; Sets the NZ flag.
     and a
     ret
 
@@ -133,3 +130,73 @@ Check_Flee_Ability:
     ld hl, AbilityText_RunAway
     call StdAbilityTextbox
     ret
+
+; "Beware of Traps!" - Admiral Ackbar
+; These are abilities that prevent the foe from escaping (including switching out). Returns NZ if the ability prevents fleeing.
+Check_Trap_Ability:
+    ; Firstly, none of this matters if the opponent has Run Away.
+    push af
+    push bc
+    call Ability_LoadOppSpeciesAndPersonality
+    cp RUN_AWAY
+    pop bc
+    jr z, .done_z
+    pop af
+    ; At this point we check the ability now.
+    call GetAbility
+    call Ability_LoadTracedAbility
+    cp ARENA_TRAP
+    jr z, .arena_trap
+    cp SHADOW_TAG
+    jr z, .shadow_tag
+    cp MAGNET_PULL
+    jr z, .magnet_pull
+    ; and of course, we're done otherwise; set z
+    xor a
+    cp a
+    jr .done
+
+.done_z ; Pops AF and sets the Z flag
+    pop af
+    cp a
+.done
+    ret
+
+.arena_trap ; We have two potential problems... does the foe have levitate, or is the foe a Flying-type?
+    push af
+    call Ability_LoadOppSpeciesAndPersonality
+    cp LEVITATE
+    jr z, .done_z
+    ld a, FLYING
+    call Ability_CheckOpponentMonType
+    jr z, .done_z
+    jr .trap_enemy
+
+.shadow_tag ; We have 1 potential problem... is the foe a Ghost-type?
+    push af
+    ld a, GHOST
+    call Ability_CheckOpponentMonType
+    jr z, .done_z
+    jr .trap_enemy
+
+.magnet_pull ; This only affects Steel-types... so unlike the other two, we return on NZ.
+    push af
+    ld a, STEEL
+    call Ability_CheckOpponentMonType
+    jr nz, .done_z
+; Fallthrough
+.trap_enemy
+    pop af
+    ; Let's get the ability name in case we need it
+    call Ability_LoadAbilityName
+    ; Right so if the enemy is checking us, that means b is a 0, and we do not return. If the
+    ; enemy is blocking us on the other hand, b is a 1 and we need to print out something.
+    xor a
+    cp b
+    jr z, .cant_escape
+    ld hl, AbilityText_PreventedEscapeAbility
+    call StdAbilityTextbox
+.cant_escape
+    ld a, 1
+    and a
+    jr .done
