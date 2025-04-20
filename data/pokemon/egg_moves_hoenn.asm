@@ -10,9 +10,9 @@ EggMovePointers3::
 	dw MudkipEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw PoochyenaEggMoves
+	dw EuxinosEggMoves
 	dw NoEggMoves3
-	dw ZigzagoonEggMoves
+	dw NoEggMoves3
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw NoEggMoves3
@@ -26,11 +26,11 @@ EggMovePointers3::
 	dw SeedotEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw TaillowEggMoves
 	dw NoEggMoves3
-	dw WingullEggMoves
 	dw NoEggMoves3
-	dw RaltsEggMoves
+	dw VoltrelEggMoves
+	dw NoEggMoves3
+	dw SolosisEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw SurskitEggMoves
@@ -43,7 +43,7 @@ EggMovePointers3::
 	dw NincadaEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw WhismurEggMoves
+	dw TinkatinkEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw MakuhitaEggMoves
@@ -51,27 +51,27 @@ EggMovePointers3::
 	dw AzurillEggMoves
 	dw SkittyEggMoves
 	dw NoEggMoves3
-	dw SableyeEggMoves
-	dw MawileEggMoves
+	dw SpiritombEggMoves
+	dw NoEggMoves3
 	dw AronEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw MedititeEggMoves
 	dw NoEggMoves3
-	dw ElectrikeEggMoves
+	dw ShinxEggMoves
 	dw NoEggMoves3
-	dw PlusleEggMoves
-	dw MinunEggMoves
-	dw VolbeatEggMoves
-	dw IllumiseEggMoves
-	dw RoseliaEggMoves
-	dw GulpinEggMoves
+	dw NoEggMoves3
+	dw GekoponEggMoves
+	dw TynamoEggMoves
+	dw NoEggMoves3
+	dw NoEggMoves3
+	dw NoEggMoves3
 	dw NoEggMoves3
 	dw CarvanhaEggMoves
 	dw NoEggMoves3
-	dw WailmerEggMoves
+	dw BarboachEggMoves
 	dw NoEggMoves3
-	dw NumelEggMoves
+	dw SmoguanaEggMoves
 	dw NoEggMoves3
 	dw TorkoalEggMoves
 	dw SpoinkEggMoves
@@ -80,17 +80,17 @@ EggMovePointers3::
 	dw TrapinchEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw CacneaEggMoves
+	dw NohfaceEggMoves
 	dw NoEggMoves3
-	dw SwabluEggMoves
+	dw KrolucadaEggMoves
 	dw NoEggMoves3
-	dw ZangooseEggMoves
-	dw SeviperEggMoves
+	dw StunkyEggMoves
+	dw NoEggMoves3
+	dw LarvestaEggMoves
+	dw NoEggMoves3
+	dw ImpidimpEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw BarboachEggMoves
-	dw NoEggMoves3
-	dw CorphishEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw LileepEggMoves
@@ -109,7 +109,7 @@ EggMovePointers3::
 	dw ChimechoEggMoves
 	dw AbsolEggMoves
 	dw NoEggMoves3
-	dw SnoruntEggMoves
+	dw SnoverEggMoves
 	dw NoEggMoves3
 	dw SphealEggMoves
 	dw NoEggMoves3
@@ -119,7 +119,7 @@ EggMovePointers3::
 	dw NoEggMoves3
 	dw RelicanthEggMoves
 	dw LuvdiscEggMoves
-	dw BagonEggMoves
+	dw RaelicEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw NoEggMoves3
@@ -165,20 +165,12 @@ MudkipEggMoves:
 	dw UPROAR
 	dw -1 ; end
 
-PoochyenaEggMoves:
+EuxinosEggMoves:
 	dw ASTONISH
 	dw COVET
 	dw LEER
 	dw POISON_FANG
 	dw YAWN
-	dw -1 ; end
-
-ZigzagoonEggMoves:
-	dw CHARM
-	dw PURSUIT
-	dw SUBSTITUTE
-	dw TICKLE
-	dw TRICK
 	dw -1 ; end
 
 LotadEggMoves:
@@ -199,24 +191,18 @@ SeedotEggMoves:
 	dw TAKE_DOWN
 	dw -1 ; end
 
-TaillowEggMoves:
+VoltrelEggMoves:
+	dw GUST
+	dw MIST
+	dw THUNDER
 	dw MIRROR_MOVE
 	dw PURSUIT
 	dw RAGE
-	dw REFRESH
 	dw SKY_ATTACK
 	dw SUPERSONIC
 	dw -1 ; end
 
-WingullEggMoves:
-	dw AGILITY
-	dw GUST
-	dw MIST
-	dw TWISTER
-	dw WATER_SPORT
-	dw -1 ; end
-
-RaltsEggMoves:
+SolosisEggMoves:
 	dw DESTINY_BOND
 	dw DISABLE
 	dw MEAN_LOOK
@@ -257,8 +243,10 @@ NincadaEggMoves:
 	dw SILVER_WIND
 	dw -1 ; end
 
-WhismurEggMoves:
-	dw EXTRASENSORY
+TinkatinkEggMoves:
+	dw ENCORE
+	dw SING
+	dw SLAM
 	dw SMELLINGSALT
 	dw SNORE
 	dw SWAGGER
@@ -295,19 +283,10 @@ SkittyEggMoves:
 	dw WISH
 	dw -1 ; end
 
-SableyeEggMoves:
+SpiritombEggMoves:
 	dw MOONLIGHT
 	dw PSYCH_UP
 	dw RECOVER
-	dw -1 ; end
-
-MawileEggMoves:
-	dw ANCIENTPOWER
-	dw FALSE_SWIPE
-	dw POISON_FANG
-	dw PSYCH_UP
-	dw SWORDS_DANCE
-	dw TICKLE
 	dw -1 ; end
 
 AronEggMoves:
@@ -327,7 +306,7 @@ MedititeEggMoves:
 	dw THUNDERPUNCH
 	dw -1 ; end
 
-ElectrikeEggMoves:
+ShinxEggMoves:
 	dw CRUNCH
 	dw CURSE
 	dw HEADBUTT
@@ -335,40 +314,15 @@ ElectrikeEggMoves:
 	dw UPROAR
 	dw -1 ; end
 
-PlusleEggMoves:
+GekoponEggMoves:
 	dw SUBSTITUTE
 	dw WISH
 	dw -1 ; end
 
-MinunEggMoves:
-	dw SUBSTITUTE
-	dw WISH
-	dw -1 ; end
-
-VolbeatEggMoves:
+TynamoEggMoves:
 	dw BATON_PASS
 	dw SILVER_WIND
 	dw TRICK
-	dw -1 ; end
-
-IllumiseEggMoves:
-	dw BATON_PASS
-	dw GROWTH
-	dw SILVER_WIND
-	dw -1 ; end
-
-RoseliaEggMoves:
-	dw COTTON_SPORE
-	dw PIN_MISSILE
-	dw SPIKES
-	dw SYNTHESIS
-	dw -1 ; end
-
-GulpinEggMoves:
-	dw ACID_ARMOR
-	dw DREAM_EATER
-	dw PAIN_SPLIT
-	dw SMOG
 	dw -1 ; end
 
 CarvanhaEggMoves:
@@ -377,18 +331,13 @@ CarvanhaEggMoves:
 	dw THRASH
 	dw -1 ; end
 
-WailmerEggMoves:
-	dw CURSE
-	dw DOUBLE_EDGE
-	dw FISSURE
-	dw SLEEP_TALK
-	dw SNORE
-	dw SWAGGER
+BarboachEggMoves:
+	dw SPARK
 	dw THRASH
-	dw TICKLE
+	dw WHIRLPOOL
 	dw -1 ; end
 
-NumelEggMoves:
+SmoguanaEggMoves:
 	dw BODY_SLAM
 	dw DEFENSE_CURL
 	dw HOWL
@@ -428,7 +377,7 @@ TrapinchEggMoves:
 	dw QUICK_ATTACK
 	dw -1 ; end
 
-CacneaEggMoves:
+NohfaceEggMoves:
 	dw ACID
 	dw COUNTER
 	dw DYNAMICPUNCH
@@ -436,40 +385,33 @@ CacneaEggMoves:
 	dw TEETER_DANCE
 	dw -1 ; end
 
-SwabluEggMoves:
+KrolucadaEggMoves:
 	dw AGILITY
 	dw HAZE
 	dw PURSUIT
 	dw RAGE
 	dw -1 ; end
 
-ZangooseEggMoves:
+StunkyEggMoves:
 	dw COUNTER
 	dw CURSE
-	dw DOUBLE_KICK
-	dw FLAIL
-	dw RAZOR_WIND
-	dw ROAR
-	dw -1 ; end
-
-SeviperEggMoves:
 	dw BODY_SLAM
 	dw SPIT_UP
 	dw STOCKPILE
 	dw SWALLOW
 	dw -1 ; end
 
-BarboachEggMoves:
+LarvestaEggMoves:
+	dw BODY_SLAM
+	dw SPIT_UP
+	dw STOCKPILE
+	dw SWALLOW
+	dw -1 ; end
+
+ImpidimpEggMoves:
 	dw SPARK
 	dw THRASH
 	dw WHIRLPOOL
-	dw -1 ; end
-
-CorphishEggMoves:
-	dw ANCIENTPOWER
-	dw BODY_SLAM
-	dw ENDEAVOR
-	dw MUD_SPORT
 	dw -1 ; end
 
 LileepEggMoves:
@@ -547,7 +489,7 @@ AbsolEggMoves:
 	dw SUBSTITUTE
 	dw -1 ; end
 
-SnoruntEggMoves:
+SnoverEggMoves:
 	dw BLOCK
 	dw SPIKES
 	dw -1 ; end
@@ -588,7 +530,7 @@ LuvdiscEggMoves:
 	dw WATER_SPORT
 	dw -1 ; end
 
-BagonEggMoves:
+RaelicEggMoves:
 	dw DRAGON_DANCE
 	dw DRAGON_RAGE
 	dw HYDRO_PUMP

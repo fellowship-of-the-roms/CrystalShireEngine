@@ -273,28 +273,28 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; MUDKIP
 	icon_pals RED,    RED    ; MARSHTOMP
 	icon_pals RED,    RED    ; SWAMPERT
-	icon_pals RED,    RED    ; POOCHYENA
-	icon_pals RED,    RED    ; MIGHTYENA
-	icon_pals RED,    RED    ; ZIGZAGOON
-	icon_pals RED,    RED    ; LINOONE
-	icon_pals RED,    RED    ; WURMPLE
-	icon_pals RED,    RED    ; SILCOON
-	icon_pals RED,    RED    ; BEAUTIFLY
-	icon_pals RED,    RED    ; CASCOON
-	icon_pals RED,    RED    ; DUSTOX
+	icon_pals RED,    RED    ; EUXINOS
+	icon_pals RED,    RED    ; WEAVILE
+	icon_pals RED,    RED    ; HONCHKROW
+	icon_pals RED,    RED    ; GLISCOR
+	icon_pals RED,    RED    ; LEAFEON
+	icon_pals RED,    RED    ; GLACEON
+	icon_pals RED,    RED    ; DRACONEON
+	icon_pals RED,    RED    ; KUJINOUGHT
+	icon_pals RED,    RED    ; MLLOY
 	icon_pals RED,    RED    ; LOTAD
 	icon_pals RED,    RED    ; LOMBRE
 	icon_pals RED,    RED    ; LUDICOLO
 	icon_pals RED,    RED    ; SEEDOT
 	icon_pals RED,    RED    ; NUZLEAF
 	icon_pals RED,    RED    ; SHIFTRY
-	icon_pals RED,    RED    ; TAILLOW
-	icon_pals RED,    RED    ; SWELLOW
-	icon_pals RED,    RED    ; WINGULL
-	icon_pals RED,    RED    ; PELIPPER
-	icon_pals RED,    RED    ; RALTS
-	icon_pals RED,    RED    ; KIRLIA
-	icon_pals RED,    RED    ; GARDEVOIR
+	icon_pals RED,    RED    ; ELECTIVIRE
+	icon_pals RED,    RED    ; MAGMORTAR
+	icon_pals RED,    RED    ; VOLTREL
+	icon_pals RED,    RED    ; VOLTREAN
+	icon_pals RED,    RED    ; SOLOSIS
+	icon_pals RED,    RED    ; DUOSION
+	icon_pals RED,    RED    ; REUNICLUS
 	icon_pals RED,    RED    ; SURSKIT
 	icon_pals RED,    RED    ; MASQUERAIN
 	icon_pals RED,    RED    ; SHROOMISH
@@ -305,37 +305,37 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; NINCADA
 	icon_pals RED,    RED    ; NINJASK
 	icon_pals RED,    RED    ; SHEDINJA
-	icon_pals RED,    RED    ; WHISMUR
-	icon_pals RED,    RED    ; LOUDRED
-	icon_pals RED,    RED    ; EXPLOUD
+	icon_pals RED,    RED    ; TINKATINK
+	icon_pals RED,    RED    ; TINKATUFF
+	icon_pals RED,    RED    ; TINKATON
 	icon_pals RED,    RED    ; MAKUHITA
 	icon_pals RED,    RED    ; HARIYAMA
 	icon_pals RED,    RED    ; AZURILL
 	icon_pals RED,    RED    ; NOSEPASS
 	icon_pals RED,    RED    ; SKITTY
 	icon_pals RED,    RED    ; DELCATTY
-	icon_pals RED,    RED    ; SABLEYE
-	icon_pals RED,    RED    ; MAWILE
+	icon_pals RED,    RED    ; SPIRITOMB
+	icon_pals RED,    RED    ; TANGROWTH
 	icon_pals RED,    RED    ; ARON
 	icon_pals RED,    RED    ; LAIRON
 	icon_pals RED,    RED    ; AGGRON
 	icon_pals RED,    RED    ; MEDITITE
 	icon_pals RED,    RED    ; MEDICHAM
-	icon_pals RED,    RED    ; ELECTRIKE
-	icon_pals RED,    RED    ; MANECTRIC
-	icon_pals RED,    RED    ; PLUSLE
-	icon_pals RED,    RED    ; MINUN
-	icon_pals RED,    RED    ; VOLBEAT
-	icon_pals RED,    RED    ; ILLUMISE
-	icon_pals RED,    RED    ; ROSELIA
-	icon_pals RED,    RED    ; GULPIN
-	icon_pals RED,    RED    ; SWALOT
+	icon_pals RED,    RED    ; SHINX
+	icon_pals RED,    RED    ; LUXIO
+	icon_pals RED,    RED    ; LUXRAY
+	icon_pals RED,    RED    ; GEKOPON
+	icon_pals RED,    RED    ; TYNAMO
+	icon_pals RED,    RED    ; EELEKTRIK
+	icon_pals RED,    RED    ; EELEKTROSS
+	icon_pals RED,    RED    ; CORSOREEF
+	icon_pals RED,    RED    ; DUNDRAG
 	icon_pals RED,    RED    ; CARVANHA
 	icon_pals RED,    RED    ; SHARPEDO
-	icon_pals RED,    RED    ; WAILMER
-	icon_pals RED,    RED    ; WAILORD
-	icon_pals RED,    RED    ; NUMEL
-	icon_pals RED,    RED    ; CAMERUPT
+	icon_pals RED,    RED    ; BARBOACH
+	icon_pals RED,    RED    ; WHISCASH
+	icon_pals RED,    RED    ; SMOGUANA
+	icon_pals RED,    RED    ; SMOKOMODO
 	icon_pals RED,    RED    ; TORKOAL
 	icon_pals RED,    RED    ; SPOINK
 	icon_pals RED,    RED    ; GRUMPIG
@@ -343,18 +343,18 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; TRAPINCH
 	icon_pals RED,    RED    ; VIBRAVA
 	icon_pals RED,    RED    ; FLYGON
-	icon_pals RED,    RED    ; CACNEA
-	icon_pals RED,    RED    ; CACTURNE
-	icon_pals RED,    RED    ; SWABLU
-	icon_pals RED,    RED    ; ALTARIA
-	icon_pals RED,    RED    ; ZANGOOSE
-	icon_pals RED,    RED    ; SEVIPER
-	icon_pals RED,    RED    ; LUNATONE
-	icon_pals RED,    RED    ; SOLROCK
-	icon_pals RED,    RED    ; BARBOACH
-	icon_pals RED,    RED    ; WHISCASH
-	icon_pals RED,    RED    ; CORPHISH
-	icon_pals RED,    RED    ; CRAWDAUNT
+	icon_pals RED,    RED    ; NOHFACE
+	icon_pals RED,    RED    ; KITSUNOH
+	icon_pals RED,    RED    ; KROLUCADA
+	icon_pals RED,    RED    ; KROLUCARD
+	icon_pals RED,    RED    ; STUNKY
+	icon_pals RED,    RED    ; SKUNTANK
+	icon_pals RED,    RED    ; LARVESTA
+	icon_pals RED,    RED    ; VOLCARONA
+	icon_pals RED,    RED    ; IMPIDIMP
+	icon_pals RED,    RED    ; MORGREM
+	icon_pals RED,    RED    ; GRIMMSNARL
+	icon_pals RED,    RED    ; WYRDEER
 	icon_pals RED,    RED    ; BALTOY
 	icon_pals RED,    RED    ; CLAYDOL
 	icon_pals RED,    RED    ; LILEEP
@@ -372,9 +372,9 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; TROPIUS
 	icon_pals RED,    RED    ; CHIMECHO
 	icon_pals RED,    RED    ; ABSOL
-	icon_pals RED,    RED    ; WYNAUT
-	icon_pals RED,    RED    ; SNORUNT
-	icon_pals RED,    RED    ; GLALIE
+	icon_pals RED,    RED    ; MAGNEZONE
+	icon_pals RED,    RED    ; SNOVER
+	icon_pals RED,    RED    ; ABOMASNOW
 	icon_pals RED,    RED    ; SPHEAL
 	icon_pals RED,    RED    ; SEALEO
 	icon_pals RED,    RED    ; WALREIN
@@ -383,9 +383,9 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; GOREBYSS
 	icon_pals RED,    RED    ; RELICANTH
 	icon_pals RED,    RED    ; LUVDISC
-	icon_pals RED,    RED    ; BAGON
-	icon_pals RED,    RED    ; SHELGON
-	icon_pals RED,    RED    ; SALAMENCE
+	icon_pals RED,    RED    ; RAELIC
+	icon_pals RED,    RED    ; ROMUSHU
+	icon_pals RED,    RED    ; FUSANG
 	icon_pals RED,    RED    ; BELDUM
 	icon_pals RED,    RED    ; METANG
 	icon_pals RED,    RED    ; METAGROSS

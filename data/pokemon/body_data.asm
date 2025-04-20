@@ -265,28 +265,28 @@ PokemonBodyData:
 	dw 104, 168    ; MUDKIP
 	dw 204, 617    ; MARSHTOMP
 	dw 411, 1806   ; SWAMPERT
-	dw 108, 300    ; POOCHYENA
-	dw 303, 816    ; MIGHTYENA
-	dw 104, 386    ; ZIGZAGOON
-	dw 108, 717    ; LINOONE
-	dw 100, 79     ; WURMPLE
-	dw 200, 220    ; SILCOON
-	dw 303, 626    ; BEAUTIFLY
-	dw 204, 254    ; CASCOON
-	dw 311, 697    ; DUSTOX
+	dw 108, 300    ; EUXINOS
+	dw 307, 750    ; WEAVILE
+	dw 211, 602    ; HONCHKROW
+	dw 607, 937    ; GLISCOR
+	dw 303, 562    ; LEAFEON
+	dw 207, 571    ; GLACEON
+	dw 407, 759    ; DRACONEON
+	dw 4707, 8774  ; KUJINOUGHT
+	dw 207, 474    ; MLLOY
 	dw 108, 57     ; LOTAD
 	dw 311, 717    ; LOMBRE
 	dw 411, 1213   ; LUDICOLO
 	dw 108, 88     ; SEEDOT
 	dw 303, 617    ; NUZLEAF
 	dw 403, 1314   ; SHIFTRY
-	dw 100, 51     ; TAILLOW
-	dw 204, 437    ; SWELLOW
-	dw 200, 209    ; WINGULL
-	dw 311, 617    ; PELIPPER
-	dw 104, 146    ; RALTS
-	dw 207, 445    ; KIRLIA
-	dw 503, 1067   ; GARDEVOIR
+	dw 511, 3056   ; ELECTIVIRE
+	dw 503, 1499   ; MAGMORTAR
+	dw 104, 79     ; VOLTREL
+	dw 407, 851    ; VOLTREAN
+	dw 100, 22     ; SOLOSIS
+	dw 200, 176    ; DUOSION
+	dw 303, 443    ; REUNICLUS
 	dw 108, 37     ; SURSKIT
 	dw 207, 79     ; MASQUERAIN
 	dw 104, 99     ; SHROOMISH
@@ -297,37 +297,37 @@ PokemonBodyData:
 	dw 108, 121    ; NINCADA
 	dw 207, 265    ; NINJASK
 	dw 207, 26     ; SHEDINJA
-	dw 200, 359    ; WHISMUR
-	dw 303, 893    ; LOUDRED
-	dw 411, 1852   ; EXPLOUD
+	dw 104, 196    ; TINKATINK
+	dw 204, 1303   ; TINKATUFF
+	dw 204, 2487   ; TINKATON
 	dw 303, 1905   ; MAKUHITA
 	dw 707, 5595   ; HARIYAMA
 	dw 008, 44     ; AZURILL
 	dw 303, 2138   ; NOSEPASS
 	dw 200, 243    ; SKITTY
 	dw 307, 719    ; DELCATTY
-	dw 108, 243    ; SABLEYE
-	dw 200, 254    ; MAWILE
+	dw 303, 2381   ; SPIRITOMB
+	dw 607, 2835   ; TANGROWTH
 	dw 104, 1323   ; ARON
 	dw 211, 2646   ; LAIRON
 	dw 611, 7937   ; AGGRON
 	dw 200, 247    ; MEDITITE
 	dw 403, 694    ; MEDICHAM
-	dw 200, 335    ; ELECTRIKE
-	dw 411, 886    ; MANECTRIC
-	dw 104, 93     ; PLUSLE
-	dw 104, 93     ; MINUN
-	dw 204, 390    ; VOLBEAT
-	dw 200, 390    ; ILLUMISE
-	dw 100, 44     ; ROSELIA
-	dw 104, 227    ; GULPIN
-	dw 507, 1764   ; SWALOT
+	dw 108, 209    ; SHINX
+	dw 211, 672    ; LUXIO
+	dw 407, 926    ; LUXRAY
+	dw 311, 2491   ; GEKOPON
+	dw 8,   7      ; TYNAMO
+	dw 311, 485    ; EELEKTRIK
+	dw 611, 1775   ; EELEKTROSS
+	dw 607, 2866   ; CORSOREEF
+	dw 711, 450    ; DUNDRAG
 	dw 207, 459    ; CARVANHA
 	dw 511, 1958   ; SHARPEDO
-	dw 607, 2866   ; WAILMER
-	dw 4707, 8774  ; WAILORD
-	dw 204, 529    ; NUMEL
-	dw 603, 4850   ; CAMERUPT
+	dw 104, 42     ; BARBOACH
+	dw 211, 520    ; WHISCASH
+	dw 204, 529    ; SMOGUANA
+	dw 603, 3850   ; SMOKOMODO
 	dw 108, 1773   ; TORKOAL
 	dw 204, 675    ; SPOINK
 	dw 211, 1576   ; GRUMPIG
@@ -335,18 +335,18 @@ PokemonBodyData:
 	dw 204, 331    ; TRAPINCH
 	dw 307, 337    ; VIBRAVA
 	dw 607, 1808   ; FLYGON
-	dw 104, 1131   ; CACNEA
-	dw 403, 1706   ; CACTURNE
-	dw 104, 26     ; SWABLU
-	dw 307, 454    ; ALTARIA
-	dw 403, 888    ; ZANGOOSE
-	dw 810, 1157   ; SEVIPER
-	dw 303, 3704   ; LUNATONE
-	dw 311, 3395   ; SOLROCK
-	dw 104, 42     ; BARBOACH
-	dw 211, 520    ; WHISCASH
-	dw 200, 254    ; CORPHISH
-	dw 307, 723    ; CRAWDAUNT
+	dw 204, 276    ; NOHFACE
+	dw 503, 1609   ; KITSUNOH
+	dw 104, 26     ; KROLUCADA
+	dw 307, 454    ; KROLUCARD
+	dw 104, 423    ; STUNKY
+	dw 303, 838    ; SKUNTANK
+	dw 307, 635    ; LARVESTA
+	dw 503, 1014   ; VOLCARONA
+	dw 104, 121    ; IMPIDIMP
+	dw 207, 276    ; MORGREM
+	dw 411, 1345   ; GRIMMSNARL
+	dw 511, 2097   ; WYRDEER
 	dw 108, 474    ; BALTOY
 	dw 411, 2381   ; CLAYDOL
 	dw 303, 525    ; LILEEP
@@ -364,9 +364,9 @@ PokemonBodyData:
 	dw 607, 2205   ; TROPIUS
 	dw 200, 22     ; CHIMECHO
 	dw 311, 1036   ; ABSOL
-	dw 200, 309    ; WYNAUT
-	dw 204, 370    ; SNORUNT
-	dw 411, 5655   ; GLALIE
+	dw 311, 3968   ; MAGNEZONE
+	dw 303, 1113   ; SNOVER
+	dw 703, 2987   ; ABOMASNOW
 	dw 207, 871    ; SPHEAL
 	dw 307, 1931   ; SEALEO
 	dw 407, 3320   ; WALREIN
@@ -375,9 +375,9 @@ PokemonBodyData:
 	dw 511, 498    ; GOREBYSS
 	dw 303, 516    ; RELICANTH
 	dw 200, 192    ; LUVDISC
-	dw 200, 928    ; BAGON
-	dw 307, 2436   ; SHELGON
-	dw 411, 2262   ; SALAMENCE
+	dw 200, 928    ; RAELIC
+	dw 307, 2436   ; ROMUSHU
+	dw 411, 2262   ; FUSANG
 	dw 200, 2099   ; BELDUM
 	dw 311, 4464   ; METANG
 	dw 503, 12125  ; METAGROSS

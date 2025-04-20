@@ -1310,6 +1310,7 @@ MagnemiteEvosAttacks:
 	db 0 ; no more level-up moves
 
 MagnetonEvosAttacks:
+	dbww EVOLVE_ITEM, THUNDERSTONE, MAGNEZONE
 	db 0 ; no more evolutions
 	dbw 1, METAL_SOUND
 	dbw 1, SUPERSONIC
@@ -1327,6 +1328,7 @@ MagnetonEvosAttacks:
 	db 0 ; no more level-up moves
 
 FarfetchDEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_EVENITE, MLLOY
 	db 0 ; no more evolutions
 	dbw 1, PECK
 	dbw 6, SAND_ATTACK
@@ -1792,6 +1794,7 @@ ChanseyEvosAttacks:
 	db 0 ; no more level-up moves
 
 TangelaEvosAttacks:
+	dbbw EVOLVE_LEVEL, 40, TANGROWTH
 	db 0 ; no more evolutions
 	dbw 1, CONSTRICT
 	dbw 1, INGRAIN
@@ -1959,6 +1962,7 @@ JynxEvosAttacks:
 	db 0 ; no more level-up moves
 
 ElectabuzzEvosAttacks:
+	dbbw EVOLVE_LEVEL, 50, ELECTIVIRE
 	db 0 ; no more evolutions
 	dbw 1, LEER
 	dbw 1, QUICK_ATTACK
@@ -1972,6 +1976,7 @@ ElectabuzzEvosAttacks:
 	db 0 ; no more level-up moves
 
 MagmarEvosAttacks:
+	dbbw EVOLVE_LEVEL, 50, MAGMORTAR
 	db 0 ; no more evolutions
 	dbw 1, EMBER
 	dbw 1, FIRE_PUNCH
@@ -2061,9 +2066,12 @@ EeveeEvosAttacks:
 	dbww EVOLVE_ITEM, WATER_STONE, VAPOREON
 	dbww EVOLVE_ITEM, FIRE_STONE, FLAREON
 	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, ESPEON
-	dbbw EVOLVE_HAPPINESS, TR_EVENITE, UMBREON
+	dbww EVOLVE_ITEM, MOON_STONE, UMBREON
+	dbww EVOLVE_ITEM, LEAF_STONE, LEAFEON
+	dbbw EVOLVE_HAPPINESS, TR_EVENITE, GLACEON
+	dbww EVOLVE_TRADE, DRAGON_SCALE, DRACONEON
 	db 0 ; no more evolutions
-	; dbw 1, HELPING_HAND
+	dbw 1, GROWTH
 	dbw 1, TACKLE
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
@@ -2076,7 +2084,7 @@ EeveeEvosAttacks:
 
 VaporeonEvosAttacks:
 	db 0 ; no more evolutions
-	; dbw 1, HELPING_HAND
+	dbw 1, GROWTH
 	dbw 1, TACKLE
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
@@ -2091,7 +2099,7 @@ VaporeonEvosAttacks:
 
 JolteonEvosAttacks:
 	db 0 ; no more evolutions
-	; dbw 1, HELPING_HAND
+	dbw 1, GROWTH
 	dbw 1, TACKLE
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
@@ -2106,7 +2114,7 @@ JolteonEvosAttacks:
 
 FlareonEvosAttacks:
 	db 0 ; no more evolutions
-	; dbw 1, HELPING_HAND
+	dbw 1, GROWTH
 	dbw 1, TACKLE
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK

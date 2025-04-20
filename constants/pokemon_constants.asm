@@ -282,28 +282,28 @@ DEF HOENN_POKEMON EQU const_value
 	const MUDKIP     ; 102
 	const MARSHTOMP  ; 103
 	const SWAMPERT   ; 104
-	const POOCHYENA  ; 105
-	const MIGHTYENA  ; 106
-	const ZIGZAGOON  ; 107
-	const LINOONE    ; 108
-	const WURMPLE    ; 109
-	const SILCOON    ; 10a
-	const BEAUTIFLY  ; 10b
-	const CASCOON    ; 10c
-	const DUSTOX     ; 10d
+	const EUXINOS    ; 105
+	const WEAVILE    ; 106
+	const HONCHKROW  ; 107
+	const GLISCOR    ; 108
+	const LEAFEON    ; 109
+	const GLACEON    ; 10a
+	const DRACONEON  ; 10b
+	const KUJINOUGHT ; 10c
+	const MLLOY      ; 10d
 	const LOTAD	     ; 10e
 	const LOMBRE     ; 10f
 	const LUDICOLO   ; 110
 	const SEEDOT     ; 111
 	const NUZLEAF    ; 112
 	const SHIFTRY    ; 113
-	const TAILLOW    ; 114
-	const SWELLOW    ; 115
-	const WINGULL    ; 116
-	const PELIPPER   ; 117
-	const RALTS	     ; 118
-	const KIRLIA     ; 119
-	const GARDEVOIR  ; 11a
+	const ELECTIVIRE ; 114
+	const MAGMORTAR  ; 115
+	const VOLTREL    ; 116
+	const VOLTREAN   ; 117
+	const SOLOSIS	 ; 118
+	const DUOSION    ; 119
+	const REUNICLUS  ; 11a
 	const SURSKIT    ; 11b
 	const MASQUERAIN ; 11c
 	const SHROOMISH  ; 11d
@@ -314,37 +314,37 @@ DEF HOENN_POKEMON EQU const_value
 	const NINCADA    ; 122
 	const NINJASK    ; 123
 	const SHEDINJA   ; 124
-	const WHISMUR    ; 125
-	const LOUDRED    ; 126
-	const EXPLOUD    ; 127
+	const TINKATINK  ; 125
+	const TINKATUFF  ; 126
+	const TINKATON   ; 127
 	const MAKUHITA   ; 128
 	const HARIYAMA   ; 129
 	const AZURILL    ; 12a
 	const NOSEPASS   ; 12b
 	const SKITTY     ; 12c
 	const DELCATTY   ; 12d
-	const SABLEYE    ; 12e
-	const MAWILE     ; 12f
+	const SPIRITOMB  ; 12e
+	const TANGROWTH  ; 12f
 	const ARON       ; 130
 	const LAIRON     ; 131
 	const AGGRON     ; 132
 	const MEDITITE   ; 133
 	const MEDICHAM   ; 134
-	const ELECTRIKE  ; 135
-	const MANECTRIC  ; 136
-	const PLUSLE     ; 137
-	const MINUN      ; 138
-	const VOLBEAT    ; 139
-	const ILLUMISE   ; 13a
-	const ROSELIA    ; 13b
-	const GULPIN     ; 13c
-	const SWALOT     ; 13d
+	const SHINX      ; 135
+	const LUXIO      ; 136
+	const LUXRAY     ; 137
+	const GEKOPON    ; 138
+	const TYNAMO     ; 139
+	const EELEKTRIK  ; 13a
+	const EELEKTROSS ; 13b
+	const CORSOREEF  ; 13c
+	const DUNDRAG    ; 13d
 	const CARVANHA   ; 13e
 	const SHARPEDO   ; 13f
-	const WAILMER    ; 140
-	const WAILORD    ; 141
-	const NUMEL      ; 142
-	const CAMERUPT   ; 143
+	const BARBOACH   ; 140
+	const WHISCASH   ; 141
+	const SMOGUANA   ; 142
+	const SMOKOMODO  ; 143
 	const TORKOAL    ; 144
 	const SPOINK     ; 145
 	const GRUMPIG    ; 146
@@ -352,18 +352,18 @@ DEF HOENN_POKEMON EQU const_value
 	const TRAPINCH   ; 148
 	const VIBRAVA    ; 149
 	const FLYGON     ; 14a
-	const CACNEA     ; 14b
-	const CACTURNE   ; 14c
-	const SWABLU     ; 14d
-	const ALTARIA    ; 14e
-	const ZANGOOSE   ; 14f
-	const SEVIPER    ; 150
-	const LUNATONE   ; 151
-	const SOLROCK    ; 152
-	const BARBOACH   ; 153
-	const WHISCASH   ; 154
-	const CORPHISH   ; 155
-	const CRAWDAUNT  ; 156
+	const NOHFACE    ; 14b
+	const KITSUNOH   ; 14c
+	const KROLUCADA  ; 14d
+	const KROLUCARD  ; 14e
+	const STUNKY     ; 14f
+	const SKUNTANK   ; 150
+	const LARVESTA   ; 151
+	const VOLCARONA  ; 152
+	const IMPIDIMP   ; 153
+	const MORGREM    ; 154
+	const GRIMMSNARL ; 155
+	const WYRDEER    ; 156
 	const BALTOY     ; 157
 	const CLAYDOL    ; 158
 	const LILEEP     ; 159
@@ -381,9 +381,9 @@ DEF HOENN_POKEMON EQU const_value
 	const TROPIUS    ; 165
 	const CHIMECHO   ; 166
 	const ABSOL      ; 167
-	const WYNAUT     ; 168
-	const SNORUNT    ; 169
-	const GLALIE     ; 16a
+	const MAGNEZONE  ; 168
+	const SNOVER     ; 169
+	const ABOMASNOW  ; 16a
 	const SPHEAL     ; 16b
 	const SEALEO     ; 16c
 	const WALREIN    ; 16d
@@ -392,9 +392,9 @@ DEF HOENN_POKEMON EQU const_value
 	const GOREBYSS   ; 170
 	const RELICANTH  ; 171
 	const LUVDISC    ; 172
-	const BAGON      ; 173
-	const SHELGON    ; 174
-	const SALAMENCE  ; 175
+	const RAELIC     ; 173
+	const ROMUSHU    ; 174
+	const FUSANG     ; 175
 	const BELDUM     ; 176
 	const METANG     ; 177
 	const METAGROSS  ; 178

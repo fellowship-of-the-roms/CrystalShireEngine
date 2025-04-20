@@ -1,0 +1,21 @@
+	db 0 ; species ID placeholder
+
+	db  65,  60,  45,  70,  75,  55
+	evs  0,   0,   0,   0,   2,   0
+	;   hp  atk  def  spd  sat  sdf
+
+	db DARK, DARK ; type
+	db 120 ; catch rate
+	db 130 ; base exp
+	dw NO_ITEM, NO_ITEM ; items
+	db GENDER_F0  ; gender ratio
+	db 20 ; step cycles to hatch
+	INCBIN "gfx/pokemon/hoenn/morgrem/front.dimensions"
+	db PICKUP, PICKUP ; wBaseAbility1, wBaseAbility2
+	dw NULL ; Padding left-over from the unused back pic
+	db GROWTH_MEDIUM_FAST ; growth rate
+	dn EGG_HUMANSHAPE, EGG_HUMANSHAPE ; egg groups
+
+	; tm/hm learnset
+	tmhm WATER_PULSE, TOXIC, HAIL, HIDDEN_POWER, ICE_BEAM, BLIZZARD, HYPER_BEAM, PROTECT, RAIN_DANCE, FRUSTRATION, EARTHQUAKE, RETURN, DOUBLE_TEAM, SANDSTORM, ROCK_TOMB, FACADE, SECRET_POWER, REST, ATTRACT, SURF, STRENGTH, ROCK_SMASH, WATERFALL, DIVE
+	; end

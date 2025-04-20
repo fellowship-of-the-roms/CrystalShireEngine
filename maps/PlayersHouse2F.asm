@@ -151,10 +151,10 @@ if DEF(_DEBUG)
 	; post-e4
 	setflag ENGINE_CREDITS_SKIP
 	; ; good party
-	; givepoke MEWTWO, 100, BRIGHTPOWDER
+	givepoke WEAVILE, 100, BRIGHTPOWDER
 	; ; hm slaves
-	; givepoke MEW, 100, LEFTOVERS
-	; givepoke LANTURN, 100, LEFTOVERS
+	givepoke VOLCARONA, 100, LEFTOVERS
+	givepoke TANGROWTH, 100, LEFTOVERS
 	; givepokemove FLY,        wPartyMon2, 0
 	; givepokemove SURF,       wPartyMon2, 1
 	; givepokemove STRENGTH,   wPartyMon2, 2
@@ -164,13 +164,13 @@ if DEF(_DEBUG)
 	; givepokemove HEADBUTT,   wPartyMon3, 2
 	; givepokemove WATERFALL,  wPartyMon3, 3
 	; misc pokemon for testing
-	givepoke NINJASK, 75
+	givepoke SPIRITOMB, 75
 	givepokemove QUICK_ATTACK,  wPartyMon1, 0
 	givepokemove SNATCH,  wPartyMon1, 1
 	givepokemove WHIRLWIND,  wPartyMon1, 2
 	givepokemove VITAL_THROW,  wPartyMon1, 3
-	givepoke NINCADA, 50
-	givepoke WURMPLE, 50
+	givepoke SNOVER, 50
+	givepoke SOLOSIS, 50
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1

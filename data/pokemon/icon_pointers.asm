@@ -268,28 +268,28 @@ IconPointers:
 	dw MudkipIcon
 	dw MarshtompIcon
 	dw SwampertIcon
-	dw PoochyenaIcon
-	dw MightyenaIcon
-	dw ZigzagoonIcon
-	dw LinooneIcon
-	dw WurmpleIcon
-	dw SilcoonIcon
-	dw BeautiflyIcon
-	dw CascoonIcon
-	dw DustoxIcon
+	dw EuxinosIcon
+	dw WeavileIcon
+	dw HonchkrowIcon
+	dw GliscorIcon
+	dw LeafeonIcon
+	dw GlaceonIcon
+	dw DraconeonIcon
+	dw KujinoughtIcon
+	dw MlloyIcon
 	dw LotadIcon
 	dw LombreIcon
 	dw LudicoloIcon
 	dw SeedotIcon
 	dw NuzleafIcon
 	dw ShiftryIcon
-	dw TaillowIcon
-	dw SwellowIcon
-	dw WingullIcon
-	dw PelipperIcon
-	dw RaltsIcon
-	dw KirliaIcon
-	dw GardevoirIcon
+	dw ElectivireIcon
+	dw MagmortarIcon
+	dw VoltrelIcon
+	dw VoltreanIcon
+	dw SolosisIcon
+	dw DuosionIcon
+	dw ReuniclusIcon
 	dw SurskitIcon
 	dw MasquerainIcon
 	dw ShroomishIcon
@@ -300,37 +300,37 @@ IconPointers:
 	dw NincadaIcon
 	dw NinjaskIcon
 	dw ShedinjaIcon
-	dw WhismurIcon
-	dw LoudredIcon
-	dw ExploudIcon
+	dw TinkatinkIcon
+	dw TinkatuffIcon
+	dw TinkatonIcon
 	dw MakuhitaIcon
 	dw HariyamaIcon
 	dw AzurillIcon
 	dw NosepassIcon
 	dw SkittyIcon
 	dw DelcattyIcon
-	dw SableyeIcon
-	dw MawileIcon
+	dw SpiritombIcon
+	dw TangrowthIcon
 	dw AronIcon
 	dw LaironIcon
 	dw AggronIcon
 	dw MedititeIcon
 	dw MedichamIcon
-	dw ElectrikeIcon
-	dw ManectricIcon
-	dw PlusleIcon
-	dw MinunIcon
-	dw VolbeatIcon
-	dw IllumiseIcon
-	dw RoseliaIcon
-	dw GulpinIcon
-	dw SwalotIcon
+	dw ShinxIcon
+	dw LuxioIcon
+	dw LuxrayIcon
+	dw GekoponIcon
+	dw TynamoIcon
+	dw EelektrikIcon
+	dw EelektrossIcon
+	dw CorsoreefIcon
+	dw DundragIcon
 	dw CarvanhaIcon
 	dw SharpedoIcon
-	dw WailmerIcon
-	dw WailordIcon
-	dw NumelIcon
-	dw CameruptIcon
+	dw BarboachIcon
+	dw WhiscashIcon
+	dw SmoguanaIcon
+	dw SmokomodoIcon
 	dw TorkoalIcon
 	dw SpoinkIcon
 	dw GrumpigIcon
@@ -338,18 +338,18 @@ IconPointers:
 	dw TrapinchIcon
 	dw VibravaIcon
 	dw FlygonIcon
-	dw CacneaIcon
-	dw CacturneIcon
-	dw SwabluIcon
-	dw AltariaIcon
-	dw ZangooseIcon
-	dw SeviperIcon
-	dw LunatoneIcon
-	dw SolrockIcon
-	dw BarboachIcon
-	dw WhiscashIcon
-	dw CorphishIcon
-	dw CrawdauntIcon
+	dw NohfaceIcon
+	dw KitsunohIcon
+	dw KrolucadaIcon
+	dw KrolucardIcon
+	dw StunkyIcon
+	dw SkuntankIcon
+	dw LarvestaIcon
+	dw VolcaronaIcon
+	dw ImpidimpIcon
+	dw MorgremIcon
+	dw GrimmsnarlIcon
+	dw WyrdeerIcon
 	dw BaltoyIcon
 	dw ClaydolIcon
 	dw LileepIcon
@@ -367,9 +367,9 @@ IconPointers:
 	dw TropiusIcon
 	dw ChimechoIcon
 	dw AbsolIcon
-	dw WynautIcon
-	dw SnoruntIcon
-	dw GlalieIcon
+	dw MagnezoneIcon
+	dw SnoverIcon
+	dw AbomasnowIcon
 	dw SphealIcon
 	dw SealeoIcon
 	dw WalreinIcon
@@ -378,9 +378,9 @@ IconPointers:
 	dw GorebyssIcon
 	dw RelicanthIcon
 	dw LuvdiscIcon
-	dw BagonIcon
-	dw ShelgonIcon
-	dw SalamenceIcon
+	dw RaelicIcon
+	dw RomushuIcon
+	dw FusangIcon
 	dw BeldumIcon
 	dw MetangIcon
 	dw MetagrossIcon

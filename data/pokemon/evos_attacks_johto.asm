@@ -847,6 +847,7 @@ ForretressEvosAttacks:
 	db 0 ; no more level-up moves
 
 DunsparceEvosAttacks:
+	dbbw EVOLVE_LEVEL, 45, DUNDRAG
 	db 0 ; no more evolutions
 	dbw 1, RAGE
 	dbw 4, DEFENSE_CURL
@@ -860,6 +861,7 @@ DunsparceEvosAttacks:
 	db 0 ; no more level-up moves
 
 GligarEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, GLISCOR
 	db 0 ; no more evolutions
 	dbw 1, POISON_STING
 	dbw 6, SAND_ATTACK
@@ -969,6 +971,7 @@ HeracrossEvosAttacks:
 	db 0 ; no more level-up moves
 
 SneaselEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_EVENITE, WEAVILE
 	db 0 ; no more evolutions
 	dbw 1, LEER
 	dbw 1, SCRATCH
@@ -1073,6 +1076,7 @@ PiloswineEvosAttacks:
 	db 0 ; no more level-up moves
 
 CorsolaEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, CORSOREEF
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
 	dbw 6, HARDEN
@@ -1100,6 +1104,7 @@ RemoraidEvosAttacks:
 	db 0 ; no more level-up moves
 
 OctilleryEvosAttacks:
+	dbww EVOLVE_ITEM, FIRE_STONE, KUJINOUGHT
 	db 0 ; no more evolutions
 	dbw 1, WATER_GUN
 	dbw 11, CONSTRICT
@@ -1232,6 +1237,7 @@ Porygon2EvosAttacks:
 	db 0 ; no more level-up moves
 
 StantlerEvosAttacks:
+	dbww EVOLVE_TRADE, KINGS_ROCK, WYRDEER
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
 	dbw 7, LEER
