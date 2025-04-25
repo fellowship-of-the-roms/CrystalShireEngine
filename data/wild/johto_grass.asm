@@ -291,7 +291,7 @@ JohtoGrassWildMons:
 	dbw 14, ZUBAT
 	dbw 15, SLUGMA   ;RATTATA
 	dbw 15, RATICATE
-	dbw 15, LITWICK  ;RATICATE
+	dbw 18, RATICATE 
 	; day
 	dbw 13, RATTATA
 	dbw 14, KOFFING
@@ -299,7 +299,7 @@ JohtoGrassWildMons:
 	dbw 14, ZUBAT
 	dbw 15, SLUGMA   ;RATTATA
 	dbw 15, RATICATE
-	dbw 15, LITWICK  ;RATICATE
+	dbw 18, RATICATE 
 	; nite
 	dbw 13, RATTATA
 	dbw 14, KOFFING
@@ -850,20 +850,20 @@ JohtoGrassWildMons:
 	dbw 22, SEEL
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
-	dbw 24, SEEL
-	dbw 24, SEEL
+	dbw 24, SHELLDER
+	dbw 24, SHELLDER
 	; day
 	dbw 22, KRABBY
 	dbw 23, ZUBAT
 	dbw 22, SEEL
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
-	dbw 24, SEEL
-	dbw 24, SEEL
+	dbw 24, SHELLDER
+	dbw 24, SHELLDER
 	; nite
 	dbw 22, KRABBY
 	dbw 23, ZUBAT
-	dbw 22, KRABBY
+	dbw 22, SHELLDER
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
 	dbw 24, GOLBAT
@@ -878,20 +878,20 @@ JohtoGrassWildMons:
 	dbw 22, SEEL
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
-	dbw 24, SEEL
-	dbw 24, SEEL
+	dbw 24, SHELLDER
+	dbw 24, SHELLDER
 	; day
 	dbw 22, KRABBY
 	dbw 23, ZUBAT
 	dbw 22, SEEL
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
-	dbw 24, SEEL
-	dbw 24, SEEL
+	dbw 24, SHELLDER
+	dbw 24, SHELLDER
 	; nite
 	dbw 22, KRABBY
 	dbw 23, ZUBAT
-	dbw 22, KRABBY
+	dbw 22, SHELLDER
 	dbw 24, KRABBY
 	dbw 25, GOLBAT
 	dbw 24, GOLBAT
@@ -1019,7 +1019,7 @@ JohtoGrassWildMons:
 	dbw 26, KRABBY
 	dbw 27, GOLBAT
 	dbw 26, SEEL
-	dbw 26, SEEL
+	dbw 30, KINGLER
 	; day
 	dbw 24, KRABBY
 	dbw 25, ZUBAT
@@ -1027,7 +1027,7 @@ JohtoGrassWildMons:
 	dbw 26, KRABBY
 	dbw 27, GOLBAT
 	dbw 26, SEEL
-	dbw 26, SEEL
+	dbw 30, KINGLER
 	; nite
 	dbw 24, KRABBY
 	dbw 25, ZUBAT
@@ -1035,7 +1035,7 @@ JohtoGrassWildMons:
 	dbw 26, KRABBY
 	dbw 27, GOLBAT
 	dbw 26, GOLBAT
-	dbw 26, GOLBAT
+	dbw 30, KINGLER
 	end_grass_wildmons
 
 	def_grass_wildmons WHIRL_ISLAND_LUGIA_CHAMBER
@@ -1044,26 +1044,26 @@ JohtoGrassWildMons:
 	dbw 25, KRABBY
 	dbw 26, ZUBAT
 	dbw 25, SEEL
-	dbw 27, KRABBY
+	dbw 30, KINGLER
 	dbw 28, GOLBAT
-	dbw 27, SEEL
-	dbw 27, CORSOREEF
+	dbw 35, DEWGONG
+	dbw 35, CORSOREEF
 	; day
 	dbw 25, KRABBY
 	dbw 26, ZUBAT
 	dbw 25, SEEL
-	dbw 27, KRABBY
+	dbw 30, KINGLER
 	dbw 28, GOLBAT
-	dbw 27, SEEL
-	dbw 27, CORSOREEF
+	dbw 35, DEWGONG
+	dbw 35, CORSOREEF
 	; nite
 	dbw 25, KRABBY
 	dbw 26, ZUBAT
 	dbw 25, KRABBY
-	dbw 27, KRABBY
+	dbw 30, KINGLER
 	dbw 28, GOLBAT
-	dbw 27, GOLBAT
-	dbw 27, CORSOREEF
+	dbw 35, DEWGONG
+	dbw 35, CORSOREEF
 	end_grass_wildmons
 
 	def_grass_wildmons SILVER_CAVE_ROOM_1
@@ -1510,8 +1510,8 @@ JohtoGrassWildMons:
 	dbw 16, MAGNEMITE
 	dbw 16, NOCTOWL
 	dbw 16, MEOWTH
-	dbw 16, MEOWTH
-	dbw 16, MEOWTH
+	dbw 14, IMPIDIMP   ;MEOWTH
+	dbw 17, IMPIDIMP   ;MEOWTH
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_39
@@ -1538,8 +1538,8 @@ JohtoGrassWildMons:
 	dbw 16, MAGNEMITE
 	dbw 16, NOCTOWL
 	dbw 18, MEOWTH
-	dbw 18, MEOWTH
-	dbw 18, MEOWTH
+	dbw 14, IMPIDIMP   ;MEOWTH
+	dbw 17, IMPIDIMP   ;MEOWTH
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_42
@@ -1606,24 +1606,24 @@ JohtoGrassWildMons:
 	dbw 22, BELLSPROUT
 	dbw 24, WEEPINBELL
 	dbw 24, LICKITUNG
-	dbw 26, LICKITUNG
-	dbw 26, LICKITUNG
+	dbw 26, ELECTABUZZ  ;LICKITUNG
+	dbw 26, ELECTABUZZ  ;LICKITUNG
 	; day
 	dbw 23, TANGELA
 	dbw 22, LICKITUNG
 	dbw 22, BELLSPROUT
 	dbw 24, WEEPINBELL
 	dbw 24, LICKITUNG
-	dbw 26, LICKITUNG
-	dbw 26, LICKITUNG
+	dbw 26, ELECTABUZZ  ;LICKITUNG
+	dbw 26, ELECTABUZZ  ;LICKITUNG
 	; nite
 	dbw 23, TANGELA
 	dbw 22, POLIWAG
 	dbw 22, BELLSPROUT
 	dbw 24, WEEPINBELL
 	dbw 24, POLIWHIRL
-	dbw 26, POLIWHIRL
-	dbw 26, POLIWHIRL
+	dbw 26, ELECTABUZZ  ;LICKITUNG
+	dbw 26, ELECTABUZZ  ;LICKITUNG
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_45
@@ -1650,8 +1650,8 @@ JohtoGrassWildMons:
 	dbw 24, GLIGAR
 	dbw 25, GRAVELER
 	dbw 27, GRAVELER
-	dbw 27, GRAVELER
-	dbw 27, GRAVELER
+	dbw 27, MURKROW   ;GRAVELER
+	dbw 30, MURKROW   ;GRAVELER
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_46
@@ -1669,7 +1669,7 @@ JohtoGrassWildMons:
 	dbw 2, SPEAROW
 	dbw 3, GEODUDE
 	dbw 3, RATTATA
-	dbw 2, RATTATA
+	dbw 2, PHANPY     ;RATTATA
 	dbw 2, RATTATA
 	dbw 2, RATTATA
 	; nite
@@ -1678,8 +1678,8 @@ JohtoGrassWildMons:
 	dbw 3, GEODUDE
 	dbw 3, RATTATA
 	dbw 2, RATTATA
-	dbw 2, RATTATA
-	dbw 2, RATTATA
+	dbw 2, SPINARAK   ;RATTATA
+	dbw 2, SPINARAK   ;RATTATA
 	end_grass_wildmons
 
 	def_grass_wildmons SILVER_CAVE_OUTSIDE

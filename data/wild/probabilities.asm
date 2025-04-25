@@ -14,8 +14,10 @@ GrassMonProbTable:
 
 WaterMonProbTable:
 	table_width 1
-	db 60
+	db 40
 	db 30
-	db 10
+	db 25
+	db 4
+	db 1
 	assert_table_length NUM_WATERMON
 	db 0
