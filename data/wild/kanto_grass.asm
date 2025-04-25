@@ -425,18 +425,18 @@ KantoGrassWildMons:
 	def_grass_wildmons ROUTE_10_NORTH
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	dbw 15, SPEAROW
+	dbw 15, FEAROW       ;SPEAROW
 	dbw 17, VOLTORB
 	dbw 15, RATICATE
-	dbw 15, FEAROW
+	dbw 15, TINKATINK    ;FEAROW
 	dbw 15, MAROWAK
 	dbw 16, ELECTABUZZ
 	dbw 16, ELECTABUZZ
 	; day
-	dbw 15, SPEAROW
+	dbw 15, FEAROW       ;SPEAROW
 	dbw 17, VOLTORB
 	dbw 15, RATICATE
-	dbw 15, FEAROW
+	dbw 15, TINKATINK    ;FEAROW
 	dbw 15, MAROWAK
 	dbw 18, ELECTABUZZ
 	dbw 18, ELECTABUZZ

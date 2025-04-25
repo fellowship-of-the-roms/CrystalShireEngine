@@ -1598,19 +1598,17 @@ LileepEvosAttacks:
 PurgislugEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ACID
-	dbw 1, CONFUSION
-	dbw 1, CONSTRICT
-	dbw 1, INGRAIN
+	dbw 1, AMNESIA
 	dbw 8, CONSTRICT
-	dbw 15, ACID
-	dbw 22, INGRAIN
+	dbw 15, CONFUSION
+	dbw 22, SLUDGE
 	dbw 29, CONFUSE_RAY
-	dbw 36, AMNESIA
+	dbw 36, AMNESIA ;MYSTIC_FLAME
 	dbw 48, ANCIENTPOWER
 	dbw 60, SPIT_UP
 	dbw 60, STOCKPILE
 	dbw 60, SWALLOW
-	dbw 67, SHADOW_BALL
+	dbw 67, EXTRASENSORY
 	db 0 ; no more level-up moves
 
 AnorithEvosAttacks:
