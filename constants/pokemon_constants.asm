@@ -273,15 +273,15 @@ DEF JOHTO_POKEMON EQU const_value
 	const HO_OH      ; fa
 	const CELEBI     ; fb
 DEF HOENN_POKEMON EQU const_value
-	const TREECKO    ; fc
-	const GROVYLE    ; fd
-	const SCEPTILE   ; fe
-	const TORCHIC    ; ff
-	const COMBUSKEN  ; 100
-	const BLAZIKEN   ; 101
-	const MUDKIP     ; 102
-	const MARSHTOMP  ; 103
-	const SWAMPERT   ; 104
+	const TREECKO    ; fc  turtwig
+	const GROVYLE    ; fd  grotle
+	const SCEPTILE   ; fe  torterra
+	const TORCHIC    ; ff  chimchar
+	const COMBUSKEN  ; 100 monferno
+	const BLAZIKEN   ; 101 infernape
+	const MUDKIP     ; 102 piplup
+	const MARSHTOMP  ; 103 prinplup
+	const SWAMPERT   ; 104 empoleon
 	const EUXINOS    ; 105
 	const WEAVILE    ; 106
 	const HONCHKROW  ; 107
@@ -306,9 +306,9 @@ DEF HOENN_POKEMON EQU const_value
 	const REUNICLUS  ; 11a
 	const SURSKIT    ; 11b
 	const MASQUERAIN ; 11c
-	const SHROOMISH  ; 11d
-	const BRELOOM    ; 11e
-	const SLAKOTH    ; 11f
+	const SHROOMISH  ; 11d out?
+	const BRELOOM    ; 11e out?
+	const SLAKOTH    ; 11f 
 	const VIGOROTH   ; 120
 	const SLAKING    ; 121
 	const NINCADA    ; 122
@@ -319,10 +319,10 @@ DEF HOENN_POKEMON EQU const_value
 	const TINKATON   ; 127
 	const MAKUHITA   ; 128
 	const HARIYAMA   ; 129
-	const AZURILL    ; 12a
-	const NOSEPASS   ; 12b
-	const SKITTY     ; 12c
-	const DELCATTY   ; 12d
+	const AZURILL    ; 12a out
+	const NOSEPASS   ; 12b out
+	const SKITTY     ; 12c out
+	const DELCATTY   ; 12d out
 	const SPIRITOMB  ; 12e
 	const TANGROWTH  ; 12f
 	const ARON       ; 130
@@ -346,9 +346,9 @@ DEF HOENN_POKEMON EQU const_value
 	const SMOGUANA   ; 142
 	const SMOKOMODO  ; 143
 	const TORKOAL    ; 144
-	const SPOINK     ; 145
-	const GRUMPIG    ; 146
-	const SPINDA     ; 147
+	const SPOINK     ; 145 flittle
+	const GRUMPIG    ; 146 espathra
+	const SPINDA     ; 147 out
 	const TRAPINCH   ; 148
 	const VIBRAVA    ; 149
 	const FLYGON     ; 14a
@@ -366,30 +366,30 @@ DEF HOENN_POKEMON EQU const_value
 	const WYRDEER    ; 156
 	const BALTOY     ; 157
 	const CLAYDOL    ; 158
-	const LILEEP     ; 159
-	const CRADILY    ; 15a
-	const ANORITH    ; 15b
-	const ARMALDO    ; 15c
+	const LILEEP     ; 159 out
+	const PURGISLUG  ; 15a
+	const ANORITH    ; 15b out
+	const ARMALDO    ; 15c out
 	const FEEBAS     ; 15d
 	const MILOTIC    ; 15e
 	const CASTFORM   ; 15f
-	const KECLEON    ; 160
-	const SHUPPET    ; 161
-	const BANETTE    ; 162
+	const LITWICK    ; 160 
+	const LAMPENT    ; 161 
+	const CHANDELURE ; 162 
 	const DUSKULL    ; 163
 	const DUSCLOPS   ; 164
-	const TROPIUS    ; 165
+	const DECIBELLE  ; 165 
 	const CHIMECHO   ; 166
 	const ABSOL      ; 167
 	const MAGNEZONE  ; 168
 	const SNOVER     ; 169
 	const ABOMASNOW  ; 16a
-	const SPHEAL     ; 16b
-	const SEALEO     ; 16c
-	const WALREIN    ; 16d
-	const CLAMPERL   ; 16e
-	const HUNTAIL    ; 16f
-	const GOREBYSS   ; 170
+	const SPHEAL     ; 16b out
+	const SEALEO     ; 16c out
+	const WALREIN    ; 16d out
+	const CLAMPERL   ; 16e out
+	const HUNTAIL    ; 16f out
+	const GOREBYSS   ; 170 out
 	const RELICANTH  ; 171
 	const LUVDISC    ; 172
 	const RAELIC     ; 173
@@ -398,16 +398,16 @@ DEF HOENN_POKEMON EQU const_value
 	const BELDUM     ; 176
 	const METANG     ; 177
 	const METAGROSS  ; 178
-	const REGIROCK   ; 179
-	const REGICE     ; 17a
-	const REGISTEEL  ; 17b
+	const REGIROCK   ; 179 darkrai
+	const REGICE     ; 17a meloetta
+	const REGISTEEL  ; 17b marshadow
 	const LATIAS     ; 17c
 	const LATIOS     ; 17d
 	const KYOGRE     ; 17e
 	const GROUDON    ; 17f
 	const RAYQUAZA   ; 180
 	const JIRACHI    ; 181
-	const DEOXYS     ; 182
+	const DEOXYS     ; 182 out?
 DEF NUM_POKEMON EQU const_value - 1
 
 DEF EGG EQU -3

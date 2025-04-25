@@ -95,18 +95,18 @@ AnimationPointers3:
 	dw BaltoyAnimation
 	dw ClaydolAnimation
 	dw LileepAnimation
-	dw CradilyAnimation
+	dw PurgislugAnimation
 	dw AnorithAnimation
 	dw ArmaldoAnimation
 	dw FeebasAnimation
 	dw MiloticAnimation
 	dw CastformAnimation
-	dw KecleonAnimation
-	dw ShuppetAnimation
-	dw BanetteAnimation
+	dw LitwickAnimation
+	dw LampentAnimation
+	dw ChandelureAnimation
 	dw DuskullAnimation
 	dw DusclopsAnimation
-	dw TropiusAnimation
+	dw DecibelleAnimation
 	dw ChimechoAnimation
 	dw AbsolAnimation
 	dw MagnezoneAnimation
@@ -232,18 +232,18 @@ WyrdeerAnimation:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/anim.asm"
 BaltoyAnimation:        INCLUDE "gfx/pokemon/hoenn/baltoy/anim.asm"
 ClaydolAnimation:       INCLUDE "gfx/pokemon/hoenn/claydol/anim.asm"
 LileepAnimation:        INCLUDE "gfx/pokemon/hoenn/lileep/anim.asm"
-CradilyAnimation:       INCLUDE "gfx/pokemon/hoenn/cradily/anim.asm"
+PurgislugAnimation:     INCLUDE "gfx/pokemon/hoenn/purgislug/anim.asm"
 AnorithAnimation:       INCLUDE "gfx/pokemon/hoenn/anorith/anim.asm"
 ArmaldoAnimation:       INCLUDE "gfx/pokemon/hoenn/armaldo/anim.asm"
 FeebasAnimation:        INCLUDE "gfx/pokemon/hoenn/feebas/anim.asm"
 MiloticAnimation:       INCLUDE "gfx/pokemon/hoenn/milotic/anim.asm"
 CastformAnimation:      INCLUDE "gfx/pokemon/hoenn/castform/anim.asm"
-KecleonAnimation:       INCLUDE "gfx/pokemon/hoenn/kecleon/anim.asm"
-ShuppetAnimation:       INCLUDE "gfx/pokemon/hoenn/shuppet/anim.asm"
-BanetteAnimation:       INCLUDE "gfx/pokemon/hoenn/banette/anim.asm"
+LitwickAnimation:       INCLUDE "gfx/pokemon/hoenn/litwick/anim.asm"
+LampentAnimation:       INCLUDE "gfx/pokemon/hoenn/lampent/anim.asm"
+ChandelureAnimation:    INCLUDE "gfx/pokemon/hoenn/chandelure/anim.asm"
 DuskullAnimation:       INCLUDE "gfx/pokemon/hoenn/duskull/anim.asm"
 DusclopsAnimation:      INCLUDE "gfx/pokemon/hoenn/dusclops/anim.asm"
-TropiusAnimation:       INCLUDE "gfx/pokemon/hoenn/tropius/anim.asm"
+DecibelleAnimation:     INCLUDE "gfx/pokemon/hoenn/decibelle/anim.asm"
 ChimechoAnimation:      INCLUDE "gfx/pokemon/hoenn/chimecho/anim.asm"
 AbsolAnimation:         INCLUDE "gfx/pokemon/hoenn/absol/anim.asm"
 MagnezoneAnimation:     INCLUDE "gfx/pokemon/hoenn/magnezone/anim.asm"

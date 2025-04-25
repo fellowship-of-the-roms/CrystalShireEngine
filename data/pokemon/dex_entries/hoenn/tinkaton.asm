@@ -1,9 +1,9 @@
-	db "LOUD@" ; species name
+	db "HAMMER@" ; species name
 
-	db   "Its howls can be"
-	next "heard over six"
-	next "miles away. It"
+	db   "The hammer is very"  
+	next "heavy, yet it gets" 
+	next "swung around easi-"
 
-	page "emits all sorts of"
-	next "noises from the"
-	next "ports on its body.@"
+	page "ly by TINKATON as"
+	next "it steals whatever"
+	next "it pleases.@"

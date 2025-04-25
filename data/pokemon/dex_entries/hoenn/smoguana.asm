@@ -1,9 +1,9 @@
-	db "NUMB@" ; species name
+	db "EMBER@" ; species name
 
-	db   "Its humped back"
-	next "stores intensely"
-	next "hot magma. In"
+	db   "It naps in warm"
+	next "ash, its back coa-"
+	next "ted with cooling"
 
-	page "rain, the magma"
-	next "cools, slowing its"
-	next "movement.@"
+	page "flakes. When an-"
+	next "gered, it lets off"
+	next "bursts of smoke.@"

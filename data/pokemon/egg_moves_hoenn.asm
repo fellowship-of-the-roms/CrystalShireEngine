@@ -94,18 +94,18 @@ EggMovePointers3::
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw LileepEggMoves
-	dw NoEggMoves3
+	dw PurgislugEggMoves
 	dw AnorithEggMoves
 	dw NoEggMoves3
 	dw FeebasEggMoves
 	dw NoEggMoves3
 	dw CastformEggMoves
-	dw KecleonEggMoves
-	dw ShuppetEggMoves
+	dw LitwickEggMoves
+	dw NoEggMoves3
 	dw NoEggMoves3
 	dw DuskullEggMoves
 	dw NoEggMoves3
-	dw TropiusEggMoves
+	dw NoEggMoves3
 	dw ChimechoEggMoves
 	dw AbsolEggMoves
 	dw NoEggMoves3
@@ -197,6 +197,7 @@ VoltrelEggMoves:
 	dw THUNDER
 	dw MIRROR_MOVE
 	dw PURSUIT
+	dw DIVE
 	dw RAGE
 	dw SKY_ATTACK
 	dw SUPERSONIC
@@ -421,6 +422,13 @@ LileepEggMoves:
 	dw ROCK_SLIDE
 	dw -1 ; end
 
+PurgislugEggMoves:
+	dw BARRIER
+	dw MIRROR_COAT
+	dw RECOVER
+	dw ROCK_SLIDE
+	dw -1 ; end
+
 AnorithEggMoves:
 	dw KNOCK_OFF
 	dw RAPID_SPIN
@@ -442,13 +450,9 @@ CastformEggMoves:
 	dw PSYCH_UP
 	dw -1 ; end
 
-KecleonEggMoves:
+LitwickEggMoves:
 	dw DISABLE
 	dw MAGIC_COAT
-	dw TRICK
-	dw -1 ; end
-
-ShuppetEggMoves:
 	dw ASTONISH
 	dw DESTINY_BOND
 	dw DISABLE
@@ -463,14 +467,6 @@ DuskullEggMoves:
 	dw IMPRISON
 	dw MEMENTO
 	dw PAIN_SPLIT
-	dw -1 ; end
-
-TropiusEggMoves:
-	dw HEADBUTT
-	dw LEECH_SEED
-	dw NATURE_POWER
-	dw RAZOR_WIND
-	dw SLAM
 	dw -1 ; end
 
 ChimechoEggMoves:

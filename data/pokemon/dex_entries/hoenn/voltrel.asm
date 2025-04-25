@@ -1,9 +1,9 @@
-	db "SEAGULL@" ; species name
+	db "PETREL@" ; species name
 
-	db   "It soars high in"
-	next "the sky, riding on"
-	next "updrafts like a"
+	db   "These #MON make" 
+	next "their nests on"
+	next "coastal cliffs."
 
-	page "glider. It carries"
-	next "food tucked in its"
-	next "bill.@"
+	page "The nests' texture"
+	next "is odd, but they"
+	next "are a delicacy.@"

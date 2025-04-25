@@ -1,9 +1,9 @@
-	db "ERUPTION@" ; species name
+	db "VOLCANO@" ; species name
 
-	db   "It has volcanoes"
-	next "on its back. If"
-	next "magma builds up in"
+	db   "It stomps to a"
+	next "beat, kicking up "
+	next "ember and ash with"
 
-	page "its body, it shud-"
-	next "ders, then erupts"
-	next "violently.@"
+	page "each strike. Its"
+	next "fierce footwork is"
+	next "like a war dance.@"

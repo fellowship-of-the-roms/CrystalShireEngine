@@ -349,18 +349,18 @@ INCBIN "gfx/footprints/hoenn/wyrdeer.1bpp"
 INCBIN "gfx/footprints/hoenn/baltoy.1bpp"
 INCBIN "gfx/footprints/hoenn/claydol.1bpp"
 INCBIN "gfx/footprints/hoenn/lileep.1bpp"
-INCBIN "gfx/footprints/hoenn/cradily.1bpp"
+INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder purgislug
 INCBIN "gfx/footprints/hoenn/anorith.1bpp"
 INCBIN "gfx/footprints/hoenn/armaldo.1bpp"
 INCBIN "gfx/footprints/hoenn/feebas.1bpp"
 INCBIN "gfx/footprints/hoenn/milotic.1bpp"
 INCBIN "gfx/footprints/hoenn/castform.1bpp"
-INCBIN "gfx/footprints/hoenn/kecleon.1bpp"
-INCBIN "gfx/footprints/hoenn/shuppet.1bpp"
-INCBIN "gfx/footprints/hoenn/banette.1bpp"
+INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder litwick
+INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder lampent
+INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder chandelure
 INCBIN "gfx/footprints/hoenn/duskull.1bpp"
 INCBIN "gfx/footprints/hoenn/dusclops.1bpp"
-INCBIN "gfx/footprints/hoenn/tropius.1bpp"
+INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder decibelle
 INCBIN "gfx/footprints/hoenn/chimecho.1bpp"
 INCBIN "gfx/footprints/hoenn/absol.1bpp"
 INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder magnezone

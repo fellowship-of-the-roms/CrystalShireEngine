@@ -1,9 +1,9 @@
-	db "WHISPER@" ; species name
+	db "METALSMITH@" ; species name
 
-	db   "Usually, its cries"
-	next "are like quiet"
-	next "murmurs. If"
+	db   "It swings its ham-"  
+	next "mer around to pro-"
+	next "tect itself, but"
 
-	page "frightened, it"
-	next "shrieks as loud as"
-	next "a jet plane.@"
+	page "its weapon can be"
+	next "stolen by #MON"
+	next "that eat metal.@"

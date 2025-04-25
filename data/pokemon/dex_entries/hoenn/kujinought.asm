@@ -1,9 +1,9 @@
-	db "COCOON@" ; species name
+	db "WHALE@" ; species name
 
-	db   "It never forgets"
-	next "any attack it en-"
-	next "dured while in the"
+	db   "This behemoth is"
+	next "a rare but deva-"
+	next "stating foe. Its"
 
-	page "cocoon. After evo-"
-	next "lution, it seeks"
-	next "payback.@"
+	page "immense strength"
+	next "is the source of"
+	next "its pride.@"

@@ -1,9 +1,9 @@
-	db "ENDURANCE@" ; species name
+	db "EFFIGY@" ; species name
 
-	db   "Within its rugged"
-	next "shell, its cells"
-	next "have begun chang-"
+	db   "Quiet and gentle,"   
+	next "it helps people to"
+	next "find their way. If"
 
-	page "ing. The shell"
-	next "peels off the in-"
-	next "stant it evolves.@"
+	page "treated well, moss"
+	next "starts to grow"
+	next "across its body.@"

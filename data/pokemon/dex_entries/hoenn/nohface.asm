@@ -1,9 +1,8 @@
-	db "CACTUS@" ; species name
+	db "MASK@" ; species name
 
-	db   "By storing water"
-	next "in its body, this"
-	next "desert dweller can"
+	db   "It waits for some-"
+	next "one to become its"
+	next "friend. Years of"
 
-	page "survive for 30"
-	next "days without wa-"
-	next "ter.@"
+	page "waiting have made"
+	next "it bitter.@"

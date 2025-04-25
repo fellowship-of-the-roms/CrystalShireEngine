@@ -1,9 +1,9 @@
-	db "BITE@" ; species name
+	db "PREDATOR@" ; species name
 
-	db   "A #MON with a"
-	next "persistent nature,"
-	next "it chases its cho-"
+	db   "A savage predator"
+    next "from a lost era."
+    next "EUXINOS struck"
 
-	page "sen prey until the"
-	next "prey becomes ex-"
-	next "hausted.@"
+    page "fast with venomous"
+	next "fangs and eerie"
+    next "silence.@"

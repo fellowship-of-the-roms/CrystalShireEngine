@@ -350,18 +350,18 @@ PokemonBodyData:
 	dw 108, 474    ; BALTOY
 	dw 411, 2381   ; CLAYDOL
 	dw 303, 525    ; LILEEP
-	dw 411, 1332   ; CRADILY
+	dw 411, 1332   ; PURGISLUG
 	dw 204, 276    ; ANORITH
 	dw 411, 1504   ; ARMALDO
 	dw 200, 163    ; FEEBAS
 	dw 2004, 3571  ; MILOTIC
 	dw 100, 18     ; CASTFORM
-	dw 303, 485    ; KECLEON
-	dw 200, 51     ; SHUPPET
-	dw 307, 276    ; BANETTE
+	dw 100, 68     ; LITWICK
+	dw 200, 287    ; LAMPENT
+	dw 303, 756    ; CHANDELURE
 	dw 207, 331    ; DUSKULL
 	dw 503, 675    ; DUSCLOPS
-	dw 607, 2205   ; TROPIUS
+	dw 607, 2205   ; DECIBELLE
 	dw 200, 22     ; CHIMECHO
 	dw 311, 1036   ; ABSOL
 	dw 311, 3968   ; MAGNEZONE
@@ -375,9 +375,9 @@ PokemonBodyData:
 	dw 511, 498    ; GOREBYSS
 	dw 303, 516    ; RELICANTH
 	dw 200, 192    ; LUVDISC
-	dw 200, 928    ; RAELIC
-	dw 307, 2436   ; ROMUSHU
-	dw 411, 2262   ; FUSANG
+	dw 14,  77     ; RAELIC
+	dw 33,  485    ; ROMUSHU
+	dw 411, 2526   ; FUSANG
 	dw 200, 2099   ; BELDUM
 	dw 311, 4464   ; METANG
 	dw 503, 12125  ; METAGROSS

@@ -1,9 +1,9 @@
-	db "HUMMING@" ; species name
+	db "NOCTURN@" ; species name
 
-	db   "If it bonds with a"
-	next "person, it will"
-	next "gently envelop the"
+	db   "It hates insects"
+	next "and feeds on rare"
+	next "fruit. It flies by" 
 
-	page "friend with its"
-	next "soft wings, then"
-	next "hum.@"
+	page "moonlight and lea-"
+	next "ves torn rinds in"
+	next "eerie patterns.@"

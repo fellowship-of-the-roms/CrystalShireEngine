@@ -1,8 +1,9 @@
-	db "SCARECROW@" ; species name
+	db "MASK@" ; species name
 
-	db   "It becomes active"
-	next "at night, seeking"
-	next "prey that is ex-"
+	db   "KITSUNOH is seldom"
+	next "seen in old ruins."
+	next "Most people think"
 
-	page "hausted from the"
-	next "day's desert heat.@"
+	page "its existence is"
+	next "nothing more than"
+	next "an old fairytale.@"

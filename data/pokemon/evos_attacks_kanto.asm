@@ -1194,7 +1194,7 @@ GeodudeEvosAttacks:
 	db 0 ; no more level-up moves
 
 GravelerEvosAttacks:
-	dbww EVOLVE_TRADE, -1, GOLEM
+	dbbw EVOLVE_LEVEL, 35, GRAVELER
 	db 0 ; no more evolutions
 	dbw 1, DEFENSE_CURL
 	dbw 1, MUD_SPORT

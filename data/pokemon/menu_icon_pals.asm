@@ -358,18 +358,18 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; BALTOY
 	icon_pals RED,    RED    ; CLAYDOL
 	icon_pals RED,    RED    ; LILEEP
-	icon_pals RED,    RED    ; CRADILY
+	icon_pals RED,    RED    ; PURGISLUG
 	icon_pals RED,    RED    ; ANORITH
 	icon_pals RED,    RED    ; ARMALDO
 	icon_pals RED,    RED    ; FEEBAS
 	icon_pals RED,    RED    ; MILOTIC
 	icon_pals RED,    RED    ; CASTFORM
-	icon_pals RED,    RED    ; KECLEON
-	icon_pals RED,    RED    ; SHUPPET
-	icon_pals RED,    RED    ; BANETTE
+	icon_pals RED,    RED    ; LITWICK
+	icon_pals RED,    RED    ; LAMPENT
+	icon_pals RED,    RED    ; CHANDELURE
 	icon_pals RED,    RED    ; DUSKULL
 	icon_pals RED,    RED    ; DUSCLOPS
-	icon_pals RED,    RED    ; TROPIUS
+	icon_pals RED,    RED    ; DECIBELLE
 	icon_pals RED,    RED    ; CHIMECHO
 	icon_pals RED,    RED    ; ABSOL
 	icon_pals RED,    RED    ; MAGNEZONE

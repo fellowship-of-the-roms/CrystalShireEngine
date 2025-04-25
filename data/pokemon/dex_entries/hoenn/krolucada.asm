@@ -1,9 +1,9 @@
-	db "COTTON@" ; species name
+	db "TEA BUG@" ; species name
 
-	db   "It can't relax if"
-	next "it or its sur-"
-	next "roundings are not"
+	db   "It lives on tea"
+    next "plants, sipping"
+    next "sap from tender" 
 
-	page "clean. It wipes"
-	next "off dirt with its"
-	next "wings.@"
+    page "leaves. Its bite" 
+    next "leaves pale marks" 
+	next "in the foliage.@"

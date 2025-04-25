@@ -134,9 +134,9 @@ CeladonGameCornerPrizeRoomPokemonVendor:
 	loadmenu .MenuHeader
 	verticalmenu
 	closewindow
-	ifequal 1, .Pikachu
-	ifequal 2, .Porygon
-	ifequal 3, .Larvitar
+	ifequal 1, .Pikachu    ; 
+	ifequal 2, .Porygon    ;CASTFORM
+	ifequal 3, .Larvitar   ;PORYGON
 	sjump CeladonPrizeRoom_CancelPurchaseScript
 
 .Pikachu:

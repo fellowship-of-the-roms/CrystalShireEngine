@@ -1,8 +1,9 @@
-	db "ROCK@" ; species name
+	db "DRIFTWOOD@" ; species name
 
-	db   "Dreaming of one"
-	next "day flying, it"
-	next "practices by leap-"
+	db   "Often mistaken for" 
+	next "a twig, it stays"
+	next "still for hours."
 
-	page "ing off cliffs ev-"
-	next "ery day.@"
+	page "Legend has it, the"
+	next "forest whispers to"
+	next "it when its alone.@"

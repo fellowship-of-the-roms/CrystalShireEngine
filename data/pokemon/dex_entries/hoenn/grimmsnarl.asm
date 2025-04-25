@@ -1,9 +1,11 @@
-	db "RUFFIAN@" ; species name
+	db "DEVIL@" ; species name
 
-	db   "Its hardy vitality"
-	next "enables it to"
-	next "adapt to any envi-"
+	db   "Its hair acts like"
+    next "muscles. When"
+    next "spread it wraps a-"
 
-	page "ronment. Its pin-"
-	next "cers will never"
-	next "release prey.@"
+    page "round foes and"
+    next "traps them like"
+	next "black tentacles.@"
+
+	;Its hairs work like muscle fibers. When its hairs unfurl, they latch on to opponents, ensnaring them as tentacles would.

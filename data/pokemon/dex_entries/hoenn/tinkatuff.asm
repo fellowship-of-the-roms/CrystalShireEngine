@@ -1,8 +1,9 @@
-	db "BIG@" ; species name
+	db "HAMMER@" ; species name
 
-	db   "The shock waves"
-	next "from its cries can"
-	next "tip over trucks."
+	db   "It will attack"   
+	next "STEEL #MON, to"
+	next "gather more metal"
 
-	page "It stamps its feet"
-	next "to power up.@"
+	page "from them in or-"
+	next "der to create a"
+	next "large hammer.@"

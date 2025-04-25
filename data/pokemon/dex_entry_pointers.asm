@@ -349,18 +349,18 @@ PokedexDataPointerTable:
 	dba BaltoyPokedexEntry
 	dba ClaydolPokedexEntry
 	dba LileepPokedexEntry
-	dba CradilyPokedexEntry
+	dba PurgislugPokedexEntry
 	dba AnorithPokedexEntry
 	dba ArmaldoPokedexEntry
 	dba FeebasPokedexEntry
 	dba MiloticPokedexEntry
 	dba CastformPokedexEntry
-	dba KecleonPokedexEntry
-	dba ShuppetPokedexEntry
-	dba BanettePokedexEntry
+	dba LitwickPokedexEntry
+	dba LampentPokedexEntry
+	dba ChandelurePokedexEntry
 	dba DuskullPokedexEntry
 	dba DusclopsPokedexEntry
-	dba TropiusPokedexEntry
+	dba DecibellePokedexEntry
 	dba ChimechoPokedexEntry
 	dba AbsolPokedexEntry
 	dba MagnezonePokedexEntry

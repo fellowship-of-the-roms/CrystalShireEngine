@@ -123,7 +123,7 @@ KantoGrassWildMons:
 	dbw 34, GOLBAT
 	dbw 35, SANDSLASH
 	dbw 35, RHYDON
-	dbw 35, RHYDON
+	dbw 35, LAIRON     ;RHYDON
 	; day
 	dbw 34, GRAVELER
 	dbw 32, RHYHORN
@@ -131,7 +131,7 @@ KantoGrassWildMons:
 	dbw 34, GOLBAT
 	dbw 35, SANDSLASH
 	dbw 35, RHYDON
-	dbw 35, RHYDON
+	dbw 35, LAIRON     ;RHYDON
 	; nite
 	dbw 34, GOLBAT
 	dbw 34, GRAVELER

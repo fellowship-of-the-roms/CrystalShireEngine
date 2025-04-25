@@ -353,18 +353,18 @@ IconPointers:
 	dw BaltoyIcon
 	dw ClaydolIcon
 	dw LileepIcon
-	dw CradilyIcon
+	dw PurgislugIcon
 	dw AnorithIcon
 	dw ArmaldoIcon
 	dw FeebasIcon
 	dw MiloticIcon
 	dw CastformIcon
-	dw KecleonIcon
-	dw ShuppetIcon
-	dw BanetteIcon
+	dw LitwickIcon
+	dw LampentIcon
+	dw ChandelureIcon
 	dw DuskullIcon
 	dw DusclopsIcon
-	dw TropiusIcon
+	dw DecibelleIcon
 	dw ChimechoIcon
 	dw AbsolIcon
 	dw MagnezoneIcon

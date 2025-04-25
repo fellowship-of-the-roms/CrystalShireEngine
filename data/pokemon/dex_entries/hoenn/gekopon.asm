@@ -1,9 +1,9 @@
-	db "CHEERING@" ; species name
+	db "BULBFROG@" ; species name
 
-	db   "It cheers on"
-	next "friends. If its"
-	next "friends are los-"
+	db   "It lives in swampy"
+	next "forests. When dis-"
+	next "turbed, it defends"
 
-	page "ing, its body lets"
-	next "off more and more"
-	next "sparks.@"
+	page "its territory with"
+	next "shocking force and"
+	next "unyielding spirit.@"

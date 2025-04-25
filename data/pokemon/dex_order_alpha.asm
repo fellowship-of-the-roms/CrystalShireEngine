@@ -20,7 +20,6 @@ AlphabeticalPokedexOrder:
 	dw AZUMARILL
 	dw AZURILL
 	dw BALTOY
-	dw BANETTE
 	dw BARBOACH
 	dw BAYLEEF
 	dw BEEDRILL
@@ -37,6 +36,7 @@ AlphabeticalPokedexOrder:
 	dw CASTFORM
 	dw CATERPIE
 	dw CELEBI
+	dw CHANDELURE
 	dw CHANSEY
 	dw CHARIZARD
 	dw CHARMANDER
@@ -53,11 +53,11 @@ AlphabeticalPokedexOrder:
 	dw COMBUSKEN
 	dw CORSOLA
 	dw CORSOREEF
-	dw CRADILY
 	dw CROBAT
 	dw CROCONAW
 	dw CUBONE
 	dw CYNDAQUIL
+	dw DECIBELLE
 	dw DELCATTY
 	dw DELIBIRD
 	dw DEOXYS
@@ -152,7 +152,6 @@ AlphabeticalPokedexOrder:
 	dw KADABRA
 	dw KAKUNA
 	dw KANGASKHAN
-	dw KECLEON
 	dw KINGDRA
 	dw KINGLER
 	dw KITSUNOH
@@ -163,6 +162,7 @@ AlphabeticalPokedexOrder:
 	dw KUJINOUGHT
 	dw KYOGRE
 	dw LAIRON
+	dw LAMPENT
 	dw LANTURN
 	dw LAPRAS
 	dw LARVESTA
@@ -174,6 +174,7 @@ AlphabeticalPokedexOrder:
 	dw LEDYBA
 	dw LICKITUNG
 	dw LILEEP
+	dw LITWICK
 	dw LOMBRE
 	dw LOTAD
 	dw LUDICOLO
@@ -260,6 +261,7 @@ AlphabeticalPokedexOrder:
 	dw PRIMEAPE
 	dw PSYDUCK
 	dw PUPITAR
+	dw PURGISLUG
 	dw QUAGSIRE
 	dw QUILAVA
 	dw QWILFISH
@@ -297,7 +299,6 @@ AlphabeticalPokedexOrder:
 	dw SHINX
 	dw SHROOMISH
 	dw SHUCKLE
-	dw SHUPPET
 	dw SKARMORY
 	dw SKIPLOOM
 	dw SKITTY
@@ -352,7 +353,6 @@ AlphabeticalPokedexOrder:
 	dw TOTODILE
 	dw TRAPINCH
 	dw TREECKO
-	dw TROPIUS
 	dw TYNAMO
 	dw TYPHLOSION
 	dw TYRANITAR

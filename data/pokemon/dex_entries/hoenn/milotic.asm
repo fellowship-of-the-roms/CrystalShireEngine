@@ -1,4 +1,4 @@
-	db "TENDER@" ; species name
+	db "BEAUTY@" ; species name
 
 	db   "Its lovely scales"
 	next "are described as"

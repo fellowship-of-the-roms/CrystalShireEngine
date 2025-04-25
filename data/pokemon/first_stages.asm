@@ -346,18 +346,18 @@ FirstEvoStages::
 	dw BALTOY
 	dw BALTOY     ;158
 	dw LILEEP
-	dw LILEEP
+	dw PURGISLUG
 	dw ANORITH
 	dw ANORITH
 	dw FEEBAS
 	dw FEEBAS
 	dw CASTFORM
-	dw KECLEON    ;160
-	dw SHUPPET
-	dw SHUPPET
+	dw LITWICK    ;160
+	dw LITWICK
+	dw LITWICK
 	dw DUSKULL
 	dw DUSKULL
-	dw TROPIUS
+	dw CHIMECHO
 	dw CHIMECHO
 	dw ABSOL
 	dw MAGNEMITE     ;168

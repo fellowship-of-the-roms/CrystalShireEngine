@@ -1,9 +1,9 @@
-	db "DRAGON@" ; species name
+	db "SPIRITWOOD@" ; species name
 
-	db   "As a result of its"
-	next "long-held dream"
-	next "of flying, its"
+	db   "Said to be born"      
+	next "from sacred trees,"
+	next "it appears in fo-"
 
-	page "cellular structure"
-	next "changed, and wings"
-	next "grew out.@"
+	page "rests untouched by"
+	next "man. Flowers bloom"
+	next "in its hoofprints.@"

@@ -1,9 +1,9 @@
-	db "POISON@" ; species name
+	db "BRAWLER@" ; species name
 
-	db   "Toxic powder is"
-	next "scattered with"
-	next "each flap. It is"
+	db   "This #MON loves to"
+	next "drink BERRYJUICE."
+	next "Once it has had"
 
-	page "known to strip"
-	next "leaves off trees"
-	next "lining boulevards.@"
+	page "enough to drink,"
+	next "it enjoys to cause"
+	next "a ruckus.@"

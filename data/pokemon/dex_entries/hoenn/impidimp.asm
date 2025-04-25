@@ -1,9 +1,9 @@
-	db "WHISKERS@" ; species name
+	db "WILY@" ; species name
 
-	db   "Its slimy body is"
-	next "hard to grasp. In"
-	next "one region, it is"
+	db   "It sneaks into"  	  
+	next "homes, stealing"
+	next "things and feast-"
 
-	page "said to have been"
-	next "born from hardened"
-	next "mud.@"
+	page "ing on the nega-"
+	next "tive energy of the"
+	next "pranked occupants.@"

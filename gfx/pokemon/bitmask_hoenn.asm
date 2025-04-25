@@ -95,18 +95,18 @@ BitmaskPointers3:
 	dw BaltoyBitmasks
 	dw ClaydolBitmasks
 	dw LileepBitmasks
-	dw CradilyBitmasks
+	dw PurgislugBitmasks
 	dw AnorithBitmasks
 	dw ArmaldoBitmasks
 	dw FeebasBitmasks
 	dw MiloticBitmasks
 	dw CastformBitmasks
-	dw KecleonBitmasks
-	dw ShuppetBitmasks
-	dw BanetteBitmasks
+	dw LitwickBitmasks
+	dw LampentBitmasks
+	dw ChandelureBitmasks
 	dw DuskullBitmasks
 	dw DusclopsBitmasks
-	dw TropiusBitmasks
+	dw DecibelleBitmasks
 	dw ChimechoBitmasks
 	dw AbsolBitmasks
 	dw MagnezoneBitmasks
@@ -232,18 +232,18 @@ WyrdeerBitmasks:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/bitmask.asm"
 BaltoyBitmasks:        INCLUDE "gfx/pokemon/hoenn/baltoy/bitmask.asm"
 ClaydolBitmasks:       INCLUDE "gfx/pokemon/hoenn/claydol/bitmask.asm"
 LileepBitmasks:        INCLUDE "gfx/pokemon/hoenn/lileep/bitmask.asm"
-CradilyBitmasks:       INCLUDE "gfx/pokemon/hoenn/cradily/bitmask.asm"
+PurgislugBitmasks:     INCLUDE "gfx/pokemon/hoenn/purgislug/bitmask.asm"
 AnorithBitmasks:       INCLUDE "gfx/pokemon/hoenn/anorith/bitmask.asm"
 ArmaldoBitmasks:       INCLUDE "gfx/pokemon/hoenn/armaldo/bitmask.asm"
 FeebasBitmasks:        INCLUDE "gfx/pokemon/hoenn/feebas/bitmask.asm"
 MiloticBitmasks:       INCLUDE "gfx/pokemon/hoenn/milotic/bitmask.asm"
 CastformBitmasks:      INCLUDE "gfx/pokemon/hoenn/castform/bitmask.asm"
-KecleonBitmasks:       INCLUDE "gfx/pokemon/hoenn/kecleon/bitmask.asm"
-ShuppetBitmasks:       INCLUDE "gfx/pokemon/hoenn/shuppet/bitmask.asm"
-BanetteBitmasks:       INCLUDE "gfx/pokemon/hoenn/banette/bitmask.asm"
+LitwickBitmasks:       INCLUDE "gfx/pokemon/hoenn/litwick/bitmask.asm"
+LampentBitmasks:       INCLUDE "gfx/pokemon/hoenn/lampent/bitmask.asm"
+ChandelureBitmasks:    INCLUDE "gfx/pokemon/hoenn/chandelure/bitmask.asm"
 DuskullBitmasks:       INCLUDE "gfx/pokemon/hoenn/duskull/bitmask.asm"
 DusclopsBitmasks:      INCLUDE "gfx/pokemon/hoenn/dusclops/bitmask.asm"
-TropiusBitmasks:       INCLUDE "gfx/pokemon/hoenn/tropius/bitmask.asm"
+DecibelleBitmasks:     INCLUDE "gfx/pokemon/hoenn/decibelle/bitmask.asm"
 ChimechoBitmasks:      INCLUDE "gfx/pokemon/hoenn/chimecho/bitmask.asm"
 AbsolBitmasks:         INCLUDE "gfx/pokemon/hoenn/absol/bitmask.asm"
 MagnezoneBitmasks:     INCLUDE "gfx/pokemon/hoenn/magnezone/bitmask.asm"

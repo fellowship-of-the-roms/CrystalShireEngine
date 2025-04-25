@@ -726,8 +726,8 @@ INCBIN "gfx/pokemon/hoenn/claydol/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/claydol/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/lileep/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/lileep/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/cradily/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/cradily/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/purgislug/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/purgislug/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/anorith/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/anorith/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/armaldo/normal.gbcpal", middle_colors
@@ -738,18 +738,18 @@ INCBIN "gfx/pokemon/hoenn/milotic/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/milotic/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/castform/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/castform/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/kecleon/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/kecleon/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/shuppet/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/shuppet/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/banette/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/banette/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/litwick/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/litwick/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/lampent/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/lampent/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/chandelure/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/chandelure/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/duskull/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/duskull/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/dusclops/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/dusclops/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/tropius/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/tropius/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/decibelle/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/decibelle/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/chimecho/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/chimecho/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/absol/normal.gbcpal", middle_colors

@@ -95,18 +95,18 @@ EvosAttacksPointers3::
 	dw BaltoyEvosAttacks
 	dw ClaydolEvosAttacks
 	dw LileepEvosAttacks
-	dw CradilyEvosAttacks
+	dw PurgislugEvosAttacks
 	dw AnorithEvosAttacks
 	dw ArmaldoEvosAttacks
 	dw FeebasEvosAttacks
 	dw MiloticEvosAttacks
 	dw CastformEvosAttacks
-	dw KecleonEvosAttacks
-	dw ShuppetEvosAttacks
-	dw BanetteEvosAttacks
+	dw LitwickEvosAttacks
+	dw LampentEvosAttacks
+	dw ChandelureEvosAttacks
 	dw DuskullEvosAttacks
 	dw DusclopsEvosAttacks
-	dw TropiusEvosAttacks
+	dw DecibelleEvosAttacks
 	dw ChimechoEvosAttacks
 	dw AbsolEvosAttacks
 	dw MagnezoneEvosAttacks
@@ -1031,9 +1031,9 @@ ShinxEvosAttacks:
 	dbbw EVOLVE_LEVEL, 15, LUXIO
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
-	dbw 4, THUNDER_WAVE
-	dbw 9, LEER
-	dbw 12, HOWL
+	dbw 4, LEER
+	dbw 9, HOWL
+	dbw 12, BITE
 	dbw 17, QUICK_ATTACK
 	dbw 20, SPARK
 	dbw 25, ODOR_SLEUTH
@@ -1049,9 +1049,9 @@ LuxioEvosAttacks:
 	dbw 1, HOWL
 	dbw 1, LEER
 	dbw 1, TACKLE
-	dbw 1, THUNDER_WAVE
-	dbw 5, THUNDER_WAVE
-	dbw 10, LEER
+	dbw 1, BITE
+	dbw 5, LEER
+	dbw 10, BITE
 	dbw 13, HOWL
 	dbw 18, QUICK_ATTACK
 	dbw 21, SPARK
@@ -1067,9 +1067,9 @@ LuxrayEvosAttacks:
 	dbw 1, HOWL
 	dbw 1, LEER
 	dbw 1, TACKLE
-	dbw 1, THUNDER_WAVE
-	dbw 6, THUNDER_WAVE
-	dbw 11, LEER
+	dbw 1, BITE
+	dbw 6, LEER
+	dbw 11, BITE
 	dbw 14, HOWL
 	dbw 19, QUICK_ATTACK
 	dbw 22, SPARK
@@ -1378,7 +1378,7 @@ NohfaceEvosAttacks:
 	dbw 4, LEER
 	dbw 7, QUICK_ATTACK
 	dbw 10, SWORDS_DANCE
-	dbw 13, FURY_CUTTER
+	dbw 13, NIGHT_SHADE
 	dbw 19, SLASH
 	dbw 25, PURSUIT
 	dbw 31, CRUSH_CLAW
@@ -1395,7 +1395,7 @@ KitsunohEvosAttacks:
 	dbw 5, LEER
 	dbw 8, QUICK_ATTACK
 	dbw 11, SWORDS_DANCE
-	dbw 14, FURY_CUTTER
+	dbw 14, NIGHT_SHADE
 	dbw 20, SLASH
 	dbw 26, PURSUIT
 	dbw 32, CRUSH_CLAW
@@ -1405,7 +1405,7 @@ KitsunohEvosAttacks:
 	db 0 ; no more level-up moves
 
 KrolucadaEvosAttacks:
-	dbbw EVOLVE_LEVEL, 35, KROLUCARD
+	dbbw EVOLVE_LEVEL, 42, KROLUCARD
 	db 0 ; no more evolutions
 	dbw 1, STRING_SHOT
 	dbw 10, LEECH_LIFE
@@ -1582,7 +1582,6 @@ ClaydolEvosAttacks:
 	db 0 ; no more level-up moves
 
 LileepEvosAttacks:
-	dbbw EVOLVE_LEVEL, 40, CRADILY
 	db 0 ; no more evolutions
 	dbw 1, ASTONISH
 	dbw 8, CONSTRICT
@@ -1596,10 +1595,10 @@ LileepEvosAttacks:
 	dbw 50, SWALLOW
 	db 0 ; no more level-up moves
 
-CradilyEvosAttacks:
+PurgislugEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ACID
-	dbw 1, ASTONISH
+	dbw 1, CONFUSION
 	dbw 1, CONSTRICT
 	dbw 1, INGRAIN
 	dbw 8, CONSTRICT
@@ -1611,6 +1610,7 @@ CradilyEvosAttacks:
 	dbw 60, SPIT_UP
 	dbw 60, STOCKPILE
 	dbw 60, SWALLOW
+	dbw 67, SHADOW_BALL
 	db 0 ; no more level-up moves
 
 AnorithEvosAttacks:
@@ -1680,53 +1680,45 @@ CastformEvosAttacks:
 	dbw 30, WEATHER_BALL
 	db 0 ; no more level-up moves
 
-KecleonEvosAttacks:
-	db 0 ; no more evolutions
-	dbw 1, ASTONISH
-	dbw 1, LICK
-	dbw 1, SCRATCH
-	dbw 1, TAIL_WHIP
-	dbw 1, THIEF
-	dbw 4, BIND
-	dbw 7, FAINT_ATTACK
-	dbw 12, FURY_SWIPES
-	dbw 17, PSYBEAM
-	dbw 24, SCREECH
-	dbw 31, SLASH
-	dbw 40, SUBSTITUTE
-	dbw 49, ANCIENTPOWER
-	db 0 ; no more level-up moves
-
-ShuppetEvosAttacks:
-	dbbw EVOLVE_LEVEL, 37, BANETTE
+LitwickEvosAttacks:
+	dbbw EVOLVE_LEVEL, 41, LAMPENT
 	db 0 ; no more evolutions
 	dbw 1, KNOCK_OFF
-	dbw 8, SCREECH
+	dbw 8, SMOG
 	dbw 13, NIGHT_SHADE
 	dbw 20, CURSE
-	dbw 25, SPITE
+	dbw 25, EMBER
 	dbw 32, WILL_O_WISP
-	dbw 37, FAINT_ATTACK
+	dbw 37, FIRE_SPIN
 	dbw 44, SHADOW_BALL
-	dbw 49, SNATCH
-	dbw 56, GRUDGE
+	dbw 49, GRUDGE
+	dbw 56, OVERHEAT
 	db 0 ; no more level-up moves
 
-BanetteEvosAttacks:
+LampentEvosAttacks:
+	dbww EVOLVE_ITEM, FIRE_STONE, CHANDELURE
 	db 0 ; no more evolutions
 	dbw 1, CURSE
-	dbw 1, KNOCK_OFF
+	dbw 1, WILL_O_WISP
 	dbw 1, NIGHT_SHADE
-	dbw 1, SCREECH
-	dbw 8, SCREECH
+	dbw 1, SMOG
+	dbw 8, SMOG
 	dbw 13, NIGHT_SHADE
 	dbw 20, CURSE
-	dbw 25, SPITE
+	dbw 25, EMBER
 	dbw 32, WILL_O_WISP
-	dbw 39, FAINT_ATTACK
+	dbw 39, FIRE_SPIN
 	dbw 48, SHADOW_BALL
-	dbw 55, SNATCH
-	dbw 64, GRUDGE
+	dbw 55, GRUDGE
+	dbw 64, OVERHEAT
+	db 0 ; no more level-up moves
+
+ChandelureEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, FIRE_SPIN
+	dbw 1, WILL_O_WISP
+	dbw 1, SHADOW_BALL
+	dbw 1, CONFUSE_RAY
 	db 0 ; no more level-up moves
 
 DuskullEvosAttacks:
@@ -1735,13 +1727,13 @@ DuskullEvosAttacks:
 	dbw 1, LEER
 	dbw 1, NIGHT_SHADE
 	dbw 5, DISABLE
-	dbw 12, FORESIGHT
+	dbw 12, MEAN_LOOK
 	dbw 16, ASTONISH
 	dbw 23, CONFUSE_RAY
 	dbw 27, PURSUIT
 	dbw 34, CURSE
 	dbw 38, WILL_O_WISP
-	dbw 45, MEAN_LOOK
+	dbw 45, PAIN_SPLIT
 	dbw 49, FUTURE_SIGHT
 	db 0 ; no more level-up moves
 
@@ -1752,33 +1744,35 @@ DusclopsEvosAttacks:
 	dbw 1, LEER
 	dbw 1, NIGHT_SHADE
 	dbw 5, DISABLE
-	dbw 12, FORESIGHT
+	dbw 12, MEAN_LOOK
 	dbw 16, ASTONISH
 	dbw 23, CONFUSE_RAY
 	dbw 27, PURSUIT
 	dbw 34, CURSE
 	dbw 37, SHADOW_PUNCH
 	dbw 41, WILL_O_WISP
-	dbw 51, MEAN_LOOK
+	dbw 51, PAIN_SPLIT
 	dbw 58, FUTURE_SIGHT
 	db 0 ; no more level-up moves
 
-TropiusEvosAttacks:
+DecibelleEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, GUST
-	dbw 1, LEER
-	dbw 7, GROWTH
-	dbw 11, RAZOR_LEAF
-	dbw 17, STOMP
-	dbw 21, SWEET_SCENT
-	dbw 27, WHIRLWIND
-	dbw 31, MAGICAL_LEAF
-	dbw 37, BODY_SLAM
-	dbw 41, SOLARBEAM
-	dbw 47, SYNTHESIS
+	dbw 1, WRAP
+	dbw 6, GROWL
+	dbw 9, ASTONISH
+	dbw 14, CONFUSION
+	dbw 17, TAKE_DOWN
+	dbw 22, UPROAR
+	dbw 25, YAWN
+	dbw 30, PSYWAVE
+	dbw 33, DOUBLE_EDGE
+	dbw 38, HEAL_BELL
+	dbw 41, SAFEGUARD
+	dbw 46, PSYCHIC_M
 	db 0 ; no more level-up moves
 
 ChimechoEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, DECIBELLE
 	db 0 ; no more evolutions
 	dbw 1, WRAP
 	dbw 6, GROWL

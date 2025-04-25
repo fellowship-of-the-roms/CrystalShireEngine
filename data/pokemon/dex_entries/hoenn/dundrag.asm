@@ -1,9 +1,9 @@
 	db "SKY SNAKE@" ; species name
 
-	db   "It flies high"
-	next "in the sky where"
-	next "light is shining."
+	db   "A divine serpent"
+	next "that soars through"
+	next "the heavens. Rare-"
 
-	page "Many people from"
-	next "Johto think its"
-	next "a divine spirit.@"
+	page "ly seen, it is re-"
+	next "vered in Johto as"
+	next "a guardian spirit.@"

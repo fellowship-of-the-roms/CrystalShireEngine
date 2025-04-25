@@ -709,8 +709,8 @@ PokemonPicPointers::
 	dba ClaydolBackpic
 	dba LileepFrontpic
 	dba LileepBackpic
-	dba CradilyFrontpic
-	dba CradilyBackpic
+	dba PurgislugFrontpic
+	dba PurgislugBackpic
 	dba AnorithFrontpic
 	dba AnorithBackpic
 	dba ArmaldoFrontpic
@@ -721,18 +721,18 @@ PokemonPicPointers::
 	dba MiloticBackpic
 	dba CastformFrontpic
 	dba CastformBackpic
-	dba KecleonFrontpic
-	dba KecleonBackpic
-	dba ShuppetFrontpic
-	dba ShuppetBackpic
-	dba BanetteFrontpic
-	dba BanetteBackpic
+	dba LitwickFrontpic
+	dba LitwickBackpic
+	dba LampentFrontpic
+	dba LampentBackpic
+	dba ChandelureFrontpic
+	dba ChandelureBackpic
 	dba DuskullFrontpic
 	dba DuskullBackpic
 	dba DusclopsFrontpic
 	dba DusclopsBackpic
-	dba TropiusFrontpic
-	dba TropiusBackpic
+	dba DecibelleFrontpic
+	dba DecibelleBackpic
 	dba ChimechoFrontpic
 	dba ChimechoBackpic
 	dba AbsolFrontpic

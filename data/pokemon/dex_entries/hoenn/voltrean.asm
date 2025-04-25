@@ -1,9 +1,9 @@
-	db "WATER@" ; species name
+	db "PETREL@" ; species name
 
-	db   "It is a messenger"
-	next "of the skies, car-"
-	next "rying small"
+	db   "It inflates its"     
+	next "throat sac to amp-"
+	next "lify its electri-"
 
-	page "#MON and eggs"
-	next "to safety in its"
-	next "bill.@"
+	page "city. By riding"
+	next "winds, VOLTREAN"
+	next "can fly very fast.@"

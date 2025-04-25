@@ -95,18 +95,18 @@ FramePointers3:
 	dw BaltoyFrames
 	dw ClaydolFrames
 	dw LileepFrames
-	dw CradilyFrames
+	dw PurgislugFrames
 	dw AnorithFrames
 	dw ArmaldoFrames
 	dw FeebasFrames
 	dw MiloticFrames
 	dw CastformFrames
-	dw KecleonFrames
-	dw ShuppetFrames
-	dw BanetteFrames
+	dw LitwickFrames
+	dw LampentFrames
+	dw ChandelureFrames
 	dw DuskullFrames
 	dw DusclopsFrames
-	dw TropiusFrames
+	dw DecibelleFrames
 	dw ChimechoFrames
 	dw AbsolFrames
 	dw MagnezoneFrames
@@ -232,18 +232,18 @@ WyrdeerFrames:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/frames.asm"
 BaltoyFrames:        INCLUDE "gfx/pokemon/hoenn/baltoy/frames.asm"
 ClaydolFrames:       INCLUDE "gfx/pokemon/hoenn/claydol/frames.asm"
 LileepFrames:        INCLUDE "gfx/pokemon/hoenn/lileep/frames.asm"
-CradilyFrames:       INCLUDE "gfx/pokemon/hoenn/cradily/frames.asm"
+PurgislugFrames:     INCLUDE "gfx/pokemon/hoenn/purgislug/frames.asm"
 AnorithFrames:       INCLUDE "gfx/pokemon/hoenn/anorith/frames.asm"
 ArmaldoFrames:       INCLUDE "gfx/pokemon/hoenn/armaldo/frames.asm"
 FeebasFrames:        INCLUDE "gfx/pokemon/hoenn/feebas/frames.asm"
 MiloticFrames:       INCLUDE "gfx/pokemon/hoenn/milotic/frames.asm"
 CastformFrames:      INCLUDE "gfx/pokemon/hoenn/castform/frames.asm"
-KecleonFrames:       INCLUDE "gfx/pokemon/hoenn/kecleon/frames.asm"
-ShuppetFrames:       INCLUDE "gfx/pokemon/hoenn/shuppet/frames.asm"
-BanetteFrames:       INCLUDE "gfx/pokemon/hoenn/banette/frames.asm"
+LitwickFrames:       INCLUDE "gfx/pokemon/hoenn/litwick/frames.asm"
+LampentFrames:       INCLUDE "gfx/pokemon/hoenn/lampent/frames.asm"
+ChandelureFrames:    INCLUDE "gfx/pokemon/hoenn/chandelure/frames.asm"
 DuskullFrames:       INCLUDE "gfx/pokemon/hoenn/duskull/frames.asm"
 DusclopsFrames:      INCLUDE "gfx/pokemon/hoenn/dusclops/frames.asm"
-TropiusFrames:       INCLUDE "gfx/pokemon/hoenn/tropius/frames.asm"
+DecibelleFrames:     INCLUDE "gfx/pokemon/hoenn/decibelle/frames.asm"
 ChimechoFrames:      INCLUDE "gfx/pokemon/hoenn/chimecho/frames.asm"
 AbsolFrames:         INCLUDE "gfx/pokemon/hoenn/absol/frames.asm"
 MagnezoneFrames:     INCLUDE "gfx/pokemon/hoenn/magnezone/frames.asm"
