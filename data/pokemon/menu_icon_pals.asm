@@ -357,7 +357,7 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; WYRDEER
 	icon_pals RED,    RED    ; BALTOY
 	icon_pals RED,    RED    ; CLAYDOL
-	icon_pals RED,    RED    ; LILEEP
+	icon_pals RED,    RED    ; MUNCHLAX
 	icon_pals RED,    RED    ; PURGISLUG
 	icon_pals RED,    RED    ; ANORITH
 	icon_pals RED,    RED    ; ARMALDO

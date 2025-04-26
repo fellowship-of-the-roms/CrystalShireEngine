@@ -346,7 +346,7 @@ NewPokedexOrder:
 	dw WYRDEER
 	dw BALTOY
 	dw CLAYDOL
-	dw LILEEP
+	dw MUNCHLAX
 	dw PURGISLUG
 	dw ANORITH
 	dw ARMALDO

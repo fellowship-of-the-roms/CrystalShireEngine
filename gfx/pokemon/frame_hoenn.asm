@@ -94,7 +94,7 @@ FramePointers3:
 	dw WyrdeerFrames
 	dw BaltoyFrames
 	dw ClaydolFrames
-	dw LileepFrames
+	dw MunchlaxFrames
 	dw PurgislugFrames
 	dw AnorithFrames
 	dw ArmaldoFrames
@@ -231,7 +231,7 @@ GrimmsnarlFrames:    INCLUDE "gfx/pokemon/hoenn/grimmsnarl/frames.asm"
 WyrdeerFrames:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/frames.asm"
 BaltoyFrames:        INCLUDE "gfx/pokemon/hoenn/baltoy/frames.asm"
 ClaydolFrames:       INCLUDE "gfx/pokemon/hoenn/claydol/frames.asm"
-LileepFrames:        INCLUDE "gfx/pokemon/hoenn/lileep/frames.asm"
+MunchlaxFrames:      INCLUDE "gfx/pokemon/hoenn/munchlax/frames.asm"
 PurgislugFrames:     INCLUDE "gfx/pokemon/hoenn/purgislug/frames.asm"
 AnorithFrames:       INCLUDE "gfx/pokemon/hoenn/anorith/frames.asm"
 ArmaldoFrames:       INCLUDE "gfx/pokemon/hoenn/armaldo/frames.asm"

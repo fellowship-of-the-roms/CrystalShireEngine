@@ -94,7 +94,7 @@ AnimationIdlePointers3:
 	dw WyrdeerAnimationIdle
 	dw BaltoyAnimationIdle
 	dw ClaydolAnimationIdle
-	dw LileepAnimationIdle
+	dw MunchlaxAnimationIdle
 	dw PurgislugAnimationIdle
 	dw AnorithAnimationIdle
 	dw ArmaldoAnimationIdle
@@ -231,7 +231,7 @@ GrimmsnarlAnimationIdle:    INCLUDE "gfx/pokemon/hoenn/grimmsnarl/anim_idle.asm"
 WyrdeerAnimationIdle:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/anim_idle.asm"
 BaltoyAnimationIdle:        INCLUDE "gfx/pokemon/hoenn/baltoy/anim_idle.asm"
 ClaydolAnimationIdle:       INCLUDE "gfx/pokemon/hoenn/claydol/anim_idle.asm"
-LileepAnimationIdle:        INCLUDE "gfx/pokemon/hoenn/lileep/anim_idle.asm"
+MunchlaxAnimationIdle:      INCLUDE "gfx/pokemon/hoenn/munchlax/anim_idle.asm"
 PurgislugAnimationIdle:     INCLUDE "gfx/pokemon/hoenn/purgislug/anim_idle.asm"
 AnorithAnimationIdle:       INCLUDE "gfx/pokemon/hoenn/anorith/anim_idle.asm"
 ArmaldoAnimationIdle:       INCLUDE "gfx/pokemon/hoenn/armaldo/anim_idle.asm"

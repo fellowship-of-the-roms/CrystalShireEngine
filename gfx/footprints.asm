@@ -348,7 +348,7 @@ INCBIN "gfx/footprints/hoenn/grimmsnarl.1bpp"
 INCBIN "gfx/footprints/hoenn/wyrdeer.1bpp"
 INCBIN "gfx/footprints/hoenn/baltoy.1bpp"
 INCBIN "gfx/footprints/hoenn/claydol.1bpp"
-INCBIN "gfx/footprints/hoenn/lileep.1bpp"
+INCBIN "gfx/footprints/hoenn/munchlax.1bpp"
 INCBIN "gfx/footprints/johto/misdreavus.1bpp" ;no footprint placeholder purgislug
 INCBIN "gfx/footprints/hoenn/anorith.1bpp"
 INCBIN "gfx/footprints/hoenn/armaldo.1bpp"

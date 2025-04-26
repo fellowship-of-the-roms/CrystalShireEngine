@@ -707,8 +707,8 @@ PokemonPicPointers::
 	dba BaltoyBackpic
 	dba ClaydolFrontpic
 	dba ClaydolBackpic
-	dba LileepFrontpic
-	dba LileepBackpic
+	dba MunchlaxFrontpic
+	dba MunchlaxBackpic
 	dba PurgislugFrontpic
 	dba PurgislugBackpic
 	dba AnorithFrontpic

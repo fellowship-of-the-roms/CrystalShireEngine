@@ -353,7 +353,7 @@ PokemonCries::
 	mon_cry CRY_BULBASAUR,   238,  129 ; WYRDEER
 	mon_cry CRY_VOLTORB,     237,  256 ; BALTOY
 	mon_cry CRY_VOLTORB,     168,  272 ; CLAYDOL
-	mon_cry CRY_DUNSPARCE,   461,  216 ; LILEEP
+	mon_cry CRY_GRIMER,      101,  128 ; MUNCHLAX
 	mon_cry CRY_DUNSPARCE,   438,  272 ; PURGISLUG mon_cry CRY_HOOTHOOT,    250,  320 alt cry
 	mon_cry CRY_CATERPIE,    147,  224 ; ANORITH
 	mon_cry CRY_FEAROW,      189,  145 ; ARMALDO

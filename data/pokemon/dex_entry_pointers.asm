@@ -348,7 +348,7 @@ PokedexDataPointerTable:
 	dba WyrdeerPokedexEntry
 	dba BaltoyPokedexEntry
 	dba ClaydolPokedexEntry
-	dba LileepPokedexEntry
+	dba MunchlaxPokedexEntry
 	dba PurgislugPokedexEntry
 	dba AnorithPokedexEntry
 	dba ArmaldoPokedexEntry

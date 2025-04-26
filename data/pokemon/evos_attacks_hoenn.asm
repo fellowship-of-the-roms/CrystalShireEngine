@@ -94,7 +94,7 @@ EvosAttacksPointers3::
 	dw WyrdeerEvosAttacks
 	dw BaltoyEvosAttacks
 	dw ClaydolEvosAttacks
-	dw LileepEvosAttacks
+	dw MunchlaxEvosAttacks
 	dw PurgislugEvosAttacks
 	dw AnorithEvosAttacks
 	dw ArmaldoEvosAttacks
@@ -1581,18 +1581,22 @@ ClaydolEvosAttacks:
 	dbw 55, EXPLOSION
 	db 0 ; no more level-up moves
 
-LileepEvosAttacks:
+MunchlaxEvosAttacks:
+	dbbw EVOLVE_HAPPINESS, TR_ANYTIME, SNORLAX
 	db 0 ; no more evolutions
-	dbw 1, ASTONISH
-	dbw 8, CONSTRICT
-	dbw 15, ACID
-	dbw 22, INGRAIN
-	dbw 29, CONFUSE_RAY
-	dbw 36, AMNESIA
-	dbw 43, ANCIENTPOWER
-	dbw 50, SPIT_UP
-	dbw 50, STOCKPILE
-	dbw 50, SWALLOW
+	dbw 1, TACKLE
+	dbw 6, AMNESIA
+	dbw 10, DEFENSE_CURL
+	dbw 15, BELLY_DRUM
+	dbw 19, HEADBUTT
+	dbw 24, YAWN
+	dbw 28, REST
+	dbw 28, SNORE
+	dbw 33, BODY_SLAM
+	dbw 37, BLOCK
+	dbw 42, COVET
+	dbw 46, ROLLOUT
+	dbw 51, HYPER_BEAM
 	db 0 ; no more level-up moves
 
 PurgislugEvosAttacks:

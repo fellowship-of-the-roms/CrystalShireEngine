@@ -349,7 +349,7 @@ PokemonBodyData:
 	dw 511, 2097   ; WYRDEER
 	dw 108, 474    ; BALTOY
 	dw 411, 2381   ; CLAYDOL
-	dw 303, 525    ; LILEEP
+	dw 2315, 200   ; MUNCHLAX
 	dw 411, 1332   ; PURGISLUG
 	dw 204, 276    ; ANORITH
 	dw 411, 1504   ; ARMALDO

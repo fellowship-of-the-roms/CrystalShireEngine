@@ -94,7 +94,7 @@ AnimationPointers3:
 	dw WyrdeerAnimation
 	dw BaltoyAnimation
 	dw ClaydolAnimation
-	dw LileepAnimation
+	dw MunchlaxAnimation
 	dw PurgislugAnimation
 	dw AnorithAnimation
 	dw ArmaldoAnimation
@@ -231,7 +231,7 @@ GrimmsnarlAnimation:    INCLUDE "gfx/pokemon/hoenn/grimmsnarl/anim.asm"
 WyrdeerAnimation:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/anim.asm"
 BaltoyAnimation:        INCLUDE "gfx/pokemon/hoenn/baltoy/anim.asm"
 ClaydolAnimation:       INCLUDE "gfx/pokemon/hoenn/claydol/anim.asm"
-LileepAnimation:        INCLUDE "gfx/pokemon/hoenn/lileep/anim.asm"
+MunchlaxAnimation:      INCLUDE "gfx/pokemon/hoenn/munchlax/anim.asm"
 PurgislugAnimation:     INCLUDE "gfx/pokemon/hoenn/purgislug/anim.asm"
 AnorithAnimation:       INCLUDE "gfx/pokemon/hoenn/anorith/anim.asm"
 ArmaldoAnimation:       INCLUDE "gfx/pokemon/hoenn/armaldo/anim.asm"

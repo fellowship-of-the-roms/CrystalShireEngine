@@ -366,7 +366,7 @@ DEF HOENN_POKEMON EQU const_value
 	const WYRDEER    ; 156
 	const BALTOY     ; 157
 	const CLAYDOL    ; 158
-	const LILEEP     ; 159 out
+	const MUNCHLAX   ; 159 out
 	const PURGISLUG  ; 15a
 	const ANORITH    ; 15b out
 	const ARMALDO    ; 15c out

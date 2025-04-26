@@ -143,7 +143,7 @@ FirstEvoStages::
 	dw KABUTO
 	dw KABUTO
 	dw AERODACTYL
-	dw SNORLAX
+	dw MUNCHLAX
 	dw ARTICUNO   ;090
 	dw ZAPDOS
 	dw MOLTRES
@@ -345,7 +345,7 @@ FirstEvoStages::
 	dw STANTLER
 	dw BALTOY
 	dw BALTOY     ;158
-	dw LILEEP
+	dw MUNCHLAX
 	dw PURGISLUG
 	dw ANORITH
 	dw ANORITH

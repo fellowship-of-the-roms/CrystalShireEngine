@@ -173,7 +173,6 @@ AlphabeticalPokedexOrder:
 	dw LEDIAN
 	dw LEDYBA
 	dw LICKITUNG
-	dw LILEEP
 	dw LITWICK
 	dw LOMBRE
 	dw LOTAD
@@ -219,6 +218,7 @@ AlphabeticalPokedexOrder:
 	dw MR__MIME
 	dw MUDKIP
 	dw MUK
+	dw MUNCHLAX
 	dw MURKROW
 	dw NATU
 	dw NIDOKING

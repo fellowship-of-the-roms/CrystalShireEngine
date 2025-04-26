@@ -93,7 +93,7 @@ EggMovePointers3::
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw LileepEggMoves
+	dw MunchlaxEggMoves
 	dw PurgislugEggMoves
 	dw AnorithEggMoves
 	dw NoEggMoves3
@@ -415,11 +415,13 @@ ImpidimpEggMoves:
 	dw WHIRLPOOL
 	dw -1 ; end
 
-LileepEggMoves:
-	dw BARRIER
-	dw MIRROR_COAT
-	dw RECOVER
-	dw ROCK_SLIDE
+MunchlaxEggMoves:
+	dw CHARM
+	dw CURSE
+	dw DOUBLE_EDGE
+	dw FISSURE
+	dw LICK
+	dw SUBSTITUTE
 	dw -1 ; end
 
 PurgislugEggMoves:

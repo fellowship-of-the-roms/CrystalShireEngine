@@ -94,7 +94,7 @@ BitmaskPointers3:
 	dw WyrdeerBitmasks
 	dw BaltoyBitmasks
 	dw ClaydolBitmasks
-	dw LileepBitmasks
+	dw MunchlaxBitmasks
 	dw PurgislugBitmasks
 	dw AnorithBitmasks
 	dw ArmaldoBitmasks
@@ -231,7 +231,7 @@ GrimmsnarlBitmasks:    INCLUDE "gfx/pokemon/hoenn/grimmsnarl/bitmask.asm"
 WyrdeerBitmasks:       INCLUDE "gfx/pokemon/hoenn/wyrdeer/bitmask.asm"
 BaltoyBitmasks:        INCLUDE "gfx/pokemon/hoenn/baltoy/bitmask.asm"
 ClaydolBitmasks:       INCLUDE "gfx/pokemon/hoenn/claydol/bitmask.asm"
-LileepBitmasks:        INCLUDE "gfx/pokemon/hoenn/lileep/bitmask.asm"
+MunchlaxBitmasks:      INCLUDE "gfx/pokemon/hoenn/munchlax/bitmask.asm"
 PurgislugBitmasks:     INCLUDE "gfx/pokemon/hoenn/purgislug/bitmask.asm"
 AnorithBitmasks:       INCLUDE "gfx/pokemon/hoenn/anorith/bitmask.asm"
 ArmaldoBitmasks:       INCLUDE "gfx/pokemon/hoenn/armaldo/bitmask.asm"

@@ -351,7 +351,7 @@ PokemonNames::
 	db "WYRDEER@@@"
 	db "BALTOY@@@@"
 	db "CLAYDOL@@@"
-	db "LILEEP@@@@"
+	db "MUNCHLAX@@"
 	db "PURGISLUG@"
 	db "ANORITH@@@"
 	db "ARMALDO@@@"

@@ -352,7 +352,7 @@ IconPointers:
 	dw WyrdeerIcon
 	dw BaltoyIcon
 	dw ClaydolIcon
-	dw LileepIcon
+	dw MunchlaxIcon
 	dw PurgislugIcon
 	dw AnorithIcon
 	dw ArmaldoIcon
