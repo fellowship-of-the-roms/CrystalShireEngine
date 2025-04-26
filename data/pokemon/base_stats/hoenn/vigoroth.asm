@@ -1,6 +1,6 @@
 	db 0 ; species ID placeholder
 
-	db  80,  80,  80,  90,  55,  55
+	db  80, 100,  80,  90,  55,  55
 	evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 

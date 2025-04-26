@@ -1,15 +1,15 @@
 	db 0 ; species ID placeholder
 
-	db  55,  40,  85,  40,  80, 105
+	db  55,  40, 105,  75, 120, 125
 	evs  0,   0,   0,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, FLYING ; type
+	db FLYING, FLYING ; type
 	db 75 ; catch rate
 	db 114 ; base exp
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
-	db 10 ; step cycles to hatch
+	db 25 ; 10 step cycles to hatch
 	INCBIN "gfx/pokemon/johto/togetic/front.dimensions"
 	db HUSTLE, SERENE_GRACE ; wBaseAbility1, wBaseAbility2
 	dw NULL ; Padding left-over from the unused back pic

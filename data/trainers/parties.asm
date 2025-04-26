@@ -997,7 +997,7 @@ BirdKeeperGroup:
 	next_list_item ; BIRD_KEEPER (2)
 	db "ABE@", TRAINERTYPE_NORMAL
 	db 9
-	dw NATU
+	dw VOLTREL
 	db -1 ; end
 
 	next_list_item ; BIRD_KEEPER (3)
@@ -1012,13 +1012,13 @@ BirdKeeperGroup:
 	db "THEO@", TRAINERTYPE_NORMAL
 	db 17
 	dw PIDGEY
-	db 15
-	dw PIDGEY
+	;db 15
+	;dw PIDGEY
 	db 19
 	dw PIDGEY
-	db 15
+	db 16 ;15
 	dw VOLTREL
-	db 15
+	db 16 ;15
 	dw VOLTREL
 	db -1 ; end
 
@@ -1207,7 +1207,7 @@ LassGroup:
 
 	next_list_item ; LASS (5)
 	db "CONNIE@", TRAINERTYPE_NORMAL
-	db 21
+	db 23 ;21
 	dw MARILL
 	db -1 ; end
 
@@ -2311,7 +2311,7 @@ GentlemanGroup:
 	next_list_item ; GENTLEMAN (1)
 	db "PRESTON@", TRAINERTYPE_NORMAL
 	db 21 ;18
-	dw GROWLITHE
+	dw LUXIO
 	db 21 ;18
 	dw GROWLITHE
 	db -1 ; end
@@ -2428,7 +2428,7 @@ BugCatcherGroup:
 	dw BEEDRILL
 	db -1 ; end
 
-	next_list_item ; BUG_CATCHER (4)
+	next_list_item ; BUG_CATCHER (4) 1
 	db "WADE@", TRAINERTYPE_NORMAL
 	db 2
 	dw WEEDLE
@@ -2478,7 +2478,7 @@ BugCatcherGroup:
 	dw PINSIR
 	db -1 ; end
 
-	next_list_item ; BUG_CATCHER (10)
+	next_list_item ; BUG_CATCHER (10) 2
 	db "WADE@", TRAINERTYPE_NORMAL
 	db 9
 	dw METAPOD
@@ -2490,7 +2490,7 @@ BugCatcherGroup:
 	dw METAPOD
 	db -1 ; end
 
-	next_list_item ; BUG_CATCHER (11)
+	next_list_item ; BUG_CATCHER (11) 3
 	db "WADE@", TRAINERTYPE_NORMAL
 	db 14
 	dw BUTTERFREE
@@ -3173,7 +3173,7 @@ SailorGroup:
 	dw KRABBY
 	db -1 ; end
 
-	next_list_item ; SAILOR (2)
+	next_list_item ; SAILOR (2) 1
 	db "HUEY@", TRAINERTYPE_NORMAL
 	db 19 ;18
 	dw MACHOP
@@ -3193,7 +3193,7 @@ SailorGroup:
 	db "KENT@", TRAINERTYPE_MOVES
 	db 21 ;18
 	dw KRABBY
-	dw BUBBLE, LEER, VICEGRIP, HARDEN
+	dw BUBBLEBEAM, LEER, VICEGRIP, HARDEN
 	db 22 ;20
 	dw KRABBY
 	dw BUBBLEBEAM, LEER, VICEGRIP, HARDEN
@@ -3251,7 +3251,7 @@ SailorGroup:
 	dw QUAGSIRE
 	db -1 ; end
 
-	next_list_item ; SAILOR (11)
+	next_list_item ; SAILOR (11) 2
 	db "HUEY@", TRAINERTYPE_NORMAL
 	db 28
 	dw POLIWHIRL
@@ -3259,7 +3259,7 @@ SailorGroup:
 	dw POLIWHIRL
 	db -1 ; end
 
-	next_list_item ; SAILOR (12)
+	next_list_item ; SAILOR (12) 3
 	db "HUEY@", TRAINERTYPE_NORMAL
 	db 34
 	dw POLIWHIRL
@@ -3267,7 +3267,7 @@ SailorGroup:
 	dw POLIWRATH
 	db -1 ; end
 
-	next_list_item ; SAILOR (13)
+	next_list_item ; SAILOR (13) 4
 	db "HUEY@", TRAINERTYPE_MOVES
 	db 38
 	dw POLITOED
@@ -4144,7 +4144,7 @@ BlackbeltGroup:
 	db 32
 	dw MACHOKE
 	db 34
-	dw MACHOKE
+	dw HARIYAMA
 	db -1 ; end
 
 	end_list_items

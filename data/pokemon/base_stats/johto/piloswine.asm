@@ -1,6 +1,6 @@
 	db 0 ; species ID placeholder
 
-	db 100, 100,  80,  50,  60,  60
+	db 130, 120,  80,  50,  80,  60
 	evs  1,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
@@ -11,7 +11,7 @@
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/johto/piloswine/front.dimensions"
-	db OBLIVIOUS, OBLIVIOUS ; wBaseAbility1, wBaseAbility2
+	db THICK_FAT, THICK_FAT ; wBaseAbility1, wBaseAbility2
 	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_SLOW ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups
