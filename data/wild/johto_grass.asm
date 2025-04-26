@@ -1158,24 +1158,24 @@ JohtoGrassWildMons:
 	dbw 60, GOLBAT
 	dbw 56, PARASECT
 	dbw 58, PARASECT
-	dbw 60, ABOMSANOW
-	dbw 62, ABOMSANOW
+	dbw 60, ABOMASNOW
+	dbw 62, ABOMASNOW
 	; day
 	dbw 58, GOLBAT
 	dbw 56, GOLBAT
 	dbw 50, GOLBAT
 	dbw 56, PARASECT
 	dbw 58, PARASECT
-	dbw 60, ABOMSANOW
-	dbw 62, ABOMSANOW
+	dbw 60, ABOMASNOW
+	dbw 62, ABOMASNOW
 	; nite
 	dbw 45, MISDREAVUS
 	dbw 58, GOLBAT
 	dbw 50, GOLBAT
 	dbw 56, PARASECT
 	dbw 58, PARASECT
-	dbw 60, ABOMSANOW
-	dbw 62, ABOMSANOW
+	dbw 60, ABOMASNOW
+	dbw 62, ABOMASNOW
 	end_grass_wildmons
 
 	def_grass_wildmons DARK_CAVE_VIOLET_ENTRANCE
