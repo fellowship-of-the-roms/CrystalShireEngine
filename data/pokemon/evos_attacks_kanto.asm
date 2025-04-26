@@ -551,13 +551,13 @@ SandslashEvosAttacks:
 NidoranFEvosAttacks:
 	dbbw EVOLVE_LEVEL, 16, NIDORINA
 	db 0 ; no more evolutions
-	dbw 1, GROWL
 	dbw 1, SCRATCH
+	dbw 1, GROWL
 	dbw 8, TAIL_WHIP
 	dbw 12, DOUBLE_KICK
 	dbw 17, POISON_STING
 	dbw 20, BITE
-	; dbw 23, HELPING_HAND
+	dbw 23, POISON_FANG
 	dbw 30, FURY_SWIPES
 	dbw 38, FLATTER
 	dbw 47, CRUNCH
@@ -566,13 +566,13 @@ NidoranFEvosAttacks:
 NidorinaEvosAttacks:
 	dbww EVOLVE_ITEM, MOON_STONE, NIDOQUEEN
 	db 0 ; no more evolutions
-	dbw 1, GROWL
 	dbw 1, SCRATCH
+	dbw 1, GROWL
 	dbw 8, TAIL_WHIP
 	dbw 12, DOUBLE_KICK
 	dbw 18, POISON_STING
 	dbw 22, BITE
-	; dbw 26, HELPING_HAND
+	dbw 26, POISON_FANG
 	dbw 34, FURY_SWIPES
 	dbw 43, FLATTER
 	dbw 53, CRUNCH
@@ -581,10 +581,10 @@ NidorinaEvosAttacks:
 NidoqueenEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, DOUBLE_KICK
-	dbw 1, POISON_STING
-	dbw 1, SCRATCH
-	dbw 1, TAIL_WHIP
-	dbw 23, BODY_SLAM
+	dbw 1, POISON_FANG
+	dbw 1, BITE
+	dbw 1, BODY_SLAM
+	dbw 37, SUPERPOWER
 	db 0 ; no more level-up moves
 
 NidoranMEvosAttacks:
@@ -620,10 +620,10 @@ NidorinoEvosAttacks:
 NidokingEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, DOUBLE_KICK
-	dbw 1, FOCUS_ENERGY
+	dbw 1, POISON_FANG
 	dbw 1, PECK
-	dbw 1, POISON_STING
-	dbw 23, THRASH
+	dbw 1, THRASH
+	dbw 37, MEGAHORN
 	db 0 ; no more level-up moves
 
 ClefairyEvosAttacks:

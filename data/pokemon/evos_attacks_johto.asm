@@ -891,9 +891,9 @@ SteelixEvosAttacks:
 SnubbullEvosAttacks:
 	dbbw EVOLVE_LEVEL, 23, GRANBULL
 	db 0 ; no more evolutions
-	dbw 1, SCARY_FACE
 	dbw 1, TACKLE
-	dbw 4, TAIL_WHIP
+	dbw 1, TAIL_WHIP
+	dbw 4, SCARY_FACE
 	dbw 8, CHARM
 	dbw 13, BITE
 	dbw 19, LICK
@@ -905,9 +905,9 @@ SnubbullEvosAttacks:
 
 GranbullEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, SCARY_FACE
 	dbw 1, TACKLE
-	dbw 4, TAIL_WHIP
+	dbw 1, TAIL_WHIP
+	dbw 4, SCARY_FACE
 	dbw 8, CHARM
 	dbw 13, BITE
 	dbw 19, LICK

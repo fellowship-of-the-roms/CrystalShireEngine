@@ -126,7 +126,7 @@ ChuckGroup:
 	db 31 ;new mon
 	dw HARIYAMA
 	dw DYNAMICPUNCH, VITAL_THROW, ARM_THRUST, KNOCK_OFF
-	db 33 ;30
+	db 34 ;30
 	dw POLIWRATH
 	dw HYPNOSIS, MIND_READER, SURF, DYNAMICPUNCH
 	db -1 ; end
@@ -1172,10 +1172,9 @@ BirdKeeperGroup:
 
 LassGroup:
 	next_list_item ; LASS (1)
-	db "CARRIE@", TRAINERTYPE_MOVES
-	db 18
+	db "CARRIE@", TRAINERTYPE_NORMAL
+	db 19 ;18
 	dw SNUBBULL
-	dw SCARY_FACE, CHARM, BITE, LICK
 	db -1 ; end
 
 	next_list_item ; LASS (2)
@@ -1372,12 +1371,12 @@ CooltrainerMGroup:
 
 	next_list_item ; COOLTRAINERM (3)
 	db "PAUL@", TRAINERTYPE_NORMAL
-	db 39 ;34
+	db 37 ;34
+	dw DRATINI
+	db 38 ;34
 	dw DRATINI
 	db 39 ;34
-	dw DRATINI
-	db 39 ;34
-	dw DRATINI
+	dw DRAGONAIR
 	db -1 ; end
 
 	next_list_item ; COOLTRAINERM (4)
@@ -1391,7 +1390,7 @@ CooltrainerMGroup:
 	next_list_item ; COOLTRAINERM (5)
 	db "MIKE@", TRAINERTYPE_NORMAL
 	db 42 ;37
-	dw DRAGONAIR
+	dw VIBRAVA
 	db -1 ; end
 
 	next_list_item ; COOLTRAINERM (6) 2
@@ -2348,13 +2347,13 @@ GentlemanGroup:
 SkierGroup:
 	next_list_item ; SKIER (1)
 	db "ROXANNE@", TRAINERTYPE_NORMAL
-	db 30 ;28
+	db 32 ;28
 	dw JYNX
 	db -1 ; end
 
 	next_list_item ; SKIER (2)
 	db "CLARISSA@", TRAINERTYPE_NORMAL
-	db 31 ;28
+	db 33 ;28
 	dw DEWGONG
 	db -1 ; end
 
@@ -4060,10 +4059,10 @@ BlackbeltGroup:
 
 	next_list_item ; BLACKBELT_T (2)
 	db "YOSHI@", TRAINERTYPE_MOVES
-	db 27 ;new mon
-	dw MAKUHITA
-	dw ARM_THRUST, VITAL_THROW, FAKE_OUT, SAND_ATTACK
-	db 29 ;27
+	;db 27 ;new mon
+	;dw MAKUHITA
+	;dw ARM_THRUST, VITAL_THROW, FAKE_OUT, SAND_ATTACK
+	db 30 ;27
 	dw HITMONLEE
 	dw DOUBLE_KICK, MEDITATE, JUMP_KICK, FOCUS_ENERGY
 	db -1 ; end
@@ -4089,10 +4088,10 @@ BlackbeltGroup:
 
 	next_list_item ; BLACKBELT_T (4)
 	db "LAO@", TRAINERTYPE_MOVES
-	db 27 ;new mon
-	dw MAKUHITA
-	dw ARM_THRUST, VITAL_THROW, FAKE_OUT, SAND_ATTACK
-	db 29 ;27
+	;db 27 ;new mon
+	;dw MAKUHITA
+	;dw ARM_THRUST, VITAL_THROW, FAKE_OUT, SAND_ATTACK
+	db 30 ;27
 	dw HITMONCHAN
 	dw COMET_PUNCH, THUNDERPUNCH, ICE_PUNCH, FIRE_PUNCH
 	db -1 ; end
@@ -4100,8 +4099,8 @@ BlackbeltGroup:
 	next_list_item ; BLACKBELT_T (5)
 	db "NOB@", TRAINERTYPE_MOVES
 	db 27 ;25
-	dw MACHOKE
-	dw LEER, FOCUS_ENERGY, KARATE_CHOP, SEISMIC_TOSS
+	dw MAKUHITA
+	dw ARM_THRUST, VITAL_THROW, FAKE_OUT, SAND_ATTACK
 	db 27 ;25
 	dw MACHOKE
 	dw LEER, KARATE_CHOP, SEISMIC_TOSS, ROCK_SLIDE
@@ -4891,9 +4890,9 @@ MediumGroup:
 	db 18
 	dw DUSKULL
 	db 20
-	dw HAUNTER
+	dw LITWICK
 	db 20
-	dw HAUNTER
+	dw LITWICK
 	db -1 ; end
 
 	next_list_item ; MEDIUM (2)
@@ -4954,7 +4953,7 @@ BoarderGroup:
 	next_list_item ; BOARDER (2)
 	db "BRAD@", TRAINERTYPE_NORMAL
 	db 29 ;26
-	dw SWINUB
+	dw SEEL
 	db 29 ;26
 	dw SWINUB
 	db -1 ; end
@@ -4962,11 +4961,11 @@ BoarderGroup:
 	next_list_item ; BOARDER (3)
 	db "DOUGLAS@", TRAINERTYPE_NORMAL
 	db 28 ;24
-	dw SEEL
+	dw SHELLDER
 	db 30 ;25
 	dw CLOYSTER
 	db 28 ;24
-	dw SEEL
+	dw SHELLDER
 	db -1 ; end
 
 	end_list_items
