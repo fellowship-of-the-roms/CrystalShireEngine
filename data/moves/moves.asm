@@ -333,7 +333,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, FLYING,        100, 15,   0      ;FEATHERDANCE
 	move EFFECT_ALL_UP_HIT,         60, GHOST,         100,  5,  10      ;OMINOUS_WIND
 	move EFFECT_BURN_HIT,           85, FIRE,           90, 10,  10      ;BLAZE_KICK
-	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND								anim
+	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND								
 	move EFFECT_ROLLOUT,            30, ICE,            90, 20,   0      ;ICE_BALL
 	move EFFECT_NORMAL_HIT,        120, GRASS,          85, 10,   0      ;POWER_WHIP								anim
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;SLACK_OFF
