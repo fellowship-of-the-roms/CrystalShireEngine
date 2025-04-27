@@ -295,16 +295,16 @@ MovesGen3:
 	move EFFECT_BURN_HIT,          100, FIRE,           90, 10,  10      ;HEAT_WAVE
 	move EFFECT_HAIL,                0, ICE,           100, 10,   0      ;HAIL EFFECT_HAIL
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 15,   0      ;TORMENT
-	move EFFECT_NORMAL_HIT,        100, ROCK,           80,  5,   0      ;STONE_EDGE								anim
+	move EFFECT_NORMAL_HIT,        100, ROCK,           80,  5,   0      ;STONE_EDGE
 	move EFFECT_POISON,              0, FIRE,           75, 15,   0      ;WILL_O_WISP EFFECT_BURN
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 10,   0      ;MEMENTO EFFECT_MEMENTO
 	move EFFECT_NORMAL_HIT,         70, NORMAL,        100, 20,   0      ;FACADE EFFECT_FACADE
 	move EFFECT_NORMAL_HIT,        150, FIGHTING,      100, 20,   0      ;FOCUS_PUNCH EFFECT_FOCUS_PUNCH
 	move EFFECT_NORMAL_HIT,         60, NORMAL,        100, 10,   0      ;SMELLINGSALT EFFECT_SMELLINGSALT
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;NATURE_POWER EFFECT_NATURE_POWER
-	move EFFECT_SP_ATTACK_UP_HIT,   50, ELECTRIC,       90, 10,  70      ;CHARGE_BEAM								anim
+	move EFFECT_SP_ATTACK_UP_HIT,   50, ELECTRIC,       90, 10,  70      ;CHARGE_BEAM
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 20,   0      ;TAUNT EFFECT_TAUNT
-	move EFFECT_NORMAL_HIT,         70, DARK,	   	   100, 15,   0      ;NIGHT_SLASH								anim
+	move EFFECT_NORMAL_HIT,         70, DARK,	   	   100, 15,   0      ;NIGHT_SLASH
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 10,   0      ;ROLE_PLAY
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;WISH
 	move EFFECT_HYPER_BEAM,        150, ROCK,           90,  5,   0      ;ROCK_WRECKER								anim

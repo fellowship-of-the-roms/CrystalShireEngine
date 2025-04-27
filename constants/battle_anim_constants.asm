@@ -341,6 +341,15 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_SHOOTING_TRIANGLE       ; 132
 	const BATTLE_ANIM_OBJ_SPINNING_TRIANGLE       ; 133
 	const BATTLE_ANIM_OBJ_SHOOTING_MIST           ; 134
+	const BATTLE_ANIM_OBJ_STONE_EDGE_STILL        ; 135
+	const BATTLE_ANIM_OBJ_STONE_EDGE              ; 136
+	const BATTLE_ANIM_OBJ_CHARGE_BEAM             ; 137
+	const BATTLE_ANIM_OBJ_CUT_RIGHT               ; 138
+	const BATTLE_ANIM_OBJ_CUT_LEFT                ; 139
+	const BATTLE_ANIM_OBJ_ROCK_WRECKER_GROW       ; 13a
+	const BATTLE_ANIM_OBJ_ROCK_WRECKER_CHARGE     ; 13b
+	const BATTLE_ANIM_OBJ_ROCK_WRECKER            ; 13c
+
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
 ; DoBattleAnimFrame arguments (see engine/battle_anims/functions.asm)
@@ -437,6 +446,7 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_ROCK_TOMB                          ; 58
 	const BATTLE_ANIM_FUNC_AIR_CUTTER                         ; 59
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_OUT_SLOW_SHORT         ; 5a
+
 DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 
 ; BattleAnimFrameData indexes (see data/battle_anims/framesets.asm)
@@ -699,6 +709,11 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_BOUNCING_MUSHROOM       ; 0fe
 	const BATTLE_ANIM_FRAMESET_SPINNING_TRIANGLE       ; 0ff
 	const BATTLE_ANIM_FRAMESET_SPINNING_TRIANGLE_SLOW  ; 100
+	const BATTLE_ANIM_FRAMESET_STONE_EDGE              ; 101
+	const BATTLE_ANIM_FRAMESET_CHARGE_BEAM             ; 102
+	const BATTLE_ANIM_FRAMESET_CUT_RIGHT               ; 103
+	const BATTLE_ANIM_FRAMESET_CUT_LEFT                ; 104
+	const BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW       ; 105
 DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 
 ; BattleAnimOAMData indexes (see data/battle_anims/oam.asm)
@@ -958,6 +973,17 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_0FB
 	const BATTLE_ANIM_OAMSET_0FC
 	const BATTLE_ANIM_OAMSET_0FD
+	const BATTLE_ANIM_OAMSET_0FE
+	const BATTLE_ANIM_OAMSET_0FF
+	const BATTLE_ANIM_OAMSET_100
+	const BATTLE_ANIM_OAMSET_101
+	const BATTLE_ANIM_OAMSET_102
+	const BATTLE_ANIM_OAMSET_103
+	const BATTLE_ANIM_OAMSET_104
+	const BATTLE_ANIM_OAMSET_105
+	const BATTLE_ANIM_OAMSET_106
+	const BATTLE_ANIM_OAMSET_107
+	
 DEF NUM_BATTLE_ANIM_OAMSETS EQU const_value
 
 assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_BATTLE_OAM_CMD, \
@@ -1091,6 +1117,7 @@ DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 	const BATTLE_ANIM_GFX_EXPLOSION_SMALL  ; 41
 	const BATTLE_ANIM_GFX_MUSHROOM         ; 42
 	const BATTLE_ANIM_GFX_TRIANGLE         ; 43
+	const BATTLE_ANIM_GFX_HUGE_ROCK        ; 44
 DEF NUM_BATTLE_ANIM_GFX EQU const_value - 1
 
 ; battle_bg_effect struct members (see macros/ram.asm)

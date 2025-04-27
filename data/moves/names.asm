@@ -262,7 +262,7 @@ MoveNames::
 	li "HEAT WAVE"
 	li "HAIL"
 	li "TORMENT"
-	li "STONE_EDGE"
+	li "STONE EDGE"
 	li "WILL-O-WISP"
 	li "MEMENTO"
 	li "FACADE"

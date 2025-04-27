@@ -9,14 +9,14 @@ AnimObjGFX:
 	table_width 4
 	anim_obj_gfx  0, AnimObj00GFX
 	anim_obj_gfx 35, AnimObjHitGFX
-	anim_obj_gfx  6, AnimObjCutGFX
+	anim_obj_gfx  7, AnimObjCutGFX
 	anim_obj_gfx  6, AnimObjFireGFX
 	anim_obj_gfx 20, AnimObjWaterGFX
 	anim_obj_gfx 26, AnimObjLightningGFX
 	anim_obj_gfx 18, AnimObjPlantGFX
 	anim_obj_gfx 12, AnimObjSmokeGFX
 	anim_obj_gfx  9, AnimObjExplosionGFX
-	anim_obj_gfx 17, AnimObjRocksGFX
+	anim_obj_gfx 19, AnimObjRocksGFX
 	anim_obj_gfx 15, AnimObjIceGFX
 	anim_obj_gfx 10, AnimObjPokeBallGFX
 	anim_obj_gfx 19, AnimObjPoisonGFX
@@ -77,4 +77,5 @@ AnimObjGFX:
 	anim_obj_gfx  6, AnimObjExplosionSmallGFX
 	anim_obj_gfx 18, AnimObjMushroomGFX
 	anim_obj_gfx 12, AnimObjTriangleGFX
+	anim_obj_gfx 16, AnimObjHugeRockGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

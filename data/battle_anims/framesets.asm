@@ -259,6 +259,11 @@ BattleAnimFrameData:
 	dw .Frameset_BouncingMushroom      ; BATTLE_ANIM_FRAMESET_BOUNCING_MUSHROOM
 	dw .Frameset_SpinningTriangle      ; BATTLE_ANIM_FRAMESET_SHOOTING_TRIANGLE
 	dw .Frameset_SpinningTriangleSlow  ; BATTLE_ANIM_FRAMESET_SPINNING_TRIANGLE
+	dw .Frameset_StoneEdge             ; BATTLE_ANIM_FRAMESET_STONE_EDGE
+	dw .Frameset_ChargeBeam            ; BATTLE_ANIM_FRAMESET_CHARGE_BEAM
+	dw .Frameset_CutRight              ; BATTLE_ANIM_FRAMESET_CUT_RIGHT
+	dw .Frameset_CutLeft               ; BATTLE_ANIM_FRAMESET_CUT_LEFT
+	dw .Frameset_RockWreckerGrow       ; BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1682,3 +1687,52 @@ BattleAnimFrameData:
 	battleoamframe BATTLE_ANIM_OAMSET_0FC,  2, OAM_Y_FLIP
 	battleoamframe BATTLE_ANIM_OAMSET_0FD,  2, OAM_X_FLIP
 	battleoamrestart
+
+.Frameset_StoneEdge:
+	battleoamframe BATTLE_ANIM_OAMSET_0FE,  50
+	battleoamdelete
+
+.Frameset_ChargeBeam:
+	battleoamframe BATTLE_ANIM_OAMSET_0FF,  8
+	battleoamend
+
+.Frameset_CutRight:
+	battleoamframe BATTLE_ANIM_OAMSET_100,  1
+	battleoamframe BATTLE_ANIM_OAMSET_101,  1
+	battleoamframe BATTLE_ANIM_OAMSET_102,  1
+	battleoamframe BATTLE_ANIM_OAMSET_103,  1
+	battleoamframe BATTLE_ANIM_OAMSET_104,  1
+	battleoamframe BATTLE_ANIM_OAMSET_105,  1
+	battleoamframe BATTLE_ANIM_OAMSET_106,  2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2
+	battleoamdelete
+
+.Frameset_CutLeft:
+	battleoamframe BATTLE_ANIM_OAMSET_100,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_101,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_102,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_103,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_104,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_105,  1, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_106,  2, OAM_X_FLIP
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2, OAM_X_FLIP
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2, OAM_X_FLIP
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2, OAM_X_FLIP
+	battleoamwait 2
+	battleoamframe BATTLE_ANIM_OAMSET_107,  2, OAM_X_FLIP
+	battleoamdelete
+
+.Frameset_RockWreckerGrow:
+	battleoamwait 20
+	battleoamframe BATTLE_ANIM_OAMSET_00F, 30
+	battleoamframe BATTLE_ANIM_OAMSET_01B, 30
+	battleoamframe BATTLE_ANIM_OAMSET_01C, 43
+	battleoamdelete
