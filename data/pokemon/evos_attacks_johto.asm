@@ -881,16 +881,16 @@ GligarEvosAttacks:
 
 SteelixEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, TACKLE
+	dbw 1, SLAM
 	dbw 1, SCREECH
 	dbw 9, BIND
 	dbw 13, ROCK_THROW
 	dbw 21, HARDEN
 	dbw 25, RAGE
 	dbw 33, SANDSTORM
-	dbw 37, SLAM
+	dbw 37, CRUNCH
 	dbw 45, IRON_TAIL
-	dbw 49, CRUNCH
+	dbw 49, STONE_EDGE
 	dbw 57, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
@@ -1412,12 +1412,12 @@ LarvitarEvosAttacks:
 	dbbw EVOLVE_LEVEL, 30, PUPITAR
 	db 0 ; no more evolutions
 	dbw 1, BITE
-	dbw 1, LEER
+	dbw 1, SCARY_FACE
 	dbw 8, SANDSTORM
 	dbw 15, SCREECH
 	dbw 22, ROCK_SLIDE
 	dbw 29, THRASH
-	dbw 36, SCARY_FACE
+	dbw 36, STONE_EDGE
 	dbw 43, CRUNCH
 	dbw 50, EARTHQUAKE
 	dbw 57, HYPER_BEAM
@@ -1427,14 +1427,14 @@ PupitarEvosAttacks:
 	dbbw EVOLVE_LEVEL, 55, TYRANITAR
 	db 0 ; no more evolutions
 	dbw 1, BITE
-	dbw 1, LEER
+	dbw 1, SCARY_FACE
 	dbw 1, SANDSTORM
 	dbw 1, SCREECH
 	dbw 8, SANDSTORM
 	dbw 15, SCREECH
 	dbw 22, ROCK_SLIDE
 	dbw 29, THRASH
-	dbw 38, SCARY_FACE
+	dbw 38, STONE_EDGE
 	dbw 47, CRUNCH
 	dbw 56, EARTHQUAKE
 	dbw 65, HYPER_BEAM
@@ -1443,14 +1443,14 @@ PupitarEvosAttacks:
 TyranitarEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, BITE
-	dbw 1, LEER
+	dbw 1, SCARY_FACE
 	dbw 1, SANDSTORM
 	dbw 1, SCREECH
 	dbw 8, SANDSTORM
 	dbw 15, SCREECH
 	dbw 22, ROCK_SLIDE
 	dbw 29, THRASH
-	dbw 38, SCARY_FACE
+	dbw 38, STONE_EDGE
 	dbw 47, CRUNCH
 	dbw 61, EARTHQUAKE
 	dbw 75, HYPER_BEAM

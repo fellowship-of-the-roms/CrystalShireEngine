@@ -1186,52 +1186,53 @@ TentacruelEvosAttacks:
 GeodudeEvosAttacks:
 	dbbw EVOLVE_LEVEL, 25, GRAVELER
 	db 0 ; no more evolutions
-	dbw 1, DEFENSE_CURL
 	dbw 1, TACKLE
+	dbw 1, DEFENSE_CURL
 	dbw 6, MUD_SLAP
-	dbw 11, ROCK_THROW
+	dbw 8, ROCK_THROW
+	dbw 11, ROCK_BLAST
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
 	dbw 26, ROLLOUT
-	dbw 31, ROCK_BLAST
+	dbw 31, ROCK_SLIDE
 	dbw 36, EARTHQUAKE
 	dbw 41, EXPLOSION
-	dbw 46, DOUBLE_EDGE
+	dbw 46, STONE_EDGE
 	db 0 ; no more level-up moves
 
 GravelerEvosAttacks:
 	dbbw EVOLVE_LEVEL, 35, GRAVELER
 	db 0 ; no more evolutions
+	dbw 1, TACKLE
 	dbw 1, DEFENSE_CURL
 	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
-	dbw 1, TACKLE
 	dbw 6, MUD_SLAP
-	dbw 11, ROCK_THROW
+	dbw 11, ROCK_BLAST
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
 	dbw 29, ROLLOUT
-	dbw 37, ROCK_BLAST
+	dbw 37, ROCK_SLIDE
 	dbw 45, EARTHQUAKE
 	dbw 53, EXPLOSION
-	dbw 62, DOUBLE_EDGE
+	dbw 62, STONE_EDGE
 	db 0 ; no more level-up moves
 
 GolemEvosAttacks:
 	db 0 ; no more evolutions
+	dbw 1, TACKLE
 	dbw 1, DEFENSE_CURL
 	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
-	dbw 1, TACKLE
 	dbw 6, MUD_SLAP
-	dbw 11, ROCK_THROW
+	dbw 11, ROCK_BLAST
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
 	dbw 29, ROLLOUT
-	dbw 37, ROCK_BLAST
+	dbw 37, ROCK_SLIDE
 	dbw 45, EARTHQUAKE
 	dbw 53, EXPLOSION
-	dbw 62, DOUBLE_EDGE
+	dbw 62, STONE_EDGE
 	db 0 ; no more level-up moves
 
 PonytaEvosAttacks:
@@ -1506,7 +1507,7 @@ GengarEvosAttacks:
 OnixEvosAttacks:
 	dbww EVOLVE_ITEM, METAL_COAT, STEELIX
 	db 0 ; no more evolutions
-	dbw 1, TACKLE
+	dbw 1, SAND_TOMB
 	dbw 1, SCREECH
 	dbw 9, BIND
 	dbw 13, ROCK_THROW
@@ -1515,7 +1516,7 @@ OnixEvosAttacks:
 	dbw 33, SANDSTORM
 	dbw 37, SLAM
 	dbw 45, IRON_TAIL
-	dbw 49, SAND_TOMB
+	dbw 49, STONE_EDGE
 	dbw 57, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
@@ -1756,12 +1757,12 @@ RhyhornEvosAttacks:
 	dbbw EVOLVE_LEVEL, 42, RHYDON
 	db 0 ; no more evolutions
 	dbw 1, HORN_ATTACK
-	dbw 1, TAIL_WHIP
+	dbw 1, SCARY_FACE
 	dbw 10, STOMP
 	dbw 15, FURY_ATTACK
-	dbw 24, SCARY_FACE
-	dbw 29, ROCK_BLAST
-	dbw 38, HORN_DRILL
+	dbw 24, ROCK_BLAST
+	dbw 29, HORN_DRILL
+	dbw 38, STONE_EDGE
 	dbw 43, TAKE_DOWN
 	dbw 52, EARTHQUAKE
 	dbw 57, MEGAHORN
@@ -1772,12 +1773,12 @@ RhydonEvosAttacks:
 	dbw 1, FURY_ATTACK
 	dbw 1, HORN_ATTACK
 	dbw 1, STOMP
-	dbw 1, TAIL_WHIP
+	dbw 1, SCARY_FACE
 	dbw 10, STOMP
 	dbw 15, FURY_ATTACK
-	dbw 24, SCARY_FACE
-	dbw 29, ROCK_BLAST
-	dbw 38, HORN_DRILL
+	dbw 24, ROCK_BLAST
+	dbw 29, HORN_DRILL
+	dbw 38, STONE_EDGE
 	dbw 42, ROCK_WRECKER
 	dbw 46, TAKE_DOWN
 	dbw 58, EARTHQUAKE

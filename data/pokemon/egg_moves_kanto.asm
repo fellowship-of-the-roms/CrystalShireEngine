@@ -403,6 +403,7 @@ TentacoolEggMoves:
 
 GeodudeEggMoves:
 	dw BLOCK
+	dw DOUBLE_EDGE
 	dw MEGA_PUNCH
 	dw ROCK_SLIDE
 	dw -1 ; end
