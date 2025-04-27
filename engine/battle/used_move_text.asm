@@ -295,10 +295,10 @@ MoveTable:
 ;	dw LUSTER_PURGE ; 125
 ;	dw MIST_BALL    ; 126
 ;	dw FEATHERDANCE ; 127
-	dw OMINOUS_WIND ; 128
+;	dw OMINOUS_WIND ; 128
 ;	dw BLAZE_KICK   ; 129
-	dw BURNING_SAND ; 12a
-	dw ICE_BALL     ; 12b
+;	dw BURNING_SAND ; 12a
+;	dw ICE_BALL     ; 12b
 	dw POWER_WHIP   ; 12c
 	dw SLACK_OFF    ; 12d
 	dw HYPER_VOICE  ; 12e
@@ -357,7 +357,7 @@ ENDC
 
 DisplayUsedMoveText:
 IF DEF(_DEBUG)
-	;jp .no_animate_all_moves ; comment this line to animate all moves
+	jp .no_animate_all_moves ; comment this line to animate all moves
 	ld de, MoveTable
 .loop
 	ld a, BATTLE_VARS_MOVE
