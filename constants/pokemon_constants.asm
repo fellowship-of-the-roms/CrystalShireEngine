@@ -273,15 +273,15 @@ DEF JOHTO_POKEMON EQU const_value
 	const HO_OH      ; fa
 	const CELEBI     ; fb
 DEF HOENN_POKEMON EQU const_value
-	const TREECKO    ; fc  turtwig
-	const GROVYLE    ; fd  grotle
-	const SCEPTILE   ; fe  torterra
-	const TORCHIC    ; ff  chimchar
-	const COMBUSKEN  ; 100 monferno
-	const BLAZIKEN   ; 101 infernape
-	const MUDKIP     ; 102 piplup
-	const MARSHTOMP  ; 103 prinplup
-	const SWAMPERT   ; 104 empoleon
+	const TREECKO    ; fc 
+	const GROVYLE    ; fd  
+	const SCEPTILE   ; fe  
+	const TORCHIC    ; ff 
+	const COMBUSKEN  ; 100 
+	const BLAZIKEN   ; 101 
+	const MUDKIP     ; 102
+	const MARSHTOMP  ; 103 
+	const SWAMPERT   ; 104 
 	const EUXINOS    ; 105
 	const WEAVILE    ; 106
 	const HONCHKROW  ; 107

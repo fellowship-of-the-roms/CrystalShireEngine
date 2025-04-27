@@ -1852,129 +1852,167 @@ AbomasnowEvosAttacks:
 	db 0 ; no more level-up moves
 
 TurtwigEvosAttacks:
-	dbbw EVOLVE_LEVEL, 32, GROTLE
+	dbbw EVOLVE_LEVEL, 18, GROTLE
 	db 0 ; no more evolutions
-	dbw 1, GROWL
-	dbw 1, POWDER_SNOW
-	dbw 1, WATER_GUN
-	dbw 7, ENCORE
-	dbw 13, ICE_BALL
-	dbw 19, BODY_SLAM
-	dbw 25, AURORA_BEAM
-	dbw 31, HAIL
-	dbw 37, REST
-	dbw 37, SNORE
-	dbw 43, BLIZZARD
-	dbw 49, SHEER_COLD
+	dbw 1, TACKLE
+	dbw 1, WITHDRAW
+	dbw 6, ABSORB
+	dbw 11, RAZOR_LEAF
+	dbw 17, CURSE
+	dbw 21, BITE
+	dbw 26, LEECH_SEED
+	dbw 31, SYNTHESIS
+	dbw 36, CRUNCH
+	dbw 41, GIGA_DRAIN
+	dbw 46, ROCK_SLIDE
 	db 0 ; no more level-up moves
 
 GrotleEvosAttacks:
-	dbbw EVOLVE_LEVEL, 44, EMPOLEON
+	dbbw EVOLVE_LEVEL, 32, TORTERRA
 	db 0 ; no more evolutions
-	dbw 1, ENCORE
-	dbw 1, GROWL
-	dbw 1, POWDER_SNOW
-	dbw 1, WATER_GUN
-	dbw 7, ENCORE
-	dbw 13, ICE_BALL
-	dbw 19, BODY_SLAM
-	dbw 25, AURORA_BEAM
-	dbw 31, HAIL
-	dbw 39, REST
-	dbw 39, SNORE
-	dbw 47, BLIZZARD
-	dbw 55, SHEER_COLD
+	dbw 1, ABSORB
+	dbw 1, WITHDRAW
+	dbw 1, TACKLE
+	dbw 6, WITHDRAW
+	dbw 11, ABSORB
+	dbw 16, RAZOR_LEAF
+	dbw 17, CURSE
+	dbw 23, BITE
+	dbw 29, MEGA_DRAIN
+	dbw 35, SYNTHESIS
+	dbw 41, CRUNCH
+	dbw 47, GIGA_DRAIN
+	dbw 53, ROCK_SLIDE
 	db 0 ; no more level-up moves
 
 TorterraEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, ENCORE
-	dbw 1, GROWL
-	dbw 1, POWDER_SNOW
-	dbw 1, WATER_GUN
-	dbw 7, ENCORE
-	dbw 13, ICE_BALL
-	dbw 19, BODY_SLAM
-	dbw 25, AURORA_BEAM
-	dbw 31, HAIL
-	dbw 39, REST
-	dbw 39, SNORE
-	dbw 50, BLIZZARD
-	dbw 61, SHEER_COLD
+	dbw 1, ABSORB
+	dbw 1, WITHDRAW
+	dbw 1, TACKLE
+	dbw 6, WITHDRAW
+	dbw 11, ABSORB
+	dbw 16, RAZOR_LEAF
+	dbw 17, CURSE
+	dbw 23, BITE
+	dbw 29, MEGA_DRAIN
+	dbw 32, EARTHQUAKE
+	dbw 35, SYNTHESIS
+	dbw 43, CRUNCH
+	dbw 51, GIGA_DRAIN
+	dbw 59, STONE_EDGE
 	db 0 ; no more level-up moves
 
 ChimcharEvosAttacks:
-	; dbww EVOLVE_TRADE, DEEP_SEA_TOOTH, HUNTAIL
-	; dbww EVOLVE_TRADE, DEEP_SEA_SCALE, GOREBYSS
+	dbbw EVOLVE_LEVEL, 14, MONFERNO
 	db 0 ; no more evolutions
-	dbw 1, CLAMP
-	dbw 1, IRON_DEFENSE
-	dbw 1, WATER_GUN
-	dbw 1, WHIRLPOOL
+	dbw 1, SCRATCH
+	dbw 1, LEER
+	dbw 7, TAUNT
+	dbw 10, EMBER
+	dbw 16, FURY_SWIPES
+	dbw 19, FLAME_WHEEL
+	dbw 25, FIRE_SPIN
+	dbw 28, FACADE
+	dbw 34, FAINT_ATTACK
+	dbw 37, CALM_MIND
+	dbw 43, FIRE_SPIN
 	db 0 ; no more level-up moves
 
 MonfernoEvosAttacks:
+	dbbw EVOLVE_LEVEL, 36, INFERNAPE
 	db 0 ; no more evolutions
-	dbw 1, WHIRLPOOL
-	dbw 8, BITE
-	dbw 15, SCREECH
-	dbw 22, WATER_PULSE
-	dbw 29, SCARY_FACE
-	dbw 36, CRUNCH
-	dbw 43, BATON_PASS
-	dbw 50, HYDRO_PUMP
+	dbw 1, EMBER
+	dbw 1, TAUNT
+	dbw 1, LEER
+	dbw 1, SCRATCH
+	dbw 7, TAUNT
+	dbw 13, EMBER
+	dbw 16, MACH_PUNCH
+	dbw 17, FURY_SWIPES
+	dbw 21, FLAME_WHEEL
+	dbw 28, FACADE
+	dbw 32, FAINT_ATTACK
+	dbw 39, FIRE_SPIN
+	dbw 43, CALM_MIND
+	dbw 50, OVERHEAT
 	db 0 ; no more level-up moves
 
 InfernapeEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, WHIRLPOOL
-	dbw 8, CONFUSION
-	dbw 15, AGILITY
-	dbw 22, WATER_PULSE
-	dbw 29, AMNESIA
-	dbw 36, PSYCHIC_M
-	dbw 43, BATON_PASS
-	dbw 50, HYDRO_PUMP
+	dbw 1, EMBER
+	dbw 1, LEER
+	dbw 1, SCRATCH
+	dbw 7, TAUNT
+	dbw 13, EMBER
+	dbw 16, MACH_PUNCH
+	dbw 17, FURY_SWIPES
+	dbw 21, FLAME_WHEEL
+	dbw 28, FACADE
+	dbw 32, FAINT_ATTACK
+	dbw 36, LOW_KICK
+	dbw 42, FIRE_SPIN
+	dbw 49, CALM_MIND
+	dbw 59, OVERHEAT
 	db 0 ; no more level-up moves
 
 PiplupEvosAttacks:
-	; dbww EVOLVE_TRADE, DEEP_SEA_TOOTH, HUNTAIL
-	; dbww EVOLVE_TRADE, DEEP_SEA_SCALE, GOREBYSS
+	dbbw EVOLVE_LEVEL, 16, PRINPLUP
 	db 0 ; no more evolutions
-	dbw 1, CLAMP
-	dbw 1, IRON_DEFENSE
-	dbw 1, WATER_GUN
-	dbw 1, WHIRLPOOL
+	dbw 1, POUND
+	dbw 1, GROWL
+	dbw 6, BUBBLE
+	dbw 10, METAL_SOUND
+	dbw 15, PECK
+	dbw 19, BIDE
+	dbw 24, BUBBLEBEAM
+	dbw 28, FURY_ATTACK
+	dbw 33, SWAGGER
+	dbw 37, MIST
+	dbw 42, DRILL_PECK
+	dbw 46, HYDRO_PUMP
 	db 0 ; no more level-up moves
 	
 PrinplupEvosAttacks:
+	dbbw EVOLVE_LEVEL, 36, EMPOLEON
 	db 0 ; no more evolutions
-	dbw 1, WHIRLPOOL
-	dbw 8, BITE
-	dbw 15, SCREECH
-	dbw 22, WATER_PULSE
-	dbw 29, SCARY_FACE
-	dbw 36, CRUNCH
-	dbw 43, BATON_PASS
-	dbw 50, HYDRO_PUMP
+	dbw 1, POUND
+	dbw 1, GROWL
+	dbw 6, BUBBLE
+	dbw 10, METAL_SOUND
+	dbw 15, PECK
+	dbw 16, METAL_CLAW
+	dbw 19, BIDE
+	dbw 24, BUBBLEBEAM
+	dbw 28, FURY_ATTACK
+	dbw 33, SWAGGER
+	dbw 37, MIST
+	dbw 42, DRILL_PECK
+	dbw 46, HYDRO_PUMP
 	db 0 ; no more level-up moves
 
 EmpoleonEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, WHIRLPOOL
-	dbw 8, CONFUSION
-	dbw 15, AGILITY
-	dbw 22, WATER_PULSE
-	dbw 29, AMNESIA
-	dbw 36, PSYCHIC_M
-	dbw 43, BATON_PASS
-	dbw 50, HYDRO_PUMP
+	dbw 1, POUND
+	dbw 1, GROWL
+	dbw 1, BUBBLE
+	dbw 6, MUD_SLAP
+	dbw 10, SWORDS_DANCE
+	dbw 15, PECK
+	dbw 16, METAL_CLAW
+	dbw 20, BUBBLEBEAM
+	dbw 25, SWAGGER
+	dbw 31, MIRROR_SHOT
+	dbw 39, DIVE
+	dbw 46, MIST
+	dbw 52, DRILL_PECK
+	dbw 61, HYDRO_PUMP
 	db 0 ; no more level-up moves
 
 RelicanthEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, HARDEN
 	dbw 1, TACKLE
+	dbw 1, HARDEN
 	dbw 8, WATER_GUN
 	dbw 15, ROCK_TOMB
 	dbw 22, YAWN

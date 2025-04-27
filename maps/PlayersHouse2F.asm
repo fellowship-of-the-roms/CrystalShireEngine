@@ -155,14 +155,14 @@ if DEF(_DEBUG)
 	; ; hm slaves
 	givepoke TYNAMO, PLAIN_FORM, 5;, LEFTOVERS
 	givepoke EEVEE, PLAIN_FORM, 99, LEAF_STONE
-	givepokemove FLY,        wPartyMon2, 0
-	; givepokemove SURF,       wPartyMon2, 1
-	; givepokemove STRENGTH,   wPartyMon2, 2
-	; givepokemove CUT,        wPartyMon2, 3
-	; givepokemove FLASH,      wPartyMon3, 0
-	; givepokemove ROCK_SMASH, wPartyMon3, 1
-	; givepokemove HEADBUTT,   wPartyMon3, 2
-	; givepokemove WATERFALL,  wPartyMon3, 3
+	givepokemove BURNING_SAND,        wPartyMon2, 0
+	givepokemove MIRROR_SHOT,       wPartyMon2, 1
+	givepokemove GUNK_SHOT,   wPartyMon2, 2
+	givepokemove OMINOUS_WIND,        wPartyMon2, 3
+	givepokemove NIGHT_SLASH,      wPartyMon3, 0
+	givepokemove STONE_EDGE, wPartyMon3, 1
+	givepokemove CHARGE_BEAM,   wPartyMon3, 2
+	givepokemove NIGHT_SLASH,  wPartyMon3, 3
 	; misc pokemon for testing
 	givepoke EEVEE, PLAIN_FORM, 75
 	;givepokemove QUICK_ATTACK,  wPartyMon1, 0
