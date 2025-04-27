@@ -397,6 +397,7 @@ TentacoolEggMoves:
 	dw HAZE
 	dw MIRROR_COAT
 	dw RAPID_SPIN
+	dw GUNK_SHOT
 	dw SAFEGUARD
 	dw -1 ; end
 
@@ -671,6 +672,7 @@ KabutoEggMoves:
 	dw CONFUSE_RAY
 	dw DIG
 	dw FLAIL
+	dw ENDURE
 	dw KNOCK_OFF
 	dw RAPID_SPIN
 	dw -1 ; end

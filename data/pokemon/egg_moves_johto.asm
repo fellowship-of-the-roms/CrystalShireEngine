@@ -152,6 +152,7 @@ HoothootEggMoves:
 	dw MIRROR_MOVE
 	dw SKY_ATTACK
 	dw SUPERSONIC
+	dw MYSTICALFIRE
 	dw WHIRLWIND
 	dw WING_ATTACK
 	dw -1 ; end
@@ -289,6 +290,7 @@ SunkernEggMoves:
 YanmaEggMoves:
 	dw LEECH_LIFE
 	dw REVERSAL
+	dw OMINOUS_WIND
 	dw SILVER_WIND
 	dw WHIRLWIND
 	dw -1 ; end
@@ -309,6 +311,8 @@ MurkrowEggMoves:
 	dw FEATHERDANCE
 	dw MIRROR_MOVE
 	dw PERISH_SONG
+	dw HEAT_WAVE
+	dw OMINOUS_WIND
 	dw SKY_ATTACK
 	dw WHIRLWIND
 	dw WING_ATTACK
@@ -356,6 +360,7 @@ GligarEggMoves:
 	dw METAL_CLAW
 	dw RAZOR_WIND
 	dw SAND_TOMB
+	dw NIGHT_SLASH
 	dw WING_ATTACK
 	dw -1 ; end
 
@@ -395,6 +400,7 @@ SneaselEggMoves:
 	dw CRUSH_CLAW
 	dw FAKE_OUT
 	dw FORESIGHT
+	dw FAINT_ATTACK
 	dw REFLECT
 	dw SPITE
 	dw -1 ; end
@@ -405,6 +411,7 @@ TeddiursaEggMoves:
 	dw FAKE_TEARS
 	dw METAL_CLAW
 	dw SEISMIC_TOSS
+	dw NIGHT_SLASH
 	dw SLEEP_TALK
 	dw TAKE_DOWN
 	dw YAWN
@@ -451,6 +458,7 @@ DelibirdEggMoves:
 	dw AURORA_BEAM
 	dw FUTURE_SIGHT
 	dw ICE_BALL
+	dw OMINOUS_WIND
 	dw QUICK_ATTACK
 	dw RAPID_SPIN
 	dw SPLASH
@@ -469,6 +477,7 @@ SkarmoryEggMoves:
 	dw CURSE
 	dw DRILL_PECK
 	dw PURSUIT
+	dw MIRROR_SHOT
 	dw SKY_ATTACK
 	dw WHIRLWIND
 	dw -1 ; end

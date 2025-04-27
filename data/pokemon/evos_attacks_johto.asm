@@ -288,10 +288,11 @@ NoctowlEvosAttacks:
 	dbw 6, FORESIGHT
 	dbw 11, PECK
 	dbw 16, HYPNOSIS
+	dbw 20, CONFUSION
 	dbw 25, REFLECT
 	dbw 33, TAKE_DOWN
-	dbw 41, CONFUSION
-	dbw 57, DREAM_EATER
+	dbw 41, DREAM_EATER
+	dbw 57, OMINOUS_WIND
 	db 0 ; no more level-up moves
 
 LedybaEvosAttacks:
@@ -441,7 +442,7 @@ TogepiEvosAttacks:
 	dbw 11, SWEET_KISS
 	dbw 16, YAWN
 	dbw 21, ENCORE
-	; dbw 26, FOLLOW_ME
+	dbw 26, RETURN
 	dbw 31, WISH
 	dbw 36, SAFEGUARD
 	dbw 41, DOUBLE_EDGE
@@ -455,20 +456,20 @@ TogeticEvosAttacks:
 	dbw 11, SWEET_KISS
 	dbw 16, YAWN
 	dbw 21, ENCORE
-	; dbw 26, FOLLOW_ME
+	dbw 26, RETURN
 	dbw 31, WISH
 	dbw 36, SAFEGUARD
-	dbw 41, DOUBLE_EDGE
+	dbw 41, OMINOUS_WIND
 	db 0 ; no more level-up moves
 
 NatuEvosAttacks:
 	dbbw EVOLVE_LEVEL, 25, XATU
 	db 0 ; no more evolutions
 	dbw 1, PECK
-	dbw 1, LEER
+	dbw 1, TELEPORT
 	dbw 10, NIGHT_SHADE
-	dbw 20, TELEPORT
-	dbw 30, FUTURE_SIGHT
+	dbw 20, FUTURE_SIGHT
+	dbw 30, MYSTICALFIRE
 	dbw 30, WISH
 	dbw 40, CONFUSE_RAY
 	dbw 50, PSYCHIC_M
@@ -477,13 +478,14 @@ NatuEvosAttacks:
 XatuEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, PECK
-	dbw 1, LEER
+	dbw 1, TELEPORT
 	dbw 10, NIGHT_SHADE
-	dbw 20, TELEPORT
-	dbw 35, FUTURE_SIGHT
+	dbw 20, FUTURE_SIGHT
+	dbw 35, MYSTICALFIRE
 	dbw 35, WISH
 	dbw 50, CONFUSE_RAY
 	dbw 65, PSYCHIC_M
+	dbw 70, OMINOUS_WIND
 	db 0 ; no more level-up moves
 
 MareepEvosAttacks:
@@ -729,7 +731,7 @@ EspeonEvosAttacks:
 	dbw 8, SAND_ATTACK
 	dbw 16, CONFUSION
 	dbw 23, QUICK_ATTACK
-	dbw 30, SWIFT
+	dbw 30, MYSTICALFIRE
 	dbw 36, PSYBEAM
 	dbw 42, PSYCH_UP
 	dbw 47, PSYCHIC_M
@@ -761,6 +763,7 @@ MurkrowEvosAttacks:
 	dbw 35, FAINT_ATTACK
 	dbw 40, TAUNT
 	dbw 48, MEAN_LOOK
+	dbw 57, NIGHT_SLASH
 	db 0 ; no more level-up moves
 
 SlowkingEvosAttacks:
@@ -786,9 +789,10 @@ MisdreavusEvosAttacks:
 	dbw 17, CONFUSE_RAY
 	dbw 23, MEAN_LOOK
 	dbw 30, PSYBEAM
-	dbw 37, PAIN_SPLIT
+	dbw 37, MYSTICALFIRE
 	dbw 45, PERISH_SONG
 	dbw 53, GRUDGE
+	dbw 61, PAIN_SPLIT
 	db 0 ; no more level-up moves
 
 UnownEvosAttacks:
@@ -821,29 +825,30 @@ GirafarigEvosAttacks:
 PinecoEvosAttacks:
 	dbbw EVOLVE_LEVEL, 31, FORRETRESS
 	db 0 ; no more evolutions
-	dbw 1, TACKLE
+	dbw 1, BIDE
 	dbw 1, PROTECT
 	dbw 8, SELFDESTRUCT
 	dbw 15, TAKE_DOWN
 	dbw 22, RAPID_SPIN
-	dbw 29, BIDE
+	dbw 29, SPIKES
 	dbw 36, EXPLOSION
-	dbw 43, SPIKES
-	dbw 50, DOUBLE_EDGE
+	dbw 43, DOUBLE_EDGE
+	dbw 50, ZAP_CANNON
 	db 0 ; no more level-up moves
 
 ForretressEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, TACKLE
+	dbw 1, BIDE
 	dbw 1, PROTECT
 	dbw 1, SELFDESTRUCT
 	dbw 8, SELFDESTRUCT
 	dbw 15, TAKE_DOWN
 	dbw 22, RAPID_SPIN
-	dbw 29, BIDE
+	dbw 29, SPIKES
+	dbw 31, MIRROR_SHOT
 	dbw 39, EXPLOSION
-	dbw 49, SPIKES
-	dbw 59, DOUBLE_EDGE
+	dbw 49, DOUBLE_EDGE
+	dbw 59, ZAP_CANNON
 	db 0 ; no more level-up moves
 
 DunsparceEvosAttacks:
@@ -864,12 +869,13 @@ GligarEvosAttacks:
 	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, GLISCOR
 	db 0 ; no more evolutions
 	dbw 1, POISON_STING
+	dbw 1, SCREECH
 	dbw 6, SAND_ATTACK
 	dbw 13, HARDEN
 	dbw 20, QUICK_ATTACK
 	dbw 28, FAINT_ATTACK
 	dbw 36, SLASH
-	dbw 44, SCREECH
+	dbw 44, X_SCISSOR
 	dbw 52, GUILLOTINE
 	db 0 ; no more level-up moves
 
@@ -928,6 +934,7 @@ QwilfishEvosAttacks:
 	dbw 28, PIN_MISSILE
 	dbw 37, TAKE_DOWN
 	dbw 46, HYDRO_PUMP
+	dbw 54, GUNK_SHOT
 	db 0 ; no more level-up moves
 
 ScizorEvosAttacks:
@@ -942,7 +949,7 @@ ScizorEvosAttacks:
 	dbw 31, SLASH
 	dbw 36, SWORDS_DANCE
 	dbw 41, DOUBLE_TEAM
-	dbw 46, FURY_CUTTER
+	dbw 46, X_SCISSOR
 	db 0 ; no more level-up moves
 
 ShuckleEvosAttacks:
@@ -978,7 +985,7 @@ SneaselEvosAttacks:
 	dbw 1, TAUNT
 	dbw 8, QUICK_ATTACK
 	dbw 15, SCREECH
-	dbw 22, FAINT_ATTACK
+	dbw 22, NIGHT_SLASH
 	dbw 29, FURY_SWIPES
 	dbw 36, AGILITY
 	dbw 43, ICY_WIND
@@ -1232,7 +1239,7 @@ Porygon2EvosAttacks:
 	dbw 24, DEFENSE_CURL
 	dbw 32, LOCK_ON
 	dbw 36, TRI_ATTACK
-	dbw 44, RECYCLE
+	dbw 44, CHARGE_BEAM
 	dbw 48, ZAP_CANNON
 	db 0 ; no more level-up moves
 
@@ -1364,7 +1371,7 @@ RaikouEvosAttacks:
 	dbw 1, BITE
 	dbw 1, LEER
 	dbw 11, THUNDERSHOCK
-	dbw 21, ROAR
+	dbw 21, CHARGE_BEAM
 	dbw 31, QUICK_ATTACK
 	dbw 41, SPARK
 	dbw 51, REFLECT
@@ -1378,7 +1385,7 @@ EnteiEvosAttacks:
 	dbw 1, BITE
 	dbw 1, LEER
 	dbw 11, EMBER
-	dbw 21, ROAR
+	dbw 21, BURNING_SAND
 	dbw 31, FIRE_SPIN
 	dbw 41, STOMP
 	dbw 51, FLAMETHROWER

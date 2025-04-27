@@ -321,7 +321,7 @@ WeavileEvosAttacks:
 	dbw 1, TAUNT
 	dbw 9, QUICK_ATTACK
 	dbw 16, SCREECH
-	dbw 23, FAINT_ATTACK
+	dbw 23, NIGHT_SLASH
 	dbw 30, FURY_SWIPES
 	dbw 37, AGILITY
 	dbw 44, ICY_WIND
@@ -340,18 +340,19 @@ HonchkrowEvosAttacks:
 	dbw 35, FAINT_ATTACK
 	dbw 40, TAUNT
 	dbw 48, MEAN_LOOK
-	;dbw 56, NIGHT_SLASH
+	dbw 56, NIGHT_SLASH
 	db 0 ; no more level-up moves
 
 GliscorEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, POISON_STING
+	dbw 1, SCREECH
 	dbw 7, SAND_ATTACK
 	dbw 14, HARDEN
 	dbw 21, QUICK_ATTACK
 	dbw 29, FAINT_ATTACK
 	dbw 37, SLASH
-	dbw 45, SCREECH
+	dbw 45, X_SCISSOR
 	dbw 53, GUILLOTINE
 	db 0 ; no more level-up moves
 
@@ -744,6 +745,7 @@ NinjaskEvosAttacks:
 	dbw 31, SLASH
 	dbw 38, AGILITY
 	dbw 45, BATON_PASS
+	dbw 51, X_SCISSOR
 	db 0 ; no more level-up moves
 
 ShedinjaEvosAttacks:
@@ -754,10 +756,12 @@ ShedinjaEvosAttacks:
 	dbw 9, SAND_ATTACK
 	dbw 14, FURY_SWIPES
 	dbw 19, MIND_READER
+	dbw 21, OMINOUS_WIND
 	dbw 25, SPITE
 	dbw 31, CONFUSE_RAY
 	dbw 38, SHADOW_BALL
 	dbw 45, GRUDGE
+	dbw 51, MYSTICALFIRE
 	db 0 ; no more level-up moves
 
 TinkatinkEvosAttacks:
@@ -910,7 +914,7 @@ SpiritombEvosAttacks:
 	dbw 17, DREAM_EATER
 	dbw 21, FAKE_OUT
 	dbw 25, TORMENT
-	dbw 29, NIGHT_SHADE ;OMINOUS_WINDS
+	dbw 29, OMINOUS_WIND
 	dbw 33, WILL_O_WISP
 	dbw 37, CONFUSE_RAY
 	dbw 41, SHADOW_BALL
@@ -931,7 +935,7 @@ TangrowthEvosAttacks:
 	dbw 38, STUN_SPORE
 	dbw 40, SLAM
 	dbw 46, TICKLE
-	;dbw 53, POWER_WHIP
+	dbw 53, POWER_WHIP
 	db 0 ; no more level-up moves
 
 AronEvosAttacks:
@@ -1235,7 +1239,7 @@ SmoguanaEvosAttacks:
 	dbw 25, FOCUS_ENERGY
 	dbw 29, SLASH
 	dbw 31, SMOKESCREEN
-	dbw 35, DIG
+	dbw 35, BURNING_SAND
 	dbw 41, FLAMETHROWER
 	dbw 49, DOUBLE_EDGE
 	db 0 ; no more level-up moves
@@ -1252,7 +1256,7 @@ SmokomodoEvosAttacks:
 	dbw 29, SLASH
 	dbw 31, SMOKESCREEN
 	dbw 33, ROCK_SLIDE
-	dbw 37, DIG
+	dbw 37, BURNING_SAND
 	dbw 45, ERUPTION
 	dbw 55, FISSURE
 	db 0 ; no more level-up moves
@@ -1269,7 +1273,7 @@ TorkoalEvosAttacks:
 	dbw 30, FLAMETHROWER
 	dbw 33, IRON_DEFENSE
 	dbw 40, AMNESIA
-	dbw 43, FLAIL
+	dbw 43, BURNING_SAND
 	dbw 46, HEAT_WAVE
 	db 0 ; no more level-up moves
 
@@ -1372,33 +1376,33 @@ NohfaceEvosAttacks:
 	dbbw EVOLVE_HAPPINESS, TR_EVENITE, KITSUNOH
 	db 0 ; no more evolutions
 	dbw 1, SCRATCH
-	dbw 4, LEER
+	dbw 1, LEER
+	dbw 4, DETECT
 	dbw 7, QUICK_ATTACK
 	dbw 10, SWORDS_DANCE
 	dbw 13, NIGHT_SHADE
 	dbw 19, SLASH
-	dbw 25, PURSUIT
+	dbw 25, FAINT_ATTACK
 	dbw 31, CRUSH_CLAW
-	dbw 37, FAINT_ATTACK
-	dbw 46, DETECT
-	dbw 55, FALSE_SWIPE
+	dbw 37, OMINOUS_WIND
+	dbw 46, GLARE
+	dbw 55, NIGHT_SLASH
 	db 0 ; no more level-up moves
 
 KitsunohEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, ABSORB
-	dbw 1, GROWTH
 	dbw 1, SCRATCH
-	dbw 5, LEER
+	dbw 1, LEER
+	dbw 5, DETECT
 	dbw 8, QUICK_ATTACK
 	dbw 11, SWORDS_DANCE
 	dbw 14, NIGHT_SHADE
 	dbw 20, SLASH
-	dbw 26, PURSUIT
+	dbw 26, FAINT_ATTACK
 	dbw 32, CRUSH_CLAW
-	dbw 38, FAINT_ATTACK
-	dbw 47, DETECT
-	dbw 56, FALSE_SWIPE
+	dbw 38, OMINOUS_WIND
+	dbw 47, GLARE
+	dbw 56, NIGHT_SLASH
 	db 0 ; no more level-up moves
 
 KrolucadaEvosAttacks:
@@ -1406,7 +1410,7 @@ KrolucadaEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, STRING_SHOT
 	dbw 10, LEECH_LIFE
-	dbw 20, PURSUIT
+	dbw 20, NIGHT_SLASH
 	dbw 30, MEGA_DRAIN
 	dbw 40, DEFENSE_CURL
 	dbw 50, PSYBEAM
@@ -1418,12 +1422,12 @@ KrolucardEvosAttacks:
 	dbw 1, STRING_SHOT
 	dbw 1, SCRATCH
 	dbw 12, LEECH_LIFE
-	dbw 22, PURSUIT
+	dbw 22, NIGHT_SLASH
 	dbw 32, MEGA_DRAIN
 	dbw 42, GIGA_DRAIN ;DRAIN_LIFE
 	dbw 52, EXTRASENSORY
 	dbw 62, SILVER_WIND
-	dbw 67, SHADOW_BALL ;OMINOUS_WIND
+	dbw 67, OMINOUS_WIND
 	db 0 ; no more level-up moves
 
 StunkyEvosAttacks:
@@ -1435,7 +1439,7 @@ StunkyEvosAttacks:
 	dbw 10, FURY_SWIPES
 	dbw 16, SMOKESCREEN
 	dbw 25, SLASH
-	dbw 28, BITE
+	dbw 28, NIGHT_SLASH
 	dbw 34, POISON_FANG
 	dbw 37, MEMENTO
 	dbw 44, EXPLOSION
@@ -1449,7 +1453,7 @@ SkuntankEvosAttacks:
 	dbw 11, FURY_SWIPES
 	dbw 17, SMOKESCREEN
 	dbw 26, SLASH
-	dbw 29, BITE
+	dbw 29, NIGHT_SLASH
 	dbw 35, POISON_FANG
 	dbw 38, FLAMETHROWER
 	dbw 43, MEMENTO
@@ -1807,7 +1811,7 @@ MagnezoneEvosAttacks:
 	dbw 1, METAL_SOUND
 	dbw 1, SUPERSONIC
 	dbw 1, ZAP_CANNON
-	dbw 1, LOCK_ON
+	dbw 1, MIRROR_SHOT
 	db 0 ; no more level-up moves
 
 SnoverEvosAttacks:

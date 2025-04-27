@@ -292,6 +292,7 @@ SpiritombEggMoves:
 AronEggMoves:
 	dw BODY_SLAM
 	dw ENDEAVOR
+	dw MIRROR_SHOT
 	dw SMELLINGSALT
 	dw STOMP
 	dw -1 ; end
@@ -348,6 +349,7 @@ SmoguanaEggMoves:
 
 TorkoalEggMoves:
 	dw ENDURE
+	dw FLAIL
 	dw ERUPTION
 	dw SLEEP_TALK
 	dw YAWN
@@ -406,9 +408,8 @@ LarvestaEggMoves:
 	dw -1 ; end
 
 ImpidimpEggMoves:
-	dw SPARK
 	dw THRASH
-	dw WHIRLPOOL
+	dw NIGHT_SLASH
 	dw -1 ; end
 
 MunchlaxEggMoves:
@@ -424,6 +425,7 @@ PurgislugEggMoves:
 	dw BARRIER
 	dw MIRROR_COAT
 	dw RECOVER
+	dw GUNK_SHOT
 	dw ROCK_SLIDE
 	dw -1 ; end
 
@@ -469,6 +471,7 @@ DuskullEggMoves:
 ChimechoEggMoves:
 	dw CURSE
 	dw DISABLE
+	dw MIRROR_SHOT
 	dw DREAM_EATER
 	dw HYPNOSIS
 	dw -1 ; end

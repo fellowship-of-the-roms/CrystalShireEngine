@@ -283,7 +283,7 @@ DEF GEN2_MOVES EQU const_value - 1
 	const INGRAIN      ; 111
 	const SUPERPOWER   ; 112
 	const MAGIC_COAT   ; 113
-	const RECYCLE      ; 114
+	const GUNK_SHOT    ; 114
 	const REVENGE      ; 115
 	const BRICK_BREAK  ; 116
 	const YAWN         ; 117
@@ -307,7 +307,7 @@ DEF GEN2_MOVES EQU const_value - 1
 	const BLAZE_KICK   ; 129
 	const BURNING_SAND ; 12a
 	const ICE_BALL     ; 12b
-	const NEEDLE_ARM   ; 12c
+	const POWER_WHIP   ; 12c
 	const SLACK_OFF    ; 12d
 	const HYPER_VOICE  ; 12e
 	const POISON_FANG  ; 12f

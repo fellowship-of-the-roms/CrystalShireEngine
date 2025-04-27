@@ -275,7 +275,7 @@ MoveTable:
 	dw INGRAIN      ; 111
 	dw SUPERPOWER   ; 112
 	dw MAGIC_COAT   ; 113
-	dw RECYCLE      ; 114
+	dw GUNK_SHOT    ; 114
 	dw REVENGE      ; 115
 	dw BRICK_BREAK  ; 116
 	dw YAWN         ; 117
@@ -299,7 +299,7 @@ MoveTable:
 	dw BLAZE_KICK   ; 129
 	dw BURNING_SAND ; 12a
 	dw ICE_BALL     ; 12b
-	dw NEEDLE_ARM   ; 12c
+	dw POWER_WHIP   ; 12c
 	dw SLACK_OFF    ; 12d
 	dw HYPER_VOICE  ; 12e
 	dw POISON_FANG  ; 12f

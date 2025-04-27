@@ -379,7 +379,7 @@ MovesGen3:
 	move EFFECT_THIEF,              40, NORMAL,        100, 40, 100      ;COVET
 	move EFFECT_NORMAL_HIT,        120, ELECTRIC,      100, 15,  10      ;VOLT_TACKLE EFFECT_VOLT_TACKLE
 	move EFFECT_ALWAYS_HIT,         60, GRASS,         100, 20,   0      ;MAGICAL_LEAF
-	move EFFECT_SP_ATK_DOWN_HIT,    65, FIRE,          100, 10,  10      ;MYSTICAL_FIRE								anim
+	move EFFECT_SP_ATK_DOWN_HIT,    65, FIRE,          100, 10,  10      ;MYSTICALFIRE								anim
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 20,   0      ;CALM_MIND EFFECT_CALM_MIND
 	move EFFECT_NORMAL_HIT,         90, GRASS,         100, 15,   0      ;LEAF_BLADE
 	move EFFECT_NORMAL_HIT,          0, DRAGON,        100, 20,   0      ;DRAGON_DANCE EFFECT_DRAGON_DANCE
