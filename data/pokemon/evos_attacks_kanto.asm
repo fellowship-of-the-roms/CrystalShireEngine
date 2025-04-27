@@ -1498,7 +1498,7 @@ GengarEvosAttacks:
 	db 0 ; no more level-up moves
 
 OnixEvosAttacks:
-	dbww EVOLVE_TRADE, METAL_COAT, STEELIX
+	dbww EVOLVE_ITEM, METAL_COAT, STEELIX
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
 	dbw 1, SCREECH
@@ -1837,7 +1837,7 @@ HorseaEvosAttacks:
 	db 0 ; no more level-up moves
 
 SeadraEvosAttacks:
-	dbww EVOLVE_TRADE, DRAGON_SCALE, KINGDRA
+	dbww EVOLVE_ITEM, DRAGON_SCALE, KINGDRA
 	db 0 ; no more evolutions
 	dbw 1, BUBBLE
 	dbw 1, LEER
@@ -1929,7 +1929,7 @@ MrMimeEvosAttacks:
 	db 0 ; no more level-up moves
 
 ScytherEvosAttacks:
-	dbww EVOLVE_TRADE, METAL_COAT, SCIZOR
+	dbww EVOLVE_ITEM, METAL_COAT, SCIZOR
 	db 0 ; no more evolutions
 	dbw 1, LEER
 	dbw 1, QUICK_ATTACK
@@ -2065,14 +2065,14 @@ EeveeEvosAttacks:
 	dbww EVOLVE_ITEM, THUNDERSTONE, JOLTEON
 	dbww EVOLVE_ITEM, WATER_STONE, VAPOREON
 	dbww EVOLVE_ITEM, FIRE_STONE, FLAREON
-	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, ESPEON
+	dbww EVOLVE_ITEM, SUN_STONE, ESPEON
 	dbww EVOLVE_ITEM, MOON_STONE, UMBREON
 	dbww EVOLVE_ITEM, LEAF_STONE, LEAFEON
-	dbbw EVOLVE_HAPPINESS, TR_EVENITE, GLACEON
-	dbww EVOLVE_TRADE, DRAGON_SCALE, DRACONEON
+	dbbw EVOLVE_HAPPINESS, TR_ANYTIME, GLACEON
+	dbww EVOLVE_ITEM, DRAGON_SCALE, DRACONEON
 	db 0 ; no more evolutions
-	dbw 1, GROWTH
 	dbw 1, TACKLE
+	dbw 1, GROWTH
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
 	dbw 16, GROWL
@@ -2084,8 +2084,8 @@ EeveeEvosAttacks:
 
 VaporeonEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, GROWTH
 	dbw 1, TACKLE
+	dbw 1, GROWTH
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
 	dbw 16, WATER_GUN
@@ -2099,8 +2099,8 @@ VaporeonEvosAttacks:
 
 JolteonEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, GROWTH
 	dbw 1, TACKLE
+	dbw 1, GROWTH
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
 	dbw 16, THUNDERSHOCK
@@ -2114,8 +2114,8 @@ JolteonEvosAttacks:
 
 FlareonEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, GROWTH
 	dbw 1, TACKLE
+	dbw 1, GROWTH
 	dbw 1, TAIL_WHIP
 	dbw 8, SAND_ATTACK
 	dbw 16, EMBER
@@ -2128,7 +2128,7 @@ FlareonEvosAttacks:
 	db 0 ; no more level-up moves
 
 PorygonEvosAttacks:
-	dbww EVOLVE_TRADE, UP_GRADE, PORYGON2
+	dbww EVOLVE_ITEM, UP_GRADE, PORYGON2
 	db 0 ; no more evolutions
 	dbw 1, CONVERSION
 	dbw 1, CONVERSION2
@@ -2151,7 +2151,7 @@ OmanyteEvosAttacks:
 	dbw 13, BITE
 	dbw 19, WATER_GUN
 	dbw 25, MUD_SHOT
-	dbw 31, LEER
+	dbw 31, DIVE
 	dbw 37, PROTECT
 	dbw 43, TICKLE
 	dbw 49, ANCIENTPOWER
@@ -2166,7 +2166,7 @@ OmastarEvosAttacks:
 	dbw 13, BITE
 	dbw 19, WATER_GUN
 	dbw 25, MUD_SHOT
-	dbw 31, LEER
+	dbw 31, DIVE
 	dbw 37, PROTECT
 	dbw 40, SPIKE_CANNON
 	dbw 46, TICKLE
@@ -2180,10 +2180,10 @@ KabutoEvosAttacks:
 	dbw 1, HARDEN
 	dbw 1, SCRATCH
 	dbw 13, ABSORB
-	dbw 19, LEER
+	dbw 19, ENDURE
 	dbw 25, MUD_SHOT
 	dbw 31, SAND_ATTACK
-	dbw 37, ENDURE
+	dbw 37, ENDURE        ;X_SCISSOR
 	dbw 43, METAL_SOUND
 	dbw 49, MEGA_DRAIN
 	dbw 55, ANCIENTPOWER
@@ -2195,10 +2195,10 @@ KabutopsEvosAttacks:
 	dbw 1, HARDEN
 	dbw 1, SCRATCH
 	dbw 13, ABSORB
-	dbw 19, LEER
+	dbw 19, ENDURE
 	dbw 25, MUD_SHOT
 	dbw 31, SAND_ATTACK
-	dbw 37, ENDURE
+	dbw 37, ENDURE        ;X_SCISSOR     
 	dbw 40, SLASH
 	dbw 46, METAL_SOUND
 	dbw 55, MEGA_DRAIN

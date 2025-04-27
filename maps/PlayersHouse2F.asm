@@ -58,31 +58,31 @@ if DEF(_DEBUG)
 	; pokedex
 	setflag ENGINE_POKEDEX
 	; useful items
-	giveitem RARE_CANDY, 99
-	giveitem HP_UP, 99
-	giveitem MAX_REPEL, 99
-	giveitem TIMER_BALL, 99
-	giveitem PREMIER_BALL, 99
-	giveitem MASTER_BALL, 99
-	giveitem POKE_BALL, 1
-	giveitem BLU_APRICORN, 2
-	giveitem ICE_BERRY
-	giveitem BICYCLE
-	giveitem GOOD_ROD
-	giveitem THUNDERSTONE, 10
-	giveitem FIRE_STONE, 10
-	giveitem WATER_STONE, 10
-	giveitem LEAF_STONE, 10
-	giveitem MOON_STONE, 10
-	giveitem SUN_STONE, 10
-	giveitem BERRY, 10
-	giveitem GOLD_BERRY, 10
-	giveitem MINT_BERRY, 10
-	giveitem MYSTERYBERRY, 10
-	giveitem QUICK_CLAW
-	giveitem KINGS_ROCK
-	giveitem AMULET_COIN
-	giveitem SCOPE_LENS
+	;giveitem RARE_CANDY, 99
+	;giveitem HP_UP, 99
+	;giveitem MAX_REPEL, 99
+	;giveitem TIMER_BALL, 99
+	;giveitem PREMIER_BALL, 99
+	;giveitem MASTER_BALL, 99
+	;giveitem POKE_BALL, 1
+	;giveitem BLU_APRICORN, 2
+	;giveitem ICE_BERRY
+	;giveitem BICYCLE
+	;giveitem GOOD_ROD
+	;giveitem THUNDERSTONE, 10
+	;giveitem FIRE_STONE, 10
+	;giveitem WATER_STONE, 10
+	;giveitem LEAF_STONE, 10
+	;giveitem MOON_STONE, 10
+	;giveitem SUN_STONE, 10
+	;giveitem BERRY, 10
+	;giveitem GOLD_BERRY, 10
+	;giveitem MINT_BERRY, 10
+	;giveitem MYSTERYBERRY, 10
+	;giveitem QUICK_CLAW
+	;giveitem KINGS_ROCK
+	;giveitem AMULET_COIN
+	;giveitem SCOPE_LENS
 	; all badges
 	setflag ENGINE_ZEPHYRBADGE
 	setflag ENGINE_HIVEBADGE
@@ -151,10 +151,10 @@ if DEF(_DEBUG)
 	; post-e4
 	setflag ENGINE_CREDITS_SKIP
 	; ; good party
-	givepoke LARVESTA, PLAIN_FORM, 99;, BRIGHTPOWDER
+	givepoke STANTLER, PLAIN_FORM, 99, KINGS_ROCK 
 	; ; hm slaves
-	givepoke HONCHKROW, PLAIN_FORM, 99;, LEFTOVERS
-	givepoke GLISCOR, PLAIN_FORM, 99;, LEFTOVERS
+	givepoke MUNCHLAX, PLAIN_FORM, 99;, LEFTOVERS
+	givepoke EEVEE, PLAIN_FORM, 99, LEAF_STONE
 	givepokemove FLY,        wPartyMon2, 0
 	; givepokemove SURF,       wPartyMon2, 1
 	; givepokemove STRENGTH,   wPartyMon2, 2
@@ -164,12 +164,12 @@ if DEF(_DEBUG)
 	; givepokemove HEADBUTT,   wPartyMon3, 2
 	; givepokemove WATERFALL,  wPartyMon3, 3
 	; misc pokemon for testing
-	givepoke CORSOREEF, PLAIN_FORM, 75
+	givepoke EEVEE, PLAIN_FORM, 75
 	;givepokemove QUICK_ATTACK,  wPartyMon1, 0
 	;givepokemove SNATCH,  wPartyMon1, 1
 	;givepokemove WHIRLWIND,  wPartyMon1, 2
 	;givepokemove VITAL_THROW,  wPartyMon1, 3
-	givepoke BARBOACH, PLAIN_FORM, 50
+	givepoke EEVEE, PLAIN_FORM, 50
 	givepoke WHISCASH, PLAIN_FORM, 50
 	; intro events
 	addcellnum PHONE_MOM
