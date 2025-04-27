@@ -278,7 +278,7 @@ MoveNames::
 	li "INGRAIN"
 	li "SUPERPOWER"
 	li "MAGIC COAT"
-	li "RECYCLE"
+	li "GUNK SHOT"
 	li "REVENGE"
 	li "BRICK BREAK"
 	li "YAWN"

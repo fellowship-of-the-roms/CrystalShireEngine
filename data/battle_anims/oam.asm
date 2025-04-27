@@ -271,6 +271,7 @@ BattleAnimOAMData:
 	battleanimoam $02, 10, .OAMData_105 ; BATTLE_ANIM_OAMSET_105
 	battleanimoam $02, 11, .OAMData_106 ; BATTLE_ANIM_OAMSET_106
 	battleanimoam $02,  7, .OAMData_106 ; BATTLE_ANIM_OAMSET_107
+	battleanimoam $0a,  9, .OAMData_0e9 ; BATTLE_ANIM_OAMSET_108
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_011:

@@ -349,6 +349,8 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_ROCK_WRECKER_GROW       ; 13a
 	const BATTLE_ANIM_OBJ_ROCK_WRECKER_CHARGE     ; 13b
 	const BATTLE_ANIM_OBJ_ROCK_WRECKER            ; 13c
+	const BATTLE_ANIM_OBJ_GUNK_SHOT               ; 13d
+	const BATTLE_ANIM_OBJ_GUNK_SHOT_BUBBLES       ; 13e
 
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
@@ -714,6 +716,7 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_CUT_RIGHT               ; 103
 	const BATTLE_ANIM_FRAMESET_CUT_LEFT                ; 104
 	const BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW       ; 105
+	const BATTLE_ANIM_FRAMESET_GUNK_SHOT               ; 106
 DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 
 ; BattleAnimOAMData indexes (see data/battle_anims/oam.asm)
@@ -983,6 +986,7 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_105
 	const BATTLE_ANIM_OAMSET_106
 	const BATTLE_ANIM_OAMSET_107
+	const BATTLE_ANIM_OAMSET_108
 	
 DEF NUM_BATTLE_ANIM_OAMSETS EQU const_value
 
