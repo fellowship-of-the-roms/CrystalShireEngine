@@ -295,23 +295,23 @@ MovesGen3:
 	move EFFECT_BURN_HIT,          100, FIRE,           90, 10,  10      ;HEAT_WAVE
 	move EFFECT_HAIL,                0, ICE,           100, 10,   0      ;HAIL EFFECT_HAIL
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 15,   0      ;TORMENT
-	move EFFECT_SWAGGER,             0, DARK,          100, 15, 100      ;FLATTER EFFECT_FLATTER
+	move EFFECT_NORMAL_HIT,        100, ROCK,           80,  5,   0      ;STONE_EDGE								anim
 	move EFFECT_POISON,              0, FIRE,           75, 15,   0      ;WILL_O_WISP EFFECT_BURN
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 10,   0      ;MEMENTO EFFECT_MEMENTO
 	move EFFECT_NORMAL_HIT,         70, NORMAL,        100, 20,   0      ;FACADE EFFECT_FACADE
 	move EFFECT_NORMAL_HIT,        150, FIGHTING,      100, 20,   0      ;FOCUS_PUNCH EFFECT_FOCUS_PUNCH
 	move EFFECT_NORMAL_HIT,         60, NORMAL,        100, 10,   0      ;SMELLINGSALT EFFECT_SMELLINGSALT
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;NATURE_POWER EFFECT_NATURE_POWER
-	move EFFECT_NORMAL_HIT,          0, ELECTRIC,      100, 20,   0      ;CHARGE EFFECT_CHARGE
+	move EFFECT_SP_ATTACK_UP_HIT,   50, ELECTRIC,       90, 10,  70      ;CHARGE_BEAM								anim
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 20,   0      ;TAUNT EFFECT_TAUNT
-	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 10,   0      ;TRICK
+	move EFFECT_NORMAL_HIT,         70, DARK,	   	   100, 15,   0      ;NIGHT_SLASH								anim
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 10,   0      ;ROLE_PLAY
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;WISH
-	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;ASSIST EFFECT_ASSIST
+	move EFFECT_HYPER_BEAM,        150, ROCK,           90,  5,   0      ;ROCK_WRECKER								anim
 	move EFFECT_NORMAL_HIT,          0, GRASS,         100, 20,   0      ;INGRAIN
 	move EFFECT_NORMAL_HIT,        120, FIGHTING,      100,  5,   0      ;SUPERPOWER EFFECT_SUPERPOWER
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 15,   0      ;MAGIC_COAT
-	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 10,   0      ;RECYCLE
+	move EFFECT_POISON_HIT,        120, POISON,         80,  5,  30      ;GUNK_SHOT									anim
 	move EFFECT_NORMAL_HIT,         60, FIGHTING,      100, 10, 100      ;REVENGE EFFECT_REVENGE
 	move EFFECT_NORMAL_HIT,         75, FIGHTING,      100, 15,   0      ;BRICK_BREAK EFFECT_BRICK_BREAK
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 10,   0      ;YAWN
@@ -327,15 +327,15 @@ MovesGen3:
 	move EFFECT_FLY,                80, WATER,         100, 10,   0      ;DIVE
 	move EFFECT_MULTI_HIT,          15, FIGHTING,      100, 20,   0      ;ARM_THRUST
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;CAMOUFLAGE
-	move EFFECT_NORMAL_HIT,          0, BUG,           100, 20,   0      ;TAIL_GLOW
+	move EFFECT_ACCURACY_DOWN_HIT,  65, STEEL,          85, 10,  30      ;MIRROR_SHOT								anim
 	move EFFECT_SP_DEF_DOWN_HIT,    70, PSYCHIC_TYPE,  100,  5,  50      ;LUSTER_PURGE
 	move EFFECT_SP_DEF_DOWN_HIT,    70, PSYCHIC_TYPE,  100,  5,  50      ;MIST_BALL EFFECT_SP_ATK_DOWN_HIT
 	move EFFECT_NORMAL_HIT,          0, FLYING,        100, 15,   0      ;FEATHERDANCE
-	move EFFECT_CONFUSE,             0, NORMAL,        100, 20,   0      ;TEETER_DANCE
+	move EFFECT_ALL_UP_HIT,         60, GHOST,         100,  5,  10      ;OMINOUS_WIND								anim
 	move EFFECT_BURN_HIT,           85, FIRE,           90, 10,  10      ;BLAZE_KICK
-	move EFFECT_NORMAL_HIT,          0, GROUND,        100, 15,   0      ;MUD_SPORT
+	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND								anim
 	move EFFECT_ROLLOUT,            30, ICE,            90, 20,   0      ;ICE_BALL
-	move EFFECT_FLINCH_HIT,         60, GRASS,         100, 15,  30      ;NEEDLE_ARM
+	move EFFECT_NORMAL_HIT,        120, GRASS,          85, 10,   0      ;POWER_WHIP								anim
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;SLACK_OFF
 	move EFFECT_NORMAL_HIT,         90, NORMAL,        100, 10,   0      ;HYPER_VOICE
 	move EFFECT_NORMAL_HIT,         50, POISON,        100, 15,  50      ;POISON_FANG EFFECT_TOXIC_HIT
@@ -357,7 +357,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;TICKLE EFFECT_TICKLE
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 20,   0      ;COSMIC_POWER
 	move EFFECT_NORMAL_HIT,        150, WATER,         100,  5,   0      ;WATER_SPOUT EFFECT_WATER_SPOUT
-	move EFFECT_CONFUSE_HIT,        75, BUG,           100, 15,  10      ;SIGNAL_BEAM
+	move EFFECT_NORMAL_HIT ,        80, BUG,           100, 15,   0      ;X_SCISSOR									anim
 	move EFFECT_ALWAYS_HIT,         60, GHOST,         100, 20,   0      ;SHADOW_PUNCH
 	move EFFECT_FLINCH_HIT,         80, PSYCHIC_TYPE,  100, 30,  10      ;EXTRASENSORY
 	move EFFECT_NORMAL_HIT,         85, FIGHTING,       90, 15,   0      ;SKY_UPPERCUT
@@ -379,7 +379,7 @@ MovesGen3:
 	move EFFECT_THIEF,              40, NORMAL,        100, 40, 100      ;COVET
 	move EFFECT_NORMAL_HIT,        120, ELECTRIC,      100, 15,  10      ;VOLT_TACKLE EFFECT_VOLT_TACKLE
 	move EFFECT_ALWAYS_HIT,         60, GRASS,         100, 20,   0      ;MAGICAL_LEAF
-	move EFFECT_NORMAL_HIT,          0, WATER,         100, 15,   0      ;WATER_SPORT
+	move EFFECT_SP_ATK_DOWN_HIT,    65, FIRE,          100, 10,  10      ;MYSTICAL_FIRE								anim
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 20,   0      ;CALM_MIND EFFECT_CALM_MIND
 	move EFFECT_NORMAL_HIT,         90, GRASS,         100, 15,   0      ;LEAF_BLADE
 	move EFFECT_NORMAL_HIT,          0, DRAGON,        100, 20,   0      ;DRAGON_DANCE EFFECT_DRAGON_DANCE

@@ -255,7 +255,7 @@ MudkipEvosAttacks:
 	dbw 10, WATER_GUN
 	dbw 15, BIDE
 	dbw 19, FORESIGHT
-	dbw 24, MUD_SPORT
+	dbw 24, SWAGGER
 	dbw 28, TAKE_DOWN
 	dbw 33, WHIRLPOOL
 	dbw 37, PROTECT
@@ -275,7 +275,7 @@ MarshtompEvosAttacks:
 	dbw 15, BIDE
 	dbw 16, MUD_SHOT
 	dbw 20, FORESIGHT
-	dbw 25, MUD_SPORT
+	dbw 25, SWAGGER
 	dbw 31, TAKE_DOWN
 	dbw 37, MUDDY_WATER
 	dbw 42, PROTECT
@@ -294,7 +294,7 @@ SwampertEvosAttacks:
 	dbw 15, BIDE
 	dbw 16, MUD_SHOT
 	dbw 20, FORESIGHT
-	dbw 25, MUD_SPORT
+	dbw 25, SWAGGER
 	dbw 31, TAKE_DOWN
 	dbw 39, MUDDY_WATER
 	dbw 46, PROTECT
@@ -446,7 +446,7 @@ LombreEvosAttacks:
 	dbw 13, NATURE_POWER
 	dbw 19, FAKE_OUT
 	dbw 25, FURY_SWIPES
-	dbw 31, WATER_SPORT
+	dbw 31, SWAGGER
 	dbw 37, THIEF
 	dbw 43, UPROAR
 	dbw 49, HYDRO_PUMP
@@ -609,7 +609,7 @@ SurskitEvosAttacks:
 	dbw 1, BUBBLE
 	dbw 7, QUICK_ATTACK
 	dbw 13, SWEET_SCENT
-	dbw 19, WATER_SPORT
+	dbw 19, DOUBLE_TEAM
 	dbw 25, BUBBLEBEAM
 	dbw 31, AGILITY
 	dbw 37, HAZE
@@ -621,10 +621,10 @@ MasquerainEvosAttacks:
 	dbw 1, BUBBLE
 	dbw 1, QUICK_ATTACK
 	dbw 1, SWEET_SCENT
-	dbw 1, WATER_SPORT
+	dbw 1, DOUBLE_TEAM
 	dbw 7, QUICK_ATTACK
 	dbw 13, SWEET_SCENT
-	dbw 19, WATER_SPORT
+	dbw 19, DOUBLE_TEAM
 	dbw 26, GUST
 	dbw 33, SCARY_FACE
 	dbw 40, STUN_SPORE
@@ -884,7 +884,7 @@ SkittyEvosAttacks:
 	dbw 7, ATTRACT
 	dbw 13, SING
 	dbw 15, DOUBLESLAP
-	dbw 19, ASSIST
+	dbw 19, METRONOME
 	dbw 25, CHARM
 	dbw 27, FAINT_ATTACK
 	dbw 31, COVET
@@ -1040,7 +1040,7 @@ ShinxEvosAttacks:
 	dbw 28, ROAR
 	dbw 33, BITE
 	dbw 36, THUNDER
-	dbw 41, CHARGE
+	dbw 41, CHARGE_BEAM
 	db 0 ; no more level-up moves
 
 LuxioEvosAttacks:
@@ -1059,7 +1059,7 @@ LuxioEvosAttacks:
 	dbw 32, ROAR
 	dbw 40, BITE
 	dbw 46, THUNDER
-	dbw 54, CHARGE
+	dbw 54, CHARGE_BEAM
 	db 0 ; no more level-up moves
 
 LuxrayEvosAttacks:
@@ -1075,7 +1075,7 @@ LuxrayEvosAttacks:
 	dbw 22, SPARK
 	dbw 27, ODOR_SLEUTH
 	dbw 33, ROAR
-	dbw 41, BITE
+	dbw 41, CHARGE_BEAM
 	dbw 47, THUNDER
 	dbw 55, CRUNCH
 	db 0 ; no more level-up moves
@@ -1097,16 +1097,16 @@ GekoponEvosAttacks:
 
 TynamoEvosAttacks:
 	dbbw EVOLVE_LEVEL, 39, EELEKTRIK
-	dbw 1, CHARGE
+	dbw 1, CHARGE_BEAM
 	dbw 1, VICEGRIP
-	dbw 1, SPARK
+	dbw 1, SCREECH
 	dbw 1, THUNDER_WAVE
 	db 0 ; no more level-up moves
 
 EelektrikEvosAttacks:
 	dbww EVOLVE_ITEM, THUNDERSTONE, EELEKTROSS
 	db 0 ; no more evolutions
-	dbw 1, CHARGE
+	dbw 1, CHARGE_BEAM
 	dbw 1, VICEGRIP
 	dbw 1, SPARK
 	dbw 1, THUNDER_WAVE
@@ -1198,8 +1198,7 @@ BarboachEvosAttacks:
 	dbbw EVOLVE_LEVEL, 30, WHISCASH
 	db 0 ; no more evolutions
 	dbw 1, MUD_SLAP
-	dbw 6, MUD_SPORT
-	dbw 6, WATER_SPORT
+	dbw 6, SPLASH
 	dbw 11, WATER_GUN
 	dbw 16, MAGNITUDE
 	dbw 21, AMNESIA
@@ -1213,11 +1212,9 @@ BarboachEvosAttacks:
 WhiscashEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, MUD_SLAP
-	dbw 1, MUD_SPORT
+	dbw 1, SPLASH
 	dbw 1, TICKLE
-	dbw 1, WATER_SPORT
-	dbw 6, MUD_SPORT
-	dbw 6, WATER_SPORT
+	dbw 6, SPLASH
 	dbw 11, WATER_GUN
 	dbw 16, MAGNITUDE
 	dbw 21, AMNESIA
@@ -1318,7 +1315,7 @@ SpindaEvosAttacks:
 	dbw 16, PSYBEAM
 	dbw 23, HYPNOSIS
 	dbw 27, DIZZY_PUNCH
-	dbw 34, TEETER_DANCE
+	dbw 34, CONFUSE_RAY
 	dbw 38, PSYCH_UP
 	dbw 45, DOUBLE_EDGE
 	dbw 49, FLAIL
@@ -1620,7 +1617,7 @@ AnorithEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, SCRATCH
 	dbw 7, HARDEN
-	dbw 13, MUD_SPORT
+	dbw 13, MUD_SLAP
 	dbw 19, WATER_GUN
 	dbw 25, METAL_CLAW
 	dbw 31, PROTECT
@@ -1633,11 +1630,11 @@ AnorithEvosAttacks:
 ArmaldoEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, HARDEN
-	dbw 1, MUD_SPORT
+	dbw 1, MUD_SLAP
 	dbw 1, SCRATCH
 	dbw 1, WATER_GUN
 	dbw 7, HARDEN
-	dbw 13, MUD_SPORT
+	dbw 13, MUD_SLAP
 	dbw 19, WATER_GUN
 	dbw 25, METAL_CLAW
 	dbw 31, PROTECT
@@ -1659,7 +1656,7 @@ MiloticEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, WATER_GUN
 	dbw 5, WRAP
-	dbw 10, WATER_SPORT
+	dbw 10, SPLASH
 	dbw 15, REFRESH
 	dbw 20, WATER_PULSE
 	dbw 25, TWISTER
@@ -1941,7 +1938,7 @@ RelicanthEvosAttacks:
 	dbw 15, ROCK_TOMB
 	dbw 22, YAWN
 	dbw 29, TAKE_DOWN
-	dbw 36, MUD_SPORT
+	dbw 36, DOUBLE_EDGE 
 	dbw 43, ANCIENTPOWER
 	dbw 50, REST
 	dbw 57, DOUBLE_EDGE
@@ -2097,7 +2094,7 @@ LatiasEvosAttacks:
 	; dbw 10, HELPING_HAND
 	dbw 15, SAFEGUARD
 	dbw 20, DRAGONBREATH
-	dbw 25, WATER_SPORT
+	dbw 25, DIVE
 	dbw 30, REFRESH
 	dbw 35, MIST_BALL
 	dbw 40, PSYCHIC_M

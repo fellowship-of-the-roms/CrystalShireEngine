@@ -272,23 +272,23 @@ MoveDescriptionsGen3:
 	dw HeatWaveDescription
 	dw HailDescription
 	dw TormentDescription
-	dw FlatterDescription
+	dw StoneEdgeDescription
 	dw WillOWispDescription
 	dw MementoDescription
 	dw FacadeDescription
 	dw FocusPunchDescription
 	dw SmellingSaltDescription
 	dw NaturePowerDescription
-	dw ChargeDescription
+	dw ChargeBeamDescription
 	dw TauntDescription
-	dw TrickDescription
+	dw NightSlashDescription
 	dw RolePlayDescription
 	dw WishDescription
-	dw AssistDescription
+	dw RockWreckerDescription
 	dw IngrainDescription
 	dw SuperpowerDescription
 	dw MagicCoatDescription
-	dw RecycleDescription
+	dw GunkShotDescription
 	dw RevengeDescription
 	dw BrickBreakDescription
 	dw YawnDescription
@@ -304,13 +304,13 @@ MoveDescriptionsGen3:
 	dw DiveDescription
 	dw ArmThrustDescription
 	dw CamouflageDescription
-	dw TailGlowDescription
+	dw MirrorShotDescription
 	dw LusterPurgeDescription
 	dw MistBallDescription
 	dw FeatherDanceDescription
-	dw TeeterDanceDescription
+	dw OminousWindDescription
 	dw BlazeKickDescription
-	dw MudSportDescription
+	dw BurningSandDescription
 	dw IceBallDescription
 	dw NeedleArmDescription
 	dw SlackOffDescription
@@ -334,7 +334,7 @@ MoveDescriptionsGen3:
 	dw TickleDescription
 	dw CosmicPowerDescription
 	dw WaterSpoutDescription
-	dw SignalBeamDescription
+	dw XScissorDescription
 	dw ShadowPunchDescription
 	dw ExtrasensoryDescription
 	dw SkyUppercutDescription
@@ -356,7 +356,7 @@ MoveDescriptionsGen3:
 	dw CovetDescription
 	dw VoltTackleDescription
 	dw MagicalLeafDescription
-	dw WaterSportDescription
+	dw MysticalFireDescription
 	dw CalmMindDescription
 	dw LeafBladeDescription
 	dw DragonDanceDescription
@@ -1412,9 +1412,9 @@ TormentDescription:
 	db   "Prevents use of"
 	next "successive moves.@"
 
-FlatterDescription:
-	db   "Causes confusion."
-	next "Raises SPCL.ATK.@"
+StoneEdgeDescription:
+	db   "Has a high criti-"
+	next "cal hit ratio.@"
 
 WillOWispDescription:
 	db   "A move that may"
@@ -1440,17 +1440,17 @@ NaturePowerDescription:
 	db   "Attack varies dep-"
 	next "ending on area.@"
 
-ChargeDescription:
-	db   "Boosts the next"
-	next "ELECTRIC attack.@"
+ChargeBeamDescription:
+	db   "An attack that may"
+	next "raise SPCL.ATK.@"
 
 TauntDescription:
 	db   "Taunts foe to only"
 	next "use attack moves.@"
 
-TrickDescription:
-	db   "Tricks foe into"
-	next "trading held items.@"
+NightSlashDescription:
+	db   "Has a high criti-"
+	next "cal hit ratio.@"
 
 RolePlayDescription:
 	db   "Copies the foe's"
@@ -1460,9 +1460,9 @@ WishDescription:
 	db   "A move that heals"
 	next "on 2nd turn.@"
 
-AssistDescription:
-	db   "Randomly uses an"
-	next "ally's move.@"
+RockWreckerDescription:
+	db   "1st turn: Attack"
+	next "2nd turn: Rest@"
 
 IngrainDescription:
 	db   "Restores HP, but"
@@ -1476,9 +1476,9 @@ MagicCoatDescription:
 	db   "Reflect LEECH SEED"
 	next "and status moves.@"
 
-RecycleDescription:
-	db   "Recycles used item"
-	next "for one more use.@"
+GunkShotDescription:
+	db   "An attack that may"
+	next "poison the foe.@"
 
 RevengeDescription:
 	db   "Gains power if"
@@ -1540,9 +1540,9 @@ CamouflageDescription:
 	db   "Alters user's type"
 	next "depending on area.@"
 
-TailGlowDescription:
-	db   "Sharply raises the"
-	next "user's SPCL.ATK.@"
+MirrorShotDescription:
+	db   "An attack that may"
+	next "lower accuracy.@"
 
 LusterPurgeDescription:
 	db   "An attack that may"
@@ -1556,17 +1556,17 @@ FeatherDanceDescription:
 	db   "Sharply reduces"
 	next "the foe's ATTACK.@"
 
-TeeterDanceDescription:
-	db   "Wobbly dance that"
-	next "causes confusion.@"
+OminousWindDescription:
+	db   "An attack that may"
+	next "raise all stats.@"
 
 BlazeKickDescription:
 	db   "High critical hit."
 	next "May cause burn.@"
 
-MudSportDescription:
-	db   "Weakens ELECTRIC-"
-	next "type attacks.@"
+BurningSandDescription:
+	db   "An attack that may"
+	next "cause burn.@"
 
 IceBallDescription:
 	db   "Attacks 5 turns"
@@ -1660,9 +1660,9 @@ WaterSpoutDescription:
 	db   "Stronger if the"
 	next "user's HP is high.@"
 
-SignalBeamDescription:
-	db   "An attack that may"
-	next "cause confusion.@"
+XScissorDescription:
+	db   "A devastating"
+	next "attack.@"
 
 ShadowPunchDescription:
 	db   "An attack that"
@@ -1748,9 +1748,9 @@ MagicalLeafDescription:
 	db   "An attack that"
 	next "never misses.@"
 
-WaterSportDescription:
-	db   "Weakens FIRE-"
-	next "type attacks.@"
+MysticalFireDescription:
+	db   "An attack that may"
+	next "lower SPCL.ATK.@"
 
 CalmMindDescription:
 	db   "Raises the user's"

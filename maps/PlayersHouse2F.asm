@@ -153,7 +153,7 @@ if DEF(_DEBUG)
 	; ; good party
 	givepoke STANTLER, PLAIN_FORM, 99, KINGS_ROCK 
 	; ; hm slaves
-	givepoke MUNCHLAX, PLAIN_FORM, 99;, LEFTOVERS
+	givepoke TYNAMO, PLAIN_FORM, 5;, LEFTOVERS
 	givepoke EEVEE, PLAIN_FORM, 99, LEAF_STONE
 	givepokemove FLY,        wPartyMon2, 0
 	; givepokemove SURF,       wPartyMon2, 1

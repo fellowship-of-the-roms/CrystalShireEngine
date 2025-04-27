@@ -182,7 +182,7 @@ SquirtleEggMoves:
 	dw HAZE
 	dw MIRROR_COAT
 	dw MIST
-	dw MUD_SPORT
+	dw MIRROR_SHOT
 	dw REFRESH
 	dw YAWN
 	dw -1 ; end
@@ -299,7 +299,7 @@ VenonatEggMoves:
 	dw BATON_PASS
 	dw GIGA_DRAIN
 	dw SCREECH
-	dw SIGNAL_BEAM
+	dw SILVER_WIND
 	dw -1 ; end
 
 DiglettEggMoves:
@@ -314,7 +314,7 @@ DiglettEggMoves:
 
 MeowthEggMoves:
 	dw AMNESIA
-	dw ASSIST
+	dw CALM_MIND
 	dw CHARM
 	dw HYPNOSIS
 	dw PSYCH_UP
@@ -360,7 +360,6 @@ PoliwagEggMoves:
 	dw MIND_READER
 	dw MIST
 	dw SPLASH
-	dw WATER_SPORT
 	dw -1 ; end
 
 AbraEggMoves:
@@ -419,7 +418,6 @@ PonytaEggMoves:
 SlowpokeEggMoves:
 	dw BELLY_DRUM
 	dw FUTURE_SIGHT
-	dw MUD_SPORT
 	dw SAFEGUARD
 	dw SLEEP_TALK
 	dw SNORE
@@ -494,7 +492,7 @@ OnixEggMoves:
 	dw -1 ; end
 
 DrowzeeEggMoves:
-	dw ASSIST
+	dw CONFUSE_RAY
 	dw BARRIER
 	dw FIRE_PUNCH
 	dw ICE_PUNCH
@@ -605,7 +603,7 @@ HorseaEggMoves:
 GoldeenEggMoves:
 	dw HAZE
 	dw HYDRO_PUMP
-	dw MUD_SPORT
+	dw MIRROR_SHOT
 	dw PSYBEAM
 	dw SLEEP_TALK
 	dw -1 ; end
@@ -616,7 +614,7 @@ MrMimeEggMoves:
 	dw HYPNOSIS
 	dw MIMIC
 	dw PSYCH_UP
-	dw TRICK
+	;dw TRICK
 	dw -1 ; end
 
 ScytherEggMoves:

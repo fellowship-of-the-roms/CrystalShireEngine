@@ -130,21 +130,20 @@ TotodileEggMoves:
 	dw CRUNCH
 	dw DRAGON_CLAW
 	dw HYDRO_PUMP
-	dw MUD_SPORT
+	dw SUPERPOWER
 	dw ROCK_SLIDE
 	dw THRASH
-	dw WATER_SPORT
 	dw -1 ; end
 
 SentretEggMoves:
-	dw ASSIST
+	dw BURNING_SAND
 	dw DOUBLE_EDGE
 	dw FOCUS_ENERGY
 	dw PURSUIT
 	dw REVERSAL
 	dw SLASH
 	dw SUBSTITUTE
-	dw TRICK
+	;dw TRICK
 	dw -1 ; end
 
 HoothootEggMoves:
@@ -168,7 +167,6 @@ SpinarakEggMoves:
 	dw DISABLE
 	dw PSYBEAM
 	dw PURSUIT
-	dw SIGNAL_BEAM
 	dw SONICBOOM
 	dw -1 ; end
 
@@ -180,7 +178,7 @@ ChinchouEggMoves:
 
 PichuEggMoves:
 	dw BIDE
-	dw CHARGE
+	dw CHARGE_BEAM
 	dw DOUBLESLAP
 	dw ENCORE
 	dw PRESENT
@@ -230,7 +228,7 @@ NatuEggMoves:
 
 MareepEggMoves:
 	dw BODY_SLAM
-	dw CHARGE
+	dw CHARGE_BEAM
 	dw ODOR_SLEUTH
 	dw REFLECT
 	dw SAFEGUARD
@@ -291,7 +289,6 @@ SunkernEggMoves:
 YanmaEggMoves:
 	dw LEECH_LIFE
 	dw REVERSAL
-	dw SIGNAL_BEAM
 	dw SILVER_WIND
 	dw WHIRLWIND
 	dw -1 ; end
@@ -300,7 +297,6 @@ WooperEggMoves:
 	dw ANCIENTPOWER
 	dw BODY_SLAM
 	dw CURSE
-	dw MUD_SPORT
 	dw SAFEGUARD
 	dw SPIT_UP
 	dw STOCKPILE
@@ -463,7 +459,7 @@ DelibirdEggMoves:
 MantineEggMoves:
 	dw HAZE
 	dw HYDRO_PUMP
-	dw MUD_SPORT
+	dw DIVE
 	dw ROCK_SLIDE
 	dw SLAM
 	dw TWISTER

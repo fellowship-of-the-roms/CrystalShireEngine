@@ -267,19 +267,19 @@ DEF GEN2_MOVES EQU const_value - 1
 	const HEAT_WAVE    ; 101
 	const HAIL         ; 102
 	const TORMENT      ; 103
-	const FLATTER      ; 104
+	const STONE_EDGE   ; 104
 	const WILL_O_WISP  ; 105
 	const MEMENTO      ; 106
 	const FACADE       ; 107
 	const FOCUS_PUNCH  ; 108
 	const SMELLINGSALT ; 109
 	const NATURE_POWER ; 10a
-	const CHARGE       ; 10b
+	const CHARGE_BEAM  ; 10b
 	const TAUNT        ; 10c
-	const TRICK        ; 10d
+	const NIGHT_SLASH  ; 10d
 	const ROLE_PLAY    ; 10e
 	const WISH         ; 10f
-	const ASSIST       ; 110
+	const ROCK_WRECKER ; 110
 	const INGRAIN      ; 111
 	const SUPERPOWER   ; 112
 	const MAGIC_COAT   ; 113
@@ -299,13 +299,13 @@ DEF GEN2_MOVES EQU const_value - 1
 	const DIVE         ; 121
 	const ARM_THRUST   ; 122
 	const CAMOUFLAGE   ; 123
-	const TAIL_GLOW    ; 124
+	const MIRROR_SHOT  ; 124
 	const LUSTER_PURGE ; 125
 	const MIST_BALL    ; 126
 	const FEATHERDANCE ; 127
-	const TEETER_DANCE ; 128
+	const OMINOUS_WIND ; 128
 	const BLAZE_KICK   ; 129
-	const MUD_SPORT    ; 12a
+	const BURNING_SAND ; 12a
 	const ICE_BALL     ; 12b
 	const NEEDLE_ARM   ; 12c
 	const SLACK_OFF    ; 12d
@@ -329,7 +329,7 @@ DEF GEN2_MOVES EQU const_value - 1
 	const TICKLE       ; 13f
 	const COSMIC_POWER ; 140
 	const WATER_SPOUT  ; 141
-	const SIGNAL_BEAM  ; 142
+	const X_SCISSOR    ; 142
 	const SHADOW_PUNCH ; 143
 	const EXTRASENSORY ; 144
 	const SKY_UPPERCUT ; 145
@@ -351,7 +351,7 @@ DEF GEN2_MOVES EQU const_value - 1
 	const COVET        ; 155
 	const VOLT_TACKLE  ; 156
 	const MAGICAL_LEAF ; 157
-	const WATER_SPORT  ; 158
+	const MYSTICALFIRE ; 158
 	const CALM_MIND    ; 159
 	const LEAF_BLADE   ; 15a
 	const DRAGON_DANCE ; 15b

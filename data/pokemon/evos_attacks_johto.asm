@@ -384,7 +384,7 @@ ChinchouEvosAttacks:
 	dbw 29, CONFUSE_RAY
 	dbw 37, TAKE_DOWN
 	dbw 41, HYDRO_PUMP
-	dbw 49, CHARGE
+	dbw 49, CHARGE_BEAM
 	db 0 ; no more level-up moves
 
 LanturnEvosAttacks:
@@ -399,7 +399,7 @@ LanturnEvosAttacks:
 	dbw 32, CONFUSE_RAY
 	dbw 43, TAKE_DOWN
 	dbw 50, HYDRO_PUMP
-	dbw 61, CHARGE
+	dbw 61, CHARGE_BEAM
 	db 0 ; no more level-up moves
 
 PichuEvosAttacks:

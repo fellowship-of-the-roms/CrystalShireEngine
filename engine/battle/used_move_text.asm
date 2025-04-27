@@ -259,19 +259,19 @@ MoveTable:
 	dw HEAT_WAVE    ; 101
 	dw HAIL         ; 102
 	dw TORMENT      ; 103
-	dw FLATTER      ; 104
+	dw STONE_EDGE   ; 104
 	dw WILL_O_WISP  ; 105
 	dw MEMENTO      ; 106
 	dw FACADE       ; 107
 	dw FOCUS_PUNCH  ; 108
 	dw SMELLINGSALT ; 109
 	dw NATURE_POWER ; 10a
-	dw CHARGE       ; 10b
+	dw CHARGE_BEAM  ; 10b
 	dw TAUNT        ; 10c
-	dw TRICK        ; 10d
+	dw NIGHT_SLASH  ; 10d
 	dw ROLE_PLAY    ; 10e
 	dw WISH         ; 10f
-	dw ASSIST       ; 110
+	dw ROCK_WRECKER ; 110
 	dw INGRAIN      ; 111
 	dw SUPERPOWER   ; 112
 	dw MAGIC_COAT   ; 113
@@ -291,13 +291,13 @@ MoveTable:
 	dw DIVE         ; 121
 	dw ARM_THRUST   ; 122
 	dw CAMOUFLAGE   ; 123
-	dw TAIL_GLOW    ; 124
+	dw MIRROR_SHOT  ; 124
 	dw LUSTER_PURGE ; 125
 	dw MIST_BALL    ; 126
 	dw FEATHERDANCE ; 127
-	dw TEETER_DANCE ; 128
+	dw OMINOUS_WIND ; 128
 	dw BLAZE_KICK   ; 129
-	dw MUD_SPORT    ; 12a
+	dw BURNING_SAND ; 12a
 	dw ICE_BALL     ; 12b
 	dw NEEDLE_ARM   ; 12c
 	dw SLACK_OFF    ; 12d
@@ -321,7 +321,7 @@ MoveTable:
 	dw TICKLE       ; 13f
 	dw COSMIC_POWER ; 140
 	dw WATER_SPOUT  ; 141
-	dw SIGNAL_BEAM  ; 142
+	dw X_SCISSOR    ; 142
 	dw SHADOW_PUNCH ; 143
 	dw EXTRASENSORY ; 144
 	dw SKY_UPPERCUT ; 145
@@ -343,7 +343,7 @@ MoveTable:
 	dw COVET        ; 155
 	dw VOLT_TACKLE  ; 156
 	dw MAGICAL_LEAF ; 157
-	dw WATER_SPORT  ; 158
+	dw MYSTICALFIRE ; 158
 	dw CALM_MIND    ; 159
 	dw LEAF_BLADE   ; 15a
 	dw DRAGON_DANCE ; 15b

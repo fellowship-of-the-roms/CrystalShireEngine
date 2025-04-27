@@ -144,7 +144,6 @@ TreeckoEggMoves:
 	dw DRAGONBREATH
 	dw ENDEAVOR
 	dw LEECH_SEED
-	dw MUD_SPORT
 	dw -1 ; end
 
 TorchicEggMoves:
@@ -323,7 +322,7 @@ GekoponEggMoves:
 TynamoEggMoves:
 	dw BATON_PASS
 	dw SILVER_WIND
-	dw TRICK
+	;dw TRICK
 	dw -1 ; end
 
 CarvanhaEggMoves:
@@ -358,17 +357,16 @@ SpoinkEggMoves:
 	dw EXTRASENSORY
 	dw FUTURE_SIGHT
 	dw SUBSTITUTE
-	dw TRICK
+	;dw TRICK
 	dw -1 ; end
 
 SpindaEggMoves:
-	dw ASSIST
 	dw BATON_PASS
 	dw DISABLE
 	dw ENCORE
 	dw ROCK_SLIDE
 	dw SMELLINGSALT
-	dw TRICK
+	;dw TRICK
 	dw WISH
 	dw -1 ; end
 
@@ -382,8 +380,6 @@ NohfaceEggMoves:
 	dw ACID
 	dw COUNTER
 	dw DYNAMICPUNCH
-	dw GRASSWHISTLE
-	dw TEETER_DANCE
 	dw -1 ; end
 
 KrolucadaEggMoves:
@@ -444,7 +440,6 @@ FeebasEggMoves:
 	dw HYPNOSIS
 	dw LIGHT_SCREEN
 	dw MIRROR_COAT
-	dw MUD_SPORT
 	dw -1 ; end
 
 CastformEggMoves:
@@ -499,7 +494,7 @@ SphealEggMoves:
 	dw SPIT_UP
 	dw STOCKPILE
 	dw SWALLOW
-	dw WATER_SPORT
+	dw BUBBLEBEAM
 	dw YAWN
 	dw -1 ; end
 
@@ -507,7 +502,6 @@ ClamperlEggMoves:
 	dw BARRIER
 	dw BODY_SLAM
 	dw CONFUSE_RAY
-	dw MUD_SPORT
 	dw REFRESH
 	dw SUPERSONIC
 	dw -1 ; end
@@ -518,14 +512,15 @@ RelicanthEggMoves:
 	dw ROCK_SLIDE
 	dw SKULL_BASH
 	dw SLEEP_TALK
-	dw WATER_SPORT
+	dw FISSURE
 	dw -1 ; end
 
 LuvdiscEggMoves:
-	dw MUD_SPORT
+	dw MIRROR_SHOT
 	dw SPLASH
 	dw SUPERSONIC
-	dw WATER_SPORT
+	dw REFLECT
+	dw LIGHT_SCREEN
 	dw -1 ; end
 
 RaelicEggMoves:

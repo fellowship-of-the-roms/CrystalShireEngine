@@ -557,7 +557,7 @@ NidoranFEvosAttacks:
 	dbw 20, BITE
 	dbw 23, POISON_FANG
 	dbw 30, FURY_SWIPES
-	dbw 38, FLATTER
+	dbw 38, SWAGGER
 	dbw 47, CRUNCH
 	db 0 ; no more level-up moves
 
@@ -572,7 +572,7 @@ NidorinaEvosAttacks:
 	dbw 22, BITE
 	dbw 26, POISON_FANG
 	dbw 34, FURY_SWIPES
-	dbw 43, FLATTER
+	dbw 43, SWAGGER
 	dbw 53, CRUNCH
 	db 0 ; no more level-up moves
 
@@ -596,7 +596,7 @@ NidoranMEvosAttacks:
 	dbw 20, HORN_ATTACK
 	dbw 23, POISON_FANG
 	dbw 30, FURY_ATTACK
-	dbw 38, FLATTER
+	dbw 38, SWAGGER
 	dbw 47, HORN_DRILL
 	db 0 ; no more level-up moves
 
@@ -611,7 +611,7 @@ NidorinoEvosAttacks:
 	dbw 22, HORN_ATTACK
 	dbw 26, POISON_FANG
 	dbw 34, FURY_ATTACK
-	dbw 43, FLATTER
+	dbw 43, SWAGGER
 	dbw 53, HORN_DRILL
 	db 0 ; no more level-up moves
 
@@ -1035,7 +1035,7 @@ KadabraEvosAttacks:
 	dbw 30, FUTURE_SIGHT
 	dbw 33, ROLE_PLAY
 	dbw 36, PSYCHIC_M
-	dbw 43, TRICK
+	;dbw 43, TRICK
 	db 0 ; no more level-up moves
 
 AlakazamEvosAttacks:
@@ -1051,7 +1051,7 @@ AlakazamEvosAttacks:
 	dbw 30, FUTURE_SIGHT
 	dbw 33, CALM_MIND
 	dbw 36, PSYCHIC_M
-	dbw 43, TRICK
+	;dbw 43, TRICK
 	db 0 ; no more level-up moves
 
 MachopEvosAttacks:
@@ -1181,7 +1181,7 @@ GeodudeEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, DEFENSE_CURL
 	dbw 1, TACKLE
-	dbw 6, MUD_SPORT
+	dbw 6, MUD_SLAP
 	dbw 11, ROCK_THROW
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
@@ -1196,10 +1196,10 @@ GravelerEvosAttacks:
 	dbbw EVOLVE_LEVEL, 35, GRAVELER
 	db 0 ; no more evolutions
 	dbw 1, DEFENSE_CURL
-	dbw 1, MUD_SPORT
+	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
 	dbw 1, TACKLE
-	dbw 6, MUD_SPORT
+	dbw 6, MUD_SLAP
 	dbw 11, ROCK_THROW
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
@@ -1213,10 +1213,10 @@ GravelerEvosAttacks:
 GolemEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, DEFENSE_CURL
-	dbw 1, MUD_SPORT
+	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
 	dbw 1, TACKLE
-	dbw 6, MUD_SPORT
+	dbw 6, MUD_SLAP
 	dbw 11, ROCK_THROW
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
@@ -1577,7 +1577,7 @@ VoltorbEvosAttacks:
 	dbbw EVOLVE_LEVEL, 30, ELECTRODE
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
-	dbw 1, CHARGE
+	dbw 1, CHARGE_BEAM
 	dbw 8, SCREECH
 	dbw 15, SONICBOOM
 	dbw 21, SPARK
@@ -1592,7 +1592,7 @@ VoltorbEvosAttacks:
 ElectrodeEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
-	dbw 1, CHARGE
+	dbw 1, CHARGE_BEAM
 	dbw 1, SCREECH
 	dbw 1, SONICBOOM
 	dbw 8, SCREECH
@@ -1857,7 +1857,7 @@ GoldeenEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, PECK
 	dbw 1, TAIL_WHIP
-	dbw 1, WATER_SPORT
+	dbw 1, BUBBLE
 	dbw 10, SUPERSONIC
 	dbw 15, HORN_ATTACK
 	dbw 24, FLAIL
@@ -1872,7 +1872,7 @@ SeakingEvosAttacks:
 	dbw 1, PECK
 	dbw 1, SUPERSONIC
 	dbw 1, TAIL_WHIP
-	dbw 1, WATER_SPORT
+	dbw 1, BUBBLE
 	dbw 10, SUPERSONIC
 	dbw 15, HORN_ATTACK
 	dbw 24, FLAIL
@@ -1921,7 +1921,7 @@ MrMimeEvosAttacks:
 	dbw 26, ENCORE
 	dbw 29, PSYBEAM
 	dbw 33, RECYCLE
-	dbw 37, TRICK
+	dbw 37, MYSTICALFIRE
 	dbw 41, ROLE_PLAY
 	dbw 45, PSYCHIC_M
 	dbw 49, BATON_PASS
@@ -2255,7 +2255,7 @@ ZapdosEvosAttacks:
 	dbw 25, AGILITY
 	dbw 37, DETECT
 	dbw 49, DRILL_PECK
-	dbw 61, CHARGE
+	dbw 61, CHARGE_BEAM
 	dbw 73, LIGHT_SCREEN
 	dbw 85, THUNDER
 	db 0 ; no more level-up moves
