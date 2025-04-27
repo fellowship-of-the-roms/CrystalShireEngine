@@ -311,7 +311,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, GRASS,         100, 20,   0      ;INGRAIN
 	move EFFECT_NORMAL_HIT,        120, FIGHTING,      100,  5,   0      ;SUPERPOWER EFFECT_SUPERPOWER
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 15,   0      ;MAGIC_COAT
-	move EFFECT_POISON_HIT,        120, POISON,         80,  5,  30      ;GUNK_SHOT									anim
+	move EFFECT_POISON_HIT,        120, POISON,         80,  5,  30      ;GUNK_SHOT
 	move EFFECT_NORMAL_HIT,         60, FIGHTING,      100, 10, 100      ;REVENGE EFFECT_REVENGE
 	move EFFECT_NORMAL_HIT,         75, FIGHTING,      100, 15,   0      ;BRICK_BREAK EFFECT_BRICK_BREAK
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 10,   0      ;YAWN
@@ -327,11 +327,11 @@ MovesGen3:
 	move EFFECT_FLY,                80, WATER,         100, 10,   0      ;DIVE
 	move EFFECT_MULTI_HIT,          15, FIGHTING,      100, 20,   0      ;ARM_THRUST
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;CAMOUFLAGE
-	move EFFECT_ACCURACY_DOWN_HIT,  65, STEEL,          85, 10,  30      ;MIRROR_SHOT								anim
+	move EFFECT_ACCURACY_DOWN_HIT,  65, STEEL,          85, 10,  30      ;MIRROR_SHOT
 	move EFFECT_SP_DEF_DOWN_HIT,    70, PSYCHIC_TYPE,  100,  5,  50      ;LUSTER_PURGE
 	move EFFECT_SP_DEF_DOWN_HIT,    70, PSYCHIC_TYPE,  100,  5,  50      ;MIST_BALL EFFECT_SP_ATK_DOWN_HIT
 	move EFFECT_NORMAL_HIT,          0, FLYING,        100, 15,   0      ;FEATHERDANCE
-	move EFFECT_ALL_UP_HIT,         60, GHOST,         100,  5,  10      ;OMINOUS_WIND								anim
+	move EFFECT_ALL_UP_HIT,         60, GHOST,         100,  5,  10      ;OMINOUS_WIND
 	move EFFECT_BURN_HIT,           85, FIRE,           90, 10,  10      ;BLAZE_KICK
 	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND								anim
 	move EFFECT_ROLLOUT,            30, ICE,            90, 20,   0      ;ICE_BALL

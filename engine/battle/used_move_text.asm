@@ -291,12 +291,12 @@ MoveTable:
 ;	dw DIVE         ; 121
 ;	dw ARM_THRUST   ; 122
 ;	dw CAMOUFLAGE   ; 123
-	dw MIRROR_SHOT  ; 124
-	dw LUSTER_PURGE ; 125
-	dw MIST_BALL    ; 126
-	dw FEATHERDANCE ; 127
+;	dw MIRROR_SHOT  ; 124
+;	dw LUSTER_PURGE ; 125
+;	dw MIST_BALL    ; 126
+;	dw FEATHERDANCE ; 127
 	dw OMINOUS_WIND ; 128
-	dw BLAZE_KICK   ; 129
+;	dw BLAZE_KICK   ; 129
 	dw BURNING_SAND ; 12a
 	dw ICE_BALL     ; 12b
 	dw POWER_WHIP   ; 12c

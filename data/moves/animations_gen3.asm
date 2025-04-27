@@ -43,9 +43,9 @@ BattleAnimationsGen3::
 	dw BattleAnim_LusterPurge
 	dw BattleAnim_MistBall
 	dw BattleAnim_FeatherDance
-	dw BattleAnim_TeeterDance
+	dw BattleAnim_OminousWind
 	dw BattleAnim_BlazeKick
-	dw BattleAnim_MudSport
+	dw BattleAnim_ScorchingSands
 	dw BattleAnim_IceBall
 	dw BattleAnim_NeedleArm
 	dw BattleAnim_SlackOff
@@ -1399,25 +1399,36 @@ BattleAnim_FeatherDance:
 	anim_call BattleAnim_ShowMon_1
 	anim_ret
 
-BattleAnim_TeeterDance:
-	anim_1gfx BATTLE_ANIM_GFX_NOISE
-	anim_call BattleAnim_TargetObj_2Row
-	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, $1, $0
-	anim_wait 8
-	anim_sound 0, 0, SFX_SQUEAK
-	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 64, 80, $0
-	anim_wait 32
-	anim_sound 0, 0, SFX_SQUEAK
-	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 16, 80, $2
-	anim_wait 32
-	anim_sound 0, 0, SFX_SQUEAK
-	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 70, 80, $1
-	anim_wait 32
-	anim_sound 0, 0, SFX_SQUEAK
-	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 32, 80, $2
-	anim_wait 24
-	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
-	anim_call BattleAnim_ShowMon_0
+;BattleAnim_TeeterDance:
+;	anim_1gfx BATTLE_ANIM_GFX_NOISE
+;	anim_call BattleAnim_TargetObj_2Row
+;	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, $1, $0
+;	anim_wait 8
+;	anim_sound 0, 0, SFX_SQUEAK
+;	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 64, 80, $0
+;	anim_wait 32
+;	anim_sound 0, 0, SFX_SQUEAK
+;	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 16, 80, $2
+;	anim_wait 32
+;	anim_sound 0, 0, SFX_SQUEAK
+;	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 70, 80, $1
+;	anim_wait 32
+;	anim_sound 0, 0, SFX_SQUEAK
+;	anim_obj BATTLE_ANIM_OBJ_TEETER_DANCE, 32, 80, $2
+;	anim_wait 24
+;	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
+;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
+
+BattleAnim_OminousWind:
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_PURPLE
+	anim_1gfx BATTLE_ANIM_GFX_HAZE
+	anim_bgp $1b
+	anim_bgeffect BATTLE_BG_EFFECT_WHIRLPOOL, $0, $0, $0
+	anim_sound 0, 0, SFX_SPITE
+	anim_call BattleAnimSub_Mist
+	anim_wait 120
+	anim_incbgeffect BATTLE_BG_EFFECT_WHIRLPOOL
 	anim_ret
 
 BattleAnim_BlazeKick:
@@ -1458,44 +1469,63 @@ BattleAnimSub_RadialFlame:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_MudSport:
-	anim_1gfx BATTLE_ANIM_GFX_POISON
-	anim_obp0 $fc
-	anim_call BattleAnim_TargetObj_2Row
-	anim_bgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN, $0, $1, $0
-	anim_wait 22
+;BattleAnim_MudSport:
+;	anim_1gfx BATTLE_ANIM_GFX_POISON
+;	anim_obp0 $fc
+;	anim_call BattleAnim_TargetObj_2Row
+;	anim_bgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN, $0, $1, $0
+;	anim_wait 22
+;.loop
+;	anim_sound 0, 1, SFX_AEROBLAST
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $32
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $2e
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $31
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $2f
+;	anim_wait 28
+;	anim_loop 2, .loop
+;	anim_incbgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN
+;	anim_call BattleAnim_ShowMon_0
+;	anim_clearobjs
+;.loop2
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 30, 20, $10
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_TOXIC
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 80, 20, $10
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_TOXIC
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 130, 20, $10
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_TOXIC
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 55, 20, $10
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_TOXIC
+;	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 105, 20, $10
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_TOXIC
+;	anim_loop 2, .loop2
+;	anim_wait 32
+;	anim_ret
+
+BattleAnim_ScorchingSands:
+	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_FIRE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
 .loop
-	anim_sound 0, 1, SFX_AEROBLAST
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $32
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $2e
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $31
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_1, 48, 88, $2f
-	anim_wait 28
-	anim_loop 2, .loop
-	anim_incbgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN
-	anim_call BattleAnim_ShowMon_0
-	anim_clearobjs
-.loop2
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 30, 20, $10
-	anim_wait 8
-	anim_sound 6, 2, SFX_TOXIC
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 80, 20, $10
-	anim_wait 8
-	anim_sound 6, 2, SFX_TOXIC
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 130, 20, $10
-	anim_wait 8
-	anim_sound 6, 2, SFX_TOXIC
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 55, 20, $10
-	anim_wait 8
-	anim_sound 6, 2, SFX_TOXIC
-	anim_obj BATTLE_ANIM_OBJ_MUD_SPORT_2, 105, 20, $10
-	anim_wait 8
-	anim_sound 6, 2, SFX_TOXIC
-	anim_loop 2, .loop2
-	anim_wait 32
+	anim_sound 6, 2, SFX_BURN
+	anim_obj BATTLE_ANIM_OBJ_SAND, 64, 92, $4
+	anim_wait 4
+	anim_loop 10, .loop
+	anim_setobjpal PAL_BATTLE_BG_TARGET, PAL_BTLCUSTOM_FIRE
+	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME_SLOW, 136, 48, $6
+	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME_SLOW, 136, 48, $16
+	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME_SLOW, 136, 48, $26
+	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME_SLOW, 136, 48, $36
+	anim_wait 48
 	anim_ret
 
 BattleAnim_IceBall:
