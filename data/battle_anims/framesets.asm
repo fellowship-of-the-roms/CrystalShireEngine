@@ -264,6 +264,7 @@ BattleAnimFrameData:
 	dw .Frameset_CutRight              ; BATTLE_ANIM_FRAMESET_CUT_RIGHT
 	dw .Frameset_CutLeft               ; BATTLE_ANIM_FRAMESET_CUT_LEFT
 	dw .Frameset_RockWreckerGrow       ; BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW
+	dw .Frameset_GunkShot              ; BATTLE_ANIM_FRAMESET_GUNK_SHOT
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1735,4 +1736,17 @@ BattleAnimFrameData:
 	battleoamframe BATTLE_ANIM_OAMSET_00F, 30
 	battleoamframe BATTLE_ANIM_OAMSET_01B, 30
 	battleoamframe BATTLE_ANIM_OAMSET_01C, 43
+	battleoamdelete
+
+.Frameset_GunkShot:
+	battleoamwait 20
+	battleoamframe BATTLE_ANIM_OAMSET_01F,  20
+	battleoamframe BATTLE_ANIM_OAMSET_07E,  20
+	battleoamframe BATTLE_ANIM_OAMSET_108, 10
+	battleoamwait 4
+	battleoamframe BATTLE_ANIM_OAMSET_108, 4
+	battleoamwait 4
+	battleoamframe BATTLE_ANIM_OAMSET_108, 4
+	battleoamwait 4
+	battleoamframe BATTLE_ANIM_OAMSET_108, 4
 	battleoamdelete
