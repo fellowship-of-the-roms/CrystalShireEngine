@@ -384,30 +384,33 @@ DEF HOENN_POKEMON EQU const_value
 	const MAGNEZONE  ; 168
 	const SNOVER     ; 169
 	const ABOMASNOW  ; 16a
-	const SPHEAL     ; 16b out
-	const SEALEO     ; 16c out
-	const WALREIN    ; 16d out
-	const CLAMPERL   ; 16e out
-	const HUNTAIL    ; 16f out
-	const GOREBYSS   ; 170 out
-	const RELICANTH  ; 171
-	const LUVDISC    ; 172
-	const RAELIC     ; 173
-	const ROMUSHU    ; 174
-	const FUSANG     ; 175
-	const BELDUM     ; 176
-	const METANG     ; 177
-	const METAGROSS  ; 178
-	const REGIROCK   ; 179 darkrai
-	const REGICE     ; 17a meloetta
-	const REGISTEEL  ; 17b marshadow
-	const LATIAS     ; 17c
-	const LATIOS     ; 17d
-	const KYOGRE     ; 17e
-	const GROUDON    ; 17f
-	const RAYQUAZA   ; 180
-	const JIRACHI    ; 181
-	const DEOXYS     ; 182 out?
+	const TURTWIG    ; 16b
+	const GROTLE     ; 16c
+	const TORTERRA   ; 16d 
+	const CHIMCHAR   ; 16e 
+	const MONFERNO   ; 16f 
+	const INFERNAPE  ; 170 
+	const PIPLUP	 ; 171
+	const PRINPLUP	 ; 172
+	const EMPOLEON	 ; 173
+	const RELICANTH  ; 174
+	const LUVDISC    ; 175
+	const RAELIC     ; 176
+	const ROMUSHU    ; 177
+	const FUSANG     ; 178
+	const BELDUM     ; 179
+	const METANG     ; 17a
+	const METAGROSS  ; 17b
+	const REGIROCK   ; 17c darkrai
+	const REGICE     ; 17d meloetta
+	const REGISTEEL  ; 17e marshadow?
+	const LATIAS     ; 17f
+	const LATIOS     ; 180
+	const KYOGRE     ; 181
+	const GROUDON    ; 182
+	const RAYQUAZA   ; 183
+	const JIRACHI    ; 184
+	const DEOXYS     ; 185 hoopa?
 DEF NUM_POKEMON EQU const_value - 1
 
 DEF EGG EQU -3

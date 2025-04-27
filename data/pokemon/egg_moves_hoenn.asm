@@ -111,10 +111,13 @@ EggMovePointers3::
 	dw NoEggMoves3
 	dw SnoverEggMoves
 	dw NoEggMoves3
-	dw SphealEggMoves
+	dw TurtwigEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
-	dw ClamperlEggMoves
+	dw ChimcharEggMoves
+	dw NoEggMoves3
+	dw NoEggMoves3
+	dw PiplupEggMoves
 	dw NoEggMoves3
 	dw NoEggMoves3
 	dw RelicanthEggMoves
@@ -490,7 +493,7 @@ SnoverEggMoves:
 	dw SPIKES
 	dw -1 ; end
 
-SphealEggMoves:
+TurtwigEggMoves:
 	dw CURSE
 	dw FISSURE
 	dw ROCK_SLIDE
@@ -501,7 +504,15 @@ SphealEggMoves:
 	dw YAWN
 	dw -1 ; end
 
-ClamperlEggMoves:
+ChimcharEggMoves:
+	dw YAWN
+	dw BODY_SLAM
+	dw CONFUSE_RAY
+	dw REFRESH
+	dw SUPERSONIC
+	dw -1 ; end
+
+PiplupEggMoves:
 	dw BARRIER
 	dw BODY_SLAM
 	dw CONFUSE_RAY

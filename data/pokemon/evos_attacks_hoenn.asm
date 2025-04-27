@@ -112,12 +112,15 @@ EvosAttacksPointers3::
 	dw MagnezoneEvosAttacks
 	dw SnoverEvosAttacks
 	dw AbomasnowEvosAttacks
-	dw SphealEvosAttacks
-	dw SealeoEvosAttacks
-	dw WalreinEvosAttacks
-	dw ClamperlEvosAttacks
-	dw HuntailEvosAttacks
-	dw GorebyssEvosAttacks
+	dw TurtwigEvosAttacks
+	dw GrotleEvosAttacks
+	dw TorterraEvosAttacks
+	dw ChimcharEvosAttacks
+	dw MonfernoEvosAttacks
+	dw InfernapeEvosAttacks
+	dw PiplupEvosAttacks
+	dw PrinplupEvosAttacks
+	dw EmpoleonEvosAttacks
 	dw RelicanthEvosAttacks
 	dw LuvdiscEvosAttacks
 	dw RaelicEvosAttacks
@@ -1848,8 +1851,8 @@ AbomasnowEvosAttacks:
 	dbw 61, SHEER_COLD
 	db 0 ; no more level-up moves
 
-SphealEvosAttacks:
-	dbbw EVOLVE_LEVEL, 32, SEALEO
+TurtwigEvosAttacks:
+	dbbw EVOLVE_LEVEL, 32, GROTLE
 	db 0 ; no more evolutions
 	dbw 1, GROWL
 	dbw 1, POWDER_SNOW
@@ -1865,8 +1868,8 @@ SphealEvosAttacks:
 	dbw 49, SHEER_COLD
 	db 0 ; no more level-up moves
 
-SealeoEvosAttacks:
-	dbbw EVOLVE_LEVEL, 44, WALREIN
+GrotleEvosAttacks:
+	dbbw EVOLVE_LEVEL, 44, EMPOLEON
 	db 0 ; no more evolutions
 	dbw 1, ENCORE
 	dbw 1, GROWL
@@ -1883,7 +1886,7 @@ SealeoEvosAttacks:
 	dbw 55, SHEER_COLD
 	db 0 ; no more level-up moves
 
-WalreinEvosAttacks:
+TorterraEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ENCORE
 	dbw 1, GROWL
@@ -1900,7 +1903,7 @@ WalreinEvosAttacks:
 	dbw 61, SHEER_COLD
 	db 0 ; no more level-up moves
 
-ClamperlEvosAttacks:
+ChimcharEvosAttacks:
 	; dbww EVOLVE_TRADE, DEEP_SEA_TOOTH, HUNTAIL
 	; dbww EVOLVE_TRADE, DEEP_SEA_SCALE, GOREBYSS
 	db 0 ; no more evolutions
@@ -1910,7 +1913,7 @@ ClamperlEvosAttacks:
 	dbw 1, WHIRLPOOL
 	db 0 ; no more level-up moves
 
-HuntailEvosAttacks:
+MonfernoEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, WHIRLPOOL
 	dbw 8, BITE
@@ -1922,7 +1925,41 @@ HuntailEvosAttacks:
 	dbw 50, HYDRO_PUMP
 	db 0 ; no more level-up moves
 
-GorebyssEvosAttacks:
+InfernapeEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, WHIRLPOOL
+	dbw 8, CONFUSION
+	dbw 15, AGILITY
+	dbw 22, WATER_PULSE
+	dbw 29, AMNESIA
+	dbw 36, PSYCHIC_M
+	dbw 43, BATON_PASS
+	dbw 50, HYDRO_PUMP
+	db 0 ; no more level-up moves
+
+PiplupEvosAttacks:
+	; dbww EVOLVE_TRADE, DEEP_SEA_TOOTH, HUNTAIL
+	; dbww EVOLVE_TRADE, DEEP_SEA_SCALE, GOREBYSS
+	db 0 ; no more evolutions
+	dbw 1, CLAMP
+	dbw 1, IRON_DEFENSE
+	dbw 1, WATER_GUN
+	dbw 1, WHIRLPOOL
+	db 0 ; no more level-up moves
+	
+PrinplupEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, WHIRLPOOL
+	dbw 8, BITE
+	dbw 15, SCREECH
+	dbw 22, WATER_PULSE
+	dbw 29, SCARY_FACE
+	dbw 36, CRUNCH
+	dbw 43, BATON_PASS
+	dbw 50, HYDRO_PUMP
+	db 0 ; no more level-up moves
+
+EmpoleonEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, WHIRLPOOL
 	dbw 8, CONFUSION

@@ -1059,9 +1059,10 @@ SwinubEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ODOR_SLEUTH
 	dbw 1, TACKLE
+	dbw 5, ENDURE
 	dbw 10, POWDER_SNOW
-	dbw 19, ENDURE
-	dbw 28, TAKE_DOWN
+	dbw 19, TAKE_DOWN
+	dbw 28, ICE_BALL
 	dbw 37, MIST
 	dbw 46, BLIZZARD
 	dbw 55, AMNESIA
@@ -1070,13 +1071,12 @@ SwinubEvosAttacks:
 PiloswineEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ENDURE
-	dbw 1, HORN_ATTACK
+	dbw 1, FURY_ATTACK
 	dbw 1, ODOR_SLEUTH
-	dbw 1, POWDER_SNOW
 	dbw 10, POWDER_SNOW
-	dbw 19, ENDURE
-	dbw 28, TAKE_DOWN
-	dbw 33, FURY_ATTACK
+	dbw 19, TAKE_DOWN
+	dbw 28, ICE_BALL
+	dbw 33, HORN_ATTACK
 	dbw 42, MIST
 	dbw 56, BLIZZARD
 	dbw 70, AMNESIA

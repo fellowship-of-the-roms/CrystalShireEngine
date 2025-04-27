@@ -375,12 +375,15 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; MAGNEZONE
 	icon_pals RED,    RED    ; SNOVER
 	icon_pals RED,    RED    ; ABOMASNOW
-	icon_pals RED,    RED    ; SPHEAL
-	icon_pals RED,    RED    ; SEALEO
-	icon_pals RED,    RED    ; WALREIN
-	icon_pals RED,    RED    ; CLAMPERL
-	icon_pals RED,    RED    ; HUNTAIL
-	icon_pals RED,    RED    ; GOREBYSS
+	icon_pals RED,    RED    ; TURTWIG
+	icon_pals RED,    RED    ; GROTLE
+	icon_pals RED,    RED    ; TORTERRA
+	icon_pals RED,    RED    ; CHIMCHAR
+	icon_pals RED,    RED    ; MONFERNO
+	icon_pals RED,    RED    ; INFERNAPE
+	icon_pals RED,    RED    ; PIPLUP
+	icon_pals RED,    RED    ; PRINPLUP
+	icon_pals RED,    RED    ; EMPOLEON
 	icon_pals RED,    RED    ; RELICANTH
 	icon_pals RED,    RED    ; LUVDISC
 	icon_pals RED,    RED    ; RAELIC

@@ -760,18 +760,24 @@ INCBIN "gfx/pokemon/hoenn/snover/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/snover/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/abomasnow/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/abomasnow/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/spheal/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/spheal/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/sealeo/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/sealeo/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/walrein/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/walrein/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/clamperl/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/clamperl/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/huntail/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/huntail/shiny.pal"
-INCBIN "gfx/pokemon/hoenn/gorebyss/normal.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/hoenn/gorebyss/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/turtwig/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/turtwig/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/grotle/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/grotle/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/torterra/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/torterra/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/chimchar/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/chimchar/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/monferno/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/monferno/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/infernape/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/infernape/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/piplup/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/piplup/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/prinplup/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/prinplup/shiny.pal"
+INCBIN "gfx/pokemon/hoenn/empoleon/normal.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hoenn/empoleon/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/relicanth/normal.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/hoenn/relicanth/shiny.pal"
 INCBIN "gfx/pokemon/hoenn/luvdisc/normal.gbcpal", middle_colors

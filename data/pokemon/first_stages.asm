@@ -363,28 +363,31 @@ FirstEvoStages::
 	dw MAGNEMITE     ;168
 	dw SNOVER
 	dw SNOVER
-	dw SPHEAL
-	dw SPHEAL
-	dw SPHEAL
-	dw CLAMPERL
-	dw CLAMPERL
-	dw CLAMPERL   ;170
+	dw TURTWIG
+	dw TURTWIG
+	dw TURTWIG
+	dw CHIMCHAR
+	dw CHIMCHAR
+	dw CHIMCHAR   	;170
+	dw PIPLUP
+	dw PIPLUP
+	dw PIPLUP   
 	dw RELICANTH
 	dw LUVDISC
 	dw RAELIC
 	dw RAELIC
-	dw RAELIC
+	dw RAELIC		;178
 	dw BELDUM
 	dw BELDUM
-	dw BELDUM     ;178
+	dw BELDUM     
 	dw REGIROCK
 	dw REGICE
 	dw REGISTEEL
 	dw LATIAS
-	dw LATIOS
+	dw LATIOS		;180
 	dw KYOGRE
 	dw GROUDON
-	dw RAYQUAZA   ;180
+	dw RAYQUAZA   
 	dw JIRACHI
 	dw DEOXYS
 	assert_table_length NUM_POKEMON

@@ -743,18 +743,24 @@ PokemonPicPointers::
 	dba SnoverBackpic
 	dba AbomasnowFrontpic
 	dba AbomasnowBackpic
-	dba SphealFrontpic
-	dba SphealBackpic
-	dba SealeoFrontpic
-	dba SealeoBackpic
-	dba WalreinFrontpic
-	dba WalreinBackpic
-	dba ClamperlFrontpic
-	dba ClamperlBackpic
-	dba HuntailFrontpic
-	dba HuntailBackpic
-	dba GorebyssFrontpic
-	dba GorebyssBackpic
+	dba TurtwigFrontpic
+	dba TurtwigBackpic
+	dba GrotleFrontpic
+	dba GrotleBackpic
+	dba TorterraFrontpic
+	dba TorterraBackpic
+	dba ChimcharFrontpic
+	dba ChimcharBackpic
+	dba MonfernoFrontpic
+	dba MonfernoBackpic
+	dba InfernapeFrontpic
+	dba InfernapeBackpic
+	dba PiplupFrontpic
+	dba PiplupBackpic
+	dba PrinplupFrontpic
+	dba PrinplupBackpic
+	dba EmpoleonFrontpic
+	dba EmpoleonBackpic
 	dba RelicanthFrontpic
 	dba RelicanthBackpic
 	dba LuvdiscFrontpic

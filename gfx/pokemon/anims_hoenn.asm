@@ -112,12 +112,15 @@ AnimationPointers3:
 	dw MagnezoneAnimation
 	dw SnoverAnimation
 	dw AbomasnowAnimation
-	dw SphealAnimation
-	dw SealeoAnimation
-	dw WalreinAnimation
-	dw ClamperlAnimation
-	dw HuntailAnimation
-	dw GorebyssAnimation
+	dw TurtwigAnimation
+	dw GrotleAnimation
+	dw TorterraAnimation
+	dw ChimcharAnimation
+	dw MonfernoAnimation
+	dw InfernapeAnimation
+	dw PiplupAnimation
+	dw PrinplupAnimation
+	dw EmpoleonAnimation
 	dw RelicanthAnimation
 	dw LuvdiscAnimation
 	dw RaelicAnimation
@@ -249,12 +252,15 @@ AbsolAnimation:         INCLUDE "gfx/pokemon/hoenn/absol/anim.asm"
 MagnezoneAnimation:     INCLUDE "gfx/pokemon/hoenn/magnezone/anim.asm"
 SnoverAnimation:        INCLUDE "gfx/pokemon/hoenn/snover/anim.asm"
 AbomasnowAnimation:     INCLUDE "gfx/pokemon/hoenn/abomasnow/anim.asm"
-SphealAnimation:        INCLUDE "gfx/pokemon/hoenn/spheal/anim.asm"
-SealeoAnimation:        INCLUDE "gfx/pokemon/hoenn/sealeo/anim.asm"
-WalreinAnimation:       INCLUDE "gfx/pokemon/hoenn/walrein/anim.asm"
-ClamperlAnimation:      INCLUDE "gfx/pokemon/hoenn/clamperl/anim.asm"
-HuntailAnimation:       INCLUDE "gfx/pokemon/hoenn/huntail/anim.asm"
-GorebyssAnimation:      INCLUDE "gfx/pokemon/hoenn/gorebyss/anim.asm"
+TurtwigAnimation:       INCLUDE "gfx/pokemon/hoenn/turtwig/anim.asm"
+GrotleAnimation:        INCLUDE "gfx/pokemon/hoenn/grotle/anim.asm"
+TorterraAnimation:      INCLUDE "gfx/pokemon/hoenn/torterra/anim.asm"
+ChimcharAnimation:      INCLUDE "gfx/pokemon/hoenn/chimchar/anim.asm"
+MonfernoAnimation:      INCLUDE "gfx/pokemon/hoenn/monferno/anim.asm"
+InfernapeAnimation:     INCLUDE "gfx/pokemon/hoenn/infernape/anim.asm"
+PiplupAnimation:        INCLUDE "gfx/pokemon/hoenn/piplup/anim.asm"
+PrinplupAnimation:      INCLUDE "gfx/pokemon/hoenn/prinplup/anim.asm"
+EmpoleonAnimation:      INCLUDE "gfx/pokemon/hoenn/empoleon/anim.asm"
 RelicanthAnimation:     INCLUDE "gfx/pokemon/hoenn/relicanth/anim.asm"
 LuvdiscAnimation:       INCLUDE "gfx/pokemon/hoenn/luvdisc/anim.asm"
 RaelicAnimation:        INCLUDE "gfx/pokemon/hoenn/raelic/anim.asm"

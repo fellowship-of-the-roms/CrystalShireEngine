@@ -112,12 +112,15 @@ BitmaskPointers3:
 	dw MagnezoneBitmasks
 	dw SnoverBitmasks
 	dw AbomasnowBitmasks
-	dw SphealBitmasks
-	dw SealeoBitmasks
-	dw WalreinBitmasks
-	dw ClamperlBitmasks
-	dw HuntailBitmasks
-	dw GorebyssBitmasks
+	dw TurtwigBitmasks
+	dw GrotleBitmasks
+	dw TorterraBitmasks
+	dw ChimcharBitmasks
+	dw MonfernoBitmasks
+	dw InfernapeBitmasks
+	dw PiplupBitmasks
+	dw PrinplupBitmasks
+	dw EmpoleonBitmasks
 	dw RelicanthBitmasks
 	dw LuvdiscBitmasks
 	dw RaelicBitmasks
@@ -249,12 +252,15 @@ AbsolBitmasks:         INCLUDE "gfx/pokemon/hoenn/absol/bitmask.asm"
 MagnezoneBitmasks:     INCLUDE "gfx/pokemon/hoenn/magnezone/bitmask.asm"
 SnoverBitmasks:        INCLUDE "gfx/pokemon/hoenn/snover/bitmask.asm"
 AbomasnowBitmasks:     INCLUDE "gfx/pokemon/hoenn/abomasnow/bitmask.asm"
-SphealBitmasks:        INCLUDE "gfx/pokemon/hoenn/spheal/bitmask.asm"
-SealeoBitmasks:        INCLUDE "gfx/pokemon/hoenn/sealeo/bitmask.asm"
-WalreinBitmasks:       INCLUDE "gfx/pokemon/hoenn/walrein/bitmask.asm"
-ClamperlBitmasks:      INCLUDE "gfx/pokemon/hoenn/clamperl/bitmask.asm"
-HuntailBitmasks:       INCLUDE "gfx/pokemon/hoenn/huntail/bitmask.asm"
-GorebyssBitmasks:      INCLUDE "gfx/pokemon/hoenn/gorebyss/bitmask.asm"
+TurtwigBitmasks:       INCLUDE "gfx/pokemon/hoenn/turtwig/bitmask.asm"
+GrotleBitmasks:        INCLUDE "gfx/pokemon/hoenn/grotle/bitmask.asm"
+TorterraBitmasks:      INCLUDE "gfx/pokemon/hoenn/torterra/bitmask.asm"
+ChimcharBitmasks:      INCLUDE "gfx/pokemon/hoenn/chimchar/bitmask.asm"
+MonfernoBitmasks:      INCLUDE "gfx/pokemon/hoenn/monferno/bitmask.asm"
+InfernapeBitmasks:     INCLUDE "gfx/pokemon/hoenn/infernape/bitmask.asm"
+PiplupBitmasks:        INCLUDE "gfx/pokemon/hoenn/piplup/bitmask.asm"
+PrinplupBitmasks:      INCLUDE "gfx/pokemon/hoenn/prinplup/bitmask.asm"
+EmpoleonBitmasks:      INCLUDE "gfx/pokemon/hoenn/empoleon/bitmask.asm"
 RelicanthBitmasks:     INCLUDE "gfx/pokemon/hoenn/relicanth/bitmask.asm"
 LuvdiscBitmasks:       INCLUDE "gfx/pokemon/hoenn/luvdisc/bitmask.asm"
 RaelicBitmasks:        INCLUDE "gfx/pokemon/hoenn/raelic/bitmask.asm"

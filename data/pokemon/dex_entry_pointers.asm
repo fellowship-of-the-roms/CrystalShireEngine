@@ -366,12 +366,15 @@ PokedexDataPointerTable:
 	dba MagnezonePokedexEntry
 	dba SnoverPokedexEntry
 	dba AbomasnowPokedexEntry
-	dba SphealPokedexEntry
-	dba SealeoPokedexEntry
-	dba WalreinPokedexEntry
-	dba ClamperlPokedexEntry
-	dba HuntailPokedexEntry
-	dba GorebyssPokedexEntry
+	dba TurtwigPokedexEntry
+	dba GrotlePokedexEntry
+	dba TorterraPokedexEntry
+	dba ChimcharPokedexEntry
+	dba MonfernoPokedexEntry
+	dba InfernapePokedexEntry
+	dba PiplupPokedexEntry
+	dba PrinplupPokedexEntry
+	dba EmpoleonPokedexEntry
 	dba RelicanthPokedexEntry
 	dba LuvdiscPokedexEntry
 	dba RaelicPokedexEntry

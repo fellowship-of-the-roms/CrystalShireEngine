@@ -370,12 +370,15 @@ IconPointers:
 	dw MagnezoneIcon
 	dw SnoverIcon
 	dw AbomasnowIcon
-	dw SphealIcon
-	dw SealeoIcon
-	dw WalreinIcon
-	dw ClamperlIcon
-	dw HuntailIcon
-	dw GorebyssIcon
+	dw TurtwigIcon
+	dw GrotleIcon
+	dw TorterraIcon
+	dw ChimcharIcon
+	dw MonfernoIcon
+	dw InfernapeIcon
+	dw PiplupIcon
+	dw PrinplupIcon
+	dw EmpoleonIcon
 	dw RelicanthIcon
 	dw LuvdiscIcon
 	dw RaelicIcon

@@ -367,12 +367,15 @@ PokemonBodyData:
 	dw 311, 3968   ; MAGNEZONE
 	dw 303, 1113   ; SNOVER
 	dw 703, 2987   ; ABOMASNOW
-	dw 207, 871    ; SPHEAL
-	dw 307, 1931   ; SEALEO
-	dw 407, 3320   ; WALREIN
-	dw 104, 1157   ; CLAMPERL
-	dw 507, 595    ; HUNTAIL
-	dw 511, 498    ; GOREBYSS
+	dw 104, 225    ; TURTWIG
+	dw 307, 2138   ; GROTLE
+	dw 703, 6834   ; TORTERRA
+	dw 108, 137    ; CHIMCHAR
+	dw 211, 485    ; MONFERNO
+	dw 311, 1213   ; INFERNAPE
+	dw 104, 115	   ; PIPLUP
+	dw 207, 507	   ; PRINPLUP
+	dw 507, 1863   ; EMPOLEON
 	dw 303, 516    ; RELICANTH
 	dw 200, 192    ; LUVDISC
 	dw 14,  77     ; RAELIC
