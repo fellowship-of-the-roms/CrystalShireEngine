@@ -1945,7 +1945,7 @@ RelicanthEvosAttacks:
 	dbw 36, DOUBLE_EDGE 
 	dbw 43, ANCIENTPOWER
 	dbw 50, REST
-	dbw 57, DOUBLE_EDGE
+	dbw 57, STONE_EDGE
 	dbw 64, HYDRO_PUMP
 	db 0 ; no more level-up moves
 

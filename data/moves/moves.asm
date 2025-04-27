@@ -307,7 +307,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,         70, DARK,	   	   100, 15,   0      ;NIGHT_SLASH
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 10,   0      ;ROLE_PLAY
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;WISH
-	move EFFECT_HYPER_BEAM,        150, ROCK,           90,  5,   0      ;ROCK_WRECKER								anim
+	move EFFECT_HYPER_BEAM,        150, ROCK,           90,  5,   0      ;ROCK_WRECKER								
 	move EFFECT_NORMAL_HIT,          0, GRASS,         100, 20,   0      ;INGRAIN
 	move EFFECT_NORMAL_HIT,        120, FIGHTING,      100,  5,   0      ;SUPERPOWER EFFECT_SUPERPOWER
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 15,   0      ;MAGIC_COAT
