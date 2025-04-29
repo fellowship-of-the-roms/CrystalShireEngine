@@ -283,7 +283,7 @@ NoctowlEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
 	dbw 1, FORESIGHT
-	dbw 1, GROWL
+	dbw 1, NIGHTMARE
 	dbw 1, PECK
 	dbw 6, FORESIGHT
 	dbw 11, PECK
@@ -783,7 +783,7 @@ SlowkingEvosAttacks:
 MisdreavusEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, PSYWAVE
-	dbw 1, GROWL
+	dbw 1, NIGHTMARE
 	dbw 6, SPITE
 	dbw 11, ASTONISH
 	dbw 17, CONFUSE_RAY
@@ -1247,13 +1247,13 @@ StantlerEvosAttacks:
 	dbww EVOLVE_ITEM, KINGS_ROCK, WYRDEER
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
-	dbw 7, LEER
+	dbw 7, CONFUSE_RAY
 	dbw 13, ASTONISH
 	dbw 19, HYPNOSIS
 	dbw 25, STOMP
 	dbw 31, SAND_ATTACK
 	dbw 37, TAKE_DOWN
-	dbw 43, CONFUSE_RAY
+	dbw 43, NIGHTMARE
 	dbw 49, CALM_MIND
 	db 0 ; no more level-up moves
 

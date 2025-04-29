@@ -260,7 +260,7 @@ MudkipEvosAttacks:
 	dbw 19, FORESIGHT
 	dbw 24, SWAGGER
 	dbw 28, TAKE_DOWN
-	dbw 33, WHIRLPOOL
+	dbw 33, MUDDY_WATER
 	dbw 37, PROTECT
 	dbw 42, HYDRO_PUMP
 	dbw 46, ENDEAVOR
@@ -1540,13 +1540,13 @@ GrimmsnarlEvosAttacks:
 WyrdeerEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
-	dbw 7, LEER
+	dbw 7, CONFUSE_RAY
 	dbw 13, ASTONISH
 	dbw 19, HYPNOSIS
 	dbw 25, STOMP
 	dbw 31, SAND_ATTACK
 	dbw 37, TAKE_DOWN
-	dbw 43, CONFUSE_RAY
+	dbw 43, NIGHTMARE
 	dbw 49, CALM_MIND
 	db 0 ; no more level-up moves
 

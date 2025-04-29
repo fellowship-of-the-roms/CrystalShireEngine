@@ -627,19 +627,19 @@ ScientistGroup:
 
 	next_list_item ; SCIENTIST (4)
 	db "MARC@", TRAINERTYPE_NORMAL
-	db 27
-	dw MAGNEMITE
-	db 27
-	dw MAGNEMITE
-	db 27
-	dw MAGNEMITE
+	db 33 ;27
+	dw DUOSION
+	db 30 ;27
+	dw MAGNETON
+	db 33 ;27
+	dw DUOSION
 	db -1 ; end
 
 	next_list_item ; SCIENTIST (5)
 	db "RICH@", TRAINERTYPE_MOVES
-	db 30
-	dw PORYGON
-	dw CONVERSION, CONVERSION2, RECOVER, TRI_ATTACK
+	db 40 ;30
+	dw OMASTAR
+	dw SURF, BITE, ICE_BEAM, MUD_SHOT
 	db -1 ; end
 
 	end_list_items
@@ -2135,49 +2135,49 @@ GruntMGroup:
 	dw GOLBAT
 	db -1 ; end
 
-	next_list_item ; GRUNTM (7)
+	next_list_item ; GRUNTM (7) RADIO TOWER
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 23
+	db 30 ;23
 	dw KOFFING
-	db 23
-	dw GRIMER
-	db 23
-	dw ZUBAT
-	db 23
-	dw RATTATA
+	db 30 ;23
+	dw STUNKY
+	db 30 ;23
+	dw STUNKY
+	db 34 ;23
+	dw RATICATE
 	db -1 ; end
 
-	next_list_item ; GRUNTM (8)
+	next_list_item ; GRUNTM (8) RADIO TOWER
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 26
+	db 36 ;26
+	dw MAROWAK
+	db -1 ; end
+
+	next_list_item ; GRUNTM (9) RADIO TOWER
+	db "GRUNT@", TRAINERTYPE_NORMAL
+	db 32 ;24
+	dw RATICATE
+	db 34 ;26
 	dw WEEZING
 	db -1 ; end
 
-	next_list_item ; GRUNTM (9)
+	next_list_item ; GRUNTM (10) RADIO TOWER
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 24
-	dw RATICATE
-	db 26
-	dw KOFFING
-	db -1 ; end
-
-	next_list_item ; GRUNTM (10)
-	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 22
-	dw ZUBAT
-	db 24
+	db 32 ;22
+	dw DROWZEE
+	db 34 ;24
 	dw GOLBAT
-	db 22
+	db 32 ;22
 	dw GRIMER
 	db -1 ; end
 
-	next_list_item ; GRUNTM (11)
+	next_list_item ; GRUNTM (11) GOLDENROD UNDERGROUND
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 23
+	db 32 ;23
 	dw MUK
-	db 23
+	db 32 ;23
 	dw KOFFING
-	db 25
+	db 34 ;25
 	dw RATTATA
 	db -1 ; end
 
@@ -2187,25 +2187,25 @@ GruntMGroup:
 	dw HOUNDOUR
 	db -1 ; end
 
-	next_list_item ; GRUNTM (13)
+	next_list_item ; GRUNTM (13) GOLDENROD UNDERGROUND
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 27
-	dw RATTATA
+	db 37 ;27
+	dw HYPNO
 	db -1 ; end
 
-	next_list_item ; GRUNTM (14)
+	next_list_item ; GRUNTM (14) GOLDENROD UNDERGROUND
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 24
+	db 34 ;24
 	dw RATICATE
-	db 24
+	db 34 ;24
 	dw GOLBAT
 	db -1 ; end
 
-	next_list_item ; GRUNTM (15)
+	next_list_item ; GRUNTM (15) GOLDENROD UNDERGROUND
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 26
+	db 36 ;26
 	dw GRIMER
-	db 23
+	db 33 ;23
 	dw WEEZING
 	db -1 ; end
 
@@ -2263,31 +2263,31 @@ GruntMGroup:
 	dw STUNKY
 	db -1 ; end
 
-	next_list_item ; GRUNTM (22)
+	next_list_item ; GRUNTM (22) GOLDENROD RADIO TOWER
 	db "EXECUTIVE@", TRAINERTYPE_NORMAL
-	db 36
-	dw GOLBAT
+	db 42 ;36
+	dw PERSIAN
 	db -1 ; end
 
 	next_list_item ; GRUNTM (23)
 	db "EXECUTIVE@", TRAINERTYPE_NORMAL
-	db 30
+	db 33 ;30
+	dw IMPIDIMP
+	db -1 ; end
+
+	next_list_item ; GRUNTM (24) GOLDENROD UNDERGROUND
+	db "GRUNT@", TRAINERTYPE_NORMAL
+	db 32 ;25
+	dw KOFFING
+	db 32 ;25
 	dw KOFFING
 	db -1 ; end
 
-	next_list_item ; GRUNTM (24)
+	next_list_item ; GRUNTM (25) GOLDENROD UNDERGROUND
 	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 25
-	dw KOFFING
-	db 25
-	dw KOFFING
-	db -1 ; end
-
-	next_list_item ; GRUNTM (25)
-	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 24
-	dw KOFFING
-	db 24
+	db 32 ;24
+	dw STUNKY
+	db 34 ;24
 	dw MUK
 	db -1 ; end
 
@@ -4209,45 +4209,51 @@ BlackbeltGroup:
 SECTION "Enemy Trainer Parties 3", ROMX
 
 ExecutiveMGroup:
-	next_list_item ; EXECUTIVEM (1)
+	next_list_item ; EXECUTIVEM (1) ARCHER FINAL BATTLE
 	db "EXECUTIVE@", TRAINERTYPE_MOVES
-	db 33
-	dw HOUNDOUR
-	dw EMBER, ROAR, BITE, FAINT_ATTACK
-	db 33
-	dw KOFFING
-	dw TACKLE, SLUDGE, SMOKESCREEN, HAZE
-	db 35
-	dw HOUNDOOM
-	dw EMBER, SMOG, BITE, FAINT_ATTACK
+	db 41 ;33
+	dw HONCHKROW
+	dw FAINT_ATTACK, AERIAL_ACE, SUPERPOWER, STEEL_WING
+	db 39 ;33
+	dw TAUROS
+	dw PURSUIT, DOUBLE_EDGE, IRON_TAIL, ROCK_TOMB
+	db 41 ;35
+	dw MAGMAR
+	dw FIRE_PUNCH, THUNDERPUNCH, BRICK_BREAK, PSYCHIC_M
+	db 39 ;new mon
+	dw NIDOKING
+	dw X_SCISSOR, ROCK_SLIDE, BRICK_BREAK, VICEGRIP
+	db 42 ;new mon
+	dw GRIMMSNARL
+	dw MACH_PUNCH, FAINT_ATTACK, FIRE_PUNCH, ICE_PUNCH
 	db -1 ; end
 
-	next_list_item ; EXECUTIVEM (2)
+	next_list_item ; EXECUTIVEM (2) RADIO TOWER
 	db "EXECUTIVE@", TRAINERTYPE_MOVES
-	db 36
-	dw GOLBAT
-	dw LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
+	db 43 ;36
+	dw HONCHKROW
+	dw FAINT_ATTACK, DRILL_PECK, SUPERPOWER, HEAT_WAVE
 	db -1 ; end
 
-	next_list_item ; EXECUTIVEM (3)
+	next_list_item ; EXECUTIVEM (3) THE WALL RADIO TOWER
 	db "EXECUTIVE@", TRAINERTYPE_MOVES
-	db 30
-	dw KOFFING
-	dw TACKLE, SELFDESTRUCT, SLUDGE, SMOKESCREEN
-	db 30
-	dw KOFFING
-	dw TACKLE, SELFDESTRUCT, SLUDGE, SMOKESCREEN
-	db 30
-	dw KOFFING
-	dw TACKLE, SELFDESTRUCT, SLUDGE, SMOKESCREEN
-	db 32
+	db 36 ;30
+	dw PARASECT
+	dw SLASH, SPORE, X_SCISSOR, GIGA_DRAIN
+	;db 30 ;30
+	;dw KOFFING
+	;dw TACKLE, SELFDESTRUCT, SLUDGE, SMOKESCREEN
+	db 37 ;30
+	dw PARASECT
+	dw SLASH, SPORE, X_SCISSOR, GIGA_DRAIN
+	;db 38 ;32
+	;dw WEEZING
+	;dw TACKLE, EXPLOSION, SLUDGE, SMOKESCREEN
+	db 39 ;30
 	dw WEEZING
-	dw TACKLE, EXPLOSION, SLUDGE, SMOKESCREEN
-	db 30
-	dw KOFFING
 	dw TACKLE, SELFDESTRUCT, SLUDGE, SMOKESCREEN
-	db 30
-	dw KOFFING
+	db 40 ;30
+	dw FORRETRESS
 	dw TACKLE, SMOG, SLUDGE, SMOKESCREEN
 	db -1 ; end
 
@@ -4805,26 +4811,32 @@ CamperGroup:
 	end_list_items
 
 ExecutiveFGroup:
-	next_list_item ; EXECUTIVEF (1)
+	next_list_item ; EXECUTIVEF (1) ARIANA FINAL BATTLE
 	db "EXECUTIVE@", TRAINERTYPE_MOVES
-	db 32
+	db 39 ;32
 	dw ARBOK
 	dw WRAP, POISON_STING, BITE, GLARE
-	db 32
+	db 38 ;32
 	dw VILEPLUME
 	dw ABSORB, SWEET_SCENT, SLEEP_POWDER, ACID
-	db 32
-	dw MURKROW
-	dw PECK, PURSUIT, HAZE, NIGHT_SHADE
+	db 38 ;new mon
+	dw NIDOQUEEN
+	dw ABSORB, SWEET_SCENT, SLEEP_POWDER, ACID
+	db 37 ;new mon
+	dw LICKITUNG
+	dw STOMP, ICE_PUNCH, SUPERSONIC, FIRE_PUNCH
+	db 40 ;32
+	dw HONCHKROW
+	dw FLY, FAINT_ATTACK, HEAT_WAVE, MUD_SLAP
 	db -1 ; end
 
 	next_list_item ; EXECUTIVEF (2) ROCKET HIDEOUT
 	db "EXECUTIVE@", TRAINERTYPE_MOVES
-	db 31 ;23
+	db 33 ;23
 	dw ARBOK
 	dw WRAP, LEER, POISON_STING, BITE
 	db 31 ;23
-	dw PARASECT
+	dw VILEPLUME
 	dw SLASH, SPORE, CUT, GIGA_DRAIN
 	db 31 ;23
 	dw LICKITUNG
@@ -5439,7 +5451,7 @@ GruntFGroup:
 	next_list_item ; GRUNTF (3) RADIO TOWER
 	db "GRUNT@", TRAINERTYPE_NORMAL
 	db 35 ;25
-	dw MURKROW
+	dw GLOOM
 	db 35 ;25
 	dw SNEASEL
 	db -1 ; end
@@ -5457,13 +5469,13 @@ GruntFGroup:
 	db -1 ; end
 
 	next_list_item ; GRUNTF (5) ROCKET HIDEOUT
-	db "GRUNT@", TRAINERTYPE_NORMAL
-	db 27 ;18
+	db "GRUNT@", TRAINERTYPE_MOVES
+	db 28 ;18
 	dw STUNKY
-	;dw WRAP, LEER, POISON_STING, BITE
+	dw SMOKESCREEN, NIGHT_SLASH, SLASH, POISON_GAS
 	db 27 ;18
-	dw MURKROW
-	;dw ABSORB, SWEET_SCENT, STUN_SPORE, SLEEP_POWDER
+	dw GLOOM
+	dw ABSORB, SWEET_SCENT, STUN_SPORE, SLEEP_POWDER
 	db -1 ; end
 
 	end_list_items

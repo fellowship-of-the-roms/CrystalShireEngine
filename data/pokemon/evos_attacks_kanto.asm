@@ -1478,7 +1478,7 @@ HaunterEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, LICK
 	dbw 1, HYPNOSIS
-	dbw 1, SPITE
+	dbw 1, NIGHTMARE
 	dbw 8, SPITE
 	dbw 13, MEAN_LOOK
 	dbw 16, CURSE
@@ -1493,7 +1493,7 @@ GengarEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, LICK
 	dbw 1, HYPNOSIS
-	dbw 1, SPITE
+	dbw 1, NIGHTMARE
 	dbw 8, SPITE
 	dbw 13, MEAN_LOOK
 	dbw 16, CURSE
@@ -1507,9 +1507,9 @@ GengarEvosAttacks:
 OnixEvosAttacks:
 	dbww EVOLVE_ITEM, METAL_COAT, STEELIX
 	db 0 ; no more evolutions
-	dbw 1, SAND_TOMB
+	dbw 1, BIND
 	dbw 1, SCREECH
-	dbw 9, BIND
+	dbw 9, SAND_TOMB
 	dbw 13, ROCK_THROW
 	dbw 21, HARDEN
 	dbw 25, RAGE
@@ -1545,7 +1545,7 @@ HypnoEvosAttacks:
 	dbw 18, CONFUSION
 	dbw 25, HEADBUTT
 	dbw 26, FAINT_ATTACK
-	dbw 33, POISON_GAS
+	dbw 33, NIGHTMARE
 	dbw 40, MEDITATE
 	dbw 49, PSYCHIC_M
 	dbw 55, PSYCH_UP
