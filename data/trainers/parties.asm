@@ -604,9 +604,9 @@ ScientistGroup:
 	next_list_item ; SCIENTIST (1)
 	db "ROSS@", TRAINERTYPE_NORMAL
 	db 26 ;22
-	dw KOFFING
+	dw SOLOSIS
 	db 26 ;22
-	dw KOFFING
+	dw SOLOSIS
 	db -1 ; end
 
 	next_list_item ; SCIENTIST (2)
@@ -619,10 +619,10 @@ ScientistGroup:
 	db "JED@", TRAINERTYPE_NORMAL
 	db 26 ;20
 	dw MAGNEMITE
-	db 26 ;20
-	dw MAGNEMITE
-	db 26 ;20
-	dw SOLOSIS
+	db 28 ;20
+	dw KABUTO
+	;db 26 ;20
+	;dw SOLOSIS
 	db -1 ; end
 
 	next_list_item ; SCIENTIST (4)
@@ -1370,24 +1370,24 @@ CooltrainerMGroup:
 	next_list_item ; COOLTRAINERM (1)
 	db "NICK@", TRAINERTYPE_MOVES
 	db 26
-	dw CHARMANDER
+	dw CHARMELEON
 	dw EMBER, SMOKESCREEN, RAGE, SCARY_FACE
 	db 26
-	dw SQUIRTLE
+	dw WARTORTLE
 	dw WITHDRAW, WATER_GUN, BITE, CURSE
 	db 26
-	dw BULBASAUR
+	dw IVYSAUR
 	dw LEECH_SEED, POISONPOWDER, SLEEP_POWDER, RAZOR_LEAF
 	db -1 ; end
 
 	next_list_item ; COOLTRAINERM (2)
 	db "AARON@", TRAINERTYPE_NORMAL
 	db 26 ;24
-	dw IVYSAUR
+	dw NUZLEAF
 	db 26 ;24
-	dw CHARMELEON
+	dw TORKOAL
 	db 26 ;24
-	dw WARTORTLE
+	dw MANTINE
 	db -1 ; end
 
 	next_list_item ; COOLTRAINERM (3)
@@ -1534,7 +1534,7 @@ CooltrainerMGroup:
 	dw SQUIRTLE
 	db -1 ; end
 
-	next_list_item ; COOLTRAINERM (14)
+	next_list_item ; COOLTRAINERM (14) unused
 	db "ANDY@", TRAINERTYPE_NORMAL
 	db 10
 	dw BULBASAUR
@@ -1544,7 +1544,7 @@ CooltrainerMGroup:
 	dw SQUIRTLE
 	db -1 ; end
 
-	next_list_item ; COOLTRAINERM (15)
+	next_list_item ; COOLTRAINERM (15) unused
 	db "TYLER@", TRAINERTYPE_NORMAL
 	db 10
 	dw BULBASAUR
@@ -1574,7 +1574,7 @@ CooltrainerMGroup:
 	dw WARTORTLE
 	db -1 ; end
 
-	next_list_item ; COOLTRAINERM (18)
+	next_list_item ; COOLTRAINERM (18) unused
 	db "STEVE@", TRAINERTYPE_NORMAL
 	db 14
 	dw BULBASAUR
@@ -2082,17 +2082,17 @@ GruntMGroup:
 	db 14
 	dw SLOWPOKE
 	db 14 ;new mon
-	dw STUNKY
+	dw HONCHKROW
 	db -1 ; end
 
 	next_list_item ; GRUNTM (2) SLOWPOKE WELL
 	db "GRUNT@", TRAINERTYPE_NORMAL
 	db 7
 	dw RATTATA
-	db 9
+	db 8
 	dw ZUBAT
 	db 9
-	dw ZUBAT
+	dw STUNKY
 	db -1 ; end
 
 	next_list_item ; GRUNTM (3) RADIO TOWER
@@ -2181,7 +2181,7 @@ GruntMGroup:
 	dw RATTATA
 	db -1 ; end
 
-	next_list_item ; GRUNTM (12)
+	next_list_item ; GRUNTM (12) unused?
 	db "EXECUTIVE@", TRAINERTYPE_NORMAL
 	db 33
 	dw HOUNDOUR
@@ -2269,10 +2269,10 @@ GruntMGroup:
 	dw PERSIAN
 	db -1 ; end
 
-	next_list_item ; GRUNTM (23)
+	next_list_item ; GRUNTM (23) unused?
 	db "EXECUTIVE@", TRAINERTYPE_NORMAL
 	db 33 ;30
-	dw IMPIDIMP
+	dw MORGREM
 	db -1 ; end
 
 	next_list_item ; GRUNTM (24) GOLDENROD UNDERGROUND
@@ -2291,7 +2291,7 @@ GruntMGroup:
 	dw MUK
 	db -1 ; end
 
-	next_list_item ; GRUNTM (26)
+	next_list_item ; GRUNTM (26) unused?
 	db "GRUNT@", TRAINERTYPE_NORMAL
 	db 15
 	dw RATTATA
@@ -2299,7 +2299,7 @@ GruntMGroup:
 	dw RATTATA
 	db -1 ; end
 
-	next_list_item ; GRUNTM (27)
+	next_list_item ; GRUNTM (27) unused?
 	db "EXECUTIVE@", TRAINERTYPE_NORMAL
 	db 22
 	dw ZUBAT
@@ -2319,7 +2319,7 @@ GruntMGroup:
 	dw KOFFING
 	db -1 ; end
 
-	next_list_item ; GRUNTM (30)
+	next_list_item ; GRUNTM (30) unused?
 	db "GRUNT@", TRAINERTYPE_NORMAL
 	db 25
 	dw GOLBAT
@@ -2329,7 +2329,7 @@ GruntMGroup:
 	dw ARBOK
 	db -1 ; end
 
-	next_list_item ; GRUNTM (31)
+	next_list_item ; GRUNTM (31) unused?
 	db "GRUNT@", TRAINERTYPE_NORMAL
 	db 30
 	dw GOLBAT
@@ -3996,10 +3996,10 @@ FirebreatherGroup:
 
 	next_list_item ; FIREBREATHER (5)
 	db "BILL@", TRAINERTYPE_NORMAL
-	db 8 ;6
-	dw KOFFING
-	db 8 ;6
-	dw KOFFING
+	db 9 ;6
+	dw GROWLITHE
+	;db 8 ;6
+	;dw KOFFING
 	db -1 ; end
 
 	next_list_item ; FIREBREATHER (6)
@@ -4853,8 +4853,8 @@ SageGroup:
 	db "CHOW@", TRAINERTYPE_NORMAL
 	db 3
 	dw BELLSPROUT
-	db 3
-	dw BELLSPROUT
+	;db 3
+	;dw BELLSPROUT
 	db 3
 	dw BELLSPROUT
 	db -1 ; end
@@ -4909,8 +4909,8 @@ SageGroup:
 	dw BELLSPROUT
 	db 3
 	dw LOTAD
-	db 3
-	dw BELLSPROUT
+	;db 3
+	;dw BELLSPROUT
 	db -1 ; end
 
 	next_list_item ; SAGE (8)
