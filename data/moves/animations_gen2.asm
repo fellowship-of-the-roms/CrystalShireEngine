@@ -1032,7 +1032,7 @@ BattleAnim_Megahorn:
 	anim_ret
 
 BattleAnim_Dragonbreath:
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_DRAGONBREATH
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_DRAGONBREATH
 	anim_1gfx BATTLE_ANIM_GFX_FIRE
 	anim_sound 6, 2, SFX_EMBER
 .loop

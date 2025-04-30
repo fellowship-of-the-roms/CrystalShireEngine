@@ -351,6 +351,8 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_ROCK_WRECKER            ; 13c
 	const BATTLE_ANIM_OBJ_GUNK_SHOT               ; 13d
 	const BATTLE_ANIM_OBJ_GUNK_SHOT_BUBBLES       ; 13e
+	const BATTLE_ANIM_OBJ_BIG_WHIP                ; 13f
+	const BATTLE_ANIM_OBJ_MYSTICAL_FIRE           ; 140
 
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
@@ -717,6 +719,7 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_CUT_LEFT                ; 104
 	const BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW       ; 105
 	const BATTLE_ANIM_FRAMESET_GUNK_SHOT               ; 106
+	const BATTLE_ANIM_FRAMESET_BIG_WHIP                ; 107
 DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 
 ; BattleAnimOAMData indexes (see data/battle_anims/oam.asm)
@@ -987,6 +990,9 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_106
 	const BATTLE_ANIM_OAMSET_107
 	const BATTLE_ANIM_OAMSET_108
+	const BATTLE_ANIM_OAMSET_109
+	const BATTLE_ANIM_OAMSET_10A
+	const BATTLE_ANIM_OAMSET_10B
 	
 DEF NUM_BATTLE_ANIM_OAMSETS EQU const_value
 
@@ -995,58 +1001,59 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_BATTLE_OAM_CMD, \
 
 ; BattleBGEffects indexes (see engine/battle_anims/bg_effects.asm)
 	const_def 1
-	const BATTLE_BG_EFFECT_FLASH_INVERTED                   ; 01
-	const BATTLE_BG_EFFECT_FLASH_WHITE                      ; 02
-	const BATTLE_BG_EFFECT_WHITE_HUES                       ; 03
-	const BATTLE_BG_EFFECT_BLACK_HUES                       ; 04
-	const BATTLE_BG_EFFECT_ALTERNATE_HUES                   ; 05
-	const BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW     ; 06
-	const BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW ; 07
-	const BATTLE_BG_EFFECT_CYCLE_BGPALS_INVERTED            ; 08
-	const BATTLE_BG_EFFECT_HIDE_MON                         ; 09
-	const BATTLE_BG_EFFECT_SHOW_MON                         ; 0a
-	const BATTLE_BG_EFFECT_ENTER_MON                        ; 0b
-	const BATTLE_BG_EFFECT_RETURN_MON                       ; 0c
-	const BATTLE_BG_EFFECT_SURF                             ; 0d
-	const BATTLE_BG_EFFECT_WHIRLPOOL                        ; 0e
-	const BATTLE_BG_EFFECT_TELEPORT                         ; 0f
-	const BATTLE_BG_EFFECT_NIGHT_SHADE                      ; 10
-	const BATTLE_BG_EFFECT_BATTLEROBJ_1ROW                  ; 11
-	const BATTLE_BG_EFFECT_BATTLEROBJ_2ROW                  ; 12
-	const BATTLE_BG_EFFECT_DOUBLE_TEAM                      ; 13
-	const BATTLE_BG_EFFECT_ACID_ARMOR                       ; 14
-	const BATTLE_BG_EFFECT_RAPID_FLASH                      ; 15
-	const BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT                ; 16
-	const BATTLE_BG_EFFECT_FADE_MON_TO_BLACK                ; 17
-	const BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING      ; 18
-	const BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING      ; 19
-	const BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING   ; 1a
-	const BATTLE_BG_EFFECT_FLASH_MON_REPEATING              ; 1b
-	const BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING     ; 1c
-	const BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK ; 1d
-	const BATTLE_BG_EFFECT_FADE_MON_FROM_WHITE              ; 1e
-	const BATTLE_BG_EFFECT_SHAKE_SCREEN_X                   ; 1f
-	const BATTLE_BG_EFFECT_SHAKE_SCREEN_Y                   ; 20
-	const BATTLE_BG_EFFECT_WITHDRAW                         ; 21
-	const BATTLE_BG_EFFECT_BOUNCE_DOWN                      ; 22
-	const BATTLE_BG_EFFECT_DIG                              ; 23
-	const BATTLE_BG_EFFECT_TACKLE                           ; 24
-	const BATTLE_BG_EFFECT_BODY_SLAM                        ; 25
-	const BATTLE_BG_EFFECT_WOBBLE_MON                       ; 26
-	const BATTLE_BG_EFFECT_REMOVE_MON                       ; 27
-	const BATTLE_BG_EFFECT_WAVE_DEFORM_MON                  ; 28
-	const BATTLE_BG_EFFECT_PSYCHIC                          ; 29
-	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON1               ; 2a
-	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON2               ; 2b
-	const BATTLE_BG_EFFECT_FLAIL                            ; 2c
-	const BATTLE_BG_EFFECT_ROLLOUT                          ; 2d
-	const BATTLE_BG_EFFECT_VITAL_THROW                      ; 2e
-	const BATTLE_BG_EFFECT_START_WATER                      ; 2f
-	const BATTLE_BG_EFFECT_WATER                            ; 30
-	const BATTLE_BG_EFFECT_END_WATER                        ; 31
-	const BATTLE_BG_EFFECT_VIBRATE_MON                      ; 32
-	const BATTLE_BG_EFFECT_WOBBLE_PLAYER                    ; 33
-	const BATTLE_BG_EFFECT_WOBBLE_SCREEN                    ; 34
+	const BATTLE_BG_EFFECT_FLASH_INVERTED                           ; 01
+	const BATTLE_BG_EFFECT_FLASH_WHITE                              ; 02
+	const BATTLE_BG_EFFECT_WHITE_HUES                               ; 03
+	const BATTLE_BG_EFFECT_BLACK_HUES                               ; 04
+	const BATTLE_BG_EFFECT_ALTERNATE_HUES                           ; 05
+	const BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW             ; 06
+	const BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW         ; 07
+	const BATTLE_BG_EFFECT_CYCLE_BGPALS_INVERTED                    ; 08
+	const BATTLE_BG_EFFECT_HIDE_MON                                 ; 09
+	const BATTLE_BG_EFFECT_SHOW_MON                                 ; 0a
+	const BATTLE_BG_EFFECT_ENTER_MON                                ; 0b
+	const BATTLE_BG_EFFECT_RETURN_MON                               ; 0c
+	const BATTLE_BG_EFFECT_SURF                                     ; 0d
+	const BATTLE_BG_EFFECT_WHIRLPOOL                                ; 0e
+	const BATTLE_BG_EFFECT_TELEPORT                                 ; 0f
+	const BATTLE_BG_EFFECT_NIGHT_SHADE                              ; 10
+	const BATTLE_BG_EFFECT_BATTLEROBJ_1ROW                          ; 11
+	const BATTLE_BG_EFFECT_BATTLEROBJ_2ROW                          ; 12
+	const BATTLE_BG_EFFECT_DOUBLE_TEAM                              ; 13
+	const BATTLE_BG_EFFECT_ACID_ARMOR                               ; 14
+	const BATTLE_BG_EFFECT_RAPID_FLASH                              ; 15
+	const BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT                        ; 16
+	const BATTLE_BG_EFFECT_FADE_MON_TO_BLACK                        ; 17
+	const BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING              ; 18
+	const BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING              ; 19
+	const BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING           ; 1a
+	const BATTLE_BG_EFFECT_FLASH_MON_REPEATING                      ; 1b
+	const BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING             ; 1c
+	const BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK         ; 1d
+	const BATTLE_BG_EFFECT_FADE_MON_FROM_WHITE                      ; 1e
+	const BATTLE_BG_EFFECT_SHAKE_SCREEN_X                           ; 1f
+	const BATTLE_BG_EFFECT_SHAKE_SCREEN_Y                           ; 20
+	const BATTLE_BG_EFFECT_WITHDRAW                                 ; 21
+	const BATTLE_BG_EFFECT_BOUNCE_DOWN                              ; 22
+	const BATTLE_BG_EFFECT_DIG                                      ; 23
+	const BATTLE_BG_EFFECT_TACKLE                                   ; 24
+	const BATTLE_BG_EFFECT_BODY_SLAM                                ; 25
+	const BATTLE_BG_EFFECT_WOBBLE_MON                               ; 26
+	const BATTLE_BG_EFFECT_REMOVE_MON                               ; 27
+	const BATTLE_BG_EFFECT_WAVE_DEFORM_MON                          ; 28
+	const BATTLE_BG_EFFECT_PSYCHIC                                  ; 29
+	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON1                       ; 2a
+	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON2                       ; 2b
+	const BATTLE_BG_EFFECT_FLAIL                                    ; 2c
+	const BATTLE_BG_EFFECT_ROLLOUT                                  ; 2d
+	const BATTLE_BG_EFFECT_VITAL_THROW                              ; 2e
+	const BATTLE_BG_EFFECT_START_WATER                              ; 2f
+	const BATTLE_BG_EFFECT_WATER                                    ; 30
+	const BATTLE_BG_EFFECT_END_WATER                                ; 31
+	const BATTLE_BG_EFFECT_VIBRATE_MON                              ; 32
+	const BATTLE_BG_EFFECT_WOBBLE_PLAYER                            ; 33
+	const BATTLE_BG_EFFECT_WOBBLE_SCREEN                            ; 34
+	const BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW_FULL_SHIFT  ; 35
 DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 
 ; wBattleAnimTileDict keys (see wram.asm)
@@ -1122,6 +1129,7 @@ DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 	const BATTLE_ANIM_GFX_MUSHROOM         ; 42
 	const BATTLE_ANIM_GFX_TRIANGLE         ; 43
 	const BATTLE_ANIM_GFX_HUGE_ROCK        ; 44
+	const BATTLE_ANIM_GFX_BIG_WHIP         ; 45
 DEF NUM_BATTLE_ANIM_GFX EQU const_value - 1
 
 ; battle_bg_effect struct members (see macros/ram.asm)
@@ -1206,6 +1214,7 @@ DEF NUM_BG_EFFECTS EQU 5 ; see wActiveBGEffects
 	const PAL_BTLCUSTOM_PSYCHO_BOOST_2     ; 24
 	const PAL_BTLCUSTOM_ACID               ; 25
 	const PAL_BTLCUSTOM_REFLECT            ; 25
+	const PAL_BTLCUSTOM_MYSTICAL           ; 26
 DEF NUM_CUSTOM_BATTLE_PALETTES EQU const_value
 
 DEF PAL_BTLCUSTOM_DEFAULT EQU -1
