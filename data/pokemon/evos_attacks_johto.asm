@@ -149,6 +149,7 @@ MeganiumEvosAttacks:
 	dbw 41, LIGHT_SCREEN
 	dbw 51, MAGICAL_LEAF
 	dbw 61, SOLARBEAM
+	dbw 68, ANCIENT_POWER
 	db 0 ; no more level-up moves
 
 CyndaquilEvosAttacks:
@@ -190,6 +191,7 @@ TyphlosionEvosAttacks:
 	dbw 31, FLAME_WHEEL
 	dbw 45, SWIFT
 	dbw 60, FLAMETHROWER
+	dbw 68, ERUPTION
 	db 0 ; no more level-up moves
 
 TotodileEvosAttacks:
@@ -234,6 +236,7 @@ FeraligatrEvosAttacks:
 	dbw 38, SLASH
 	dbw 47, CRUNCH
 	dbw 58, HYDRO_PUMP
+	dbw 68, SUPERPOWER
 	db 0 ; no more level-up moves
 
 SentretEvosAttacks:
@@ -243,9 +246,9 @@ SentretEvosAttacks:
 	dbw 4, DEFENSE_CURL
 	dbw 7, QUICK_ATTACK
 	dbw 12, FURY_SWIPES
-	; dbw 17, HELPING_HAND
+	dbw 17, TICKLE
 	dbw 24, SLAM
-	; dbw 31, FOLLOW_ME
+	dbw 31, BELLY_DRUM
 	dbw 40, REST
 	dbw 49, AMNESIA
 	db 0 ; no more level-up moves
@@ -258,9 +261,9 @@ FurretEvosAttacks:
 	dbw 4, DEFENSE_CURL
 	dbw 7, QUICK_ATTACK
 	dbw 12, FURY_SWIPES
-	; dbw 19, HELPING_HAND
+	dbw 19, TICKLE
 	dbw 28, SLAM
-	; dbw 37, FOLLOW_ME
+	dbw 37, BELLY_DRUM
 	dbw 48, REST
 	dbw 59, AMNESIA
 	db 0 ; no more level-up moves
@@ -705,6 +708,7 @@ WooperEvosAttacks:
 	dbw 31, YAWN
 	dbw 36, EARTHQUAKE
 	dbw 41, RAIN_DANCE
+	dbw 47, MUDDY_WATER
 	dbw 51, HAZE
 	dbw 51, MIST
 	db 0 ; no more level-up moves
@@ -719,6 +723,7 @@ QuagsireEvosAttacks:
 	dbw 35, YAWN
 	dbw 42, EARTHQUAKE
 	dbw 49, RAIN_DANCE
+	dbw 53, MUDDY_WATER
 	dbw 61, HAZE
 	dbw 61, MIST
 	db 0 ; no more level-up moves

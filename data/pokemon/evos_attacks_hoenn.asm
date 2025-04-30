@@ -260,7 +260,7 @@ MudkipEvosAttacks:
 	dbw 19, FORESIGHT
 	dbw 24, SWAGGER
 	dbw 28, TAKE_DOWN
-	dbw 33, MUDDY_WATER
+	dbw 33, WATER_PULSE
 	dbw 37, PROTECT
 	dbw 42, HYDRO_PUMP
 	dbw 46, ENDEAVOR
@@ -1165,7 +1165,7 @@ DundragEvosAttacks:
 	dbw 43, ENDEAVOR
 	dbw 48, TWISTER
 	dbw 52, DRAGONBREATH
-	dbw 61, HYPER_BEAM
+	dbw 61, SKY_ATTACK
 	db 0 ; no more level-up moves
 
 CarvanhaEvosAttacks:
@@ -1227,6 +1227,7 @@ WhiscashEvosAttacks:
 	dbw 21, AMNESIA
 	dbw 26, REST
 	dbw 26, SNORE
+	dbw 30, MUDDY_WATER
 	dbw 36, EARTHQUAKE
 	dbw 46, FUTURE_SIGHT
 	dbw 56, FISSURE
@@ -1333,9 +1334,9 @@ TrapinchEvosAttacks:
 	dbbw EVOLVE_LEVEL, 35, VIBRAVA
 	db 0 ; no more evolutions
 	dbw 1, BITE
-	dbw 9, SAND_ATTACK
+	dbw 9, SAND_TOMB
 	dbw 17, FAINT_ATTACK
-	dbw 25, SAND_TOMB
+	dbw 25, BURNING_SAND
 	dbw 33, CRUNCH
 	dbw 41, DIG
 	dbw 49, SANDSTORM
@@ -1351,7 +1352,7 @@ VibravaEvosAttacks:
 	dbw 1, SAND_TOMB
 	dbw 9, SAND_ATTACK
 	dbw 17, FAINT_ATTACK
-	dbw 25, SAND_TOMB
+	dbw 25, BURNING_SAND
 	dbw 33, CRUNCH
 	dbw 35, DRAGONBREATH
 	dbw 41, SCREECH
@@ -1367,10 +1368,11 @@ FlygonEvosAttacks:
 	dbw 1, SAND_TOMB
 	dbw 9, SAND_ATTACK
 	dbw 17, FAINT_ATTACK
-	dbw 25, SAND_TOMB
+	dbw 25, BURNING_SAND
 	dbw 33, CRUNCH
 	dbw 35, DRAGONBREATH
 	dbw 41, SCREECH
+	dbw 45, DRAGON_CLAW
 	dbw 53, SANDSTORM
 	dbw 65, HYPER_BEAM
 	db 0 ; no more level-up moves
@@ -2170,7 +2172,7 @@ LatiasEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, PSYWAVE
 	dbw 5, WISH
-	; dbw 10, HELPING_HAND
+	dbw 10, AIR_CUTTER
 	dbw 15, SAFEGUARD
 	dbw 20, DRAGONBREATH
 	dbw 25, DIVE
@@ -2185,7 +2187,7 @@ LatiosEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, PSYWAVE
 	dbw 5, MEMENTO
-	; dbw 10, HELPING_HAND
+	dbw 10, AIR_CUTTER
 	dbw 15, SAFEGUARD
 	dbw 20, DRAGONBREATH
 	dbw 25, PROTECT
@@ -2247,7 +2249,7 @@ JirachiEvosAttacks:
 	dbw 1, WISH
 	dbw 5, REST
 	dbw 10, SWIFT
-	; dbw 15, HELPING_HAND
+	dbw 15, MIRROR_SHOT
 	dbw 20, PSYCHIC_M
 	dbw 25, REFRESH
 	dbw 30, REST

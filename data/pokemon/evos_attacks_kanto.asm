@@ -1190,10 +1190,10 @@ GeodudeEvosAttacks:
 	dbw 1, DEFENSE_CURL
 	dbw 6, MUD_SLAP
 	dbw 8, ROCK_THROW
-	dbw 11, ROCK_BLAST
+	dbw 11, ROLLOUT
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
-	dbw 26, ROLLOUT
+	dbw 26, ROCK_BLAST
 	dbw 31, ROCK_SLIDE
 	dbw 36, EARTHQUAKE
 	dbw 41, EXPLOSION
@@ -1208,10 +1208,10 @@ GravelerEvosAttacks:
 	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
 	dbw 6, MUD_SLAP
-	dbw 11, ROCK_BLAST
+	dbw 11, ROLLOUT
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
-	dbw 29, ROLLOUT
+	dbw 29, ROCK_BLAST
 	dbw 37, ROCK_SLIDE
 	dbw 45, EARTHQUAKE
 	dbw 53, EXPLOSION
@@ -1225,11 +1225,11 @@ GolemEvosAttacks:
 	dbw 1, MUD_SLAP
 	dbw 1, ROCK_THROW
 	dbw 6, MUD_SLAP
-	dbw 11, ROCK_BLAST
+	dbw 11, ROLLOUT
 	dbw 16, MAGNITUDE
 	dbw 21, SELFDESTRUCT
-	dbw 29, ROLLOUT
-	dbw 37, ROCK_SLIDE
+	dbw 29, ROCK_BLAST
+	dbw 35, ROCK_SLIDE
 	dbw 45, EARTHQUAKE
 	dbw 53, EXPLOSION
 	dbw 62, STONE_EDGE
@@ -2193,7 +2193,7 @@ KabutoEvosAttacks:
 	dbw 25, MUD_SHOT
 	dbw 31, SAND_ATTACK
 	dbw 37, X_SCISSOR        
-	dbw 43, METAL_SOUND
+	dbw 43, ROCK_BLAST
 	dbw 49, MEGA_DRAIN
 	dbw 55, ANCIENTPOWER
 	db 0 ; no more level-up moves
@@ -2209,7 +2209,7 @@ KabutopsEvosAttacks:
 	dbw 31, SAND_ATTACK
 	dbw 37, X_SCISSOR           
 	dbw 40, SLASH
-	dbw 46, METAL_SOUND
+	dbw 46, ROCK_BLAST
 	dbw 55, MEGA_DRAIN
 	dbw 65, ANCIENTPOWER
 	db 0 ; no more level-up moves
