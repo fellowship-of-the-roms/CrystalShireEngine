@@ -888,9 +888,11 @@ SteelixEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, SLAM
 	dbw 1, SCREECH
+	dwb 1, IRON_DEFENSE
+	dbw 1, DIG
 	dbw 9, BIND
-	dbw 13, ROCK_THROW
-	dbw 21, HARDEN
+	dbw 13, BIDE
+	dbw 21, ROCK_BLAST
 	dbw 25, RAGE
 	dbw 33, SANDSTORM
 	dbw 37, CRUNCH
@@ -1076,7 +1078,7 @@ SwinubEvosAttacks:
 PiloswineEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, ENDURE
-	dbw 1, FURY_ATTACK
+	dbw 1, BODY_SLAM
 	dbw 1, ODOR_SLEUTH
 	dbw 10, POWDER_SNOW
 	dbw 19, TAKE_DOWN
@@ -1227,7 +1229,7 @@ DonphanEvosAttacks:
 	dbw 1, ODOR_SLEUTH
 	dbw 9, DEFENSE_CURL
 	dbw 17, FLAIL
-	dbw 25, FURY_ATTACK
+	dbw 25, MAGNITUDE
 	dbw 33, ROLLOUT
 	dbw 41, RAPID_SPIN
 	dbw 49, EARTHQUAKE

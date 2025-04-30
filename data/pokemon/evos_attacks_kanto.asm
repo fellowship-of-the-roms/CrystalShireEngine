@@ -1509,9 +1509,10 @@ OnixEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, BIND
 	dbw 1, SCREECH
-	dbw 9, SAND_TOMB
+	dbw 1, HARDEN
+	dbw 9, BIDE
 	dbw 13, ROCK_THROW
-	dbw 21, HARDEN
+	dbw 21, SAND_TOMB
 	dbw 25, RAGE
 	dbw 33, SANDSTORM
 	dbw 37, SLAM
@@ -1759,7 +1760,7 @@ RhyhornEvosAttacks:
 	dbw 1, HORN_ATTACK
 	dbw 1, SCARY_FACE
 	dbw 10, STOMP
-	dbw 15, FURY_ATTACK
+	dbw 15, ROCK_THROW
 	dbw 24, ROCK_BLAST
 	dbw 29, HORN_DRILL
 	dbw 38, STONE_EDGE
@@ -1770,12 +1771,12 @@ RhyhornEvosAttacks:
 
 RhydonEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, FURY_ATTACK
+	dbw 1, ROCK_THROW
 	dbw 1, HORN_ATTACK
 	dbw 1, STOMP
 	dbw 1, SCARY_FACE
 	dbw 10, STOMP
-	dbw 15, FURY_ATTACK
+	dbw 15, ROCK_THROW
 	dbw 24, ROCK_BLAST
 	dbw 29, HORN_DRILL
 	dbw 38, STONE_EDGE

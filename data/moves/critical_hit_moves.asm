@@ -12,4 +12,5 @@ CriticalHitMoves:
 	dw AIR_CUTTER
 	dw POISON_TAIL
 	dw LEAF_BLADE
+	dw CUT
 	dw -1

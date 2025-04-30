@@ -1668,7 +1668,7 @@ MiloticEvosAttacks:
 	dbw 10, SPLASH
 	dbw 15, REFRESH
 	dbw 20, WATER_PULSE
-	dbw 25, TWISTER
+	dbw 25, DRAGONBREATH
 	dbw 30, RECOVER
 	dbw 35, RAIN_DANCE
 	dbw 40, HYDRO_PUMP
