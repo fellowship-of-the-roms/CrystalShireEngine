@@ -302,7 +302,7 @@ MoveNames::
 	li "BLAZE KICK"
 	li "BURNING SAND"
 	li "ICE BALL"
-	li "NEEDLE ARM"
+	li "POWER WHIP"
 	li "SLACK OFF"
 	li "HYPER VOICE"
 	li "POISON FANG"

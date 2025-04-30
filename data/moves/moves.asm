@@ -333,9 +333,9 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, FLYING,        100, 15,   0      ;FEATHERDANCE
 	move EFFECT_ALL_UP_HIT,         60, GHOST,         100,  5,  10      ;OMINOUS_WIND
 	move EFFECT_BURN_HIT,           85, FIRE,           90, 10,  10      ;BLAZE_KICK
-	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND								
+	move EFFECT_BURN_HIT,           70, GROUND,        100, 10,  30      ;BURNING_SAND
 	move EFFECT_ROLLOUT,            30, ICE,            90, 20,   0      ;ICE_BALL
-	move EFFECT_NORMAL_HIT,        120, GRASS,          85, 10,   0      ;POWER_WHIP								anim
+	move EFFECT_NORMAL_HIT,        120, GRASS,          85, 10,   0      ;POWER_WHIP
 	move EFFECT_HEAL,                0, NORMAL,        100, 10,   0      ;SLACK_OFF
 	move EFFECT_NORMAL_HIT,         90, NORMAL,        100, 10,   0      ;HYPER_VOICE
 	move EFFECT_NORMAL_HIT,         50, POISON,        100, 15,  50      ;POISON_FANG EFFECT_TOXIC_HIT
@@ -357,7 +357,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;TICKLE EFFECT_TICKLE
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 20,   0      ;COSMIC_POWER
 	move EFFECT_NORMAL_HIT,        150, WATER,         100,  5,   0      ;WATER_SPOUT EFFECT_WATER_SPOUT
-	move EFFECT_NORMAL_HIT ,        80, BUG,           100, 15,   0      ;X_SCISSOR									anim
+	move EFFECT_NORMAL_HIT ,        80, BUG,           100, 15,   0      ;X_SCISSOR
 	move EFFECT_ALWAYS_HIT,         60, GHOST,         100, 20,   0      ;SHADOW_PUNCH
 	move EFFECT_FLINCH_HIT,         80, PSYCHIC_TYPE,  100, 30,  10      ;EXTRASENSORY
 	move EFFECT_NORMAL_HIT,         85, FIGHTING,       90, 15,   0      ;SKY_UPPERCUT
@@ -379,7 +379,7 @@ MovesGen3:
 	move EFFECT_THIEF,              40, NORMAL,        100, 40, 100      ;COVET
 	move EFFECT_NORMAL_HIT,        120, ELECTRIC,      100, 15,  10      ;VOLT_TACKLE EFFECT_VOLT_TACKLE
 	move EFFECT_ALWAYS_HIT,         60, GRASS,         100, 20,   0      ;MAGICAL_LEAF
-	move EFFECT_SP_ATK_DOWN_HIT,    65, FIRE,          100, 10,  10      ;MYSTICALFIRE								anim
+	move EFFECT_SP_ATK_DOWN_HIT,    65, FIRE,          100, 10,  10      ;MYSTICALFIRE
 	move EFFECT_NORMAL_HIT,          0, PSYCHIC_TYPE,  100, 20,   0      ;CALM_MIND EFFECT_CALM_MIND
 	move EFFECT_NORMAL_HIT,         90, GRASS,         100, 15,   0      ;LEAF_BLADE
 	move EFFECT_NORMAL_HIT,          0, DRAGON,        100, 20,   0      ;DRAGON_DANCE EFFECT_DRAGON_DANCE

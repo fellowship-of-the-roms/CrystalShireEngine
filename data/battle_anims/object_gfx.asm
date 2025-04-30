@@ -78,4 +78,5 @@ AnimObjGFX:
 	anim_obj_gfx 18, AnimObjMushroomGFX
 	anim_obj_gfx 12, AnimObjTriangleGFX
 	anim_obj_gfx 16, AnimObjHugeRockGFX
+	anim_obj_gfx 18, AnimObjBigWhipGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
