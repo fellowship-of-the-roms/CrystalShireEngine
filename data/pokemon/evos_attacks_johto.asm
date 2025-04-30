@@ -149,7 +149,7 @@ MeganiumEvosAttacks:
 	dbw 41, LIGHT_SCREEN
 	dbw 51, MAGICAL_LEAF
 	dbw 61, SOLARBEAM
-	dbw 68, ANCIENT_POWER
+	dbw 68, ANCIENTPOWER
 	db 0 ; no more level-up moves
 
 CyndaquilEvosAttacks:
