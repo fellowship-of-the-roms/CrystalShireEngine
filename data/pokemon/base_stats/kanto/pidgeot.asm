@@ -1,6 +1,6 @@
 	db 0 ; species ID placeholder
 
-	db  84,  90,  80,  91,  70,  70
+	db  84,  80,  80,  91,  70,  70
 	evs  0,   0,   0,   3,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
@@ -11,7 +11,7 @@
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/kanto/pidgeot/front.dimensions"
-	db KEEN_EYE, KEEN_EYE ; wBaseAbility1, wBaseAbility2
+	db GUTS, GUTS ; wBaseAbility1, wBaseAbility2
 	dw NULL ; Padding left-over from the unused back pic
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FLYING, EGG_FLYING ; egg groups
