@@ -6,7 +6,7 @@
 
 	db BUG, BUG ; type
 	db 255 ; catch rate
-	db 53 ; base exp
+	db 43 ; base exp
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch

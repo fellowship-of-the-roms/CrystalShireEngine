@@ -1220,7 +1220,7 @@ LassGroup:
 	db 12
 	dw HOPPIP
 	db 15
-	dw CUBONE
+	dw LOMBRE
 	db -1 ; end
 
 	next_list_item ; LASS (5)
@@ -4383,11 +4383,11 @@ PicnickerGroup:
 
 	next_list_item ; PICNICKER (2)
 	db "GINA@", TRAINERTYPE_NORMAL
-	db 9
+	db 10
 	dw HOPPIP
-	db 9
+	db 10
 	dw HOPPIP
-	db 12 
+	db 13 
 	dw BULBASAUR
 	db -1 ; end
 
@@ -4931,25 +4931,43 @@ SageGroup:
 
 	next_list_item ; SAGE (10) TODO
 	db "GAKU@", TRAINERTYPE_NORMAL
-	db 32
+	db 42 ;32
 	dw NOCTOWL
-	db 32
+	db 42 ;new mon
+	dw WYRDEER
+	db 42 ;new mon
+	dw VICTREEBEL
+	db 42 ;new mon
+	dw DECIBELLE
+	db 42 ;32
 	dw FLAREON
 	db -1 ; end
 
 	next_list_item ; SAGE (11) TODO
 	db "MASA@", TRAINERTYPE_NORMAL
-	db 32
+	db 42 ;32
 	dw NOCTOWL
-	db 32
+	db 42 ;new mon
+	dw WYRDEER
+	db 42 ;new mon
+	dw VICTREEBEL
+	db 42 ;new mon
+	dw DECIBELLE
+	db 42 ;32
 	dw JOLTEON
 	db -1 ; end
 
 	next_list_item ; SAGE (12) TODO
 	db "KOJI@", TRAINERTYPE_NORMAL
-	db 32
+	db 42 ;32
 	dw NOCTOWL
-	db 32
+	db 42 ;new mon
+	dw WYRDEER
+	db 42 ;new mon
+	dw VICTREEBEL
+	db 42 ;new mon
+	dw DECIBELLE
+	db 42 ;32
 	dw VAPOREON
 	db -1 ; end
 
