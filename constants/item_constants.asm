@@ -247,55 +247,55 @@ ENDM
 DEF FIRST_TMHM_ITEM EQU const_value
 ; see data/moves/tmhm_moves.asm for moves
 DEF TM01 EQU const_value
-	add_tm FOCUS_PUNCH  ; 0400
-	add_tm DRAGON_CLAW  ; 0401
+	add_tm DYNAMICPUNCH ; 0400
+	add_tm HEADBUTT     ; 0401
 	add_tm WATER_PULSE  ; 0402
-	add_tm CALM_MIND    ; 0403
+	add_tm SUBSTITUTE   ; 0403
 	add_tm ROAR         ; 0404
 	add_tm TOXIC        ; 0405
-	add_tm HAIL         ; 0406
-	add_tm BULK_UP      ; 0407
+	add_tm ZAP_CANNON   ; 0406
+	add_tm SLEEP_TALK   ; 0407
 	add_tm BULLET_SEED  ; 0408
 	add_tm HIDDEN_POWER ; 0409
 	add_tm SUNNY_DAY    ; 040A
-	add_tm TAUNT        ; 040B
-	add_tm ICE_BEAM     ; 040C
+	add_tm SWEET_SCENT  ; 040B not sure
+	add_tm HAIL         ; 040C
 	add_tm BLIZZARD     ; 040D
 	add_tm HYPER_BEAM   ; 040E
-	add_tm LIGHT_SCREEN ; 040F
+	add_tm ICY_WIND     ; 040F
 	add_tm PROTECT      ; 0410
 	add_tm RAIN_DANCE   ; 0411
 	add_tm GIGA_DRAIN   ; 0412
-	add_tm SAFEGUARD    ; 0413
+	add_tm ROCK_TOMB    ; 0413
 	add_tm FRUSTRATION  ; 0414
 	add_tm SOLARBEAM    ; 0415
 	add_tm IRON_TAIL    ; 0416
-	add_tm THUNDERBOLT  ; 0417
+	add_tm DRAGONBREATH ; 0417
 	add_tm THUNDER      ; 0418
 	add_tm EARTHQUAKE   ; 0419
 	add_tm RETURN       ; 041A
 	add_tm DIG          ; 041B
 	add_tm PSYCHIC_M    ; 041C
 	add_tm SHADOW_BALL  ; 041D
-	add_tm BRICK_BREAK  ; 041E
+	add_tm MUD_SLAP     ; 041E
 	add_tm DOUBLE_TEAM  ; 041F
-	add_tm REFLECT      ; 0420
+	add_tm ICE_PUNCH    ; 0420
 	add_tm SHOCK_WAVE   ; 0421
-	add_tm FLAMETHROWER ; 0422
+	add_tm BRICK_BREAK  ; 0422
 	add_tm SLUDGE_BOMB  ; 0423
 	add_tm SANDSTORM    ; 0424
 	add_tm FIRE_BLAST   ; 0425
-	add_tm ROCK_TOMB    ; 0426
+	add_tm SWIFT        ; 0426
 	add_tm AERIAL_ACE   ; 0427
-	add_tm TORMENT      ; 0428
-	add_tm FACADE       ; 0429
-	add_tm SECRET_POWER ; 042A
+	add_tm THUNDERPUNCH ; 0428
+	add_tm DREAM_EATER  ; 0429
+	add_tm FACADE       ; 042A
 	add_tm REST         ; 042B
 	add_tm ATTRACT      ; 042C
 	add_tm THIEF        ; 042D
 	add_tm STEEL_WING   ; 042E
-	add_tm SKILL_SWAP   ; 042F
-	add_tm SNATCH       ; 0430
+	add_tm FIRE_PUNCH   ; 042F
+	add_tm FURY_CUTTER  ; 0430
 	add_tm OVERHEAT     ; 0431
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
@@ -318,7 +318,7 @@ DEF HM01 EQU const_value
 	add_hm FLASH        ; 0436
 	add_hm ROCK_SMASH   ; 0437
 	add_hm WATERFALL    ; 0438
-	add_hm DIVE         ; 0439
+	add_hm WHIRLPOOL    ; 0439
 DEF NUM_HMS EQU __tmhm_value__ - NUM_TMS - 1
 
 assert (NUM_TMS + NUM_HMS) < $ff, "TMs/HMs can't exceed 255 due to GetTMHMNumber."
@@ -336,6 +336,23 @@ DEF MT01 EQU const_value
 	add_mt FRENZY_PLANT
 	add_mt BLAST_BURN
 	add_mt HYDRO_CANNON
+	add_mt FOCUS_PUNCH
+	add_mt CURSE
+	add_mt MEGA_PUNCH
+	add_mt MEGA_KICK
+	add_mt ROCK_SLIDE
+	add_mt THUNDER_WAVE
+	add_mt DOUBLE_EDGE
+	add_mt SEISMIC_TOSS
+	add_mt PSYCH_UP
+	add_mt SOFTBOILED
+	add_mt FLAMETHROWER
+	add_mt ICE_BEAM
+	add_mt THUNDERBOLT
+	add_mt REFLECT
+	add_mt LIGHT_SCREEN
+	add_mt DIVE
+	add_mt SKILL_SWAP
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS
