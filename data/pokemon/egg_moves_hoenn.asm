@@ -225,7 +225,6 @@ ShroomishEggMoves:
 	dw CHARM
 	dw FAKE_TEARS
 	dw FALSE_SWIPE
-	; dw HELPING_HAND
 	dw SWAGGER
 	dw -1 ; end
 
@@ -263,7 +262,6 @@ MakuhitaEggMoves:
 	dw DYNAMICPUNCH
 	dw FAINT_ATTACK
 	dw FORESIGHT
-	; dw HELPING_HAND
 	dw REVENGE
 	dw -1 ; end
 
@@ -278,7 +276,6 @@ AzurillEggMoves:
 SkittyEggMoves:
 	dw BATON_PASS
 	dw FAKE_TEARS
-	; dw HELPING_HAND
 	dw PSYCH_UP
 	dw SUBSTITUTE
 	dw TICKLE

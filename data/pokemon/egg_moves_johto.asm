@@ -262,7 +262,6 @@ HoppipEggMoves:
 	dw CONFUSION
 	dw DOUBLE_EDGE
 	dw ENCORE
-	; dw HELPING_HAND
 	dw PSYCH_UP
 	dw REFLECT
 	dw -1 ; end
@@ -282,7 +281,6 @@ SunkernEggMoves:
 	dw CURSE
 	dw ENCORE
 	dw GRASSWHISTLE
-	; dw HELPING_HAND
 	dw LEECH_SEED
 	dw NATURE_POWER
 	dw -1 ; end
@@ -512,11 +510,11 @@ StantlerEggMoves:
 	dw -1 ; end
 
 TyrogueEggMoves:
-	; dw HELPING_HAND
 	dw HI_JUMP_KICK
 	dw MACH_PUNCH
 	dw MIND_READER
 	dw RAPID_SPIN
+	dw SEISMIC_TOSS
 	dw -1 ; end
 
 SmoochumEggMoves:
@@ -549,7 +547,6 @@ MagbyEggMoves:
 MiltankEggMoves:
 	dw CURSE
 	dw ENDURE
-	; dw HELPING_HAND
 	dw PRESENT
 	dw PSYCH_UP
 	dw REVERSAL

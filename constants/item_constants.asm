@@ -247,14 +247,14 @@ ENDM
 DEF FIRST_TMHM_ITEM EQU const_value
 ; see data/moves/tmhm_moves.asm for moves
 DEF TM01 EQU const_value
-	add_tm DYNAMICPUNCH ; 0400
-	add_tm HEADBUTT     ; 0401
+	add_tm DYNAMICPUNCH ; 0400 new
+	add_tm HEADBUTT     ; 0401 new
 	add_tm WATER_PULSE  ; 0402
-	add_tm SUBSTITUTE   ; 0403
+	add_tm SUBSTITUTE   ; 0403 new
 	add_tm ROAR         ; 0404
 	add_tm TOXIC        ; 0405
-	add_tm ZAP_CANNON   ; 0406
-	add_tm SLEEP_TALK   ; 0407
+	add_tm ZAP_CANNON   ; 0406 new
+	add_tm SLEEP_TALK   ; 0407 new
 	add_tm BULLET_SEED  ; 0408
 	add_tm HIDDEN_POWER ; 0409
 	add_tm SUNNY_DAY    ; 040A
@@ -262,15 +262,15 @@ DEF TM01 EQU const_value
 	add_tm HAIL         ; 040C
 	add_tm BLIZZARD     ; 040D
 	add_tm HYPER_BEAM   ; 040E
-	add_tm ICY_WIND     ; 040F
+	add_tm ICY_WIND     ; 040F new
 	add_tm PROTECT      ; 0410
 	add_tm RAIN_DANCE   ; 0411
 	add_tm GIGA_DRAIN   ; 0412
-	add_tm ROCK_TOMB    ; 0413
+	add_tm SWIFT        ; 0413 new
 	add_tm FRUSTRATION  ; 0414
 	add_tm SOLARBEAM    ; 0415
 	add_tm IRON_TAIL    ; 0416
-	add_tm DRAGONBREATH ; 0417
+	add_tm DRAGONBREATH ; 0417 new
 	add_tm THUNDER      ; 0418
 	add_tm EARTHQUAKE   ; 0419
 	add_tm RETURN       ; 041A
@@ -279,23 +279,23 @@ DEF TM01 EQU const_value
 	add_tm SHADOW_BALL  ; 041D
 	add_tm BRICK_BREAK  ; 041E
 	add_tm DOUBLE_TEAM  ; 041F
-	add_tm ICE_PUNCH    ; 0420
+	add_tm ICE_PUNCH    ; 0420 new
 	add_tm SHOCK_WAVE   ; 0421
-	add_tm MUD_SLAP     ; 0422
+	add_tm MUD_SLAP     ; 0422 new
 	add_tm SLUDGE_BOMB  ; 0423
 	add_tm SANDSTORM    ; 0424
 	add_tm FIRE_BLAST   ; 0425
-	add_tm SWIFT        ; 0426
+	add_tm ROCK_TOMB    ; 0426
 	add_tm AERIAL_ACE   ; 0427
-	add_tm THUNDERPUNCH ; 0428
-	add_tm DREAM_EATER  ; 0429
+	add_tm THUNDERPUNCH ; 0428 new
+	add_tm DREAM_EATER  ; 0429 new
 	add_tm FACADE       ; 042A
 	add_tm REST         ; 042B
 	add_tm ATTRACT      ; 042C
 	add_tm THIEF        ; 042D
 	add_tm STEEL_WING   ; 042E
-	add_tm FIRE_PUNCH   ; 042F
-	add_tm FURY_CUTTER  ; 0430
+	add_tm FIRE_PUNCH   ; 042F new
+	add_tm FURY_CUTTER  ; 0430 new
 	add_tm OVERHEAT     ; 0431
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
@@ -343,8 +343,6 @@ DEF MT01 EQU const_value
 	add_mt ROCK_SLIDE
 	add_mt THUNDER_WAVE
 	add_mt DOUBLE_EDGE
-	add_mt SEISMIC_TOSS
-	add_mt PSYCH_UP
 	add_mt SOFTBOILED
 	add_mt FLAMETHROWER
 	add_mt ICE_BEAM
@@ -353,6 +351,8 @@ DEF MT01 EQU const_value
 	add_mt LIGHT_SCREEN
 	add_mt DIVE
 	add_mt SKILL_SWAP
+	;add_mt SEISMIC_TOSS mayber later
+	;add_mt PSYCH_UP
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS
