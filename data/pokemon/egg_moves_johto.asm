@@ -196,6 +196,8 @@ CleffaEggMoves:
 	dw SPLASH
 	dw SUBSTITUTE
 	dw WISH
+	dw PSYCH_UP
+	dw CALM_MIND
 	dw -1 ; end
 
 IgglybuffEggMoves:
@@ -291,6 +293,7 @@ YanmaEggMoves:
 	dw OMINOUS_WIND
 	dw SILVER_WIND
 	dw WHIRLWIND
+	dw DRAGON_PULSE
 	dw -1 ; end
 
 WooperEggMoves:

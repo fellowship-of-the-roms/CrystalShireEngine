@@ -921,6 +921,7 @@ GolduckEvosAttacks:
 	dbw 16, PSYCH_UP
 	dbw 23, PSYBEAM
 	dbw 31, WATER_PULSE
+	dbw 32, CALM_MIND
 	dbw 44, PSYCHIC_M
 	dbw 58, HYDRO_PUMP
 	db 0 ; no more level-up moves
