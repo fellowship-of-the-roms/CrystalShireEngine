@@ -258,7 +258,7 @@ DEF TM01 EQU const_value
 	add_tm BULLET_SEED  ; 0408
 	add_tm HIDDEN_POWER ; 0409
 	add_tm SUNNY_DAY    ; 040A
-	add_tm SWEET_SCENT  ; 040B not sure
+	add_tm TAUNT        ; 040B
 	add_tm HAIL         ; 040C
 	add_tm BLIZZARD     ; 040D
 	add_tm HYPER_BEAM   ; 040E
@@ -277,11 +277,11 @@ DEF TM01 EQU const_value
 	add_tm DIG          ; 041B
 	add_tm PSYCHIC_M    ; 041C
 	add_tm SHADOW_BALL  ; 041D
-	add_tm MUD_SLAP     ; 041E
+	add_tm BRICK_BREAK  ; 041E
 	add_tm DOUBLE_TEAM  ; 041F
 	add_tm ICE_PUNCH    ; 0420
 	add_tm SHOCK_WAVE   ; 0421
-	add_tm BRICK_BREAK  ; 0422
+	add_tm MUD_SLAP     ; 0422
 	add_tm SLUDGE_BOMB  ; 0423
 	add_tm SANDSTORM    ; 0424
 	add_tm FIRE_BLAST   ; 0425
