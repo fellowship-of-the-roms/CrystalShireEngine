@@ -400,7 +400,7 @@ DraconeonEvosAttacks:
 	dbw 30, SLAM
 	dbw 36, DRAGONBREATH
 	dbw 42, SAFEGUARD
-	dbw 47, TWISTER ;DRAGON_PULSE
+	dbw 47, DRAGON_PULSE
 	dbw 52, RECOVER 
 	db 0 ; no more level-up moves
 
@@ -1164,7 +1164,7 @@ DundragEvosAttacks:
 	dbw 36, TAKE_DOWN
 	dbw 43, ENDEAVOR
 	dbw 48, TWISTER
-	dbw 52, DRAGONBREATH
+	dbw 52, DRAGON_PULSE
 	dbw 61, SKY_ATTACK
 	db 0 ; no more level-up moves
 
@@ -1674,6 +1674,7 @@ MiloticEvosAttacks:
 	dbw 40, HYDRO_PUMP
 	dbw 45, ATTRACT
 	dbw 50, SAFEGUARD
+	dbw 55, DRAGON_PULSE
 	db 0 ; no more level-up moves
 
 CastformEvosAttacks:
@@ -2051,7 +2052,7 @@ RaelicEvosAttacks:
 	dbw 33, DRAGONBREATH
 	dbw 37, MAGIC_COAT
 	dbw 41, DOUBLE_EDGE
-	dbw 49, DRAGON_CLAW ;DRAGON_PULSE
+	dbw 49, DRAGON_PULSE
 	db 0 ; no more level-up moves
 
 RomushuEvosAttacks:
@@ -2069,6 +2070,7 @@ RomushuEvosAttacks:
 	dbw 38, DRAGONBREATH
 	dbw 47, MAGIC_COAT
 	dbw 56, DOUBLE_EDGE
+	dbw 63, DRAGON_PULSE
 	db 0 ; no more level-up moves
 
 FusangEvosAttacks:
@@ -2087,7 +2089,7 @@ FusangEvosAttacks:
 	dbw 47, MAGIC_COAT
 	dbw 50, ANCIENTPOWER
 	dbw 61, EXTRASENSORY
-	dbw 79, DRAGON_CLAW
+	dbw 79, DRAGON_PULSE
 	db 0 ; no more level-up moves
 
 BeldumEvosAttacks:

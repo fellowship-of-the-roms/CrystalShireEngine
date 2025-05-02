@@ -290,7 +290,7 @@ MoveNames::
 	li "REFRESH"
 	li "GRUDGE"
 	li "SNATCH"
-	li "SECRET POWER"
+	li "DRAGON PULSE"
 	li "DIVE"
 	li "ARM THRUST"
 	li "CAMOUFLAGE"

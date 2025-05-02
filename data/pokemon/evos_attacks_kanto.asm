@@ -1841,9 +1841,9 @@ HorseaEvosAttacks:
 	dbw 8, SMOKESCREEN
 	dbw 15, AGILITY
 	dbw 22, WATER_GUN
-	dbw 29, TWISTER
-	dbw 36, DRAGONBREATH
-	dbw 43, HYDRO_PUMP
+	dbw 29, DRAGONBREATH
+	dbw 36, HYDRO_PUMP
+	dbw 43, DRAGON_PULSE
 	dbw 50, DRAGON_DANCE
 	db 0 ; no more level-up moves
 
@@ -1857,9 +1857,9 @@ SeadraEvosAttacks:
 	dbw 8, SMOKESCREEN
 	dbw 15, AGILITY
 	dbw 22, WATER_GUN
-	dbw 29, TWISTER
-	dbw 40, DRAGONBREATH
-	dbw 51, HYDRO_PUMP
+	dbw 29, DRAGONBREATH
+	dbw 40, HYDRO_PUMP
+	dbw 51, DRAGON_PULSE
 	dbw 62, DRAGON_DANCE
 	db 0 ; no more level-up moves
 
@@ -2295,6 +2295,7 @@ DratiniEvosAttacks:
 	dbw 36, AGILITY
 	dbw 43, SAFEGUARD
 	dbw 50, OUTRAGE
+	dbw 54, DRAGON_PULSE
 	dbw 57, HYPER_BEAM
 	db 0 ; no more level-up moves
 
@@ -2311,6 +2312,7 @@ DragonairEvosAttacks:
 	dbw 29, SLAM
 	dbw 38, AGILITY
 	dbw 47, SAFEGUARD
+	dbw 54, DRAGON_PULSE
 	dbw 56, OUTRAGE
 	dbw 65, HYPER_BEAM
 	db 0 ; no more level-up moves
@@ -2327,6 +2329,7 @@ DragoniteEvosAttacks:
 	dbw 29, SLAM
 	dbw 38, AGILITY
 	dbw 47, SAFEGUARD
+	dbw 54, DRAGON_PULSE
 	dbw 55, WING_ATTACK
 	dbw 61, OUTRAGE
 	dbw 75, HYPER_BEAM

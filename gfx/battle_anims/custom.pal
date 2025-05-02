@@ -171,5 +171,10 @@ INCLUDE "gfx/battle_anims/battle_anims.pal"
 	RGB 31, 24, 02
 	RGB 29, 03, 04
 	RGB 29, 02, 18
+; dragonpulse
+	RGB 31, 31, 31
+	RGB 28, 28, 28
+	RGB 19, 14, 28
+	RGB 07, 06, 22
 rept NUM_CUSTOM_BATTLE_PALETTES - 6
 endr

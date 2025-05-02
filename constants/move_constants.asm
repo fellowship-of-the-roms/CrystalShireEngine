@@ -295,7 +295,7 @@ DEF GEN2_MOVES EQU const_value - 1
 	const REFRESH      ; 11d
 	const GRUDGE       ; 11e
 	const SNATCH       ; 11f
-	const SECRET_POWER ; 120
+	const DRAGON_PULSE ; 120
 	const DIVE         ; 121
 	const ARM_THRUST   ; 122
 	const CAMOUFLAGE   ; 123

@@ -300,7 +300,7 @@ MoveDescriptionsGen3:
 	dw RefreshDescription
 	dw GrudgeDescription
 	dw SnatchDescription
-	dw SecretPowerDescription
+	dw DragonPulseDescription
 	dw DiveDescription
 	dw ArmThrustDescription
 	dw CamouflageDescription
@@ -1524,9 +1524,9 @@ SnatchDescription:
 	db   "Steals foe's next"
 	next "heal or stat move.@"
 
-SecretPowerDescription:
-	db   "Attack varies dep-"
-	next "ending on area.@"
+DragonPulseDescription:
+	db   "Foe is attacked by"
+	next "draconic energy.@"
 
 DiveDescription:
 	db   "1st turn: Dive"

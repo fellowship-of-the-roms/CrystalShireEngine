@@ -174,6 +174,7 @@ CharmanderEggMoves:
 	dw OUTRAGE
 	dw ROCK_SLIDE
 	dw SWORDS_DANCE
+	dw DRAGON_PULSE
 	dw -1 ; end
 
 SquirtleEggMoves:
@@ -646,6 +647,7 @@ LaprasEggMoves:
 	dw SLEEP_TALK
 	dw SUBSTITUTE
 	dw TICKLE
+	dw DRAGON_PULSE
 	dw -1 ; end
 
 EeveeEggMoves:

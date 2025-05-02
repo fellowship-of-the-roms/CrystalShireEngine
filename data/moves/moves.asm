@@ -323,7 +323,7 @@ MovesGen3:
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;REFRESH
 	move EFFECT_NORMAL_HIT,          0, GHOST,         100,  5,   0      ;GRUDGE
 	move EFFECT_NORMAL_HIT,          0, DARK,          100, 10,   0      ;SNATCH EFFECT_SNATCH
-	move EFFECT_NORMAL_HIT,         70, NORMAL,        100, 20,  30      ;SECRET_POWER EFFECT_SECRET_POWER
+	move EFFECT_NORMAL_HIT,         95, DRAGON,        100, 10,   0      ;DRAGON_PULSE
 	move EFFECT_FLY,                80, WATER,         100, 10,   0      ;DIVE
 	move EFFECT_MULTI_HIT,          15, FIGHTING,      100, 20,   0      ;ARM_THRUST
 	move EFFECT_NORMAL_HIT,          0, NORMAL,        100, 20,   0      ;CAMOUFLAGE

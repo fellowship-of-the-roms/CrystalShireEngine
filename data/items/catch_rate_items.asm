@@ -22,8 +22,8 @@ TimeCapsule_CatchRateItems:
 	dbw 195, BERRY
 	dbw 200, TM_BULLET_SEED ; TM_PSYCH_UP
 	dbw 220, BERRY
-	dbw 225, TM_REFLECT ; TM_ICE_PUNCH
-	dbw 235, TM_SECRET_POWER ; TM_DETECT
+	dbw 225, TM_ICE_PUNCH
+	dbw 235, TM_FACADE  ; TM_DETECT
 	dbw 250, BERRY
 	dbw 255, BERRY
 	db 0 ; end

@@ -1203,6 +1203,7 @@ KingdraEvosAttacks:
 	dbw 15, LEER
 	dbw 22, WATER_GUN
 	dbw 29, TWISTER
+	dbw 33, DRAGON_PULSE
 	dbw 40, AGILITY
 	dbw 51, HYDRO_PUMP
 	dbw 62, DRAGON_DANCE
