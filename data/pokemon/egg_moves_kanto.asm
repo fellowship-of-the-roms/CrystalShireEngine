@@ -424,6 +424,7 @@ SlowpokeEggMoves:
 	dw SAFEGUARD
 	dw SLEEP_TALK
 	dw SNORE
+	dw CALM_MIND
 	dw STOMP
 	dw -1 ; end
 

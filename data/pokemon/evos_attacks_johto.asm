@@ -1285,6 +1285,7 @@ TyrogueEvosAttacks:
 	dbbbw EVOLVE_STAT, 20, ATK_EQ_DEF, HITMONTOP
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
+	dbw 1, BULK_UP
 	db 0 ; no more level-up moves
 
 HitmontopEvosAttacks:

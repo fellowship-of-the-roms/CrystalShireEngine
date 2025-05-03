@@ -1078,7 +1078,7 @@ MachopEvosAttacks:
 	db 0 ; no more level-up moves
 
 MachokeEvosAttacks:
-	dbww EVOLVE_TRADE, -1, MACHAMP
+	dbbw EVOLVE_LEVEL, 38, MACHAMP
 	db 0 ; no more evolutions
 	dbw 1, FOCUS_ENERGY
 	dbw 1, LEER
@@ -1088,6 +1088,7 @@ MachokeEvosAttacks:
 	dbw 19, SEISMIC_TOSS
 	dbw 22, FORESIGHT
 	dbw 25, REVENGE
+	dbw 28, BULK_UP
 	dbw 33, VITAL_THROW
 	dbw 41, SUBMISSION
 	dbw 46, CROSS_CHOP
@@ -1105,6 +1106,7 @@ MachampEvosAttacks:
 	dbw 19, SEISMIC_TOSS
 	dbw 22, FORESIGHT
 	dbw 25, REVENGE
+	dbw 28, BULK_UP
 	dbw 33, VITAL_THROW
 	dbw 41, SUBMISSION
 	dbw 46, CROSS_CHOP
@@ -1527,11 +1529,12 @@ DrowzeeEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	dbw 1, HYPNOSIS
+	dbw 1, MEDITATE
 	dbw 10, DISABLE
 	dbw 18, CONFUSION
 	dbw 25, HEADBUTT
 	dbw 31, POISON_GAS
-	dbw 36, MEDITATE
+	dbw 36, CALM_MIND
 	dbw 40, PSYCHIC_M
 	dbw 43, PSYCH_UP
 	dbw 45, FUTURE_SIGHT
@@ -1540,7 +1543,7 @@ DrowzeeEvosAttacks:
 HypnoEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, CONFUSION
-	dbw 1, DISABLE
+	dbw 1, MEDITATE
 	dbw 1, HYPNOSIS
 	dbw 1, POUND
 	dbw 10, DISABLE
@@ -1548,7 +1551,7 @@ HypnoEvosAttacks:
 	dbw 25, HEADBUTT
 	dbw 26, FAINT_ATTACK
 	dbw 33, NIGHTMARE
-	dbw 40, MEDITATE
+	dbw 40, CALM_MIND
 	dbw 49, PSYCHIC_M
 	dbw 55, PSYCH_UP
 	dbw 60, FUTURE_SIGHT
