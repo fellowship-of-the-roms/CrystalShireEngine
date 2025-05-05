@@ -375,7 +375,7 @@ IlexForestHeadbuttGuyScript:
 	iftrue .AlreadyGotHeadbutt
 	writetext Text_HeadbuttIntro
 	promptbutton
-	verbosegiveitem TM_DRAGON_CLAW ; TM_HEADBUTT
+	verbosegiveitem TM_HEADBUTT
 	iffalse .BagFull
 	setevent EVENT_GOT_TM02_HEADBUTT
 .AlreadyGotHeadbutt:

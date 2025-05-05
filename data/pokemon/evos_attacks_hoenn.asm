@@ -849,6 +849,7 @@ HariyamaEvosAttacks:
 	dbw 13, VITAL_THROW
 	dbw 19, FAKE_OUT
 	dbw 22, WHIRLWIND
+	dbw 24, BULK_UP
 	dbw 29, KNOCK_OFF
 	dbw 33, SMELLINGSALT
 	dbw 40, BELLY_DRUM
@@ -1020,7 +1021,7 @@ MedichamEvosAttacks:
 	dbw 1, DETECT
 	dbw 1, FIRE_PUNCH
 	dbw 1, ICE_PUNCH
-	dbw 1, MEDITATE
+	dbw 1, BULK_UP
 	dbw 1, THUNDERPUNCH
 	dbw 4, MEDITATE
 	dbw 9, CONFUSION

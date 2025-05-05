@@ -269,7 +269,7 @@ Route35Sign:
 	jumptext Route35SignText
 
 Route35TMRollout:
-	itemball TM_CALM_MIND ; TM_ROLLOUT
+	itemball TM_SUBSTITUTE ; TM_ROLLOUT may need to change
 
 Route35FruitTree:
 	fruittree FRUITTREE_ROUTE_35

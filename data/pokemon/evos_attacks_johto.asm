@@ -888,7 +888,7 @@ SteelixEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, SLAM
 	dbw 1, SCREECH
-	dwb 1, IRON_DEFENSE
+	dbw 1, IRON_DEFENSE
 	dbw 1, DIG
 	dbw 9, BIND
 	dbw 13, BIDE
