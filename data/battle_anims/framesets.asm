@@ -266,6 +266,7 @@ BattleAnimFrameData:
 	dw .Frameset_RockWreckerGrow       ; BATTLE_ANIM_FRAMESET_ROCK_WRECKER_GROW
 	dw .Frameset_GunkShot              ; BATTLE_ANIM_FRAMESET_GUNK_SHOT
 	dw .Frameset_BigWhip               ; BATTLE_ANIM_FRAMESET_BIG_WHIP
+	dw .Frameset_DragonPulse           ; BATTLE_ANIM_FRAMESET_DRAGON_PULSE
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1760,5 +1761,13 @@ BattleAnimFrameData:
 	battleoamframe BATTLE_ANIM_OAMSET_109,  1, OAM_Y_FLIP
 	battleoamframe BATTLE_ANIM_OAMSET_10A,  1
 	battleoamframe BATTLE_ANIM_OAMSET_109,  1
+	battleoamframe BATTLE_ANIM_OAMSET_10B,  1
+	battleoamrestart
+
+.Frameset_DragonPulse:
+	;battleoamframe BATTLE_ANIM_OAMSET_1E,  3
+	;battleoamframe BATTLE_ANIM_OAMSET_55,  3
+	;battleoamframe BATTLE_ANIM_OAMSET_54,  3
+	;battleoamframe BATTLE_ANIM_OAMSET_53,  3
 	battleoamframe BATTLE_ANIM_OAMSET_10B,  1
 	battleoamrestart
