@@ -1765,9 +1765,8 @@ BattleAnimFrameData:
 	battleoamrestart
 
 .Frameset_DragonPulse:
-	;battleoamframe BATTLE_ANIM_OAMSET_1E,  3
-	;battleoamframe BATTLE_ANIM_OAMSET_55,  3
-	;battleoamframe BATTLE_ANIM_OAMSET_54,  3
-	;battleoamframe BATTLE_ANIM_OAMSET_53,  3
-	battleoamframe BATTLE_ANIM_OAMSET_10B,  1
+	battleoamframe BATTLE_ANIM_OAMSET_01E,  3
+	battleoamframe BATTLE_ANIM_OAMSET_055,  3
+	battleoamframe BATTLE_ANIM_OAMSET_054,  3
+	battleoamframe BATTLE_ANIM_OAMSET_053,  3
 	battleoamrestart

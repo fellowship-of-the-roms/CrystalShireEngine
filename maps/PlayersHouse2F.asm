@@ -162,7 +162,7 @@ if DEF(_DEBUG)
 	givepokemove NIGHT_SLASH,      wPartyMon3, 0
 	givepokemove STONE_EDGE, wPartyMon3, 1
 	givepokemove CHARGE_BEAM,   wPartyMon3, 2
-	givepokemove NIGHT_SLASH,  wPartyMon3, 3
+	givepokemove DRAGON_PULSE,  wPartyMon3, 3
 	; misc pokemon for testing
 	givepoke EEVEE, PLAIN_FORM, 75
 	;givepokemove QUICK_ATTACK,  wPartyMon1, 0
