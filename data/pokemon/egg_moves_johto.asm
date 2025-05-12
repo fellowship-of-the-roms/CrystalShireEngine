@@ -216,6 +216,7 @@ TogepiEggMoves:
 	dw PRESENT
 	dw PSYCH_UP
 	dw SUBSTITUTE
+	dw MYSTICALFIRE
 	dw -1 ; end
 
 NatuEggMoves:

@@ -1147,7 +1147,7 @@ CorsoreefEvosAttacks:
 	dbw 18, REFRESH
 	dbw 24, BUBBLEBEAM
 	dbw 29, INGRAIN
-	dbw 35, ROCK_BLAST ;STONE_EDGE
+	dbw 35, STONE_EDGE
 	dbw 40, MIRROR_COAT
 	dbw 46, ANCIENTPOWER
 	dbw 54, WATER_SPOUT
@@ -1775,7 +1775,7 @@ DecibelleEvosAttacks:
 	dbw 22, UPROAR
 	dbw 25, YAWN
 	dbw 30, PSYWAVE
-	dbw 33, DOUBLE_EDGE
+	dbw 33, MIRROR_SHOT
 	dbw 38, HEAL_BELL
 	dbw 41, SAFEGUARD
 	dbw 46, PSYCHIC_M
@@ -1792,7 +1792,7 @@ ChimechoEvosAttacks:
 	dbw 22, UPROAR
 	dbw 25, YAWN
 	dbw 30, PSYWAVE
-	dbw 33, DOUBLE_EDGE
+	dbw 33, MIRROR_SHOT
 	dbw 38, HEAL_BELL
 	dbw 41, SAFEGUARD
 	dbw 46, PSYCHIC_M

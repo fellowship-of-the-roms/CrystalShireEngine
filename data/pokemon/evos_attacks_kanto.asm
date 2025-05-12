@@ -462,7 +462,7 @@ FearowEvosAttacks:
 	db 0 ; no more level-up moves
 
 EkansEvosAttacks:
-	dbbw EVOLVE_LEVEL, 32, ARBOK
+	dbbw EVOLVE_LEVEL, 34, ARBOK
 	db 0 ; no more evolutions
 	dbw 1, WRAP
 	dbw 1, LEER

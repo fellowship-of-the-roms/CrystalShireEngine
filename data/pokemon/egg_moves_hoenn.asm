@@ -171,8 +171,8 @@ EuxinosEggMoves:
 	dw ASTONISH
 	dw COVET
 	dw LEER
-	dw POISON_FANG
-	dw YAWN
+	dw POISON_TAIL
+	dw FAINT_ATTACK
 	dw -1 ; end
 
 LotadEggMoves:
@@ -494,10 +494,7 @@ TurtwigEggMoves:
 	dw CURSE
 	dw FISSURE
 	dw ROCK_SLIDE
-	dw SPIT_UP
-	dw STOCKPILE
-	dw SWALLOW
-	dw BUBBLEBEAM
+	dw STONE_EDGE
 	dw YAWN
 	dw -1 ; end
 
