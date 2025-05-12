@@ -682,11 +682,9 @@ AI_Switch:
 	res SUBSTATUS_IN_LOVE, [hl]
 	farcall EnemySwitch
 	farcall ResetBattleParticipants
-	xor a
-	ld [wTotalBattleTurns], a
 	ld a, [wLinkMode]
 	and a
-	ret z
+	ret nz
 	scf
 	ret
 
