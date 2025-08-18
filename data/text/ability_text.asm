@@ -75,3 +75,14 @@ AbilityText_PreventedEscapeAbility: ; OK, because switching and escaping can get
     text_ram wStringBuffer1
     text "!"
     prompt
+
+AbilityText_PreventedMove: ; Ability Name - wStringBuffer1, Move Name - wStringBuffer2
+    text "<TARGET>'s@"
+    text_ram wStringBuffer1
+    line " pre-"
+
+    para "vents <USER>'s@"
+    text_ran wStringBuffer2
+    line " from"
+    cont "having an affect!"
+    prompt
