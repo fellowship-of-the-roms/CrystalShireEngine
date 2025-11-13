@@ -1699,7 +1699,7 @@ AddMobileMonToParty:
 	ld l, a
 	ld bc, MON_NAME_LENGTH - 1
 	rst CopyBytes
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 
 	ld hl, wPartyMonNicknames
@@ -1718,7 +1718,7 @@ AddMobileMonToParty:
 	ld l, a
 	ld bc, MON_NAME_LENGTH - 1
 	rst CopyBytes
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 
 	ld hl, sPartyMail

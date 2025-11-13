@@ -1,5 +1,5 @@
-DEF TIMESET_UP_ARROW   EQU "♂" ; $ef
-DEF TIMESET_DOWN_ARROW EQU "♀" ; $f5
+DEF TIMESET_UP_ARROW   EQU '♂' ; $ef
+DEF TIMESET_DOWN_ARROW EQU '♀' ; $f5
 
 InitClock:
 ; Ask the player to set the time.
@@ -172,7 +172,7 @@ SetHour:
 
 .okay
 	hlcoord 4, 9
-	ld a, " "
+	ld a, ' '
 	ld bc, 15
 	rst ByteFill
 	hlcoord 4, 9
@@ -235,7 +235,7 @@ SetMinutes:
 	ld [hl], a
 .finish_dpad
 	hlcoord 12, 9
-	ld a, " "
+	ld a, ' '
 	ld bc, 7
 	rst ByteFill
 	hlcoord 12, 9
@@ -256,7 +256,7 @@ DisplayMinutesWithMinString:
 
 PrintTwoDigitNumberLeftAlign:
 	push hl
-	ld a, " "
+	ld a, ' '
 	ld [hli], a
 	ld [hl], a
 	pop hl
@@ -313,7 +313,7 @@ OakText_ResponseToSetTime:
 	ld a, [wInitHourBuffer]
 	ld c, a
 	call PrintHour
-	ld a, ":"
+	ld a, ':'
 	ld [hli], a
 	ld de, wInitMinuteBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2

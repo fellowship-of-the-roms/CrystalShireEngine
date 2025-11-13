@@ -58,7 +58,7 @@ ReadTrainerParty:
 
 .skip_name
 	call GetNextTrainerDataByte
-	cp "@"
+	cp '@'
 	jr nz, .skip_name
 
 	call GetNextTrainerDataByte
@@ -336,7 +336,7 @@ SetTrainerBattleLevel:
 
 .skip_name
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .skip_name
 
 	inc hl

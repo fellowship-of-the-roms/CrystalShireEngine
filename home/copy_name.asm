@@ -8,7 +8,7 @@ CopyName2::
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp "@"
+	cp '@'
 	jr nz, .loop
 	ret
 
@@ -20,11 +20,11 @@ CopyStringWithTerminator::
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr z, .clear_loop
 	dec c
 	jr nz, .copy_loop
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 	ret
 

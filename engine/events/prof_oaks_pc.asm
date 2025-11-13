@@ -60,7 +60,7 @@ Rate:
 	ld c, a
 	push bc
 	push hl
-	ld a, "@"
+	ld a, '@'
 	ld bc, ITEM_NAME_LENGTH
 	rst ByteFill
 	ld hl, sp + 2

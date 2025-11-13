@@ -96,10 +96,10 @@ LoadContestantName:
 ; Delete the trailing terminator and replace it with a space.
 .next
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .next
 	dec hl
-	ld a, " "
+	ld a, ' '
 	ld [hli], a
 	ld d, h
 	ld e, l
