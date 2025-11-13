@@ -1402,7 +1402,7 @@ ItemActionTextWaitButton:
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
 	ld bc, wTilemapEnd - wTilemap
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	ld a, [wPartyMenuActionText]
 	call ItemActionText

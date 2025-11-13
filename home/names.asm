@@ -87,7 +87,7 @@ GetNthString::
 .loop
 	push bc
 	ld b, a
-	ld c, "@"
+	ld c, '@'
 .readChar
 	ld a, [hli]
 	cp c
@@ -106,16 +106,16 @@ GetBasePokemonName::
 	ld hl, wStringBuffer1
 .loop
 	ld a, [hl]
-	cp "@"
+	cp '@'
 	jr z, .quit
-	cp "♂"
+	cp '♂'
 	jr z, .end
-	cp "♀"
+	cp '♀'
 	jr z, .end
 	inc hl
 	jr .loop
 .end
-	ld [hl], "@"
+	ld [hl], '@'
 .quit
 	pop hl
 	ret
@@ -147,7 +147,7 @@ GetPokemonName::
 	ld bc, MON_NAME_LENGTH - 1
 	rst CopyBytes
 	ld hl, wStringBuffer1 + MON_NAME_LENGTH - 1
-	ld [hl], "@"
+	ld [hl], '@'
 	pop de
 
 	pop hl
@@ -272,7 +272,7 @@ GetTMHMName::
 .not_hm
 
 ; Divide and mod by 10 to get the top and bottom digits respectively
-	ld b, "0"
+	ld b, '0'
 .mod10
 	sub 10
 	jr c, .done_mod
@@ -287,13 +287,13 @@ GetTMHMName::
 	inc de
 	pop af
 
-	ld b, "0"
+	ld b, '0'
 	add b
 	ld [de], a
 
 ; End the string
 	inc de
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 
 	pop af

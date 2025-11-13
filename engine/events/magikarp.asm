@@ -94,14 +94,14 @@ PrintMagikarpLength:
 	ld de, wMagikarpLength
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld a, "′"
+	ld a, '′'
 	ld [hli], a
 	ld de, wMagikarpLength + 1
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld a, "″"
+	ld a, '″'
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 	ret
 
 CalcMagikarpLength: ; TODO: FIX DVs to IVs CalcMagikarpLength

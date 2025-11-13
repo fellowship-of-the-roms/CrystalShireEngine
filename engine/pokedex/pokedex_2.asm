@@ -250,7 +250,7 @@ GetDexEntryPagePointer:
 	ld a, b
 	call GetFarByte
 	inc hl
-	cp "@"
+	cp '@'
 	jr nz, .loop1
 ; if c != 1: skip entry
 	dec c
@@ -260,7 +260,7 @@ GetDexEntryPagePointer:
 	ld a, b
 	call GetFarByte
 	inc hl
-	cp "@"
+	cp '@'
 	jr nz, .loop2
 
 .done

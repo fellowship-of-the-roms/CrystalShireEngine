@@ -3,7 +3,7 @@ PlaceNextVWFChar::
 ; Advances de to the next character.
 ; Returns z if the character is the string terminator.
 	inc de
-	cp "@"
+	cp '@'
 	ret z
 
 	push bc
@@ -103,7 +103,7 @@ _GetNextVWFLength::
 ; Returns length of character a (just read from [de]) in c.
 ; Advances de to the next character.
 	inc de
-	cp "@"
+	cp '@'
 	ret z
 
 	push hl

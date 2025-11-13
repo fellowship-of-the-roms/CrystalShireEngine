@@ -677,7 +677,7 @@ Hatch_UpdateFrontpicBGMapCenter:
 	push bc
 	hlcoord 0, 0
 	ld bc, SCREEN_AREA
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	pop bc
 	pop hl

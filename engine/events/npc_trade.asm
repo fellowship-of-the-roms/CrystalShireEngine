@@ -382,7 +382,7 @@ GetTradeMonNames:
 	ld hl, wStringBuffer1
 .loop
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .loop
 
 	dec hl
@@ -394,13 +394,13 @@ GetTradeMonNames:
 	and a ; TRADE_GENDER_EITHER
 	ret z
 	cp TRADE_GENDER_MALE
-	ld a, "♂"
+	ld a, '♂'
 	jr z, .done
 	; TRADE_GENDER_FEMALE
-	ld a, "♀"
+	ld a, '♀'
 .done
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 	ret
 
 INCLUDE "data/events/npc_trades.asm"

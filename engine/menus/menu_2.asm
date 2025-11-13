@@ -67,7 +67,7 @@ _PlaceMenuQuantity:
 	ret nz
 	ld de, $15
 	add hl, de
-	ld a, "x"
+	ld a, 'x'
 	ld [hli], a
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2

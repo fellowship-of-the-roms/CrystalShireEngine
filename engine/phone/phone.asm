@@ -453,7 +453,7 @@ PhoneCall::
 .CallerTextboxWithName:
 	call Phone_CallerTextbox
 	hlcoord 1, 2
-	ld a, "☎"
+	ld a, '☎'
 	ld [hli], a
 	inc hl
 	ld a, [wPhoneCaller]
@@ -524,7 +524,7 @@ Phone_TextboxWithName:
 	push bc
 	call Phone_CallerTextbox
 	hlcoord 1, 1
-	ld a, "☎"
+	ld a, '☎'
 	ld [hli], a
 	inc hl
 	ld d, h
@@ -578,7 +578,7 @@ GetCallerName:
 	push hl
 	push bc
 	rst PlaceString
-	ld a, ":"
+	ld a, ':'
 	ld [bc], a
 	pop bc
 	pop hl

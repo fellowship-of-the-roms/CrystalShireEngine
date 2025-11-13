@@ -1,5 +1,5 @@
-DEF TRADEANIM_RIGHT_ARROW EQU "▶" ; $ed
-DEF TRADEANIM_LEFT_ARROW  EQU "▼" ; $ee
+DEF TRADEANIM_RIGHT_ARROW EQU '▶' ; $ed
+DEF TRADEANIM_LEFT_ARROW  EQU '▼' ; $ee
 
 ; TradeAnim_TubeAnimJumptable.Jumptable indexes
 	const_def
@@ -165,7 +165,7 @@ RunTradeAnimScript:
 	call ClearVBank1
 	hlbgcoord 0, 0
 	ld bc, STARTOF(VRAM) + SIZEOF(VRAM) - vBGMap0
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	ld hl, TradeGameBoyLZ
 	ld de, vTiles2 tile $31
@@ -456,7 +456,7 @@ TradeAnim_TubeToPlayer8:
 	farcall ClearSpriteAnims
 	hlbgcoord 0, 0
 	ld bc, STARTOF(VRAM) + SIZEOF(VRAM) - vBGMap0
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	xor a
 	ldh [hSCX], a
@@ -569,7 +569,7 @@ TradeAnim_PlaceTrademonStatsOnTubeAnim:
 	call ClearTilemap
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
-	ld a, "─"
+	ld a, '─'
 	rst ByteFill
 	hlcoord 0, 1
 	ld de, wLinkPlayer1Name
@@ -578,7 +578,7 @@ TradeAnim_PlaceTrademonStatsOnTubeAnim:
 	ld de, 0
 .find_name_end_loop
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr z, .done
 	dec de
 	jr .find_name_end_loop
@@ -939,7 +939,7 @@ TrademonStats_PrintSpeciesNumber:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 	pop de
-	ld [hl], " "
+	ld [hl], ' '
 	ret
 
 TrademonStats_PrintSpeciesName:
@@ -1178,7 +1178,7 @@ TradeAnim_TakeCareOfText:
 	call WaitTop
 	hlcoord 0, 10
 	ld bc, 8 * SCREEN_WIDTH
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	call WaitBGMap
 	ld hl, .TakeGoodCareOfMonText
@@ -1235,7 +1235,7 @@ TradeAnim_Wait80Frames:
 TradeAnim_BlankTilemap:
 	hlcoord 0, 0
 	ld bc, SCREEN_AREA
-	ld a, " "
+	ld a, ' '
 	jmp ByteFill
 
 TradeAnim_CopyBoxFromDEtoHL:

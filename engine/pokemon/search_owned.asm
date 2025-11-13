@@ -90,7 +90,7 @@ CheckOwnMonAnywhere:
 	inc de
 	inc hl
 	jr nz, .next
-	cp "@"
+	cp '@'
 	scf
 	ret z
 	jr .cmp_ot

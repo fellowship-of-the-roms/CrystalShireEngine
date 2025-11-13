@@ -215,7 +215,7 @@ LoadMapNameSignGFX:
 	ld hl, wStringBuffer1
 .length_loop
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr z, .got_length
 	inc c
 	jr .length_loop
@@ -239,7 +239,7 @@ LoadMapNameSignGFX:
 .loop
 	; a = tile offset into font graphic
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .continue
 
 	; copy sign palette for PAL_BG_TEXT
@@ -256,11 +256,11 @@ LoadMapNameSignGFX:
 	; save position in landmark name
 	push hl
 	; spaces are unique
-	cp "¯"
+	cp '¯'
 	jr z, .space
-	cp "<BSP>"
+	cp '<BSP>'
 	jr z, .space
-	cp " "
+	cp ' '
 	jr nz, .not_space
 .space
 	ld hl, TextboxSpaceGFX

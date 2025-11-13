@@ -1,8 +1,8 @@
 _CheckForBattleTowerRules:
 	ld hl, wStringBuffer2
-	ld a, "3"
+	ld a, '3'
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 	ld de, .PointerTables
 	call BattleTower_ExecuteJumptable
 	ret z

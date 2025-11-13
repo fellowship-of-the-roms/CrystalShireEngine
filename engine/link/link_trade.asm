@@ -48,7 +48,7 @@ _LinkTextbox:
 	push hl
 	ld a, $33
 	ld [hli], a
-	ld a, " "
+	ld a, ' '
 	call .PlaceRow
 	ld [hl], $34
 	pop hl

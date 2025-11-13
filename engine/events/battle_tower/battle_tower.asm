@@ -85,9 +85,9 @@ RunBattleTowerTrainer:
 	call CloseSRAM
 	ld hl, wStringBuffer3
 	ld a, [wNrOfBeatenBattleTowerTrainers]
-	add "1"
+	add '1'
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 
 .lost
 	pop af
@@ -148,7 +148,7 @@ ReadBTTrainerParty:
 
 .skip_mon_3
 ; Add the terminator character to each of these names
-	ld a, "@"
+	ld a, '@'
 	ld [wBT_OTTempMon1Name + MON_NAME_LENGTH - 1], a
 	ld [wBT_OTTempMon2Name + MON_NAME_LENGTH - 1], a
 	ld [wBT_OTTempMon3Name + MON_NAME_LENGTH - 1], a
@@ -169,7 +169,7 @@ ReadBTTrainerParty:
 	ld de, wOTPlayerName
 	ld bc, NAME_LENGTH - 1
 	rst CopyBytes
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 
 	ld hl, wBT_OTTempTrainerClass
@@ -492,7 +492,7 @@ BattleTowerAction_EggTicket:
 rept 4
 	dec hl
 endr
-	ld a, "@"
+	ld a, '@'
 	ld [hli], a
 	ld [hl], a
 	ld hl, EGG_TICKET

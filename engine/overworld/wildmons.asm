@@ -1127,7 +1127,7 @@ RandomPhoneMon:
 	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	inc hl
-	cp "@"
+	cp '@'
 	jr nz, .skip_name
 
 	ld a, [wTrainerGroupBank]

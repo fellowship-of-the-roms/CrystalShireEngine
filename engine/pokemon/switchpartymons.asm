@@ -19,7 +19,7 @@ _SwitchPartyMons:
 	ld bc, 2 * SCREEN_WIDTH
 	rst AddNTimes
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, " "
+	ld a, ' '
 	rst ByteFill
 	pop af
 	ld hl, wShadowOAMSprite00

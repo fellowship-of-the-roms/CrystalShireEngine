@@ -8,29 +8,29 @@ CheckStringForErrors:
 	jr z, .NextChar
 	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .NextChar
-	cp "<NEXT>"
+	cp '<NEXT>'
 	jr z, .NextChar
-	cp "@"
+	cp '@'
 	jr z, .Done
-	cp "ガ"
+	cp 'ガ'
 	jr c, .Fail
-	cp "<PLAY_G>"
+	cp '<PLAY_G>'
 	jr c, .NextChar
-	cp "<JP_18>" + 1
+	cp '<JP_18>' + 1
 	jr c, .Fail
-	cp "<NI>"
+	cp '<NI>'
 	jr c, .NextChar
-	cp "<NO>" + 1
+	cp '<NO>' + 1
 	jr c, .Fail
-	cp "<ROUTE>"
+	cp '<ROUTE>'
 	jr c, .NextChar
-	cp "<GREEN>" + 1
+	cp '<GREEN>' + 1
 	jr c, .Fail
-	cp "<ENEMY>"
+	cp '<ENEMY>'
 	jr c, .NextChar
-	cp "<ENEMY>" + 1
+	cp '<ENEMY>' + 1
 	jr c, .Fail
-	cp "<MOM>"
+	cp '<MOM>'
 	jr c, .NextChar
 
 .Fail:
@@ -52,32 +52,32 @@ CheckStringForErrors_IgnoreTerminator:
 	inc de
 	and a
 	jr z, .next
-	cp "<DEXEND>" + 1
+	cp '<DEXEND>' + 1
 	jr nc, .next
-	cp "<NEXT>"
+	cp '<NEXT>'
 	jr z, .next
-	cp "@"
+	cp '@'
 	jr z, .next
 
-	cp "ガ"
+	cp 'ガ'
 	jr c, .end
-	cp "<PLAY_G>"
+	cp '<PLAY_G>'
 	jr c, .next
-	cp "<JP_18>" + 1
+	cp '<JP_18>' + 1
 	jr c, .end
-	cp "<NI>"
+	cp '<NI>'
 	jr c, .next
-	cp "<NO>" + 1
+	cp '<NO>' + 1
 	jr c, .end
-	cp "<ROUTE>"
+	cp '<ROUTE>'
 	jr c, .next
-	cp "<GREEN>" + 1
+	cp '<GREEN>' + 1
 	jr c, .end
-	cp "<ENEMY>"
+	cp '<ENEMY>'
 	jr c, .next
-	cp "<ENEMY>" + 1
+	cp '<ENEMY>' + 1
 	jr c, .end
-	cp "<MOM>"
+	cp '<MOM>'
 	jr c, .next
 
 .end
@@ -94,7 +94,7 @@ CheckStringContainsLessThanBNextCharacters:
 .loop
 	ld a, [de]
 	inc de
-	cp "<NEXT>"
+	cp '<NEXT>'
 	jr nz, .next_char
 	dec b
 	jr z, .done
