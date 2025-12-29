@@ -450,7 +450,10 @@ BillsPC_BlankTiles:
 	push af
 	ld c, 4
 	call BillsPC_SafeGet2bpp
-	call PopAFBCDEHL
+	pop af
+	pop bc
+	pop de
+	pop hl
 	add hl, bc
 	dec a
 	jr nz, .loop

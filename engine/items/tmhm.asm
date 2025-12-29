@@ -113,7 +113,10 @@ ChooseMonToLearnTMHM_NoRefresh:
 	ld de, SFX_WRONG
 	call PlaySFX
 	call WaitSFX
-	call PopAFBCDEHL
+	pop af
+	pop bc
+	pop de
+	pop hl
 	jr .loopback
 
 TeachTMHM:
