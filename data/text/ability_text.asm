@@ -82,7 +82,7 @@ AbilityText_PreventedMove: ; Ability Name - wStringBuffer1, Move Name - wStringB
     line " pre-"
 
     para "vents <USER>'s@"
-    text_ran wStringBuffer2
+    text_ram wStringBuffer2
     line " from"
     cont "having an affect!"
     prompt
