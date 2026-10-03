@@ -77,6 +77,9 @@ if DEF(_DEBUG)
 	giveitem KINGS_ROCK
 	giveitem AMULET_COIN
 	giveitem SCOPE_LENS
+	; give player access to the manet train
+	giveitem PASS
+	setevent EVENT_RESTORED_POWER_TO_KANTO
 	; all badges
 	setflag ENGINE_ZEPHYRBADGE
 	setflag ENGINE_HIVEBADGE
