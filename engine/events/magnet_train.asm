@@ -215,9 +215,9 @@ GetMagnetTrainBGTiles:
 	ld hl, MagnetTrainBGTiles
 	add hl, de
 	add hl, de
-	ld a, [hli]
+	ld e, [hl] ; no-optimize b|c|d|e = *hl++|*hl-- (a is DrawMagnetTrain's row counter.)
+	inc hl
 	ld d, [hl]
-	ld e, a
 	pop hl
 	ret
 
@@ -390,6 +390,16 @@ MagnetTrain_Jumptable_FirstRunThrough:
 	ld [wEnvironment], a
 	ld b, SCGB_MAPPALS
 	call GetSGBLayout
+	assert PAL_OW_RED < 8, "the train's OAM data uses PAL_OW_RED as a hardware palette"
+	ld a, [wPlayerGender]
+	bit PLAYERGENDER_FEMALE_F, a
+	ld a, PAL_OW_RED
+	jr z, .got_player_pal
+	ld a, PAL_OW_BLUE
+.got_player_pal
+	ld [wNeededPalIndex], a
+	ld de, wOBPals1 palette PAL_OW_RED
+	farcall CopySpritePal
 	call UpdateTimePals
 
 	ldh a, [rBGP]
