@@ -27,8 +27,8 @@ BattleCommand_Substitute:
 	ld a, [hld]
 	sub b
 	ld e, a
-	sbc e
-	add [hl]
+	ld a, [hl]
+	sbc 0 ; no-optimize a = X +/- carry: keep carry for the underflow check
 	ld d, a
 	jr c, .too_weak_to_sub
 	ld a, d
