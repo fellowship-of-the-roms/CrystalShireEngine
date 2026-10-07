@@ -30,6 +30,10 @@ CheckRegisteredItem:
 	dw .CheckTMHM
 
 .CheckItem:
+	ld a, [wRegisteredItem]
+	call GetItemIndexFromID
+	ld b, h
+	ld c, l
 	ld hl, wNumItems
 	call .CheckRegisteredNo
 	jr c, .NoRegisteredItem
@@ -38,10 +42,14 @@ CheckRegisteredItem:
 	ld d, 0
 	add hl, de
 	add hl, de
-	call .IsSameItem
-	jr c, .NoRegisteredItem
-	and a
-	ret
+	add hl, de ; item entries: index high byte, index low byte, quantity
+	ld a, [hli]
+	cp b
+	jr nz, .NoRegisteredItem
+	ld a, [hl]
+	cp c
+	jr nz, .NoRegisteredItem
+	jr .RegisteredItemFound
 
 .CheckKeyItem:
 	ld a, [wRegisteredItem]
@@ -51,22 +59,28 @@ CheckRegisteredItem:
 	ld de, 1
 	call IsInArray
 	jr nc, .NoRegisteredItem
-	ld a, [wRegisteredItem]
-	ld [wCurItem], a
-	and a
-	ret
+	jr .RegisteredItemFound
 
 .CheckBall:
+	ld a, [wRegisteredItem]
+	call GetItemIndexFromID
+	ld c, l
 	ld hl, wNumBalls
 	call .CheckRegisteredNo
-	jr nc, .NoRegisteredItem
+	jr c, .NoRegisteredItem
 	inc hl
 	ld e, a
 	ld d, 0
 	add hl, de
 	add hl, de
-	call .IsSameItem
-	jr c, .NoRegisteredItem
+	ld a, [hl] ; ball entries use the low byte of the item index
+	cp c
+	jr nz, .NoRegisteredItem
+
+.RegisteredItemFound:
+	ld a, [wRegisteredItem]
+	ld [wCurItem], a
+	and a
 	ret
 
 .CheckTMHM:
@@ -89,18 +103,6 @@ CheckRegisteredItem:
 	ret
 
 .NotEnoughItems:
-	scf
-	ret
-
-.IsSameItem:
-	ld a, [wRegisteredItem]
-	cp [hl]
-	jr nz, .NotSameItem
-	ld [wCurItem], a
-	and a
-	ret
-
-.NotSameItem:
 	scf
 	ret
 
@@ -151,7 +153,7 @@ UseRegisteredItem:
 	xor a
 	ld [wUsingItemWithSelect], a
 	ld a, [wItemEffectSucceeded]
-	cp 1
+	dec a
 	jr nz, ._cantuse
 	scf
 	ld a, HMENURETURN_SCRIPT

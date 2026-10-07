@@ -131,7 +131,7 @@ ItemTableGarbageCollection:
 		wItemBallItemID, wContestMonItem, wBattleAnimParam, \
 		wScriptVar, wCurEnemyItem, wEnemyTrainerItem1, \
 		wEnemyTrainerItem2, wNamedObjectIndex, wBaseItem1, \
-		wBaseItem2
+		wBaseItem2, wRegisteredItem
 
 ; battle tower stuff should be here but this ROM hack doesn't care
 
